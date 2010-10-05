@@ -66,8 +66,8 @@ NSInteger sortByStringComparator(NSString* uno, NSString* dos, void* context) ;
 -(NSString*) stringAtIndex:(int)idx ;
 -(NSString*) last ;
 -(NSString*) strip ;
-- (id) split ;
-- (id) split:(id)sep ;
+- (NSArray*) split ;
+- (NSArray*) split:(id)sep ;
 -(NSArray*) each_chars ;
 -(NSString*) slice:(int)loc :(int)length_ ;
 -(NSString*) slice:(int)loc backward:(int)backward ;
@@ -77,5 +77,6 @@ NSInteger sortByStringComparator(NSString* uno, NSString* dos, void* context) ;
 -(char) to_char ;
 -(NSString*) repeat:(int)times ;
 -(NSData*) to_data ;
+- (NSString*) reverse ;
 @end
 

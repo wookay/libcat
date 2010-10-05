@@ -14,6 +14,8 @@ typedef void (^IndexBlock)(int idx);
 
 @interface NSNumber (Block)
 
--(id) times:(IndexBlock)block ;
+-(id) times:(id)block ;
+-(id) upto:(int)limit :(id)block ;
+-(id) downto:(int)limit :(id)block ;
 
 @end

@@ -6,9 +6,11 @@
 //  Copyright 2010 factorcat. All rights reserved.
 //
 
-#import "TestNumber.h"
 #import "UnitTest.h"
 #import "NSNumberExt.h"
+
+@interface TestNumber : NSObject 
+@end
 
 @implementation TestNumber
 
@@ -21,6 +23,8 @@
 	
 	assert_equal(LONGNUM(3), [LONGNUM(3.14) floor_down]);
 	assert_equal(LONGNUM(1), [LONGNUM(1.66) floor_down]);
+
+	assert_equal(@"A", [FIXNUM(65) chr]);
 }
 
 @end

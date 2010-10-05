@@ -8,6 +8,8 @@
 
 #import "NSArrayExt.h"
 #import "NSStringExt.h"
+#import "NSMutableArrayExt.h"
+#import "Logger.h"
 
 NSArray* PAIR(id uno, id dos) {
 	NSMutableArray* ary = [NSMutableArray array];
@@ -34,13 +36,6 @@ NSArray* TRIO(id uno, id dos, id tres) {
 -(BOOL) isEmpty {
 	return 0 == self.count;
 }
-
-//-(NSArray*) mapForKey:(NSString*)key {
-//	NSMutableArray* ary = [NSMutableArray array];
-//	for (id obj in self) {
-//		if ([s
-//	}
-//}
 
 -(NSArray*) slice:(int)loc :(int)length_ {
 	NSRange range;
@@ -116,4 +111,29 @@ NSArray* TRIO(id uno, id dos, id tres) {
 	return [self lastObject];
 }
 
+-(NSArray*) reverse {
+	return [[self reverseObjectEnumerator] allObjects];
+}
+
+-(NSArray*) transpose {
+	NSMutableArray* transposedArray = [NSMutableArray array];		
+	if (self.count > 0) {
+		NSArray* firstArray = [self objectAtFirst];
+		for (int idx = 0; idx < firstArray.count; idx++) {
+			[transposedArray addObject:[NSMutableArray array]];
+		}
+		for (NSArray* subarray in self) {
+			for (int idx = 0; idx < subarray.count; idx++) {
+				NSMutableArray* ary = [transposedArray objectAtIndex:idx];
+				[ary addObject:[subarray objectAtIndex:idx]];
+			}
+		}
+	}
+	return transposedArray;
+}
+
+-(NSArray*) sort {
+	return [self sortedArrayUsingSelector:@selector(compare:)];
+}
+	 
 @end

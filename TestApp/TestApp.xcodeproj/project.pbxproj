@@ -15,10 +15,21 @@
 		28AD73600D9D9599002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD735F0D9D9599002E5188 /* MainWindow.xib */; };
 		28C286E10D94DF7D0034E888 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C286E00D94DF7D0034E888 /* RootViewController.m */; };
 		28F335F11007B36200424DE2 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28F335F01007B36200424DE2 /* RootViewController.xib */; };
+		DA699968125A165C00A08654 /* UIViewBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DA699967125A165C00A08654 /* UIViewBlock.m */; };
+		DAC581AE125AE82600203336 /* TestView.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC581AD125AE82600203336 /* TestView.m */; };
+		DAC5825A125AF7F800203336 /* TestArray.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC58259125AF7F800203336 /* TestArray.m */; };
+		DAC58356125B08BE00203336 /* Async.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC58355125B08BE00203336 /* Async.m */; };
+		DAC5835B125B0A2100203336 /* TestAsync.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC5835A125B0A2100203336 /* TestAsync.m */; };
+		DAC587F5125B6DB300203336 /* NSObjectObserverExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC587EE125B6DB300203336 /* NSObjectObserverExt.m */; };
+		DAC587F6125B6DB300203336 /* Observer.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC587F0125B6DB300203336 /* Observer.m */; };
+		DAC587F7125B6DB300203336 /* ObserverManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC587F2125B6DB300203336 /* ObserverManager.m */; };
+		DAC587F8125B6DB300203336 /* ProxyMutableDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC587F4125B6DB300203336 /* ProxyMutableDictionary.m */; };
+		DAC58916125B76B300203336 /* TestArrayBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC58915125B76B300203336 /* TestArrayBlock.m */; };
+		DAC5891B125B76BF00203336 /* TestDictionaryBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC5891A125B76BF00203336 /* TestDictionaryBlock.m */; };
+		DAC5893D125B773200203336 /* TestNumberBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC5893C125B773200203336 /* TestNumberBlock.m */; };
 		DACBA12E125971F90035C31F /* NSArrayBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACBA0F6125971F90035C31F /* NSArrayBlock.m */; };
 		DACBA12F125971F90035C31F /* NSDictionaryBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACBA0F8125971F90035C31F /* NSDictionaryBlock.m */; };
 		DACBA130125971F90035C31F /* NSNumberBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACBA0FA125971F90035C31F /* NSNumberBlock.m */; };
-		DACBA131125971F90035C31F /* ObserverManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DACBA0FC125971F90035C31F /* ObserverManager.m */; };
 		DACBA132125971F90035C31F /* UIButtonBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACBA0FE125971F90035C31F /* UIButtonBlock.m */; };
 		DACBA133125971F90035C31F /* TestBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACBA101125971F90035C31F /* TestBlock.m */; };
 		DACBA134125971F90035C31F /* GeometryExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACBA105125971F90035C31F /* GeometryExt.m */; };
@@ -41,6 +52,7 @@
 		DACBA1D8125974980035C31F /* TestString.m in Sources */ = {isa = PBXBuildFile; fileRef = DACBA1D7125974980035C31F /* TestString.m */; };
 		DACBA1DF125974E00035C31F /* TestDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = DACBA1DE125974E00035C31F /* TestDictionary.m */; };
 		DACBA1F2125975920035C31F /* TestObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = DACBA1F1125975920035C31F /* TestObserver.m */; };
+		DAEBFD1D125B7B610070A3A7 /* README in Resources */ = {isa = PBXBuildFile; fileRef = DAEBFD1C125B7B610070A3A7 /* README */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,17 +69,32 @@
 		28F335F01007B36200424DE2 /* RootViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* TestApp-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "TestApp-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		DA699966125A165C00A08654 /* UIViewBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewBlock.h; sourceTree = "<group>"; };
+		DA699967125A165C00A08654 /* UIViewBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIViewBlock.m; sourceTree = "<group>"; };
+		DAC581AD125AE82600203336 /* TestView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestView.m; sourceTree = "<group>"; };
+		DAC58259125AF7F800203336 /* TestArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestArray.m; sourceTree = "<group>"; };
+		DAC58354125B08BE00203336 /* Async.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Async.h; sourceTree = "<group>"; };
+		DAC58355125B08BE00203336 /* Async.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Async.m; sourceTree = "<group>"; };
+		DAC5835A125B0A2100203336 /* TestAsync.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestAsync.m; sourceTree = "<group>"; };
+		DAC587ED125B6DB300203336 /* NSObjectObserverExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSObjectObserverExt.h; sourceTree = "<group>"; };
+		DAC587EE125B6DB300203336 /* NSObjectObserverExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSObjectObserverExt.m; sourceTree = "<group>"; };
+		DAC587EF125B6DB300203336 /* Observer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Observer.h; sourceTree = "<group>"; };
+		DAC587F0125B6DB300203336 /* Observer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Observer.m; sourceTree = "<group>"; };
+		DAC587F1125B6DB300203336 /* ObserverManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObserverManager.h; sourceTree = "<group>"; };
+		DAC587F2125B6DB300203336 /* ObserverManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObserverManager.m; sourceTree = "<group>"; };
+		DAC587F3125B6DB300203336 /* ProxyMutableDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProxyMutableDictionary.h; sourceTree = "<group>"; };
+		DAC587F4125B6DB300203336 /* ProxyMutableDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProxyMutableDictionary.m; sourceTree = "<group>"; };
+		DAC58915125B76B300203336 /* TestArrayBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestArrayBlock.m; sourceTree = "<group>"; };
+		DAC5891A125B76BF00203336 /* TestDictionaryBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestDictionaryBlock.m; sourceTree = "<group>"; };
+		DAC5893C125B773200203336 /* TestNumberBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestNumberBlock.m; sourceTree = "<group>"; };
 		DACBA0F5125971F90035C31F /* NSArrayBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSArrayBlock.h; sourceTree = "<group>"; };
 		DACBA0F6125971F90035C31F /* NSArrayBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSArrayBlock.m; sourceTree = "<group>"; };
 		DACBA0F7125971F90035C31F /* NSDictionaryBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDictionaryBlock.h; sourceTree = "<group>"; };
 		DACBA0F8125971F90035C31F /* NSDictionaryBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDictionaryBlock.m; sourceTree = "<group>"; };
 		DACBA0F9125971F90035C31F /* NSNumberBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSNumberBlock.h; sourceTree = "<group>"; };
 		DACBA0FA125971F90035C31F /* NSNumberBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSNumberBlock.m; sourceTree = "<group>"; };
-		DACBA0FB125971F90035C31F /* ObserverManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObserverManager.h; sourceTree = "<group>"; };
-		DACBA0FC125971F90035C31F /* ObserverManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObserverManager.m; sourceTree = "<group>"; };
 		DACBA0FD125971F90035C31F /* UIButtonBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIButtonBlock.h; sourceTree = "<group>"; };
 		DACBA0FE125971F90035C31F /* UIButtonBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIButtonBlock.m; sourceTree = "<group>"; };
-		DACBA100125971F90035C31F /* TestBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestBlock.h; sourceTree = "<group>"; };
 		DACBA101125971F90035C31F /* TestBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestBlock.m; sourceTree = "<group>"; };
 		DACBA103125971F90035C31F /* ExtHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtHeaders.h; sourceTree = "<group>"; };
 		DACBA104125971F90035C31F /* GeometryExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeometryExt.h; sourceTree = "<group>"; };
@@ -106,14 +133,12 @@
 		DACBA12B125971F90035C31F /* UnitTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnitTest.h; sourceTree = "<group>"; };
 		DACBA12C125971F90035C31F /* UnitTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnitTest.m; sourceTree = "<group>"; };
 		DACBA12D125971F90035C31F /* UserConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserConstants.h; sourceTree = "<group>"; };
-		DACBA14A1259724A0035C31F /* TestNumber.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestNumber.h; sourceTree = "<group>"; };
 		DACBA14B1259724A0035C31F /* TestNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestNumber.m; sourceTree = "<group>"; };
-		DACBA1D6125974980035C31F /* TestString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestString.h; sourceTree = "<group>"; };
 		DACBA1D7125974980035C31F /* TestString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestString.m; sourceTree = "<group>"; };
-		DACBA1DD125974E00035C31F /* TestDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestDictionary.h; sourceTree = "<group>"; };
 		DACBA1DE125974E00035C31F /* TestDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestDictionary.m; sourceTree = "<group>"; };
 		DACBA1F0125975920035C31F /* TestObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestObserver.h; sourceTree = "<group>"; };
 		DACBA1F1125975920035C31F /* TestObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestObserver.m; sourceTree = "<group>"; };
+		DAEBFD1C125B7B610070A3A7 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README; path = ../README; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +177,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				DAEBFD1C125B7B610070A3A7 /* README */,
 				DACBA0FF125971F90035C31F /* BlockTestCases */,
 				DACBA123125971F90035C31F /* ExtTestCases */,
 				DACBA147125971FC0035C31F /* libcat */,
@@ -193,19 +219,37 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		DAC587EC125B6DB300203336 /* Observer */ = {
+			isa = PBXGroup;
+			children = (
+				DAC587EF125B6DB300203336 /* Observer.h */,
+				DAC587F0125B6DB300203336 /* Observer.m */,
+				DAC587F1125B6DB300203336 /* ObserverManager.h */,
+				DAC587F2125B6DB300203336 /* ObserverManager.m */,
+				DAC587F3125B6DB300203336 /* ProxyMutableDictionary.h */,
+				DAC587F4125B6DB300203336 /* ProxyMutableDictionary.m */,
+				DAC587ED125B6DB300203336 /* NSObjectObserverExt.h */,
+				DAC587EE125B6DB300203336 /* NSObjectObserverExt.m */,
+			);
+			path = Observer;
+			sourceTree = "<group>";
+		};
 		DACBA0F4125971F90035C31F /* Block */ = {
 			isa = PBXGroup;
 			children = (
+				DAC587EC125B6DB300203336 /* Observer */,
 				DACBA0F5125971F90035C31F /* NSArrayBlock.h */,
 				DACBA0F6125971F90035C31F /* NSArrayBlock.m */,
 				DACBA0F7125971F90035C31F /* NSDictionaryBlock.h */,
 				DACBA0F8125971F90035C31F /* NSDictionaryBlock.m */,
 				DACBA0F9125971F90035C31F /* NSNumberBlock.h */,
 				DACBA0FA125971F90035C31F /* NSNumberBlock.m */,
-				DACBA0FB125971F90035C31F /* ObserverManager.h */,
-				DACBA0FC125971F90035C31F /* ObserverManager.m */,
 				DACBA0FD125971F90035C31F /* UIButtonBlock.h */,
 				DACBA0FE125971F90035C31F /* UIButtonBlock.m */,
+				DA699966125A165C00A08654 /* UIViewBlock.h */,
+				DA699967125A165C00A08654 /* UIViewBlock.m */,
+				DAC58354125B08BE00203336 /* Async.h */,
+				DAC58355125B08BE00203336 /* Async.m */,
 			);
 			name = Block;
 			path = ../Block;
@@ -214,10 +258,14 @@
 		DACBA0FF125971F90035C31F /* BlockTestCases */ = {
 			isa = PBXGroup;
 			children = (
-				DACBA100125971F90035C31F /* TestBlock.h */,
 				DACBA101125971F90035C31F /* TestBlock.m */,
+				DAC581AD125AE82600203336 /* TestView.m */,
 				DACBA1F0125975920035C31F /* TestObserver.h */,
 				DACBA1F1125975920035C31F /* TestObserver.m */,
+				DAC5835A125B0A2100203336 /* TestAsync.m */,
+				DAC58915125B76B300203336 /* TestArrayBlock.m */,
+				DAC5891A125B76BF00203336 /* TestDictionaryBlock.m */,
+				DAC5893C125B773200203336 /* TestNumberBlock.m */,
 			);
 			name = BlockTestCases;
 			path = ../BlockTestCases;
@@ -264,12 +312,10 @@
 		DACBA123125971F90035C31F /* ExtTestCases */ = {
 			isa = PBXGroup;
 			children = (
-				DACBA14A1259724A0035C31F /* TestNumber.h */,
 				DACBA14B1259724A0035C31F /* TestNumber.m */,
-				DACBA1D6125974980035C31F /* TestString.h */,
 				DACBA1D7125974980035C31F /* TestString.m */,
-				DACBA1DD125974E00035C31F /* TestDictionary.h */,
 				DACBA1DE125974E00035C31F /* TestDictionary.m */,
+				DAC58259125AF7F800203336 /* TestArray.m */,
 			);
 			name = ExtTestCases;
 			path = ../ExtTestCases;
@@ -352,6 +398,7 @@
 			files = (
 				28AD73600D9D9599002E5188 /* MainWindow.xib in Resources */,
 				28F335F11007B36200424DE2 /* RootViewController.xib in Resources */,
+				DAEBFD1D125B7B610070A3A7 /* README in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,7 +415,6 @@
 				DACBA12E125971F90035C31F /* NSArrayBlock.m in Sources */,
 				DACBA12F125971F90035C31F /* NSDictionaryBlock.m in Sources */,
 				DACBA130125971F90035C31F /* NSNumberBlock.m in Sources */,
-				DACBA131125971F90035C31F /* ObserverManager.m in Sources */,
 				DACBA132125971F90035C31F /* UIButtonBlock.m in Sources */,
 				DACBA133125971F90035C31F /* TestBlock.m in Sources */,
 				DACBA134125971F90035C31F /* GeometryExt.m in Sources */,
@@ -391,6 +437,18 @@
 				DACBA1D8125974980035C31F /* TestString.m in Sources */,
 				DACBA1DF125974E00035C31F /* TestDictionary.m in Sources */,
 				DACBA1F2125975920035C31F /* TestObserver.m in Sources */,
+				DA699968125A165C00A08654 /* UIViewBlock.m in Sources */,
+				DAC581AE125AE82600203336 /* TestView.m in Sources */,
+				DAC5825A125AF7F800203336 /* TestArray.m in Sources */,
+				DAC58356125B08BE00203336 /* Async.m in Sources */,
+				DAC5835B125B0A2100203336 /* TestAsync.m in Sources */,
+				DAC587F5125B6DB300203336 /* NSObjectObserverExt.m in Sources */,
+				DAC587F6125B6DB300203336 /* Observer.m in Sources */,
+				DAC587F7125B6DB300203336 /* ObserverManager.m in Sources */,
+				DAC587F8125B6DB300203336 /* ProxyMutableDictionary.m in Sources */,
+				DAC58916125B76B300203336 /* TestArrayBlock.m in Sources */,
+				DAC5891B125B76BF00203336 /* TestDictionaryBlock.m in Sources */,
+				DAC5893D125B773200203336 /* TestNumberBlock.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

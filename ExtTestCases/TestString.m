@@ -6,14 +6,22 @@
 //  Copyright 2010 factorcat. All rights reserved.
 //
 
-#import "TestString.h"
 #import "NSStringExt.h"
 #import "UnitTest.h"
 
+@interface TestString : NSObject 
+@end
+
+
 @implementation TestString
 
--(void) test_string {
+-(void) test_SWF {
 	assert_equal(@"0xff", SWF(@"0x%x", 255));
+}
+
+-(void) test_string {
+	assert_equal(@"cba", [@"abc" reverse]);
+	assert_equal(@"bc", [@"abc" slice:1 :2]);
 }
 
 @end

@@ -34,4 +34,7 @@ NSArray* TRIO(id uno, id dos, id tres) ;
 -(NSString*) join:(NSString*)separator ;
 -(NSString*) join ;
 -(NSArray*) sortedArrayUsingFunction:(NSInteger (*)(id, id, void *))comparator ;
+-(NSArray*) reverse ;
+-(NSArray*) transpose ;
+-(NSArray*) sort ;
 @end

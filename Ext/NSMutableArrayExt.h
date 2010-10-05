@@ -11,7 +11,8 @@
 
 @interface NSMutableArray (Stack)
 
+- (id) push:(id)obj ;
 - (id) pop ;
--(void) setObject:(id)obj atIndex:(int)idx ;
+- (void) setObject:(id)obj atIndex:(int)idx ;
 
 @end

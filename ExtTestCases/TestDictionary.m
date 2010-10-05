@@ -6,9 +6,13 @@
 //  Copyright 2010 factorcat. All rights reserved.
 //
 
-#import "TestDictionary.h"
 #import "NSDictionaryExt.h"
 #import "UnitTest.h"
+#import "NSStringExt.h"
+
+@interface TestDictionary : NSObject 
+@end
+
 
 @implementation TestDictionary
 
@@ -20,6 +24,13 @@
 											@"key", @"object",
 											nil];
 	assert_equal(expected, got);
+}
+
+-(void) test_HashSTAR {
+	NSDictionary* expected = [NSDictionary dictionaryWithKeysAndObjects:
+							  @"key", @"object",
+							  nil];	
+	assert_equal(expected, HashSTAR(_w(@"key object")));
 }
 
 @end

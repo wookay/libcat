@@ -11,22 +11,25 @@
 
 @implementation NSArray (Block)
 
--(void) each:(EachBlock)block {
+-(NSArray*) each:(EachBlock)block {
 	[self enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
 		block(obj);
 	}];
+	return self;
 }
 
--(void) each_with_index:(EachWithIndexBlock)block {
+-(NSArray*) each_with_index:(EachWithIndexBlock)block {
 	[self enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
 		block(obj, idx);
 	}];	
+	return self;
 }
 
 -(NSArray*) map:(MapBlock)block {
 	NSMutableArray* ary = [NSMutableArray array];
 	[self enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-		[ary addObject:block(obj)];
+		id result = block(obj);
+		[ary addObject:result ? result : [NSNull null]];
 	}];
 	return ary;
 }
@@ -34,7 +37,8 @@
 -(NSArray*) map_with_index:(MapWithIndexBlock)block {	
 	NSMutableArray* ary = [NSMutableArray array];
 	[self enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-		[ary addObject:block(obj, idx)];
+		id result = block(obj, idx);
+		[ary addObject:result ? result : [NSNull null]];
 	}];
 	return ary;	
 }
@@ -57,6 +61,18 @@
 		}
 	}];
 	return ary;
+}
+
+-(NSArray*) reduce:(id)init :(ReduceBlock)block {
+	__block id result = init;
+	[self enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+		result = block(result, obj);
+	}];
+	return result;
+}
+
+- (NSArray *) sort:(SortBlock)block {
+	return [self sortedArrayUsingComparator:block];
 }
 
 @end

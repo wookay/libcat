@@ -11,12 +11,11 @@
 
 @implementation NSMutableArray (Stack)
 
--(void) setObject:(id)obj atIndex:(int)idx {
-	if (idx < self.count) {
-		[self replaceObjectAtIndex:idx withObject:obj];
-	}
+- (id) push:(id)obj {
+	[self addObject:obj];
+	return self;
 }
-  
+
 - (id) pop {
 	if ([self count] == 0) {
 		return nil;
@@ -24,6 +23,12 @@
 	id obj = [[[self lastObject] retain] autorelease];
 	[self removeLastObject];
 	return obj;
+}
+
+-(void) setObject:(id)obj atIndex:(int)idx {
+	if (idx < self.count) {
+		[self replaceObjectAtIndex:idx withObject:obj];
+	}
 }
 
 @end

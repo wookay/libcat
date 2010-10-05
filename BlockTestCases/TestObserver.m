@@ -17,10 +17,12 @@
 @synthesize name;
 @synthesize products;
 @synthesize days;
+@synthesize book;
 
 -(void) setup {
 	self.products = [NSMutableArray array];
 	self.days = [NSMutableSet set];
+	self.book = [NSMutableDictionary dictionary];
 }
 
 -(void) test_observer {
@@ -30,7 +32,7 @@
 	self.name = @"suzy";
 	self.name = nil;
 	
-	[[self mutableArrayValueForKey:@"products"] addObject:@"hello"];
+	[[self mutableArrayValueForKeyPath:@"products"] addObject:@"hello"];
 	[self addObserver:OBSERVERMAN forKeyPath:@"products" withArrayChangedBlock:^(NSKeyValueChange kind, id obj, id oldObj, int idx) {
 		if (NSKeyValueChangeSetting == kind) {
 //			log_info(@"array %@ %@ %@", keyValueChangeToString(kind), obj, oldObj);
@@ -38,11 +40,11 @@
 //			log_info(@"array %@ %@ %@ %d", keyValueChangeToString(kind), obj, oldObj, idx);
 		}
 	}];	
-	[[self mutableArrayValueForKey:@"products"] addObject:@"world"];
-	[[self mutableArrayValueForKey:@"products"] replaceObjectAtIndex:0 withObject:@"my"];
-	[[self mutableArrayValueForKey:@"products"] removeObjectAtIndex:0];
-	[[self mutableArrayValueForKey:@"products"] removeAllObjects];
-	[[self mutableArrayValueForKey:@"products"] removeAllObjects];
+	[[self mutableArrayValueForKeyPath:@"products"] addObject:@"world"];
+	[[self mutableArrayValueForKeyPath:@"products"] replaceObjectAtIndex:0 withObject:@"my"];
+	[[self mutableArrayValueForKeyPath:@"products"] removeObjectAtIndex:0];
+	[[self mutableArrayValueForKeyPath:@"products"] removeAllObjects];
+	[[self mutableArrayValueForKeyPath:@"products"] removeAllObjects];
 	self.products = nil;
 	self.products = [NSMutableArray arrayWithObjects:@"1", @"2", nil];
 	[[self mutableArrayValueForKey:@"products"] addObjectsFromArray:_w(@"3 4 5")];
@@ -55,12 +57,27 @@
 		}
 	}];
 	self.days = [NSMutableSet set];
-	[[self mutableSetValueForKey:@"days"] addObject:@"2010-10-03"];
-	[[self mutableSetValueForKey:@"days"] addObject:@"2010-10-03"];
-	[[self mutableSetValueForKey:@"days"] addObject:@"2010-10-05"];
+	[[self mutableSetValueForKeyPath:@"days"] addObject:@"2010-10-03"];
+	[[self mutableSetValueForKeyPath:@"days"] addObject:@"2010-10-03"];
+	[[self mutableSetValueForKeyPath:@"days"] addObject:@"2010-10-05"];
 	self.days = nil;
 	self.days = [NSMutableSet set];
-	
+
+	id dictionaryChangedBlock = ^(NSKeyValueChange kind, id obj, id oldObj, id key) {
+		if (NSKeyValueChangeSetting == kind) {
+//			log_info(@"dict %@  obj:%@  oldObj:%@", keyValueChangeToString(kind), obj, oldObj);
+		} else {
+//			log_info(@"dict %@  obj:%@  oldObj:%@  key:%@", keyValueChangeToString(kind), obj, oldObj, key);
+		}
+	};
+	[OBSERVERMAN addDictionaryChangedBlock:dictionaryChangedBlock forKeyPath:@"book"];
+	[self addObserver:OBSERVERMAN forKeyPath:@"book" withDictionarySetBlock:dictionaryChangedBlock];
+	self.book = nil;
+	self.book = [NSMutableDictionary dictionary];
+	[[self mutableDictionaryValueForKeyPath:@"book"] setObject:@"best book title" forKey:@"best"];
+	[[self mutableDictionaryValueForKeyPath:@"book"] setObject:@"best book title.." forKey:@"best"];
+	[[self mutableDictionaryValueForKeyPath:@"book"] removeObjectForKey:@"best"];
+	[[self mutableDictionaryValueForKeyPath:@"book"] setObject:@"test book title" forKey:@"test"];
 }
 
 
@@ -68,9 +85,12 @@
 	[name release];
 	[products release];
 	[days release];
+	[book release];
 	[self removeObserver:OBSERVERMAN forKeyPath:@"name"];
 	[self removeObserver:OBSERVERMAN forKeyPath:@"products"];
 	[self removeObserver:OBSERVERMAN forKeyPath:@"days"];
+	[self removeObserver:OBSERVERMAN forKeyPath:@"book"];
+	[OBSERVERMAN removeDictionaryChangedBlockForKeyPath:@"book"];
 	[super dealloc];
 }
 

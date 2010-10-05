@@ -13,9 +13,11 @@
 	NSString* name;
 	NSMutableArray* products;
 	NSMutableSet* days;
+	NSMutableDictionary* book;
 }
 @property (nonatomic, retain) NSString* name;
 @property (nonatomic, retain) NSMutableArray* products;
 @property (nonatomic, retain) NSMutableSet* days;
+@property (nonatomic, retain) NSMutableDictionary* book;
 
 @end

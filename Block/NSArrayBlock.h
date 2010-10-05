@@ -13,14 +13,18 @@ typedef void (^EachWithIndexBlock)(id obj, int idx);
 typedef id (^MapBlock)(id obj);
 typedef id (^MapWithIndexBlock)(id obj, int idx);
 typedef BOOL (^FilterBlock)(id obj);
+typedef id (^ReduceBlock)(id result, id item);
+typedef NSComparisonResult (^SortBlock)(id uno, id dos);
 
 @interface NSArray (Block)
 
--(void) each:(EachBlock)block ;
--(void) each_with_index:(EachWithIndexBlock)block ;
+-(NSArray*) each:(EachBlock)block ;
+-(NSArray*) each_with_index:(EachWithIndexBlock)block ;
 -(NSArray*) map:(MapBlock)block ;
 -(NSArray*) map_with_index:(MapWithIndexBlock)block ;
 -(NSArray*) select:(FilterBlock)block ;
 -(NSArray*) reject:(FilterBlock)block ;
+-(NSArray*) reduce:(id)init :(ReduceBlock)block ;
+-(NSArray*) sort:(SortBlock)block ;
 
 @end

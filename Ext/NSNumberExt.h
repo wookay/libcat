@@ -16,7 +16,9 @@ CGFloat int_to_float(int val) ;
 
 
 @interface NSNumber (MathFunctions)
--(id) round_up ;
--(id) ceiling ;
--(id) floor_down ;
+-(NSString*) chr ;
+-(NSNumber*) next ;
+-(NSNumber*) round_up ;
+-(NSNumber*) ceiling ;
+-(NSNumber*) floor_down ;
 @end

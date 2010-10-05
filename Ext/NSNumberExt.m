@@ -19,20 +19,23 @@ CGFloat int_to_float(int val) {
 }
 
 
-
-
-
 @implementation NSNumber (MathFunctions)
--(id) round_up {
+-(NSString*) chr {
+	return [NSString stringWithFormat:@"%C", [self charValue]];
+}
+-(NSNumber*) next {
+	return [NSNumber numberWithInt:[self intValue] + 1];
+}
+-(NSNumber*) round_up {
 	double value = round([self doubleValue]);
 	return [NSNumber numberWithDouble:value];
 }
--(id) ceiling {
+-(NSNumber*) ceiling {
 	double value = ceil([self doubleValue]);
 	return [NSNumber numberWithDouble:value];
 }
--(id) floor_down {
+-(NSNumber*) floor_down {
 	double value = floor([self doubleValue]);
-	return [NSNumber numberWithFloat:value];
+	return [NSNumber numberWithDouble:value];
 }
 @end

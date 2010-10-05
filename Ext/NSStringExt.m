@@ -9,6 +9,7 @@
 #import "NSStringExt.h"
 #import "NSNumberExt.h"
 #import "Logger.h"
+#import "NSArrayExt.h"
 
 NSString* SWF(NSString* format, ...) {
 	va_list args;
@@ -106,15 +107,11 @@ NSInteger sortByStringComparator(NSString* uno, NSString* dos, void* context) {
 	}
 }
 
-- (id) split {
+- (NSArray*) split {
 	return [self split:SPACE];
 }
 
--(NSArray*) each_chars {
-	return [self split:EMPTY_STRING];
-}
-
-- (id) split:(id)sep {
+- (NSArray*) split:(id)sep {
 	if ([EMPTY_STRING isEqualToString:self]) {
 		return [NSArray array];
 	} 
@@ -139,6 +136,14 @@ NSInteger sortByStringComparator(NSString* uno, NSString* dos, void* context) {
 		[ary addObject:self];
 	}
 	return [ary componentsJoinedByString:EMPTY_STRING];
+}
+
+-(NSArray*) each_chars {
+	return [self split:EMPTY_STRING];
+}
+
+- (NSString*) reverse {
+	return [[[self split:EMPTY_STRING] reverse] join:EMPTY_STRING];
 }
 
 @end
