@@ -85,11 +85,9 @@
         }
         free(classes);
     }
-	[self setup];
 	for(NSString* targetClassString in targetClasses) {
 		[[self target:targetClassString] run_tests];
 	}
-	[self report];
 }
 
 @end
