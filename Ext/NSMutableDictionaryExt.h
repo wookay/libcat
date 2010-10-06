@@ -11,8 +11,9 @@
 
 @interface NSMutableDictionary (UpdateArray)
 
--(void) updateArray:(id)obj forKey:(id)key ;
+-(void) updateArrayWithObject:(id)obj forKey:(id)key ;
 -(void) updateArrayWithArray:(NSArray*)obj forKey:(id)key ;
 -(NSArray*) arrayForKey:(id)key ;
+-(int) arrayCountForKey:(id)key ;
 
 @end

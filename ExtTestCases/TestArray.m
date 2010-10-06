@@ -19,13 +19,11 @@
 @implementation TestArray
 
 -(void) test_array {
-	NSArray* expected = _array2(_w(@"1 3 5"), _w(@"2 4 6"));
-	assert_equal(expected, [_array3(_w(@"1 2"), _w(@"3 4"), _w(@"5 6")) transpose]);
+	NSArray* ary = _w(@"1 2 3");
 	
-	expected = _array3(_w(@"1 2"), _w(@"3 4"), _w(@"5 6"));
-	assert_equal(expected, [[_array3(_w(@"1 2"), _w(@"3 4"), _w(@"5 6")) transpose] transpose]);
-
-	assert_equal(_array0(), [_array0() transpose]);
+	assert_equal(@"1", [ary objectAtFirst]);
+	assert_equal(@"2", [ary objectAtSecond]);
+	assert_equal(@"3", [ary objectAtLast]);
 
 	assert_equal(_w(@"1 2 3"), [_w(@"2 1 3") sort]);
 }
@@ -36,6 +34,16 @@
 
 -(void) test_trio {
 	assert_equal(_w(@"a b c"), TRIO(@"a", @"b", @"c"));
+}
+
+-(void) test_transpose {
+	NSArray* expected = _array2(_w(@"1 3 5"), _w(@"2 4 6"));
+	assert_equal(expected, [_array3(_w(@"1 2"), _w(@"3 4"), _w(@"5 6")) transpose]);
+	
+	expected = _array3(_w(@"1 2"), _w(@"3 4"), _w(@"5 6"));
+	assert_equal(expected, [[_array3(_w(@"1 2"), _w(@"3 4"), _w(@"5 6")) transpose] transpose]);
+	
+	assert_equal(_array0(), [_array0() transpose]);
 }
 
 @end

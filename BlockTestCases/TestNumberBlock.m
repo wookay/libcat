@@ -16,24 +16,41 @@
 @implementation TestNumberBlock
 
 -(void) test_number_block {
-	[FIXNUM(1) times:^(int idx) {
-		assert_true(idx < 1);
+	__block int cnt = 0;
+	[FIXNUM(5) times:^(int idx) {
+		cnt += 1;
 	}];
-	[FIXNUM(1) times:^ {
-		assert_true(true);
+	assert_equal(5, cnt);
+
+	cnt = 0;
+	[FIXNUM(5) times:^ {
+		cnt += 1;
 	}];	
-	[FIXNUM(2) upto:3 :^(int idx) {
-		assert_true(idx <= 3);
+	assert_equal(5, cnt);
+
+	cnt = 0;
+	[FIXNUM(2) upto:5 :^(int idx) {
+		cnt += 1;
 	}];
-	[FIXNUM(2) upto:3 :^ {
-		assert_true(true);
+	assert_equal(4, cnt);
+	
+	cnt = 0;
+	[FIXNUM(2) upto:5 :^ {
+		cnt += 1;
 	}];	
-	[FIXNUM(3) downto:2 :^(int idx) {
-		assert_true(idx <= 3);
+	assert_equal(4, cnt);
+
+	cnt = 0;
+	[FIXNUM(3) downto:1 :^(int idx) {
+		cnt += 1;
 	}];
-	[FIXNUM(3) downto:2 :^ {
-		assert_true(true);
+	assert_equal(3, cnt);
+
+	cnt = 0;
+	[FIXNUM(3) downto:1 :^ {
+		cnt += 1;
 	}];
+	assert_equal(3, cnt);
 	
 	id lambda = ^ { };
 	[FIXNUM(2) upto:3 :lambda];

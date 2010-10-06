@@ -19,9 +19,17 @@
 	assert_equal(@"0xff", SWF(@"0x%x", 255));
 }
 
+-(void) test_w {
+	NSArray* expected = [@"a b" componentsSeparatedByString:SPACE];
+	assert_equal(expected, _w(@"a b"));
+}
+
 -(void) test_string {
 	assert_equal(@"cba", [@"abc" reverse]);
 	assert_equal(@"bc", [@"abc" slice:1 :2]);
+	assert_equal(@"abcd", [@"abcff" gsub:@"ff" to:@"d"]);
+	assert_true([@"abcff" hasText:@"ff"]);
+
 }
 
 @end

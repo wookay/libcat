@@ -22,6 +22,6 @@
 
 @interface NSObject (NSKeyValueCodingExt)
 
--(ProxyMutableDictionary*) mutableDictionaryValueForKeyPath:(NSString*)keyPath ;
+-(id) mutableDictionaryValueForKeyPath:(NSString*)keyPath ;
 
 @end

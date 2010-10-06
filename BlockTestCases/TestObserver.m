@@ -12,6 +12,8 @@
 #import "UnitTest.h"
 #import "Logger.h"
 #import "NSStringExt.h"
+#import "GeometryExt.h"
+#import "NSMutableDictionaryExt.h"
 
 @implementation TestObserver
 @synthesize name;
@@ -20,79 +22,108 @@
 @synthesize book;
 
 -(void) setup {
+	self.name = nil;
 	self.products = [NSMutableArray array];
 	self.days = [NSMutableSet set];
 	self.book = [NSMutableDictionary dictionary];
 }
 
--(void) test_observer {
+-(void) test_object_observer {
+	NSMutableDictionary* counter = [NSMutableDictionary dictionary];
+
 	[self addObserver:OBSERVERMAN forKeyPath:@"name" withObjectChangedBlock:^(NSKeyValueChange kind, id obj, id oldObj) {
-//		log_info(@"obj %@ %@ %@", keyValueChangeToString(kind), obj, oldObj);
+		[counter updateArrayWithObject:EMPTY_STRING forKey:Enum(kind)];
 	}];
 	self.name = @"suzy";
 	self.name = nil;
 	
+	assert_equal(2, [counter arrayCountForKey:Enum(NSKeyValueChangeSetting)]);	
+	assert_equal(0, [counter arrayCountForKey:Enum(NSKeyValueChangeInsertion)]);
+	assert_equal(0, [counter arrayCountForKey:Enum(NSKeyValueChangeRemoval)]);
+	assert_equal(0, [counter arrayCountForKey:Enum(NSKeyValueChangeReplacement)]);
+	
+	[self removeObserver:OBSERVERMAN forKeyPath:@"name"];
+}
+
+-(void) test_mutable_array_observer {
+	NSMutableDictionary* counter = [NSMutableDictionary dictionary];
+
 	[[self mutableArrayValueForKeyPath:@"products"] addObject:@"hello"];
 	[self addObserver:OBSERVERMAN forKeyPath:@"products" withArrayChangedBlock:^(NSKeyValueChange kind, id obj, id oldObj, int idx) {
-		if (NSKeyValueChangeSetting == kind) {
-//			log_info(@"array %@ %@ %@", keyValueChangeToString(kind), obj, oldObj);
-		} else {
-//			log_info(@"array %@ %@ %@ %d", keyValueChangeToString(kind), obj, oldObj, idx);
-		}
+		[counter updateArrayWithObject:EMPTY_STRING forKey:Enum(kind)];
 	}];	
-	[[self mutableArrayValueForKeyPath:@"products"] addObject:@"world"];
-	[[self mutableArrayValueForKeyPath:@"products"] replaceObjectAtIndex:0 withObject:@"my"];
-	[[self mutableArrayValueForKeyPath:@"products"] removeObjectAtIndex:0];
-	[[self mutableArrayValueForKeyPath:@"products"] removeAllObjects];
-	[[self mutableArrayValueForKeyPath:@"products"] removeAllObjects];
+	NSMutableArray* products_ = [self mutableArrayValueForKeyPath:@"products"];
+	[products_ addObject:@"world"];
+	[products_ replaceObjectAtIndex:0 withObject:@"my"];
+	[products_ removeObjectAtIndex:0];
+	[products_ removeAllObjects];
+	[products_ removeAllObjects];
 	self.products = nil;
 	self.products = [NSMutableArray arrayWithObjects:@"1", @"2", nil];
-	[[self mutableArrayValueForKey:@"products"] addObjectsFromArray:_w(@"3 4 5")];
+	[products_ addObjectsFromArray:_w(@"3 4 5")];
 	
+	assert_equal(2, [counter arrayCountForKey:Enum(NSKeyValueChangeSetting)]);	
+	assert_equal(4, [counter arrayCountForKey:Enum(NSKeyValueChangeInsertion)]);
+	assert_equal(2, [counter arrayCountForKey:Enum(NSKeyValueChangeRemoval)]);
+	assert_equal(1, [counter arrayCountForKey:Enum(NSKeyValueChangeReplacement)]);
+	
+	[self removeObserver:OBSERVERMAN forKeyPath:@"products"];
+}
+	
+-(void) test_mutable_set_observer {
+	NSMutableDictionary* counter = [NSMutableDictionary dictionary];
 	[self addObserver:OBSERVERMAN forKeyPath:@"days" withSetChangedBlock:^(NSKeyValueChange kind, id obj, id oldObj) {
-		if (NSKeyValueChangeSetting == kind) {
-//			log_info(@"set %@ %@", keyValueChangeToString(kind), obj);
-		} else {
-//			log_info(@"set %@ %@ %@", keyValueChangeToString(kind), obj, oldObj);
-		}
+		[counter updateArrayWithObject:EMPTY_STRING forKey:Enum(kind)];
 	}];
 	self.days = [NSMutableSet set];
-	[[self mutableSetValueForKeyPath:@"days"] addObject:@"2010-10-03"];
-	[[self mutableSetValueForKeyPath:@"days"] addObject:@"2010-10-03"];
-	[[self mutableSetValueForKeyPath:@"days"] addObject:@"2010-10-05"];
+	NSMutableSet* days_ = [self mutableSetValueForKeyPath:@"days"];
+	[days_ addObject:@"2010-10-03"];
+	[days_ addObject:@"2010-10-03"];
+	[days_ addObject:@"2010-10-05"];
+	[days_ removeObject:@"2010-10-05"];
 	self.days = nil;
 	self.days = [NSMutableSet set];
-
-	id dictionaryChangedBlock = ^(NSKeyValueChange kind, id obj, id oldObj, id key) {
-		if (NSKeyValueChangeSetting == kind) {
-//			log_info(@"dict %@  obj:%@  oldObj:%@", keyValueChangeToString(kind), obj, oldObj);
-		} else {
-//			log_info(@"dict %@  obj:%@  oldObj:%@  key:%@", keyValueChangeToString(kind), obj, oldObj, key);
-		}
-	};
+	
+	assert_equal(3, [counter arrayCountForKey:Enum(NSKeyValueChangeSetting)]);	
+	assert_equal(2, [counter arrayCountForKey:Enum(NSKeyValueChangeInsertion)]);
+	assert_equal(1, [counter arrayCountForKey:Enum(NSKeyValueChangeRemoval)]);
+	assert_equal(0, [counter arrayCountForKey:Enum(NSKeyValueChangeReplacement)]);
+	
+}
+	
+-(void) test_mutable_dictionary_observer {
+	NSMutableDictionary* counter = [NSMutableDictionary dictionary];
+	DictionaryChangedBlock dictionaryChangedBlock = ^(NSKeyValueChange kind, id obj, id oldObj, id key) {		
+		[counter updateArrayWithObject:EMPTY_STRING forKey:Enum(kind)];
+	};	
 	[OBSERVERMAN addDictionaryChangedBlock:dictionaryChangedBlock forKeyPath:@"book"];
 	[self addObserver:OBSERVERMAN forKeyPath:@"book" withDictionarySetBlock:dictionaryChangedBlock];
 	self.book = nil;
 	self.book = [NSMutableDictionary dictionary];
-	[[self mutableDictionaryValueForKeyPath:@"book"] setObject:@"best book title" forKey:@"best"];
-	[[self mutableDictionaryValueForKeyPath:@"book"] setObject:@"best book title.." forKey:@"best"];
-	[[self mutableDictionaryValueForKeyPath:@"book"] removeObjectForKey:@"best"];
-	[[self mutableDictionaryValueForKeyPath:@"book"] setObject:@"test book title" forKey:@"test"];
+	NSMutableDictionary* book_ = [self mutableDictionaryValueForKeyPath:@"book"];
+	[book_ setObject:@"best book title" forKey:@"best"];
+	[book_ setObject:@"best book title.." forKey:@"best"];
+	[book_ removeObjectForKey:@"best"];
+	[book_ setObject:@"test book title" forKey:@"test"];
+	
+	assert_equal(3, [counter arrayCountForKey:Enum(NSKeyValueChangeSetting)]);
+	assert_equal(2, [counter arrayCountForKey:Enum(NSKeyValueChangeInsertion)]);
+	assert_equal(1, [counter arrayCountForKey:Enum(NSKeyValueChangeRemoval)]);
+	assert_equal(1, [counter arrayCountForKey:Enum(NSKeyValueChangeReplacement)]);
+	
+	[self removeObserver:OBSERVERMAN forKeyPath:@"book"];
+	[OBSERVERMAN removeDictionaryChangedBlockForKeyPath:@"book"];
 }
 
 
 -(void) dealloc {
+	[self removeObserver:OBSERVERMAN forKeyPath:@"days"];	
+
 	[name release];
 	[products release];
 	[days release];
 	[book release];
-	[self removeObserver:OBSERVERMAN forKeyPath:@"name"];
-	[self removeObserver:OBSERVERMAN forKeyPath:@"products"];
-	[self removeObserver:OBSERVERMAN forKeyPath:@"days"];
-	[self removeObserver:OBSERVERMAN forKeyPath:@"book"];
-	[OBSERVERMAN removeDictionaryChangedBlockForKeyPath:@"book"];
 	[super dealloc];
 }
-
 
 @end

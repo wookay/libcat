@@ -16,7 +16,7 @@
 
 @implementation TestDictionary
 
--(void) test_dictionary {
+-(void) test_dictionaryWithKeysAndObjects {
 	NSDictionary* expected = [NSDictionary dictionaryWithObjectsAndKeys:
 											@"object", @"key",
 											nil];

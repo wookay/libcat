@@ -31,6 +31,7 @@ BOOL CGRectHasPoint(CGRect rect, CGPoint point) ;
 #define SFPoint(point)  NSStringFromCGPoint(point)
 #define SFRange(range)	[NSString stringWithFormat:@"{location=%d, length=%d}", range.location, range.length]
 #define VFPoint(point)	[NSValue valueWithCGPoint:point]
+#define Enum(enum)		[NSNumber numberWithInt:enum]
 
 #define NSRangeZero (NSMakeRange(0, 0))
 #define CGAffineTransformInverse	CGAffineTransformRotate(CGAffineTransformIdentity, -M_PI)

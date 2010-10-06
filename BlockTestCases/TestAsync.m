@@ -17,7 +17,16 @@
 @implementation TestAsync
 
 -(void) test_async {
-	[Async perform:^{ assert_true(true); } afterDone:^{ assert_true(true); }];
+	__block int cnt = 0;
+	[Async perform:^{ 
+				cnt += 1;
+		}
+		afterDone:^{ 
+			cnt += 1;
+			assert_equal(2, cnt); 
+		}];
+	
+	assert_equal(0, cnt); 
 }
 
 @end

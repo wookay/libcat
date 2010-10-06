@@ -16,28 +16,28 @@
 	[self addObserver:observer
 		   forKeyPath:keyPath 
 			  options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew 
-			  context:PAIR([NSObject class], block)];
+			  context:PAIR([NSObject class], Block_copy(block))];
 }
 
 -(void) addObserver:(Observer*)observer forKeyPath:(NSString *)keyPath withArrayChangedBlock:(ArrayChangedBlock)block {
 	[self addObserver:observer 
 		   forKeyPath:keyPath 
 			  options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew
-			  context:PAIR([NSMutableArray class], block)];
+			  context:PAIR([NSMutableArray class], Block_copy(block))];
 }
 	
 -(void) addObserver:(Observer*)observer forKeyPath:(NSString *)keyPath withSetChangedBlock:(SetChangedBlock)block {
 	[self addObserver:observer 
 		   forKeyPath:keyPath
 			  options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew 
-			  context:PAIR([NSMutableSet class], block)];
+			  context:PAIR([NSMutableSet class], Block_copy(block))];
 }
 
 -(void) addObserver:(Observer*)observer forKeyPath:(NSString *)keyPath withDictionarySetBlock:(DictionaryChangedBlock)block {
 	[self addObserver:observer 
 		   forKeyPath:keyPath 
 			  options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew
-			  context:PAIR([NSMutableDictionary class], block)];
+			  context:PAIR([NSMutableDictionary class], Block_copy(block))];
 }
 
 @end
@@ -45,7 +45,7 @@
 
 @implementation NSObject (NSKeyValueCodingExt)
 
--(ProxyMutableDictionary*) mutableDictionaryValueForKeyPath:(NSString*)keyPath {
+-(id) mutableDictionaryValueForKeyPath:(NSString*)keyPath {
 	id obj = [self valueForKeyPath:keyPath];
 	if ([obj isKindOfClass:[ProxyMutableDictionary class]]) {
 		return obj;

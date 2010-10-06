@@ -12,7 +12,7 @@
 
 @implementation NSMutableDictionary (UpdateArray)
 
--(void) updateArray:(id)obj forKey:(id)key {
+-(void) updateArrayWithObject:(id)obj forKey:(id)key {
 	NSArray* exist = [self objectForKey:key];
 	NSMutableArray* ary;
 	if (nil == exist) {
@@ -42,6 +42,10 @@
 		return [NSArray array];
 	}
 	return exist;
+}
+
+-(int) arrayCountForKey:(id)key {
+	return [[self arrayForKey:key] count];
 }
 
 @end

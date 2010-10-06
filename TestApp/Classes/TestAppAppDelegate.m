@@ -26,12 +26,12 @@
     // Add the navigation controller's view to the window and display.
     [window addSubview:navigationController.view];
     [window makeKeyAndVisible];
-
+	
 	[UnitTest setup];
 	[UnitTest run_all_tests];
 	[UnitTest report];
-	
-    return YES;
+
+	return YES;
 }
 
 

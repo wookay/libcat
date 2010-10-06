@@ -78,21 +78,21 @@ NSString* keyValueChangeToString(NSKeyValueChange kind) {
 			[indexes enumerateIndexesUsingBlock:^(NSUInteger index, BOOL *stop) {
 				switch (kind) {
 					case NSKeyValueChangeRemoval: {
-						id oldObj = [old objectAtIndex:idx];
-						block(kind, nil, oldObj, index);
-					}
+							id oldObj = [old objectAtIndex:idx];
+							block(kind, nil, oldObj, index);
+						}
 						break;												
 					case NSKeyValueChangeInsertion: {
-						id obj = [new objectAtIndex:idx];
-						block(kind, obj, nil, index);
-					}
+							id obj = [new objectAtIndex:idx];
+							block(kind, obj, nil, index);
+						}
 						break;
 					case NSKeyValueChangeReplacement: {
-						id oldObj = [old objectAtIndex:idx];
-						id newObj = [new objectAtIndex:idx];
-						block(kind, newObj, oldObj, index);
-					}
-						break;						
+							id oldObj = [old objectAtIndex:idx];
+							id newObj = [new objectAtIndex:idx];
+							block(kind, newObj, oldObj, index);
+						}
+						break;		
 					default:
 						break;
 				}
