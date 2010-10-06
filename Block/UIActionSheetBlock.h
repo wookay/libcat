@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "UIViewBlock.h"
+#import "NSNumberExt.h"
 
 typedef enum { kActionSheetCancelButton, kActionSheetDestructiveButton, kActionSheetOtherButton } ActionSheetButtonType;
 typedef void (^ActionSheetBlock)() ;

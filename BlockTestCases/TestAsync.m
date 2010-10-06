@@ -19,14 +19,21 @@
 -(void) test_async {
 	__block int cnt = 0;
 	[Async perform:^{ 
-				cnt += 1;
+		cnt += 1;
+		assert_equal(1, cnt); 
+	}];
+	assert_equal(0, cnt); 
+
+	[Async perform:^{ 
+			cnt += 1;
+			assert_equal(2, cnt); 
 		}
 		afterDone:^{ 
 			cnt += 1;
-			assert_equal(2, cnt); 
+			assert_equal(3, cnt); 
 		}];
 	
-	assert_equal(0, cnt); 
+	assert_equal(1, cnt); 
 }
 
 @end

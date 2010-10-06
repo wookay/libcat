@@ -27,15 +27,14 @@
 
 +(void) show:(id)view title:(NSString*)title_ buttons:(NSArray*)buttons afterDone:(ActionSheetBlock)doneBlock pass:(PassBlock)passBlock {
 	
-	__block NSString* cancelButtonTitle = nil;
-	__block ActionSheetBlock cancelBlock = nil;
-	__block NSString* destructiveButtonTitle = nil;
-	__block ActionSheetBlock destructiveBlock = nil;
-	__block NSMutableArray* otherButtonTitles = [NSMutableArray array];
-	__block NSMutableArray* otherBlocks = [NSMutableArray array];
+	NSString* cancelButtonTitle = nil;
+	NSString* destructiveButtonTitle = nil;
+	NSMutableArray* otherButtonTitles = [NSMutableArray array];
+	ActionSheetBlock cancelBlock = nil;
+	ActionSheetBlock destructiveBlock = nil;
+	NSMutableArray* otherBlocks = [NSMutableArray array];
 	
-	typedef void (^ButtonArrangeBlock)(NSArray*);
-	ButtonArrangeBlock buttonArrange = ^(NSArray* trio) {
+	for (NSArray* trio in buttons) {
 		ActionSheetButtonType buttonType = [[trio objectAtFirst] intValue];
 		NSString* buttonTitle = [trio objectAtSecond];
 		ActionSheetBlock block = [trio objectAtThird];
@@ -54,10 +53,6 @@
 				[otherBlocks addObject:block];
 				break;
 		}
-	};
-	
-	for (NSArray* trio in buttons) {
-		buttonArrange(trio);
 	}
 	
 	UIActionSheet* sheet = [[self alloc] initWithTitle:title_

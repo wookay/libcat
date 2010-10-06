@@ -15,6 +15,8 @@
 @implementation TestNumber
 
 -(void) test_number {
+	assert_equal(FIXNUM(2), [FIXNUM(1) next]);
+	
 	assert_equal(LONGNUM(4), [LONGNUM(3.14) ceiling]);
 	assert_equal(LONGNUM(2), [LONGNUM(1.66) ceiling]);
 	
