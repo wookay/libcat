@@ -12,7 +12,7 @@
 #import "UnitTest.h"
 #import "Logger.h"
 #import "NSStringExt.h"
-#import "GeometryExt.h"
+#import "NSNumberExt.h"
 #import "NSMutableDictionaryExt.h"
 
 @implementation TestObserver

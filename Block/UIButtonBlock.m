@@ -22,6 +22,7 @@
 			NSArray* actions = [self actionsForTarget:target forControlEvent:controlEvents];
 			for (NSString* strAction in actions) {
 				[self removeTarget:target action:NSSelectorFromString(strAction) forControlEvents:controlEvents];
+				[target release];
 			}
 		}
 	}
@@ -40,8 +41,8 @@
 }
 
 +(ProcForButton*) procWithBlock:(ButtonBlock)block {
-	ProcForButton* proc = [[[ProcForButton alloc] init] autorelease];
-	proc.callBlock = block;
+	ProcForButton* proc = [[ProcForButton alloc] init];
+	proc.callBlock = Block_copy(block);
 	return proc;
 }
 
@@ -53,7 +54,7 @@
 	return self;
 }
 
-- (void)dealloc {
+-(void) dealloc {
 	if (nil != callBlock) {
 		Block_release(callBlock);
 	}

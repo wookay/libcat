@@ -9,6 +9,7 @@
 #import "RootViewController.h"
 #import "UnitTest.h"
 #import "NSStringExt.h"
+#import "Logger.h"
 
 enum { kRowTests, kRowAssertions, kRowFailures, kRowErrors, kRowMax };
 
@@ -19,14 +20,13 @@ enum { kRowTests, kRowAssertions, kRowFailures, kRowErrors, kRowMax };
 #pragma mark -
 #pragma mark View lifecycle
 
-/*
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+	
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
-*/
 
 /*
 - (void)viewWillAppear:(BOOL)animated {

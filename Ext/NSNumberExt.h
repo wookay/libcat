@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+#define Enum(enum)		[NSNumber numberWithInt:enum]
 #define FIXNUM(num)		[NSNumber numberWithInt:num]
 #define LONGNUM(num)	[NSNumber numberWithDouble:num]
 

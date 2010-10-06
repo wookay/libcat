@@ -16,6 +16,9 @@
 		28C286E10D94DF7D0034E888 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C286E00D94DF7D0034E888 /* RootViewController.m */; };
 		28F335F11007B36200424DE2 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28F335F01007B36200424DE2 /* RootViewController.xib */; };
 		DA699968125A165C00A08654 /* UIViewBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DA699967125A165C00A08654 /* UIViewBlock.m */; };
+		DABE4428125C88E600903735 /* UIAlertViewBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DABE4427125C88E600903735 /* UIAlertViewBlock.m */; };
+		DABE45F4125C987900903735 /* UIActionSheetBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DABE45F3125C987900903735 /* UIActionSheetBlock.m */; };
+		DABE48B0125CB9D400903735 /* TestActionSheetBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DABE48AF125CB9D400903735 /* TestActionSheetBlock.m */; };
 		DAC581AE125AE82600203336 /* TestView.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC581AD125AE82600203336 /* TestView.m */; };
 		DAC5825A125AF7F800203336 /* TestArray.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC58259125AF7F800203336 /* TestArray.m */; };
 		DAC58356125B08BE00203336 /* Async.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC58355125B08BE00203336 /* Async.m */; };
@@ -71,6 +74,11 @@
 		8D1107310486CEB800E47090 /* TestApp-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "TestApp-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		DA699966125A165C00A08654 /* UIViewBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewBlock.h; sourceTree = "<group>"; };
 		DA699967125A165C00A08654 /* UIViewBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIViewBlock.m; sourceTree = "<group>"; };
+		DABE4426125C88E600903735 /* UIAlertViewBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIAlertViewBlock.h; sourceTree = "<group>"; };
+		DABE4427125C88E600903735 /* UIAlertViewBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIAlertViewBlock.m; sourceTree = "<group>"; };
+		DABE45F2125C987900903735 /* UIActionSheetBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIActionSheetBlock.h; sourceTree = "<group>"; };
+		DABE45F3125C987900903735 /* UIActionSheetBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIActionSheetBlock.m; sourceTree = "<group>"; };
+		DABE48AF125CB9D400903735 /* TestActionSheetBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestActionSheetBlock.m; sourceTree = "<group>"; };
 		DAC581AD125AE82600203336 /* TestView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestView.m; sourceTree = "<group>"; };
 		DAC58259125AF7F800203336 /* TestArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestArray.m; sourceTree = "<group>"; };
 		DAC58354125B08BE00203336 /* Async.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Async.h; sourceTree = "<group>"; };
@@ -246,6 +254,10 @@
 				DACBA0FA125971F90035C31F /* NSNumberBlock.m */,
 				DACBA0FD125971F90035C31F /* UIButtonBlock.h */,
 				DACBA0FE125971F90035C31F /* UIButtonBlock.m */,
+				DABE4426125C88E600903735 /* UIAlertViewBlock.h */,
+				DABE4427125C88E600903735 /* UIAlertViewBlock.m */,
+				DABE45F2125C987900903735 /* UIActionSheetBlock.h */,
+				DABE45F3125C987900903735 /* UIActionSheetBlock.m */,
 				DA699966125A165C00A08654 /* UIViewBlock.h */,
 				DA699967125A165C00A08654 /* UIViewBlock.m */,
 				DAC58354125B08BE00203336 /* Async.h */,
@@ -260,6 +272,7 @@
 			children = (
 				DACBA101125971F90035C31F /* TestBlock.m */,
 				DAC581AD125AE82600203336 /* TestView.m */,
+				DABE48AF125CB9D400903735 /* TestActionSheetBlock.m */,
 				DACBA1F0125975920035C31F /* TestObserver.h */,
 				DACBA1F1125975920035C31F /* TestObserver.m */,
 				DAC5835A125B0A2100203336 /* TestAsync.m */,
@@ -449,6 +462,9 @@
 				DAC58916125B76B300203336 /* TestArrayBlock.m in Sources */,
 				DAC5891B125B76BF00203336 /* TestDictionaryBlock.m in Sources */,
 				DAC5893D125B773200203336 /* TestNumberBlock.m in Sources */,
+				DABE4428125C88E600903735 /* UIAlertViewBlock.m in Sources */,
+				DABE45F4125C987900903735 /* UIActionSheetBlock.m in Sources */,
+				DABE48B0125CB9D400903735 /* TestActionSheetBlock.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

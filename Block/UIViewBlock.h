@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+typedef NSInteger (^PassBlock)() ;
 typedef void (^AnimationBlock)() ;
 
 @interface UIView (Block)

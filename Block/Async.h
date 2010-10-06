@@ -13,6 +13,7 @@ typedef void (^AsyncBlock)();
 @interface Async : NSObject {
 
 }
++(void) perform:(AsyncBlock)block ;
 +(void) perform:(AsyncBlock)block afterDone:(AsyncBlock)doneBlock ;
 
 @end

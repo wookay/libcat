@@ -8,6 +8,7 @@
 
 #import "UIViewBlock.h"
 #import "UIButtonBlock.h"
+#import "UIAlertViewBlock.h"
 #import "UnitTest.h"
 #import "Logger.h"
 #import "NSNumberBlock.h"
@@ -63,6 +64,25 @@
 	[button sendActionsForControlEvents:UIControlEventTouchUpInside];
 	
 	assert_equal(2, cnt);
+}
+
+-(void) test_alert {
+	[UIAlertView alert:@"alert ok"
+					OK:^(int idx) {
+						assert_equal(kAlertCancelOK_OK, idx);
+					}
+				  pass:^int {
+					  return kAlertCancelOK_OK;
+				  }];
+	
+	[UIAlertView alert:@"alert cancel ok"
+			 Cancel_OK:^(int idx) {
+						assert_equal(kAlertCancelOK_OK, idx);
+				}
+				  pass:^int {
+						return kAlertCancelOK_OK;
+				}];
+
 }
 
 @end
