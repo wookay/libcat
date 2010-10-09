@@ -12,6 +12,10 @@
 
 @implementation NSMutableDictionary (UpdateArray)
 
+-(void) setKey:(id)key withObject:(id)obj {
+	[self setObject:obj forKey:key];
+}
+
 -(void) updateArrayWithObject:(id)obj forKey:(id)key {
 	NSArray* exist = [self objectForKey:key];
 	NSMutableArray* ary;

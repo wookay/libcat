@@ -18,8 +18,8 @@ typedef NSComparisonResult (^SortBlock)(id uno, id dos);
 
 @interface NSArray (Block)
 
--(NSArray*) each:(EachBlock)block ;
--(NSArray*) each_with_index:(EachWithIndexBlock)block ;
+-(id) each:(EachBlock)block ;
+-(id) each_with_index:(EachWithIndexBlock)block ;
 -(NSArray*) map:(MapBlock)block ;
 -(NSArray*) map_with_index:(MapWithIndexBlock)block ;
 -(NSArray*) select:(FilterBlock)block ;

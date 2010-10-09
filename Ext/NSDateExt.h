@@ -33,6 +33,10 @@ enum PostfixTypes {
 };
 NSString* postfix_string(int postfix) ;
 
+
+
+
+
 @interface NSDate (Ext)
 
 #pragma mark int
@@ -103,3 +107,14 @@ NSString* postfix_string(int postfix) ;
 
 
 
+#pragma mark AMPM
+typedef struct AMPMHour12 {
+	int ampm;
+	int hour12;
+} AMPMHour12;
+enum { HOUR_AM, HOUR_PM };
+
+@interface NSDate (AMPM)
++(int) ampm:(int)amPm hour12_to_hour24:(int)hour12 ;
++(AMPMHour12) hour24_to_ampm_hour12:(int)hour24 ;
+@end

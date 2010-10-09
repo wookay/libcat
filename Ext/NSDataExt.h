@@ -9,15 +9,22 @@
 #import <Foundation/Foundation.h>
 
 
-NSData* unichar_to_data(unichar ch) ;
 
 @interface NSData (Ext)
-
--(unichar) to_unichar ;
--(NSData*) swap ;
--(NSData*) append:(NSData*)data ;
--(NSString*) ucs2_to_utf8_string ;
--(NSString*) to_utf8_string ;
+-(char) onebyte_to_char ;
+- (int) onebyte_to_int ;
+- (NSData*) append:(NSData*)data ;
 - (NSString*) to_hex;
+- (NSData*) slice:(int)loc :(int)length_ ;
+-(NSData*) slice:(int)loc backward:(int)backward ;
+@end
 
+
+NSData* unichar_to_data(unichar ch) ;
+
+@interface NSData (EncodingExt)
+- (unichar) to_unichar ;
+- (NSData*) swap ;
+- (NSString*) ucs2_to_utf8_string ;
+- (NSString*) to_utf8_string ;
 @end

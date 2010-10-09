@@ -11,14 +11,14 @@
 
 @implementation NSArray (Block)
 
--(NSArray*) each:(EachBlock)block {
+-(id) each:(EachBlock)block {
 	[self enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
 		block(obj);
 	}];
 	return self;
 }
 
--(NSArray*) each_with_index:(EachWithIndexBlock)block {
+-(id) each_with_index:(EachWithIndexBlock)block {
 	[self enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
 		block(obj, idx);
 	}];	

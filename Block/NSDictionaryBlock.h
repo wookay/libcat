@@ -12,6 +12,7 @@ typedef id (^KeyObjectBlock)(id key, id obj);
 
 @interface NSDictionary (Block)
 
+-(id) each:(KeyObjectBlock)block ;
 -(NSArray*) map:(KeyObjectBlock)block ;
 
 @end

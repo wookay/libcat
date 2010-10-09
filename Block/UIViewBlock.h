@@ -17,3 +17,4 @@ typedef void (^AnimationBlock)() ;
 +(void) animate:(AnimationBlock)block afterDone:(AnimationBlock)doneBlock ;
 
 @end
+

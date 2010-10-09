@@ -16,12 +16,14 @@
 #define AT_SIGN			 @"@"
 #define EQUAL            @"="
 #define COLON            @":"
+#define SEMICOLON		 @";"
 #define COMMA            @","
 #define UNDERBAR		 @"_"
 #define COMMA_SPACE		 @", "
 #define COMMA_LF		 @",\n"
 #define DOT              @"."
 #define DOT_SPACE		 @". "
+#define DOT_DOT			 @".."
 #define STAR             @"*"
 #define SLASH			 @"/"
 #define PLUS             @"+"
@@ -51,6 +53,7 @@
 #define SECTION_INDEX_TITLE_FOR_SEARCH			@"{search}"
 #define INDEX_OF_SECTION_INDEX_TITLE_FOR_SEARCH 0
 
+#define YES_NO(yn)		(yn ? @"YES" : @"NO")
 
 NSString* SWF(NSString* format, ...) ;
 NSArray* _w(NSString* str) ;
@@ -61,22 +64,32 @@ NSInteger sortByStringComparator(NSString* uno, NSString* dos, void* context) ;
 @interface NSString (Ext)
 -(BOOL) isEmpty ;
 -(BOOL) isNotEmpty ;	
+-(BOOL) isNumber ;
+-(BOOL) isNumberOrSpace ;
+-(BOOL) isSurrounded:(NSString*)a :(NSString*)b ;
+-(BOOL) hasText:(NSString*)str ;
+
+-(int) to_int ;
+-(char) to_char ;
 -(unichar) to_unichar ;
-+(NSString*) stringWithCharacter:(unichar) ch ;
+-(size_t) to_size_t ;
+
 -(NSString*) stringAtIndex:(int)idx ;
 -(NSString*) last ;
 -(NSString*) strip ;
-- (NSArray*) split ;
-- (NSArray*) split:(id)sep ;
--(NSArray*) each_chars ;
 -(NSString*) slice:(int)loc :(int)length_ ;
 -(NSString*) slice:(int)loc backward:(int)backward ;
 -(NSString*) gsub:(NSString*)str to:(NSString*)to ;
--(int) to_int ;
--(BOOL) hasText:(NSString*)str ;
--(char) to_char ;
+-(NSString*) uppercaseFirstCharacter ;
 -(NSString*) repeat:(int)times ;
--(NSData*) to_data ;
-- (NSString*) reverse ;
-@end
+-(NSString*) reverse ;
++(NSString*) stringWithCharacter:(unichar) ch ;
++(NSString*) stringFormat:(NSString*)formatString withArray:(NSArray*)arguments ;
 
+-(NSArray*) split ;
+-(NSArray*) split:(id)sep ;
+-(NSArray*) each_chars ;
+
+-(NSData*) to_data ;
+
+@end

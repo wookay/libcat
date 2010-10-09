@@ -33,9 +33,8 @@ BOOL CGRectHasPoint(CGRect rect, CGPoint point) ;
 #define VFPoint(point)	[NSValue valueWithCGPoint:point]
 
 #define NSRangeZero (NSMakeRange(0, 0))
+#define IS_NOT_FOUND(range)		(range.location == NSNotFound)
 #define CGAffineTransformInverse	CGAffineTransformRotate(CGAffineTransformIdentity, -M_PI)
-
-
 
 #define kDegreeToRadian 0.017453292519943295769236907684886 
 #define kRadianToDegree 57.295779513082320876798154814105

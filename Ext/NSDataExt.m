@@ -10,23 +10,9 @@
 #import "NSStringExt.h"
 #import "Logger.h"
 
-NSData* unichar_to_data(unichar ch) {
-	return [NSData dataWithBytes:&ch length:2];
-}
+
 
 @implementation NSData (Ext)
-
--(unichar) to_unichar {
-	unichar uch;
-	[self getBytes:&uch length:2];
-	return uch;
-}
-
--(NSData*) swap {
-	NSData* uno = [self subdataWithRange:NSMakeRange(0, 1)];
-	NSData* dos = [self subdataWithRange:NSMakeRange(1, 1)];
-	return [dos append:uno];
-}
 
 -(NSData*) append:(NSData*)data {
 	NSMutableData* da = [NSMutableData dataWithData:self];
@@ -34,31 +20,39 @@ NSData* unichar_to_data(unichar ch) {
 	return da;
 }
 
--(NSString*) ucs2_to_utf8_string {
-//	NSUTF16LittleEndianStringEncoding
-//	NSUTF16StringEncoding
-	NSRange range;
-	unichar emptyJong = 0x115f; // swaped
-	NSData* emptyJongData = [NSData dataWithBytes:&emptyJong length:2];
-	NSData* jongData = [self subdataWithRange:NSMakeRange(4, 2)];
-	if ([emptyJongData isEqualToData:jongData]) {
-		range = NSMakeRange(0, 4);
+-(char) onebyte_to_char {
+	char byte = 0;
+	if (1 == self.length) {
+		[self getBytes:&byte length:1];
 	} else {
-		range = NSMakeRange(0, 6);
+		log_info(@"byte_to_int length != 1");
 	}
-	NSString* str = [[NSString alloc] initWithData:[self subdataWithRange:range] encoding:NSUTF16LittleEndianStringEncoding];
-	NSData* data = [str dataUsingEncoding:NSUTF8StringEncoding];
-	[str release];
-	return [data to_utf8_string];
+	return byte;
 }
 
--(NSString*) to_utf8_string  {
-	NSString* str = [[NSString alloc] initWithData:self encoding:NSUTF8StringEncoding];
-	NSString* ret = [NSString stringWithFormat:@"%@", str];
-	[str release];	
-	return ret;
+-(int) onebyte_to_int {
+	int byte = 0;
+	if (1 == self.length) {
+		[self getBytes:&byte length:1];
+	} else {
+		log_info(@"byte_to_int length != 1");
+	}
+	return byte;
 }
 
+-(NSData*) slice:(int)loc :(int)length_ {
+	NSRange range;
+	if (self.length > loc + length_) {
+		range = NSMakeRange(loc, length_);
+	} else {
+		range = NSMakeRange(loc, self.length - loc);
+	}
+	return [self subdataWithRange:range];
+}
+
+-(NSData*) slice:(int)loc backward:(int)backward {
+	return [self slice:loc :self.length + backward + 1];
+}
 
 
 static const char *const digits = "0123456789ABCDEF";
@@ -89,6 +83,53 @@ static const char *const digits = "0123456789ABCDEF";
         [ary addObject:str];
     }
     return SWF(@"[%@]", [ary componentsJoinedByString:@", "]);
+}
+
+@end
+
+
+
+
+
+NSData* unichar_to_data(unichar ch) {
+	return [NSData dataWithBytes:&ch length:2];
+}
+
+@implementation NSData (EncodingExt)
+	
+-(NSData*) swap {
+	NSData* uno = [self subdataWithRange:NSMakeRange(0, 1)];
+	NSData* dos = [self subdataWithRange:NSMakeRange(1, 1)];
+	return [dos append:uno];
+}
+
+-(unichar) to_unichar {
+	unichar uch;
+	[self getBytes:&uch length:2];
+	return uch;
+}
+
+-(NSString*) ucs2_to_utf8_string {
+	NSRange range;
+	unichar emptyJong = 0x115f; // swaped
+	NSData* emptyJongData = [NSData dataWithBytes:&emptyJong length:2];
+	NSData* jongData = [self subdataWithRange:NSMakeRange(4, 2)];
+	if ([emptyJongData isEqualToData:jongData]) {
+		range = NSMakeRange(0, 4);
+	} else {
+		range = NSMakeRange(0, 6);
+	}
+	NSString* str = [[NSString alloc] initWithData:[self subdataWithRange:range] encoding:NSUTF16LittleEndianStringEncoding];
+	NSData* data = [str dataUsingEncoding:NSUTF8StringEncoding];
+	[str release];
+	return [data to_utf8_string];
+}
+
+-(NSString*) to_utf8_string  {
+	NSString* str = [[NSString alloc] initWithData:self encoding:NSUTF8StringEncoding];
+	NSString* ret = [NSString stringWithFormat:@"%@", str];
+	[str release];	
+	return ret;
 }
 
 @end

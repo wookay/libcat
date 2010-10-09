@@ -40,6 +40,7 @@ NSInteger sortByStringComparator(NSString* uno, NSString* dos, void* context) {
 
 @implementation NSString (Ext)
 
+// BOOL
 -(BOOL) isEmpty {
 	return 0 == self.length;	
 }
@@ -48,10 +49,50 @@ NSInteger sortByStringComparator(NSString* uno, NSString* dos, void* context) {
 	return self.length > 0;
 }
 
+-(BOOL) isNumber {	
+	NSScanner* scanner = [NSScanner scannerWithString:self];
+	if ([scanner scanInt:NULL]) {
+		return [scanner isAtEnd];
+	} else {
+		return NO;
+	}
+}
+
+-(BOOL) isNumberOrSpace {
+	return [[self gsub:SPACE to:EMPTY_STRING] isNumber];
+}
+
+-(BOOL) isSurrounded:(NSString*)a :(NSString*)b {
+	return [self hasPrefix:a] && [self hasSuffix:b];
+}
+
+-(BOOL) hasText:(NSString*)str {
+	NSRange range = [self rangeOfString:str];
+	return NSNotFound != range.location;
+}
+
+// int
+-(char) to_char {
+	return [self characterAtIndex:0];	
+}
+
 -(int) to_int {
 	return [self intValue];
 }
 
+-(unichar) to_unichar {
+	return [self characterAtIndex:0];
+}
+
+-(size_t) to_size_t {
+	unsigned result = 0;
+	NSScanner *scanner = [NSScanner scannerWithString:self];
+	[scanner scanHexInt:&result];
+	return result;
+}
+
+
+// NSString*
 -(NSString*) slice:(int)loc :(int)length_ {
 	NSRange range;
 	if (self.length > loc + length_) {
@@ -70,29 +111,16 @@ NSInteger sortByStringComparator(NSString* uno, NSString* dos, void* context) {
 	return [self stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 }
 
+-(NSString*) uppercaseFirstCharacter {
+	if (self.length > 0) {
+		return SWF(@"%@%@", [[self slice:0 :1] uppercaseString], [self slice:1 backward:-1]);
+	} else {
+		return self;
+	}
+}
+
 -(NSString*) gsub:(NSString*)str to:(NSString*)to {
 	return [self stringByReplacingOccurrencesOfString:str withString:to];	
-}
-
--(unichar) to_unichar {
-	return [self characterAtIndex:0];
-}
-
--(char) to_char {
-	return [self characterAtIndex:0];	
-}
-
--(NSData*) to_data {
-	return [self dataUsingEncoding:NSUTF8StringEncoding];
-}
-
--(BOOL) hasText:(NSString*)str {
-	NSRange range = [self rangeOfString:str];
-	return NSNotFound != range.location;
-}
-
-+(NSString*) stringWithCharacter:(unichar) ch {
-	return [NSString stringWithFormat:@"%C", ch];
 }
 
 -(NSString*) stringAtIndex:(int)idx {
@@ -106,6 +134,40 @@ NSInteger sortByStringComparator(NSString* uno, NSString* dos, void* context) {
 		return EMPTY_STRING;
 	}
 }
+
+-(NSString*) repeat:(int)times {
+	NSMutableArray* ary = [NSMutableArray array];
+	for (int idx = 0; idx < times; idx++) {
+		[ary addObject:self];
+	}
+	return [ary componentsJoinedByString:EMPTY_STRING];
+}
+
+
+- (NSString*) reverse {
+	return [[[self split:EMPTY_STRING] reverse] join:EMPTY_STRING];
+}
+
+
++(NSString*) stringWithCharacter:(unichar) ch {
+	return [NSString stringWithFormat:@"%C", ch];
+}
+
++(NSString*) stringFormat:(NSString*)formatString withArray:(NSArray*)arguments {
+	char *argList = (char *)malloc(sizeof(NSString *) * [arguments count]);
+    [arguments getObjects:(id *)argList];
+    NSString* contents = [[NSString alloc] initWithFormat:formatString arguments:argList];
+    free(argList);
+	NSString* ret = SWF(@"%@", contents);
+	[contents release];
+	return ret;
+}
+
+// NSArray*
+-(NSArray*) each_chars {
+	return [self split:EMPTY_STRING];
+}
+
 
 - (NSArray*) split {
 	return [self split:SPACE];
@@ -130,20 +192,9 @@ NSInteger sortByStringComparator(NSString* uno, NSString* dos, void* context) {
 	}
 }
 
--(NSString*) repeat:(int)times {
-	NSMutableArray* ary = [NSMutableArray array];
-	for (int idx = 0; idx < times; idx++) {
-		[ary addObject:self];
-	}
-	return [ary componentsJoinedByString:EMPTY_STRING];
-}
-
--(NSArray*) each_chars {
-	return [self split:EMPTY_STRING];
-}
-
-- (NSString*) reverse {
-	return [[[self split:EMPTY_STRING] reverse] join:EMPTY_STRING];
+// NSData*
+-(NSData*) to_data {
+	return [self dataUsingEncoding:NSUTF8StringEncoding];
 }
 
 @end

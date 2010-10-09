@@ -15,10 +15,24 @@
 		28AD73600D9D9599002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD735F0D9D9599002E5188 /* MainWindow.xib */; };
 		28C286E10D94DF7D0034E888 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C286E00D94DF7D0034E888 /* RootViewController.m */; };
 		28F335F11007B36200424DE2 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28F335F01007B36200424DE2 /* RootViewController.xib */; };
+		DA054F25125DD36E00660097 /* TestConsole.m in Sources */ = {isa = PBXBuildFile; fileRef = DA054F24125DD36E00660097 /* TestConsole.m */; };
+		DA054F6E125DDD3600660097 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA054F6D125DDD3600660097 /* CFNetwork.framework */; };
+		DA440CF5126044D700761E20 /* CommandManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DA440CDE126044D700761E20 /* CommandManager.m */; };
+		DA440CF6126044D700761E20 /* ConsoleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DA440CE0126044D700761E20 /* ConsoleManager.m */; };
+		DA440CF7126044D700761E20 /* NSObjectSetValueFromString.m in Sources */ = {isa = PBXBuildFile; fileRef = DA440CE2126044D700761E20 /* NSObjectSetValueFromString.m */; };
+		DA440CF8126044D700761E20 /* NSObjectValueToString.m in Sources */ = {isa = PBXBuildFile; fileRef = DA440CE4126044D700761E20 /* NSObjectValueToString.m */; };
+		DA440D11126045C600761E20 /* ConsoleResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DA440D03126045C600761E20 /* ConsoleResponseHandler.m */; };
+		DA440D12126045C600761E20 /* HTTPResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DA440D05126045C600761E20 /* HTTPResponseHandler.m */; };
+		DA440D13126045C600761E20 /* ImageResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DA440D07126045C600761E20 /* ImageResponseHandler.m */; };
+		DA440D14126045C600761E20 /* WebResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DA440D09126045C600761E20 /* WebResponseHandler.m */; };
+		DA440D15126045C600761E20 /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = DA440D0C126045C600761E20 /* AsyncSocket.m */; };
+		DA440D16126045C600761E20 /* HTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA440D0E126045C600761E20 /* HTTPServer.m */; };
+		DA440D17126045C600761E20 /* LoggerServer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA440D10126045C600761E20 /* LoggerServer.m */; };
 		DA699968125A165C00A08654 /* UIViewBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DA699967125A165C00A08654 /* UIViewBlock.m */; };
 		DABE4428125C88E600903735 /* UIAlertViewBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DABE4427125C88E600903735 /* UIAlertViewBlock.m */; };
 		DABE45F4125C987900903735 /* UIActionSheetBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DABE45F3125C987900903735 /* UIActionSheetBlock.m */; };
 		DABE48B0125CB9D400903735 /* TestActionSheetBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DABE48AF125CB9D400903735 /* TestActionSheetBlock.m */; };
+		DABF50CC125D9E270015B672 /* TestDate.m in Sources */ = {isa = PBXBuildFile; fileRef = DABF50CB125D9E270015B672 /* TestDate.m */; };
 		DAC581AE125AE82600203336 /* TestView.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC581AD125AE82600203336 /* TestView.m */; };
 		DAC5825A125AF7F800203336 /* TestArray.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC58259125AF7F800203336 /* TestArray.m */; };
 		DAC58356125B08BE00203336 /* Async.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC58355125B08BE00203336 /* Async.m */; };
@@ -72,6 +86,31 @@
 		28F335F01007B36200424DE2 /* RootViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* TestApp-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "TestApp-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		DA054F23125DD36E00660097 /* TestConsole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestConsole.h; sourceTree = "<group>"; };
+		DA054F24125DD36E00660097 /* TestConsole.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestConsole.m; sourceTree = "<group>"; };
+		DA054F6D125DDD3600660097 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		DA440CDD126044D700761E20 /* CommandManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommandManager.h; sourceTree = "<group>"; };
+		DA440CDE126044D700761E20 /* CommandManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommandManager.m; sourceTree = "<group>"; };
+		DA440CDF126044D700761E20 /* ConsoleManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsoleManager.h; sourceTree = "<group>"; };
+		DA440CE0126044D700761E20 /* ConsoleManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConsoleManager.m; sourceTree = "<group>"; };
+		DA440CE1126044D700761E20 /* NSObjectSetValueFromString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSObjectSetValueFromString.h; sourceTree = "<group>"; };
+		DA440CE2126044D700761E20 /* NSObjectSetValueFromString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSObjectSetValueFromString.m; sourceTree = "<group>"; };
+		DA440CE3126044D700761E20 /* NSObjectValueToString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSObjectValueToString.h; sourceTree = "<group>"; };
+		DA440CE4126044D700761E20 /* NSObjectValueToString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSObjectValueToString.m; sourceTree = "<group>"; };
+		DA440D02126045C600761E20 /* ConsoleResponseHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsoleResponseHandler.h; sourceTree = "<group>"; };
+		DA440D03126045C600761E20 /* ConsoleResponseHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConsoleResponseHandler.m; sourceTree = "<group>"; };
+		DA440D04126045C600761E20 /* HTTPResponseHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPResponseHandler.h; sourceTree = "<group>"; };
+		DA440D05126045C600761E20 /* HTTPResponseHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPResponseHandler.m; sourceTree = "<group>"; };
+		DA440D06126045C600761E20 /* ImageResponseHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageResponseHandler.h; sourceTree = "<group>"; };
+		DA440D07126045C600761E20 /* ImageResponseHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageResponseHandler.m; sourceTree = "<group>"; };
+		DA440D08126045C600761E20 /* WebResponseHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebResponseHandler.h; sourceTree = "<group>"; };
+		DA440D09126045C600761E20 /* WebResponseHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebResponseHandler.m; sourceTree = "<group>"; };
+		DA440D0B126045C600761E20 /* AsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncSocket.h; sourceTree = "<group>"; };
+		DA440D0C126045C600761E20 /* AsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncSocket.m; sourceTree = "<group>"; };
+		DA440D0D126045C600761E20 /* HTTPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPServer.h; sourceTree = "<group>"; };
+		DA440D0E126045C600761E20 /* HTTPServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPServer.m; sourceTree = "<group>"; };
+		DA440D0F126045C600761E20 /* LoggerServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoggerServer.h; sourceTree = "<group>"; };
+		DA440D10126045C600761E20 /* LoggerServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoggerServer.m; sourceTree = "<group>"; };
 		DA699966125A165C00A08654 /* UIViewBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewBlock.h; sourceTree = "<group>"; };
 		DA699967125A165C00A08654 /* UIViewBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIViewBlock.m; sourceTree = "<group>"; };
 		DABE4426125C88E600903735 /* UIAlertViewBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIAlertViewBlock.h; sourceTree = "<group>"; };
@@ -79,6 +118,7 @@
 		DABE45F2125C987900903735 /* UIActionSheetBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIActionSheetBlock.h; sourceTree = "<group>"; };
 		DABE45F3125C987900903735 /* UIActionSheetBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIActionSheetBlock.m; sourceTree = "<group>"; };
 		DABE48AF125CB9D400903735 /* TestActionSheetBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestActionSheetBlock.m; sourceTree = "<group>"; };
+		DABF50CB125D9E270015B672 /* TestDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestDate.m; sourceTree = "<group>"; };
 		DAC581AD125AE82600203336 /* TestView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestView.m; sourceTree = "<group>"; };
 		DAC58259125AF7F800203336 /* TestArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestArray.m; sourceTree = "<group>"; };
 		DAC58354125B08BE00203336 /* Async.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Async.h; sourceTree = "<group>"; };
@@ -157,6 +197,7 @@
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				2892E4100DC94CBA00A64D0F /* CoreGraphics.framework in Frameworks */,
+				DA054F6E125DDD3600660097 /* CFNetwork.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -186,6 +227,7 @@
 			isa = PBXGroup;
 			children = (
 				DAEBFD1C125B7B610070A3A7 /* README */,
+				DA054F1D125DD36600660097 /* ConsoleTestCases */,
 				DACBA0FF125971F90035C31F /* BlockTestCases */,
 				DACBA123125971F90035C31F /* ExtTestCases */,
 				DACBA147125971FC0035C31F /* libcat */,
@@ -220,11 +262,92 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DA054F5B125DDD2600660097 /* net */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DA054F13125DD36000660097 /* Console */ = {
+			isa = PBXGroup;
+			children = (
+				DA440D00126045C600761E20 /* net */,
+				DA440CDC126044D700761E20 /* manager */,
+			);
+			name = Console;
+			path = ../Console;
+			sourceTree = SOURCE_ROOT;
+		};
+		DA054F1D125DD36600660097 /* ConsoleTestCases */ = {
+			isa = PBXGroup;
+			children = (
+				DA054F23125DD36E00660097 /* TestConsole.h */,
+				DA054F24125DD36E00660097 /* TestConsole.m */,
+			);
+			name = ConsoleTestCases;
+			path = ../ConsoleTestCases;
+			sourceTree = SOURCE_ROOT;
+		};
+		DA054F5B125DDD2600660097 /* net */ = {
+			isa = PBXGroup;
+			children = (
+				DA054F6D125DDD3600660097 /* CFNetwork.framework */,
+			);
+			name = net;
+			sourceTree = "<group>";
+		};
+		DA440CDC126044D700761E20 /* manager */ = {
+			isa = PBXGroup;
+			children = (
+				DA440CDD126044D700761E20 /* CommandManager.h */,
+				DA440CDE126044D700761E20 /* CommandManager.m */,
+				DA440CDF126044D700761E20 /* ConsoleManager.h */,
+				DA440CE0126044D700761E20 /* ConsoleManager.m */,
+				DA440CE1126044D700761E20 /* NSObjectSetValueFromString.h */,
+				DA440CE2126044D700761E20 /* NSObjectSetValueFromString.m */,
+				DA440CE3126044D700761E20 /* NSObjectValueToString.h */,
+				DA440CE4126044D700761E20 /* NSObjectValueToString.m */,
+			);
+			path = manager;
+			sourceTree = "<group>";
+		};
+		DA440D00126045C600761E20 /* net */ = {
+			isa = PBXGroup;
+			children = (
+				DA440D01126045C600761E20 /* handlers */,
+				DA440D0A126045C600761E20 /* servers */,
+			);
+			path = net;
+			sourceTree = "<group>";
+		};
+		DA440D01126045C600761E20 /* handlers */ = {
+			isa = PBXGroup;
+			children = (
+				DA440D02126045C600761E20 /* ConsoleResponseHandler.h */,
+				DA440D03126045C600761E20 /* ConsoleResponseHandler.m */,
+				DA440D04126045C600761E20 /* HTTPResponseHandler.h */,
+				DA440D05126045C600761E20 /* HTTPResponseHandler.m */,
+				DA440D06126045C600761E20 /* ImageResponseHandler.h */,
+				DA440D07126045C600761E20 /* ImageResponseHandler.m */,
+				DA440D08126045C600761E20 /* WebResponseHandler.h */,
+				DA440D09126045C600761E20 /* WebResponseHandler.m */,
+			);
+			path = handlers;
+			sourceTree = "<group>";
+		};
+		DA440D0A126045C600761E20 /* servers */ = {
+			isa = PBXGroup;
+			children = (
+				DA440D0B126045C600761E20 /* AsyncSocket.h */,
+				DA440D0C126045C600761E20 /* AsyncSocket.m */,
+				DA440D0D126045C600761E20 /* HTTPServer.h */,
+				DA440D0E126045C600761E20 /* HTTPServer.m */,
+				DA440D0F126045C600761E20 /* LoggerServer.h */,
+				DA440D10126045C600761E20 /* LoggerServer.m */,
+			);
+			path = servers;
 			sourceTree = "<group>";
 		};
 		DAC587EC125B6DB300203336 /* Observer */ = {
@@ -329,6 +452,7 @@
 				DACBA1D7125974980035C31F /* TestString.m */,
 				DACBA1DE125974E00035C31F /* TestDictionary.m */,
 				DAC58259125AF7F800203336 /* TestArray.m */,
+				DABF50CB125D9E270015B672 /* TestDate.m */,
 			);
 			name = ExtTestCases;
 			path = ../ExtTestCases;
@@ -352,6 +476,7 @@
 		DACBA147125971FC0035C31F /* libcat */ = {
 			isa = PBXGroup;
 			children = (
+				DA054F13125DD36000660097 /* Console */,
 				DACBA0F4125971F90035C31F /* Block */,
 				DACBA102125971F90035C31F /* Ext */,
 				DACBA126125971F90035C31F /* UnitTest */,
@@ -465,6 +590,19 @@
 				DABE4428125C88E600903735 /* UIAlertViewBlock.m in Sources */,
 				DABE45F4125C987900903735 /* UIActionSheetBlock.m in Sources */,
 				DABE48B0125CB9D400903735 /* TestActionSheetBlock.m in Sources */,
+				DABF50CC125D9E270015B672 /* TestDate.m in Sources */,
+				DA054F25125DD36E00660097 /* TestConsole.m in Sources */,
+				DA440CF5126044D700761E20 /* CommandManager.m in Sources */,
+				DA440CF6126044D700761E20 /* ConsoleManager.m in Sources */,
+				DA440CF7126044D700761E20 /* NSObjectSetValueFromString.m in Sources */,
+				DA440CF8126044D700761E20 /* NSObjectValueToString.m in Sources */,
+				DA440D11126045C600761E20 /* ConsoleResponseHandler.m in Sources */,
+				DA440D12126045C600761E20 /* HTTPResponseHandler.m in Sources */,
+				DA440D13126045C600761E20 /* ImageResponseHandler.m in Sources */,
+				DA440D14126045C600761E20 /* WebResponseHandler.m in Sources */,
+				DA440D15126045C600761E20 /* AsyncSocket.m in Sources */,
+				DA440D16126045C600761E20 /* HTTPServer.m in Sources */,
+				DA440D17126045C600761E20 /* LoggerServer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

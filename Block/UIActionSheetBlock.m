@@ -92,9 +92,9 @@
 @synthesize doneBlock;
 
 - (void)actionSheet:(UIActionSheet *)actionSheet willDismissWithButtonIndex:(NSInteger)buttonIndex {
-	if (actionSheet.cancelButtonIndex == buttonIndex) {
+	if (nil != cancelBlock && actionSheet.cancelButtonIndex == buttonIndex) {
 		cancelBlock();
-	} else if (actionSheet.destructiveButtonIndex == buttonIndex) {
+	} else if (nil != destructiveBlock && actionSheet.destructiveButtonIndex == buttonIndex) {
 		destructiveBlock();
 	} else {
 		int idx = 0;
@@ -107,8 +107,10 @@
 			idx -= 1;
 		}
 		idx += buttonIndex;
-		ActionSheetBlock block = [otherBlocks objectAtIndex:idx];
-		block();
+		if (idx >= 0 && self.otherBlocks.count > idx) {
+			ActionSheetBlock block = [otherBlocks objectAtIndex:idx];
+			block();
+		}
 	}
 	if (nil != doneBlock) {
 		doneBlock();

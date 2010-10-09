@@ -31,7 +31,40 @@ void print_log_info(const char* filename, int lineno, id format, ...) {
 	if (log_print) {		
 		const char* output = [str cStringUsingEncoding:NSUTF8StringEncoding];	
 		NSString* printFormat = [NSString stringWithFormat:@"%%%ds #%%03d   %%s\n", FILENAME_PADDING];
+		
+		if (nil != LOGGERMAN.delegate) {
+			NSString* text = [NSString stringWithFormat:printFormat, filename, lineno, output]; 
+			[LOGGERMAN.delegate loggerTextOut:text];
+		}
+		
 		printf([printFormat UTF8String], filename, lineno, output);
 		[str release];
 	}
 }
+
+
+
+@implementation LoggerManager
+@synthesize delegate;
+- (id) init {
+	self = [super init];
+	if (self) {
+		self.delegate = nil;
+	}
+	return self;
+}
+
++ (LoggerManager*) sharedManager {
+	static LoggerManager* manager = nil;
+	if (! manager) {		
+		manager = [LoggerManager new];
+	}
+	return manager;
+}
+
+- (void)dealloc {
+	delegate = nil;
+    [super dealloc];
+}
+
+@end

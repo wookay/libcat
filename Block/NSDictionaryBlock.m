@@ -11,6 +11,13 @@
 
 @implementation NSDictionary (Block)
 
+-(id) each:(KeyObjectBlock)block {
+	[self enumerateKeysAndObjectsUsingBlock:^void(id key, id obj, BOOL *stop) {
+		block(key, obj);
+	}];
+	return self;
+}
+
 -(NSArray*) map:(KeyObjectBlock)block {
 	NSMutableArray* ary = [NSMutableArray array];
 	[self enumerateKeysAndObjectsUsingBlock:^void(id key, id obj, BOOL *stop) {

@@ -13,3 +13,18 @@ void print_log_info(const char* filename, int lineno, id format, ...) ;
 
 #define __FILENAME__ (strrchr(__FILE__,'/')+1)
 #define log_info(const_chars_fmt, ...) print_log_info(__FILENAME__, __LINE__, const_chars_fmt, ##__VA_ARGS__)
+
+
+
+@protocol LoggerDelegate
+-(void) loggerTextOut:(NSString*)text ;
+@end
+
+
+#define LOGGERMAN	[LoggerManager sharedManager]
+@interface LoggerManager : NSObject {
+	id<LoggerDelegate> delegate;
+}
+@property (nonatomic, retain)	id<LoggerDelegate> delegate;
++ (LoggerManager*) sharedManager ;
+@end

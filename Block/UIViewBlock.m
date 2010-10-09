@@ -7,6 +7,7 @@
 //
 
 #import "UIViewBlock.h"
+#import "Async.h"
 
 #define DEFAULT_DURATION 0.2
 
@@ -32,3 +33,5 @@
 }
 
 @end
+
+

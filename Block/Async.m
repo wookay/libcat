@@ -11,22 +11,29 @@
 @implementation Async
 
 +(void) perform:(AsyncBlock)block {
+	AsyncBlock copiedBlock = Block_copy(block);
 	dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
 	dispatch_async(queue, ^{
-		block();
+		copiedBlock();
 	});	
 }
 
-+(void) perform:(AsyncBlock)block afterDone:(AsyncBlock)doneBlock {
++(void) perform:(AsyncBlock)block afterDelay:(NSTimeInterval)delay {
+	[self performSelector:@selector(perform:) withObject:Block_copy(block) afterDelay:delay];
+}
+
++(void) perform:(AsyncBlock)block whenCompleted:(AsyncBlock)completeBlock {
+	AsyncBlock copiedBlock = Block_copy(block);
+	AsyncBlock copiedCompleteBlock = Block_copy(completeBlock);
 	dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
 	dispatch_async(queue, ^{
-		block();
-		[self performSelectorOnMainThread:@selector(taskDone:) withObject:doneBlock waitUntilDone:NO];
+		copiedBlock();
+		[self performSelectorOnMainThread:@selector(taskComplete:) withObject:copiedCompleteBlock waitUntilDone:NO];
 	});
 }
 
-+(void) taskDone:(AsyncBlock)doneBlock {
-	doneBlock();
++(void) taskComplete:(AsyncBlock)completeBlock {
+	completeBlock();
 }
 
 @end

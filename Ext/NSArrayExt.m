@@ -47,6 +47,9 @@ NSArray* TRIO(id uno, id dos, id tres) {
 	return [self subarrayWithRange:range];
 }
 
+-(NSArray*) slice:(int)loc backward:(int)backward {
+	return [self slice:loc :self.count + backward + 1];
+}
 
 -(BOOL) hasObject:(id)obj {
 	return [self containsObject:obj];

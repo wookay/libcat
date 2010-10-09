@@ -10,6 +10,7 @@
 #import "Logger.h"
 #import "NSStringExt.h"
 #import "NSLocaleExt.h"
+#import "Numero.h"
 #import "NSArrayExt.h"
 #import "Inspect.h"
 
@@ -203,7 +204,7 @@ NSString* postfix_string(int postfix) {
 	if (IS_LOCALE_KOREAN) {
 		return [self formatWith:@"yyyy년 LLL d일"];
 	} else {
-		return [self formatWith:@"d/LLL/yyyy"];
+		return [self formatWith:@"LLL d, yyyy"];
 	}	
 }
 
@@ -420,3 +421,28 @@ NSString* postfix_string(int postfix) {
 @end
 
 
+
+
+@implementation NSDate (AMPM)
++(int) ampm:(int)amPm hour12_to_hour24:(int)hour12 {
+	switch (amPm) {
+		case HOUR_PM:
+			return hour12 + DOCE;
+			break;
+		default:
+			break;
+	}
+	return hour12;
+}
++(AMPMHour12) hour24_to_ampm_hour12:(int)hour24 {
+	AMPMHour12 amPmHour12;
+	if (hour24 >= DOCE) {
+		amPmHour12.ampm = HOUR_PM;
+		amPmHour12.hour12 = hour24 - DOCE;
+	} else {
+		amPmHour12.ampm = HOUR_AM;
+		amPmHour12.hour12 = hour24;
+	}
+	return amPmHour12;
+}
+@end

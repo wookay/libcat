@@ -9,6 +9,7 @@
 #import "TestAppAppDelegate.h"
 #import "RootViewController.h"
 #import "UnitTest.h"
+#import "ConsoleManager.h"
 
 @implementation TestAppAppDelegate
 
@@ -26,6 +27,8 @@
     // Add the navigation controller's view to the window and display.
     [window addSubview:navigationController.view];
     [window makeKeyAndVisible];
+	
+	[CONSOLEMAN start_servers];
 	
 	[UnitTest setup];
 	[UnitTest run_all_tests];
@@ -66,6 +69,9 @@
 
 
 - (void)applicationWillTerminate:(UIApplication *)application {
+
+	[CONSOLEMAN stop_servers];
+	
     /*
      Called when the application is about to terminate.
      See also applicationDidEnterBackground:.
@@ -83,7 +89,7 @@
 }
 
 
-- (void)dealloc {
+- (void)dealloc {	
 	[navigationController release];
 	[window release];
 	[super dealloc];

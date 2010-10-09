@@ -14,6 +14,7 @@ typedef void (^AsyncBlock)();
 
 }
 +(void) perform:(AsyncBlock)block ;
-+(void) perform:(AsyncBlock)block afterDone:(AsyncBlock)doneBlock ;
++(void) perform:(AsyncBlock)block afterDelay:(NSTimeInterval)delay ;
++(void) perform:(AsyncBlock)block whenCompleted:(AsyncBlock)completeBlock ;
 
 @end

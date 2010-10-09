@@ -8,12 +8,25 @@
 
 #import "NSStringExt.h"
 #import "UnitTest.h"
+#import "Logger.h"
 
 @interface TestString : NSObject 
 @end
 
 
 @implementation TestString
+
+-(void) test_pointer {
+	NSString* p = SWF(@"%p", self);
+	size_t address = [p to_size_t];
+	id obj = (id)address;
+	assert_equal(self, obj);
+}
+
+-(void) test_isNumber {
+	assert_true([@"0" isNumber]);
+	assert_false([@"a" isNumber]);
+}
 
 -(void) test_SWF {
 	assert_equal(@"0xff", SWF(@"0x%x", 255));

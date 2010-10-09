@@ -31,6 +31,7 @@ NSArray* TRIO(id uno, id dos, id tres) ;
 -(id) last ;
 -(BOOL) hasObject:(id)obj ;
 -(NSArray*) slice:(int)loc :(int)length_ ;
+-(NSArray*) slice:(int)loc backward:(int)backward ;
 -(NSString*) join:(NSString*)separator ;
 -(NSString*) join ;
 -(NSArray*) sortedArrayUsingFunction:(NSInteger (*)(id, id, void *))comparator ;

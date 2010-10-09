@@ -11,3 +11,6 @@
 #define DOS		2
 #define	TRES	3
 #define	CUATRO	4
+
+
+#define DOCE 12
