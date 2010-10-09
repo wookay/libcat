@@ -18,6 +18,7 @@
 
 NSArray* PAIR(id uno, id dos) ;
 NSArray* TRIO(id uno, id dos, id tres) ;	
+NSArray* QUARTET(id uno, id dos, id tres, id cuatro) ;
 
 @interface NSArray (Ext)
 -(BOOL) isEmpty ;

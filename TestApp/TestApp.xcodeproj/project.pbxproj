@@ -69,6 +69,8 @@
 		DACBA1D8125974980035C31F /* TestString.m in Sources */ = {isa = PBXBuildFile; fileRef = DACBA1D7125974980035C31F /* TestString.m */; };
 		DACBA1DF125974E00035C31F /* TestDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = DACBA1DE125974E00035C31F /* TestDictionary.m */; };
 		DACBA1F2125975920035C31F /* TestObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = DACBA1F1125975920035C31F /* TestObserver.m */; };
+		DADD7EE51260AE2C0040E482 /* UIControlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DADD7EE31260AE2C0040E482 /* UIControlViewController.m */; };
+		DADD7EE61260AE2C0040E482 /* UIControlViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DADD7EE41260AE2C0040E482 /* UIControlViewController.xib */; };
 		DAEBFD1D125B7B610070A3A7 /* README in Resources */ = {isa = PBXBuildFile; fileRef = DAEBFD1C125B7B610070A3A7 /* README */; };
 /* End PBXBuildFile section */
 
@@ -186,6 +188,9 @@
 		DACBA1DE125974E00035C31F /* TestDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestDictionary.m; sourceTree = "<group>"; };
 		DACBA1F0125975920035C31F /* TestObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestObserver.h; sourceTree = "<group>"; };
 		DACBA1F1125975920035C31F /* TestObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestObserver.m; sourceTree = "<group>"; };
+		DADD7EE21260AE2C0040E482 /* UIControlViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIControlViewController.h; sourceTree = "<group>"; };
+		DADD7EE31260AE2C0040E482 /* UIControlViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIControlViewController.m; sourceTree = "<group>"; };
+		DADD7EE41260AE2C0040E482 /* UIControlViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UIControlViewController.xib; sourceTree = "<group>"; };
 		DAEBFD1C125B7B610070A3A7 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README; path = ../README; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -211,6 +216,9 @@
 				28C286E00D94DF7D0034E888 /* RootViewController.m */,
 				1D3623240D0F684500981E51 /* TestAppAppDelegate.h */,
 				1D3623250D0F684500981E51 /* TestAppAppDelegate.m */,
+				DADD7EE21260AE2C0040E482 /* UIControlViewController.h */,
+				DADD7EE31260AE2C0040E482 /* UIControlViewController.m */,
+				DADD7EE41260AE2C0040E482 /* UIControlViewController.xib */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -537,6 +545,7 @@
 				28AD73600D9D9599002E5188 /* MainWindow.xib in Resources */,
 				28F335F11007B36200424DE2 /* RootViewController.xib in Resources */,
 				DAEBFD1D125B7B610070A3A7 /* README in Resources */,
+				DADD7EE61260AE2C0040E482 /* UIControlViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -603,6 +612,7 @@
 				DA440D15126045C600761E20 /* AsyncSocket.m in Sources */,
 				DA440D16126045C600761E20 /* HTTPServer.m in Sources */,
 				DA440D17126045C600761E20 /* LoggerServer.m in Sources */,
+				DADD7EE51260AE2C0040E482 /* UIControlViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

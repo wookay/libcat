@@ -14,6 +14,7 @@
 #import "Async.h"
 #import "NSNumberExt.h"
 #import "ConsoleManager.h"
+#import "UIControlViewController.h"
 
 enum { kSectionUnitTest, kSectionConsole, kSectionMax };
 	enum { kRowTests, kRowAssertions, kRowFailures, kRowErrors, kRowMaxUnitTest };
@@ -136,15 +137,32 @@ enum { kSectionUnitTest, kSectionConsole, kSectionMax };
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {	
 	log_info(@"didSelectRowAtIndexPath %@", indexPath);
 	UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
-	UIViewController* vc = [[UIViewController alloc] initWithNibName:nil bundle:nil];
-	[self.navigationController pushViewController:vc animated:true];
-	vc.title = cell.textLabel.text;
+	
+	switch (indexPath.section) {
+		case kSectionUnitTest: {
+				UIViewController* vc = [[UIViewController alloc] initWithNibName:nil bundle:nil];
+				[self.navigationController pushViewController:vc animated:true];
+				vc.title = cell.textLabel.text;
 #define FF 255.0
-	float red = get_random(FF)/FF;
-	float green = get_random(FF)/FF;
-	float blue = get_random(FF)/FF;
-	vc.view.backgroundColor = [UIColor colorWithRed:red green:green blue:blue alpha:1];
-	[vc release];
+				float red = get_random(FF)/FF;
+				float green = get_random(FF)/FF;
+				float blue = get_random(FF)/FF;
+				vc.view.backgroundColor = [UIColor colorWithRed:red green:green blue:blue alpha:1];
+				[vc release];			
+			}
+			break;
+			
+		case kSectionConsole: {
+				UIControlViewController* vc = [[UIControlViewController alloc] initWithNibName:@"UIControlViewController" bundle:nil];
+				[self.navigationController pushViewController:vc animated:true];
+				vc.title = cell.textLabel.text;
+				[vc release];						
+			}
+			break;
+			
+		default:
+			break;
+	}
 
     [tableView deselectRowAtIndexPath:indexPath animated:true];
 }

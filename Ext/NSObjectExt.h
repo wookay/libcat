@@ -12,5 +12,6 @@
 @interface NSObject (Ext)
 
 -(void) performSelector:(SEL)selector afterDelay:(NSTimeInterval)ti ;
+-(BOOL) isNotNull ;
 
 @end

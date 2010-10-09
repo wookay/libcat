@@ -41,9 +41,11 @@ class Shell
     @delegate = block
   end
   def history_push input
-    HISTORY.push input
-    @HISTORY.push input
-    @history_file.write "#{input}\n"
+    if not input.empty?
+      HISTORY.push input
+      @HISTORY.push input
+      @history_file.write "#{input}\n"
+    end
   end
   def start
     at_exit do

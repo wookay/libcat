@@ -15,4 +15,8 @@
 	[self performSelector:selector withObject:nil afterDelay:ti];
 }
 
+-(BOOL) isNotNull {
+	return ! [self isKindOfClass:[NSNull class]];
+}
+
 @end

@@ -97,16 +97,18 @@ class Console
         when 'open'
            `open #{SERVER_URL}`
         when 'touch', 't'
+          puts response.body
           if /^touch / =~ response.body
-            update_prompt
-          else
-            puts response.body
+            result_uno, result_dos = response.body.split SPACE
+            if 'sendActionsForControlEvents:' == result_dos
+            else
+              update_prompt
+            end
           end
         when 'back', 'b'
+          puts response.body
           if /^back / =~ response.body
             update_prompt
-          else
-            puts response.body
           end
         when 'cd', 'rm'
           if /^cd / =~ response.body

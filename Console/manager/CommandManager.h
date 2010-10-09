@@ -8,7 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #define COMMANDMAN	[CommandManager sharedManager]
-typedef id (^CommandBlock)(id currentObject, id arg);
+typedef id (^CommandBlock)(id currentObject, id arg) ;
+typedef id (^ActionBlock)() ;
 
 
 NSArray* array_prefix_index(NSArray* array) ;
