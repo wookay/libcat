@@ -1,3 +1,4 @@
+# encoding: utf-8
 # shell.rb
 #                           wookay.noh at gmail.com
 
@@ -9,7 +10,7 @@ require 'irb/completion'
 require 'pp'
 include Readline
 
-HISTORY_PATH = '.console_history'
+HISTORY_PATH = "#{ENV['HOME']}/.console_history"
 LF = "\n"
 
 COMMANDS = %w{help open history clear quit}
@@ -28,14 +29,16 @@ class Shell
       HISTORY.push action
     end
     Readline.completion_proc = proc do |input|
-      self.completion_list.sort.uniq.select { |history| history.match /^#{input}/ }
+      self.completion_list.sort.uniq.select do |history| 
+          history.size != input.size and 0 == history.force_encoding("UTF-8").index(input)
+      end
     end
   end
   def completion_list
-    methods = @delegate.call({}, 'methods')
-    methods.split(LF).map {|x| x.gsub(',','').gsub('"','').strip }.reject{|x|x=~/^\(/ or x==/\)$/} +
-	 	COMMANDS +
-		@HISTORY#.reject{|x|x.empty?}
+    methods = @delegate.call({}, 'completion')
+    methods.split(LF).map {|x| x } + #.reject{|x|x=~/^\(/ or x==/\)$/} +
+    COMMANDS +
+    @HISTORY#.reject{|x|x.empty?}
   end
   def delegate &block
     @delegate = block

@@ -26,5 +26,5 @@ enum { LS_OBJECT, LS_VIEWCONTROLLERS, LS_TABLEVIEW, LS_SECTIONS, LS_VIEW, LS_VIE
 + (CommandManager*) sharedManager ;
 -(id) commandNotFound ;
 -(NSArray*) array_ls:(id)currentObject arg:(id)arg ;
-
+-(NSArray*) get_targetStringAndBlocks:(id)currentObject ;
 @end

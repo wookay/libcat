@@ -1,11 +1,11 @@
-#! /usr/bin/ruby
+#! /opt/local/bin/ruby1.9
+# encoding: utf-8
 # console.rb
 #                           wookay.noh at gmail.com
 
 
 
 CONSOLE_SERVER_ADDRESS = 'localhost'
-
 
 
 
@@ -33,6 +33,7 @@ rm N			: remove from superview
 property		: property getter (text, frame ...)
 property = value	: property settter
 open			: open safari to display target object view
+clear			: clear history
 about			: about
 quit			: quit (q)
 EOF
@@ -43,6 +44,12 @@ libcat Console #{CONSOLE_VERSION} by wookay
 EOF
 
 class Console
+  def input text
+      puts "#{@shell.options[:prompt]}#{text}"
+      command, arg = command_arg_from_input text
+      response = console_request command, arg
+      puts response.body
+  end
   def command_arg_from_input text
     idx = text.index SPACE 
     if idx
@@ -65,6 +72,7 @@ class Console
   end
 
   def initialize
+    @shell = Shell.new :prompt => PROMPT
   end
 
   def request_prompt
@@ -82,7 +90,7 @@ class Console
   end
 
   def run prompt
-    @shell = Shell.new :prompt => prompt
+    @shell.options[:prompt] = prompt
     @proc_block = proc do |env, text|
       case text
       when ''

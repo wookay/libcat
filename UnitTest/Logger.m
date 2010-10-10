@@ -33,7 +33,7 @@ void print_log_info(const char* filename, int lineno, id format, ...) {
 		NSString* printFormat = [NSString stringWithFormat:@"%%%ds #%%03d   %%s\n", FILENAME_PADDING];
 		
 		if (nil != LOGGERMAN.delegate) {
-			NSString* text = [NSString stringWithFormat:printFormat, filename, lineno, output]; 
+			NSString* text = [NSString stringWithFormat:@"%23s #%03d   %@\n", filename, lineno, str]; 
 			[LOGGERMAN.delegate loggerTextOut:text];
 		}
 		

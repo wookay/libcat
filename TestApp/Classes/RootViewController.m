@@ -126,7 +126,7 @@ enum { kSectionUnitTest, kSectionConsole, kSectionMax };
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
 	switch (section) {
 		case kSectionUnitTest:
-			return SWF(@"Finished in %.3g seconds.", TESTMAN.elapsed);
+			return SWF(NSLocalizedString(@"Finished in %.3g seconds.", nil), TESTMAN.elapsed);
 			break;
 		default:
 			break;

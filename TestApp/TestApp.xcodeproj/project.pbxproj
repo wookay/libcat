@@ -29,6 +29,8 @@
 		DA440D16126045C600761E20 /* HTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA440D0E126045C600761E20 /* HTTPServer.m */; };
 		DA440D17126045C600761E20 /* LoggerServer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA440D10126045C600761E20 /* LoggerServer.m */; };
 		DA699968125A165C00A08654 /* UIViewBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DA699967125A165C00A08654 /* UIViewBlock.m */; };
+		DAA63F681261AC140010F870 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAA63F601261AC140010F870 /* InfoPlist.strings */; };
+		DAA63F691261AC140010F870 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAA63F621261AC140010F870 /* Localizable.strings */; };
 		DABE4428125C88E600903735 /* UIAlertViewBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DABE4427125C88E600903735 /* UIAlertViewBlock.m */; };
 		DABE45F4125C987900903735 /* UIActionSheetBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DABE45F3125C987900903735 /* UIActionSheetBlock.m */; };
 		DABE48B0125CB9D400903735 /* TestActionSheetBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DABE48AF125CB9D400903735 /* TestActionSheetBlock.m */; };
@@ -85,7 +87,7 @@
 		28AD735F0D9D9599002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		28C286DF0D94DF7D0034E888 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		28C286E00D94DF7D0034E888 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
-		28F335F01007B36200424DE2 /* RootViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
+		28F335F01007B36200424DE2 /* RootViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = RootViewController.xib; path = ../RootViewController.xib; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* TestApp-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "TestApp-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		DA054F23125DD36E00660097 /* TestConsole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestConsole.h; sourceTree = "<group>"; };
@@ -115,6 +117,12 @@
 		DA440D10126045C600761E20 /* LoggerServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoggerServer.m; sourceTree = "<group>"; };
 		DA699966125A165C00A08654 /* UIViewBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewBlock.h; sourceTree = "<group>"; };
 		DA699967125A165C00A08654 /* UIViewBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIViewBlock.m; sourceTree = "<group>"; };
+		DAA63F611261AC140010F870 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		DAA63F631261AC140010F870 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
+		DAA63F641261AC140010F870 /* Korean */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Korean; path = Korean.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		DAA63F651261AC140010F870 /* Korean */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Korean; path = Korean.lproj/Localizable.strings; sourceTree = "<group>"; };
+		DAA63F661261AC140010F870 /* Spanish */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Spanish; path = Spanish.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		DAA63F671261AC140010F870 /* Spanish */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Spanish; path = Spanish.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DABE4426125C88E600903735 /* UIAlertViewBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIAlertViewBlock.h; sourceTree = "<group>"; };
 		DABE4427125C88E600903735 /* UIAlertViewBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIAlertViewBlock.m; sourceTree = "<group>"; };
 		DABE45F2125C987900903735 /* UIActionSheetBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIActionSheetBlock.h; sourceTree = "<group>"; };
@@ -214,6 +222,7 @@
 			children = (
 				28C286DF0D94DF7D0034E888 /* RootViewController.h */,
 				28C286E00D94DF7D0034E888 /* RootViewController.m */,
+				28F335F01007B36200424DE2 /* RootViewController.xib */,
 				1D3623240D0F684500981E51 /* TestAppAppDelegate.h */,
 				1D3623250D0F684500981E51 /* TestAppAppDelegate.m */,
 				DADD7EE21260AE2C0040E482 /* UIControlViewController.h */,
@@ -260,7 +269,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				28F335F01007B36200424DE2 /* RootViewController.xib */,
+				DAA63F5F1261AC140010F870 /* Languages */,
 				28AD735F0D9D9599002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* TestApp-Info.plist */,
 			);
@@ -356,6 +365,15 @@
 				DA440D10126045C600761E20 /* LoggerServer.m */,
 			);
 			path = servers;
+			sourceTree = "<group>";
+		};
+		DAA63F5F1261AC140010F870 /* Languages */ = {
+			isa = PBXGroup;
+			children = (
+				DAA63F601261AC140010F870 /* InfoPlist.strings */,
+				DAA63F621261AC140010F870 /* Localizable.strings */,
+			);
+			path = Languages;
 			sourceTree = "<group>";
 		};
 		DAC587EC125B6DB300203336 /* Observer */ = {
@@ -527,6 +545,8 @@
 				French,
 				German,
 				en,
+				Korean,
+				Spanish,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
@@ -546,6 +566,8 @@
 				28F335F11007B36200424DE2 /* RootViewController.xib in Resources */,
 				DAEBFD1D125B7B610070A3A7 /* README in Resources */,
 				DADD7EE61260AE2C0040E482 /* UIControlViewController.xib in Resources */,
+				DAA63F681261AC140010F870 /* InfoPlist.strings in Resources */,
+				DAA63F691261AC140010F870 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -617,6 +639,29 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		DAA63F601261AC140010F870 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DAA63F611261AC140010F870 /* English */,
+				DAA63F641261AC140010F870 /* Korean */,
+				DAA63F661261AC140010F870 /* Spanish */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		DAA63F621261AC140010F870 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DAA63F631261AC140010F870 /* English */,
+				DAA63F651261AC140010F870 /* Korean */,
+				DAA63F671261AC140010F870 /* Spanish */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		1D6058940D05DD3E006BFB54 /* Debug */ = {

@@ -10,13 +10,40 @@
 #import "UnitTest.h"
 #import "Logger.h"
 #import "NSStringExt.h"
-
+#import "Inspect.h"
 
 @interface TestArray : NSObject
 @end
 
 
 @implementation TestArray
+
+-(void) test_inspect {
+	NSArray* lines;
+	
+	lines = [@"거울속에는소리가없소\
+\n저렇게까지조용한세상은참없을것이오\
+\n\
+\n거울속에도내게귀가있소\
+\n내말을못알아듣는딱한귀가두개나있소\
+\n\
+\n거울속의나는왼손잡이오\
+\n내握手를받을줄모르는-악수를모르는왼손잡이요\
+\n\
+\n거울때문에나는거울속의나를만져보지를못하는구료마는\
+\n거울이아니었던들내가어찌거울속의나를만나보기라도했겠소\
+\n\
+\n나는至今거울을안가졌소마는거울속에는늘거울속의내가있소\
+\n잘은모르지만외로된事業에골몰할게요\
+\n\
+\n거울속의나는참나와는反對요마는\
+\n또괘닮았소\
+\n나는거울속의나를근심하고診察할수없으니퍽섭섭하오" split:LF];
+	assert_equal(lines.count+2, [[lines inspect] split:LF].count);
+	
+	lines = [@"1 2 3 4 5" split:SPACE];
+	assert_equal(@"[\"1\", \"2\", \"3\", \"4\", \"5\"]", [lines inspect]);
+}
 
 -(void) test_array {
 	NSArray* ary = _w(@"1 2 3");

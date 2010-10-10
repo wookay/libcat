@@ -11,9 +11,14 @@
 
 @interface UIControlViewController : UIViewController {
 	IBOutlet UILabel* counterLabel;
+	IBOutlet UIButton* upButton;
+	IBOutlet UIButton* downButton;
 }
 
 -(IBAction) touchedUpButton:(id)sender ;
 -(IBAction) touchedDownButton:(id)sender ;
+-(void) setCounterLabelTextByInt:(int)intValue ;
+-(void) setCounterLabelTextByFloat:(float)floatValue ;
+-(void) setCounterLabelTextByString:(NSString*)str ;
 
 @end

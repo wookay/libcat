@@ -1,4 +1,4 @@
-#! /usr/bin/ruby
+#! /opt/local/bin/ruby1.9
 
 
 
@@ -12,7 +12,7 @@ LOGGER_SERVER_ADDRESS = 'localhost'
 
 
 require 'rubygems'
-require 'eventmachine'
+require 'eventmachine' #sudo gem1.9 install eventmachine
 
 DIR = "#{File.dirname __FILE__}"
 

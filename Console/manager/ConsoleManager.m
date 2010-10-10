@@ -110,7 +110,7 @@
 			[target performSelector:fromStringSelector withObject:obj];
 			[ary addObject:SWF(@"%@ = %@", lastMethod, obj)];							
 		} else {
-			[ary addObject:SWF(@"[%@ %@%@] failed", [target class], setValueFromString, obj)];
+			[ary addObject:SWF(@"[%@ %@%@] %@", [target class], setValueFromString, obj, NSLocalizedString(@"failed", nil))];
 		}
 	} else {
 		[ary addObject:SWF(@"%@ %@", lastMethodUppercased, [COMMANDMAN commandNotFound])];
@@ -136,9 +136,50 @@
 					target = [target performSelector:selector];
 					[ary addObject:SWF(@"%@ => %@", method, target)];
 					break;
-				case _C_VOID:
-					[target performSelector:selector];
-					[ary addObject:SWF(@"%@ => ", NSStringFromSelector(selector))];
+				case _C_VOID: {
+						BOOL found = true;
+						NSMethodSignature* sig = [target methodSignatureForSelector:selector];
+						switch ([sig numberOfArguments]) {
+							case 2:
+								[target performSelector:selector];
+								break;
+								
+							case 3: {
+									const char* argType = [sig getArgumentTypeAtIndex:2];
+									id argObj = nil;
+									switch (*argType) {
+										case _C_ID:
+											argObj = arg;
+											[target performSelector:selector withObject:argObj];
+											break;
+										case _C_INT:
+											argObj = (id)[arg intValue];
+											[target performSelector:selector withObject:argObj];
+											break;
+										case _C_FLT: {
+												Method m = class_getInstanceMethod([target class], selector);
+												IMP imp = method_getImplementation(m);
+												((id (*)(id, SEL, float))imp)(target, selector, [arg floatValue]);
+											}
+											break;											
+										default:
+											found = false;
+											break;
+									}
+								}
+								break;
+								
+							default:
+								log_info(@"sig numberOfArguments %d", [sig numberOfArguments]);
+								found = false;
+								break;
+						}
+						if (found) {
+							[ary addObject:SWF(@"%@", NSStringFromSelector(selector))];
+						} else {
+							[ary addObject:SWF(@"%@ => %@", method, [COMMANDMAN commandNotFound])];
+						}
+					}
 					break;
 				default: {
 					SEL toStringSelector = NSSelectorFromString(SWF(@"%@ToString", method));
@@ -146,7 +187,7 @@
 						target = [target performSelector:toStringSelector];
 						[ary addObject:SWF(@"%@ => %@", method, target)];
 					} else {
-						[ary addObject:SWF(@"%@ => %@", method, @"???")];
+						[ary addObject:SWF(@"%@ => %@", method, [COMMANDMAN commandNotFound])];
 					}
 				}
 					break;

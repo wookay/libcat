@@ -12,6 +12,7 @@
 #import "Logger.h"
 #import "objc/runtime.h"
 #import "NSDateExt.h"
+#import "NSArrayExt.h"
 
 
 #define UNITTEST_TARGET_CLASS_FILTERING_SELECTOR @selector(hasPrefix:)
@@ -133,7 +134,7 @@
 		NSString *selectorName = NSStringFromSelector(selector);
 		[ary addObject:selectorName];
 	}
-	return ary;
+	return [ary sort];
 }
 @end
 

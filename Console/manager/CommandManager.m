@@ -19,6 +19,8 @@
 #import "Async.h"
 #import "NSNumberExt.h"
 #import "NSObjectExt.h"
+#import "Inspect.h"
+#import "UnitTest.h"
 
 NSArray* array_prefix_index(NSArray* array) {
 	return [array map_with_index:^id(id obj, int idx) { 
@@ -45,6 +47,7 @@ NSArray* array_prefix_index(NSArray* array) {
 			@"back", @"command_back:arg:",
 			@"b", @"command_back:arg:",
 			@"rm", @"command_rm:arg:",
+			@"completion", @"command_completion:arg:",
 			nil];
 }
 
@@ -106,7 +109,7 @@ NSArray* array_prefix_index(NSArray* array) {
 		if ([controller.parentViewController isKindOfClass:[UINavigationController class]]) {
 			if (controller.navigationController.viewControllers.count > 1) {
 				[controller.navigationController popViewControllerAnimated:true];
-				return NSLocalizedString(@"back popViewControllerAnimated", nil);
+				return NSLocalizedString(@"back popViewControllerAnimated:", nil);
 			}
 		}
 	}
@@ -114,6 +117,13 @@ NSArray* array_prefix_index(NSArray* array) {
 }
 
 
+-(NSString*) command_completion:(id)currentObject arg:(id)arg {
+	NSArray* pair = [self get_targetStringAndBlocks:currentObject];
+	NSDictionary* targetStrings = [pair objectAtFirst];
+	NSMutableArray* ary = [NSMutableArray arrayWithArray:[currentObject methods]];
+	[ary addObjectsFromArray:[targetStrings allKeys]];
+	return [ary join:LF];
+}
 
 -(NSString*) command_ls:(id)currentObject arg:(id)arg {
 	NSMutableArray* ret = [NSMutableArray array];
@@ -126,28 +136,28 @@ NSArray* array_prefix_index(NSArray* array) {
 					if (nil == obj) {
 					} else {
 						NSString* classNameUpper = [SWF(@"%@", [obj class]) uppercaseString];
-						[ret addObject:SWF(@"[%@]: %@", classNameUpper, obj)];
+						[ret addObject:SWF(@"[%@]: %@", classNameUpper, [obj inspect])];
 					}
 				}
 				break;
 			case LS_VIEWCONTROLLERS:
-				[ret addObject:SWF(@"VIEWCONTROLLERS: %@", array_prefix_index(obj))];
+				[ret addObject:SWF(@"VIEWCONTROLLERS: %@", [array_prefix_index(obj) inspect])];
 				break;
 			case LS_TABLEVIEW:
-				[ret addObject:SWF(@"TABLEVIEW: %@", obj)];
+				[ret addObject:SWF(@"TABLEVIEW: %@", [obj inspect])];
 				break;
 			case LS_SECTIONS: {
 					[ret addObject:@"SECTIONS: "];
 					[(NSArray*)obj each_with_index:^(id sectionAry, int idx) {
-						[ret addObject:SWF(@"\t%d %@", idx, array_prefix_index(sectionAry))];
+						[ret addObject:SWF(@"\t%d %@", idx, [array_prefix_index(sectionAry) inspect])];
 					}];
 				}
 				break;
 			case LS_VIEW:
-				[ret addObject:SWF(@"VIEW: %@", obj)];
+				[ret addObject:SWF(@"VIEW: %@", [obj inspect])];
 				break;
 			case LS_VIEW_SUBVIEWS:
-				[ret addObject:SWF(@"VIEW.SUBVIEWS: %@", array_prefix_index(obj))];
+				[ret addObject:SWF(@"VIEW.SUBVIEWS: %@", [array_prefix_index(obj) inspect])];
 				break;
 			default:
 				break;
@@ -364,48 +374,14 @@ NSArray* array_prefix_index(NSArray* array) {
 	} else if ([arg isNotEmpty]) {
 		SEL selector = NSSelectorFromString(arg);
 		if ([currentObject respondsToSelector:selector]) {
-			id obj = [currentObject performSelector:selector];
+			id obj = [currentObject performSelector:selector];			
 			if (nil != obj) {
 				changeObject = obj;
 			}
 		} else { // search by title
-			NSMutableDictionary* targetStrings = [NSMutableDictionary dictionary];
-			NSMutableDictionary* targetBlocks = [NSMutableDictionary dictionary];
-			if ([currentObject isKindOfClass:[UIViewController class]]) {
-				UIViewController* controller = currentObject;
-				if ([controller.view isKindOfClass:[UITableView class]]) {
-					UITableView* tableView = (UITableView*)controller.view;
-					for (int section = 0; section < [tableView numberOfSections]; section++) {
-						for (int row = 0; row < [tableView numberOfRowsInSection:section]; row++) {
-							NSIndexPath* indexPath = [NSIndexPath indexPathWithSection:section Row:row];
-							UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
-							NSString* textLabelText = cell.textLabel.text;
-							if (nil != textLabelText) {
-								[targetStrings setObject:cell forKey:textLabelText];
-								ActionBlock block = ^id {
-									[tableView.delegate tableView:tableView didSelectRowAtIndexPath:indexPath];
-									return @"tableView:didSelectRowAtIndexPath:";
-								};
-								[targetBlocks setObject:Block_copy(block) forKey:textLabelText];
-							}
-						}
-					}
-				} else {
-					for (UIView* subview in controller.view.subviews) {
-						if ([subview isKindOfClass:[UIControl class]] && [subview respondsToSelector:@selector(titleLabel)]) {
-							NSString* titleLabelText = [[subview performSelector:@selector(titleLabel)] text];
-							if (nil != titleLabelText) {
-								[targetStrings setObject:subview forKey:titleLabelText];
-							}
-							ActionBlock block = ^id {
-								[(UIControl*)subview sendActionsForControlEvents:UIControlEventTouchUpInside];
-								return @"sendActionsForControlEvents:";
-							};
-							[targetBlocks setObject:Block_copy(block) forKey:titleLabelText];
-						}
-					}
-				}
-			}
+			NSArray* pair = [self get_targetStringAndBlocks:currentObject];
+			NSDictionary* targetStrings = [pair objectAtFirst];
+			NSDictionary* targetBlocks = [pair objectAtSecond];
 			id obj = [targetStrings	objectForKey:arg];
 			if (nil != obj) {
 				changeObject = obj;
@@ -420,7 +396,46 @@ NSArray* array_prefix_index(NSArray* array) {
 	}	
 }
 
-
+-(NSArray*) get_targetStringAndBlocks:(id)currentObject {
+	NSMutableDictionary* targetStrings = [NSMutableDictionary dictionary];
+	NSMutableDictionary* targetBlocks = [NSMutableDictionary dictionary];
+	if ([currentObject isKindOfClass:[UIViewController class]]) {
+		UIViewController* controller = currentObject;
+		if ([controller.view isKindOfClass:[UITableView class]]) {
+			UITableView* tableView = (UITableView*)controller.view;
+			for (int section = 0; section < [tableView numberOfSections]; section++) {
+				for (int row = 0; row < [tableView numberOfRowsInSection:section]; row++) {
+					NSIndexPath* indexPath = [NSIndexPath indexPathWithSection:section Row:row];
+					UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+					NSString* textLabelText = cell.textLabel.text;
+					if (nil != textLabelText) {
+						[targetStrings setObject:cell forKey:textLabelText];
+						ActionBlock block = ^id {
+							[tableView.delegate tableView:tableView didSelectRowAtIndexPath:indexPath];
+							return @"tableView:didSelectRowAtIndexPath:";
+						};
+						[targetBlocks setObject:Block_copy(block) forKey:textLabelText];
+					}
+				}
+			}
+		} else {
+			for (UIView* subview in controller.view.subviews) {
+				if ([subview isKindOfClass:[UIControl class]] && [subview respondsToSelector:@selector(titleLabel)]) {
+					NSString* titleLabelText = [[subview performSelector:@selector(titleLabel)] text];
+					if (nil != titleLabelText) {
+						[targetStrings setObject:subview forKey:titleLabelText];
+					}
+					ActionBlock block = ^id {
+						[(UIControl*)subview sendActionsForControlEvents:UIControlEventTouchUpInside];
+						return @"sendActionsForControlEvents:";
+					};
+					[targetBlocks setObject:Block_copy(block) forKey:titleLabelText];
+				}
+			}
+		}
+	}
+	return PAIR(targetStrings, targetBlocks);
+}
 
 //-(NSString*) command_touch:(id)currentObject arg:(id)arg {
 //	id changeObject = nil;
