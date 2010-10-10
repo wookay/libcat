@@ -55,7 +55,7 @@
 
 -(id) currentTargetObjectOrTopViewController {
 	if (nil == self.currentTargetObject) {
-		return [self navigationController].topViewController;
+		return [self topViewController];
 	} else {
 		return self.currentTargetObject;
 	}
@@ -199,9 +199,17 @@
 	return [ary join:LF];
 }
 
--(UINavigationController*) navigationController {
-	UINavigationController* navigationController = [[UIApplication sharedApplication].delegate performSelector:@selector(navigationController)];
-	return navigationController;
+-(UIViewController*) topViewController {
+	id delegate = [UIApplication sharedApplication].delegate;
+	if ([delegate respondsToSelector:@selector(navigationController)]) {
+		UINavigationController* navigationController = [delegate performSelector:@selector(navigationController)];	
+		return navigationController.topViewController;
+	} else if ([delegate respondsToSelector:@selector(tabBarController)]) {
+		UITabBarController* tabBarController = [delegate performSelector:@selector(tabBarController)];	
+		return tabBarController.selectedViewController;
+	} else {
+		return nil;
+	}
 }
 
 -(id) input:(NSString*)input {

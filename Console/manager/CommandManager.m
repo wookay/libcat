@@ -56,7 +56,7 @@ NSArray* array_prefix_index(NSArray* array) {
 }
 
 -(id) command_pwd:(id)currentObject arg:(id)arg {
-	CONSOLEMAN.currentTargetObject = [CONSOLEMAN navigationController].visibleViewController;	
+	CONSOLEMAN.currentTargetObject = [CONSOLEMAN topViewController];	
 	return SWF(@"%@", [CONSOLEMAN.currentTargetObject class]);
 }
 
@@ -68,7 +68,7 @@ NSArray* array_prefix_index(NSArray* array) {
 		CONSOLEMAN.currentTargetObject = changeObject;
 	} else {
 		if ([arg isEmpty]) {
-			changeObject = [CONSOLEMAN navigationController].topViewController;
+			changeObject = [CONSOLEMAN topViewController];
 			CONSOLEMAN.currentTargetObject = changeObject;
 			response = SWF(@"cd %@", [changeObject class]);
 		}
@@ -232,7 +232,7 @@ NSArray* array_prefix_index(NSArray* array) {
 	id changeObject = nil;
 	id actionBlock = [NSNull null];
 	if ([SLASH isEqualToString:arg]) {
-		changeObject = [[CONSOLEMAN navigationController].viewControllers objectAtFirst];
+		changeObject = [CONSOLEMAN topViewController];
 	} else if ([DOT isEqualToString:arg]) {
 		changeObject = currentObject;
 		
@@ -269,15 +269,8 @@ NSArray* array_prefix_index(NSArray* array) {
 				UIView* view = currentObject;
 				Class klass_UIViewControllerWrapperView = NSClassFromString(@"UIViewControllerWrapperView");
 				if ([view.superview isKindOfClass:klass_UIViewControllerWrapperView]) {
-					BOOL found = false;
-					for (UIViewController* controller in [CONSOLEMAN navigationController].viewControllers) {
-						if (controller.view == view) {
-							found = true;
-							changeObject = controller;
-							break;
-						}
-					}
-					if (found) {
+					if ([CONSOLEMAN topViewController].view == view) {
+						changeObject = [CONSOLEMAN topViewController];
 					} else {
 						changeObject = view.superview;							
 					}
