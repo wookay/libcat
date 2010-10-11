@@ -132,6 +132,20 @@ class Console
         end
       end
     end
+    connect_to_server
+  end
+
+  def connect_to_server
+    begin
+      prompt = Timeout::timeout 1 do
+        request_prompt
+      end
+    rescue Timeout::Error
+      puts "Cannot connect to console server #{CONSOLE_SERVER_ADDRESS}:#{CONSOLE_SERVER_PORT}"
+      puts "Please run TestApp"
+      prompt = PROMPT
+      exit
+    end
   end
 
   def request_prompt
@@ -160,16 +174,6 @@ end
 
 if __FILE__ == $0
   console = Console.new
-  begin
-    prompt = Timeout::timeout 1 do
-      console.request_prompt
-    end
-  rescue Timeout::Error
-    puts "Cannot connect to console server #{CONSOLE_SERVER_ADDRESS}:#{CONSOLE_SERVER_PORT}"
-	puts "Please run TestApp"
-    prompt = PROMPT
-	exit
-  end
   console.run prompt
   
 end
