@@ -339,7 +339,7 @@ NSArray* array_prefix_index(NSArray* array) {
 					found = true;
 					ActionBlock block = ^id {
 						tabBarController.selectedIndex = row;
-						return @"selectedIndex";
+						return SWF(@"selectedIndex = %d", row);
 					};
 					actionBlock = Block_copy(block);
 				}			
@@ -361,7 +361,7 @@ NSArray* array_prefix_index(NSArray* array) {
 						found = true;
 						ActionBlock block = ^id {
 							[tableView.delegate tableView:tableView didSelectRowAtIndexPath:indexPath];
-							return @"tableView:didSelectRowAtIndexPath:";
+							return SWF(@"tableView:didSelectRowAtIndexPath: %d %d", section, row);
 						};
 						actionBlock = Block_copy(block);
 					}				
@@ -374,7 +374,7 @@ NSArray* array_prefix_index(NSArray* array) {
 						if ([subview isKindOfClass:[UIControl class]]) {
 							ActionBlock block = ^id {				
 								[(UIControl*)subview sendActionsForControlEvents:UIControlEventTouchUpInside];
-								return @"sendActionsForControlEvents:";
+								return SWF(@"sendActionsForControlEvents: %@", @"UIControlEventTouchUpInside");
 							};
 							actionBlock = Block_copy(block);
 						}					
@@ -389,7 +389,7 @@ NSArray* array_prefix_index(NSArray* array) {
 					found = true;
 					ActionBlock block = ^id {
 						[tableView.delegate tableView:tableView didSelectRowAtIndexPath:indexPath];
-						return @"tableView:didSelectRowAtIndexPath:";
+						return SWF(@"tableView:didSelectRowAtIndexPath: %d %d", section, row);
 					};
 					actionBlock = Block_copy(block);				
 				}
@@ -403,7 +403,7 @@ NSArray* array_prefix_index(NSArray* array) {
 					if ([subview isKindOfClass:[UIControl class]]) {
 						ActionBlock block = ^id {				
 							[(UIControl*)subview sendActionsForControlEvents:UIControlEventTouchUpInside];
-							return @"sendActionsForControlEvents:";
+							return SWF(@"sendActionsForControlEvents: %@", @"UIControlEventTouchUpInside");
 						};
 						actionBlock = Block_copy(block);
 					}
@@ -448,7 +448,7 @@ NSArray* array_prefix_index(NSArray* array) {
 			if (cell == cellObj) {
 				ActionBlock block = ^id {
 					[tableView.delegate tableView:tableView didSelectRowAtIndexPath:indexPath];
-					return @"tableView:didSelectRowAtIndexPath:";
+					return SWF(@"tableView:didSelectRowAtIndexPath: %d %d", indexPath.section, indexPath.row);
 				};
 				actionBlock = Block_copy(block);
 				break;
@@ -457,7 +457,7 @@ NSArray* array_prefix_index(NSArray* array) {
 	} else if ([targetObject isKindOfClass:[UIControl class]]) {
 		ActionBlock block = ^id {				
 			[targetObject sendActionsForControlEvents:UIControlEventTouchUpInside];
-			return @"sendActionsForControlEvents:";
+			return SWF(@"sendActionsForControlEvents: %@", @"UIControlEventTouchUpInside");
 		};
 		actionBlock = Block_copy(block);
 	} else if ([targetObject isKindOfClass:[UIBarButtonItem class]]) {
@@ -487,7 +487,7 @@ NSArray* array_prefix_index(NSArray* array) {
 						[targetStrings setObject:cell forKey:textLabelText];
 						ActionBlock block = ^id {
 							[tableView.delegate tableView:tableView didSelectRowAtIndexPath:indexPath];
-							return @"tableView:didSelectRowAtIndexPath:";
+							return SWF(@"tableView:didSelectRowAtIndexPath: %d %d", section, row);
 						};
 						[targetBlocks setObject:Block_copy(block) forKey:textLabelText];
 					}
@@ -502,7 +502,7 @@ NSArray* array_prefix_index(NSArray* array) {
 					}
 					ActionBlock block = ^id {
 						[(UIControl*)subview sendActionsForControlEvents:UIControlEventTouchUpInside];
-						return @"sendActionsForControlEvents:";
+						return SWF(@"sendActionsForControlEvents: %@", @"UIControlEventTouchUpInside");
 					};
 					[targetBlocks setObject:Block_copy(block) forKey:titleLabelText];
 				}
