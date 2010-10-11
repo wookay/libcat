@@ -17,9 +17,9 @@
 #import "NSArrayExt.h"
 #import <QuartzCore/QuartzCore.h>
 #import "NSArrayBlock.h"
+#import "Inspect.h"
 
-
-#define S(obj) SWF(@"%@", obj)
+#define S(obj) SWF(@"%@", [obj inspect])
 
 @interface NSString (HTMLExtensions)
 
@@ -116,7 +116,7 @@ static NSString *replaceAll(NSString *s, NSDictionary *replacements) {
 					if ([obj isKindOfClass:[UIView class]]) {
 						[ary addObject:SWF(@"<img src='/image/%p.png' />", obj)];
 					} else if ([obj respondsToSelector:@selector(title)]) {
-						title =[obj title];
+						title = [obj title];
 					}
 				}
 				break;
@@ -125,15 +125,14 @@ static NSString *replaceAll(NSString *s, NSDictionary *replacements) {
 				break;
 			case LS_TABLEVIEW:
 				[ary addObject:SWF(@"TABLEVIEW: %@", [S(obj) htmlEscapedString])];
-//				[ary addObject:SWF(@"<img src='/image/%p.png' />", obj)];
 				break;
 			case LS_SECTIONS: {
-					NSArray* sections = [(NSArray*)obj map:^id(id sectionAry) { 
-										return [sectionAry map:^id(id cell) {
-											return SWF(@"<img src='/image/%p.png' /> %@", cell, [S(cell) htmlEscapedString]);
-										}];
-						}];
-					[ary addObject:SWF(@"SECTIONS: %@", sections)];
+					[ary addObject:SWF(@"SECTIONS: ")];
+					for (NSArray* sectionArray in (NSArray*)obj) {
+						for (id cell in sectionArray) {
+							 [ary addObject:SWF(@"<img src='/image/%p.png' /> %@", cell, [S(cell) htmlEscapedString])];
+						}
+					}
 				}
 				break;
 			case LS_VIEW:
@@ -144,9 +143,23 @@ static NSString *replaceAll(NSString *s, NSDictionary *replacements) {
 					NSArray* subviews = [obj map:^id(id subview) {
 						return SWF(@"<img src='/image/%p.png' /> %@", subview, [S(subview) htmlEscapedString]);
 					}];
-					[ary addObject:SWF(@"VIEW.SUBVIEWS: %@", subviews)];
+					[ary addObject:SWF(@"VIEW.SUBVIEWS: %@", [subviews inspect])];
 				}
 				break;
+			case LS_TABBAR:
+				[ary addObject:SWF(@"TABBAR: %@", [S(obj) htmlEscapedString])];
+				[ary addObject:SWF(@"<img src='/image/%p.png' />", obj)];
+				break;				
+			case LS_NAVIGATIONITEM:
+				[ary addObject:SWF(@"NAVIGATIONITEM: %@", [S(obj) htmlEscapedString])];
+				break;																
+			case LS_NAVIGATIONCONTROLLER_TOOLBAR:
+				[ary addObject:SWF(@"NAVIGATIONCONTROLLER_TOOLBAR: %@", [S(obj) htmlEscapedString])];				
+				[ary addObject:SWF(@"<img src='/image/%p.png' />", obj)];
+				break;								
+			case LS_NAVIGATIONCONTROLLER_TOOLBAR_ITEMS:
+				[ary addObject:SWF(@"NAVIGATIONCONTROLLER_TOOLBAR_ITEMS: %@", [S(obj) htmlEscapedString])];				
+				break;																
 			default:
 				break;
 		}
@@ -154,8 +167,7 @@ static NSString *replaceAll(NSString *s, NSDictionary *replacements) {
 	[ary addObject:@"<img src='/image/capture.png' border='20'>"];
 
 	NSString* body = SWF(@"<pre>%@</pre>", [ary join:LF]);
-	NSString* head = SWF(@"<title>%@</title>\
-						 <script type=\"text/javascript\" src=\"/js/json.js\"></script>", title);
+	NSString* head = SWF(@"<meta http-equiv='content-type' content='text/html; charset=UTF-8' /><title>%@</title>", title);
 	NSString* html = SWF(@"<html><head>%@</head><body bgcolor='#d3d3d3'>%@</body></html>", head, body);
 	
 	NSData* fileData = [html dataUsingEncoding:NSUTF8StringEncoding];

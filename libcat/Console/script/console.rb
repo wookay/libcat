@@ -23,12 +23,12 @@ CONSOLE_SERVER_URL = "#{SERVER_URL}/console"
 PROMPT = '> '
 
 HELP = <<EOF
-ls			: list current target object
-cd			: change target object
+ls			: list current target object (ㄹ)
+cd			: change target object (ㄷ)
   [ cd 0 ]		: to change target object at index as listed
   [ cd 0x6067490 ]	: to change target object at memory address
-touch    		: didSelectRowAtIndexPath (t)
-back    		: popViewControllerAnimated (b)
+touch    		: didSelectRowAtIndexPath (t, ㅌ)
+back    		: popViewControllerAnimated (b, ㅂ)
 rm N			: remove from superview
 property		: property getter (text, frame ...)
 property = value	: property settter
@@ -51,15 +51,26 @@ class Console
       puts response.body
   end
   def command_arg_from_input text
-    idx = text.index SPACE 
+    text_stripped = text.strip
+    idx = text_stripped.index SPACE 
     if idx
-      command = text[0..idx-1]
-      arg = text[idx+1..-1]
+      command = text_stripped[0..idx-1]
+      arg = text_stripped[idx+1..-1]
     else
-      command = text
+      command = text_stripped
       arg = nil
     end
-    [command, arg]
+    [resolve_command(command), arg]
+  end
+  def resolve_command command_str
+    aliases = { 't' => 'touch',
+    'ㅌ' => 'touch',
+    'b' => 'back',
+    'ㅂ' => 'back',
+    'ㄷ' => 'cd',
+    'ㄹ' => 'ls',
+    }
+    aliases[command_str] or command_str 
   end
   def console_request command, arg
     if arg
@@ -104,7 +115,7 @@ class Console
            puts ABOUT
         when 'open'
            `open #{SERVER_URL}`
-        when 'touch', 't'
+        when 'touch'
           puts response.body
           if /^touch / =~ response.body
             result_uno, result_dos = response.body.split SPACE
@@ -113,7 +124,7 @@ class Console
               update_prompt
             end
           end
-        when 'back', 'b'
+        when 'back'
           puts response.body
           if /^back / =~ response.body
             update_prompt

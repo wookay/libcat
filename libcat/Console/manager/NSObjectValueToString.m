@@ -51,3 +51,17 @@
 }
 @end
 
+
+
+
+@implementation UINavigationItem (Inspect)
+-(NSString*) inspect {
+	return SWF(@"<UINavigationItem: %p; title = '%@'>", self, self.title);
+}
+@end
+
+@implementation UIBarButtonItem (Inspect)
+-(NSString*) inspect {	
+	return SWF(@"<UIBarButtonItem: %p; title = '%@'; target = %@; action=%@>", self, self.title, self.target, NSStringFromSelector(self.action));
+}
+@end

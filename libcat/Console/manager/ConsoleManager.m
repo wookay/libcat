@@ -55,7 +55,7 @@
 
 -(id) currentTargetObjectOrTopViewController {
 	if (nil == self.currentTargetObject) {
-		return [self topViewController];
+		return [self get_topViewController];
 	} else {
 		return self.currentTargetObject;
 	}
@@ -199,18 +199,39 @@
 	return [ary join:LF];
 }
 
--(UIViewController*) topViewController {
+-(UIViewController*) get_topViewController {
+	UIViewController* rootVC = [self get_rootViewController];
+	if (nil == rootVC) {
+		return nil;
+	} else {
+		if ([rootVC isKindOfClass:[UINavigationController class]]) {
+			UINavigationController* navigationController = (UINavigationController*)rootVC;
+			return navigationController.topViewController;
+		} else if ([rootVC isKindOfClass:[UITabBarController class]]) {
+			UITabBarController* tabBarController = (UITabBarController*)rootVC;
+			if ([tabBarController.selectedViewController isKindOfClass:[UINavigationController class]]) {
+				UINavigationController* navigationController = (UINavigationController*)tabBarController.selectedViewController;
+				return navigationController.topViewController;
+			} else {
+				return tabBarController.selectedViewController;
+			}			
+		} else {
+			return rootVC;
+		}
+	}
+}
+
+-(UIViewController*) get_rootViewController {
 	id delegate = [UIApplication sharedApplication].delegate;
 	if ([delegate respondsToSelector:@selector(navigationController)]) {
-		UINavigationController* navigationController = [delegate performSelector:@selector(navigationController)];	
-		return navigationController.topViewController;
+		return [delegate performSelector:@selector(navigationController)];
 	} else if ([delegate respondsToSelector:@selector(tabBarController)]) {
-		UITabBarController* tabBarController = [delegate performSelector:@selector(tabBarController)];	
-		return tabBarController.selectedViewController;
+		return [delegate performSelector:@selector(tabBarController)];	
 	} else {
 		return nil;
 	}
 }
+
 
 -(id) input:(NSString*)input {
 	NSRange commandRange = [input rangeOfString:SPACE];

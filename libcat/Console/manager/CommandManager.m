@@ -42,10 +42,8 @@ NSArray* array_prefix_index(NSArray* array) {
 			@"pwd", @"command_pwd:arg:",
 			@"cd", @"command_cd:arg:",
 			@"ls", @"command_ls:arg:",
-			@"t", @"command_touch:arg:",
 			@"touch", @"command_touch:arg:",
 			@"back", @"command_back:arg:",
-			@"b", @"command_back:arg:",
 			@"rm", @"command_rm:arg:",
 			@"completion", @"command_completion:arg:",
 			nil];
@@ -56,7 +54,11 @@ NSArray* array_prefix_index(NSArray* array) {
 }
 
 -(id) command_pwd:(id)currentObject arg:(id)arg {
-	CONSOLEMAN.currentTargetObject = [CONSOLEMAN topViewController];	
+	log_info(@"command_pwd1 %@", CONSOLEMAN.currentTargetObject);
+	
+	CONSOLEMAN.currentTargetObject = [CONSOLEMAN get_topViewController];	
+	log_info(@"command_pwd %@", currentObject);
+	log_info(@"command_pwd2 %@", CONSOLEMAN.currentTargetObject);
 	return SWF(@"%@", [CONSOLEMAN.currentTargetObject class]);
 }
 
@@ -68,7 +70,7 @@ NSArray* array_prefix_index(NSArray* array) {
 		CONSOLEMAN.currentTargetObject = changeObject;
 	} else {
 		if ([arg isEmpty]) {
-			changeObject = [CONSOLEMAN topViewController];
+			changeObject = [CONSOLEMAN get_topViewController];
 			CONSOLEMAN.currentTargetObject = changeObject;
 			response = SWF(@"cd %@", [changeObject class]);
 		}
@@ -83,8 +85,7 @@ NSArray* array_prefix_index(NSArray* array) {
 	if ([actionBlockObj isNotNull]) {
 		ActionBlock actionBlock = (ActionBlock)actionBlockObj;
 		NSString* methodStr = actionBlock();
-		log_info(@"touch %@", methodStr);
-
+		CONSOLEMAN.currentTargetObject = nil;
 		return SWF(@"touch %@", methodStr);
 	}
 	return NSLocalizedString(@"Not Found", nil);
@@ -126,7 +127,7 @@ NSArray* array_prefix_index(NSArray* array) {
 }
 
 -(NSString*) command_ls:(id)currentObject arg:(id)arg {
-	NSMutableArray* ret = [NSMutableArray array];
+	NSMutableArray* ary = [NSMutableArray array];
 	NSArray* arrayLS = [self array_ls:currentObject arg:arg];
 	for (NSArray* pair in arrayLS) {
 		int lsType = [[pair objectAtFirst] intValue];
@@ -136,45 +137,79 @@ NSArray* array_prefix_index(NSArray* array) {
 					if (nil == obj) {
 					} else {
 						NSString* classNameUpper = [SWF(@"%@", [obj class]) uppercaseString];
-						[ret addObject:SWF(@"[%@]: %@", classNameUpper, [obj inspect])];
+						[ary addObject:SWF(@"[%@]: %@", classNameUpper, [obj inspect])];
 					}
 				}
 				break;
 			case LS_VIEWCONTROLLERS:
-				[ret addObject:SWF(@"VIEWCONTROLLERS: %@", [array_prefix_index(obj) inspect])];
+				[ary addObject:SWF(@"VIEWCONTROLLERS: %@", [array_prefix_index(obj) inspect])];
 				break;
 			case LS_TABLEVIEW:
-				[ret addObject:SWF(@"TABLEVIEW: %@", [obj inspect])];
+				[ary addObject:SWF(@"TABLEVIEW: %@", [obj inspect])];
 				break;
 			case LS_SECTIONS: {
-					[ret addObject:@"SECTIONS: "];
+					[ary addObject:@"SECTIONS: "];
 					[(NSArray*)obj each_with_index:^(id sectionAry, int idx) {
-						[ret addObject:SWF(@"\t%d %@", idx, [array_prefix_index(sectionAry) inspect])];
+						[ary addObject:SWF(@"\t%d %@", idx, [array_prefix_index(sectionAry) inspect])];
 					}];
 				}
 				break;
 			case LS_VIEW:
-				[ret addObject:SWF(@"VIEW: %@", [obj inspect])];
+				[ary addObject:SWF(@"VIEW: %@", [obj inspect])];
 				break;
 			case LS_VIEW_SUBVIEWS:
-				[ret addObject:SWF(@"VIEW.SUBVIEWS: %@", [array_prefix_index(obj) inspect])];
+				[ary addObject:SWF(@"VIEW.SUBVIEWS: %@", [array_prefix_index(obj) inspect])];
 				break;
+			case LS_TABBAR:
+				[ary addObject:SWF(@"TABBAR: %@", [obj inspect])];				
+				break;
+			case LS_NAVIGATIONITEM:
+				[ary addObject:SWF(@"NAVIGATIONITEM: %@", [obj inspect])];				
+				break;				
+			case LS_NAVIGATIONCONTROLLER_TOOLBAR:
+				[ary addObject:SWF(@"NAVIGATIONCONTROLLER_TOOLBAR: %@", [obj inspect])];				
+				break;								
+			case LS_NAVIGATIONCONTROLLER_TOOLBAR_ITEMS:
+				[ary addObject:SWF(@"NAVIGATIONCONTROLLER_TOOLBAR_ITEMS: %@", [obj inspect])];				
+				break;												
+			case LS_TOOLBAR:
+				[ary addObject:SWF(@"TOOLBAR: %@", [obj inspect])];				
+				break;								
+			case LS_TOOLBAR_ITEMS:
+				[ary addObject:SWF(@"TOOLBAR_ITEMS: %@", [obj inspect])];				
+				break;																
 			default:
 				break;
 		}
 	}
-	return [ret join:LF];
+	return [ary join:LF];
 }
 
 -(NSArray*) array_ls:(id)currentObject arg:(id)arg {
-	if ([currentObject isKindOfClass:[UINavigationController class]]) {
-		UINavigationController* navigationController = currentObject;
+	if ([currentObject isKindOfClass:[UITabBarController class]]) {
+		UITabBarController* tabBarController = currentObject;
 		return [NSArray arrayWithObjects:
 				PAIR(Enum(LS_OBJECT), currentObject),
-				PAIR(Enum(LS_VIEWCONTROLLERS), navigationController.viewControllers),
+				PAIR(Enum(LS_TABBAR), tabBarController.tabBar),
+				PAIR(Enum(LS_VIEWCONTROLLERS), tabBarController.viewControllers),
 				nil];
+	} else if ([currentObject isKindOfClass:[UINavigationController class]]) {
+		UINavigationController* navigationController = currentObject;
+		NSMutableArray* ret = [NSMutableArray array];
+		[ret addObject:PAIR(Enum(LS_OBJECT), currentObject)];
+		[ret addObject:PAIR(Enum(LS_VIEWCONTROLLERS), navigationController.viewControllers)];
+		if (! navigationController.toolbarHidden) {
+			[ret addObject:PAIR(Enum(LS_TOOLBAR), navigationController.toolbar)];
+			[ret addObject:PAIR(Enum(LS_TOOLBAR_ITEMS), navigationController.toolbar.items)];
+		}
+		return ret;
 	} else if ([currentObject isKindOfClass:[UIViewController class]]) {
+		NSMutableArray* ret = [NSMutableArray array];
+		[ret addObject: PAIR(Enum(LS_OBJECT), currentObject) ];
 		UIViewController* controller = currentObject;
+		if (nil != controller.navigationItem) {
+			[ret addObject: PAIR(Enum(LS_NAVIGATIONITEM), controller.navigationItem) ];
+		}
 		if ([controller.view isKindOfClass:[UITableView class]]) {
 			UITableView* tableView = (UITableView*)controller.view;
 			NSMutableArray* sections = [NSMutableArray array];
@@ -187,18 +222,21 @@ NSArray* array_prefix_index(NSArray* array) {
 				}
 				[sections addObject:ary];
 			}
-			return [NSArray arrayWithObjects:
-					PAIR(Enum(LS_OBJECT), currentObject),
+			[ret addObjectsFromArray: [NSArray arrayWithObjects:
 					PAIR(Enum(LS_TABLEVIEW), tableView),
 					PAIR(Enum(LS_SECTIONS), sections),
-					nil];
+									   nil]];
 		} else {
-			return [NSArray arrayWithObjects:
-					PAIR(Enum(LS_OBJECT), currentObject),
+			[ret addObjectsFromArray: [NSArray arrayWithObjects:
 					PAIR(Enum(LS_VIEW), controller.view),
 					PAIR(Enum(LS_VIEW_SUBVIEWS), [controller.view.subviews reverse]),
-					nil];			
+									   nil]];
 		}
+		if (! controller.navigationController.toolbarHidden &&  nil != controller.navigationController.toolbar) {
+			[ret addObject: PAIR(Enum(LS_NAVIGATIONCONTROLLER_TOOLBAR), controller.navigationController.toolbar) ];
+			[ret addObject: PAIR(Enum(LS_NAVIGATIONCONTROLLER_TOOLBAR_ITEMS), controller.navigationController.toolbar.items) ];
+		}
+		return ret;
 	} else if ([currentObject isKindOfClass:[UITableView class]]) {
 		UITableView* tableView = currentObject;
 		NSMutableArray* sections = [NSMutableArray array];
@@ -232,32 +270,10 @@ NSArray* array_prefix_index(NSArray* array) {
 	id changeObject = nil;
 	id actionBlock = [NSNull null];
 	if ([SLASH isEqualToString:arg]) {
-		changeObject = [CONSOLEMAN topViewController];
+		changeObject = [CONSOLEMAN get_rootViewController];
 	} else if ([DOT isEqualToString:arg]) {
 		changeObject = currentObject;
-		
-		if ([currentObject isKindOfClass:[UITableViewCell class]]) {
-			UITableViewCell* cell = currentObject;
-			UITableView* tableView = (UITableView*)cell.superview;
-			for (NSIndexPath* indexPath in [tableView indexPathsForVisibleRows]) {
-				UITableViewCell* cellObj = [tableView cellForRowAtIndexPath:indexPath];
-				if (cell == cellObj) {
-					ActionBlock block = ^id {
-						[tableView.delegate tableView:tableView didSelectRowAtIndexPath:indexPath];
-						return @"tableView:didSelectRowAtIndexPath:";
-					};
-					actionBlock = Block_copy(block);
-					break;
-				}
-			}
-		} else if ([currentObject isKindOfClass:[UIControl class]]) {
-			ActionBlock block = ^id {				
-				[currentObject sendActionsForControlEvents:UIControlEventTouchUpInside];
-				return @"sendActionsForControlEvents:";
-			};
-			actionBlock = Block_copy(block);
-		}
-		
+		actionBlock = [self get_targetObjectActionBlock:currentObject];		
 	} else if ([DOT_DOT isEqualToString:arg]) {
 		if (nil == currentObject) {
 			return PAIR(EMPTY_STRING, nil);
@@ -269,8 +285,8 @@ NSArray* array_prefix_index(NSArray* array) {
 				UIView* view = currentObject;
 				Class klass_UIViewControllerWrapperView = NSClassFromString(@"UIViewControllerWrapperView");
 				if ([view.superview isKindOfClass:klass_UIViewControllerWrapperView]) {
-					if ([CONSOLEMAN topViewController].view == view) {
-						changeObject = [CONSOLEMAN topViewController];
+					if ([CONSOLEMAN get_topViewController].view == view) {
+						changeObject = [CONSOLEMAN get_topViewController];
 					} else {
 						changeObject = view.superview;							
 					}
@@ -283,6 +299,7 @@ NSArray* array_prefix_index(NSArray* array) {
 		size_t address = [arg to_size_t];
 		id obj = (id)address;
 		changeObject = obj;
+		actionBlock = [self get_targetObjectActionBlock:obj];
 	} else if ([arg isNumberOrSpace]) {
 		BOOL found = false;
 		int section = 0;
@@ -295,7 +312,19 @@ NSArray* array_prefix_index(NSArray* array) {
 			row = [arg to_int];
 		}
 		
-		if ([currentObject isKindOfClass:[UINavigationController class]]) {
+		if ([currentObject isKindOfClass:[UITabBarController class]]) {
+			UITabBarController* tabBarController = currentObject;
+			if (row < tabBarController.viewControllers.count) {
+				UIViewController* controller = [tabBarController.viewControllers objectAtIndex:row];
+				changeObject = controller;
+				found = true;
+				ActionBlock block = ^id {
+					tabBarController.selectedIndex = row;
+					return @"selectedIndex";
+				};
+				actionBlock = Block_copy(block);
+			}			
+		} else if ([currentObject isKindOfClass:[UINavigationController class]]) {
 			UINavigationController* navigationController = currentObject;
 			if (row < navigationController.viewControllers.count) {
 				UIViewController* controller = [navigationController.viewControllers objectAtIndex:row];
@@ -387,6 +416,39 @@ NSArray* array_prefix_index(NSArray* array) {
 	} else {
 		return TRIO(SWF(@"cd %@", [changeObject class]), changeObject, actionBlock);
 	}	
+}
+
+-(id) get_targetObjectActionBlock:(id)targetObject {
+	id actionBlock = nil;
+	if ([targetObject isKindOfClass:[UITableViewCell class]]) {
+		UITableViewCell* cell = targetObject;
+		UITableView* tableView = (UITableView*)cell.superview;
+		for (NSIndexPath* indexPath in [tableView indexPathsForVisibleRows]) {
+			UITableViewCell* cellObj = [tableView cellForRowAtIndexPath:indexPath];
+			if (cell == cellObj) {
+				ActionBlock block = ^id {
+					[tableView.delegate tableView:tableView didSelectRowAtIndexPath:indexPath];
+					return @"tableView:didSelectRowAtIndexPath:";
+				};
+				actionBlock = Block_copy(block);
+				break;
+			}
+		}
+	} else if ([targetObject isKindOfClass:[UIControl class]]) {
+		ActionBlock block = ^id {				
+			[targetObject sendActionsForControlEvents:UIControlEventTouchUpInside];
+			return @"sendActionsForControlEvents:";
+		};
+		actionBlock = Block_copy(block);
+	} else if ([targetObject isKindOfClass:[UIBarButtonItem class]]) {
+		UIBarButtonItem* barButtonItem = targetObject;
+		ActionBlock block = ^id {				
+			[barButtonItem.target performSelector:barButtonItem.action];
+			return NSStringFromSelector(barButtonItem.action);
+		};
+		actionBlock = Block_copy(block);			
+	}
+	return actionBlock;
 }
 
 -(NSArray*) get_targetStringAndBlocks:(id)currentObject {

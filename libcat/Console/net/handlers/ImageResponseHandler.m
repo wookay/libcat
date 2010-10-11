@@ -16,7 +16,7 @@
 #import "GeometryExt.h"
 #import "NSArrayExt.h"
 #import <QuartzCore/QuartzCore.h>
-
+#import "iPadExt.h"
 
 
 
@@ -69,11 +69,14 @@
 }
 
 -(UIImage*) obj_to_image:(id)obj {
-	UIView* view = (UIView*)obj;
-	UIGraphicsBeginImageContext(view.frame.size);
-	[view.layer renderInContext: UIGraphicsGetCurrentContext()];
-	UIImage* image = UIGraphicsGetImageFromCurrentImageContext();
-	UIGraphicsEndImageContext();	
+	UIImage* image = nil;
+	if ([obj isKindOfClass:[UIView class]]) {
+		UIView* view = (UIView*)obj;
+		UIGraphicsBeginImageContext(view.frame.size);
+		[view.layer renderInContext: UIGraphicsGetCurrentContext()];
+		image = UIGraphicsGetImageFromCurrentImageContext();
+		UIGraphicsEndImageContext();	
+	}
 	return image;
 }
 

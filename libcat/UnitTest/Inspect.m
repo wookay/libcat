@@ -96,7 +96,7 @@
 				return SWF(@"[%@]", [[myary lastObject] inspect]);
 				break;
 			default: {
-#define OVER_LINE_LIMIT 100
+#define OVER_LINE_LIMIT 80
 					int overLine = 0;
 					NSMutableArray* ary = [NSMutableArray array];
 					for (id obj in (NSArray*)anObject) {
@@ -109,7 +109,11 @@
 					if (OVER_LINE_LIMIT > overLine) {
 						return SWF(@"[%@]", [ary componentsJoinedByString:COMMA_SPACE]);			
 					} else {
-						return SWF(@"[\n%@\n]", [ary componentsJoinedByString:COMMA_LF]);			
+						NSMutableArray* indentedArray = [NSMutableArray array];
+						for (id obj in  ary) {
+							[indentedArray addObject:SWF(@"  %@", obj)];
+						}
+						return SWF(@"[\n%@\n]", [indentedArray componentsJoinedByString:COMMA_LF]);			
 					}
 				}
 				break;

@@ -23,3 +23,13 @@
 @interface UITableView (ValueToString)
 -(NSString*) contentOffsetToString ;
 @end
+
+
+
+@interface UINavigationItem (Inspect)
+-(NSString*) inspect ;
+@end
+
+@interface UIBarButtonItem (Inspect)
+-(NSString*) inspect ;
+@end

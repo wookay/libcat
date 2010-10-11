@@ -20,7 +20,8 @@
 
 -(void) start_servers ;
 -(void) stop_servers ;	
--(UIViewController*) topViewController ;
+-(UIViewController*) get_topViewController ;
+-(UIViewController*) get_rootViewController ;
 -(NSString*) getterChain:(id)command arg:(id)arg ;
 -(id) arg_to_proper_object:(id)arg ;
 -(NSString*) setterChain:(id)command arg:(id)arg ;

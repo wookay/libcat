@@ -2,6 +2,8 @@ libcat
 
 * Ext
 * Block
+* UIBlock
+* UnitTest
 * Console
  - Interactive Shell : libcat/Console/script/console.rb
  - Log Watcher : libcat/Console/script/log_watcher.rb

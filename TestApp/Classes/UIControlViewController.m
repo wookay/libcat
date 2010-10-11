@@ -8,6 +8,7 @@
 
 #import "UIControlViewController.h"
 #import "NSStringExt.h"
+#import "UIBarButtonItemBlock.h"
 
 @implementation UIControlViewController
 
@@ -48,8 +49,38 @@
 	
 	[upButton setTitle:NSLocalizedString(@"up", nil) forState:UIControlStateNormal];
 	[downButton setTitle:NSLocalizedString(@"down", nil) forState:UIControlStateNormal];
+
+	self.navigationController.toolbarHidden = false;		
+	
 }
 
+-(void) viewWillAppear:(BOOL)animated {
+	[self setToolbarItems:[NSArray arrayWithObjects:
+						   barbutton_item_style(NSLocalizedString(@"+ 2", nil), ^{
+								[self touchedUpButton:nil];
+								[self touchedUpButton:nil];
+							}, UIBarButtonItemStyleBordered),						   
+						   barbutton_fixed_space(10),
+						   barbutton_item(NSLocalizedString(@"- 2", nil), ^{
+								[self touchedDownButton:nil];
+								[self touchedDownButton:nil]; 
+							}),
+						   barbutton_flexible_space(0),
+						   barbutton_system(UIBarButtonSystemItemAdd, ^{
+								[self touchedUpButton:nil]; 
+							}),
+						   barbutton_fixed_space(15),
+						   barbutton_system_style(UIBarButtonSystemItemTrash, ^{
+								counterLabel.text = @"0";
+							}, UIBarButtonItemStylePlain),
+						   nil]];
+	[super viewWillAppear:animated];
+}
+
+-(void) viewWillDisappear:(BOOL)animated {
+	self.navigationController.toolbarHidden = true;
+	[super viewWillDisappear:animated];
+}
 
 /*
 // Override to allow orientations other than the default portrait orientation.

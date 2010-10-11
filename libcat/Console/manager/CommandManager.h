@@ -13,7 +13,7 @@ typedef id (^ActionBlock)() ;
 
 
 NSArray* array_prefix_index(NSArray* array) ;
-enum { LS_OBJECT, LS_VIEWCONTROLLERS, LS_TABLEVIEW, LS_SECTIONS, LS_VIEW, LS_VIEW_SUBVIEWS };
+enum { LS_OBJECT, LS_VIEWCONTROLLERS, LS_TABLEVIEW, LS_SECTIONS, LS_VIEW, LS_VIEW_SUBVIEWS, LS_TABBAR, LS_NAVIGATIONITEM, LS_NAVIGATIONCONTROLLER_TOOLBAR, LS_NAVIGATIONCONTROLLER_TOOLBAR_ITEMS, LS_TOOLBAR, LS_TOOLBAR_ITEMS };
 
 
 @interface CommandManager : NSObject {
@@ -27,4 +27,5 @@ enum { LS_OBJECT, LS_VIEWCONTROLLERS, LS_TABLEVIEW, LS_SECTIONS, LS_VIEW, LS_VIE
 -(id) commandNotFound ;
 -(NSArray*) array_ls:(id)currentObject arg:(id)arg ;
 -(NSArray*) get_targetStringAndBlocks:(id)currentObject ;
+-(id) get_targetObjectActionBlock:(id)targetObject ;
 @end
