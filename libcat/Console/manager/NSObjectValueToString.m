@@ -54,6 +54,15 @@
 
 
 
+@implementation NSArray (ValueToString)
+-(NSString*) countToString {
+	return SWF(@"%d", [self count]);
+}
+@end
+
+
+
+
 @implementation UINavigationItem (Inspect)
 -(NSString*) inspect {
 	return SWF(@"<UINavigationItem: %p; title = '%@'>", self, self.title);

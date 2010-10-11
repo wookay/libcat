@@ -17,8 +17,8 @@
 #import "objc/runtime.h"
 #import "NSObjectValueToString.h"
 #import "NSObjectSetValueFromString.h"
-
-//#import "TouchSynthesis.h"
+#import "Inspect.h"
+#import "NSIndexPathExt.h"
 
 
 // used also in console.rb
@@ -127,75 +127,187 @@
 	id target = currentTargetObject;
 	NSMutableArray* ary = [NSMutableArray array];
 	for (NSString* method in [command split:DOT]) {
+		if ([method isEmpty]) {
+			continue;
+		}
+		
 		SEL selector = NSSelectorFromString(method);
 		if ([target respondsToSelector:selector]) {
+			BOOL found = true;
 			NSMethodSignature* sig = [target methodSignatureForSelector:selector];
 			const char* returnType = [sig methodReturnType];
-			switch (*returnType) {
-				case _C_ID:
-					target = [target performSelector:selector];
-					[ary addObject:SWF(@"%@ => %@", method, target)];
+			switch ([sig numberOfArguments]) {
+#define ARGUMENT_COUNT_IS_ZERO	2
+#define ARGUMENT_COUNT_IS_ONE	3
+#define ARGUMENT_COUNT_IS_TWO	4
+				case ARGUMENT_COUNT_IS_ZERO:
+					switch (*returnType) {
+						case _C_ID:
+							target = [target performSelector:selector];
+							[ary addObject:SWF(@"%@ => %@", method, target)];
+							break;
+							
+						case _C_INT:
+						case _C_UINT:
+							[ary addObject:SWF(@"%@ => %d", method, [target performSelector:selector])];
+							break;
+
+						 case _C_VOID:
+							 [target performSelector:selector];
+							 break;
+									  
+						default:
+							log_info(@"zero *returnType %c", *returnType);
+							found = false;
+							break;
+					} // switch (*returnType)
 					break;
-				case _C_VOID: {
-						BOOL found = true;
-						NSMethodSignature* sig = [target methodSignatureForSelector:selector];
-						switch ([sig numberOfArguments]) {
-							case 2:
-								[target performSelector:selector];
+					
+				case ARGUMENT_COUNT_IS_ONE: {
+						const char* argType = [sig getArgumentTypeAtIndex:2];
+						switch (*argType) {
+							case _C_ID:
+								switch (*returnType) {
+									case _C_ID:
+										target = [target performSelector:selector withObject:arg];
+										[ary addObject:SWF(@"%@ => %@", method, target)];
+										break;
+										
+									case _C_INT:
+									case _C_UINT:
+										[ary addObject:SWF(@"%@ => %d", method, [target performSelector:selector withObject:arg])];
+										break;
+										 
+									 case _C_VOID:
+										 [target performSelector:selector withObject:arg];
+										 break;
+									 
+									default:
+										found = false;
+									 break;
+								} // switch(*returnType)
+								break;
+										 
+							case _C_INT:
+								 switch (*returnType) {
+									 case _C_ID:
+										 target = [target performSelector:selector withObject:(id)[arg intValue]];
+										 [ary addObject:SWF(@"%@ => %@", method, target)];
+										 break;
+										 
+									 case _C_INT:
+									 case _C_UINT:
+										 [ary addObject:SWF(@"%@ => %d", method, [target performSelector:selector withObject:(id)[arg intValue]])];
+										  break;
+										  
+									  case _C_VOID:
+										  [target performSelector:selector withObject:(id)[arg intValue]];
+										  break;
+									  
+										default:
+										 found = false;
+										  break;
+								  } // switch(*returnType)
+								  break;
+										
+							case _C_UINT:
+								switch (*returnType) {
+									case _C_ID:
+										target = [target performSelector:selector withObject:(id)[arg unsignedIntValue]];
+										[ary addObject:SWF(@"%@ => %@", method, target)];
+										break;
+										
+									case _C_INT:
+									case _C_UINT:
+										[ary addObject:SWF(@"%@ => %d", method, [target performSelector:selector withObject:(id)[arg unsignedIntValue]])];
+										break;
+										
+									case _C_VOID:
+										[target performSelector:selector withObject:(id)[arg unsignedIntValue]];
+										break;
+										
+									default:
+										found = false;
+										break;
+								} // switch(*returnType)
 								break;
 								
-							case 3: {
-									const char* argType = [sig getArgumentTypeAtIndex:2];
-									id argObj = nil;
-									switch (*argType) {
+							case _C_FLT: {
+									Method m = class_getInstanceMethod([target class], selector);
+									IMP imp = method_getImplementation(m);
+									switch (*returnType) {
 										case _C_ID:
-											argObj = arg;
-											[target performSelector:selector withObject:argObj];
+											target = ((id (*)(id, SEL, float))imp)(target, selector, [arg floatValue]);
+											[ary addObject:SWF(@"%@ => %@", method, target)];
 											break;
+											
 										case _C_INT:
-											argObj = (id)[arg intValue];
-											[target performSelector:selector withObject:argObj];
-											break;
-										case _C_FLT: {
-												Method m = class_getInstanceMethod([target class], selector);
-												IMP imp = method_getImplementation(m);
-												((id (*)(id, SEL, float))imp)(target, selector, [arg floatValue]);
+										case _C_UINT: {
+												int returnValue = ((int (*)(id, SEL, float))imp)(target, selector, [arg floatValue]);
+												[ary addObject:SWF(@"%@ => %d", method, returnValue)];
 											}
-											break;											
-										default:
+											 break;
+											 
+										 case _C_VOID:
+											((void (*)(id, SEL, float))imp)(target, selector, [arg floatValue]);
+											 break;
+											 
+										   default:
 											found = false;
-											break;
-									}
-								}
-								break;
+											 break;
+									} // switch(*returnType)
+								} // case _C_FLT
+								break;	
 								
 							default:
-								log_info(@"sig numberOfArguments %d", [sig numberOfArguments]);
 								found = false;
 								break;
-						}
-						if (found) {
-							[ary addObject:SWF(@"%@", NSStringFromSelector(selector))];
+						} // switch(*argType)
+					} // ARGUMENT_COUNT_IS_ONE
+					break;
+
+				case ARGUMENT_COUNT_IS_TWO: {
+						if ([method isEqualToString:@"tableView:cellForRowAtIndexPath:"]) {
+							int section = 0;
+							int row = 0;
+							if ([arg hasText:SPACE]) {
+								NSArray* pair = [arg split:SPACE];
+								section = [[pair objectAtFirst] to_int];
+								row = [[pair objectAtSecond] to_int];
+							} else {
+								row = [arg to_int];
+							}
+							NSIndexPath* indexPath = [NSIndexPath indexPathWithSection:section Row:row];
+							UITableView* tableView = nil;
+							if ([target respondsToSelector:@selector(tableView)]) {
+								tableView = [target performSelector:@selector(tableView)];
+							}
+							target = [target performSelector:selector withObject:tableView withObject:indexPath];
+							[ary addObject:SWF(@"%@ %@ => %@", method, arg, target)];	
 						} else {
-							[ary addObject:SWF(@"%@ => %@", method, [COMMANDMAN commandNotFound])];
+							found  = false;
 						}
-					}
+					} // ARGUMENT_COUNT_IS_TWO
 					break;
-				default: {
-					SEL toStringSelector = NSSelectorFromString(SWF(@"%@ToString", method));
-					if ([target respondsToSelector:toStringSelector]) {
-						target = [target performSelector:toStringSelector];
-						[ary addObject:SWF(@"%@ => %@", method, target)];
-					} else {
-						[ary addObject:SWF(@"%@ => %@", method, [COMMANDMAN commandNotFound])];
-					}
-				}
+					
+				default:
+					found = false;
 					break;
+			} // switch ([sig numberOfArguments])
+			if (found) {
+			} else {
+				[ary addObject:SWF(@"%@ => %@", method, [COMMANDMAN commandNotFound])];
 			}
 		} else {
-			[ary addObject:SWF(@"%@ => %@", method, [COMMANDMAN commandNotFound])];
+			SEL toStringSelector = NSSelectorFromString(SWF(@"%@ToString", method));
+			if ([target respondsToSelector:toStringSelector]) {
+				target = [target performSelector:toStringSelector];
+				[ary addObject:SWF(@"%@ => %@", method, target)];
+			} else {
+				[ary addObject:SWF(@"%@ => %@", method, [COMMANDMAN commandNotFound])];
+			}
 		}
-	}
+	} // for
 	return [ary join:LF];
 }
 

@@ -58,7 +58,7 @@ NSInteger sortByStringComparator(NSString* uno, NSString* dos, void* context) {
 	}
 }
 
--(BOOL) isNumberOrSpace {
+-(BOOL) isNumberHasSpace {
 	return [[self gsub:SPACE to:EMPTY_STRING] isNumber];
 }
 

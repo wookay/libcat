@@ -49,7 +49,7 @@
 			return;
 		}
 		
-		log_info(@"Echo server started on port %hu", [listenSocket localPort]);
+		//log_info(@"Logger server started on port %hu", [listenSocket localPort]);
 		isRunning = YES;
 	}	
 }

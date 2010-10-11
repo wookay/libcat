@@ -22,9 +22,13 @@
 #import "Inspect.h"
 #import "UnitTest.h"
 
+
+#define TOOLBAR_ITEMS_SECTION_INDEX -1
+
+
 NSArray* array_prefix_index(NSArray* array) {
 	return [array map_with_index:^id(id obj, int idx) { 
-		return SWF(@"[%d] %@", idx, obj); 
+		return SWF(@"[%d] %@", idx, [obj inspect]); 
 	}];
 }
 
@@ -54,11 +58,7 @@ NSArray* array_prefix_index(NSArray* array) {
 }
 
 -(id) command_pwd:(id)currentObject arg:(id)arg {
-	log_info(@"command_pwd1 %@", CONSOLEMAN.currentTargetObject);
-	
 	CONSOLEMAN.currentTargetObject = [CONSOLEMAN get_topViewController];	
-	log_info(@"command_pwd %@", currentObject);
-	log_info(@"command_pwd2 %@", CONSOLEMAN.currentTargetObject);
 	return SWF(@"%@", [CONSOLEMAN.currentTargetObject class]);
 }
 
@@ -126,6 +126,7 @@ NSArray* array_prefix_index(NSArray* array) {
 	return [ary join:LF];
 }
 
+
 -(NSString*) command_ls:(id)currentObject arg:(id)arg {
 	NSMutableArray* ary = [NSMutableArray array];
 	NSArray* arrayLS = [self array_ls:currentObject arg:arg];
@@ -170,13 +171,13 @@ NSArray* array_prefix_index(NSArray* array) {
 				[ary addObject:SWF(@"NAVIGATIONCONTROLLER_TOOLBAR: %@", [obj inspect])];				
 				break;								
 			case LS_NAVIGATIONCONTROLLER_TOOLBAR_ITEMS:
-				[ary addObject:SWF(@"NAVIGATIONCONTROLLER_TOOLBAR_ITEMS: %@", [obj inspect])];				
+				[ary addObject:SWF(@"NAVIGATIONCONTROLLER_TOOLBAR_ITEMS: %d %@", TOOLBAR_ITEMS_SECTION_INDEX, [array_prefix_index(obj) inspect])];				
 				break;												
 			case LS_TOOLBAR:
 				[ary addObject:SWF(@"TOOLBAR: %@", [obj inspect])];				
 				break;								
 			case LS_TOOLBAR_ITEMS:
-				[ary addObject:SWF(@"TOOLBAR_ITEMS: %@", [obj inspect])];				
+				[ary addObject:SWF(@"TOOLBAR_ITEMS: %d %@", TOOLBAR_ITEMS_SECTION_INDEX, [array_prefix_index(obj) inspect])];				
 				break;																
 			default:
 				break;
@@ -184,6 +185,7 @@ NSArray* array_prefix_index(NSArray* array) {
 	}
 	return [ary join:LF];
 }
+
 
 -(NSArray*) array_ls:(id)currentObject arg:(id)arg {
 	if ([currentObject isKindOfClass:[UITabBarController class]]) {
@@ -300,7 +302,7 @@ NSArray* array_prefix_index(NSArray* array) {
 		id obj = (id)address;
 		changeObject = obj;
 		actionBlock = [self get_targetObjectActionBlock:obj];
-	} else if ([arg isNumberOrSpace]) {
+	} else if ([arg isNumberHasSpace]) {
 		BOOL found = false;
 		int section = 0;
 		int row = 0;
@@ -311,30 +313,75 @@ NSArray* array_prefix_index(NSArray* array) {
 		} else {
 			row = [arg to_int];
 		}
-		
-		if ([currentObject isKindOfClass:[UITabBarController class]]) {
-			UITabBarController* tabBarController = currentObject;
-			if (row < tabBarController.viewControllers.count) {
-				UIViewController* controller = [tabBarController.viewControllers objectAtIndex:row];
-				changeObject = controller;
-				found = true;
-				ActionBlock block = ^id {
-					tabBarController.selectedIndex = row;
-					return @"selectedIndex";
-				};
-				actionBlock = Block_copy(block);
-			}			
-		} else if ([currentObject isKindOfClass:[UINavigationController class]]) {
-			UINavigationController* navigationController = currentObject;
-			if (row < navigationController.viewControllers.count) {
-				UIViewController* controller = [navigationController.viewControllers objectAtIndex:row];
-				changeObject = controller;
-				found = true;
+		if (TOOLBAR_ITEMS_SECTION_INDEX == section) {
+			if ([currentObject isKindOfClass:[UIViewController class]]) {
+				UIViewController* controller = currentObject;
+				if (! controller.navigationController.toolbarHidden &&  nil != controller.navigationController.toolbar) {
+					NSArray* items = controller.navigationController.toolbar.items;
+					if (items.count > row) {
+						UIBarButtonItem* barButtonItem = [items objectAtIndex:row];
+						changeObject = barButtonItem;
+						found = true;
+						ActionBlock block = ^id {
+							[barButtonItem.target performSelector:barButtonItem.action];
+							return NSStringFromSelector(barButtonItem.action);
+						};
+						actionBlock = Block_copy(block);
+					}
+				}
 			}
-		} else if ([currentObject isKindOfClass:[UIViewController class]]) {
-			UIViewController* controller = currentObject;
-			if ([controller.view isKindOfClass:[UITableView class]]) {
-				UITableView* tableView = (UITableView*)controller.view;
+		} else { // TOOLBAR_ITEMS_SECTION_INDEX != section
+			if ([currentObject isKindOfClass:[UITabBarController class]]) {
+				UITabBarController* tabBarController = currentObject;
+				if (row < tabBarController.viewControllers.count) {
+					UIViewController* controller = [tabBarController.viewControllers objectAtIndex:row];
+					changeObject = controller;
+					found = true;
+					ActionBlock block = ^id {
+						tabBarController.selectedIndex = row;
+						return @"selectedIndex";
+					};
+					actionBlock = Block_copy(block);
+				}			
+			} else if ([currentObject isKindOfClass:[UINavigationController class]]) {
+				UINavigationController* navigationController = currentObject;
+				if (row < navigationController.viewControllers.count) {
+					UIViewController* controller = [navigationController.viewControllers objectAtIndex:row];
+					changeObject = controller;
+					found = true;
+				}
+			} else if ([currentObject isKindOfClass:[UIViewController class]]) {
+				UIViewController* controller = currentObject;
+				if ([controller.view isKindOfClass:[UITableView class]]) {
+					UITableView* tableView = (UITableView*)controller.view;
+					if (section < [tableView numberOfSections] && row < [tableView numberOfRowsInSection:section]) {
+						NSIndexPath* indexPath = [NSIndexPath indexPathWithSection:section Row:row];
+						UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+						changeObject = cell;
+						found = true;
+						ActionBlock block = ^id {
+							[tableView.delegate tableView:tableView didSelectRowAtIndexPath:indexPath];
+							return @"tableView:didSelectRowAtIndexPath:";
+						};
+						actionBlock = Block_copy(block);
+					}				
+				} else {
+					if (row < controller.view.subviews.count) {
+						UIView* subview = [[controller.view.subviews reverse] objectAtIndex:row];
+						changeObject = subview;
+						found = true;
+						
+						if ([subview isKindOfClass:[UIControl class]]) {
+							ActionBlock block = ^id {				
+								[(UIControl*)subview sendActionsForControlEvents:UIControlEventTouchUpInside];
+								return @"sendActionsForControlEvents:";
+							};
+							actionBlock = Block_copy(block);
+						}					
+					}
+				}
+			} else if ([currentObject isKindOfClass:[UITableView class]]) {
+				UITableView* tableView = currentObject;
 				if (section < [tableView numberOfSections] && row < [tableView numberOfRowsInSection:section]) {
 					NSIndexPath* indexPath = [NSIndexPath indexPathWithSection:section Row:row];
 					UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
@@ -344,11 +391,12 @@ NSArray* array_prefix_index(NSArray* array) {
 						[tableView.delegate tableView:tableView didSelectRowAtIndexPath:indexPath];
 						return @"tableView:didSelectRowAtIndexPath:";
 					};
-					actionBlock = Block_copy(block);
-				}				
-			} else {
-				if (row < controller.view.subviews.count) {
-					UIView* subview = [[controller.view.subviews reverse] objectAtIndex:row];
+					actionBlock = Block_copy(block);				
+				}
+			} else if ([currentObject isKindOfClass:[UIView class]]) {
+				UIView* view = currentObject;
+				if (row < view.subviews.count) {
+					UIView* subview = [[view.subviews reverse] objectAtIndex:row];				
 					changeObject = subview;
 					found = true;
 					
@@ -358,38 +406,10 @@ NSArray* array_prefix_index(NSArray* array) {
 							return @"sendActionsForControlEvents:";
 						};
 						actionBlock = Block_copy(block);
-					}					
+					}
 				}
 			}
-		} else if ([currentObject isKindOfClass:[UITableView class]]) {
-			UITableView* tableView = currentObject;
-			if (section < [tableView numberOfSections] && row < [tableView numberOfRowsInSection:section]) {
-				NSIndexPath* indexPath = [NSIndexPath indexPathWithSection:section Row:row];
-				UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
-				changeObject = cell;
-				found = true;
-				ActionBlock block = ^id {
-					[tableView.delegate tableView:tableView didSelectRowAtIndexPath:indexPath];
-					return @"tableView:didSelectRowAtIndexPath:";
-				};
-				actionBlock = Block_copy(block);				
-			}
-		} else if ([currentObject isKindOfClass:[UIView class]]) {
-			UIView* view = currentObject;
-			if (row < view.subviews.count) {
-				UIView* subview = [[view.subviews reverse] objectAtIndex:row];				
-				changeObject = subview;
-				found = true;
-				
-				if ([subview isKindOfClass:[UIControl class]]) {
-					ActionBlock block = ^id {				
-						[(UIControl*)subview sendActionsForControlEvents:UIControlEventTouchUpInside];
-						return @"sendActionsForControlEvents:";
-					};
-					actionBlock = Block_copy(block);
-				}
-			}
-		}
+		} // TOOLBAR_ITEMS_SECTION_INDEX != section
 		if (! found) {
 			return PAIR(NSLocalizedString(@"Not Found", nil), nil); 
 		}

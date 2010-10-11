@@ -24,15 +24,17 @@ PROMPT = '> '
 
 HELP = <<EOF
 ls			: list current target object (ㄹ)
-cd			: change target object (ㄷ)
+cd TARGET		: change target object (ㄷ)
   [ cd 0 ]		: to change target object at index as listed
+  [ cd Title ]		: to change target object label as Title
   [ cd 0x6067490 ]	: to change target object at memory address
-touch    		: didSelectRowAtIndexPath (t, ㅌ)
+touch TARGET   		: touch target object (t, ㅌ)
 back    		: popViewControllerAnimated (b, ㅂ)
 rm N			: remove from superview
 property		: property getter (text, frame ...)
 property = value	: property settter
 open			: open safari to display target object view
+sleep N			: sleep
 clear			: clear history
 about			: about
 quit			: quit (q)
@@ -44,11 +46,15 @@ libcat Console #{CONSOLE_VERSION} by wookay
 EOF
 
 class Console
+  def comment_out line
+    line.gsub(/#(.*)$/, '')
+  end
+  def input_commands lines
+    lines.split(LF).each { |line| input comment_out(line) }
+  end
   def input text
-      puts "#{@shell.options[:prompt]}#{text}"
-      command, arg = command_arg_from_input text
-      response = console_request command, arg
-      puts response.body
+    puts "#{@shell.options[:prompt]}#{text}"
+    @proc_block.call @shell.options, text
   end
   def command_arg_from_input text
     text_stripped = text.strip
@@ -83,25 +89,7 @@ class Console
   end
 
   def initialize
-    @shell = Shell.new :prompt => PROMPT
-  end
-
-  def request_prompt
-    response = console_request 'pwd', nil
-    "#{response.body}#{PROMPT}"
-  end
-
-
-  def update_prompt
-    @shell.options[:prompt] = request_prompt
-  end
-
-  def command_help
-    @proc_block.call(@shell.options, 'help')
-  end
-
-  def run prompt
-    @shell.options[:prompt] = prompt
+    @shell = Shell.new :prompt => PROMPT, :print => true
     @proc_block = proc do |env, text|
       case text
       when ''
@@ -115,6 +103,8 @@ class Console
            puts ABOUT
         when 'open'
            `open #{SERVER_URL}`
+        when 'sleep'
+          sleep arg.to_f
         when 'touch'
           puts response.body
           if /^touch / =~ response.body
@@ -142,6 +132,24 @@ class Console
         end
       end
     end
+  end
+
+  def request_prompt
+    response = console_request 'pwd', nil
+    "#{response.body}#{PROMPT}"
+  end
+
+
+  def update_prompt
+    @shell.options[:prompt] = request_prompt
+  end
+
+  def command_help
+    @proc_block.call(@shell.options, 'help')
+  end
+
+  def run prompt
+    @shell.options[:prompt] = prompt
     @shell.delegate &@proc_block
 
    command_help

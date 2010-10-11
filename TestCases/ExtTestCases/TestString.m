@@ -25,7 +25,11 @@
 
 -(void) test_isNumber {
 	assert_true([@"0" isNumber]);
+	assert_true([@" 0" isNumber]);
+	assert_true([@"-1" isNumber]);
 	assert_false([@"a" isNumber]);
+	assert_false([@"1 2" isNumber]);
+	assert_true([@"1 2" isNumberHasSpace]);
 }
 
 -(void) test_SWF {

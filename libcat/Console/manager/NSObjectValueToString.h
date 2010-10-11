@@ -25,6 +25,10 @@
 @end
 
 
+@interface NSArray (ValueToString)
+-(NSString*) countToString ;
+@end
+
 
 @interface UINavigationItem (Inspect)
 -(NSString*) inspect ;
