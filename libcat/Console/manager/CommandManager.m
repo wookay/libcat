@@ -21,7 +21,7 @@
 #import "NSObjectExt.h"
 #import "Inspect.h"
 #import "UnitTest.h"
-
+#import "NewObjectManager.h"
 
 #define TOOLBAR_ITEMS_SECTION_INDEX -1
 
@@ -49,6 +49,7 @@ NSArray* array_prefix_index(NSArray* array) {
 			@"touch", @"command_touch:arg:",
 			@"back", @"command_back:arg:",
 			@"rm", @"command_rm:arg:",
+			@"new", @"command_new:arg:",
 			@"completion", @"command_completion:arg:",
 			nil];
 }
@@ -62,18 +63,20 @@ NSArray* array_prefix_index(NSArray* array) {
 	return SWF(@"%@", [CONSOLEMAN.currentTargetObject class]);
 }
 
+-(NSString*) command_new:(id)currentObject arg:(id)arg {
+	return [NEWOBJECTMAN makeNewOne:arg];
+}
+
 -(NSString*) command_cd:(id)currentObject arg:(id)arg {
 	NSArray* pair = [self findTargetObject:currentObject arg:arg];
 	id response = [pair objectAtFirst];
 	id changeObject = [pair objectAtSecond];
 	if ([changeObject isNotNull]) {
 		CONSOLEMAN.currentTargetObject = changeObject;
-	} else {
-		if ([arg isEmpty]) {
-			changeObject = [CONSOLEMAN get_topViewController];
-			CONSOLEMAN.currentTargetObject = changeObject;
-			response = SWF(@"cd %@", [changeObject class]);
-		}
+	} else if (nil == arg) {
+		changeObject = [CONSOLEMAN get_topViewController];
+		CONSOLEMAN.currentTargetObject = changeObject;
+		response = SWF(@"cd %@", [changeObject class]);
 	}
 	return response;
 }
@@ -82,11 +85,13 @@ NSArray* array_prefix_index(NSArray* array) {
 -(NSString*) command_touch:(id)currentObject arg:(id)arg {
 	NSArray* trio = [self findTargetObject:currentObject arg:arg];
 	id actionBlockObj = [trio objectAtThird];
-	if ([actionBlockObj isNotNull]) {
-		ActionBlock actionBlock = (ActionBlock)actionBlockObj;
-		NSString* methodStr = actionBlock();
-		CONSOLEMAN.currentTargetObject = nil;
-		return SWF(@"touch %@", methodStr);
+	if (nil != actionBlockObj && [actionBlockObj isNotNull]) {
+		if ([actionBlockObj isKindOfClass:NSClassFromString(@"__NSMallocBlock__")]) {
+			ActionBlock actionBlock = (ActionBlock)actionBlockObj;
+			NSString* methodStr = actionBlock();
+			CONSOLEMAN.currentTargetObject = nil;
+			return SWF(@"touch %@", methodStr);
+		}
 	}
 	return NSLocalizedString(@"Not Found", nil);
 }
@@ -110,7 +115,7 @@ NSArray* array_prefix_index(NSArray* array) {
 		if ([controller.parentViewController isKindOfClass:[UINavigationController class]]) {
 			if (controller.navigationController.viewControllers.count > 1) {
 				[controller.navigationController popViewControllerAnimated:true];
-				return NSLocalizedString(@"back popViewControllerAnimated:", nil);
+				return SWF(@"back popViewControllerAnimated: %d", true);
 			}
 		}
 	}
@@ -270,7 +275,7 @@ NSArray* array_prefix_index(NSArray* array) {
 
 -(NSArray*) findTargetObject:(id)currentObject arg:(id)arg {
 	id changeObject = nil;
-	id actionBlock = [NSNull null];
+	id actionBlock = nil;
 	if ([SLASH isEqualToString:arg]) {
 		changeObject = [CONSOLEMAN get_rootViewController];
 	} else if ([DOT isEqualToString:arg]) {
@@ -297,6 +302,9 @@ NSArray* array_prefix_index(NSArray* array) {
 				}
 			}
 		}
+	} else if ([arg hasPrefix:@"$"]) {
+		id obj = [CONSOLEMAN get_argObject:arg];
+		changeObject = obj;
 	} else if ([arg hasPrefix:@"0x"]) {
 		size_t address = [arg to_size_t];
 		id obj = (id)address;
@@ -499,37 +507,18 @@ NSArray* array_prefix_index(NSArray* array) {
 					NSString* titleLabelText = [[subview performSelector:@selector(titleLabel)] text];
 					if (nil != titleLabelText) {
 						[targetStrings setObject:subview forKey:titleLabelText];
+						ActionBlock block = ^id {
+							[(UIControl*)subview sendActionsForControlEvents:UIControlEventTouchUpInside];
+							return SWF(@"sendActionsForControlEvents: %@", @"UIControlEventTouchUpInside");
+						};
+						[targetBlocks setObject:Block_copy(block) forKey:titleLabelText];						
 					}
-					ActionBlock block = ^id {
-						[(UIControl*)subview sendActionsForControlEvents:UIControlEventTouchUpInside];
-						return SWF(@"sendActionsForControlEvents: %@", @"UIControlEventTouchUpInside");
-					};
-					[targetBlocks setObject:Block_copy(block) forKey:titleLabelText];
 				}
 			}
 		}
 	}
 	return PAIR(targetStrings, targetBlocks);
 }
-
-//-(NSString*) command_touch:(id)currentObject arg:(id)arg {
-//	id changeObject = nil;
-//	if ([arg isEmpty]) {
-//		changeObject = currentObject;
-//	} else {
-//		NSArray* pair = [self changeCurrentObject:currentObject arg:arg];
-//		changeObject = [pair objectAtSecond];
-//	}	
-//	
-//	if ((nil != changeObject) && [changeObject respondsToSelector:@selector(touchUpInside)]) {
-//		CONSOLEMAN.currentObject = changeObject;
-//		[CONSOLEMAN.currentObject performSelectorOnMainThread:@selector(touchUpInside) withObject:nil waitUntilDone:NO];
-//		CONSOLEMAN.currentObject = nil;
-//		return NSLocalizedString(@"touchUpInside", nil);
-//	} else {
-//		return NSLocalizedString(@"Not Found", nil);
-//	}
-//}
 
 + (CommandManager*) sharedManager {
 	static CommandManager*	manager = nil;

@@ -19,7 +19,8 @@
 #import "NSObjectSetValueFromString.h"
 #import "Inspect.h"
 #import "NSIndexPathExt.h"
-
+#import "NewObjectManager.h"
+#import "NSObjectExt.h"
 
 // used also in console.rb
 #define CONSOLE_SERVER_PORT 8080
@@ -28,6 +29,7 @@
 
 @implementation ConsoleManager
 @synthesize currentTargetObject;
+
 -(void) start_servers {
 	[[HTTPServer sharedServer] startWithPort:CONSOLE_SERVER_PORT];
 	[[LoggerServer sharedServer] startWithPort:LOGGER_SERVER_PORT];
@@ -66,6 +68,7 @@
 	NSMutableArray* ary = [NSMutableArray array];
 	id target = currentTargetObject;
 	NSString* lastMethod = nil;
+	
 	NSArray* commands = [command split:DOT];
 	if (commands.count > 1) {
 		lastMethod = [commands objectAtLast];
@@ -100,26 +103,31 @@
 		return [COMMANDMAN commandNotFound];
 	}
 
-	NSString* lastMethodUppercased = SWF(@"set%@:", [lastMethod uppercaseFirstCharacter]);
-	SEL setterSelector = NSSelectorFromString(lastMethodUppercased);
-	if ([target respondsToSelector:setterSelector]) {		
-		id obj = [self arg_to_proper_object:arg];
-		NSString* setValueFromString = SWF(@"set%@FromString:", [lastMethod uppercaseFirstCharacter]);
-		SEL fromStringSelector = NSSelectorFromString(setValueFromString);
-		if ([target respondsToSelector:fromStringSelector]) {
-			[target performSelector:fromStringSelector withObject:obj];
-			[ary addObject:SWF(@"%@ = %@", lastMethod, obj)];							
-		} else {
-			[ary addObject:SWF(@"[%@ %@%@] %@", [target class], setValueFromString, obj, NSLocalizedString(@"failed", nil))];
-		}
+	id obj = [self arg_to_proper_object:arg];
+	if ([lastMethod hasPrefix:NEW_OBJECT_PREFIX]) {
+		[NEWOBJECTMAN setNewObject:obj forKey:lastMethod];
+		[ary addObject:SWF(@"%@ = %@", lastMethod, obj)];							
 	} else {
-		[ary addObject:SWF(@"%@ %@", lastMethodUppercased, [COMMANDMAN commandNotFound])];
+		NSString* lastMethodUppercased = SWF(@"set%@:", [lastMethod uppercaseFirstCharacter]);
+		SEL setterSelector = NSSelectorFromString(lastMethodUppercased);
+		if ([target respondsToSelector:setterSelector]) {		
+			NSString* setValueFromString = SWF(@"set%@FromString:", [lastMethod uppercaseFirstCharacter]);
+			SEL fromStringSelector = NSSelectorFromString(setValueFromString);
+			if ([target respondsToSelector:fromStringSelector]) {
+				[target performSelector:fromStringSelector withObject:obj];
+				[ary addObject:SWF(@"%@ = %@", lastMethod, obj)];							
+			} else {
+				[ary addObject:SWF(@"[%@ %@%@] %@", [target class], setValueFromString, obj, NSLocalizedString(@"failed", nil))];
+			}
+		} else {
+			[ary addObject:SWF(@"%@ %@", lastMethodUppercased, [COMMANDMAN commandNotFound])];
+		}
 	}
 	return [ary join:LF];
 }
 
 -(id) arg_to_proper_object:(id)arg {
-	NSString* obj = [[[arg strip] slice:1 backward:-1] strip];
+	id obj = [self get_argObject:[[[arg strip] slice:1 backward:-1] strip]];
 	return obj;
 }
 
@@ -140,10 +148,13 @@
 #define ARGUMENT_COUNT_IS_ZERO	2
 #define ARGUMENT_COUNT_IS_ONE	3
 #define ARGUMENT_COUNT_IS_TWO	4
+#define ARGUMENT_INDEX_ONE 2
+#define ARGUMENT_INDEX_TWO 3
 				case ARGUMENT_COUNT_IS_ZERO:
 					switch (*returnType) {
 						case _C_ID:
 							target = [target performSelector:selector];
+							[NEWOBJECTMAN updateNewOne:target];
 							[ary addObject:SWF(@"%@ => %@", method, target)];
 							break;
 							
@@ -164,22 +175,24 @@
 					break;
 					
 				case ARGUMENT_COUNT_IS_ONE: {
-						const char* argType = [sig getArgumentTypeAtIndex:2];
+						id argObj = [self get_argObject:arg];
+						const char* argType = [sig getArgumentTypeAtIndex:ARGUMENT_INDEX_ONE];
 						switch (*argType) {
 							case _C_ID:
 								switch (*returnType) {
 									case _C_ID:
-										target = [target performSelector:selector withObject:arg];
+										target = [target performSelector:selector withObject:argObj];
+										[NEWOBJECTMAN updateNewOne:target];
 										[ary addObject:SWF(@"%@ => %@", method, target)];
 										break;
 										
 									case _C_INT:
 									case _C_UINT:
-										[ary addObject:SWF(@"%@ => %d", method, [target performSelector:selector withObject:arg])];
+										[ary addObject:SWF(@"%@ => %d", method, [target performSelector:selector withObject:argObj])];
 										break;
 										 
 									 case _C_VOID:
-										 [target performSelector:selector withObject:arg];
+										 [target performSelector:selector withObject:argObj];
 										 break;
 									 
 									default:
@@ -192,6 +205,7 @@
 								 switch (*returnType) {
 									 case _C_ID:
 										 target = [target performSelector:selector withObject:(id)[arg intValue]];
+										 [NEWOBJECTMAN updateNewOne:target];
 										 [ary addObject:SWF(@"%@ => %@", method, target)];
 										 break;
 										 
@@ -214,6 +228,7 @@
 								switch (*returnType) {
 									case _C_ID:
 										target = [target performSelector:selector withObject:(id)[arg unsignedIntValue]];
+										[NEWOBJECTMAN updateNewOne:target];
 										[ary addObject:SWF(@"%@ => %@", method, target)];
 										break;
 										
@@ -238,6 +253,7 @@
 									switch (*returnType) {
 										case _C_ID:
 											target = ((id (*)(id, SEL, float))imp)(target, selector, [arg floatValue]);
+											[NEWOBJECTMAN updateNewOne:target];
 											[ary addObject:SWF(@"%@ => %@", method, target)];
 											break;
 											
@@ -283,9 +299,19 @@
 								tableView = [target performSelector:@selector(tableView)];
 							}
 							target = [target performSelector:selector withObject:tableView withObject:indexPath];
+							[NEWOBJECTMAN updateNewOne:target];
 							[ary addObject:SWF(@"%@ %@ => %@", method, arg, target)];	
 						} else {
-							found  = false;
+							NSArray* pair = [arg split:SPACE];
+							id objOne = [pair objectAtFirst];
+							id objTwo = [pair objectAtSecond];
+							const char* argTypeOne = [sig getArgumentTypeAtIndex:ARGUMENT_INDEX_ONE];
+							const char* argTypeTwo = [sig getArgumentTypeAtIndex:ARGUMENT_INDEX_TWO];
+							if (_C_ID == *argTypeOne && _C_UINT == *argTypeTwo) {
+								[target performSelector:selector withObject:objOne withObject:(id)[objTwo intValue]];	
+							} else {
+								found  = false;
+							}
 						}
 					} // ARGUMENT_COUNT_IS_TWO
 					break;
@@ -302,9 +328,22 @@
 			SEL toStringSelector = NSSelectorFromString(SWF(@"%@ToString", method));
 			if ([target respondsToSelector:toStringSelector]) {
 				target = [target performSelector:toStringSelector];
+				[NEWOBJECTMAN updateNewOne:target];
 				[ary addObject:SWF(@"%@ => %@", method, target)];
 			} else {
-				[ary addObject:SWF(@"%@ => %@", method, [COMMANDMAN commandNotFound])];
+				NSString* newArg = nil;
+				if (nil == arg) {
+					newArg = method;
+				} else {
+					newArg = SWF(@"%@ %@", method, arg);
+				}
+				NSArray* pair = [COMMANDMAN findTargetObject:[self currentTargetObjectOrTopViewController] arg:newArg];
+				id obj = [pair objectAtSecond];
+				if ([obj isNotNull]) {
+					[ary addObject:SWF(@"%@", obj)];
+				} else {
+					[ary addObject:SWF(@"%@ => %@", method, [COMMANDMAN commandNotFound])];
+				}
 			}
 		}
 	} // for
@@ -344,6 +383,30 @@
 	}
 }
 
+-(id) get_argObject:(NSString*)arg {
+	BOOL foundNewObject = false;
+	NSMutableArray* newObjectArgs = [NSMutableArray array];
+	for (NSString* one in [arg split:SPACE]) {
+		if ([one hasPrefix:NEW_OBJECT_PREFIX]) {
+			id obj = [NEWOBJECTMAN newObjectForKey:one];
+			if (nil != obj) {
+				foundNewObject = true;
+				[newObjectArgs addObject:obj];
+			}
+		} else {
+			[newObjectArgs addObject:one];
+		}
+	}
+	if (foundNewObject) {
+		if (1 == newObjectArgs.count) {
+			return [newObjectArgs objectAtFirst];
+		} else {
+			return newObjectArgs;
+		}
+	} else {
+		return arg;
+	}
+}
 
 -(id) input:(NSString*)input {
 	NSRange commandRange = [input rangeOfString:SPACE];

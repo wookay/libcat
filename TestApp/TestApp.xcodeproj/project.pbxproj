@@ -41,6 +41,10 @@
 		DA44B0131261FFBF000F7374 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DA44B0121261FFBF000F7374 /* AppDelegate.m */; };
 		DAA63F681261AC140010F870 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAA63F601261AC140010F870 /* InfoPlist.strings */; };
 		DAA63F691261AC140010F870 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAA63F621261AC140010F870 /* Localizable.strings */; };
+		DAC7AE461263210F0073BED1 /* TestObject.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC7AE451263210F0073BED1 /* TestObject.m */; };
+		DAC7AE471263210F0073BED1 /* TestObject.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC7AE451263210F0073BED1 /* TestObject.m */; };
+		DAC7AE68126324F70073BED1 /* NewObjectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC7AE67126324F70073BED1 /* NewObjectManager.m */; };
+		DAC7AE69126324F70073BED1 /* NewObjectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC7AE67126324F70073BED1 /* NewObjectManager.m */; };
 		DACAAFA712629000006DA76D /* Async.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAAF4312629000006DA76D /* Async.m */; };
 		DACAAFA812629000006DA76D /* NSArrayBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAAF4512629000006DA76D /* NSArrayBlock.m */; };
 		DACAAFA912629000006DA76D /* NSDictionaryBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAAF4712629000006DA76D /* NSDictionaryBlock.m */; };
@@ -188,6 +192,9 @@
 		DAA63F651261AC140010F870 /* Korean */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Korean; path = Korean.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DAA63F661261AC140010F870 /* Spanish */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Spanish; path = Spanish.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DAA63F671261AC140010F870 /* Spanish */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Spanish; path = Spanish.lproj/Localizable.strings; sourceTree = "<group>"; };
+		DAC7AE451263210F0073BED1 /* TestObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestObject.m; sourceTree = "<group>"; };
+		DAC7AE66126324F70073BED1 /* NewObjectManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewObjectManager.h; sourceTree = "<group>"; };
+		DAC7AE67126324F70073BED1 /* NewObjectManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewObjectManager.m; sourceTree = "<group>"; };
 		DACAAF4212629000006DA76D /* Async.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Async.h; sourceTree = "<group>"; };
 		DACAAF4312629000006DA76D /* Async.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Async.m; sourceTree = "<group>"; };
 		DACAAF4412629000006DA76D /* NSArrayBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSArrayBlock.h; sourceTree = "<group>"; };
@@ -528,6 +535,8 @@
 				DACAAF5712629000006DA76D /* CommandManager.m */,
 				DACAAF5812629000006DA76D /* ConsoleManager.h */,
 				DACAAF5912629000006DA76D /* ConsoleManager.m */,
+				DAC7AE66126324F70073BED1 /* NewObjectManager.h */,
+				DAC7AE67126324F70073BED1 /* NewObjectManager.m */,
 				DACAAF5A12629000006DA76D /* NSObjectSetValueFromString.h */,
 				DACAAF5B12629000006DA76D /* NSObjectSetValueFromString.m */,
 				DACAAF5C12629000006DA76D /* NSObjectValueToString.h */,
@@ -686,6 +695,7 @@
 				DACAB01412629054006DA76D /* TestDictionary.m */,
 				DACAB01512629054006DA76D /* TestNumber.m */,
 				DACAB01612629054006DA76D /* TestString.m */,
+				DAC7AE451263210F0073BED1 /* TestObject.m */,
 			);
 			path = ExtTestCases;
 			sourceTree = "<group>";
@@ -861,6 +871,8 @@
 				DACAB02312629054006DA76D /* TestDictionary.m in Sources */,
 				DACAB02412629054006DA76D /* TestNumber.m in Sources */,
 				DACAB02512629054006DA76D /* TestString.m in Sources */,
+				DAC7AE471263210F0073BED1 /* TestObject.m in Sources */,
+				DAC7AE69126324F70073BED1 /* NewObjectManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -928,6 +940,8 @@
 				DACAB03112629054006DA76D /* TestDictionary.m in Sources */,
 				DACAB03212629054006DA76D /* TestNumber.m in Sources */,
 				DACAB03312629054006DA76D /* TestString.m in Sources */,
+				DAC7AE461263210F0073BED1 /* TestObject.m in Sources */,
+				DAC7AE68126324F70073BED1 /* NewObjectManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -14,6 +14,8 @@
 #import "NSStringExt.h"
 #import "GeometryExt.h"
 #import "NSArrayExt.h"
+#import "NSObjectExt.h"
+#import "Inspect.h"
 
 @implementation ConsoleResponseHandler
 
@@ -40,8 +42,15 @@
 #define SLASH_CONSOLE_SLASH_LENGTH 9	//	/console/
 	if (urlPath.length > SLASH_CONSOLE_SLASH_LENGTH) {
 		NSString* command = [[url path] slice:[@"/console/" length] backward:-1];
-		NSString* arg = [[[url query] slice:[@"arg=" length] backward:-1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-		return PAIR(command, arg);		
+		id arg = nil;
+		NSString* query = [url query];
+		if ([query isNotEmpty]) {
+			NSString* argOne = [[query slice:[@"arg=" length] backward:-1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+			if (0 < [argOne length]) {
+				arg = argOne;
+			}
+		}
+		return PAIR(command, (nil == arg) ? [NSNull null] : arg);		
 	} else {
 		return PAIR(nil, nil);
 	}
@@ -70,7 +79,7 @@
 	NSArray* pair = [self url_to_console_input];
 	NSString* command = [pair objectAtFirst];
 	id arg = [pair objectAtSecond];
-	id output = [CONSOLEMAN input:command arg:arg];
+	id output = [CONSOLEMAN input:command arg:[arg isNull] ? nil : arg];
 	NSData* fileData = [output to_data];
 	
 	CFHTTPMessageRef response =

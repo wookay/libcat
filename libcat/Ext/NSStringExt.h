@@ -31,6 +31,7 @@
 #define MINUS			 @"-"
 #define QUESTION_MARK    @"?"
 #define EXCLAMATION_MARK @"!"
+#define DOLLAR			 @"$"
 #define	LESS_THAN        @"<"
 #define	GREATER_THAN     @">"
 #define OPENING_BRACE	 @"{"

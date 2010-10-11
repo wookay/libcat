@@ -33,6 +33,7 @@ back    		: popViewControllerAnimated (b, ㅂ)
 rm N			: remove from superview
 property		: property getter (text, frame ...)
 property = value	: property settter
+new Class		: NSClassFromString ($)
 open			: open safari to display target object view
 sleep N			: sleep
 clear			: clear history
@@ -75,6 +76,7 @@ class Console
     'ㅂ' => 'back',
     'ㄷ' => 'cd',
     'ㄹ' => 'ls',
+    '$' => 'new',
     }
     aliases[command_str] or command_str 
   end
@@ -116,12 +118,13 @@ class Console
           end
         when 'back'
           puts response.body
-          if /^back / =~ response.body
+          if /^#{command} / =~ response.body
             update_prompt
           end
         when 'cd', 'rm'
-          if /^cd / =~ response.body
-            prompt = response.body['cd '.size..-1]
+          matcher = 'rm' == command ? 'cd' : command
+          if /^#{matcher} / =~ response.body
+            prompt = response.body["#{matcher} ".size..-1]
             @shell.options[:prompt] = "#{prompt}#{PROMPT}"
           else
             puts response.body
@@ -140,6 +143,7 @@ class Console
       prompt = Timeout::timeout 1 do
         request_prompt
       end
+      @shell.options[:prompt] = prompt
     rescue Timeout::Error
       puts "Cannot connect to console server #{CONSOLE_SERVER_ADDRESS}:#{CONSOLE_SERVER_PORT}"
       puts "Please run TestApp"
@@ -162,18 +166,14 @@ class Console
     @proc_block.call(@shell.options, 'help')
   end
 
-  def run prompt
-    @shell.options[:prompt] = prompt
+  def run 
     @shell.delegate &@proc_block
-
    command_help
-
     @shell.start
   end
 end
 
 if __FILE__ == $0
   console = Console.new
-  console.run prompt
-  
+  console.run
 end

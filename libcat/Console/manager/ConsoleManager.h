@@ -12,7 +12,7 @@
 @interface ConsoleManager : NSObject {
 	id currentTargetObject;
 }
-@property (nonatomic, retain)	id currentTargetObject;
+@property (nonatomic, retain) id currentTargetObject;
 
 -(id) input:(NSString*)command arg:(id)arg ;
 -(id) input:(NSString*)input ;
@@ -22,6 +22,7 @@
 -(void) stop_servers ;	
 -(UIViewController*) get_topViewController ;
 -(UIViewController*) get_rootViewController ;
+-(id) get_argObject:(NSString*)arg ;
 -(NSString*) getterChain:(id)command arg:(id)arg ;
 -(id) arg_to_proper_object:(id)arg ;
 -(NSString*) setterChain:(id)command arg:(id)arg ;
