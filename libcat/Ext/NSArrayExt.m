@@ -13,16 +13,16 @@
 
 NSArray* PAIR(id uno, id dos) {
 	NSMutableArray* ary = [NSMutableArray array];
-	[ary addObject:(nil == uno) ? EMPTY_STRING : uno];
-	[ary addObject:(nil == dos) ? EMPTY_STRING : dos];
+	[ary addObject:(nil == uno) ? [NSNull null] : uno];
+	[ary addObject:(nil == dos) ? [NSNull null] : dos];
 	return ary;
 }
 
 NSArray* TRIO(id uno, id dos, id tres) {
 	NSMutableArray* ary = [NSMutableArray array];
-	[ary addObject:(nil == uno) ? EMPTY_STRING : uno];
-	[ary addObject:(nil == dos) ? EMPTY_STRING : dos];
-	[ary addObject:(nil == tres) ? EMPTY_STRING : tres];
+	[ary addObject:(nil == uno) ? [NSNull null] : uno];
+	[ary addObject:(nil == dos) ? [NSNull null] : dos];
+	[ary addObject:(nil == tres) ? [NSNull null] : tres];
 	return ary;	
 }
 
