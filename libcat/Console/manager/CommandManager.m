@@ -109,7 +109,7 @@ NSArray* array_prefix_index(NSArray* array) {
 			ActionBlock actionBlock = (ActionBlock)actionBlockObj;
 			NSString* methodStr = actionBlock();
 			CONSOLEMAN.currentTargetObject = nil;
-			return SWF(@"touch %@", methodStr);
+			return methodStr;
 		}
 	}
 	return NSLocalizedString(@"Not Found", nil);
@@ -133,9 +133,10 @@ NSArray* array_prefix_index(NSArray* array) {
 		UIViewController* controller = currentObject;
 		if ([controller.parentViewController isKindOfClass:[UINavigationController class]]) {
 			if (controller.navigationController.viewControllers.count > 1) {
+				NSString* oldTargetStr = [controller.navigationController downcasedClassName];
 				[controller.navigationController popViewControllerAnimated:false];
 				CONSOLEMAN.currentTargetObject = nil;
-				return SWF(@"back popViewControllerAnimated: %d", false);
+				return SWF(@"[%@ popViewControllerAnimated: %d]", oldTargetStr, false);
 			}
 		}
 	}
