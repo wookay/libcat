@@ -14,5 +14,8 @@
 -(void) performSelector:(SEL)selector afterDelay:(NSTimeInterval)ti ;
 -(BOOL) isNull ;
 -(BOOL) isNotNull ;
+-(NSArray*) methods ;
+-(NSArray*) class_methods ;
+-(NSString*) downcasedClassName ;
 
 @end

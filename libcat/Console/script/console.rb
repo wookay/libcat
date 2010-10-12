@@ -25,16 +25,27 @@ PROMPT = '> '
 HELP = <<EOF
 ls			: list current target object (ㄹ)
 cd TARGET		: change target object (ㄷ)
-  [ cd 0 ]		: to change target object at index as listed
-  [ cd Title ]		: to change target object label as Title
-  [ cd 0x6067490 ]	: to change target object at memory address
+  [ cd ]		: topViewController
+  [ cd 0 ]		: at index as listed
+  [ cd 1 0 ]		: at section and index
+  [ cd -1 0 ]		: at index on toolbar
+  [ cd . ]		: to self
+  [ cd .. ]		: to superview
+  [ cd Title ]		: labeled as Title
+  [ cd view ] 		: to property
+  [ cd UIButton ]	: to class
+  [ cd 0x6067490 ]	: at memory address
+
 touch TARGET   		: touch target object (t, ㅌ)
-back    		: popViewControllerAnimated (b, ㅂ)
-rm N			: remove from superview
+back    		: popViewControllerAnimated: false (b, ㅂ)
+rm N			: removeFromSuperview
+
 property		: property getter (text, frame ...)
 property = value	: property settter
-new Class		: NSClassFromString ($)
-open			: open safari to display target object view
+$			: display new objects
+  [ $1 = property ]     : set new object
+
+open			: open Safari to display target UI
 sleep N			: sleep
 clear			: clear history
 about			: about
@@ -51,7 +62,10 @@ class Console
     line.gsub(/#(.*)$/, '')
   end
   def input_commands lines
-    lines.split(LF).each { |line| input comment_out(line) }
+    lines.split(LF).each do |line| 
+      text = comment_out(line)
+      input comment_out(line) if text.strip.size > 0
+    end
   end
   def input text
     puts "#{@shell.options[:prompt]}#{text}"
@@ -76,7 +90,7 @@ class Console
     'ㅂ' => 'back',
     'ㄷ' => 'cd',
     'ㄹ' => 'ls',
-    '$' => 'new',
+    '$' => 'new_objects',
     }
     aliases[command_str] or command_str 
   end
@@ -107,31 +121,14 @@ class Console
            `open #{SERVER_URL}`
         when 'sleep'
           sleep arg.to_f
-        when 'touch'
-          puts response.body
-          if /^touch / =~ response.body
-            result_uno, result_dos = response.body.split SPACE
-            if 'sendActionsForControlEvents:' == result_dos
-            else
-              update_prompt
-            end
-          end
-        when 'back'
-          puts response.body
-          if /^#{command} / =~ response.body
-            update_prompt
-          end
-        when 'cd', 'rm'
-          matcher = 'rm' == command ? 'cd' : command
-          if /^#{matcher} / =~ response.body
-            prompt = response.body["#{matcher} ".size..-1]
-            @shell.options[:prompt] = "#{prompt}#{PROMPT}"
-          else
-            puts response.body
-          end
-        else
+        when 'completion'
           puts response.body if env[:print]
           response.body
+        when 'cd', 'rm', 'back', 'touch'
+          puts response.body if response.body.size>0 and env[:print]
+          update_prompt
+        else
+          puts response.body if env[:print]
         end
       end
     end

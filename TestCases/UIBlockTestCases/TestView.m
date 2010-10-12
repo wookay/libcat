@@ -43,28 +43,7 @@
 	assert_equal(1, cnt);
 }
 
--(void) test_button {
-	__block int cnt = 0;
-	
-	UIButton* button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-	[button addBlock:^(id sender) {
-		assert_equal(button, sender);
-		cnt += 1;
-	} forControlEvents:UIControlEventTouchUpInside];
-	
-	assert_equal(0, cnt);
-	
-	[button sendActionsForControlEvents:UIControlEventTouchUpInside];
-	assert_equal(1, cnt);
-	
-	[button sendActionsForControlEvents:UIControlEventTouchUpInside];
-	assert_equal(2, cnt);
-	
-	[button removeBlockForControlEvents:UIControlEventTouchUpInside];
-	[button sendActionsForControlEvents:UIControlEventTouchUpInside];
-	
-	assert_equal(2, cnt);
-}
+
 
 -(void) test_alert {
 	[UIAlertView alert:@"alert ok"

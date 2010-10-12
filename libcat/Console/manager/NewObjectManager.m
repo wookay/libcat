@@ -31,22 +31,6 @@
 	}
 }
 
--(NSString*) makeNewOne:(NSString*)className {
-	NSMutableArray* ary = [NSMutableArray array];
-	if (nil == className) {
-		[ary addObject:SWF(@"NEW_OBJECTS: %@", self.newObjects)];
-		[ary addObject:SWF(@"%@: %@", NEW_ONE_NAME, self.newOne)];
-	} else {
-		Class klass = NSClassFromString(className);
-		if (nil == klass) {
-			[ary addObject:NSLocalizedString(@"Not Found", nil)];
-		} else {
-			self.newOne = klass;
-			[ary addObject:SWF(@"%@ = %@", NEW_ONE_NAME, klass)];
-		}
-	}
-	return [ary join:LF];
-}
 
 -(void) updateNewOne:(id)obj {
 	self.newOne = obj;

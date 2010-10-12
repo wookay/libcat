@@ -16,12 +16,15 @@
 #import "ConsoleManager.h"
 #import "NSArrayExt.h"
 #import "NSArrayBlock.h"
+#import "NSObjectExt.h"
 #import "Async.h"
 #import "NSNumberExt.h"
 #import "NSObjectExt.h"
 #import "Inspect.h"
 #import "UnitTest.h"
 #import "NewObjectManager.h"
+#import "objc/runtime.h"
+
 
 #define TOOLBAR_ITEMS_SECTION_INDEX -1
 
@@ -49,7 +52,7 @@ NSArray* array_prefix_index(NSArray* array) {
 			@"touch", @"command_touch:arg:",
 			@"back", @"command_back:arg:",
 			@"rm", @"command_rm:arg:",
-			@"new", @"command_new:arg:",
+			@"new_objects", @"command_new_objects:arg:",
 			@"completion", @"command_completion:arg:",
 			nil];
 }
@@ -59,26 +62,42 @@ NSArray* array_prefix_index(NSArray* array) {
 }
 
 -(id) command_pwd:(id)currentObject arg:(id)arg {
-	CONSOLEMAN.currentTargetObject = [CONSOLEMAN get_topViewController];	
+	if (nil == CONSOLEMAN.currentTargetObject) {
+		CONSOLEMAN.currentTargetObject = [CONSOLEMAN get_topViewController];
+	}
 	return SWF(@"%@", [CONSOLEMAN.currentTargetObject class]);
 }
 
--(NSString*) command_new:(id)currentObject arg:(id)arg {
-	return [NEWOBJECTMAN makeNewOne:arg];
+-(NSString*) command_new_objects:(id)currentObject arg:(id)arg {
+	NSMutableArray* ary = [NSMutableArray array];
+	[ary addObject:SWF(@"NEW_OBJECTS: %@", NEWOBJECTMAN.newObjects)];
+	[ary addObject:SWF(@"%@: %@", NEW_ONE_NAME, NEWOBJECTMAN.newOne)];
+	return [ary join:LF];
 }
 
 -(NSString*) command_cd:(id)currentObject arg:(id)arg {
-	NSArray* pair = [self findTargetObject:currentObject arg:arg];
-	id response = [pair objectAtFirst];
-	id changeObject = [pair objectAtSecond];
-	if ([changeObject isNotNull]) {
-		CONSOLEMAN.currentTargetObject = changeObject;
-	} else if (nil == arg) {
-		changeObject = [CONSOLEMAN get_topViewController];
-		CONSOLEMAN.currentTargetObject = changeObject;
-		response = SWF(@"cd %@", [changeObject class]);
+	id changeObject = nil;
+	if (nil == arg) {
+		CONSOLEMAN.currentTargetObject = [CONSOLEMAN get_topViewController];
+		changeObject = CONSOLEMAN.currentTargetObject;
+	} else {
+		NSArray* pair = [self findTargetObject:currentObject arg:arg];
+		changeObject = [pair objectAtSecond];
+		if ([changeObject isNull]) {
+			id response = [pair objectAtFirst];
+			return response;
+		} else {
+			if (changeObject == [changeObject class] && nil != CONSOLEMAN.currentTargetObject) {
+				NSString* ret = SWF(@"%@ = %@", NEW_ONE_NAME, CONSOLEMAN.currentTargetObject);
+				[NEWOBJECTMAN updateNewOne:CONSOLEMAN.currentTargetObject];
+				CONSOLEMAN.currentTargetObject = changeObject;
+				return ret;
+			} else {
+				CONSOLEMAN.currentTargetObject = changeObject;
+			}
+		}
 	}
-	return response;
+	return EMPTY_STRING;
 }
 
 
@@ -114,20 +133,23 @@ NSArray* array_prefix_index(NSArray* array) {
 		UIViewController* controller = currentObject;
 		if ([controller.parentViewController isKindOfClass:[UINavigationController class]]) {
 			if (controller.navigationController.viewControllers.count > 1) {
-				[controller.navigationController popViewControllerAnimated:true];
-				return SWF(@"back popViewControllerAnimated: %d", true);
+				[controller.navigationController popViewControllerAnimated:false];
+				CONSOLEMAN.currentTargetObject = nil;
+				return SWF(@"back popViewControllerAnimated: %d", false);
 			}
 		}
 	}
 	return NSLocalizedString(@"Not Found", nil);
 }
 
-
 -(NSString*) command_completion:(id)currentObject arg:(id)arg {
 	NSArray* pair = [self get_targetStringAndBlocks:currentObject];
 	NSDictionary* targetStrings = [pair objectAtFirst];
 	NSMutableArray* ary = [NSMutableArray arrayWithArray:[currentObject methods]];
 	[ary addObjectsFromArray:[targetStrings allKeys]];
+	if (currentObject == [currentObject class]) {
+		[ary addObjectsFromArray:[currentObject class_methods]];
+	}
 	return [ary join:LF];
 }
 
@@ -184,6 +206,9 @@ NSArray* array_prefix_index(NSArray* array) {
 			case LS_TOOLBAR_ITEMS:
 				[ary addObject:SWF(@"TOOLBAR_ITEMS: %d %@", TOOLBAR_ITEMS_SECTION_INDEX, [array_prefix_index(obj) inspect])];				
 				break;																
+			case LS_CLASS_METHODS:
+				[ary addObject:SWF(@"CLASS_METHODS: %@", [obj inspect])];				
+				break;																				
 			default:
 				break;
 		}
@@ -266,7 +291,12 @@ NSArray* array_prefix_index(NSArray* array) {
 				PAIR(Enum(LS_OBJECT), currentObject),
 				PAIR(Enum(LS_VIEW_SUBVIEWS), [view.subviews reverse]),
 				nil];
-	} else {
+	} else if (currentObject == [currentObject class]) {
+		return [NSArray arrayWithObjects:
+				PAIR(Enum(LS_OBJECT), currentObject),
+				PAIR(Enum(LS_CLASS_METHODS), [currentObject class_methods]),
+				nil];				
+	} else {	
 		return [NSArray arrayWithObjects:
 				PAIR(Enum(LS_OBJECT), currentObject),
 				nil];		
@@ -347,7 +377,7 @@ NSArray* array_prefix_index(NSArray* array) {
 					found = true;
 					ActionBlock block = ^id {
 						tabBarController.selectedIndex = row;
-						return SWF(@"selectedIndex = %d", row);
+						return SWF(@"[%@ setSelectedIndex: %d]", [tabBarController downcasedClassName], row);
 					};
 					actionBlock = Block_copy(block);
 				}			
@@ -369,7 +399,7 @@ NSArray* array_prefix_index(NSArray* array) {
 						found = true;
 						ActionBlock block = ^id {
 							[tableView.delegate tableView:tableView didSelectRowAtIndexPath:indexPath];
-							return SWF(@"tableView:didSelectRowAtIndexPath: %d %d", section, row);
+							return SWF(@"[%@ tableView:didSelectRowAtIndexPath: %d %d]", tableView.delegate, section, row);
 						};
 						actionBlock = Block_copy(block);
 					}				
@@ -382,7 +412,7 @@ NSArray* array_prefix_index(NSArray* array) {
 						if ([subview isKindOfClass:[UIControl class]]) {
 							ActionBlock block = ^id {				
 								[(UIControl*)subview sendActionsForControlEvents:UIControlEventTouchUpInside];
-								return SWF(@"sendActionsForControlEvents: %@", @"UIControlEventTouchUpInside");
+								return SWF(@"[%@ sendActionsForControlEvents: %@]", [subview downcasedClassName], @"UIControlEventTouchUpInside");
 							};
 							actionBlock = Block_copy(block);
 						}					
@@ -397,7 +427,7 @@ NSArray* array_prefix_index(NSArray* array) {
 					found = true;
 					ActionBlock block = ^id {
 						[tableView.delegate tableView:tableView didSelectRowAtIndexPath:indexPath];
-						return SWF(@"tableView:didSelectRowAtIndexPath: %d %d", section, row);
+						return SWF(@"[%@ tableView:didSelectRowAtIndexPath: %d %d]", tableView.delegate, section, row);
 					};
 					actionBlock = Block_copy(block);				
 				}
@@ -411,7 +441,7 @@ NSArray* array_prefix_index(NSArray* array) {
 					if ([subview isKindOfClass:[UIControl class]]) {
 						ActionBlock block = ^id {				
 							[(UIControl*)subview sendActionsForControlEvents:UIControlEventTouchUpInside];
-							return SWF(@"sendActionsForControlEvents: %@", @"UIControlEventTouchUpInside");
+							return SWF(@"[%@ sendActionsForControlEvents: %@]", [subview downcasedClassName], @"UIControlEventTouchUpInside");
 						};
 						actionBlock = Block_copy(block);
 					}
@@ -433,7 +463,13 @@ NSArray* array_prefix_index(NSArray* array) {
 			NSDictionary* targetStrings = [pair objectAtFirst];
 			NSDictionary* targetBlocks = [pair objectAtSecond];
 			id obj = [targetStrings	objectForKey:arg];
-			if (nil != obj) {
+			if (nil == obj) {
+				Class klass = NSClassFromString(arg);
+				if (nil != klass) {
+					changeObject = klass;
+					[NEWOBJECTMAN updateNewOne:changeObject];
+				}
+			} else {
 				changeObject = obj;
 				actionBlock = [targetBlocks objectForKey:arg];
 			}
@@ -456,7 +492,7 @@ NSArray* array_prefix_index(NSArray* array) {
 			if (cell == cellObj) {
 				ActionBlock block = ^id {
 					[tableView.delegate tableView:tableView didSelectRowAtIndexPath:indexPath];
-					return SWF(@"tableView:didSelectRowAtIndexPath: %d %d", indexPath.section, indexPath.row);
+					return SWF(@"[%@ tableView:didSelectRowAtIndexPath: %d %d]", tableView.delegate, indexPath.section, indexPath.row);
 				};
 				actionBlock = Block_copy(block);
 				break;
@@ -465,7 +501,7 @@ NSArray* array_prefix_index(NSArray* array) {
 	} else if ([targetObject isKindOfClass:[UIControl class]]) {
 		ActionBlock block = ^id {				
 			[targetObject sendActionsForControlEvents:UIControlEventTouchUpInside];
-			return SWF(@"sendActionsForControlEvents: %@", @"UIControlEventTouchUpInside");
+			return SWF(@"[%@ sendActionsForControlEvents: %@]", [targetObject downcasedClassName], @"UIControlEventTouchUpInside");
 		};
 		actionBlock = Block_copy(block);
 	} else if ([targetObject isKindOfClass:[UIBarButtonItem class]]) {
@@ -495,7 +531,7 @@ NSArray* array_prefix_index(NSArray* array) {
 						[targetStrings setObject:cell forKey:textLabelText];
 						ActionBlock block = ^id {
 							[tableView.delegate tableView:tableView didSelectRowAtIndexPath:indexPath];
-							return SWF(@"tableView:didSelectRowAtIndexPath: %d %d", section, row);
+							return SWF(@"[%@ tableView:didSelectRowAtIndexPath: %d %d]", tableView.delegate, section, row);
 						};
 						[targetBlocks setObject:Block_copy(block) forKey:textLabelText];
 					}
@@ -509,7 +545,7 @@ NSArray* array_prefix_index(NSArray* array) {
 						[targetStrings setObject:subview forKey:titleLabelText];
 						ActionBlock block = ^id {
 							[(UIControl*)subview sendActionsForControlEvents:UIControlEventTouchUpInside];
-							return SWF(@"sendActionsForControlEvents: %@", @"UIControlEventTouchUpInside");
+							return SWF(@"[%@ sendActionsForControlEvents: %@]", [subview downcasedClassName], @"UIControlEventTouchUpInside");
 						};
 						[targetBlocks setObject:Block_copy(block) forKey:titleLabelText];						
 					}

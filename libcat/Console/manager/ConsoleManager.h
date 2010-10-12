@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 #define CONSOLEMAN	[ConsoleManager sharedManager]
 
+typedef enum { kGetterReturnTypeString, kGetterReturnTypeObject } GetterReturnType ;
+
+
 @interface ConsoleManager : NSObject {
 	id currentTargetObject;
 }
@@ -27,4 +30,5 @@
 -(id) arg_to_proper_object:(id)arg ;
 -(NSString*) setterChain:(id)command arg:(id)arg ;
 -(id) currentTargetObjectOrTopViewController ;
+-(id) getterChainObject:(id)command arg:(id)arg returnType:(GetterReturnType)returnType ;
 @end

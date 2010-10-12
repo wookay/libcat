@@ -36,9 +36,7 @@ class Shell
   end
   def completion_list
     methods = @delegate.call({}, 'completion')
-    methods.split(LF).map {|x| x } + #.reject{|x|x=~/^\(/ or x==/\)$/} +
-    COMMANDS +
-    @HISTORY#.reject{|x|x.empty?}
+    (methods or '').split(LF).map {|x| x } + COMMANDS + @HISTORY
   end
   def delegate &block
     @delegate = block

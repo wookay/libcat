@@ -41,6 +41,12 @@
 		DA44B0131261FFBF000F7374 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DA44B0121261FFBF000F7374 /* AppDelegate.m */; };
 		DAA63F681261AC140010F870 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAA63F601261AC140010F870 /* InfoPlist.strings */; };
 		DAA63F691261AC140010F870 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAA63F621261AC140010F870 /* Localizable.strings */; };
+		DAAAE1FE126442E00059A264 /* TestActionSheetBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DAAAE1FC126442E00059A264 /* TestActionSheetBlock.m */; };
+		DAAAE1FF126442E00059A264 /* TestView.m in Sources */ = {isa = PBXBuildFile; fileRef = DAAAE1FD126442E00059A264 /* TestView.m */; };
+		DAAAE200126442E00059A264 /* TestActionSheetBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DAAAE1FC126442E00059A264 /* TestActionSheetBlock.m */; };
+		DAAAE201126442E00059A264 /* TestView.m in Sources */ = {isa = PBXBuildFile; fileRef = DAAAE1FD126442E00059A264 /* TestView.m */; };
+		DAAAE206126442ED0059A264 /* TestButton.m in Sources */ = {isa = PBXBuildFile; fileRef = DAAAE205126442ED0059A264 /* TestButton.m */; };
+		DAAAE207126442ED0059A264 /* TestButton.m in Sources */ = {isa = PBXBuildFile; fileRef = DAAAE205126442ED0059A264 /* TestButton.m */; };
 		DAC7AE461263210F0073BED1 /* TestObject.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC7AE451263210F0073BED1 /* TestObject.m */; };
 		DAC7AE471263210F0073BED1 /* TestObject.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC7AE451263210F0073BED1 /* TestObject.m */; };
 		DAC7AE68126324F70073BED1 /* NewObjectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC7AE67126324F70073BED1 /* NewObjectManager.m */; };
@@ -125,28 +131,24 @@
 		DACAAFFE12629000006DA76D /* Inspect.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAAFA112629000006DA76D /* Inspect.m */; };
 		DACAAFFF12629000006DA76D /* Logger.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAAFA312629000006DA76D /* Logger.m */; };
 		DACAB00012629000006DA76D /* UnitTest.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAAFA512629000006DA76D /* UnitTest.m */; };
-		DACAB01812629054006DA76D /* TestActionSheetBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB00512629054006DA76D /* TestActionSheetBlock.m */; };
 		DACAB01912629054006DA76D /* TestArrayBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB00612629054006DA76D /* TestArrayBlock.m */; };
 		DACAB01A12629054006DA76D /* TestAsync.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB00712629054006DA76D /* TestAsync.m */; };
 		DACAB01B12629054006DA76D /* TestBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB00812629054006DA76D /* TestBlock.m */; };
 		DACAB01C12629054006DA76D /* TestDictionaryBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB00912629054006DA76D /* TestDictionaryBlock.m */; };
 		DACAB01D12629054006DA76D /* TestNumberBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB00A12629054006DA76D /* TestNumberBlock.m */; };
 		DACAB01E12629054006DA76D /* TestObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB00C12629054006DA76D /* TestObserver.m */; };
-		DACAB01F12629054006DA76D /* TestView.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB00D12629054006DA76D /* TestView.m */; };
 		DACAB02012629054006DA76D /* TestConsole.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB01012629054006DA76D /* TestConsole.m */; };
 		DACAB02112629054006DA76D /* TestArray.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB01212629054006DA76D /* TestArray.m */; };
 		DACAB02212629054006DA76D /* TestDate.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB01312629054006DA76D /* TestDate.m */; };
 		DACAB02312629054006DA76D /* TestDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB01412629054006DA76D /* TestDictionary.m */; };
 		DACAB02412629054006DA76D /* TestNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB01512629054006DA76D /* TestNumber.m */; };
 		DACAB02512629054006DA76D /* TestString.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB01612629054006DA76D /* TestString.m */; };
-		DACAB02612629054006DA76D /* TestActionSheetBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB00512629054006DA76D /* TestActionSheetBlock.m */; };
 		DACAB02712629054006DA76D /* TestArrayBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB00612629054006DA76D /* TestArrayBlock.m */; };
 		DACAB02812629054006DA76D /* TestAsync.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB00712629054006DA76D /* TestAsync.m */; };
 		DACAB02912629054006DA76D /* TestBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB00812629054006DA76D /* TestBlock.m */; };
 		DACAB02A12629054006DA76D /* TestDictionaryBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB00912629054006DA76D /* TestDictionaryBlock.m */; };
 		DACAB02B12629054006DA76D /* TestNumberBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB00A12629054006DA76D /* TestNumberBlock.m */; };
 		DACAB02C12629054006DA76D /* TestObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB00C12629054006DA76D /* TestObserver.m */; };
-		DACAB02D12629054006DA76D /* TestView.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB00D12629054006DA76D /* TestView.m */; };
 		DACAB02E12629054006DA76D /* TestConsole.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB01012629054006DA76D /* TestConsole.m */; };
 		DACAB02F12629054006DA76D /* TestArray.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB01212629054006DA76D /* TestArray.m */; };
 		DACAB03012629054006DA76D /* TestDate.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB01312629054006DA76D /* TestDate.m */; };
@@ -192,6 +194,9 @@
 		DAA63F651261AC140010F870 /* Korean */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Korean; path = Korean.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DAA63F661261AC140010F870 /* Spanish */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Spanish; path = Spanish.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DAA63F671261AC140010F870 /* Spanish */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Spanish; path = Spanish.lproj/Localizable.strings; sourceTree = "<group>"; };
+		DAAAE1FC126442E00059A264 /* TestActionSheetBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestActionSheetBlock.m; sourceTree = "<group>"; };
+		DAAAE1FD126442E00059A264 /* TestView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestView.m; sourceTree = "<group>"; };
+		DAAAE205126442ED0059A264 /* TestButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestButton.m; sourceTree = "<group>"; };
 		DAC7AE451263210F0073BED1 /* TestObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestObject.m; sourceTree = "<group>"; };
 		DAC7AE66126324F70073BED1 /* NewObjectManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewObjectManager.h; sourceTree = "<group>"; };
 		DAC7AE67126324F70073BED1 /* NewObjectManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewObjectManager.m; sourceTree = "<group>"; };
@@ -280,7 +285,6 @@
 		DACAAFA412629000006DA76D /* UnitTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnitTest.h; sourceTree = "<group>"; };
 		DACAAFA512629000006DA76D /* UnitTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnitTest.m; sourceTree = "<group>"; };
 		DACAAFA612629000006DA76D /* UserConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserConstants.h; sourceTree = "<group>"; };
-		DACAB00512629054006DA76D /* TestActionSheetBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestActionSheetBlock.m; sourceTree = "<group>"; };
 		DACAB00612629054006DA76D /* TestArrayBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestArrayBlock.m; sourceTree = "<group>"; };
 		DACAB00712629054006DA76D /* TestAsync.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestAsync.m; sourceTree = "<group>"; };
 		DACAB00812629054006DA76D /* TestBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestBlock.m; sourceTree = "<group>"; };
@@ -288,7 +292,6 @@
 		DACAB00A12629054006DA76D /* TestNumberBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestNumberBlock.m; sourceTree = "<group>"; };
 		DACAB00B12629054006DA76D /* TestObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestObserver.h; sourceTree = "<group>"; };
 		DACAB00C12629054006DA76D /* TestObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestObserver.m; sourceTree = "<group>"; };
-		DACAB00D12629054006DA76D /* TestView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestView.m; sourceTree = "<group>"; };
 		DACAB00F12629054006DA76D /* TestConsole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestConsole.h; sourceTree = "<group>"; };
 		DACAB01012629054006DA76D /* TestConsole.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestConsole.m; sourceTree = "<group>"; };
 		DACAB01212629054006DA76D /* TestArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestArray.m; sourceTree = "<group>"; };
@@ -475,6 +478,16 @@
 			path = Languages;
 			sourceTree = "<group>";
 		};
+		DAAAE1FB126442E00059A264 /* UIBlockTestCases */ = {
+			isa = PBXGroup;
+			children = (
+				DAAAE1FC126442E00059A264 /* TestActionSheetBlock.m */,
+				DAAAE1FD126442E00059A264 /* TestView.m */,
+				DAAAE205126442ED0059A264 /* TestButton.m */,
+			);
+			path = UIBlockTestCases;
+			sourceTree = "<group>";
+		};
 		DACAAF4012629000006DA76D /* libcat */ = {
 			isa = PBXGroup;
 			children = (
@@ -653,10 +666,10 @@
 		DACAB00312629054006DA76D /* TestCases */ = {
 			isa = PBXGroup;
 			children = (
+				DAAAE1FB126442E00059A264 /* UIBlockTestCases */,
 				DACAB00412629054006DA76D /* BlockTestCases */,
 				DACAB00E12629054006DA76D /* ConsoleTestCases */,
 				DACAB01112629054006DA76D /* ExtTestCases */,
-				DACAB01712629054006DA76D /* UIBlockTestCases */,
 			);
 			name = TestCases;
 			path = ../TestCases;
@@ -665,7 +678,6 @@
 		DACAB00412629054006DA76D /* BlockTestCases */ = {
 			isa = PBXGroup;
 			children = (
-				DACAB00512629054006DA76D /* TestActionSheetBlock.m */,
 				DACAB00612629054006DA76D /* TestArrayBlock.m */,
 				DACAB00712629054006DA76D /* TestAsync.m */,
 				DACAB00812629054006DA76D /* TestBlock.m */,
@@ -673,7 +685,6 @@
 				DACAB00A12629054006DA76D /* TestNumberBlock.m */,
 				DACAB00B12629054006DA76D /* TestObserver.h */,
 				DACAB00C12629054006DA76D /* TestObserver.m */,
-				DACAB00D12629054006DA76D /* TestView.m */,
 			);
 			path = BlockTestCases;
 			sourceTree = "<group>";
@@ -698,13 +709,6 @@
 				DAC7AE451263210F0073BED1 /* TestObject.m */,
 			);
 			path = ExtTestCases;
-			sourceTree = "<group>";
-		};
-		DACAB01712629054006DA76D /* UIBlockTestCases */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = UIBlockTestCases;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -857,14 +861,12 @@
 				DACAAFD112629000006DA76D /* Inspect.m in Sources */,
 				DACAAFD212629000006DA76D /* Logger.m in Sources */,
 				DACAAFD312629000006DA76D /* UnitTest.m in Sources */,
-				DACAB01812629054006DA76D /* TestActionSheetBlock.m in Sources */,
 				DACAB01912629054006DA76D /* TestArrayBlock.m in Sources */,
 				DACAB01A12629054006DA76D /* TestAsync.m in Sources */,
 				DACAB01B12629054006DA76D /* TestBlock.m in Sources */,
 				DACAB01C12629054006DA76D /* TestDictionaryBlock.m in Sources */,
 				DACAB01D12629054006DA76D /* TestNumberBlock.m in Sources */,
 				DACAB01E12629054006DA76D /* TestObserver.m in Sources */,
-				DACAB01F12629054006DA76D /* TestView.m in Sources */,
 				DACAB02012629054006DA76D /* TestConsole.m in Sources */,
 				DACAB02112629054006DA76D /* TestArray.m in Sources */,
 				DACAB02212629054006DA76D /* TestDate.m in Sources */,
@@ -873,6 +875,9 @@
 				DACAB02512629054006DA76D /* TestString.m in Sources */,
 				DAC7AE471263210F0073BED1 /* TestObject.m in Sources */,
 				DAC7AE69126324F70073BED1 /* NewObjectManager.m in Sources */,
+				DAAAE200126442E00059A264 /* TestActionSheetBlock.m in Sources */,
+				DAAAE201126442E00059A264 /* TestView.m in Sources */,
+				DAAAE207126442ED0059A264 /* TestButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -926,14 +931,12 @@
 				DACAAFFE12629000006DA76D /* Inspect.m in Sources */,
 				DACAAFFF12629000006DA76D /* Logger.m in Sources */,
 				DACAB00012629000006DA76D /* UnitTest.m in Sources */,
-				DACAB02612629054006DA76D /* TestActionSheetBlock.m in Sources */,
 				DACAB02712629054006DA76D /* TestArrayBlock.m in Sources */,
 				DACAB02812629054006DA76D /* TestAsync.m in Sources */,
 				DACAB02912629054006DA76D /* TestBlock.m in Sources */,
 				DACAB02A12629054006DA76D /* TestDictionaryBlock.m in Sources */,
 				DACAB02B12629054006DA76D /* TestNumberBlock.m in Sources */,
 				DACAB02C12629054006DA76D /* TestObserver.m in Sources */,
-				DACAB02D12629054006DA76D /* TestView.m in Sources */,
 				DACAB02E12629054006DA76D /* TestConsole.m in Sources */,
 				DACAB02F12629054006DA76D /* TestArray.m in Sources */,
 				DACAB03012629054006DA76D /* TestDate.m in Sources */,
@@ -942,6 +945,9 @@
 				DACAB03312629054006DA76D /* TestString.m in Sources */,
 				DAC7AE461263210F0073BED1 /* TestObject.m in Sources */,
 				DAC7AE68126324F70073BED1 /* NewObjectManager.m in Sources */,
+				DAAAE1FE126442E00059A264 /* TestActionSheetBlock.m in Sources */,
+				DAAAE1FF126442E00059A264 /* TestView.m in Sources */,
+				DAAAE206126442ED0059A264 /* TestButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

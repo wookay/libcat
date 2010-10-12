@@ -30,6 +30,11 @@ enum { kSectionUnitTest, kSectionConsole, kSectionMax };
 	self.tableView.sectionHeaderHeight = 50;
 }
 
+-(void) viewWillAppear:(BOOL)animated {
+	self.navigationController.toolbarHidden = true;
+	[super viewWillAppear:animated];
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return kSectionMax;
 }

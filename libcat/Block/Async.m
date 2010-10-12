@@ -22,7 +22,7 @@
 	[self performSelector:@selector(perform:) withObject:Block_copy(block) afterDelay:delay];
 }
 
-+(void) perform:(AsyncBlock)block whenCompleted:(AsyncBlock)completeBlock {
++(void) perform:(AsyncBlock)block afterDone:(AsyncBlock)completeBlock {
 	AsyncBlock copiedBlock = Block_copy(block);
 	AsyncBlock copiedCompleteBlock = Block_copy(completeBlock);
 	dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);

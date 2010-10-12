@@ -19,7 +19,6 @@
 @property (nonatomic, retain) NSMutableDictionary* newObjects;
 @property (nonatomic, retain) id newOne;
 + (NewObjectManager*) sharedManager ;
--(NSString*) makeNewOne:(NSString*)className ;
 -(void) setNewObject:(id)obj forKey:(NSString*)key ;
 -(id) newObjectForKey:(NSString*)key ;	
 -(void) updateNewOne:(id)obj ;

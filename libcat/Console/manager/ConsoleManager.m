@@ -103,11 +103,22 @@
 		return [COMMANDMAN commandNotFound];
 	}
 
-	id obj = [self arg_to_proper_object:arg];
 	if ([lastMethod hasPrefix:NEW_OBJECT_PREFIX]) {
+		NSString* getterCommand = nil;
+		NSString* getterArg = nil;
+		arg = [[[arg strip] slice:1 backward:-1] strip];
+		NSRange commandRange = [arg rangeOfString:SPACE];
+		if (IS_NOT_FOUND(commandRange)) {
+			getterCommand = arg;
+		} else {
+			getterCommand = [arg slice:0 :commandRange.location];
+			getterArg = [arg slice:commandRange.location backward:-1];
+		}
+		id obj = [self getterChainObject:getterCommand arg:getterArg returnType:kGetterReturnTypeObject];
 		[NEWOBJECTMAN setNewObject:obj forKey:lastMethod];
 		[ary addObject:SWF(@"%@ = %@", lastMethod, obj)];							
 	} else {
+		id obj = [self arg_to_proper_object:arg];
 		NSString* lastMethodUppercased = SWF(@"set%@:", [lastMethod uppercaseFirstCharacter]);
 		SEL setterSelector = NSSelectorFromString(lastMethodUppercased);
 		if ([target respondsToSelector:setterSelector]) {		
@@ -131,7 +142,12 @@
 	return obj;
 }
 
+
 -(NSString*) getterChain:(id)command arg:(id)arg {
+	return [self getterChainObject:command arg:arg returnType:kGetterReturnTypeString];
+}
+
+-(id) getterChainObject:(id)command arg:(id)arg returnType:(GetterReturnType)returnType {
 	id target = currentTargetObject;
 	NSMutableArray* ary = [NSMutableArray array];
 	for (NSString* method in [command split:DOT]) {
@@ -140,6 +156,7 @@
 		}
 		
 		SEL selector = NSSelectorFromString(method);
+		NSString* oldTargetStr = SWF(@"%@", [target downcasedClassName]);
 		if ([target respondsToSelector:selector]) {
 			BOOL found = true;
 			NSMethodSignature* sig = [target methodSignatureForSelector:selector];
@@ -154,19 +171,19 @@
 					switch (*returnType) {
 						case _C_ID:
 							target = [target performSelector:selector];
-							[NEWOBJECTMAN updateNewOne:target];
-							[ary addObject:SWF(@"%@ => %@", method, target)];
+							[ary addObject:SWF(@"[%@ %@] => %@", oldTargetStr, method, target)];
 							break;
 							
 						case _C_INT:
 						case _C_UINT:
-							[ary addObject:SWF(@"%@ => %d", method, [target performSelector:selector])];
+							[ary addObject:SWF(@"[%@ %@] => %d", oldTargetStr, method, [target performSelector:selector])];
 							break;
-
-						 case _C_VOID:
-							 [target performSelector:selector];
-							 break;
-									  
+							
+						case _C_VOID:
+							[target performSelector:selector];
+							[ary addObject:SWF(@"[%@ %@]", oldTargetStr, method)];
+							break;
+							
 						default:
 							log_info(@"zero *returnType %c", *returnType);
 							found = false;
@@ -175,145 +192,145 @@
 					break;
 					
 				case ARGUMENT_COUNT_IS_ONE: {
-						id argObj = [self get_argObject:arg];
-						const char* argType = [sig getArgumentTypeAtIndex:ARGUMENT_INDEX_ONE];
-						switch (*argType) {
-							case _C_ID:
-								switch (*returnType) {
-									case _C_ID:
-										target = [target performSelector:selector withObject:argObj];
-										[NEWOBJECTMAN updateNewOne:target];
-										[ary addObject:SWF(@"%@ => %@", method, target)];
-										break;
-										
-									case _C_INT:
-									case _C_UINT:
-										[ary addObject:SWF(@"%@ => %d", method, [target performSelector:selector withObject:argObj])];
-										break;
-										 
-									 case _C_VOID:
-										 [target performSelector:selector withObject:argObj];
-										 break;
-									 
-									default:
-										found = false;
-									 break;
-								} // switch(*returnType)
-								break;
-										 
-							case _C_INT:
-								 switch (*returnType) {
-									 case _C_ID:
-										 target = [target performSelector:selector withObject:(id)[arg intValue]];
-										 [NEWOBJECTMAN updateNewOne:target];
-										 [ary addObject:SWF(@"%@ => %@", method, target)];
-										 break;
-										 
-									 case _C_INT:
-									 case _C_UINT:
-										 [ary addObject:SWF(@"%@ => %d", method, [target performSelector:selector withObject:(id)[arg intValue]])];
-										  break;
-										  
-									  case _C_VOID:
-										  [target performSelector:selector withObject:(id)[arg intValue]];
-										  break;
-									  
-										default:
-										 found = false;
-										  break;
-								  } // switch(*returnType)
-								  break;
-										
-							case _C_UINT:
-								switch (*returnType) {
-									case _C_ID:
-										target = [target performSelector:selector withObject:(id)[arg unsignedIntValue]];
-										[NEWOBJECTMAN updateNewOne:target];
-										[ary addObject:SWF(@"%@ => %@", method, target)];
-										break;
-										
-									case _C_INT:
-									case _C_UINT:
-										[ary addObject:SWF(@"%@ => %d", method, [target performSelector:selector withObject:(id)[arg unsignedIntValue]])];
-										break;
-										
-									case _C_VOID:
-										[target performSelector:selector withObject:(id)[arg unsignedIntValue]];
-										break;
-										
-									default:
-										found = false;
-										break;
-								} // switch(*returnType)
-								break;
-								
-							case _C_FLT: {
-									Method m = class_getInstanceMethod([target class], selector);
-									IMP imp = method_getImplementation(m);
-									switch (*returnType) {
-										case _C_ID:
-											target = ((id (*)(id, SEL, float))imp)(target, selector, [arg floatValue]);
-											[NEWOBJECTMAN updateNewOne:target];
-											[ary addObject:SWF(@"%@ => %@", method, target)];
-											break;
-											
-										case _C_INT:
-										case _C_UINT: {
-												int returnValue = ((int (*)(id, SEL, float))imp)(target, selector, [arg floatValue]);
-												[ary addObject:SWF(@"%@ => %d", method, returnValue)];
-											}
-											 break;
-											 
-										 case _C_VOID:
-											((void (*)(id, SEL, float))imp)(target, selector, [arg floatValue]);
-											 break;
-											 
-										   default:
-											found = false;
-											 break;
-									} // switch(*returnType)
-								} // case _C_FLT
-								break;	
-								
-							default:
-								found = false;
-								break;
-						} // switch(*argType)
-					} // ARGUMENT_COUNT_IS_ONE
+					id argObj = [self get_argObject:arg];
+					const char* argType = [sig getArgumentTypeAtIndex:ARGUMENT_INDEX_ONE];
+					switch (*argType) {
+						case _C_ID:
+							switch (*returnType) {
+								case _C_ID:
+									target = [target performSelector:selector withObject:argObj];
+									[ary addObject:SWF(@"[%@ %@ %@] => %@", oldTargetStr, method, argObj, target)];
+									break;
+									
+								case _C_INT:
+								case _C_UINT:
+									[ary addObject:SWF(@"[%@ %@ %@] => %d", oldTargetStr, method, argObj, [target performSelector:selector withObject:argObj])];
+									break;
+									
+								case _C_VOID:
+									[target performSelector:selector withObject:argObj];
+									[ary addObject:SWF(@"[%@ %@ %@]", oldTargetStr, method, argObj)];
+									break;
+									
+								default:
+									found = false;
+									break;
+							} // switch(*returnType)
+							break;
+							
+						case _C_INT:
+							switch (*returnType) {
+								case _C_ID:
+									target = [target performSelector:selector withObject:(id)[arg intValue]];
+									[ary addObject:SWF(@"[%@ %@ %@] => %@", oldTargetStr, method, arg, target)];
+									break;
+									
+								case _C_INT:
+								case _C_UINT:
+									[ary addObject:SWF(@"[%@ %@ %@] => %d", oldTargetStr, method, arg, [target performSelector:selector withObject:(id)[arg intValue]])];
+									break;
+									
+								case _C_VOID:
+									[target performSelector:selector withObject:(id)[arg intValue]];
+									[ary addObject:SWF(@"[%@ %@ %@]", oldTargetStr, method, argObj)];
+									break;
+									
+								default:
+									found = false;
+									break;
+							} // switch(*returnType)
+							break;
+							
+						case _C_UINT:
+							switch (*returnType) {
+								case _C_ID:
+									target = [target performSelector:selector withObject:(id)[arg unsignedIntValue]];
+									[ary addObject:SWF(@"[%@ @% %@] => %@", oldTargetStr, method, arg, target)];
+									break;
+									
+								case _C_INT:
+								case _C_UINT:
+									[ary addObject:SWF(@"[%@ %@ %@] => %d", oldTargetStr, method, arg, [target performSelector:selector withObject:(id)[arg unsignedIntValue]])];
+									break;
+									
+								case _C_VOID:
+									[target performSelector:selector withObject:(id)[arg unsignedIntValue]];
+									[ary addObject:SWF(@"[%@ %@ %@]", oldTargetStr, method, argObj)];
+									break;
+									
+								default:
+									found = false;
+									break;
+							} // switch(*returnType)
+							break;
+							
+						case _C_FLT: {
+							Method m = class_getInstanceMethod([target class], selector);
+							IMP imp = method_getImplementation(m);
+							switch (*returnType) {
+								case _C_ID:
+									target = ((id (*)(id, SEL, float))imp)(target, selector, [arg floatValue]);
+									[ary addObject:SWF(@"[%@ %@ %@] => %@", oldTargetStr, method, arg, target)];
+									break;
+									
+								case _C_INT:
+								case _C_UINT: {
+									int returnValue = ((int (*)(id, SEL, float))imp)(target, selector, [arg floatValue]);
+									[ary addObject:SWF(@"[%@ %@ %@] => %d", oldTargetStr, method, arg, returnValue)];
+								}
+									break;
+									
+								case _C_VOID:
+									((void (*)(id, SEL, float))imp)(target, selector, [arg floatValue]);
+									[ary addObject:SWF(@"[%@ %@ %@]", oldTargetStr, method, argObj)];
+									break;
+									
+								default:
+									found = false;
+									break;
+							} // switch(*returnType)
+						} // case _C_FLT
+							break;	
+							
+						default:
+							found = false;
+							break;
+					} // switch(*argType)
+				} // ARGUMENT_COUNT_IS_ONE
 					break;
-
+					
 				case ARGUMENT_COUNT_IS_TWO: {
-						if ([method isEqualToString:@"tableView:cellForRowAtIndexPath:"]) {
-							int section = 0;
-							int row = 0;
-							if ([arg hasText:SPACE]) {
-								NSArray* pair = [arg split:SPACE];
-								section = [[pair objectAtFirst] to_int];
-								row = [[pair objectAtSecond] to_int];
-							} else {
-								row = [arg to_int];
-							}
-							NSIndexPath* indexPath = [NSIndexPath indexPathWithSection:section Row:row];
-							UITableView* tableView = nil;
-							if ([target respondsToSelector:@selector(tableView)]) {
-								tableView = [target performSelector:@selector(tableView)];
-							}
-							target = [target performSelector:selector withObject:tableView withObject:indexPath];
-							[NEWOBJECTMAN updateNewOne:target];
-							[ary addObject:SWF(@"%@ %@ => %@", method, arg, target)];	
-						} else {
+					if ([method isEqualToString:@"tableView:cellForRowAtIndexPath:"]) {
+						int section = 0;
+						int row = 0;
+						if ([arg hasText:SPACE]) {
 							NSArray* pair = [arg split:SPACE];
-							id objOne = [pair objectAtFirst];
-							id objTwo = [pair objectAtSecond];
-							const char* argTypeOne = [sig getArgumentTypeAtIndex:ARGUMENT_INDEX_ONE];
-							const char* argTypeTwo = [sig getArgumentTypeAtIndex:ARGUMENT_INDEX_TWO];
-							if (_C_ID == *argTypeOne && _C_UINT == *argTypeTwo) {
-								[target performSelector:selector withObject:objOne withObject:(id)[objTwo intValue]];	
-							} else {
-								found  = false;
-							}
+							section = [[pair objectAtFirst] to_int];
+							row = [[pair objectAtSecond] to_int];
+						} else {
+							row = [arg to_int];
 						}
-					} // ARGUMENT_COUNT_IS_TWO
+						NSIndexPath* indexPath = [NSIndexPath indexPathWithSection:section Row:row];
+						UITableView* tableView = nil;
+						if ([target respondsToSelector:@selector(tableView)]) {
+							tableView = [target performSelector:@selector(tableView)];
+						}
+						target = [target performSelector:selector withObject:tableView withObject:indexPath];
+						[ary addObject:SWF(@"[%@ %@ %@] => %@", oldTargetStr, method, arg, target)];	
+					} else {
+						NSArray* pair = [arg split:SPACE];
+						id objOne = [pair objectAtFirst];
+						id objTwo = [pair objectAtSecond];
+						const char* argTypeOne = [sig getArgumentTypeAtIndex:ARGUMENT_INDEX_ONE];
+						const char* argTypeTwo = [sig getArgumentTypeAtIndex:ARGUMENT_INDEX_TWO];
+						if (_C_ID == *argTypeOne && _C_UINT == *argTypeTwo) {
+							[target performSelector:selector withObject:objOne withObject:(id)[objTwo intValue]];	
+							[ary addObject:SWF(@"[%@ %@ %@]", oldTargetStr, method, arg)];	
+						} else {
+							found  = false;
+						}
+					}
+				} // ARGUMENT_COUNT_IS_TWO
 					break;
 					
 				default:
@@ -328,8 +345,7 @@
 			SEL toStringSelector = NSSelectorFromString(SWF(@"%@ToString", method));
 			if ([target respondsToSelector:toStringSelector]) {
 				target = [target performSelector:toStringSelector];
-				[NEWOBJECTMAN updateNewOne:target];
-				[ary addObject:SWF(@"%@ => %@", method, target)];
+				[ary addObject:SWF(@"[%@ %@] => %@", oldTargetStr, method, target)];
 			} else {
 				NSString* newArg = nil;
 				if (nil == arg) {
@@ -347,8 +363,13 @@
 			}
 		}
 	} // for
-	return [ary join:LF];
+	if (kGetterReturnTypeObject == returnType) {
+		return target;
+	} else {
+		return [ary join:LF];
+	}
 }
+
 
 -(UIViewController*) get_topViewController {
 	UIViewController* rootVC = [self get_rootViewController];

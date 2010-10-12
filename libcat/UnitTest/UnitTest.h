@@ -50,7 +50,6 @@ NSValue* got_encoded = [NSValue valueWithValue:&__got withObjCType: @encode(__ty
 @interface NSObject (UnitTest)
 -(void) run_test:(SEL)sel ;
 -(void) run_tests ;
--(NSArray*) methods ;
 @end
 
 @interface NSValue (Ext)

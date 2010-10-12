@@ -13,6 +13,7 @@
 #import "objc/runtime.h"
 #import "NSDateExt.h"
 #import "NSArrayExt.h"
+#import "NSObjectExt.h"
 
 
 #define UNITTEST_TARGET_CLASS_FILTERING_SELECTOR @selector(hasPrefix:)
@@ -123,19 +124,6 @@
 	}
 }
 
--(NSArray*) methods {
-	Class targetClass = [self class];
-	NSMutableArray* ary = [NSMutableArray array];
-	unsigned int methodCount;
-	Method *methods = class_copyMethodList((Class)targetClass, &methodCount);
-	for (size_t idx = 0; idx < methodCount; ++idx) {
-		Method method = methods[idx];
-		SEL selector = method_getName(method);
-		NSString *selectorName = NSStringFromSelector(selector);
-		[ary addObject:selectorName];
-	}
-	return [ary sort];
-}
 @end
 
 

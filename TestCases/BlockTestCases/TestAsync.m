@@ -28,7 +28,7 @@
 			cnt += 1;
 			assert_equal(2, cnt); 
 		}
-		whenCompleted:^{ 
+		afterDone:^{ 
 			cnt += 1;
 			assert_equal(3, cnt); 
 		}];
