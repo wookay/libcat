@@ -24,6 +24,7 @@ PROMPT = '> '
 
 HELP = <<EOF
 ls			: list current target object (ㄹ)
+  [ ls -r ]		: list recursive
 cd TARGET		: change target object (ㄷ)
   [ cd ]		: topViewController
   [ cd 0 ]		: at index as listed

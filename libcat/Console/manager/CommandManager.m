@@ -22,6 +22,7 @@
 #import "NSObjectExt.h"
 #import "Inspect.h"
 #import "UnitTest.h"
+#import "UIViewBlock.h"
 #import "NewObjectManager.h"
 #import "objc/runtime.h"
 
@@ -186,6 +187,11 @@ NSArray* array_prefix_index(NSArray* array) {
 			case LS_VIEW:
 				[ary addObject:SWF(@"VIEW: %@", [obj inspect])];
 				break;
+			case LS_INDENTED_VIEW: {
+					int depth = [[pair objectAtThird] intValue];
+					[ary addObject:SWF(@"%@%@", [TAB repeat:depth], [obj inspect])];
+				}
+				break;				
 			case LS_VIEW_SUBVIEWS:
 				[ary addObject:SWF(@"VIEW.SUBVIEWS: %@", [array_prefix_index(obj) inspect])];
 				break;
@@ -219,26 +225,28 @@ NSArray* array_prefix_index(NSArray* array) {
 
 
 -(NSArray*) array_ls:(id)currentObject arg:(id)arg {
+	NSMutableArray* ret = [NSMutableArray array];
+	[ret addObject:PAIR(Enum(LS_OBJECT), currentObject)];
+
+#define LS_OPTION_RECURSIVE @"-r"
+	BOOL recursive = [LS_OPTION_RECURSIVE isEqualToString:arg];
+	TraverseBlock traverseBlock = ^(int depth, UIView* subview) {
+		log_info(@"%@%@", [SPACE repeat:depth], [subview inspect]);
+		[ret addObject:TRIO(Enum(LS_INDENTED_VIEW), subview, FIXNUM(depth))];
+	};
+	
 	if ([currentObject isKindOfClass:[UITabBarController class]]) {
 		UITabBarController* tabBarController = currentObject;
-		return [NSArray arrayWithObjects:
-				PAIR(Enum(LS_OBJECT), currentObject),
-				PAIR(Enum(LS_TABBAR), tabBarController.tabBar),
-				PAIR(Enum(LS_VIEWCONTROLLERS), tabBarController.viewControllers),
-				nil];
+		[ret addObject:PAIR(Enum(LS_TABBAR), tabBarController.tabBar)];
+		[ret addObject:PAIR(Enum(LS_VIEWCONTROLLERS), tabBarController.viewControllers)];
 	} else if ([currentObject isKindOfClass:[UINavigationController class]]) {
 		UINavigationController* navigationController = currentObject;
-		NSMutableArray* ret = [NSMutableArray array];
-		[ret addObject:PAIR(Enum(LS_OBJECT), currentObject)];
 		[ret addObject:PAIR(Enum(LS_VIEWCONTROLLERS), navigationController.viewControllers)];
 		if (! navigationController.toolbarHidden) {
 			[ret addObject:PAIR(Enum(LS_TOOLBAR), navigationController.toolbar)];
 			[ret addObject:PAIR(Enum(LS_TOOLBAR_ITEMS), navigationController.toolbar.items)];
 		}
-		return ret;
 	} else if ([currentObject isKindOfClass:[UIViewController class]]) {
-		NSMutableArray* ret = [NSMutableArray array];
-		[ret addObject: PAIR(Enum(LS_OBJECT), currentObject) ];
 		UIViewController* controller = currentObject;
 		if (nil != controller.navigationItem) {
 			[ret addObject: PAIR(Enum(LS_NAVIGATIONITEM), controller.navigationItem) ];
@@ -260,16 +268,17 @@ NSArray* array_prefix_index(NSArray* array) {
 					PAIR(Enum(LS_SECTIONS), sections),
 									   nil]];
 		} else {
-			[ret addObjectsFromArray: [NSArray arrayWithObjects:
-					PAIR(Enum(LS_VIEW), controller.view),
-					PAIR(Enum(LS_VIEW_SUBVIEWS), [controller.view.subviews reverse]),
-									   nil]];
+			if (recursive) {
+				[controller.view traverseSubviews:traverseBlock reverse:true];
+			} else {
+				[ret addObject:PAIR(Enum(LS_VIEW), controller.view)];
+				[ret addObject:PAIR(Enum(LS_VIEW_SUBVIEWS), [controller.view.subviews reverse])];
+			}
 		}
 		if (! controller.navigationController.toolbarHidden &&  nil != controller.navigationController.toolbar) {
 			[ret addObject: PAIR(Enum(LS_NAVIGATIONCONTROLLER_TOOLBAR), controller.navigationController.toolbar) ];
 			[ret addObject: PAIR(Enum(LS_NAVIGATIONCONTROLLER_TOOLBAR_ITEMS), controller.navigationController.toolbar.items) ];
 		}
-		return ret;
 	} else if ([currentObject isKindOfClass:[UITableView class]]) {
 		UITableView* tableView = currentObject;
 		NSMutableArray* sections = [NSMutableArray array];
@@ -282,26 +291,18 @@ NSArray* array_prefix_index(NSArray* array) {
 			}
 			[sections addObject:ary];
 		}
-		return [NSArray arrayWithObjects:
-				PAIR(Enum(LS_OBJECT), currentObject),
-				PAIR(Enum(LS_SECTIONS), sections),
-				nil];	
+		[ret addObject:PAIR(Enum(LS_SECTIONS), sections)];
 	} else if ([currentObject isKindOfClass:[UIView class]]) {
 		UIView* view = currentObject;
-		return [NSArray arrayWithObjects:
-				PAIR(Enum(LS_OBJECT), currentObject),
-				PAIR(Enum(LS_VIEW_SUBVIEWS), [view.subviews reverse]),
-				nil];
+		if (recursive) {
+			[view traverseSubviews:traverseBlock reverse:true];
+		} else {
+			[ret addObject:PAIR(Enum(LS_VIEW_SUBVIEWS), [view.subviews reverse])];
+		}
 	} else if (currentObject == [currentObject class]) {
-		return [NSArray arrayWithObjects:
-				PAIR(Enum(LS_OBJECT), currentObject),
-				PAIR(Enum(LS_CLASS_METHODS), [currentObject class_methods]),
-				nil];				
-	} else {	
-		return [NSArray arrayWithObjects:
-				PAIR(Enum(LS_OBJECT), currentObject),
-				nil];		
+		[ret addObject:PAIR(Enum(LS_CLASS_METHODS), [currentObject class_methods])];
 	}
+	return ret;
 }
 
 -(NSArray*) findTargetObject:(id)currentObject arg:(id)arg {
