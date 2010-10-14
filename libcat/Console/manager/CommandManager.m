@@ -228,10 +228,8 @@ NSArray* array_prefix_index(NSArray* array) {
 	NSMutableArray* ret = [NSMutableArray array];
 	[ret addObject:PAIR(Enum(LS_OBJECT), currentObject)];
 
-#define LS_OPTION_RECURSIVE @"-r"
 	BOOL recursive = [LS_OPTION_RECURSIVE isEqualToString:arg];
 	TraverseBlock traverseBlock = ^(int depth, UIView* subview) {
-		log_info(@"%@%@", [SPACE repeat:depth], [subview inspect]);
 		[ret addObject:TRIO(Enum(LS_INDENTED_VIEW), subview, FIXNUM(depth))];
 	};
 	
@@ -263,10 +261,8 @@ NSArray* array_prefix_index(NSArray* array) {
 				}
 				[sections addObject:ary];
 			}
-			[ret addObjectsFromArray: [NSArray arrayWithObjects:
-					PAIR(Enum(LS_TABLEVIEW), tableView),
-					PAIR(Enum(LS_SECTIONS), sections),
-									   nil]];
+			[ret addObject:PAIR(Enum(LS_TABLEVIEW), tableView)];
+			[ret addObject:PAIR(Enum(LS_SECTIONS), sections)];
 		} else {
 			if (recursive) {
 				[controller.view traverseSubviews:traverseBlock reverse:true];

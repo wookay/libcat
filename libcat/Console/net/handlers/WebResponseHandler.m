@@ -18,6 +18,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "NSArrayBlock.h"
 #import "Inspect.h"
+#import "NSBundleExt.h"
 
 #define S(obj) SWF(@"%@", [obj inspect])
 
@@ -102,10 +103,19 @@ static NSString *replaceAll(NSString *s, NSDictionary *replacements) {
 	//	log_info(@"requestMethod %@", requestMethod);
 	//	log_info(@"headerFields %@", headerFields);
 	
+	NSString* arg = nil;
+	NSString* query = [url query];
+	if (nil != query) {
+		NSString* param = @"arg=";
+		if (query.length > param.length) {
+			arg = [query slice:param.length backward:-1];
+		}
+	}
+	BOOL recursive = [arg isEqualToString:LS_OPTION_RECURSIVE];
 	NSMutableArray* ary = [NSMutableArray array];
-
-	NSArray* arrayLS = [COMMANDMAN array_ls:[CONSOLEMAN currentTargetObjectOrTopViewController] arg:nil];
-	NSString* title = EMPTY_STRING;
+	NSMutableArray* topLinks = [NSMutableArray array];
+	NSArray* arrayLS = [COMMANDMAN array_ls:[CONSOLEMAN currentTargetObjectOrTopViewController] arg:arg];
+	NSString* title = [NSBundle bundleName];
 	for (NSArray* pair in arrayLS) {
 		int lsType = [[pair objectAtFirst] intValue];
 		id obj = [pair objectAtSecond];
@@ -114,9 +124,14 @@ static NSString *replaceAll(NSString *s, NSDictionary *replacements) {
 					NSString* classNameUpper = [SWF(@"%@", [obj class]) uppercaseString];
 					[ary addObject:SWF(@"[%@]: %@", classNameUpper, [S(obj) htmlEscapedString])];
 					if ([obj isKindOfClass:[UIView class]]) {
-						[ary addObject:SWF(@"<img src='/image/%p.png' />", obj)];
+						[ary addObject:SWF(@"<img src='/image/%p.png' /><hr />", obj)];
 					} else if ([obj respondsToSelector:@selector(title)]) {
-						title = [obj title];
+						title = SWF(@"%@ :: %@", [NSBundle bundleName], [obj title]);
+						if (recursive) {
+							[topLinks addObject:@"<a href='/'>recursive off</a>"];
+						} else {
+							[topLinks addObject:@"<a href='/?arg=-r'>recursive on</a>"];
+						}
 					}
 				}
 				break;
@@ -128,34 +143,45 @@ static NSString *replaceAll(NSString *s, NSDictionary *replacements) {
 				break;
 			case LS_SECTIONS: {
 					[ary addObject:SWF(@"SECTIONS: ")];
+					int section = 0;
 					for (NSArray* sectionArray in (NSArray*)obj) {
+						int row = 0;
 						for (id cell in sectionArray) {
-							 [ary addObject:SWF(@"<img src='/image/%p.png' /> %@", cell, [S(cell) htmlEscapedString])];
+							[ary addObject:SWF(@"[%d %d] %@<br /><img src='/image/%p.png' /><hr />", section, row, [S(cell) htmlEscapedString], cell)];
+							row += 1;
 						}
+						section += 1;
 					}
 				}
 				break;
 			case LS_VIEW:
 				[ary addObject:SWF(@"VIEW: %@", [S(obj) htmlEscapedString])];
-				[ary addObject:SWF(@"<img src='/image/%p.png' />", obj)];
+				[ary addObject:SWF(@"<img src='/image/%p.png' /><hr />", obj)];
 				break;
+			case LS_INDENTED_VIEW: {
+					int depth = [[pair objectAtThird] intValue];
+					[ary addObject:SWF(@"%@%@<br /><img src='/image/%p.png' /><hr />", [TAB repeat:depth], [S(obj) htmlEscapedString], obj)];
+				}
+				break;				
 			case LS_VIEW_SUBVIEWS: {
-					NSArray* subviews = [obj map:^id(id subview) {
-						return SWF(@"<img src='/image/%p.png' /> %@", subview, [S(subview) htmlEscapedString]);
-					}];
-					[ary addObject:SWF(@"VIEW.SUBVIEWS: %@", [subviews inspect])];
+					[ary addObject:SWF(@"VIEW.SUBVIEWS: ")];
+					int idx = 0;
+					for (id subview in (NSArray*)obj) {
+						[ary addObject:SWF(@"[%d] %@<br /><img src='/image/%p.png' /><hr />", idx, [S(subview) htmlEscapedString], subview)];
+						idx += 1;
+					}				
 				}
 				break;
 			case LS_TABBAR:
 				[ary addObject:SWF(@"TABBAR: %@", [S(obj) htmlEscapedString])];
-				[ary addObject:SWF(@"<img src='/image/%p.png' />", obj)];
+				[ary addObject:SWF(@"<img src='/image/%p.png' /><hr />", obj)];
 				break;				
 			case LS_NAVIGATIONITEM:
 				[ary addObject:SWF(@"NAVIGATIONITEM: %@", [S(obj) htmlEscapedString])];
 				break;																
 			case LS_NAVIGATIONCONTROLLER_TOOLBAR:
 				[ary addObject:SWF(@"NAVIGATIONCONTROLLER_TOOLBAR: %@", [S(obj) htmlEscapedString])];				
-				[ary addObject:SWF(@"<img src='/image/%p.png' />", obj)];
+				[ary addObject:SWF(@"<img src='/image/%p.png' /><hr />", obj)];
 				break;								
 			case LS_NAVIGATIONCONTROLLER_TOOLBAR_ITEMS:
 				[ary addObject:SWF(@"NAVIGATIONCONTROLLER_TOOLBAR_ITEMS: %@", [S(obj) htmlEscapedString])];				
@@ -168,7 +194,7 @@ static NSString *replaceAll(NSString *s, NSDictionary *replacements) {
 
 	NSString* body = SWF(@"<pre>%@</pre>", [ary join:LF]);
 	NSString* head = SWF(@"<meta http-equiv='content-type' content='text/html; charset=UTF-8' /><title>%@</title>", title);
-	NSString* html = SWF(@"<html><head>%@</head><body bgcolor='#d3d3d3'>%@</body></html>", head, body);
+	NSString* html = SWF(@"<html><head>%@</head><body bgcolor='#d3d3d3'>%@%@</body></html>", head, [topLinks join:LF], body);
 	
 	NSData* fileData = [html dataUsingEncoding:NSUTF8StringEncoding];
 

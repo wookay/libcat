@@ -11,6 +11,10 @@
 
 @implementation NSBundle (Ext)
 
++ (NSString*) bundleName {
+	return [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"];	
+}
+
 + (NSString*) bundleVersion {
 	return [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];	
 }
