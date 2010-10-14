@@ -18,10 +18,6 @@
 	});	
 }
 
-+(void) perform:(AsyncBlock)block afterDelay:(NSTimeInterval)delay {
-	[self performSelector:@selector(perform:) withObject:Block_copy(block) afterDelay:delay];
-}
-
 +(void) perform:(AsyncBlock)block afterDone:(AsyncBlock)completeBlock {
 	AsyncBlock copiedBlock = Block_copy(block);
 	AsyncBlock copiedCompleteBlock = Block_copy(completeBlock);
@@ -34,6 +30,10 @@
 
 +(void) taskComplete:(AsyncBlock)completeBlock {
 	completeBlock();
+}
+
++(void) afterDelay:(NSTimeInterval)delay perform:(AsyncBlock)block {
+	[self performSelector:@selector(perform:) withObject:Block_copy(block) afterDelay:delay];
 }
 
 @end

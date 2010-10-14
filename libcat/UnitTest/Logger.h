@@ -18,6 +18,7 @@ void print_log_info(const char* filename, int lineno, id format, ...) ;
 
 @protocol LoggerDelegate
 -(void) loggerTextOut:(NSString*)text ;
+-(void) show_ip_address ;
 @end
 
 
@@ -27,4 +28,5 @@ void print_log_info(const char* filename, int lineno, id format, ...) ;
 }
 @property (nonatomic, retain)	id<LoggerDelegate> delegate;
 + (LoggerManager*) sharedManager ;
+-(void) show_ip_address ;
 @end

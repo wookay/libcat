@@ -18,6 +18,10 @@ CGFloat int_to_float(int val) {
 	return val + 0.0f;
 }
 
+BOOL is_odd(int n) {
+	return 1 == n%2;
+}
+
 
 @implementation NSNumber (MathFunctions)
 -(NSString*) chr {

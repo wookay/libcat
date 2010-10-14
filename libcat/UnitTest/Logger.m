@@ -46,6 +46,13 @@ void print_log_info(const char* filename, int lineno, id format, ...) {
 
 @implementation LoggerManager
 @synthesize delegate;
+
+-(void) show_ip_address {
+	if (nil != delegate) {
+		[delegate show_ip_address];
+	}
+}
+
 - (id) init {
 	self = [super init];
 	if (self) {

@@ -27,6 +27,12 @@
 	assert_equal(LONGNUM(1), [LONGNUM(1.66) floor_down]);
 
 	assert_equal(@"A", [FIXNUM(65) chr]);
+	
+	assert_false(is_odd(0));
+	assert_true(is_odd(1));
+	assert_false(is_odd(2));
+	assert_true(is_odd(3));
+
 }
 
 @end

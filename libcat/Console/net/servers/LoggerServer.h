@@ -19,6 +19,7 @@
 
 + (LoggerServer*) sharedServer ;
 
+- (NSString *) get_local_ip_address ;
 -(void) startWithPort:(int)port ;
 -(void) stop ;
 

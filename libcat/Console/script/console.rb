@@ -5,7 +5,7 @@
 
 
 
-CONSOLE_SERVER_ADDRESS = 'localhost'
+CONSOLE_SERVER_ADDRESS = ARGV.size>0 ? ARGV.first : 'localhost'
 
 
 

@@ -37,3 +37,8 @@
 @interface UINavigationItem (SetValueFromString)
 -(void) setTitleFromString:(NSString*)str ;
 @end
+
+
+@interface UIScrollView (SetValueFromString)
+-(void) setContentSizeFromString:(NSString*)str ;
+@end

@@ -8,6 +8,12 @@
 
 #import "LoggerServer.h"
 #import "Logger.h"
+#include <arpa/inet.h>
+#include <netdb.h>
+#include <net/if.h>
+#include <ifaddrs.h>
+#import "iPadExt.h"
+#import "UIButtonBlock.h"
 
 #define WELCOME_MSG  0
 #define ECHO_MSG     1
@@ -18,6 +24,27 @@
 
 @implementation LoggerServer
 
+-(void) show_ip_address {
+	NSString* ip_address = [self get_local_ip_address];
+	if (nil == ip_address) {
+//		ip_address = NSLocalizedString(@"Not Found", nil);
+	}
+	CGRect rect = CGRectMake(4.2, SCREEN_HEIGHT-16, 70, 14);
+	UIButton* label = [[UIButton alloc] initWithFrame:rect];
+	[label addBlock:^(id sender) { 
+		[sender	removeBlockForControlEvents:UIControlEventTouchUpInside];
+		[sender removeFromSuperview];
+	} forControlEvents:UIControlEventTouchUpInside];
+	label.titleLabel.font = [UIFont fontWithName:@"CourierNewPS-BoldMT" size:rect.size.height];
+	label.titleLabel.textAlignment = UITextAlignmentLeft;
+	label.titleLabel.adjustsFontSizeToFitWidth = true;
+	label.backgroundColor = [UIColor clearColor];
+	[label setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+	[label setTitle:ip_address forState:UIControlStateNormal];
+	[[UIApplication sharedApplication].keyWindow addSubview:label];
+	[label release];
+}
+
 -(void) loggerTextOut:(NSString *)text {
 	NSData* data = [text dataUsingEncoding:NSUTF8StringEncoding];
 	for (AsyncSocket* sock in connectedSockets) {
@@ -25,6 +52,32 @@
 	}
 }
 
+
+
+- (NSString *) get_local_ip_address
+{
+	BOOL success;
+	struct ifaddrs * addrs;
+	const struct ifaddrs * cursor;
+	
+	success = getifaddrs(&addrs) == 0;
+	if (success) {
+		cursor = addrs;
+		while (cursor != NULL) {
+			// the second test keeps from picking up the loopback address
+			if (cursor->ifa_addr->sa_family == AF_INET && (cursor->ifa_flags & IFF_LOOPBACK) == 0) 
+			{
+				NSString *name = [NSString stringWithUTF8String:cursor->ifa_name];
+				if ([name isEqualToString:@"en0"])  // Wi-Fi adapter
+					return [NSString stringWithUTF8String:inet_ntoa(((struct sockaddr_in *)cursor->ifa_addr)->sin_addr)];
+			}
+			cursor = cursor->ifa_next;
+		}
+		freeifaddrs(addrs);
+	}
+	return nil;
+	
+}
 
 + (LoggerServer*) sharedServer {
 	static LoggerServer*	manager = nil;

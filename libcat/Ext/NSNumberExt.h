@@ -14,7 +14,7 @@
 
 int get_random(int div) ;
 CGFloat int_to_float(int val) ;
-
+BOOL is_odd(int n) ;
 
 @interface NSNumber (MathFunctions)
 -(NSString*) chr ;

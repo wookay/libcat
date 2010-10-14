@@ -122,3 +122,10 @@ CGRect rectFromString(NSString* str) {
 	self.title = str;
 }
 @end
+
+
+@implementation UIScrollView (SetValueFromString)
+-(void) setContentSizeFromString:(NSString*)str {
+	self.contentSize = CGSizeFromString(str);
+}
+@end

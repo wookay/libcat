@@ -9,7 +9,7 @@
 #import "AppDelegate.h"
 #import "UnitTest.h"
 #import "ConsoleManager.h"
-
+#import "Logger.h"
 
 @implementation AppDelegate
 
@@ -27,6 +27,7 @@
     [window makeKeyAndVisible];
 	
 	[CONSOLEMAN start_servers];
+	[LOGGERMAN show_ip_address];
 	
 	[UnitTest setup];
 	[UnitTest run_all_tests];
