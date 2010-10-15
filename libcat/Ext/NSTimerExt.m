@@ -11,11 +11,11 @@
 
 @implementation NSTimer (Ext)
 
-+(void) after:(NSTimeInterval)ti target:(id)aTarget action:(SEL)aSelector {
++(void) afterDelay:(NSTimeInterval)ti target:(id)aTarget action:(SEL)aSelector {
 	[self scheduledTimerWithTimeInterval:ti target:aTarget selector:aSelector userInfo:nil repeats:false];
 }
 
-+(void) after:(NSTimeInterval)ti target:(id)aTarget action:(SEL)aSelector userInfo:(id)userInfo {
++(void) afterDelay:(NSTimeInterval)ti target:(id)aTarget action:(SEL)aSelector userInfo:(id)userInfo {
 	[self scheduledTimerWithTimeInterval:ti target:aTarget selector:aSelector userInfo:userInfo repeats:false];
 }
 

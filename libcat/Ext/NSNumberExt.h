@@ -15,6 +15,7 @@
 int get_random(int div) ;
 CGFloat int_to_float(int val) ;
 BOOL is_odd(int n) ;
+int enum_rshift(int greatest, int current) ;
 
 @interface NSNumber (MathFunctions)
 -(NSString*) chr ;

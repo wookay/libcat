@@ -22,6 +22,11 @@ BOOL is_odd(int n) {
 	return 1 == n%2;
 }
 
+int enum_rshift(int greatest, int current) {
+	return ((current+1) == greatest) ? 0 : current+1;
+}
+
+
 
 @implementation NSNumber (MathFunctions)
 -(NSString*) chr {

@@ -38,6 +38,7 @@ cd TARGET		: change target object (ㄷ)
   [ cd 0x6067490 ]	: at memory address
 
 touch TARGET   		: touch target object (t, ㅌ)
+flash TARGET		: flash target object (f)
 back    		: popViewControllerAnimated: false (b, ㅂ)
 rm N			: removeFromSuperview
 
@@ -88,6 +89,7 @@ class Console
     aliases = { 't' => 'touch',
     'ㅌ' => 'touch',
     'b' => 'back',
+    'f' => 'flash',
     'ㅂ' => 'back',
     'ㄷ' => 'cd',
     'ㄹ' => 'ls',
@@ -125,7 +127,7 @@ class Console
         when 'completion'
           puts response.body if env[:print]
           response.body
-        when 'cd', 'rm', 'back', 'touch'
+        when 'cd', 'rm', 'back', 'touch', 'flash'
           puts response.body if response.body.size>0 and env[:print]
           update_prompt
         else

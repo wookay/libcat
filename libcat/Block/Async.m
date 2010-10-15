@@ -7,6 +7,8 @@
 //
 
 #import "Async.h"
+#import "NSTimerExt.h"
+#import "NSArrayExt.h"
 
 @implementation Async
 
@@ -24,16 +26,25 @@
 	dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
 	dispatch_async(queue, ^{
 		copiedBlock();
-		[self performSelectorOnMainThread:@selector(taskComplete:) withObject:copiedCompleteBlock waitUntilDone:NO];
+		[self performSelectorOnMainThread:@selector(__taskCompleted:) withObject:copiedCompleteBlock waitUntilDone:NO];
 	});
 }
 
-+(void) taskComplete:(AsyncBlock)completeBlock {
++(void) __taskCompleted:(AsyncBlock)completeBlock {
 	completeBlock();
+}
+
++(void) __taskPerform:(NSTimer*)timer {
+	NSArray* pair = [timer userInfo];
+	[self perform:[pair objectAtFirst] afterDone:[pair objectAtSecond]];
 }
 
 +(void) afterDelay:(NSTimeInterval)delay perform:(AsyncBlock)block {
 	[self performSelector:@selector(perform:) withObject:Block_copy(block) afterDelay:delay];
+}
+
++(void) afterDelay:(NSTimeInterval)delay perform:(AsyncBlock)block afterDone:(AsyncBlock)completeBlock {
+	[NSTimer afterDelay:delay target:self action:@selector(__taskPerform:) userInfo:_array2(Block_copy(block), Block_copy(completeBlock))];
 }
 
 @end

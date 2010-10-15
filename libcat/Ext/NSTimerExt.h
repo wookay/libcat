@@ -10,6 +10,6 @@
 
 
 @interface NSTimer (Ext)
-+ (void) after:(NSTimeInterval)ti target:(id)aTarget action:(SEL)aSelector ;
-+ (void) after:(NSTimeInterval)ti target:(id)aTarget action:(SEL)aSelector userInfo:(id)userInfo ;
++ (void) afterDelay:(NSTimeInterval)ti target:(id)aTarget action:(SEL)aSelector ;
++ (void) afterDelay:(NSTimeInterval)ti target:(id)aTarget action:(SEL)aSelector userInfo:(id)userInfo ;
 @end

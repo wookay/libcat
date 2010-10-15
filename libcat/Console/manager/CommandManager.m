@@ -25,6 +25,7 @@
 #import "UIViewBlock.h"
 #import "NewObjectManager.h"
 #import "objc/runtime.h"
+#import <QuartzCore/QuartzCore.h>
 
 
 #define TOOLBAR_ITEMS_SECTION_INDEX -1
@@ -51,6 +52,7 @@ NSArray* array_prefix_index(NSArray* array) {
 			@"cd", @"command_cd:arg:",
 			@"ls", @"command_ls:arg:",
 			@"touch", @"command_touch:arg:",
+			@"flash", @"command_flash:arg:",
 			@"back", @"command_back:arg:",
 			@"rm", @"command_rm:arg:",
 			@"new_objects", @"command_new_objects:arg:",
@@ -116,6 +118,34 @@ NSArray* array_prefix_index(NSArray* array) {
 	return NSLocalizedString(@"Not Found", nil);
 }
 
+-(NSString*) command_flash:(id)currentObject arg:(id)arg {
+	NSArray* pair = [self findTargetObject:currentObject arg:arg];
+	id changeObject = [pair objectAtSecond];
+	if ([changeObject isKindOfClass:[UIView class]]) {
+		UIView* view = (UIView*)changeObject;
+		CGFloat viewAlpha = view.alpha;
+		CGFloat layerBorderWidth = view.layer.borderWidth;
+		CGColorRef layerBorderColor = view.layer.borderColor;
+		[UIView animate:^ {
+				view.layer.borderWidth = 3;
+				view.layer.borderColor = [[UIColor redColor] CGColor];
+				view.alpha = viewAlpha - 0.1;
+			} afterDone:^ {
+				view.layer.borderWidth = layerBorderWidth;
+				view.layer.borderColor = layerBorderColor;
+				view.alpha = viewAlpha;
+			}];
+	} else if ([changeObject isKindOfClass:[UIBarButtonItem	class]]) {
+		UIBarButtonItem* barButtonItem = (UIBarButtonItem*)changeObject;
+		UIBarButtonItemStyle style = barButtonItem.style;		
+		[UIView animate:^ {
+			barButtonItem.style = enum_rshift(UIBarButtonItemStyleDone, style);
+		} afterDone:^ {
+			barButtonItem.style = style;
+		}];
+	}
+	return EMPTY_STRING;
+}
 
 -(NSString*) command_rm:(id)currentObject arg:(id)arg {
 	NSArray* pair = [self findTargetObject:currentObject arg:arg];
