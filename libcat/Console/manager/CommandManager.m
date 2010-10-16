@@ -492,6 +492,9 @@ NSArray* array_prefix_index(NSArray* array) {
 			NSDictionary* targetBlocks = [pair objectAtSecond];
 			id obj = [targetStrings	objectForKey:arg];
 			if (nil == obj) {
+				obj = [targetStrings objectForKey:NSLocalizedString(arg, nil)];
+			}
+			if (nil == obj) {
 				Class klass = NSClassFromString(arg);
 				if (nil != klass) {
 					changeObject = klass;
