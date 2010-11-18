@@ -29,15 +29,9 @@ CGFloat CGPointDiffY(CGPoint from, CGPoint to) {
 	return from.y - to.y;
 }
 
-
-
 #pragma mark CGRect
 BOOL CGRectHasPoint(CGRect rect, CGPoint point) {
 	return true == CGRectContainsPoint(rect, point);
-}
-
-CGRect CGRectExpand(CGRect rect, CGFloat dx, CGFloat dy) {
-	return CGRectMake(rect.origin.x, rect.origin.y, rect.size.width+dx, rect.size.height+dy);
 }
 
 CGRect CGRectOriginZero(CGRect rect) {
@@ -50,7 +44,52 @@ CGRect CGRectWithSize(CGSize size) {
 	rect.size = size;
 	return rect;
 }
-
 CGRect CGRectWithCenterPoint(CGPoint centerPoint, CGFloat width, CGFloat height) {
 	return CGRectMake(centerPoint.x - width/2, centerPoint.y - height/2, width, height);
+}
+
+CGRect CGRectExpand(CGRect rect, CGFloat dx, CGFloat dy) {
+	return CGRectMake(rect.origin.x, rect.origin.y, rect.size.width+dx, rect.size.height+dy);
+}
+
+CGRect CGRectBottomLeft(CGRect rect, CGFloat width, CGFloat height) {
+	return CGRectMake(rect.origin.x, rect.origin.y + rect.size.height - height, width, height);
+}
+
+CGRect CGRectTopLeft(CGRect rect, CGFloat width, CGFloat height) {
+	return CGRectMake(rect.origin.x, rect.origin.y, width, height);
+}
+
+CGRect CGRectTopRight(CGRect rect, CGFloat width, CGFloat height) {
+	return CGRectMake(rect.origin.x + rect.size.width - width, rect.origin.y, width, height);
+}
+
+CGRect CGRectForCenter(CGRect rect, CGFloat width, CGFloat height) {
+	return CGRectMake(rect.origin.x + rect.size.width/2 - width/2, rect.origin.y + rect.size.height/2 - height/2, width, height);
+}
+
+CGRect CGRectForRight(CGRect rect, CGFloat width, CGFloat height) {
+	return CGRectMake(rect.origin.x + rect.size.width - width, rect.origin.y + (rect.size.height - height)/2 , width, height);
+}
+
+CGRect CGRectSideOffset(CGRect rect, CGFloat x, CGFloat y) {
+	return CGRectMake(rect.origin.x - x, rect.origin.y - y, rect.size.width + x*2, rect.size.height + y*2);
+}
+
+CGRect CGRectWithOrigin(CGPoint point, CGFloat width, CGFloat height) {
+	return CGRectMake(point.x, point.y, width, height);
+}
+
+CGRect CGRectSetOrigin(CGRect rect, CGFloat x, CGFloat y) {
+	rect.origin = CGPointMake(x, y);
+	return rect;
+}
+
+CGRect CGRectSetOriginPoint(CGRect rect, CGPoint point) {
+	rect.origin = point;
+	return rect;
+}
+
+CGRect CGRectWithTwoPoints(CGPoint from, CGPoint to) {
+	return CGRectWithOrigin(from, to.x-from.x, to.y-from.y);
 }

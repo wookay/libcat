@@ -19,6 +19,8 @@
 NSString* postfix_string(int postfix) {
 	if (IS_LOCALE_KOREAN) {
 		switch (postfix) {
+			case POSTFIX_YEAR:
+				return @"년";
 			case POSTFIX_MONTH:
 				return @"월";
 			case POSTFIX_DAY:
@@ -33,6 +35,55 @@ NSString* postfix_string(int postfix) {
 	}
 	return EMPTY_STRING;
 }
+
+NSString* hourName_minute_second_SPACE(NSTimeInterval ti) {
+	NSMutableArray* ary = [NSMutableArray array];
+	NSTimeInterval left = ti;
+	if (left > ONE_HOUR_SECONDS) {
+		int hour = left/ONE_HOUR_SECONDS;
+		left -= hour*ONE_HOUR_SECONDS;
+		if (IS_LANG_KOREAN) {
+			[ary addObject:SWF(@"%d시간", hour)];
+		} else {
+			[ary addObject:SWF(@"%02d", hour)];
+		}
+	}
+	if (left > ONE_MINUTE_SECONDS) {
+		int minute = left/ONE_MINUTE_SECONDS;
+		left -= minute*ONE_MINUTE_SECONDS;
+		if (IS_LANG_KOREAN) {
+			[ary addObject:SWF(@"%d분", minute)];
+		} else {
+			[ary addObject:SWF(@"%02d", minute)];
+		}
+	}
+	int seconds = left;
+	if (IS_LANG_KOREAN) {
+		if (0 == seconds && ary.count > 0) {
+		} else {
+			[ary addObject:SWF(@"%d초", seconds)];
+		}
+	} else {
+		[ary addObject:SWF(@"%02d", seconds)];
+	}
+	if (IS_LANG_KOREAN) {
+		return [ary componentsJoinedByString:SPACE];
+	} else {
+		return [ary componentsJoinedByString:COLON];
+	}
+}
+
+
+#ifdef BUILD_313
+@interface NSDate (Build313)
+-(NSDate*) dateByAddingTimeInterval:(NSTimeInterval)ti ;
+@end
+@implementation NSDate (Build313)
+-(NSDate*) dateByAddingTimeInterval:(NSTimeInterval)ti {
+	return [self addTimeInterval:ti];
+}
+@end
+#endif
 
 
 @interface NSDate (Private)
@@ -232,12 +283,24 @@ NSString* postfix_string(int postfix) {
 	}
 }
 
+-(NSString*) hourName_minute_second_SPACE {
+	if (IS_LOCALE_KOREAN) {
+		return [self formatWith:@"H시 m분 s초"];
+	} else {
+		return [self formatWith:@"H:m:s"];
+	}
+}
+
 -(NSString*) hourName_SPACE {
 	if (IS_LOCALE_KOREAN) {
 		return [self formatWith:@"H시"];
 	} else {
 		return [self formatWith:@"H"];
 	}
+}
+
+-(NSString*) monthName {
+	return [self formatWith:@"LLLL"];
 }
 
 -(NSString*) monthName_day_SPACE {

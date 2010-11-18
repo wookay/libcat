@@ -26,13 +26,14 @@ enum WeekdayIndexes {
 };
 
 enum PostfixTypes {
-	POSTFIX_MONTH = 1,
-	POSTFIX_DAY = 2,
-	POSTFIX_HOUR = 3,
-	POSTFIX_MINUTE = 4,
+	POSTFIX_YEAR = 1,
+	POSTFIX_MONTH = 2,
+	POSTFIX_DAY = 3,
+	POSTFIX_HOUR = 4,
+	POSTFIX_MINUTE = 5,
 };
 NSString* postfix_string(int postfix) ;
-
+NSString* hourName_minute_second_SPACE(NSTimeInterval ti) ;
 
 
 
@@ -72,12 +73,14 @@ NSString* postfix_string(int postfix) ;
 -(NSString*) year_monthName_SPACE ;
 -(NSString*) year_monthName_day_SPACE ;
 -(NSString*) month_day_DOT ;
+-(NSString*) monthName ;
 -(NSString*) monthName_day_SPACE ;
 -(NSString*) monthName_day_weekday_SPACE ;
 -(NSString*) amPM_hourName_minute_SPACE ;
 -(NSString*) amPM_hourName_SPACE ;	
--(NSString*) hourName_minute_SPACE ;
 -(NSString*) hourName_SPACE ;	
+-(NSString*) hourName_minute_SPACE ;
+-(NSString*) hourName_minute_second_SPACE ;
 -(NSString*) hour_minute_COLON ;
 -(NSString*) hour_minute_second_COLON ;
 -(NSString*) gmtString ;

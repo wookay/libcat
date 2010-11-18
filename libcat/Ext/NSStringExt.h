@@ -58,8 +58,11 @@
 
 NSString* SWF(NSString* format, ...) ;
 NSArray* _w(NSString* str) ;
+NSString* char_to_string(char ch) ;
 NSString* int_to_string(int n);
+NSString* double_to_string(double n) ;
 NSString* unichar_to_string(unichar ch) ;
+NSString* nil_to_empty_string(NSString* str) ;
 NSInteger sortByStringComparator(NSString* uno, NSString* dos, void* context) ;
 
 @interface NSString (Ext)

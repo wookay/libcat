@@ -20,17 +20,28 @@ CGFloat CGPointDiffY(CGPoint from, CGPoint to) ;
 #define CGPointMinusOne	CGPointMake(-1, -1)
 
 #pragma mark CGRect
-CGRect CGRectExpand(CGRect rect, CGFloat dx, CGFloat dy) ;
+BOOL CGRectHasPoint(CGRect rect, CGPoint point) ;
 CGRect CGRectOriginZero(CGRect rect) ;
 CGRect CGRectWithSize(CGSize size) ;
 CGRect CGRectWithCenterPoint(CGPoint centerPoint, CGFloat width, CGFloat height) ;
-BOOL CGRectHasPoint(CGRect rect, CGPoint point) ;
+CGRect CGRectExpand(CGRect rect, CGFloat dx, CGFloat dy) ;
+CGRect CGRectBottomLeft(CGRect rect, CGFloat width, CGFloat height) ;
+CGRect CGRectTopLeft(CGRect rect, CGFloat width, CGFloat height) ;
+CGRect CGRectTopRight(CGRect rect, CGFloat width, CGFloat height) ;
+CGRect CGRectForCenter(CGRect rect, CGFloat width, CGFloat height) ;
+CGRect CGRectForRight(CGRect rect, CGFloat width, CGFloat height) ;
+CGRect CGRectSideOffset(CGRect rect, CGFloat x, CGFloat y) ;
+CGRect CGRectWithOrigin(CGPoint point, CGFloat width, CGFloat height) ;
+CGRect CGRectSetOrigin(CGRect rect, CGFloat x, CGFloat y) ;
+CGRect CGRectSetOriginPoint(CGRect rect, CGPoint point) ;	
+CGRect CGRectWithTwoPoints(CGPoint from, CGPoint to) ;
 
 #define SFRect(rect)	NSStringFromCGRect(rect)
 #define SFSize(size)	NSStringFromCGSize(size)
 #define SFPoint(point)  NSStringFromCGPoint(point)
 #define SFRange(range)	[NSString stringWithFormat:@"{location=%d, length=%d}", range.location, range.length]
 #define VFPoint(point)	[NSValue valueWithCGPoint:point]
+#define VFRect(rect)	[NSValue valueWithCGRect:rect]
 
 #define NSRangeZero (NSMakeRange(0, 0))
 #define IS_NOT_FOUND(range)		(range.location == NSNotFound)

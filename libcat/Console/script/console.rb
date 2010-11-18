@@ -54,6 +54,8 @@ about			: about
 quit			: quit (q)
 EOF
 
+# watch TARGET		: watch target object (w)
+
 CONSOLE_VERSION = 0.1
 ABOUT = <<EOF
 libcat Console #{CONSOLE_VERSION} by wookay
@@ -94,6 +96,7 @@ class Console
     'ㄷ' => 'cd',
     'ㄹ' => 'ls',
     '$' => 'new_objects',
+    'w' => 'watch',
     }
     aliases[command_str] or command_str 
   end
@@ -127,7 +130,7 @@ class Console
         when 'completion'
           puts response.body if env[:print]
           response.body
-        when 'cd', 'rm', 'back', 'touch', 'flash'
+        when 'cd', 'rm', 'back', 'touch', 'flash', 'watch'
           puts response.body if response.body.size>0 and env[:print]
           update_prompt
         else

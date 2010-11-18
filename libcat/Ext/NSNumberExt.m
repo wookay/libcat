@@ -18,6 +18,10 @@ CGFloat int_to_float(int val) {
 	return val + 0.0f;
 }
 
+int float_to_int(float val) {
+	return (int)val;
+}
+
 BOOL is_odd(int n) {
 	return 1 == n%2;
 }

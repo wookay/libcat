@@ -10,10 +10,13 @@
 
 #define Enum(enum)		[NSNumber numberWithInt:enum]
 #define FIXNUM(num)		[NSNumber numberWithInt:num]
+#define FIXNUM_with_float(num) FIXNUM(float_to_int(num))
+#define FLOAT(num)		[NSNumber numberWithFloat:num]
 #define LONGNUM(num)	[NSNumber numberWithDouble:num]
 
 int get_random(int div) ;
 CGFloat int_to_float(int val) ;
+int float_to_int(float val) ;
 BOOL is_odd(int n) ;
 int enum_rshift(int greatest, int current) ;
 

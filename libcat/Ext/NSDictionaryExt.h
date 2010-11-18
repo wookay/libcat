@@ -26,4 +26,5 @@ NSDictionary* HashSTAR(NSArray* ary) ;
 -(BOOL) hasNotKey:(id)key ;
 -(NSArray*) sortedKeys:(SEL)selector ;
 -(BOOL) isEmpty ;
+-(NSArray*) keyValuePairs ;
 @end

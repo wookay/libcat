@@ -25,18 +25,29 @@ NSArray* _w(NSString* str) {
 	return [str componentsSeparatedByString:SPACE];
 }
 
+NSString* char_to_string(char ch) {
+	return [NSString stringWithFormat:@"%c", ch];
+}
+
 NSString* int_to_string(int n) {
 	return [NSString stringWithFormat:@"%d", n];
+}
+
+NSString* double_to_string(double n) {
+	return [NSString stringWithFormat:@"%f", n];
 }
 
 NSString* unichar_to_string(unichar ch) {
 	return [NSString stringWithFormat:@"%C", ch];
 }
 
+NSString* nil_to_empty_string(NSString* str) {
+	return (nil == str) ? EMPTY_STRING : str;
+}
+
 NSInteger sortByStringComparator(NSString* uno, NSString* dos, void* context) {
 	return [uno localizedCaseInsensitiveCompare:dos];
 }
-
 
 @implementation NSString (Ext)
 

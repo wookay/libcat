@@ -51,11 +51,24 @@ NSDictionary* HashSTAR(NSArray* ary) {
 
 -(id) keyForObject:(id)obj {
 	NSArray* ary = [self allKeysForObject:obj];
-	return [ary objectAtFirst];
+	if (ary.count > 0) {
+		return [ary objectAtFirst];
+	} else {
+		return nil;
+	}
 }
 
 -(BOOL) isEmpty {
 	return 0 ==[self allKeys].count;
+}
+
+-(NSArray*) keyValuePairs {
+	NSMutableArray* ary = [NSMutableArray array];
+	for (id key in [self allKeys]) {
+		id value = [self objectForKey:key];
+		[ary addObject:PAIR(key,value)];
+	}
+	return ary;
 }
 
 + (id)dictionaryWithKeysAndObjects:(id)firstKey, ... {

@@ -17,3 +17,9 @@
 #define SCREEN_FRAME CGRectMake(0,0,SCREEN_WIDTH,SCREEN_HEIGHT)
 #define HALF_SCREEN_WIDTH (SCREEN_WIDTH/2)
 #define HALF_SCREEN_HEIGHT (SCREEN_HEIGHT/2)
+
+
+
+#ifdef BUILD_313
+	#import "Build313Ext.h"
+#endif

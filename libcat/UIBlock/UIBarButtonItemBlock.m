@@ -14,9 +14,10 @@ UIBarButtonItem* barbutton_item(NSString* title, BarButtonItemBlock block) {
 }
 
 UIBarButtonItem* barbutton_item_style(NSString* title, BarButtonItemBlock block, UIBarButtonItemStyle style) {
-	UIBarButtonItem* item = [[[UIBarButtonItem alloc] initWithTitle:title style:style target:[ProcForBarButtonItem procWithBlock:Block_copy(block)] action:@selector(call)] autorelease];
+	id target = [ProcForBarButtonItem procWithBlock:Block_copy(block)];
+	UIBarButtonItem* item = [[[UIBarButtonItem alloc] initWithTitle:title style:style target:target action:@selector(call)] autorelease];
 	item.style = style;
-	return item;	
+	return item;		
 }
 
 UIBarButtonItem* barbutton_system(int systemItem, BarButtonItemBlock block) {

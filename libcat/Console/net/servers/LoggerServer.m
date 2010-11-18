@@ -29,7 +29,13 @@
 	if (nil == ip_address) {
 //		ip_address = NSLocalizedString(@"Not Found", nil);
 	}
-	CGRect rect = CGRectMake(4.2, SCREEN_HEIGHT-16, 70, 14);
+	CGFloat height;
+#ifdef BUILD_313
+	height = 480;
+#else
+	height = SCREEN_HEIGHT;
+#endif
+	CGRect rect = CGRectMake(4.2, height-16, 70, 14);
 	UIButton* label = [[UIButton alloc] initWithFrame:rect];
 	[label addBlock:^(id sender) { 
 		[sender	removeBlockForControlEvents:UIControlEventTouchUpInside];

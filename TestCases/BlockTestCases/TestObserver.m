@@ -115,6 +115,20 @@
 	[OBSERVERMAN removeDictionaryChangedBlockForKeyPath:@"book"];
 }
 
+-(void) hello {
+}
+
+//-(void) test_before_invoke {
+//	__block int cnt = 0;
+//	[self before_invoke_any_selector:^(SEL sel) {
+//		cnt += 1;
+//	}];	
+//	[self before_invoke_selector:@selector(hello) block:^{
+//		cnt += 1;
+//	}];
+//	[self hello];
+//	assert_equal(2, cnt);
+//}
 
 -(void) dealloc {
 	[self removeObserver:OBSERVERMAN forKeyPath:@"days"];	

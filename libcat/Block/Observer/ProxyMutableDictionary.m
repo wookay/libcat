@@ -40,6 +40,16 @@
 	}
 }
 
+-(void) removeAllObjects {
+	[self removeObjectsForKeys:[proxyDict allKeys]];
+}
+
+-(void) removeObjectsForKeys:(NSArray*)keyArray {
+	for (id key in keyArray) {
+		[self removeObjectForKey:key];
+	}
+}
+
 -(void) setObject:(id)anObject forKey:(id)aKey {
 	BOOL hasKey = [proxyDict hasKey:aKey];
 	id oldObj = [proxyDict objectForKey:aKey];
@@ -57,20 +67,9 @@
 	}
 }
 
--(void) removeAllObjects {
-	[self removeObjectsForKeys:[proxyDict allKeys]];
-}
-
--(void) removeObjectsForKeys:(NSArray*)keyArray {
-	for (id key in keyArray) {
-		[self removeObjectForKey:key];
-	}
-}
-
 -(void) removeObjectForKey:(id)aKey {
 	id oldObj = [proxyDict objectForKey:aKey];
-	[proxyDict removeObjectForKey:aKey];
-	
+	[proxyDict removeObjectForKey:aKey];	
 	DictionaryChangedBlock changedBlock = [OBSERVERMAN.observeBlock objectForKey:proxyKeyPath];
 	if (nil != changedBlock) {
 		changedBlock(NSKeyValueChangeRemoval, nil, oldObj, aKey);

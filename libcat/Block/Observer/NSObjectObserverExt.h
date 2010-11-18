@@ -10,6 +10,9 @@
 #import "ProxyMutableDictionary.h"
 #import "Observer.h"
 
+
+
+
 @interface NSObject (ObserverExt)
 
 -(void) addObserver:(Observer*)observer forKeyPath:(NSString *)keyPath withObjectChangedBlock:(ObjectChangedBlock)block ;
@@ -25,3 +28,4 @@
 -(id) mutableDictionaryValueForKeyPath:(NSString*)keyPath ;
 
 @end
+

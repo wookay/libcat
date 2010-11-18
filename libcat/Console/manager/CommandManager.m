@@ -27,7 +27,6 @@
 #import "objc/runtime.h"
 #import <QuartzCore/QuartzCore.h>
 
-
 #define TOOLBAR_ITEMS_SECTION_INDEX -1
 
 
@@ -55,6 +54,7 @@ NSArray* array_prefix_index(NSArray* array) {
 			@"flash", @"command_flash:arg:",
 			@"back", @"command_back:arg:",
 			@"rm", @"command_rm:arg:",
+			@"watch", @"command_watch:arg:",
 			@"new_objects", @"command_new_objects:arg:",
 			@"completion", @"command_completion:arg:",
 			nil];
@@ -77,6 +77,7 @@ NSArray* array_prefix_index(NSArray* array) {
 	[ary addObject:SWF(@"%@: %@", NEW_ONE_NAME, NEWOBJECTMAN.newOne)];
 	return [ary join:LF];
 }
+
 
 -(NSString*) command_cd:(id)currentObject arg:(id)arg {
 	id changeObject = nil;
@@ -103,6 +104,21 @@ NSArray* array_prefix_index(NSArray* array) {
 	return EMPTY_STRING;
 }
 
+
+
+-(NSString*) command_watch:(id)currentObject arg:(id)arg {
+	NSArray* pair = [self findTargetObject:currentObject arg:arg];
+	id changeObject = [pair objectAtSecond];
+	if ([changeObject isNull]) {
+		id response = [pair objectAtFirst];
+		return response;
+	} else {
+//		[changeObject before_invoke_any_selector:^(SEL sel) {
+//			log_info(@"log %@", NSStringFromSelector(sel));
+//		}];
+		return EMPTY_STRING;
+	}
+}
 
 -(NSString*) command_touch:(id)currentObject arg:(id)arg {
 	NSArray* trio = [self findTargetObject:currentObject arg:arg];

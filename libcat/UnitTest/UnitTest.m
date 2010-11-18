@@ -28,7 +28,7 @@
 }
 
 +(void) report {
-	TESTMAN.elapsed = ABS([TESTMAN.test_started_at timeIntervalSinceNow]);
+	TESTMAN.elapsed = ABS([TESTMAN.test_started_at timeIntervalSince1970]);
 	printf("\nFinished in %.3g seconds.\n", TESTMAN.elapsed);
 	printf("\n%d tests, %d assertions, %d failures, %d errors", TESTMAN.tests, TESTMAN.assertions, TESTMAN.failures, TESTMAN.errors);
 }

@@ -10,6 +10,8 @@
 #import "Observer.h"
 #import "NSObjectObserverExt.h"
 
+
+
 #define OBSERVERMAN	[ObserverManager sharedManager]
 
 @interface ObserverManager : Observer {
@@ -22,3 +24,4 @@
 
 + (ObserverManager*) sharedManager ;
 @end
+

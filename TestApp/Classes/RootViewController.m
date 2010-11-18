@@ -22,8 +22,7 @@ enum { kSectionUnitTest, kSectionConsole, kSectionMax };
 
 @implementation RootViewController
 
-
-- (void)viewDidLoad {
+- (void)viewDidLoad {	
     [super viewDidLoad];	
 	
 	self.title = NSLocalizedString(@"libcat", nil);
@@ -31,7 +30,7 @@ enum { kSectionUnitTest, kSectionConsole, kSectionMax };
 }
 
 -(void) viewWillAppear:(BOOL)animated {
-	self.navigationController.toolbarHidden = true;
+	self.navigationController.toolbarHidden = true;		
 	[super viewWillAppear:animated];
 }
 

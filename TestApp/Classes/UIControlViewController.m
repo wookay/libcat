@@ -9,6 +9,7 @@
 #import "UIControlViewController.h"
 #import "NSStringExt.h"
 #import "UIBarButtonItemBlock.h"
+#import "Logger.h"
 
 @implementation UIControlViewController
 
@@ -33,15 +34,13 @@
 }
 
 
-/*
  // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     if ((self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil])) {
         // Custom initialization
     }
-    return self;
+	return self;
 }
-*/
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
@@ -98,6 +97,7 @@
 }
 
 - (void)viewDidUnload {
+	log_info(@"viewDidUnload");
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -105,6 +105,7 @@
 
 
 - (void)dealloc {
+	log_info(@"dealloc");
     [super dealloc];
 }
 

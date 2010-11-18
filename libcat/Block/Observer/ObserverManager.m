@@ -8,7 +8,6 @@
 
 #import "ObserverManager.h"
 
-
 @implementation ObserverManager
 @synthesize observeBlock;
 
@@ -49,8 +48,4 @@
 }
 
 @end
-
-
-
-
 

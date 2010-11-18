@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+#define FLEXIBLE_SPACE_ITEM		[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease]
 
 typedef void (^BarButtonItemBlock)() ;
 
