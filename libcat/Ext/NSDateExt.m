@@ -6,6 +6,7 @@
 //  Copyright 2010 factorcat. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
 #import "NSDateExt.h"
 #import "Logger.h"
 #import "NSStringExt.h"

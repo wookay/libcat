@@ -6,7 +6,7 @@
 //  Copyright 2010 factorcat. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 #define Enum(enum)		[NSNumber numberWithInt:enum]
 #define FIXNUM(num)		[NSNumber numberWithInt:num]

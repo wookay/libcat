@@ -66,12 +66,12 @@ enum { kSectionUnitTest, kSectionConsole, kSectionMax };
 			switch (indexPath.row) {
 				case kRowTests:
 					cell.textLabel.text = NSLocalizedString(@"Tests", nil);
-					cell.detailTextLabel.text = int_to_string(TESTMAN.tests);
+					cell.detailTextLabel.text = int_to_string(UNITTESTMAN.tests);
 					break;
 				case kRowAssertions:
 					cell.textLabel.text = NSLocalizedString(@"Assertions", nil);
-					cell.detailTextLabel.text = int_to_string(TESTMAN.assertions);
-					if (0 == TESTMAN.failures && TESTMAN.assertions > 0) {
+					cell.detailTextLabel.text = int_to_string(UNITTESTMAN.assertions);
+					if (0 == UNITTESTMAN.failures && UNITTESTMAN.assertions > 0) {
 						cell.textLabel.backgroundColor = [UIColor clearColor];
 						cell.detailTextLabel.backgroundColor = [UIColor clearColor];
 						cell.contentView.backgroundColor = [UIColor greenColor];
@@ -79,8 +79,8 @@ enum { kSectionUnitTest, kSectionConsole, kSectionMax };
 					break;
 				case kRowFailures:
 					cell.textLabel.text = NSLocalizedString(@"Failures", nil);
-					cell.detailTextLabel.text = int_to_string(TESTMAN.failures);
-					if (TESTMAN.failures > 0) {
+					cell.detailTextLabel.text = int_to_string(UNITTESTMAN.failures);
+					if (UNITTESTMAN.failures > 0) {
 						cell.textLabel.backgroundColor = [UIColor clearColor];
 						cell.detailTextLabel.backgroundColor = [UIColor clearColor];
 						cell.contentView.backgroundColor = [UIColor redColor];
@@ -88,7 +88,7 @@ enum { kSectionUnitTest, kSectionConsole, kSectionMax };
 					break;
 				case kRowErrors:
 					cell.textLabel.text = NSLocalizedString(@"Errors", nil);
-					cell.detailTextLabel.text = int_to_string(TESTMAN.errors);
+					cell.detailTextLabel.text = int_to_string(UNITTESTMAN.errors);
 					break;
 				default:
 					break;
@@ -130,7 +130,7 @@ enum { kSectionUnitTest, kSectionConsole, kSectionMax };
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
 	switch (section) {
 		case kSectionUnitTest:
-			return SWF(NSLocalizedString(@"Finished in %.3g seconds.", nil), TESTMAN.elapsed);
+			return SWF(NSLocalizedString(@"Finished in %.3g seconds.", nil), UNITTESTMAN.elapsed);
 			break;
 		default:
 			break;

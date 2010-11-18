@@ -26,5 +26,7 @@
 	<true/>
 	<key>NSMainNibFile</key>
 	<string>TabBarMainWindow</string>
+	<key>NSMainNibFile~ipad</key>
+	<string>TabBarMainWindow-iPad</string>
 </dict>
 </plist>

@@ -29,7 +29,7 @@
 	if (nil == ip_address) {
 //		ip_address = NSLocalizedString(@"Not Found", nil);
 	}
-	CGFloat height;
+	CGFloat height = 0;
 #ifdef BUILD_313
 	height = 480;
 #else

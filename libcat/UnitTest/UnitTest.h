@@ -58,8 +58,8 @@ NSValue* got_encoded = [NSValue valueWithValue:&__got withObjCType: @encode(__ty
 
 
 
-#define TESTMAN [TestManager sharedManager]
-@interface TestManager : NSObject {
+#define UNITTESTMAN [UnitTestManager sharedManager]
+@interface UnitTestManager : NSObject {
 	BOOL dot_if_passed;
 	NSDate* test_started_at;
 	NSTimeInterval elapsed;
@@ -76,5 +76,5 @@ NSValue* got_encoded = [NSValue valueWithValue:&__got withObjCType: @encode(__ty
 @property (nonatomic) int failures;
 @property (nonatomic) int errors;
 
-+ (TestManager*) sharedManager ;
++ (UnitTestManager*) sharedManager ;
 @end

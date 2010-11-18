@@ -6,7 +6,6 @@
 //  Copyright 2010 factorcat. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 
 #define ONE_DAY_SECONDS		86400 // 1 day = 60*60*24 seconds
 #define ONE_HOUR_SECONDS	3600 // 60*60

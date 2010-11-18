@@ -10,6 +10,7 @@
 #import "NSArrayExt.h"
 #import "Logger.h"
 #import "Async.h"
+#import "iPadExt.h"
 
 @implementation UIActionSheet (Block)
 
@@ -73,7 +74,12 @@
 	} else {
 		showTarget = @selector(showInView:);
 	}
-	[sheet performSelector:showTarget withObject:view];
+	if ([sheet respondsToSelector:showTarget]) {
+		if (IS_IPAD) {
+		} else {
+			[sheet performSelector:showTarget withObject:view];
+		}
+	}
 	
 	if (nil != passBlock) {
 		[sheet dismissWithClickedButtonIndex:passBlock() animated:FALSE];

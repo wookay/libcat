@@ -23,18 +23,18 @@
 @implementation UnitTest
 
 +(void) setup {
-	TESTMAN.test_started_at = [NSDate date];
+	UNITTESTMAN.test_started_at = [NSDate date];
 	printf("Started\n");
 }
 
 +(void) report {
-	TESTMAN.elapsed = ABS([TESTMAN.test_started_at timeIntervalSince1970]);
-	printf("\nFinished in %.3g seconds.\n", TESTMAN.elapsed);
-	printf("\n%d tests, %d assertions, %d failures, %d errors", TESTMAN.tests, TESTMAN.assertions, TESTMAN.failures, TESTMAN.errors);
+	UNITTESTMAN.elapsed = ABS([UNITTESTMAN.test_started_at timeIntervalSince1970]);
+	printf("\nFinished in %.3g seconds.\n", UNITTESTMAN.elapsed);
+	printf("\n%d tests, %d assertions, %d failures, %d errors", UNITTESTMAN.tests, UNITTESTMAN.assertions, UNITTESTMAN.failures, UNITTESTMAN.errors);
 }
 
 +(void) assert:(NSValue*)got equals:(NSValue*)expected message:(NSString*)message inFile:(NSString*)file atLine:(int)line {	
-	TESTMAN.assertions += 1;
+	UNITTESTMAN.assertions += 1;
 	BOOL equals = false;
 	if (nil == expected && nil == got) {
 		equals = true;
@@ -43,13 +43,13 @@
 	}
 	
 	if (equals) {
-		if (TESTMAN.dot_if_passed) {
+		if (UNITTESTMAN.dot_if_passed) {
 			printf(".");
 		} else {
 			print_log_info([file UTF8String], line, @"passed: %@", [got inspect]);			
 		}
 	} else {
-		TESTMAN.failures += 1;
+		UNITTESTMAN.failures += 1;
 		printf("\n");
 		
 		NSString* expected_message;
@@ -99,9 +99,9 @@
 
 @implementation NSObject (UnitTest)
 -(void) run_test:(SEL)sel {
-	TESTMAN.tests += 1;
+	UNITTESTMAN.tests += 1;
 	NSString* format = SWF(@"%%%ds        - %%s\n", FILENAME_PADDING-2);
-	if (TESTMAN.dot_if_passed) {
+	if (UNITTESTMAN.dot_if_passed) {
 	} else {
 		NSString* methodStr = NSStringFromSelector(sel);
 		printf ([format UTF8String], [SWF(@"%@", [self class]) UTF8String], [methodStr UTF8String]);				
@@ -162,7 +162,7 @@
 
 
 
-@implementation TestManager
+@implementation UnitTestManager
 @synthesize dot_if_passed;
 @synthesize test_started_at;
 @synthesize elapsed;
@@ -171,10 +171,10 @@
 @synthesize failures;
 @synthesize errors;
 
-+ (TestManager*) sharedManager {
-	static TestManager*	manager = nil;
++ (UnitTestManager*) sharedManager {
+	static UnitTestManager*	manager = nil;
 	if (!manager) {
-		manager = [TestManager new];
+		manager = [UnitTestManager new];
 	}
 	return manager;
 }
