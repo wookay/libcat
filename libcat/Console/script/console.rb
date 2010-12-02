@@ -1,4 +1,4 @@
-#! /usr/bin/ruby
+#! /opt/local/bin/ruby1.9
 # encoding: utf-8
 # console.rb
 #                           wookay.noh at gmail.com
