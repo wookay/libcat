@@ -56,7 +56,6 @@
 		DA210AD312620AC100FBBE35 /* calculator.png in Resources */ = {isa = PBXBuildFile; fileRef = DA210AD112620AC100FBBE35 /* calculator.png */; };
 		DA210AD412620AC100FBBE35 /* trend.png in Resources */ = {isa = PBXBuildFile; fileRef = DA210AD212620AC100FBBE35 /* trend.png */; };
 		DA44AF4D1261FC68000F7374 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28F335F01007B36200424DE2 /* RootViewController.xib */; };
-		DA44AF4E1261FC68000F7374 /* README in Resources */ = {isa = PBXBuildFile; fileRef = DAEBFD1C125B7B610070A3A7 /* README */; };
 		DA44AF4F1261FC68000F7374 /* UIControlViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DADD7EE41260AE2C0040E482 /* UIControlViewController.xib */; };
 		DA44AF511261FC68000F7374 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAA63F621261AC140010F870 /* Localizable.strings */; };
 		DA44AF531261FC68000F7374 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
@@ -74,6 +73,8 @@
 		DAAAE1FF126442E00059A264 /* TestView.m in Sources */ = {isa = PBXBuildFile; fileRef = DAAAE1FD126442E00059A264 /* TestView.m */; };
 		DAAAE206126442ED0059A264 /* TestButton.m in Sources */ = {isa = PBXBuildFile; fileRef = DAAAE205126442ED0059A264 /* TestButton.m */; };
 		DAC3D08F1266A23500CA00D1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAC3D08B1266A23500CA00D1 /* InfoPlist.strings */; };
+		DAC60B05129FFAC70017FDF9 /* UIViewControllerBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC60B04129FFAC70017FDF9 /* UIViewControllerBlock.m */; };
+		DAC60B06129FFAC70017FDF9 /* UIViewControllerBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC60B04129FFAC70017FDF9 /* UIViewControllerBlock.m */; };
 		DAC7AE461263210F0073BED1 /* TestObject.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC7AE451263210F0073BED1 /* TestObject.m */; };
 		DACAB02712629054006DA76D /* TestArrayBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB00612629054006DA76D /* TestArrayBlock.m */; };
 		DACAB02812629054006DA76D /* TestAsync.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB00712629054006DA76D /* TestAsync.m */; };
@@ -87,172 +88,19 @@
 		DACAB03112629054006DA76D /* TestDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB01412629054006DA76D /* TestDictionary.m */; };
 		DACAB03212629054006DA76D /* TestNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB01512629054006DA76D /* TestNumber.m */; };
 		DACAB03312629054006DA76D /* TestString.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB01612629054006DA76D /* TestString.m */; };
-		DAE0741F1295E6E00000A11E /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28F335F01007B36200424DE2 /* RootViewController.xib */; };
-		DAE074201295E6E00000A11E /* README in Resources */ = {isa = PBXBuildFile; fileRef = DAEBFD1C125B7B610070A3A7 /* README */; };
-		DAE074211295E6E00000A11E /* UIControlViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DADD7EE41260AE2C0040E482 /* UIControlViewController.xib */; };
-		DAE074221295E6E00000A11E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAA63F621261AC140010F870 /* Localizable.strings */; };
-		DAE074231295E6E00000A11E /* TabBarMainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA44AF991261FCD6000F7374 /* TabBarMainWindow.xib */; };
-		DAE074241295E6E00000A11E /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = DA210A7A126207A400FBBE35 /* Default.png */; };
-		DAE074251295E6E00000A11E /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = DA210A7B126207A400FBBE35 /* Icon.png */; };
-		DAE074261295E6E00000A11E /* calculator.png in Resources */ = {isa = PBXBuildFile; fileRef = DA210AD112620AC100FBBE35 /* calculator.png */; };
-		DAE074271295E6E00000A11E /* trend.png in Resources */ = {isa = PBXBuildFile; fileRef = DA210AD212620AC100FBBE35 /* trend.png */; };
-		DAE074281295E6E00000A11E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAC3D08B1266A23500CA00D1 /* InfoPlist.strings */; };
-		DAE074291295E6E00000A11E /* console.rb in Resources */ = {isa = PBXBuildFile; fileRef = DA08E2421295E02B00F5F256 /* console.rb */; };
-		DAE0742A1295E6E00000A11E /* log_watcher.rb in Resources */ = {isa = PBXBuildFile; fileRef = DA08E2431295E02B00F5F256 /* log_watcher.rb */; };
-		DAE0742B1295E6E00000A11E /* ui_shell.rb in Resources */ = {isa = PBXBuildFile; fileRef = DA08E2441295E02B00F5F256 /* ui_shell.rb */; };
-		DAE0742D1295E6E00000A11E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
-		DAE0742E1295E6E00000A11E /* TestAppAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* TestAppAppDelegate.m */; };
-		DAE0742F1295E6E00000A11E /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C286E00D94DF7D0034E888 /* RootViewController.m */; };
-		DAE074301295E6E00000A11E /* UIControlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DADD7EE31260AE2C0040E482 /* UIControlViewController.m */; };
-		DAE074311295E6E00000A11E /* TabBarAppAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DA44AFAE1261FDA5000F7374 /* TabBarAppAppDelegate.m */; };
-		DAE074321295E6E00000A11E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DA44B0121261FFBF000F7374 /* AppDelegate.m */; };
-		DAE074331295E6E00000A11E /* TestArrayBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB00612629054006DA76D /* TestArrayBlock.m */; };
-		DAE074341295E6E00000A11E /* TestAsync.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB00712629054006DA76D /* TestAsync.m */; };
-		DAE074351295E6E00000A11E /* TestBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB00812629054006DA76D /* TestBlock.m */; };
-		DAE074361295E6E00000A11E /* TestDictionaryBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB00912629054006DA76D /* TestDictionaryBlock.m */; };
-		DAE074371295E6E00000A11E /* TestNumberBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB00A12629054006DA76D /* TestNumberBlock.m */; };
-		DAE074381295E6E00000A11E /* TestObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB00C12629054006DA76D /* TestObserver.m */; };
-		DAE074391295E6E00000A11E /* TestConsole.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB01012629054006DA76D /* TestConsole.m */; };
-		DAE0743A1295E6E00000A11E /* TestArray.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB01212629054006DA76D /* TestArray.m */; };
-		DAE0743B1295E6E00000A11E /* TestDate.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB01312629054006DA76D /* TestDate.m */; };
-		DAE0743C1295E6E00000A11E /* TestDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB01412629054006DA76D /* TestDictionary.m */; };
-		DAE0743D1295E6E00000A11E /* TestNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB01512629054006DA76D /* TestNumber.m */; };
-		DAE0743E1295E6E00000A11E /* TestString.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB01612629054006DA76D /* TestString.m */; };
-		DAE0743F1295E6E00000A11E /* TestObject.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC7AE451263210F0073BED1 /* TestObject.m */; };
-		DAE074401295E6E00000A11E /* TestActionSheetBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DAAAE1FC126442E00059A264 /* TestActionSheetBlock.m */; };
-		DAE074411295E6E00000A11E /* TestView.m in Sources */ = {isa = PBXBuildFile; fileRef = DAAAE1FD126442E00059A264 /* TestView.m */; };
-		DAE074421295E6E00000A11E /* TestButton.m in Sources */ = {isa = PBXBuildFile; fileRef = DAAAE205126442ED0059A264 /* TestButton.m */; };
-		DAE074431295E6E00000A11E /* Async.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E2141295E02B00F5F256 /* Async.m */; };
-		DAE074441295E6E00000A11E /* NSArrayBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E2161295E02B00F5F256 /* NSArrayBlock.m */; };
-		DAE074451295E6E00000A11E /* NSDictionaryBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E2181295E02B00F5F256 /* NSDictionaryBlock.m */; };
-		DAE074461295E6E00000A11E /* NSNumberBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E21A1295E02B00F5F256 /* NSNumberBlock.m */; };
-		DAE074471295E6E00000A11E /* NSObjectObserverExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E21D1295E02B00F5F256 /* NSObjectObserverExt.m */; };
-		DAE074481295E6E00000A11E /* Observer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E21F1295E02B00F5F256 /* Observer.m */; };
-		DAE074491295E6E00000A11E /* ObserverManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E2211295E02B00F5F256 /* ObserverManager.m */; };
-		DAE0744A1295E6E00000A11E /* ProxyMutableDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E2231295E02B00F5F256 /* ProxyMutableDictionary.m */; };
-		DAE0744B1295E6E00000A11E /* CommandManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E2271295E02B00F5F256 /* CommandManager.m */; };
-		DAE0744C1295E6E00000A11E /* ConsoleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E2291295E02B00F5F256 /* ConsoleManager.m */; };
-		DAE0744D1295E6E00000A11E /* NewObjectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E22B1295E02B00F5F256 /* NewObjectManager.m */; };
-		DAE0744E1295E6E00000A11E /* NSObjectSetValueFromString.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E22D1295E02B00F5F256 /* NSObjectSetValueFromString.m */; };
-		DAE0744F1295E6E00000A11E /* NSObjectValueToString.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E22F1295E02B00F5F256 /* NSObjectValueToString.m */; };
-		DAE074501295E6E00000A11E /* ConsoleResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E2331295E02B00F5F256 /* ConsoleResponseHandler.m */; };
-		DAE074511295E6E00000A11E /* HTTPResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E2351295E02B00F5F256 /* HTTPResponseHandler.m */; };
-		DAE074521295E6E00000A11E /* ImageResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E2371295E02B00F5F256 /* ImageResponseHandler.m */; };
-		DAE074531295E6E00000A11E /* WebResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E2391295E02B00F5F256 /* WebResponseHandler.m */; };
-		DAE074541295E6E00000A11E /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E23C1295E02B00F5F256 /* AsyncSocket.m */; };
-		DAE074551295E6E00000A11E /* HTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E23E1295E02B00F5F256 /* HTTPServer.m */; };
-		DAE074561295E6E00000A11E /* LoggerServer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E2401295E02B00F5F256 /* LoggerServer.m */; };
-		DAE074571295E6E00000A11E /* GeometryExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E2481295E02B00F5F256 /* GeometryExt.m */; };
-		DAE074581295E6E00000A11E /* NSArrayExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E24B1295E02B00F5F256 /* NSArrayExt.m */; };
-		DAE074591295E6E00000A11E /* NSBundleExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E24D1295E02B00F5F256 /* NSBundleExt.m */; };
-		DAE0745A1295E6E00000A11E /* NSDataExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E24F1295E02B00F5F256 /* NSDataExt.m */; };
-		DAE0745B1295E6E00000A11E /* NSDateExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E2511295E02B00F5F256 /* NSDateExt.m */; };
-		DAE0745C1295E6E00000A11E /* NSDictionaryExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E2531295E02B00F5F256 /* NSDictionaryExt.m */; };
-		DAE0745D1295E6E00000A11E /* NSIndexPathExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E2551295E02B00F5F256 /* NSIndexPathExt.m */; };
-		DAE0745E1295E6E00000A11E /* NSMutableArrayExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E2581295E02B00F5F256 /* NSMutableArrayExt.m */; };
-		DAE0745F1295E6E00000A11E /* NSMutableDictionaryExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E25A1295E02B00F5F256 /* NSMutableDictionaryExt.m */; };
-		DAE074601295E6E00000A11E /* NSNumberExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E25C1295E02B00F5F256 /* NSNumberExt.m */; };
-		DAE074611295E6E00000A11E /* NSObjectExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E25E1295E02B00F5F256 /* NSObjectExt.m */; };
-		DAE074621295E6E00000A11E /* NSStringExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E2601295E02B00F5F256 /* NSStringExt.m */; };
-		DAE074631295E6E00000A11E /* NSTimerExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E2621295E02B00F5F256 /* NSTimerExt.m */; };
-		DAE074641295E6E00000A11E /* UIActionSheetBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E2661295E02B00F5F256 /* UIActionSheetBlock.m */; };
-		DAE074651295E6E00000A11E /* UIAlertViewBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E2681295E02B00F5F256 /* UIAlertViewBlock.m */; };
-		DAE074661295E6E00000A11E /* UIBarButtonItemBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E26A1295E02B00F5F256 /* UIBarButtonItemBlock.m */; };
-		DAE074671295E6E00000A11E /* UIButtonBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E26C1295E02B00F5F256 /* UIButtonBlock.m */; };
-		DAE074681295E6E00000A11E /* UIViewBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E26E1295E02B00F5F256 /* UIViewBlock.m */; };
-		DAE074691295E6E00000A11E /* Inspect.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E2711295E02B00F5F256 /* Inspect.m */; };
-		DAE0746A1295E6E00000A11E /* Logger.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E2731295E02B00F5F256 /* Logger.m */; };
-		DAE0746B1295E6E00000A11E /* UnitTest.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E2751295E02B00F5F256 /* UnitTest.m */; };
-		DAE0746D1295E6E00000A11E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
-		DAE0746E1295E6E00000A11E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
-		DAE0746F1295E6E00000A11E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
-		DAE074701295E6E00000A11E /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA054F6D125DDD3600660097 /* CFNetwork.framework */; };
-		DAE074AD1295E7A10000A11E /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAE074AC1295E7A10000A11E /* MainWindow-iPad.xib */; };
 		DAE074AE1295E7A10000A11E /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAE074AC1295E7A10000A11E /* MainWindow-iPad.xib */; };
 		DAE074C71295E8D30000A11E /* TabBarMainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAE074C61295E8D30000A11E /* TabBarMainWindow-iPad.xib */; };
-		DAE074CD1295E8E50000A11E /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28F335F01007B36200424DE2 /* RootViewController.xib */; };
-		DAE074CE1295E8E50000A11E /* README in Resources */ = {isa = PBXBuildFile; fileRef = DAEBFD1C125B7B610070A3A7 /* README */; };
-		DAE074CF1295E8E50000A11E /* UIControlViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DADD7EE41260AE2C0040E482 /* UIControlViewController.xib */; };
-		DAE074D01295E8E50000A11E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAA63F621261AC140010F870 /* Localizable.strings */; };
-		DAE074D11295E8E50000A11E /* TabBarMainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA44AF991261FCD6000F7374 /* TabBarMainWindow.xib */; };
-		DAE074D21295E8E50000A11E /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = DA210A7A126207A400FBBE35 /* Default.png */; };
-		DAE074D31295E8E50000A11E /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = DA210A7B126207A400FBBE35 /* Icon.png */; };
-		DAE074D41295E8E50000A11E /* calculator.png in Resources */ = {isa = PBXBuildFile; fileRef = DA210AD112620AC100FBBE35 /* calculator.png */; };
-		DAE074D51295E8E50000A11E /* trend.png in Resources */ = {isa = PBXBuildFile; fileRef = DA210AD212620AC100FBBE35 /* trend.png */; };
-		DAE074D61295E8E50000A11E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAC3D08B1266A23500CA00D1 /* InfoPlist.strings */; };
-		DAE074D71295E8E50000A11E /* console.rb in Resources */ = {isa = PBXBuildFile; fileRef = DA08E2421295E02B00F5F256 /* console.rb */; };
-		DAE074D81295E8E50000A11E /* log_watcher.rb in Resources */ = {isa = PBXBuildFile; fileRef = DA08E2431295E02B00F5F256 /* log_watcher.rb */; };
-		DAE074D91295E8E50000A11E /* ui_shell.rb in Resources */ = {isa = PBXBuildFile; fileRef = DA08E2441295E02B00F5F256 /* ui_shell.rb */; };
-		DAE074DA1295E8E50000A11E /* TabBarMainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAE074C61295E8D30000A11E /* TabBarMainWindow-iPad.xib */; };
-		DAE074DC1295E8E50000A11E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
-		DAE074DD1295E8E50000A11E /* TestAppAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* TestAppAppDelegate.m */; };
-		DAE074DE1295E8E50000A11E /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C286E00D94DF7D0034E888 /* RootViewController.m */; };
-		DAE074DF1295E8E50000A11E /* UIControlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DADD7EE31260AE2C0040E482 /* UIControlViewController.m */; };
-		DAE074E01295E8E50000A11E /* TabBarAppAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DA44AFAE1261FDA5000F7374 /* TabBarAppAppDelegate.m */; };
-		DAE074E11295E8E50000A11E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DA44B0121261FFBF000F7374 /* AppDelegate.m */; };
-		DAE074E21295E8E50000A11E /* TestArrayBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB00612629054006DA76D /* TestArrayBlock.m */; };
-		DAE074E31295E8E50000A11E /* TestAsync.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB00712629054006DA76D /* TestAsync.m */; };
-		DAE074E41295E8E50000A11E /* TestBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB00812629054006DA76D /* TestBlock.m */; };
-		DAE074E51295E8E50000A11E /* TestDictionaryBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB00912629054006DA76D /* TestDictionaryBlock.m */; };
-		DAE074E61295E8E50000A11E /* TestNumberBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB00A12629054006DA76D /* TestNumberBlock.m */; };
-		DAE074E71295E8E50000A11E /* TestObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB00C12629054006DA76D /* TestObserver.m */; };
-		DAE074E81295E8E50000A11E /* TestConsole.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB01012629054006DA76D /* TestConsole.m */; };
-		DAE074E91295E8E50000A11E /* TestArray.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB01212629054006DA76D /* TestArray.m */; };
-		DAE074EA1295E8E50000A11E /* TestDate.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB01312629054006DA76D /* TestDate.m */; };
-		DAE074EB1295E8E50000A11E /* TestDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB01412629054006DA76D /* TestDictionary.m */; };
-		DAE074EC1295E8E50000A11E /* TestNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB01512629054006DA76D /* TestNumber.m */; };
-		DAE074ED1295E8E50000A11E /* TestString.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB01612629054006DA76D /* TestString.m */; };
-		DAE074EE1295E8E50000A11E /* TestObject.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC7AE451263210F0073BED1 /* TestObject.m */; };
-		DAE074EF1295E8E50000A11E /* TestActionSheetBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DAAAE1FC126442E00059A264 /* TestActionSheetBlock.m */; };
-		DAE074F01295E8E50000A11E /* TestView.m in Sources */ = {isa = PBXBuildFile; fileRef = DAAAE1FD126442E00059A264 /* TestView.m */; };
-		DAE074F11295E8E50000A11E /* TestButton.m in Sources */ = {isa = PBXBuildFile; fileRef = DAAAE205126442ED0059A264 /* TestButton.m */; };
-		DAE074F21295E8E50000A11E /* Async.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E2141295E02B00F5F256 /* Async.m */; };
-		DAE074F31295E8E50000A11E /* NSArrayBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E2161295E02B00F5F256 /* NSArrayBlock.m */; };
-		DAE074F41295E8E50000A11E /* NSDictionaryBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E2181295E02B00F5F256 /* NSDictionaryBlock.m */; };
-		DAE074F51295E8E50000A11E /* NSNumberBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E21A1295E02B00F5F256 /* NSNumberBlock.m */; };
-		DAE074F61295E8E50000A11E /* NSObjectObserverExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E21D1295E02B00F5F256 /* NSObjectObserverExt.m */; };
-		DAE074F71295E8E50000A11E /* Observer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E21F1295E02B00F5F256 /* Observer.m */; };
-		DAE074F81295E8E50000A11E /* ObserverManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E2211295E02B00F5F256 /* ObserverManager.m */; };
-		DAE074F91295E8E50000A11E /* ProxyMutableDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E2231295E02B00F5F256 /* ProxyMutableDictionary.m */; };
-		DAE074FA1295E8E50000A11E /* CommandManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E2271295E02B00F5F256 /* CommandManager.m */; };
-		DAE074FB1295E8E50000A11E /* ConsoleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E2291295E02B00F5F256 /* ConsoleManager.m */; };
-		DAE074FC1295E8E50000A11E /* NewObjectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E22B1295E02B00F5F256 /* NewObjectManager.m */; };
-		DAE074FD1295E8E50000A11E /* NSObjectSetValueFromString.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E22D1295E02B00F5F256 /* NSObjectSetValueFromString.m */; };
-		DAE074FE1295E8E50000A11E /* NSObjectValueToString.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E22F1295E02B00F5F256 /* NSObjectValueToString.m */; };
-		DAE074FF1295E8E50000A11E /* ConsoleResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E2331295E02B00F5F256 /* ConsoleResponseHandler.m */; };
-		DAE075001295E8E50000A11E /* HTTPResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E2351295E02B00F5F256 /* HTTPResponseHandler.m */; };
-		DAE075011295E8E50000A11E /* ImageResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E2371295E02B00F5F256 /* ImageResponseHandler.m */; };
-		DAE075021295E8E50000A11E /* WebResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E2391295E02B00F5F256 /* WebResponseHandler.m */; };
-		DAE075031295E8E50000A11E /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E23C1295E02B00F5F256 /* AsyncSocket.m */; };
-		DAE075041295E8E50000A11E /* HTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E23E1295E02B00F5F256 /* HTTPServer.m */; };
-		DAE075051295E8E50000A11E /* LoggerServer.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E2401295E02B00F5F256 /* LoggerServer.m */; };
-		DAE075061295E8E50000A11E /* GeometryExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E2481295E02B00F5F256 /* GeometryExt.m */; };
-		DAE075071295E8E50000A11E /* NSArrayExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E24B1295E02B00F5F256 /* NSArrayExt.m */; };
-		DAE075081295E8E50000A11E /* NSBundleExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E24D1295E02B00F5F256 /* NSBundleExt.m */; };
-		DAE075091295E8E50000A11E /* NSDataExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E24F1295E02B00F5F256 /* NSDataExt.m */; };
-		DAE0750A1295E8E50000A11E /* NSDateExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E2511295E02B00F5F256 /* NSDateExt.m */; };
-		DAE0750B1295E8E50000A11E /* NSDictionaryExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E2531295E02B00F5F256 /* NSDictionaryExt.m */; };
-		DAE0750C1295E8E50000A11E /* NSIndexPathExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E2551295E02B00F5F256 /* NSIndexPathExt.m */; };
-		DAE0750D1295E8E50000A11E /* NSMutableArrayExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E2581295E02B00F5F256 /* NSMutableArrayExt.m */; };
-		DAE0750E1295E8E50000A11E /* NSMutableDictionaryExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E25A1295E02B00F5F256 /* NSMutableDictionaryExt.m */; };
-		DAE0750F1295E8E50000A11E /* NSNumberExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E25C1295E02B00F5F256 /* NSNumberExt.m */; };
-		DAE075101295E8E50000A11E /* NSObjectExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E25E1295E02B00F5F256 /* NSObjectExt.m */; };
-		DAE075111295E8E50000A11E /* NSStringExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E2601295E02B00F5F256 /* NSStringExt.m */; };
-		DAE075121295E8E50000A11E /* NSTimerExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E2621295E02B00F5F256 /* NSTimerExt.m */; };
-		DAE075131295E8E50000A11E /* UIActionSheetBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E2661295E02B00F5F256 /* UIActionSheetBlock.m */; };
-		DAE075141295E8E50000A11E /* UIAlertViewBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E2681295E02B00F5F256 /* UIAlertViewBlock.m */; };
-		DAE075151295E8E50000A11E /* UIBarButtonItemBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E26A1295E02B00F5F256 /* UIBarButtonItemBlock.m */; };
-		DAE075161295E8E50000A11E /* UIButtonBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E26C1295E02B00F5F256 /* UIButtonBlock.m */; };
-		DAE075171295E8E50000A11E /* UIViewBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E26E1295E02B00F5F256 /* UIViewBlock.m */; };
-		DAE075181295E8E50000A11E /* Inspect.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E2711295E02B00F5F256 /* Inspect.m */; };
-		DAE075191295E8E50000A11E /* Logger.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E2731295E02B00F5F256 /* Logger.m */; };
-		DAE0751A1295E8E50000A11E /* UnitTest.m in Sources */ = {isa = PBXBuildFile; fileRef = DA08E2751295E02B00F5F256 /* UnitTest.m */; };
-		DAE0751C1295E8E50000A11E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
-		DAE0751D1295E8E50000A11E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
-		DAE0751E1295E8E50000A11E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
-		DAE0751F1295E8E50000A11E /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA054F6D125DDD3600660097 /* CFNetwork.framework */; };
+		DAE9D27512A81AC500EA3F21 /* UITouchExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE9D27412A81AC500EA3F21 /* UITouchExt.m */; };
+		DAE9D27612A81AC500EA3F21 /* UITouchExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE9D27412A81AC500EA3F21 /* UITouchExt.m */; };
+		DAE9D27B12A81ACB00EA3F21 /* UIEventExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE9D27A12A81ACB00EA3F21 /* UIEventExt.m */; };
+		DAE9D27C12A81ACB00EA3F21 /* UIEventExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE9D27A12A81ACB00EA3F21 /* UIEventExt.m */; };
+		DAE9D27F12A81B6E00EA3F21 /* HitTestWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE9D27E12A81B6E00EA3F21 /* HitTestWindow.m */; };
+		DAE9D28012A81B6E00EA3F21 /* HitTestWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE9D27E12A81B6E00EA3F21 /* HitTestWindow.m */; };
+		DAE9D28B12A81CCD00EA3F21 /* UIViewTouchExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE9D28A12A81CCD00EA3F21 /* UIViewTouchExt.m */; };
+		DAE9D28C12A81CCD00EA3F21 /* UIViewTouchExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAE9D28A12A81CCD00EA3F21 /* UIViewTouchExt.m */; };
+		DAE9D2AD12A81EE500EA3F21 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = DAE9D2AC12A81EE500EA3F21 /* README.md */; };
+		DAE9D2AE12A81EE500EA3F21 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = DAE9D2AC12A81EE500EA3F21 /* README.md */; };
 		DAE9E26B1295E63F00F72551 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28F335F01007B36200424DE2 /* RootViewController.xib */; };
-		DAE9E26C1295E63F00F72551 /* README in Resources */ = {isa = PBXBuildFile; fileRef = DAEBFD1C125B7B610070A3A7 /* README */; };
 		DAE9E26D1295E63F00F72551 /* UIControlViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DADD7EE41260AE2C0040E482 /* UIControlViewController.xib */; };
 		DAE9E26E1295E63F00F72551 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAA63F621261AC140010F870 /* Localizable.strings */; };
 		DAE9E26F1295E63F00F72551 /* TabBarMainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA44AF991261FCD6000F7374 /* TabBarMainWindow.xib */; };
@@ -462,6 +310,8 @@
 		DAC3D0921266A23F00CA00D1 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DAC3D0931266A23F00CA00D1 /* Korean */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Korean; path = Korean.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DAC3D0941266A23F00CA00D1 /* Spanish */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Spanish; path = Spanish.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		DAC60B03129FFAC70017FDF9 /* UIViewControllerBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewControllerBlock.h; sourceTree = "<group>"; };
+		DAC60B04129FFAC70017FDF9 /* UIViewControllerBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIViewControllerBlock.m; sourceTree = "<group>"; };
 		DAC7AE451263210F0073BED1 /* TestObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestObject.m; sourceTree = "<group>"; };
 		DACAB00612629054006DA76D /* TestArrayBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestArrayBlock.m; sourceTree = "<group>"; };
 		DACAB00712629054006DA76D /* TestAsync.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestAsync.m; sourceTree = "<group>"; };
@@ -480,12 +330,18 @@
 		DADD7EE21260AE2C0040E482 /* UIControlViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIControlViewController.h; sourceTree = "<group>"; };
 		DADD7EE31260AE2C0040E482 /* UIControlViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIControlViewController.m; sourceTree = "<group>"; };
 		DADD7EE41260AE2C0040E482 /* UIControlViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UIControlViewController.xib; sourceTree = "<group>"; };
-		DAE074741295E6E00000A11E /* TestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAE074AC1295E7A10000A11E /* MainWindow-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = "MainWindow-iPad.xib"; sourceTree = "<group>"; };
 		DAE074C61295E8D30000A11E /* TabBarMainWindow-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = "TabBarMainWindow-iPad.xib"; sourceTree = "<group>"; };
-		DAE075231295E8E50000A11E /* TabBarApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TabBarApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DAE9D27312A81AC500EA3F21 /* UITouchExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITouchExt.h; sourceTree = "<group>"; };
+		DAE9D27412A81AC500EA3F21 /* UITouchExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITouchExt.m; sourceTree = "<group>"; };
+		DAE9D27912A81ACB00EA3F21 /* UIEventExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIEventExt.h; sourceTree = "<group>"; };
+		DAE9D27A12A81ACB00EA3F21 /* UIEventExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIEventExt.m; sourceTree = "<group>"; };
+		DAE9D27D12A81B6E00EA3F21 /* HitTestWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HitTestWindow.h; sourceTree = "<group>"; };
+		DAE9D27E12A81B6E00EA3F21 /* HitTestWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HitTestWindow.m; sourceTree = "<group>"; };
+		DAE9D28912A81CCD00EA3F21 /* UIViewTouchExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewTouchExt.h; sourceTree = "<group>"; };
+		DAE9D28A12A81CCD00EA3F21 /* UIViewTouchExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIViewTouchExt.m; sourceTree = "<group>"; };
+		DAE9D2AC12A81EE500EA3F21 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README.md; path = ../README.md; sourceTree = SOURCE_ROOT; };
 		DAE9E2C01295E63F00F72551 /* TestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		DAEBFD1C125B7B610070A3A7 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README; path = ../README; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -497,28 +353,6 @@
 				DA44AF8E1261FC68000F7374 /* UIKit.framework in Frameworks */,
 				DA44AF8F1261FC68000F7374 /* CoreGraphics.framework in Frameworks */,
 				DA44AF901261FC68000F7374 /* CFNetwork.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DAE0746C1295E6E00000A11E /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				DAE0746D1295E6E00000A11E /* Foundation.framework in Frameworks */,
-				DAE0746E1295E6E00000A11E /* UIKit.framework in Frameworks */,
-				DAE0746F1295E6E00000A11E /* CoreGraphics.framework in Frameworks */,
-				DAE074701295E6E00000A11E /* CFNetwork.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DAE0751B1295E8E50000A11E /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				DAE0751C1295E8E50000A11E /* Foundation.framework in Frameworks */,
-				DAE0751D1295E8E50000A11E /* UIKit.framework in Frameworks */,
-				DAE0751E1295E8E50000A11E /* CoreGraphics.framework in Frameworks */,
-				DAE0751F1295E8E50000A11E /* CFNetwork.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -554,8 +388,6 @@
 			children = (
 				DA44AF941261FC68000F7374 /* TabBarApp.app */,
 				DAE9E2C01295E63F00F72551 /* TestApp.app */,
-				DAE074741295E6E00000A11E /* TestApp.app */,
-				DAE075231295E8E50000A11E /* TabBarApp.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -563,7 +395,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				DAEBFD1C125B7B610070A3A7 /* README */,
+				DAE9D2AC12A81EE500EA3F21 /* README.md */,
 				DA08E2111295E02B00F5F256 /* libcat */,
 				DACAB00312629054006DA76D /* TestCases */,
 				080E96DDFE201D6D7F000001 /* Classes */,
@@ -662,6 +494,7 @@
 		DA08E2241295E02B00F5F256 /* Console */ = {
 			isa = PBXGroup;
 			children = (
+				DAE9D27012A81A9C00EA3F21 /* touch */,
 				DA08E2251295E02B00F5F256 /* manager */,
 				DA08E2301295E02B00F5F256 /* net */,
 				DA08E2411295E02B00F5F256 /* script */,
@@ -783,6 +616,8 @@
 				DA08E26C1295E02B00F5F256 /* UIButtonBlock.m */,
 				DA08E26D1295E02B00F5F256 /* UIViewBlock.h */,
 				DA08E26E1295E02B00F5F256 /* UIViewBlock.m */,
+				DAC60B03129FFAC70017FDF9 /* UIViewControllerBlock.h */,
+				DAC60B04129FFAC70017FDF9 /* UIViewControllerBlock.m */,
 			);
 			path = UIBlock;
 			sourceTree = "<group>";
@@ -948,6 +783,21 @@
 			path = ExtTestCases;
 			sourceTree = "<group>";
 		};
+		DAE9D27012A81A9C00EA3F21 /* touch */ = {
+			isa = PBXGroup;
+			children = (
+				DAE9D27D12A81B6E00EA3F21 /* HitTestWindow.h */,
+				DAE9D27E12A81B6E00EA3F21 /* HitTestWindow.m */,
+				DAE9D27912A81ACB00EA3F21 /* UIEventExt.h */,
+				DAE9D27A12A81ACB00EA3F21 /* UIEventExt.m */,
+				DAE9D27312A81AC500EA3F21 /* UITouchExt.h */,
+				DAE9D27412A81AC500EA3F21 /* UITouchExt.m */,
+				DAE9D28912A81CCD00EA3F21 /* UIViewTouchExt.h */,
+				DAE9D28A12A81CCD00EA3F21 /* UIViewTouchExt.m */,
+			);
+			path = touch;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -966,40 +816,6 @@
 			name = TabBarApp;
 			productName = TestApp;
 			productReference = DA44AF941261FC68000F7374 /* TabBarApp.app */;
-			productType = "com.apple.product-type.application";
-		};
-		DAE0741D1295E6E00000A11E /* TestApp_42beta */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = DAE074711295E6E00000A11E /* Build configuration list for PBXNativeTarget "TestApp_42beta" */;
-			buildPhases = (
-				DAE0741E1295E6E00000A11E /* Resources */,
-				DAE0742C1295E6E00000A11E /* Sources */,
-				DAE0746C1295E6E00000A11E /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = TestApp_42beta;
-			productName = TestApp;
-			productReference = DAE074741295E6E00000A11E /* TestApp.app */;
-			productType = "com.apple.product-type.application";
-		};
-		DAE074CB1295E8E50000A11E /* TabBarApp_42beta */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = DAE075201295E8E50000A11E /* Build configuration list for PBXNativeTarget "TabBarApp_42beta" */;
-			buildPhases = (
-				DAE074CC1295E8E50000A11E /* Resources */,
-				DAE074DB1295E8E50000A11E /* Sources */,
-				DAE0751B1295E8E50000A11E /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = TabBarApp_42beta;
-			productName = TestApp;
-			productReference = DAE075231295E8E50000A11E /* TabBarApp.app */;
 			productType = "com.apple.product-type.application";
 		};
 		DAE9E2691295E63F00F72551 /* TestApp */ = {
@@ -1043,8 +859,6 @@
 			targets = (
 				DAE9E2691295E63F00F72551 /* TestApp */,
 				DA44AF4A1261FC68000F7374 /* TabBarApp */,
-				DAE0741D1295E6E00000A11E /* TestApp_42beta */,
-				DAE074CB1295E8E50000A11E /* TabBarApp_42beta */,
 			);
 		};
 /* End PBXProject section */
@@ -1055,7 +869,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA44AF4D1261FC68000F7374 /* RootViewController.xib in Resources */,
-				DA44AF4E1261FC68000F7374 /* README in Resources */,
 				DA44AF4F1261FC68000F7374 /* UIControlViewController.xib in Resources */,
 				DA44AF511261FC68000F7374 /* Localizable.strings in Resources */,
 				DA44AF9A1261FCD6000F7374 /* TabBarMainWindow.xib in Resources */,
@@ -1068,48 +881,7 @@
 				DA08E2B81295E02B00F5F256 /* log_watcher.rb in Resources */,
 				DA08E2B91295E02B00F5F256 /* ui_shell.rb in Resources */,
 				DAE074C71295E8D30000A11E /* TabBarMainWindow-iPad.xib in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DAE0741E1295E6E00000A11E /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				DAE0741F1295E6E00000A11E /* RootViewController.xib in Resources */,
-				DAE074201295E6E00000A11E /* README in Resources */,
-				DAE074211295E6E00000A11E /* UIControlViewController.xib in Resources */,
-				DAE074221295E6E00000A11E /* Localizable.strings in Resources */,
-				DAE074231295E6E00000A11E /* TabBarMainWindow.xib in Resources */,
-				DAE074241295E6E00000A11E /* Default.png in Resources */,
-				DAE074251295E6E00000A11E /* Icon.png in Resources */,
-				DAE074261295E6E00000A11E /* calculator.png in Resources */,
-				DAE074271295E6E00000A11E /* trend.png in Resources */,
-				DAE074281295E6E00000A11E /* InfoPlist.strings in Resources */,
-				DAE074291295E6E00000A11E /* console.rb in Resources */,
-				DAE0742A1295E6E00000A11E /* log_watcher.rb in Resources */,
-				DAE0742B1295E6E00000A11E /* ui_shell.rb in Resources */,
-				DAE074AD1295E7A10000A11E /* MainWindow-iPad.xib in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DAE074CC1295E8E50000A11E /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				DAE074CD1295E8E50000A11E /* RootViewController.xib in Resources */,
-				DAE074CE1295E8E50000A11E /* README in Resources */,
-				DAE074CF1295E8E50000A11E /* UIControlViewController.xib in Resources */,
-				DAE074D01295E8E50000A11E /* Localizable.strings in Resources */,
-				DAE074D11295E8E50000A11E /* TabBarMainWindow.xib in Resources */,
-				DAE074D21295E8E50000A11E /* Default.png in Resources */,
-				DAE074D31295E8E50000A11E /* Icon.png in Resources */,
-				DAE074D41295E8E50000A11E /* calculator.png in Resources */,
-				DAE074D51295E8E50000A11E /* trend.png in Resources */,
-				DAE074D61295E8E50000A11E /* InfoPlist.strings in Resources */,
-				DAE074D71295E8E50000A11E /* console.rb in Resources */,
-				DAE074D81295E8E50000A11E /* log_watcher.rb in Resources */,
-				DAE074D91295E8E50000A11E /* ui_shell.rb in Resources */,
-				DAE074DA1295E8E50000A11E /* TabBarMainWindow-iPad.xib in Resources */,
+				DAE9D2AE12A81EE500EA3F21 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1118,7 +890,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				DAE9E26B1295E63F00F72551 /* RootViewController.xib in Resources */,
-				DAE9E26C1295E63F00F72551 /* README in Resources */,
 				DAE9E26D1295E63F00F72551 /* UIControlViewController.xib in Resources */,
 				DAE9E26E1295E63F00F72551 /* Localizable.strings in Resources */,
 				DAE9E26F1295E63F00F72551 /* TabBarMainWindow.xib in Resources */,
@@ -1131,6 +902,7 @@
 				DAE9E2761295E63F00F72551 /* log_watcher.rb in Resources */,
 				DAE9E2771295E63F00F72551 /* ui_shell.rb in Resources */,
 				DAE074AE1295E7A10000A11E /* MainWindow-iPad.xib in Resources */,
+				DAE9D2AD12A81EE500EA3F21 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1204,146 +976,11 @@
 				DA08E2CC1295E02B00F5F256 /* Inspect.m in Sources */,
 				DA08E2CD1295E02B00F5F256 /* Logger.m in Sources */,
 				DA08E2CE1295E02B00F5F256 /* UnitTest.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DAE0742C1295E6E00000A11E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				DAE0742D1295E6E00000A11E /* main.m in Sources */,
-				DAE0742E1295E6E00000A11E /* TestAppAppDelegate.m in Sources */,
-				DAE0742F1295E6E00000A11E /* RootViewController.m in Sources */,
-				DAE074301295E6E00000A11E /* UIControlViewController.m in Sources */,
-				DAE074311295E6E00000A11E /* TabBarAppAppDelegate.m in Sources */,
-				DAE074321295E6E00000A11E /* AppDelegate.m in Sources */,
-				DAE074331295E6E00000A11E /* TestArrayBlock.m in Sources */,
-				DAE074341295E6E00000A11E /* TestAsync.m in Sources */,
-				DAE074351295E6E00000A11E /* TestBlock.m in Sources */,
-				DAE074361295E6E00000A11E /* TestDictionaryBlock.m in Sources */,
-				DAE074371295E6E00000A11E /* TestNumberBlock.m in Sources */,
-				DAE074381295E6E00000A11E /* TestObserver.m in Sources */,
-				DAE074391295E6E00000A11E /* TestConsole.m in Sources */,
-				DAE0743A1295E6E00000A11E /* TestArray.m in Sources */,
-				DAE0743B1295E6E00000A11E /* TestDate.m in Sources */,
-				DAE0743C1295E6E00000A11E /* TestDictionary.m in Sources */,
-				DAE0743D1295E6E00000A11E /* TestNumber.m in Sources */,
-				DAE0743E1295E6E00000A11E /* TestString.m in Sources */,
-				DAE0743F1295E6E00000A11E /* TestObject.m in Sources */,
-				DAE074401295E6E00000A11E /* TestActionSheetBlock.m in Sources */,
-				DAE074411295E6E00000A11E /* TestView.m in Sources */,
-				DAE074421295E6E00000A11E /* TestButton.m in Sources */,
-				DAE074431295E6E00000A11E /* Async.m in Sources */,
-				DAE074441295E6E00000A11E /* NSArrayBlock.m in Sources */,
-				DAE074451295E6E00000A11E /* NSDictionaryBlock.m in Sources */,
-				DAE074461295E6E00000A11E /* NSNumberBlock.m in Sources */,
-				DAE074471295E6E00000A11E /* NSObjectObserverExt.m in Sources */,
-				DAE074481295E6E00000A11E /* Observer.m in Sources */,
-				DAE074491295E6E00000A11E /* ObserverManager.m in Sources */,
-				DAE0744A1295E6E00000A11E /* ProxyMutableDictionary.m in Sources */,
-				DAE0744B1295E6E00000A11E /* CommandManager.m in Sources */,
-				DAE0744C1295E6E00000A11E /* ConsoleManager.m in Sources */,
-				DAE0744D1295E6E00000A11E /* NewObjectManager.m in Sources */,
-				DAE0744E1295E6E00000A11E /* NSObjectSetValueFromString.m in Sources */,
-				DAE0744F1295E6E00000A11E /* NSObjectValueToString.m in Sources */,
-				DAE074501295E6E00000A11E /* ConsoleResponseHandler.m in Sources */,
-				DAE074511295E6E00000A11E /* HTTPResponseHandler.m in Sources */,
-				DAE074521295E6E00000A11E /* ImageResponseHandler.m in Sources */,
-				DAE074531295E6E00000A11E /* WebResponseHandler.m in Sources */,
-				DAE074541295E6E00000A11E /* AsyncSocket.m in Sources */,
-				DAE074551295E6E00000A11E /* HTTPServer.m in Sources */,
-				DAE074561295E6E00000A11E /* LoggerServer.m in Sources */,
-				DAE074571295E6E00000A11E /* GeometryExt.m in Sources */,
-				DAE074581295E6E00000A11E /* NSArrayExt.m in Sources */,
-				DAE074591295E6E00000A11E /* NSBundleExt.m in Sources */,
-				DAE0745A1295E6E00000A11E /* NSDataExt.m in Sources */,
-				DAE0745B1295E6E00000A11E /* NSDateExt.m in Sources */,
-				DAE0745C1295E6E00000A11E /* NSDictionaryExt.m in Sources */,
-				DAE0745D1295E6E00000A11E /* NSIndexPathExt.m in Sources */,
-				DAE0745E1295E6E00000A11E /* NSMutableArrayExt.m in Sources */,
-				DAE0745F1295E6E00000A11E /* NSMutableDictionaryExt.m in Sources */,
-				DAE074601295E6E00000A11E /* NSNumberExt.m in Sources */,
-				DAE074611295E6E00000A11E /* NSObjectExt.m in Sources */,
-				DAE074621295E6E00000A11E /* NSStringExt.m in Sources */,
-				DAE074631295E6E00000A11E /* NSTimerExt.m in Sources */,
-				DAE074641295E6E00000A11E /* UIActionSheetBlock.m in Sources */,
-				DAE074651295E6E00000A11E /* UIAlertViewBlock.m in Sources */,
-				DAE074661295E6E00000A11E /* UIBarButtonItemBlock.m in Sources */,
-				DAE074671295E6E00000A11E /* UIButtonBlock.m in Sources */,
-				DAE074681295E6E00000A11E /* UIViewBlock.m in Sources */,
-				DAE074691295E6E00000A11E /* Inspect.m in Sources */,
-				DAE0746A1295E6E00000A11E /* Logger.m in Sources */,
-				DAE0746B1295E6E00000A11E /* UnitTest.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DAE074DB1295E8E50000A11E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				DAE074DC1295E8E50000A11E /* main.m in Sources */,
-				DAE074DD1295E8E50000A11E /* TestAppAppDelegate.m in Sources */,
-				DAE074DE1295E8E50000A11E /* RootViewController.m in Sources */,
-				DAE074DF1295E8E50000A11E /* UIControlViewController.m in Sources */,
-				DAE074E01295E8E50000A11E /* TabBarAppAppDelegate.m in Sources */,
-				DAE074E11295E8E50000A11E /* AppDelegate.m in Sources */,
-				DAE074E21295E8E50000A11E /* TestArrayBlock.m in Sources */,
-				DAE074E31295E8E50000A11E /* TestAsync.m in Sources */,
-				DAE074E41295E8E50000A11E /* TestBlock.m in Sources */,
-				DAE074E51295E8E50000A11E /* TestDictionaryBlock.m in Sources */,
-				DAE074E61295E8E50000A11E /* TestNumberBlock.m in Sources */,
-				DAE074E71295E8E50000A11E /* TestObserver.m in Sources */,
-				DAE074E81295E8E50000A11E /* TestConsole.m in Sources */,
-				DAE074E91295E8E50000A11E /* TestArray.m in Sources */,
-				DAE074EA1295E8E50000A11E /* TestDate.m in Sources */,
-				DAE074EB1295E8E50000A11E /* TestDictionary.m in Sources */,
-				DAE074EC1295E8E50000A11E /* TestNumber.m in Sources */,
-				DAE074ED1295E8E50000A11E /* TestString.m in Sources */,
-				DAE074EE1295E8E50000A11E /* TestObject.m in Sources */,
-				DAE074EF1295E8E50000A11E /* TestActionSheetBlock.m in Sources */,
-				DAE074F01295E8E50000A11E /* TestView.m in Sources */,
-				DAE074F11295E8E50000A11E /* TestButton.m in Sources */,
-				DAE074F21295E8E50000A11E /* Async.m in Sources */,
-				DAE074F31295E8E50000A11E /* NSArrayBlock.m in Sources */,
-				DAE074F41295E8E50000A11E /* NSDictionaryBlock.m in Sources */,
-				DAE074F51295E8E50000A11E /* NSNumberBlock.m in Sources */,
-				DAE074F61295E8E50000A11E /* NSObjectObserverExt.m in Sources */,
-				DAE074F71295E8E50000A11E /* Observer.m in Sources */,
-				DAE074F81295E8E50000A11E /* ObserverManager.m in Sources */,
-				DAE074F91295E8E50000A11E /* ProxyMutableDictionary.m in Sources */,
-				DAE074FA1295E8E50000A11E /* CommandManager.m in Sources */,
-				DAE074FB1295E8E50000A11E /* ConsoleManager.m in Sources */,
-				DAE074FC1295E8E50000A11E /* NewObjectManager.m in Sources */,
-				DAE074FD1295E8E50000A11E /* NSObjectSetValueFromString.m in Sources */,
-				DAE074FE1295E8E50000A11E /* NSObjectValueToString.m in Sources */,
-				DAE074FF1295E8E50000A11E /* ConsoleResponseHandler.m in Sources */,
-				DAE075001295E8E50000A11E /* HTTPResponseHandler.m in Sources */,
-				DAE075011295E8E50000A11E /* ImageResponseHandler.m in Sources */,
-				DAE075021295E8E50000A11E /* WebResponseHandler.m in Sources */,
-				DAE075031295E8E50000A11E /* AsyncSocket.m in Sources */,
-				DAE075041295E8E50000A11E /* HTTPServer.m in Sources */,
-				DAE075051295E8E50000A11E /* LoggerServer.m in Sources */,
-				DAE075061295E8E50000A11E /* GeometryExt.m in Sources */,
-				DAE075071295E8E50000A11E /* NSArrayExt.m in Sources */,
-				DAE075081295E8E50000A11E /* NSBundleExt.m in Sources */,
-				DAE075091295E8E50000A11E /* NSDataExt.m in Sources */,
-				DAE0750A1295E8E50000A11E /* NSDateExt.m in Sources */,
-				DAE0750B1295E8E50000A11E /* NSDictionaryExt.m in Sources */,
-				DAE0750C1295E8E50000A11E /* NSIndexPathExt.m in Sources */,
-				DAE0750D1295E8E50000A11E /* NSMutableArrayExt.m in Sources */,
-				DAE0750E1295E8E50000A11E /* NSMutableDictionaryExt.m in Sources */,
-				DAE0750F1295E8E50000A11E /* NSNumberExt.m in Sources */,
-				DAE075101295E8E50000A11E /* NSObjectExt.m in Sources */,
-				DAE075111295E8E50000A11E /* NSStringExt.m in Sources */,
-				DAE075121295E8E50000A11E /* NSTimerExt.m in Sources */,
-				DAE075131295E8E50000A11E /* UIActionSheetBlock.m in Sources */,
-				DAE075141295E8E50000A11E /* UIAlertViewBlock.m in Sources */,
-				DAE075151295E8E50000A11E /* UIBarButtonItemBlock.m in Sources */,
-				DAE075161295E8E50000A11E /* UIButtonBlock.m in Sources */,
-				DAE075171295E8E50000A11E /* UIViewBlock.m in Sources */,
-				DAE075181295E8E50000A11E /* Inspect.m in Sources */,
-				DAE075191295E8E50000A11E /* Logger.m in Sources */,
-				DAE0751A1295E8E50000A11E /* UnitTest.m in Sources */,
+				DAC60B05129FFAC70017FDF9 /* UIViewControllerBlock.m in Sources */,
+				DAE9D27612A81AC500EA3F21 /* UITouchExt.m in Sources */,
+				DAE9D27C12A81ACB00EA3F21 /* UIEventExt.m in Sources */,
+				DAE9D28012A81B6E00EA3F21 /* HitTestWindow.m in Sources */,
+				DAE9D28C12A81CCD00EA3F21 /* UIViewTouchExt.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1414,6 +1051,11 @@
 				DAE9E2B51295E63F00F72551 /* Inspect.m in Sources */,
 				DAE9E2B61295E63F00F72551 /* Logger.m in Sources */,
 				DAE9E2B71295E63F00F72551 /* UnitTest.m in Sources */,
+				DAC60B06129FFAC70017FDF9 /* UIViewControllerBlock.m in Sources */,
+				DAE9D27512A81AC500EA3F21 /* UITouchExt.m in Sources */,
+				DAE9D27B12A81ACB00EA3F21 /* UIEventExt.m in Sources */,
+				DAE9D27F12A81B6E00EA3F21 /* HitTestWindow.m in Sources */,
+				DAE9D28B12A81CCD00EA3F21 /* UIViewTouchExt.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1491,6 +1133,7 @@
 				GCC_PREFIX_HEADER = TestApp_Prefix.pch;
 				INFOPLIST_FILE = "TabBarApp-Info.plist";
 				PRODUCT_NAME = TabBarApp;
+				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1504,66 +1147,7 @@
 				GCC_PREFIX_HEADER = TestApp_Prefix.pch;
 				INFOPLIST_FILE = "TabBarApp-Info.plist";
 				PRODUCT_NAME = TabBarApp;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		DAE074721295E6E00000A11E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				COPY_PHASE_STRIP = NO;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = TestApp_Prefix.pch;
-				INFOPLIST_FILE = "TestApp-Info.plist";
-				PRODUCT_NAME = TestApp;
-				SDKROOT = iphoneos4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		DAE074731295E6E00000A11E /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				COPY_PHASE_STRIP = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = TestApp_Prefix.pch;
-				INFOPLIST_FILE = "TestApp-Info.plist";
-				PRODUCT_NAME = TestApp;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		DAE075211295E8E50000A11E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				COPY_PHASE_STRIP = NO;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = TestApp_Prefix.pch;
-				INFOPLIST_FILE = "TabBarApp-Info.plist";
-				PRODUCT_NAME = TabBarApp;
-				SDKROOT = iphoneos4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		DAE075221295E8E50000A11E /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				COPY_PHASE_STRIP = YES;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = TestApp_Prefix.pch;
-				INFOPLIST_FILE = "TabBarApp-Info.plist";
-				PRODUCT_NAME = TabBarApp;
+				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1580,6 +1164,7 @@
 				GCC_PREFIX_HEADER = TestApp_Prefix.pch;
 				INFOPLIST_FILE = "TestApp-Info.plist";
 				PRODUCT_NAME = TestApp;
+				SDKROOT = iphoneos4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1593,6 +1178,7 @@
 				GCC_PREFIX_HEADER = TestApp_Prefix.pch;
 				INFOPLIST_FILE = "TestApp-Info.plist";
 				PRODUCT_NAME = TestApp;
+				SDKROOT = iphoneos4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1615,24 +1201,6 @@
 			buildConfigurations = (
 				DA44AF921261FC68000F7374 /* Debug */,
 				DA44AF931261FC68000F7374 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		DAE074711295E6E00000A11E /* Build configuration list for PBXNativeTarget "TestApp_42beta" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				DAE074721295E6E00000A11E /* Debug */,
-				DAE074731295E6E00000A11E /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		DAE075201295E8E50000A11E /* Build configuration list for PBXNativeTarget "TabBarApp_42beta" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				DAE075211295E8E50000A11E /* Debug */,
-				DAE075221295E8E50000A11E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

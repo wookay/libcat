@@ -46,7 +46,7 @@ NSString* hourName_minute_second_SPACE(NSTimeInterval ti) {
 		if (IS_LANG_KOREAN) {
 			[ary addObject:SWF(@"%d시간", hour)];
 		} else {
-			[ary addObject:SWF(@"%02d", hour)];
+			[ary addObject:SWF(@"%02d hour", hour)];
 		}
 	}
 	if (left > ONE_MINUTE_SECONDS) {
@@ -55,23 +55,19 @@ NSString* hourName_minute_second_SPACE(NSTimeInterval ti) {
 		if (IS_LANG_KOREAN) {
 			[ary addObject:SWF(@"%d분", minute)];
 		} else {
-			[ary addObject:SWF(@"%02d", minute)];
+			[ary addObject:SWF(@"%02d min", minute)];
 		}
 	}
 	int seconds = left;
-	if (IS_LANG_KOREAN) {
-		if (0 == seconds && ary.count > 0) {
-		} else {
+	if (0 == seconds) {
+	} else {
+		if (IS_LANG_KOREAN) {
 			[ary addObject:SWF(@"%d초", seconds)];
+		} else {
+			[ary addObject:SWF(@"%02d secs", seconds)];
 		}
-	} else {
-		[ary addObject:SWF(@"%02d", seconds)];
 	}
-	if (IS_LANG_KOREAN) {
-		return [ary componentsJoinedByString:SPACE];
-	} else {
-		return [ary componentsJoinedByString:COLON];
-	}
+	return [ary componentsJoinedByString:SPACE];
 }
 
 
@@ -159,18 +155,6 @@ NSString* hourName_minute_second_SPACE(NSTimeInterval ti) {
 	return comps.weekday;	
 }
 
--(int) weekdayIndex {
-	int weekday = [self weekday];
-	switch (FIRST_WEEKDAY_OF_CALENDAR) {
-		case 1:
-			return weekday - WEEKDAY_SUNDAY;
-			break;
-		default:
-			break;
-	}
-	return weekday;
-}
-
 
 #pragma mark NSDate
 
@@ -195,6 +179,20 @@ NSString* hourName_minute_second_SPACE(NSTimeInterval ti) {
 	return date;
 }
 
++(NSDate*) dateFrom:(int)year month:(int)month day:(int)day hour:(int)hour minute:(int)minute second:(int)second {
+	unsigned unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit ;
+	NSDateComponents* comps = [[NSCalendar currentCalendar] components:unitFlags fromDate:self];
+	comps.year = year;
+	comps.month = month;
+	comps.day = day;
+	comps.hour = hour;
+	comps.minute = minute;
+	comps.second = second;
+	NSDate* date = [[NSCalendar currentCalendar] dateFromComponents:comps];
+	return date;	
+}
+
+
 -(NSDate*) after:(NSTimeInterval)ti {
 	return [self internal_dateByAddingTimeInterval:ti];
 }
@@ -204,7 +202,7 @@ NSString* hourName_minute_second_SPACE(NSTimeInterval ti) {
 }
 
 -(NSDate*) endOfDate {
-	return [[self beginOfDate] internal_dateByAddingTimeInterval:ONE_DAY_SECONDS];
+	return [[self beginOfDate] internal_dateByAddingTimeInterval:ONE_DAY_SECONDS-1];
 }
 
 -(NSDate*) oneDayBefore {
@@ -217,6 +215,10 @@ NSString* hourName_minute_second_SPACE(NSTimeInterval ti) {
 
 -(NSDate*) oneYearAfter {
 	return [NSDate dateFrom:[self year]+1 month:[self month] day:[self day]];
+}
+
+-(int) countDownOfTheDay:(NSDate*)comingDate {
+	return [[comingDate beginOfDate] timeIntervalSinceDate:[self beginOfDate]] / ONE_DAY_SECONDS;
 }
 
 #pragma mark NSDateComponents
@@ -312,6 +314,14 @@ NSString* hourName_minute_second_SPACE(NSTimeInterval ti) {
 	}
 }
 
+-(NSString*) monthName_day_weekday_SPACE {
+	if (IS_LOCALE_KOREAN) {
+		return [self formatWith:@"M월 d일 E요일"];
+	} else {		
+		return [self formatWith:@"EEEE, d MMM"];
+	}
+}
+
 -(NSString*) year_month_day_DOT_SPACE {
 	return [self formatWith:@"Y. M. d."];
 }
@@ -343,15 +353,11 @@ NSString* hourName_minute_second_SPACE(NSTimeInterval ti) {
 -(NSString*) gmtString {
 	return [self formatWith:@"yyyy-MM-dd HH:mm:ss Z"];
 }
+@end
 
--(NSString*) monthName_day_weekday_SPACE {
-	if (IS_LOCALE_KOREAN) {
-		return [self formatWith:@"M월 d일 E요일"];
-	} else {		
-		return [self formatWith:@"EEEE, d MMM"];
-	}
-}
 
+
+@implementation NSDate (Month)
 
 -(int) numberOfDaysInMonth {
 	int count = [[NSCalendar currentCalendar] rangeOfUnit:NSDayCalendarUnit inUnit:NSMonthCalendarUnit forDate:self].length;
@@ -413,7 +419,7 @@ NSString* hourName_minute_second_SPACE(NSTimeInterval ti) {
 	int lastWeekdayInMonth = [firstDayOfPreviousMonth lastWeekdayInMonth];
 	int numberOfDaysInMonth = [firstDayOfPreviousMonth numberOfDaysInMonth];
 	NSMutableArray* ary = [NSMutableArray array];
-	for (int idx = numberOfDaysInMonth - lastWeekdayInMonth + FIRST_WEEKDAY_OF_CALENDAR; idx <= numberOfDaysInMonth; idx++) {
+	for (int idx = numberOfDaysInMonth - lastWeekdayInMonth + 1 ; idx <= numberOfDaysInMonth; idx++) {
 		[ary addObject:[NSDate dateFrom:comps.year month:comps.month day:idx]];
 	}
 	return ary;
@@ -425,7 +431,7 @@ NSString* hourName_minute_second_SPACE(NSTimeInterval ti) {
 	unsigned unitFlags = NSYearCalendarUnit | kCFCalendarUnitMonth;
 	NSDateComponents* comps = [[NSCalendar currentCalendar] components:unitFlags fromDate:firstDayOfNextMonth];
 	NSMutableArray* ary = [NSMutableArray array];
-	for (int idx = 1; idx <= WEEKDAY_COUNT - firstWeekdayInMonth + FIRST_WEEKDAY_OF_CALENDAR; idx++) {
+	for (int idx = 1; idx <= WEEKDAY_COUNT - firstWeekdayInMonth + 1; idx++) {
 		[ary addObject:[NSDate dateFrom:comps.year month:comps.month day:idx]];
 	}
 	return ary;
@@ -466,6 +472,16 @@ NSString* hourName_minute_second_SPACE(NSTimeInterval ti) {
 	return weeks;
 }
 
+-(BOOL) isSameMonth:(NSDate*)date {
+	return [self month] == [date month];
+}
+
+@end
+
+
+
+@implementation NSDate (Weekday)
+
 -(NSString*) weekdayName {
 	int idx = [self weekday] - FIRST_WEEKDAY_OF_CALENDAR;
 	return [[NSDate weekdayNames] objectAtIndex:idx];
@@ -478,15 +494,40 @@ NSString* hourName_minute_second_SPACE(NSTimeInterval ti) {
 	return names;
 }
 
--(BOOL) isSameMonth:(NSDate*)date {
-	return [self month] == [date month];
++(int) sundayWeekdayIndex {
+	switch (FIRST_WEEKDAY_OF_CALENDAR) {
+		case WEEKDAY_SUNDAY:
+			return 1;
+		case WEEKDAY_MONDAY:
+			return 7;
+		default:
+			break;
+	}
+	return 0;
+}
+
+-(BOOL) isSunday {
+	return [self weekday] == WEEKDAY_SUNDAY;
 }
 
 @end
 
 
 
+@implementation NSDate (Day)
 
+-(BOOL) isSameDay:(NSDate*)date {
+	return (self.year == date.year && self.month == date.month && self.day == date.day);
+}
+
+-(BOOL) isToday {
+	return [self isSameDay:[NSDate date]];
+}
+			
+@end
+
+			
+			
 @implementation NSDate (AMPM)
 +(int) ampm:(int)amPm hour12_to_hour24:(int)hour12 {
 	switch (amPm) {

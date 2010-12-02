@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface UIControlViewController : UIViewController {
+@interface UIControlViewController : UIViewController <UIGestureRecognizerDelegate> {
 	IBOutlet UILabel* counterLabel;
 	IBOutlet UIButton* upButton;
 	IBOutlet UIButton* downButton;

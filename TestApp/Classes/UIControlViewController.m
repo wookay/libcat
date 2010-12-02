@@ -10,10 +10,11 @@
 #import "NSStringExt.h"
 #import "UIBarButtonItemBlock.h"
 #import "Logger.h"
+#import "iPadExt.h"
 
 @implementation UIControlViewController
 
--(IBAction) touchedUpButton:(id)sender {
+-(IBAction) touchedUpButton:(id)sender {	
 	counterLabel.text = SWF(@"%d", [counterLabel.text intValue] + 1);
 }
 

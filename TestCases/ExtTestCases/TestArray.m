@@ -73,4 +73,21 @@
 	assert_equal(_array0(), [_array0() transpose]);
 }
 
+-(void) test_diagonal {
+	NSArray* expected = _array3(_w(@"1 _ _"), _w(@"_ 2 _"), _w(@"_ _ 3"));
+	assert_equal(expected, [_w(@"1 2 3") diagonal:UNDERBAR]);
+	
+	expected = _array3(_w(@"3 _ _"), _w(@"_ 2 _"), _w(@"_ _ 1"));
+	assert_equal(expected, [[_w(@"1 2 3") reverse] diagonal:UNDERBAR]);
+
+	expected = _array3(_w(@"_ _ 1"), _w(@"_ 2 _"), _w(@"3 _ _"));
+	assert_equal(expected, [[[_w(@"1 2 3") diagonal:UNDERBAR] reverse] transpose]);
+	
+	expected = _array3(_w(@"_ _ 3"), _w(@"_ 2 _"), _w(@"1 _ _"));
+	assert_equal(expected, [[[[_w(@"1 2 3") reverse] diagonal:UNDERBAR] reverse] transpose]);
+
+	assert_equal(_w(@"1 2 3"), [[_w(@"1 2 3") diagonal:UNDERBAR] undiagonal]);
+
+}
+
 @end

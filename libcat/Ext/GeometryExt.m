@@ -72,6 +72,10 @@ CGRect CGRectForRight(CGRect rect, CGFloat width, CGFloat height) {
 	return CGRectMake(rect.origin.x + rect.size.width - width, rect.origin.y + (rect.size.height - height)/2 , width, height);
 }
 
+CGRect CGRectForBottom(CGRect rect, CGFloat width, CGFloat height) {
+	return CGRectMake(rect.origin.x + rect.size.width/2 - width/2, rect.origin.y + rect.size.height - height, width, height);
+}
+
 CGRect CGRectSideOffset(CGRect rect, CGFloat x, CGFloat y) {
 	return CGRectMake(rect.origin.x - x, rect.origin.y - y, rect.size.width + x*2, rect.size.height + y*2);
 }
@@ -92,4 +96,18 @@ CGRect CGRectSetOriginPoint(CGRect rect, CGPoint point) {
 
 CGRect CGRectWithTwoPoints(CGPoint from, CGPoint to) {
 	return CGRectWithOrigin(from, to.x-from.x, to.y-from.y);
+}
+
+CGRect CGRectWithScale(CGRect rect, CGFloat scale) {
+	return CGRectMake(rect.origin.x * scale,
+					  rect.origin.y * scale,
+					  rect.size.width * scale,
+					  rect.size.height * scale);
+}
+
+CGRect CGRectWithScales(CGRect rect, CGFloat widthScale, CGFloat heightScale) {
+	return CGRectMake(rect.origin.x * widthScale,
+					  rect.origin.y * heightScale,
+					  rect.size.width * widthScale,
+					  rect.size.height * heightScale);
 }

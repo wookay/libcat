@@ -24,6 +24,7 @@ typedef enum { kGetterReturnTypeString, kGetterReturnTypeObject } GetterReturnTy
 -(void) start_servers ;
 -(void) stop_servers ;	
 -(UIViewController*) get_topViewController ;
+-(UIWindow*) get_keyWindow ;
 -(UIViewController*) get_rootViewController ;
 -(id) get_argObject:(NSString*)arg ;
 -(NSString*) getterChain:(id)command arg:(id)arg ;

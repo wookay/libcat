@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "HitTestWindow.h"
 
 #define COMMANDMAN	[CommandManager sharedManager]
 typedef id (^CommandBlock)(id currentObject, id arg) ;
@@ -18,7 +19,7 @@ enum { LS_OBJECT, LS_VIEWCONTROLLERS, LS_TABLEVIEW, LS_SECTIONS, LS_VIEW, LS_IND
 #define LS_OPTION_RECURSIVE @"-r"
 
 
-@interface CommandManager : NSObject {
+@interface CommandManager : NSObject <HitTestDelegate> {
 	NSMutableDictionary* commandsMap;
 }
 @property (nonatomic, retain) NSMutableDictionary* commandsMap;
@@ -30,4 +31,5 @@ enum { LS_OBJECT, LS_VIEWCONTROLLERS, LS_TABLEVIEW, LS_SECTIONS, LS_VIEW, LS_IND
 -(NSArray*) array_ls:(id)currentObject arg:(id)arg ;
 -(NSArray*) get_targetStringAndBlocks:(id)currentObject ;
 -(id) get_targetObjectActionBlock:(id)targetObject ;
+-(void) flickTargetView:(UIView*)view ;
 @end

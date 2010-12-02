@@ -1,4 +1,4 @@
-#! /opt/local/bin/ruby1.9
+#! /usr/bin/ruby
 # encoding: utf-8
 # console.rb
 #                           wookay.noh at gmail.com
@@ -41,6 +41,10 @@ touch TARGET   		: touch target object (t, ㅌ)
 flash TARGET		: flash target object (f)
 back    		: popViewControllerAnimated: false (b, ㅂ)
 rm N			: removeFromSuperview
+pwd 			: superviews
+
+hitTest			: hitTest (h)
+  off			: hitTest off (h off)
 
 property		: property getter (text, frame ...)
 property = value	: property settter
@@ -88,7 +92,9 @@ class Console
     [resolve_command(command), arg]
   end
   def resolve_command command_str
-    aliases = { 't' => 'touch',
+    aliases = {
+    't' => 'touch',
+    'h' => 'hitTest',
     'ㅌ' => 'touch',
     'b' => 'back',
     'f' => 'flash',
@@ -156,7 +162,7 @@ class Console
   end
 
   def request_prompt
-    response = console_request 'pwd', nil
+    response = console_request 'prompt', nil
     "#{response.body}#{PROMPT}"
   end
 

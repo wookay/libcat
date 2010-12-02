@@ -9,6 +9,7 @@
 #import "CommandManager.h"
 #import "NSMutableDictionaryExt.h"
 #import "NSDictionaryExt.h"
+#import "UIViewControllerBlock.h"
 #import "NSDictionaryBlock.h"
 #import "NSStringExt.h"
 #import "NSIndexPathExt.h"
@@ -26,6 +27,8 @@
 #import "NewObjectManager.h"
 #import "objc/runtime.h"
 #import <QuartzCore/QuartzCore.h>
+#import "GeometryExt.h"
+#import "HitTestWindow.h"
 
 #define TOOLBAR_ITEMS_SECTION_INDEX -1
 
@@ -48,6 +51,7 @@ NSArray* array_prefix_index(NSArray* array) {
 	return [NSDictionary dictionaryWithKeysAndObjects:
 			@"echo", @"command_echo:arg:",
 			@"pwd", @"command_pwd:arg:",
+			@"hitTest", @"command_hitTest:arg:",
 			@"cd", @"command_cd:arg:",
 			@"ls", @"command_ls:arg:",
 			@"touch", @"command_touch:arg:",
@@ -57,6 +61,7 @@ NSArray* array_prefix_index(NSArray* array) {
 			@"watch", @"command_watch:arg:",
 			@"new_objects", @"command_new_objects:arg:",
 			@"completion", @"command_completion:arg:",
+			@"prompt", @"command_prompt:arg:",
 			nil];
 }
 
@@ -64,7 +69,7 @@ NSArray* array_prefix_index(NSArray* array) {
 	return arg;
 }
 
--(id) command_pwd:(id)currentObject arg:(id)arg {
+-(id) command_prompt:(id)currentObject arg:(id)arg {
 	if (nil == CONSOLEMAN.currentTargetObject) {
 		CONSOLEMAN.currentTargetObject = [CONSOLEMAN get_topViewController];
 	}
@@ -104,7 +109,31 @@ NSArray* array_prefix_index(NSArray* array) {
 	return EMPTY_STRING;
 }
 
+-(void) hitTestSentEvent:(UIEvent*)event {
+	log_info(@"hitTestSentEvent %@", event);
+}
 
+#define HIT_TEST_OFF	@"off"
+-(NSString*) command_hitTest:(id)currentObject arg:(id)arg {
+	UIWindow* keyWindow = [UIApplication sharedApplication].keyWindow;
+	HitTestWindow* hitTestWindow = [HitTestWindow sharedWindow];
+	if ([HIT_TEST_OFF isEqualToString:arg]) {
+		if ([keyWindow isEqual:hitTestWindow]) {
+			[hitTestWindow.realWindow makeKeyAndVisible];
+			return NSLocalizedString(@"off", nil);
+		} else {
+			return NSLocalizedString(@"Not Found", nil);
+		}
+	} else {	
+		if (! [keyWindow isEqual:hitTestWindow]) {
+			hitTestWindow.hitTestDelegate = self;
+			hitTestWindow.realWindow = keyWindow;
+			[hitTestWindow makeKeyAndVisible];
+			[self flickTargetView:hitTestWindow];
+		}
+		return NSLocalizedString(@"true", nil);
+	}
+}
 
 -(NSString*) command_watch:(id)currentObject arg:(id)arg {
 	NSArray* pair = [self findTargetObject:currentObject arg:arg];
@@ -134,23 +163,34 @@ NSArray* array_prefix_index(NSArray* array) {
 	return NSLocalizedString(@"Not Found", nil);
 }
 
+-(void) flickTargetView:(UIView*)view {
+	CGFloat viewAlpha = view.alpha;
+	UIColor* viewBackgroundColor = view.backgroundColor;
+	CGFloat layerBorderWidth = view.layer.borderWidth;
+	CGColorRef layerBorderColor = view.layer.borderColor;
+	[UIView animateWithDuration:0.7
+					 animations:^{
+						 view.layer.borderWidth = 3;
+						 view.layer.borderColor = [[UIColor blueColor] CGColor];
+						 view.alpha = (1 == viewAlpha) ? 1 - 0.1 : 1;
+						 view.backgroundColor = [UIColor colorWithRed:0.3 green:0.3 blue:0.5 alpha:0.8];
+					 }
+					 completion:^(BOOL finished) {
+						 if (finished) {
+							 view.layer.borderWidth = layerBorderWidth;
+							 view.layer.borderColor = layerBorderColor;
+							 view.alpha = viewAlpha;
+							 view.backgroundColor = viewBackgroundColor;
+						 }
+					 }];		
+}
+
 -(NSString*) command_flash:(id)currentObject arg:(id)arg {
 	NSArray* pair = [self findTargetObject:currentObject arg:arg];
 	id changeObject = [pair objectAtSecond];
 	if ([changeObject isKindOfClass:[UIView class]]) {
 		UIView* view = (UIView*)changeObject;
-		CGFloat viewAlpha = view.alpha;
-		CGFloat layerBorderWidth = view.layer.borderWidth;
-		CGColorRef layerBorderColor = view.layer.borderColor;
-		[UIView animate:^ {
-				view.layer.borderWidth = 3;
-				view.layer.borderColor = [[UIColor redColor] CGColor];
-				view.alpha = viewAlpha - 0.1;
-			} afterDone:^ {
-				view.layer.borderWidth = layerBorderWidth;
-				view.layer.borderColor = layerBorderColor;
-				view.alpha = viewAlpha;
-			}];
+		[self flickTargetView:view];
 	} else if ([changeObject isKindOfClass:[UIBarButtonItem	class]]) {
 		UIBarButtonItem* barButtonItem = (UIBarButtonItem*)changeObject;
 		UIBarButtonItemStyle style = barButtonItem.style;		
@@ -200,7 +240,6 @@ NSArray* array_prefix_index(NSArray* array) {
 	}
 	return [ary join:LF];
 }
-
 
 -(NSString*) command_ls:(id)currentObject arg:(id)arg {
 	NSMutableArray* ary = [NSMutableArray array];
@@ -269,13 +308,35 @@ NSArray* array_prefix_index(NSArray* array) {
 	return [ary join:LF];
 }
 
+-(id) command_pwd:(id)currentObject arg:(id)arg {	
+	NSMutableArray* ary = [NSMutableArray array];
+	
+	if ([currentObject isKindOfClass:[UIView class]]) {
+		UIView* view = currentObject;
+		TraverseViewBlock traverseViewBlock = ^(int depth, UIView* superview) {
+			[ary addObject:SWF(@"%@%@", [TAB repeat:depth], [superview inspect])];
+		};
+		[view traverseSuperviews:traverseViewBlock];
+	} else if ([currentObject isKindOfClass:[UIViewController class]]) {
+		TraverseViewControllerBlock traverseViewControllerBlock = ^(int depth, UIViewController* parentViewController) {
+			[ary addObject:SWF(@"%@%@", [TAB repeat:depth], [parentViewController inspect])];
+		};		
+		UIViewController* controller = currentObject;
+		if ([controller.parentViewController isKindOfClass:[UINavigationController class]]) {
+			[controller traverseViewControllers:traverseViewControllerBlock viewControllers:controller.navigationController.viewControllers];
+		} else {
+			[controller traverseParentViewControllers:traverseViewControllerBlock];
+		}
+	}
+	return [ary join:LF];
+}
 
 -(NSArray*) array_ls:(id)currentObject arg:(id)arg {
 	NSMutableArray* ret = [NSMutableArray array];
 	[ret addObject:PAIR(Enum(LS_OBJECT), currentObject)];
 
 	BOOL recursive = [LS_OPTION_RECURSIVE isEqualToString:arg];
-	TraverseBlock traverseBlock = ^(int depth, UIView* subview) {
+	TraverseViewBlock traverseBlock = ^(int depth, UIView* subview) {
 		[ret addObject:TRIO(Enum(LS_INDENTED_VIEW), subview, FIXNUM(depth))];
 	};
 	
@@ -352,6 +413,8 @@ NSArray* array_prefix_index(NSArray* array) {
 	id actionBlock = nil;
 	if ([SLASH isEqualToString:arg]) {
 		changeObject = [CONSOLEMAN get_rootViewController];
+	} else if ([TILDE isEqualToString:arg]) {
+		changeObject = [CONSOLEMAN get_keyWindow];
 	} else if ([DOT isEqualToString:arg]) {
 		changeObject = currentObject;
 		actionBlock = [self get_targetObjectActionBlock:currentObject];		

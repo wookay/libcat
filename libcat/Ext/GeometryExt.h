@@ -17,7 +17,8 @@ CGPoint CGPointOffset(CGPoint point, CGFloat x, CGFloat y) ;
 CGPoint CGPointWithOffset(CGPoint point, CGPoint offset) ;
 CGFloat CGPointDiffX(CGPoint from, CGPoint to) ;
 CGFloat CGPointDiffY(CGPoint from, CGPoint to) ;	
-#define CGPointMinusOne	CGPointMake(-1, -1)
+#define CGPointMinusOne		CGPointMake(-1, -1)
+#define CGPointIsMinusOne(point)	CGPointEqualToPoint(point, CGPointMinusOne)
 
 #pragma mark CGRect
 BOOL CGRectHasPoint(CGRect rect, CGPoint point) ;
@@ -30,11 +31,14 @@ CGRect CGRectTopLeft(CGRect rect, CGFloat width, CGFloat height) ;
 CGRect CGRectTopRight(CGRect rect, CGFloat width, CGFloat height) ;
 CGRect CGRectForCenter(CGRect rect, CGFloat width, CGFloat height) ;
 CGRect CGRectForRight(CGRect rect, CGFloat width, CGFloat height) ;
+CGRect CGRectForBottom(CGRect rect, CGFloat width, CGFloat height) ;
 CGRect CGRectSideOffset(CGRect rect, CGFloat x, CGFloat y) ;
 CGRect CGRectWithOrigin(CGPoint point, CGFloat width, CGFloat height) ;
 CGRect CGRectSetOrigin(CGRect rect, CGFloat x, CGFloat y) ;
 CGRect CGRectSetOriginPoint(CGRect rect, CGPoint point) ;	
 CGRect CGRectWithTwoPoints(CGPoint from, CGPoint to) ;
+CGRect CGRectWithScale(CGRect rect, CGFloat scale) ;
+CGRect CGRectWithScales(CGRect rect, CGFloat widthScale, CGFloat heightScale) ;
 
 #define SFRect(rect)	NSStringFromCGRect(rect)
 #define SFSize(size)	NSStringFromCGSize(size)

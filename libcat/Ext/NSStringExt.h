@@ -32,6 +32,7 @@
 #define QUESTION_MARK    @"?"
 #define EXCLAMATION_MARK @"!"
 #define DOLLAR			 @"$"
+#define TILDE			 @"~"
 #define	LESS_THAN        @"<"
 #define	GREATER_THAN     @">"
 #define OPENING_BRACE	 @"{"
@@ -55,6 +56,8 @@
 #define INDEX_OF_SECTION_INDEX_TITLE_FOR_SEARCH 0
 
 #define YES_NO(yn)		(yn ? @"YES" : @"NO")
+
+#define CP949_ENCODING 0x80000422
 
 NSString* SWF(NSString* format, ...) ;
 NSArray* _w(NSString* str) ;

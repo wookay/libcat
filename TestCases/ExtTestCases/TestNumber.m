@@ -8,11 +8,21 @@
 
 #import "UnitTest.h"
 #import "NSNumberExt.h"
+#import "NSStringExt.h"
 
 @interface TestNumber : NSObject 
 @end
 
 @implementation TestNumber
+
+typedef enum {
+	kEnumTypeZero,
+	kEnumTypeOne,
+} kEnumType;
+
+-(void) test_enum {
+	assert_equal(@"1", SWF(@"%@", Enum(kEnumTypeOne)));
+}
 
 -(void) test_number {
 	assert_equal(FIXNUM(2), [FIXNUM(1) next]);

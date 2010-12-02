@@ -10,11 +10,13 @@
 #define ONE_DAY_SECONDS		86400 // 1 day = 60*60*24 seconds
 #define ONE_HOUR_SECONDS	3600 // 60*60
 #define ONE_MINUTE_SECONDS	60
+#define ONE_YEAR_DAYS		355
 
 #define WEEKDAY_COUNT 7
 #define FIRST_WEEKDAY_OF_CALENDAR [[NSCalendar currentCalendar] firstWeekday]
 
-enum WeekdayIndexes {
+typedef enum {
+	WEEKDAY_NONE = 0,
 	WEEKDAY_SUNDAY = 1,
 	WEEKDAY_MONDAY = 2,
 	WEEKDAY_TUESDAY = 3,
@@ -22,7 +24,7 @@ enum WeekdayIndexes {
 	WEEKDAY_THIRSDAY = 5,
 	WEEKDAY_FRIDAY = 6,
 	WEEKDAY_SATURDAY = 7
-};
+} kWeekdayIndex ;
 
 enum PostfixTypes {
 	POSTFIX_YEAR = 1,
@@ -52,12 +54,14 @@ NSString* hourName_minute_second_SPACE(NSTimeInterval ti) ;
 +(NSDate*) dateFrom:(int)year month:(int)month day:(int)day ;
 +(NSDate*) dateFrom:(int)year month:(int)month day:(int)day hour:(int)hour ;
 +(NSDate*) dateFrom:(int)year month:(int)month day:(int)day hour:(int)hour minute:(int)minute ;
++(NSDate*) dateFrom:(int)year month:(int)month day:(int)day hour:(int)hour minute:(int)minute second:(int)second ;
 -(NSDate*) after:(NSTimeInterval)ti ;
 -(NSDate*) beginOfDate ;
 -(NSDate*) endOfDate ;	
 -(NSDate*) oneYearAgo ;
 -(NSDate*) oneYearAfter ;
 -(NSDate*) oneDayBefore ;
+-(int) countDownOfTheDay:(NSDate*)comingDate ;
 
 #pragma mark NSDateComponents
 -(NSDateComponents*) today_components ;
@@ -84,7 +88,9 @@ NSString* hourName_minute_second_SPACE(NSTimeInterval ti) ;
 -(NSString*) hour_minute_second_COLON ;
 -(NSString*) gmtString ;
 
-#pragma mark month
+@end
+
+@interface NSDate (Month)
 -(int) numberOfDaysInMonth ;
 -(int) firstWeekdayInMonth ;
 -(int) lastWeekdayInMonth ;
@@ -100,13 +106,22 @@ NSString* hourName_minute_second_SPACE(NSTimeInterval ti) ;
 -(NSArray*) allDaysInMonth ;
 -(int) numberOfWeeksInMonth ;
 -(NSArray*) monthTable ;
--(int) weekdayIndex ;
-+(NSArray*) weekdayNames ;
--(NSString*) weekdayName ;
 -(BOOL) isSameMonth:(NSDate*)date ;
-
 @end
 
+
+@interface NSDate (Weekday)
++(NSArray*) weekdayNames ;
++(int) sundayWeekdayIndex ;
+-(NSString*) weekdayName ;
+-(BOOL) isSunday ;
+@end
+
+
+@interface NSDate (Day)
+-(BOOL) isSameDay:(NSDate*)date ;
+-(BOOL) isToday ;
+@end
 
 
 #pragma mark AMPM

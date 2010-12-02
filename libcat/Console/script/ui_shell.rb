@@ -15,6 +15,14 @@ LF = "\n"
 
 COMMANDS = %w{help open history clear quit}
 
+def force_encoding_utf8 str
+  if str.respond_to? :force_encoding
+    str.force_encoding("UTF-8")
+  else
+    str
+  end
+end
+
 class Shell
   attr_accessor :options
   def initialize options
@@ -30,7 +38,7 @@ class Shell
     end
     Readline.completion_proc = proc do |input|
       self.completion_list.sort.uniq.select do |history| 
-          history.size != input.size and 0 == history.force_encoding("UTF-8").index(input)
+          history.size != input.size and 0 == force_encoding_utf8(history).index(input)
       end
     end
   end

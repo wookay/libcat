@@ -30,7 +30,7 @@
 +(void) report {
 	UNITTESTMAN.elapsed = ABS([UNITTESTMAN.test_started_at timeIntervalSince1970]);
 	printf("\nFinished in %.3g seconds.\n", UNITTESTMAN.elapsed);
-	printf("\n%d tests, %d assertions, %d failures, %d errors", UNITTESTMAN.tests, UNITTESTMAN.assertions, UNITTESTMAN.failures, UNITTESTMAN.errors);
+	printf("\n%d tests, %d assertions, %d failures, %d errors\n", UNITTESTMAN.tests, UNITTESTMAN.assertions, UNITTESTMAN.failures, UNITTESTMAN.errors);
 }
 
 +(void) assert:(NSValue*)got equals:(NSValue*)expected message:(NSString*)message inFile:(NSString*)file atLine:(int)line {	

@@ -12,6 +12,8 @@
 #include <netdb.h>
 #include <net/if.h>
 #include <ifaddrs.h>
+#import <QuartzCore/QuartzCore.h>
+#import "GeometryExt.h"
 #import "iPadExt.h"
 #import "UIButtonBlock.h"
 
@@ -29,26 +31,22 @@
 	if (nil == ip_address) {
 //		ip_address = NSLocalizedString(@"Not Found", nil);
 	}
-	CGFloat height = 0;
-#ifdef BUILD_313
-	height = 480;
-#else
-	height = SCREEN_HEIGHT;
-#endif
-	CGRect rect = CGRectMake(4.2, height-16, 70, 14);
-	UIButton* label = [[UIButton alloc] initWithFrame:rect];
-	[label addBlock:^(id sender) { 
+	CGRect rect = CGRectBottomLeft([UIApplication sharedApplication].keyWindow.frame, 70, 20);
+	UIButton* ipButton = [[UIButton alloc] initWithFrame:rect];
+	[ipButton addBlock:^(id sender) { 
 		[sender	removeBlockForControlEvents:UIControlEventTouchUpInside];
 		[sender removeFromSuperview];
 	} forControlEvents:UIControlEventTouchUpInside];
-	label.titleLabel.font = [UIFont fontWithName:@"CourierNewPS-BoldMT" size:rect.size.height];
-	label.titleLabel.textAlignment = UITextAlignmentLeft;
-	label.titleLabel.adjustsFontSizeToFitWidth = true;
-	label.backgroundColor = [UIColor clearColor];
-	[label setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
-	[label setTitle:ip_address forState:UIControlStateNormal];
-	[[UIApplication sharedApplication].keyWindow addSubview:label];
-	[label release];
+	ipButton.titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:rect.size.height];
+	ipButton.titleLabel.textAlignment = UITextAlignmentCenter;
+	ipButton.titleLabel.baselineAdjustment = UIBaselineAdjustmentAlignCenters;
+	ipButton.titleLabel.adjustsFontSizeToFitWidth = true;
+	ipButton.layer.cornerRadius = 3;
+	ipButton.backgroundColor = [UIColor yellowColor];
+	[ipButton setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+	[ipButton setTitle:ip_address forState:UIControlStateNormal];
+	[[UIApplication sharedApplication].keyWindow addSubview:ipButton];
+	[ipButton release];
 }
 
 -(void) loggerTextOut:(NSString *)text {

@@ -26,6 +26,15 @@ NSArray* TRIO(id uno, id dos, id tres) {
 	return ary;	
 }
 
+NSArray* CUAD(id uno, id dos, id tres, id cuatro) {
+	NSMutableArray* ary = [NSMutableArray array];
+	[ary addObject:(nil == uno) ? [NSNull null] : uno];
+	[ary addObject:(nil == dos) ? [NSNull null] : dos];
+	[ary addObject:(nil == tres) ? [NSNull null] : tres];
+	[ary addObject:(nil == cuatro) ? [NSNull null] : cuatro];
+	return ary;	
+}
+
 
 @implementation NSArray (Ext)
 
@@ -133,6 +142,39 @@ NSArray* TRIO(id uno, id dos, id tres) {
 		}
 	}
 	return transposedArray;
+}
+
+-(NSArray*) diagonal:(id)padding {
+	NSMutableArray* diagonalArray = [NSMutableArray array];		
+	int cnt = self.count;
+	for (int row = 0; row < cnt; row++) {
+		NSMutableArray* ary = [NSMutableArray array];
+		for (int col = 0; col < cnt; col++) {
+			if (col == row) {
+				[ary addObject:[self objectAtIndex:col]];
+			} else {
+				[ary addObject:padding];
+			}
+		}
+		[diagonalArray addObject:ary];
+	}
+	return diagonalArray;
+}
+
+-(NSArray*) undiagonal {
+	int idx = 0;
+	NSMutableArray* ret = [NSMutableArray array];
+	for (NSArray* ary in self) {
+		[ret addObject:[ary objectAtIndex:idx]];
+		idx ++;
+	}
+	return ret;
+}
+
+-(NSArray*) withoutObject:(id)obj {
+	NSMutableArray* ary = [NSMutableArray arrayWithArray:self];
+	[ary removeObject:obj];
+	return ary;
 }
 
 -(NSArray*) sort {

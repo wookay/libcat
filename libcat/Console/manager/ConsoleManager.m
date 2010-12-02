@@ -376,21 +376,31 @@
 	if (nil == rootVC) {
 		return nil;
 	} else {
+		UIViewController* topViewController = nil;
 		if ([rootVC isKindOfClass:[UINavigationController class]]) {
 			UINavigationController* navigationController = (UINavigationController*)rootVC;
-			return navigationController.topViewController;
+			topViewController = navigationController.topViewController;
 		} else if ([rootVC isKindOfClass:[UITabBarController class]]) {
 			UITabBarController* tabBarController = (UITabBarController*)rootVC;
 			if ([tabBarController.selectedViewController isKindOfClass:[UINavigationController class]]) {
 				UINavigationController* navigationController = (UINavigationController*)tabBarController.selectedViewController;
-				return navigationController.topViewController;
+				topViewController = navigationController.topViewController;
 			} else {
-				return tabBarController.selectedViewController;
+				topViewController = tabBarController.selectedViewController;
 			}			
 		} else {
-			return rootVC;
+			topViewController = rootVC;
+		}
+		if (nil == topViewController.modalViewController) {
+			return topViewController;
+		} else {
+			return topViewController.modalViewController;
 		}
 	}
+}
+
+-(UIWindow*) get_keyWindow {
+	return [UIApplication sharedApplication].keyWindow;
 }
 
 -(UIViewController*) get_rootViewController {
