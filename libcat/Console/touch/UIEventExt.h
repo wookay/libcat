@@ -12,6 +12,5 @@
 @interface UIEvent (Ext)
 
 -(id) initWithTouches:(NSSet*)touches ;
-+(UIEvent*) tapEventAtPoint:(CGPoint)point ;
 
 @end
