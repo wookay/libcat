@@ -11,6 +11,7 @@ Objective-C Libraries
 
 Console
 -------
+ * <http://github.com/wookay/libcat/wiki/Console>
  * Interactive Shell : libcat/Console/script/console.rb
  * Log Watcher : libcat/Console/script/log_watcher.rb
    - requires eventmcachine ( sudo gem install eventmachine )
