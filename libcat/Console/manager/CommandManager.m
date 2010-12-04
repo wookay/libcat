@@ -28,8 +28,6 @@
 #import "objc/runtime.h"
 #import <QuartzCore/QuartzCore.h>
 #import "GeometryExt.h"
-#import "HitTestWindow.h"
-
 #define TOOLBAR_ITEMS_SECTION_INDEX -1
 
 
@@ -107,32 +105,6 @@ NSArray* array_prefix_index(NSArray* array) {
 		}
 	}
 	return EMPTY_STRING;
-}
-
--(void) hitTestSentEvent:(UIEvent*)event {
-	log_info(@"hitTestSentEvent %@", event);
-}
-
-#define HIT_TEST_OFF	@"off"
--(NSString*) command_hitTest:(id)currentObject arg:(id)arg {
-	UIWindow* keyWindow = [UIApplication sharedApplication].keyWindow;
-	HitTestWindow* hitTestWindow = [HitTestWindow sharedWindow];
-	if ([HIT_TEST_OFF isEqualToString:arg]) {
-		if ([keyWindow isEqual:hitTestWindow]) {
-			[hitTestWindow.realWindow makeKeyAndVisible];
-			return NSLocalizedString(@"off", nil);
-		} else {
-			return NSLocalizedString(@"Not Found", nil);
-		}
-	} else {	
-		if (! [keyWindow isEqual:hitTestWindow]) {
-			hitTestWindow.hitTestDelegate = self;
-			hitTestWindow.realWindow = keyWindow;
-			[hitTestWindow makeKeyAndVisible];
-			[self flickTargetView:hitTestWindow];
-		}
-		return NSLocalizedString(@"true", nil);
-	}
 }
 
 -(NSString*) command_watch:(id)currentObject arg:(id)arg {

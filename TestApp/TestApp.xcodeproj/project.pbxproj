@@ -24,6 +24,24 @@
 		DAAAE1FE126442E00059A264 /* TestActionSheetBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DAAAE1FC126442E00059A264 /* TestActionSheetBlock.m */; };
 		DAAAE1FF126442E00059A264 /* TestView.m in Sources */ = {isa = PBXBuildFile; fileRef = DAAAE1FD126442E00059A264 /* TestView.m */; };
 		DAAAE206126442ED0059A264 /* TestButton.m in Sources */ = {isa = PBXBuildFile; fileRef = DAAAE205126442ED0059A264 /* TestButton.m */; };
+		DAB7761312AA814E0033473B /* HitTestWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB7760A12AA814E0033473B /* HitTestWindow.m */; };
+		DAB7761412AA814E0033473B /* UIEventExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB7760C12AA814E0033473B /* UIEventExt.m */; };
+		DAB7761512AA814E0033473B /* UITouchExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB7760E12AA814E0033473B /* UITouchExt.m */; };
+		DAB7761612AA814E0033473B /* UIViewOpenGLExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB7761012AA814E0033473B /* UIViewOpenGLExt.m */; };
+		DAB7761712AA814E0033473B /* UIViewTouchExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB7761212AA814E0033473B /* UIViewTouchExt.m */; };
+		DAB7761812AA814E0033473B /* HitTestWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB7760A12AA814E0033473B /* HitTestWindow.m */; };
+		DAB7761912AA814E0033473B /* UIEventExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB7760C12AA814E0033473B /* UIEventExt.m */; };
+		DAB7761A12AA814E0033473B /* UITouchExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB7760E12AA814E0033473B /* UITouchExt.m */; };
+		DAB7761B12AA814E0033473B /* UIViewOpenGLExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB7761012AA814E0033473B /* UIViewOpenGLExt.m */; };
+		DAB7761C12AA814E0033473B /* UIViewTouchExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB7761212AA814E0033473B /* UIViewTouchExt.m */; };
+		DAB7761D12AA814E0033473B /* HitTestWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB7760A12AA814E0033473B /* HitTestWindow.m */; };
+		DAB7761E12AA814E0033473B /* UIEventExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB7760C12AA814E0033473B /* UIEventExt.m */; };
+		DAB7761F12AA814E0033473B /* UITouchExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB7760E12AA814E0033473B /* UITouchExt.m */; };
+		DAB7762012AA814E0033473B /* UIViewOpenGLExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB7761012AA814E0033473B /* UIViewOpenGLExt.m */; };
+		DAB7762112AA814E0033473B /* UIViewTouchExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB7761212AA814E0033473B /* UIViewTouchExt.m */; };
+		DAB7781E12AA90960033473B /* CommandManagerTouchExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB7781D12AA90960033473B /* CommandManagerTouchExt.m */; };
+		DAB7781F12AA90960033473B /* CommandManagerTouchExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB7781D12AA90960033473B /* CommandManagerTouchExt.m */; };
+		DAB7782012AA90960033473B /* CommandManagerTouchExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAB7781D12AA90960033473B /* CommandManagerTouchExt.m */; };
 		DAC0C27412A9A79800F669EC /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = DAC0C27212A9A79800F669EC /* Default.png */; };
 		DAC0C27512A9A79800F669EC /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = DAC0C27312A9A79800F669EC /* Icon.png */; };
 		DAC0C29912A9AA5300F669EC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAC0C29512A9AA5300F669EC /* InfoPlist.strings */; };
@@ -53,11 +71,6 @@
 		DAC0C4DB12A9CDEA00F669EC /* console.rb in Resources */ = {isa = PBXBuildFile; fileRef = DAC0C48512A9CDEA00F669EC /* console.rb */; };
 		DAC0C4DC12A9CDEA00F669EC /* log_watcher.rb in Resources */ = {isa = PBXBuildFile; fileRef = DAC0C48612A9CDEA00F669EC /* log_watcher.rb */; };
 		DAC0C4DD12A9CDEA00F669EC /* ui_shell.rb in Resources */ = {isa = PBXBuildFile; fileRef = DAC0C48712A9CDEA00F669EC /* ui_shell.rb */; };
-		DAC0C4DE12A9CDEA00F669EC /* HitTestWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC0C48A12A9CDEA00F669EC /* HitTestWindow.m */; };
-		DAC0C4DF12A9CDEA00F669EC /* UIEventExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC0C48C12A9CDEA00F669EC /* UIEventExt.m */; };
-		DAC0C4E012A9CDEA00F669EC /* UITouchExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC0C48E12A9CDEA00F669EC /* UITouchExt.m */; };
-		DAC0C4E112A9CDEA00F669EC /* UIViewOpenGLExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC0C49012A9CDEA00F669EC /* UIViewOpenGLExt.m */; };
-		DAC0C4E212A9CDEA00F669EC /* UIViewTouchExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC0C49212A9CDEA00F669EC /* UIViewTouchExt.m */; };
 		DAC0C4E312A9CDEA00F669EC /* GeometryExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC0C49612A9CDEA00F669EC /* GeometryExt.m */; };
 		DAC0C4E412A9CDEA00F669EC /* NSArrayExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC0C49912A9CDEA00F669EC /* NSArrayExt.m */; };
 		DAC0C4E512A9CDEA00F669EC /* NSBundleExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC0C49B12A9CDEA00F669EC /* NSBundleExt.m */; };
@@ -103,11 +116,6 @@
 		DAC0C50D12A9CDEA00F669EC /* console.rb in Resources */ = {isa = PBXBuildFile; fileRef = DAC0C48512A9CDEA00F669EC /* console.rb */; };
 		DAC0C50E12A9CDEA00F669EC /* log_watcher.rb in Resources */ = {isa = PBXBuildFile; fileRef = DAC0C48612A9CDEA00F669EC /* log_watcher.rb */; };
 		DAC0C50F12A9CDEA00F669EC /* ui_shell.rb in Resources */ = {isa = PBXBuildFile; fileRef = DAC0C48712A9CDEA00F669EC /* ui_shell.rb */; };
-		DAC0C51012A9CDEA00F669EC /* HitTestWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC0C48A12A9CDEA00F669EC /* HitTestWindow.m */; };
-		DAC0C51112A9CDEA00F669EC /* UIEventExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC0C48C12A9CDEA00F669EC /* UIEventExt.m */; };
-		DAC0C51212A9CDEA00F669EC /* UITouchExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC0C48E12A9CDEA00F669EC /* UITouchExt.m */; };
-		DAC0C51312A9CDEA00F669EC /* UIViewOpenGLExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC0C49012A9CDEA00F669EC /* UIViewOpenGLExt.m */; };
-		DAC0C51412A9CDEA00F669EC /* UIViewTouchExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC0C49212A9CDEA00F669EC /* UIViewTouchExt.m */; };
 		DAC0C51512A9CDEA00F669EC /* GeometryExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC0C49612A9CDEA00F669EC /* GeometryExt.m */; };
 		DAC0C51612A9CDEA00F669EC /* NSArrayExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC0C49912A9CDEA00F669EC /* NSArrayExt.m */; };
 		DAC0C51712A9CDEA00F669EC /* NSBundleExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC0C49B12A9CDEA00F669EC /* NSBundleExt.m */; };
@@ -153,11 +161,6 @@
 		DAC0C53F12A9CDEA00F669EC /* console.rb in Resources */ = {isa = PBXBuildFile; fileRef = DAC0C48512A9CDEA00F669EC /* console.rb */; };
 		DAC0C54012A9CDEA00F669EC /* log_watcher.rb in Resources */ = {isa = PBXBuildFile; fileRef = DAC0C48612A9CDEA00F669EC /* log_watcher.rb */; };
 		DAC0C54112A9CDEA00F669EC /* ui_shell.rb in Resources */ = {isa = PBXBuildFile; fileRef = DAC0C48712A9CDEA00F669EC /* ui_shell.rb */; };
-		DAC0C54212A9CDEA00F669EC /* HitTestWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC0C48A12A9CDEA00F669EC /* HitTestWindow.m */; };
-		DAC0C54312A9CDEA00F669EC /* UIEventExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC0C48C12A9CDEA00F669EC /* UIEventExt.m */; };
-		DAC0C54412A9CDEA00F669EC /* UITouchExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC0C48E12A9CDEA00F669EC /* UITouchExt.m */; };
-		DAC0C54512A9CDEA00F669EC /* UIViewOpenGLExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC0C49012A9CDEA00F669EC /* UIViewOpenGLExt.m */; };
-		DAC0C54612A9CDEA00F669EC /* UIViewTouchExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC0C49212A9CDEA00F669EC /* UIViewTouchExt.m */; };
 		DAC0C54712A9CDEA00F669EC /* GeometryExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC0C49612A9CDEA00F669EC /* GeometryExt.m */; };
 		DAC0C54812A9CDEA00F669EC /* NSArrayExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC0C49912A9CDEA00F669EC /* NSArrayExt.m */; };
 		DAC0C54912A9CDEA00F669EC /* NSBundleExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC0C49B12A9CDEA00F669EC /* NSBundleExt.m */; };
@@ -296,6 +299,18 @@
 		DAAAE1FC126442E00059A264 /* TestActionSheetBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestActionSheetBlock.m; sourceTree = "<group>"; };
 		DAAAE1FD126442E00059A264 /* TestView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestView.m; sourceTree = "<group>"; };
 		DAAAE205126442ED0059A264 /* TestButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestButton.m; sourceTree = "<group>"; };
+		DAB7760912AA814E0033473B /* HitTestWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HitTestWindow.h; sourceTree = "<group>"; };
+		DAB7760A12AA814E0033473B /* HitTestWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HitTestWindow.m; sourceTree = "<group>"; };
+		DAB7760B12AA814E0033473B /* UIEventExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIEventExt.h; sourceTree = "<group>"; };
+		DAB7760C12AA814E0033473B /* UIEventExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIEventExt.m; sourceTree = "<group>"; };
+		DAB7760D12AA814E0033473B /* UITouchExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITouchExt.h; sourceTree = "<group>"; };
+		DAB7760E12AA814E0033473B /* UITouchExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITouchExt.m; sourceTree = "<group>"; };
+		DAB7760F12AA814E0033473B /* UIViewOpenGLExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewOpenGLExt.h; sourceTree = "<group>"; };
+		DAB7761012AA814E0033473B /* UIViewOpenGLExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIViewOpenGLExt.m; sourceTree = "<group>"; };
+		DAB7761112AA814E0033473B /* UIViewTouchExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewTouchExt.h; sourceTree = "<group>"; };
+		DAB7761212AA814E0033473B /* UIViewTouchExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIViewTouchExt.m; sourceTree = "<group>"; };
+		DAB7781C12AA90960033473B /* CommandManagerTouchExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommandManagerTouchExt.h; sourceTree = "<group>"; };
+		DAB7781D12AA90960033473B /* CommandManagerTouchExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommandManagerTouchExt.m; sourceTree = "<group>"; };
 		DAC0C27212A9A79800F669EC /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		DAC0C27312A9A79800F669EC /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		DAC0C29612A9AA5300F669EC /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -349,16 +364,6 @@
 		DAC0C48512A9CDEA00F669EC /* console.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = console.rb; sourceTree = "<group>"; };
 		DAC0C48612A9CDEA00F669EC /* log_watcher.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = log_watcher.rb; sourceTree = "<group>"; };
 		DAC0C48712A9CDEA00F669EC /* ui_shell.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = ui_shell.rb; sourceTree = "<group>"; };
-		DAC0C48912A9CDEA00F669EC /* HitTestWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HitTestWindow.h; sourceTree = "<group>"; };
-		DAC0C48A12A9CDEA00F669EC /* HitTestWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HitTestWindow.m; sourceTree = "<group>"; };
-		DAC0C48B12A9CDEA00F669EC /* UIEventExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIEventExt.h; sourceTree = "<group>"; };
-		DAC0C48C12A9CDEA00F669EC /* UIEventExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIEventExt.m; sourceTree = "<group>"; };
-		DAC0C48D12A9CDEA00F669EC /* UITouchExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITouchExt.h; sourceTree = "<group>"; };
-		DAC0C48E12A9CDEA00F669EC /* UITouchExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITouchExt.m; sourceTree = "<group>"; };
-		DAC0C48F12A9CDEA00F669EC /* UIViewOpenGLExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewOpenGLExt.h; sourceTree = "<group>"; };
-		DAC0C49012A9CDEA00F669EC /* UIViewOpenGLExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIViewOpenGLExt.m; sourceTree = "<group>"; };
-		DAC0C49112A9CDEA00F669EC /* UIViewTouchExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewTouchExt.h; sourceTree = "<group>"; };
-		DAC0C49212A9CDEA00F669EC /* UIViewTouchExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIViewTouchExt.m; sourceTree = "<group>"; };
 		DAC0C49412A9CDEA00F669EC /* ExtHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtHeaders.h; sourceTree = "<group>"; };
 		DAC0C49512A9CDEA00F669EC /* GeometryExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeometryExt.h; sourceTree = "<group>"; };
 		DAC0C49612A9CDEA00F669EC /* GeometryExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeometryExt.m; sourceTree = "<group>"; };
@@ -526,6 +531,7 @@
 			children = (
 				DAE9D2AC12A81EE500EA3F21 /* README.md */,
 				DAC0C45412A9CDE900F669EC /* libcat */,
+				DAB7760712AA814E0033473B /* PrivateAPI */,
 				DACAB00312629054006DA76D /* TestCases */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				DA44AFF11261FF25000F7374 /* MainWindow */,
@@ -631,6 +637,42 @@
 			path = UIBlockTestCases;
 			sourceTree = "<group>";
 		};
+		DAB7760712AA814E0033473B /* PrivateAPI */ = {
+			isa = PBXGroup;
+			children = (
+				DAB7781912AA908B0033473B /* manager */,
+				DAB7760812AA814E0033473B /* touch */,
+			);
+			name = PrivateAPI;
+			path = ../PrivateAPI;
+			sourceTree = SOURCE_ROOT;
+		};
+		DAB7760812AA814E0033473B /* touch */ = {
+			isa = PBXGroup;
+			children = (
+				DAB7760912AA814E0033473B /* HitTestWindow.h */,
+				DAB7760A12AA814E0033473B /* HitTestWindow.m */,
+				DAB7760B12AA814E0033473B /* UIEventExt.h */,
+				DAB7760C12AA814E0033473B /* UIEventExt.m */,
+				DAB7760D12AA814E0033473B /* UITouchExt.h */,
+				DAB7760E12AA814E0033473B /* UITouchExt.m */,
+				DAB7760F12AA814E0033473B /* UIViewOpenGLExt.h */,
+				DAB7761012AA814E0033473B /* UIViewOpenGLExt.m */,
+				DAB7761112AA814E0033473B /* UIViewTouchExt.h */,
+				DAB7761212AA814E0033473B /* UIViewTouchExt.m */,
+			);
+			path = touch;
+			sourceTree = "<group>";
+		};
+		DAB7781912AA908B0033473B /* manager */ = {
+			isa = PBXGroup;
+			children = (
+				DAB7781C12AA90960033473B /* CommandManagerTouchExt.h */,
+				DAB7781D12AA90960033473B /* CommandManagerTouchExt.m */,
+			);
+			path = manager;
+			sourceTree = "<group>";
+		};
 		DAC0C27112A9A79800F669EC /* OpenGLApp */ = {
 			isa = PBXGroup;
 			children = (
@@ -715,7 +757,6 @@
 				DAC0C46812A9CDE900F669EC /* manager */,
 				DAC0C47312A9CDEA00F669EC /* net */,
 				DAC0C48412A9CDEA00F669EC /* script */,
-				DAC0C48812A9CDEA00F669EC /* touch */,
 			);
 			path = Console;
 			sourceTree = "<group>";
@@ -782,23 +823,6 @@
 				DAC0C48712A9CDEA00F669EC /* ui_shell.rb */,
 			);
 			path = script;
-			sourceTree = "<group>";
-		};
-		DAC0C48812A9CDEA00F669EC /* touch */ = {
-			isa = PBXGroup;
-			children = (
-				DAC0C48912A9CDEA00F669EC /* HitTestWindow.h */,
-				DAC0C48A12A9CDEA00F669EC /* HitTestWindow.m */,
-				DAC0C48B12A9CDEA00F669EC /* UIEventExt.h */,
-				DAC0C48C12A9CDEA00F669EC /* UIEventExt.m */,
-				DAC0C48D12A9CDEA00F669EC /* UITouchExt.h */,
-				DAC0C48E12A9CDEA00F669EC /* UITouchExt.m */,
-				DAC0C48F12A9CDEA00F669EC /* UIViewOpenGLExt.h */,
-				DAC0C49012A9CDEA00F669EC /* UIViewOpenGLExt.m */,
-				DAC0C49112A9CDEA00F669EC /* UIViewTouchExt.h */,
-				DAC0C49212A9CDEA00F669EC /* UIViewTouchExt.m */,
-			);
-			path = touch;
 			sourceTree = "<group>";
 		};
 		DAC0C49312A9CDEA00F669EC /* Ext */ = {
@@ -1192,11 +1216,6 @@
 				DAC0C53C12A9CDEA00F669EC /* AsyncSocket.m in Sources */,
 				DAC0C53D12A9CDEA00F669EC /* HTTPServer.m in Sources */,
 				DAC0C53E12A9CDEA00F669EC /* LoggerServer.m in Sources */,
-				DAC0C54212A9CDEA00F669EC /* HitTestWindow.m in Sources */,
-				DAC0C54312A9CDEA00F669EC /* UIEventExt.m in Sources */,
-				DAC0C54412A9CDEA00F669EC /* UITouchExt.m in Sources */,
-				DAC0C54512A9CDEA00F669EC /* UIViewOpenGLExt.m in Sources */,
-				DAC0C54612A9CDEA00F669EC /* UIViewTouchExt.m in Sources */,
 				DAC0C54712A9CDEA00F669EC /* GeometryExt.m in Sources */,
 				DAC0C54812A9CDEA00F669EC /* NSArrayExt.m in Sources */,
 				DAC0C54912A9CDEA00F669EC /* NSBundleExt.m in Sources */,
@@ -1219,6 +1238,12 @@
 				DAC0C55A12A9CDEA00F669EC /* Inspect.m in Sources */,
 				DAC0C55B12A9CDEA00F669EC /* Logger.m in Sources */,
 				DAC0C55C12A9CDEA00F669EC /* UnitTest.m in Sources */,
+				DAB7761D12AA814E0033473B /* HitTestWindow.m in Sources */,
+				DAB7761E12AA814E0033473B /* UIEventExt.m in Sources */,
+				DAB7761F12AA814E0033473B /* UITouchExt.m in Sources */,
+				DAB7762012AA814E0033473B /* UIViewOpenGLExt.m in Sources */,
+				DAB7762112AA814E0033473B /* UIViewTouchExt.m in Sources */,
+				DAB7782012AA90960033473B /* CommandManagerTouchExt.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1269,11 +1294,6 @@
 				DAC0C4D812A9CDEA00F669EC /* AsyncSocket.m in Sources */,
 				DAC0C4D912A9CDEA00F669EC /* HTTPServer.m in Sources */,
 				DAC0C4DA12A9CDEA00F669EC /* LoggerServer.m in Sources */,
-				DAC0C4DE12A9CDEA00F669EC /* HitTestWindow.m in Sources */,
-				DAC0C4DF12A9CDEA00F669EC /* UIEventExt.m in Sources */,
-				DAC0C4E012A9CDEA00F669EC /* UITouchExt.m in Sources */,
-				DAC0C4E112A9CDEA00F669EC /* UIViewOpenGLExt.m in Sources */,
-				DAC0C4E212A9CDEA00F669EC /* UIViewTouchExt.m in Sources */,
 				DAC0C4E312A9CDEA00F669EC /* GeometryExt.m in Sources */,
 				DAC0C4E412A9CDEA00F669EC /* NSArrayExt.m in Sources */,
 				DAC0C4E512A9CDEA00F669EC /* NSBundleExt.m in Sources */,
@@ -1296,6 +1316,12 @@
 				DAC0C4F612A9CDEA00F669EC /* Inspect.m in Sources */,
 				DAC0C4F712A9CDEA00F669EC /* Logger.m in Sources */,
 				DAC0C4F812A9CDEA00F669EC /* UnitTest.m in Sources */,
+				DAB7761312AA814E0033473B /* HitTestWindow.m in Sources */,
+				DAB7761412AA814E0033473B /* UIEventExt.m in Sources */,
+				DAB7761512AA814E0033473B /* UITouchExt.m in Sources */,
+				DAB7761612AA814E0033473B /* UIViewOpenGLExt.m in Sources */,
+				DAB7761712AA814E0033473B /* UIViewTouchExt.m in Sources */,
+				DAB7781F12AA90960033473B /* CommandManagerTouchExt.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1344,11 +1370,6 @@
 				DAC0C50A12A9CDEA00F669EC /* AsyncSocket.m in Sources */,
 				DAC0C50B12A9CDEA00F669EC /* HTTPServer.m in Sources */,
 				DAC0C50C12A9CDEA00F669EC /* LoggerServer.m in Sources */,
-				DAC0C51012A9CDEA00F669EC /* HitTestWindow.m in Sources */,
-				DAC0C51112A9CDEA00F669EC /* UIEventExt.m in Sources */,
-				DAC0C51212A9CDEA00F669EC /* UITouchExt.m in Sources */,
-				DAC0C51312A9CDEA00F669EC /* UIViewOpenGLExt.m in Sources */,
-				DAC0C51412A9CDEA00F669EC /* UIViewTouchExt.m in Sources */,
 				DAC0C51512A9CDEA00F669EC /* GeometryExt.m in Sources */,
 				DAC0C51612A9CDEA00F669EC /* NSArrayExt.m in Sources */,
 				DAC0C51712A9CDEA00F669EC /* NSBundleExt.m in Sources */,
@@ -1371,6 +1392,12 @@
 				DAC0C52812A9CDEA00F669EC /* Inspect.m in Sources */,
 				DAC0C52912A9CDEA00F669EC /* Logger.m in Sources */,
 				DAC0C52A12A9CDEA00F669EC /* UnitTest.m in Sources */,
+				DAB7761812AA814E0033473B /* HitTestWindow.m in Sources */,
+				DAB7761912AA814E0033473B /* UIEventExt.m in Sources */,
+				DAB7761A12AA814E0033473B /* UITouchExt.m in Sources */,
+				DAB7761B12AA814E0033473B /* UIViewOpenGLExt.m in Sources */,
+				DAB7761C12AA814E0033473B /* UIViewTouchExt.m in Sources */,
+				DAB7781E12AA90960033473B /* CommandManagerTouchExt.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

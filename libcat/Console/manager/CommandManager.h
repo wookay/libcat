@@ -7,7 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "HitTestWindow.h"
+#if USE_PRIVATE_API
+	#import "HitTestWindow.h"
+#endif
 
 #define COMMANDMAN	[CommandManager sharedManager]
 typedef id (^CommandBlock)(id currentObject, id arg) ;
@@ -19,7 +21,11 @@ enum { LS_OBJECT, LS_VIEWCONTROLLERS, LS_TABLEVIEW, LS_SECTIONS, LS_VIEW, LS_IND
 #define LS_OPTION_RECURSIVE @"-r"
 
 
-@interface CommandManager : NSObject <HitTestDelegate> {
+@interface CommandManager : NSObject
+#if USE_PRIVATE_API
+	<HitTestDelegate>
+#endif
+{
 	NSMutableDictionary* commandsMap;
 }
 @property (nonatomic, retain) NSMutableDictionary* commandsMap;
