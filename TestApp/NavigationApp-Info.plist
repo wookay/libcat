@@ -25,8 +25,8 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSMainNibFile</key>
-	<string>MainWindow</string>
+	<string>NavigationMainWindow</string>
 	<key>NSMainNibFile~ipad</key>
-	<string>MainWindow-iPad</string>
+	<string>NavigationMainWindow-iPad</string>
 </dict>
 </plist>

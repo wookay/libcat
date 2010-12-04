@@ -1,5 +1,5 @@
 //
-//  TestAppAppDelegate.h
+//  NavigationAppDelegate.h
 //  TestApp
 //
 //  Created by wookyoung noh on 04/10/10.
@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
 
-@interface TestAppAppDelegate : AppDelegate {
+@interface NavigationAppDelegate : AppDelegate {
     UINavigationController *navigationController;
 }
 

@@ -6,4 +6,4 @@
 //  Copyright 2010 factorcat. All rights reserved.
 //
 
-#define LOG_FILTER_HASPREFIX nil
+//#define LOG_FILTER_HASPREFIX nil

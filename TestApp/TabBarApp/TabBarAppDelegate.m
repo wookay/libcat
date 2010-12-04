@@ -1,15 +1,15 @@
 //
-//  TabBarAppAppDelegate.m
+//  TabBarAppDelegate.m
 //  TabBarApp
 //
 //  Created by wookyoung noh on 10/10/10.
 //  Copyright 2010 factorcat. All rights reserved.
 //
 
-#import "TabBarAppAppDelegate.h"
+#import "TabBarAppDelegate.h"
 
 
-@implementation TabBarAppAppDelegate
+@implementation TabBarAppDelegate
 
 @synthesize tabBarController;
 

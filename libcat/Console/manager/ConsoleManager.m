@@ -409,6 +409,8 @@
 		return [delegate performSelector:@selector(navigationController)];
 	} else if ([delegate respondsToSelector:@selector(tabBarController)]) {
 		return [delegate performSelector:@selector(tabBarController)];	
+	} else if ([delegate respondsToSelector:@selector(viewController)]) {
+		return [delegate performSelector:@selector(viewController)];	
 	} else {
 		return nil;
 	}

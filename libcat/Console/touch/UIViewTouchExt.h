@@ -10,7 +10,6 @@
 
 
 @interface UIView (TouchExt)
-
 -(UIEvent*) tapEventAtPoint:(CGPoint)point ;
-
 @end
+

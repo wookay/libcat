@@ -2,17 +2,16 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="7.10">
 	<data>
 		<int key="IBDocument.SystemTarget">1024</int>
-		<string key="IBDocument.SystemVersion">10F569</string>
-		<string key="IBDocument.InterfaceBuilderVersion">804</string>
-		<string key="IBDocument.AppKitVersion">1038.29</string>
+		<string key="IBDocument.SystemVersion">10H574</string>
+		<string key="IBDocument.InterfaceBuilderVersion">823</string>
+		<string key="IBDocument.AppKitVersion">1038.35</string>
 		<string key="IBDocument.HIToolboxVersion">461.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">123</string>
+			<string key="NS.object.0">132</string>
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="7"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -72,7 +71,6 @@
 							<string key="NSResourceName">calculator.png</string>
 						</object>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-						<reference key="IBUITabBar"/>
 					</object>
 					<reference key="IBUIParentViewController" ref="56266438"/>
 					<string key="IBUINibName">UIControlViewController</string>
@@ -93,7 +91,6 @@
 								<string key="NSResourceName">trend.png</string>
 							</object>
 							<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
-							<reference key="IBUITabBar"/>
 						</object>
 						<reference key="IBUIToolbarItems" ref="0"/>
 						<reference key="IBUIParentViewController" ref="56266438"/>
@@ -292,7 +289,7 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>UIApplication</string>
 					<string>UIResponder</string>
-					<string>TabBarAppAppDelegate</string>
+					<string>TabBarAppDelegate</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>RootViewController</string>
 					<object class="NSMutableDictionary">
@@ -397,7 +394,7 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">TabBarAppAppDelegate</string>
+					<string key="className">TabBarAppDelegate</string>
 					<string key="superclassName">AppDelegate</string>
 					<object class="NSMutableDictionary" key="outlets">
 						<string key="NS.key.0">tabBarController</string>
@@ -411,8 +408,8 @@
 						</object>
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">Classes/TabBarAppAppDelegate.h</string>
+						<string key="majorKey">IBUserSource</string>
+						<string key="minorKey"/>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -831,6 +828,6 @@
 				<string>{52, 52}</string>
 			</object>
 		</object>
-		<string key="IBCocoaTouchPluginVersion">123</string>
+		<string key="IBCocoaTouchPluginVersion">132</string>
 	</data>
 </archive>

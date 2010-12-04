@@ -17,7 +17,7 @@
 #import "NSArrayExt.h"
 #import <QuartzCore/QuartzCore.h>
 #import "iPadExt.h"
-
+#import "UIViewOpenGLExt.h"
 
 
 @implementation ImageResponseHandler
@@ -56,26 +56,40 @@
 }
 
 -(UIImage*) capture_image {
-	UIView* view = [UIApplication sharedApplication].keyWindow;// [CONSOLEMAN navigationController].topViewController.view;
+	UIWindow* window = [UIApplication sharedApplication].keyWindow;// [CONSOLEMAN navigationController].topViewController.view;
+	if ([window respondsToSelector:@selector(hasOpenGLView)]) {
+		if ([window performSelector:@selector(hasOpenGLView)]) {
+			if ([window respondsToSelector:@selector(opengl_to_image)]) {
+				return [window performSelector:@selector(opengl_to_image)];
+			}
+		}
+	}
 	CGRect screenRect = [[UIScreen mainScreen] bounds];    
-    UIGraphicsBeginImageContext(screenRect.size);
-    CGContextRef ctx = UIGraphicsGetCurrentContext(); 
-    [[UIColor blackColor] set]; 
-    CGContextFillRect(ctx, screenRect);
-    [view.layer renderInContext:ctx];
-    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return newImage; 
+	UIGraphicsBeginImageContext(screenRect.size);
+	CGContextRef ctx = UIGraphicsGetCurrentContext(); 
+	[[UIColor blackColor] set]; 
+	CGContextFillRect(ctx, screenRect);
+	[window.layer renderInContext:ctx];
+	UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+	UIGraphicsEndImageContext();
+	return newImage; 
 }
 
 -(UIImage*) obj_to_image:(id)obj {
 	UIImage* image = nil;
 	if ([obj isKindOfClass:[UIView class]]) {
 		UIView* view = (UIView*)obj;
+		if ([view respondsToSelector:@selector(isOpenGLView)]) {
+			if ([view performSelector:@selector(isOpenGLView)]) {
+				if ([view respondsToSelector:@selector(opengl_to_image)]) {
+					return [view performSelector:@selector(opengl_to_image)];
+				}
+			}
+		}
 		UIGraphicsBeginImageContext(view.frame.size);
 		[view.layer renderInContext: UIGraphicsGetCurrentContext()];
 		image = UIGraphicsGetImageFromCurrentImageContext();
-		UIGraphicsEndImageContext();	
+		UIGraphicsEndImageContext();				
 	}
 	return image;
 }

@@ -1,5 +1,5 @@
 //
-//  TabBarAppAppDelegate.h
+//  TabBarAppDelegate.h
 //  TabBarApp
 //
 //  Created by wookyoung noh on 10/10/10.
@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
 
-@interface TabBarAppAppDelegate : AppDelegate <UITabBarControllerDelegate> {
+@interface TabBarAppDelegate : AppDelegate <UITabBarControllerDelegate> {
     UITabBarController *tabBarController;
 }
 

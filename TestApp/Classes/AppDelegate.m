@@ -26,13 +26,15 @@
     // Add the tab bar controller's view to the window and display.
     [window makeKeyAndVisible];
 	
+//#if TARGET_IPHONE_SIMULATOR
 	[CONSOLEMAN start_servers];
 	[LOGGERMAN show_ip_address];
 	
 	[UnitTest setup];
 	[UnitTest run_all_tests];
 	[UnitTest report];
-
+//#endif
+	
     return YES;
 }
 

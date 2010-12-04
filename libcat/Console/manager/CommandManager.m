@@ -438,11 +438,12 @@ NSArray* array_prefix_index(NSArray* array) {
 					changeObject = view.superview;
 				}
 			}
-		}
-	} else if ([arg hasPrefix:@"$"]) {
+		}		
+	} else if ([arg hasPrefix:NEW_OBJECT_PREFIX]) {
 		id obj = [CONSOLEMAN get_argObject:arg];
 		changeObject = obj;
-	} else if ([arg hasPrefix:@"0x"]) {
+#define MEMORY_ADDRESS_PREFIX @"0x"
+	} else if ([arg hasPrefix:MEMORY_ADDRESS_PREFIX]) {
 		size_t address = [arg to_size_t];
 		id obj = (id)address;
 		changeObject = obj;
