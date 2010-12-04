@@ -8,10 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol HitTestDelegate
--(void) hitTestSentEvent:(UIEvent*)event ;
-@end
-
+@protocol HitTestDelegate;
 
 @interface HitTestWindow : UIWindow {
 	UIWindow* realWindow;

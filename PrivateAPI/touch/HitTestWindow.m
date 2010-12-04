@@ -12,6 +12,7 @@
 #import "UITouchExt.h"
 #import "UIEventExt.h"
 #import "iPadExt.h"
+#import "CommandManager.h"
 
 @implementation HitTestWindow
 @synthesize realWindow;

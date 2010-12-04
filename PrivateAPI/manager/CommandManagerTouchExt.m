@@ -33,7 +33,9 @@
 		}
 	} else {	
 		if (! [keyWindow isEqual:hitTestWindow]) {
+#if USE_PRIVATE_API
 			hitTestWindow.hitTestDelegate = self;
+#endif
 			hitTestWindow.realWindow = keyWindow;
 			[hitTestWindow makeKeyAndVisible];
 			[self flickTargetView:hitTestWindow];

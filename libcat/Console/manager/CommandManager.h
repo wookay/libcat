@@ -7,9 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#if USE_PRIVATE_API
-	#import "HitTestWindow.h"
-#endif
 
 #define COMMANDMAN	[CommandManager sharedManager]
 typedef id (^CommandBlock)(id currentObject, id arg) ;
@@ -20,12 +17,12 @@ NSArray* array_prefix_index(NSArray* array) ;
 enum { LS_OBJECT, LS_VIEWCONTROLLERS, LS_TABLEVIEW, LS_SECTIONS, LS_VIEW, LS_INDENTED_VIEW, LS_VIEW_SUBVIEWS, LS_TABBAR, LS_NAVIGATIONITEM, LS_NAVIGATIONCONTROLLER_TOOLBAR, LS_NAVIGATIONCONTROLLER_TOOLBAR_ITEMS, LS_TOOLBAR, LS_TOOLBAR_ITEMS, LS_CLASS_METHODS };
 #define LS_OPTION_RECURSIVE @"-r"
 
+@protocol HitTestDelegate
+-(void) hitTestSentEvent:(UIEvent*)event ;
+@end
 
-@interface CommandManager : NSObject
-#if USE_PRIVATE_API
-	<HitTestDelegate>
-#endif
-{
+
+@interface CommandManager : NSObject <HitTestDelegate> {
 	NSMutableDictionary* commandsMap;
 }
 @property (nonatomic, retain) NSMutableDictionary* commandsMap;
