@@ -14,6 +14,20 @@
 
 @implementation NSData (Ext)
 
+-(NSData*) slice:(int)loc :(int)length_ {
+	NSRange range;
+	if (self.length > loc + length_) {
+		range = NSMakeRange(loc, length_);
+	} else {
+		range = NSMakeRange(loc, self.length - loc);
+	}
+	return [self subdataWithRange:range];
+}
+
+-(NSData*) slice:(int)loc backward:(int)backward {
+	return [self slice:loc :self.length + backward + 1];
+}
+
 -(NSData*) append:(NSData*)data {
 	NSMutableData* da = [NSMutableData dataWithData:self];
 	[da appendData:data];
@@ -40,24 +54,8 @@
 	return byte;
 }
 
--(NSData*) slice:(int)loc :(int)length_ {
-	NSRange range;
-	if (self.length > loc + length_) {
-		range = NSMakeRange(loc, length_);
-	} else {
-		range = NSMakeRange(loc, self.length - loc);
-	}
-	return [self subdataWithRange:range];
-}
-
--(NSData*) slice:(int)loc backward:(int)backward {
-	return [self slice:loc :self.length + backward + 1];
-}
-
-
 static const char *const digits = "0123456789ABCDEF";
-- (NSString*) to_hex
-{
+-(NSString*) to_hex {
     NSString *result = @"";
     size_t length = [self length];
     if (0 != length) {
@@ -89,14 +87,12 @@ static const char *const digits = "0123456789ABCDEF";
 
 
 
-
+@implementation NSData (UTF8EncodingExt)
 
 NSData* unichar_to_data(unichar ch) {
 	return [NSData dataWithBytes:&ch length:2];
 }
 
-@implementation NSData (EncodingExt)
-	
 -(NSData*) swap {
 	NSData* uno = [self subdataWithRange:NSMakeRange(0, 1)];
 	NSData* dos = [self subdataWithRange:NSMakeRange(1, 1)];
@@ -133,3 +129,4 @@ NSData* unichar_to_data(unichar ch) {
 }
 
 @end
+

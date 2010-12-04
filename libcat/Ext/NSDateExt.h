@@ -121,6 +121,8 @@ NSString* hourName_minute_second_SPACE(NSTimeInterval ti) ;
 @interface NSDate (Day)
 -(BOOL) isSameDay:(NSDate*)date ;
 -(BOOL) isToday ;
+-(BOOL) isFuture ;
+-(BOOL) isPast ;
 @end
 
 

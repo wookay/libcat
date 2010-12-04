@@ -22,6 +22,7 @@
 -(void) test_date {
 	NSDate* date = [NSDate dateFrom:2010 month:8 day:15 hour:13 minute:26 second:57];
 	assert_equal(date.day, [date endOfDate].day);
+	assert_false([date isFuture]);
 }
 
 -(void) test_date_formmat_string {

@@ -21,6 +21,7 @@
 -(id) initWithPoint:(CGPoint)point view:(UIView*)view_ timestamp:(NSTimeInterval)timestamp_ phase:(UITouchPhase)phase_ tapCount:(NSUInteger)tapCount_ {
     self = [super init];
     if (nil != self) {
+#if USE_PRIVATE_API
         _timestamp = timestamp_;
         _phase = phase_;
         _tapCount = tapCount_;
@@ -34,6 +35,7 @@
         _touchFlags._isWarped = 0;
         _touchFlags._isDelayed = 0;
         _touchFlags._sentTouchesEnded = 0;
+#endif
     }
     return self;
 }
@@ -41,6 +43,7 @@
 -(id) initWithTouch:(UITouch *)touch view:(UIView*)view_ {
     self = [super init];
     if (nil != self) {
+#if USE_PRIVATE_API
         _timestamp = [touch timestamp];
         _phase = [touch phase];
         _tapCount = [touch tapCount];
@@ -54,6 +57,7 @@
         _touchFlags._isWarped = 0;
         _touchFlags._isDelayed = 0;
         _touchFlags._sentTouchesEnded = 0;
+#endif
     }
     return self;
 }

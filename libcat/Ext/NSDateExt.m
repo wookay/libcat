@@ -523,7 +523,15 @@ NSString* hourName_minute_second_SPACE(NSTimeInterval ti) {
 -(BOOL) isToday {
 	return [self isSameDay:[NSDate date]];
 }
-			
+
+-(BOOL) isFuture {
+	return NSOrderedDescending == [self compare:[NSDate date]];
+}
+
+-(BOOL) isPast {
+	return ! [self isFuture];
+}
+
 @end
 
 			
