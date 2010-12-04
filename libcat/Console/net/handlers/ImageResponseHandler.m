@@ -17,8 +17,9 @@
 #import "NSArrayExt.h"
 #import <QuartzCore/QuartzCore.h>
 #import "iPadExt.h"
+#if USE_OPENGL
 #import "UIViewOpenGLExt.h"
-
+#endif
 
 @implementation ImageResponseHandler
 
