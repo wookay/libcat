@@ -12,13 +12,6 @@
 
 @implementation CommandManager (TouchExt)
 
--(void) hitTestSentEvent:(UIEvent*)event {
-	log_info(@"hitTestSentEvent %@", event);
-}
-
-
-
-
 #define HIT_TEST_OFF	@"off"
 
 -(NSString*) command_hitTest:(id)currentObject arg:(id)arg {

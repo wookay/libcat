@@ -41,6 +41,11 @@ NSArray* array_prefix_index(NSArray* array) {
 @implementation CommandManager
 @synthesize commandsMap;
 
+#pragma mark HitTestDelegate
+-(void) hitTestSentEvent:(UIEvent*)event {
+	log_info(@"hitTestSentEvent %@", event);
+}
+
 -(id) commandNotFound {
 	return NSLocalizedString(@"Command Not Found", nil);
 }
