@@ -341,7 +341,9 @@ NSArray* array_prefix_index(NSArray* array) {
 				for (int row = 0; row < [tableView numberOfRowsInSection:section]; row++) {
 					NSIndexPath* indexPath = [NSIndexPath indexPathWithSection:section Row:row];
 					UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
-					[ary addObject:cell];
+					if (nil != cell) {
+						[ary addObject:cell];
+					}
 				}
 				[sections addObject:ary];
 			}

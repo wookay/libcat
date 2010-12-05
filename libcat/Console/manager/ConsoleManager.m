@@ -51,7 +51,12 @@
 			return [self getterChain:command arg:arg];
 		}
 	} else {
-		return [COMMANDMAN performSelector:NSSelectorFromString(selectorStr) withObject:[self currentTargetObjectOrTopViewController] withObject:arg];
+		SEL selector = NSSelectorFromString(selectorStr);
+		if ([COMMANDMAN respondsToSelector:selector]) {
+			return [COMMANDMAN performSelector:selector withObject:[self currentTargetObjectOrTopViewController] withObject:arg];
+		} else {
+			return SWF(@"%@ : %@", NSLocalizedString(@"Command Not Found", nil), command);
+		}
 	}
 }
 

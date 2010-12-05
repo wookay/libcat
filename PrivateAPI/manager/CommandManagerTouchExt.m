@@ -25,15 +25,17 @@
 			return NSLocalizedString(@"Not Found", nil);
 		}
 	} else {	
-		if (! [keyWindow isEqual:hitTestWindow]) {
 #if USE_PRIVATE_API
+		if (! [keyWindow isEqual:hitTestWindow]) {
 			hitTestWindow.hitTestDelegate = self;
-#endif
 			hitTestWindow.realWindow = keyWindow;
 			[hitTestWindow makeKeyAndVisible];
 			[self flickTargetView:hitTestWindow];
 		}
 		return NSLocalizedString(@"true", nil);
+#else
+		return NSLocalizedString(@"Add USE_PRIVATE_API=1 to Preprocessor Macros", nil);
+#endif
 	}
 }
 
