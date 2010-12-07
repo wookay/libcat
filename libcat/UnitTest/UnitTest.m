@@ -24,13 +24,13 @@
 
 +(void) setup {
 	UNITTESTMAN.test_started_at = [NSDate date];
-	printf("Started\n");
+	print_log_info(@"Started\n");
 }
 
 +(void) report {
 	UNITTESTMAN.elapsed = ABS([UNITTESTMAN.test_started_at timeIntervalSince1970]);
-	printf("\nFinished in %.3g seconds.\n", UNITTESTMAN.elapsed);
-	printf("\n%d tests, %d assertions, %d failures, %d errors\n", UNITTESTMAN.tests, UNITTESTMAN.assertions, UNITTESTMAN.failures, UNITTESTMAN.errors);
+	print_log_info(@"\nFinished in %.3g seconds.\n", UNITTESTMAN.elapsed);
+	print_log_info(@"\n%d tests, %d assertions, %d failures, %d errors\n", UNITTESTMAN.tests, UNITTESTMAN.assertions, UNITTESTMAN.failures, UNITTESTMAN.errors);
 }
 
 +(void) assert:(NSValue*)got equals:(NSValue*)expected message:(NSString*)message inFile:(NSString*)file atLine:(int)line {	
@@ -44,9 +44,9 @@
 	
 	if (equals) {
 		if (UNITTESTMAN.dot_if_passed) {
-			printf(".");
+			print_log_info(@".");
 		} else {
-			print_log_info([file UTF8String], line, @"passed: %@", [got inspect]);			
+			print_log_info(@"%@%d%@%@", file, line, @"passed: %@", [got inspect]);			
 		}
 	} else {
 		UNITTESTMAN.failures += 1;
@@ -59,9 +59,9 @@
 			expected_message = message;
 		}
 		if ([expected isKindOfClass:[NSDate class]] && [got isKindOfClass:[NSDate class]]) {
-			print_log_info([file UTF8String], line, @"Assertion failed\nExpected: %@\nGot: %@", [(NSDate*)expected gmtString], [(NSDate*)got gmtString]);
+			print_log_info(@"%@%d%@%@%@", file, line, @"Assertion failed\nExpected: %@\nGot: %@", [(NSDate*)expected gmtString], [(NSDate*)got gmtString]);
 		} else {
-			print_log_info([file UTF8String], line, @"Assertion failed\nExpected: %@\nGot: %@", expected_message, [got inspect]);
+			print_log_info(@"%@%d%@%@%@", file, line, @"Assertion failed\nExpected: %@\nGot: %@", expected_message, [got inspect]);
 		}
 	}	
 }
@@ -104,7 +104,7 @@
 	if (UNITTESTMAN.dot_if_passed) {
 	} else {
 		NSString* methodStr = NSStringFromSelector(sel);
-		printf ([format UTF8String], [SWF(@"%@", [self class]) UTF8String], [methodStr UTF8String]);				
+		print_log_info(format, [SWF(@"%@", [self class]) UTF8String], [methodStr UTF8String]);				
 	}
 	[self performSelector:sel];
 }

@@ -17,7 +17,7 @@ require 'timeout'
 
 
 SPACE = ' '
-CONSOLE_SERVER_PORT = open("#{DIR}/../manager/ConsoleManager.m").read.lines.select { |line| line =~ /#define CONSOLE_SERVER_PORT/ }.first.split(SPACE).last.to_i # 8080
+CONSOLE_SERVER_PORT = open("#{DIR}/../libcat/Console/manager/ConsoleManager.m").read.lines.select { |line| line =~ /#define CONSOLE_SERVER_PORT/ }.first.split(SPACE).last.to_i # 8080
 SERVER_URL = "http://#{CONSOLE_SERVER_ADDRESS}:#{CONSOLE_SERVER_PORT}"
 CONSOLE_SERVER_URL = "#{SERVER_URL}/console"
 PROMPT = '> '

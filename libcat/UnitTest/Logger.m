@@ -9,7 +9,11 @@
 #import "Logger.h"
 #import "UserConstants.h"
 
-void print_log_info(const char* filename, int lineno, id format, ...) {
+void stdout_log_info(BOOL filename_lineno_flag, const char* filename, int lineno, id format, ...) {
+#if LOGGER_OFF
+	return;
+#endif
+	
 	NSString *str;
 	if ([format isKindOfClass:[NSString class]]) {
 		va_list args;
@@ -17,7 +21,7 @@ void print_log_info(const char* filename, int lineno, id format, ...) {
 		str = [[NSString alloc] initWithFormat:format  arguments: args];
 		va_end (args);		
 	} else {
-		str = [NSString stringWithFormat:@"%@", format];
+		str = [[NSString alloc] initWithString:[format description]];
 	}
 	
 	BOOL log_print = true;	
@@ -29,19 +33,21 @@ void print_log_info(const char* filename, int lineno, id format, ...) {
 #endif
 	
 	if (log_print) {		
-		const char* output = [str cStringUsingEncoding:NSUTF8StringEncoding];	
-		NSString* printFormat = [NSString stringWithFormat:@"%%%ds #%%03d   %%s\n", FILENAME_PADDING];
-		
+		NSString* text;
+		if (filename_lineno_flag) {
+			NSString* printFormat = [NSString stringWithFormat:@"%%%ds #%%03d   %%@\n", FILENAME_PADDING];
+			text = [NSString stringWithFormat:printFormat, filename, lineno, str]; 
+		} else {
+			text = [NSString stringWithFormat:@"%@", str];
+		}
 		if (nil != LOGGERMAN.delegate) {
-			NSString* text = [NSString stringWithFormat:@"%23s #%03d   %@\n", filename, lineno, str]; 
 			[LOGGERMAN.delegate loggerTextOut:text];
 		}
-		
-		printf([printFormat UTF8String], filename, lineno, output);
-		[str release];
+		printf("%s", [text UTF8String]);
 	}
+	
+	[str release];
 }
-
 
 
 @implementation LoggerManager

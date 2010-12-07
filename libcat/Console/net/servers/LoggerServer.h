@@ -13,9 +13,11 @@
 @interface LoggerServer : NSObject <LoggerDelegate> {
 	AsyncSocket *listenSocket;
 	NSMutableArray *connectedSockets;
-	
+
+	UITextView* logTextView;
 	BOOL isRunning;	
 }
+@property (nonatomic, retain) UITextView* logTextView;
 
 + (LoggerServer*) sharedServer ;
 

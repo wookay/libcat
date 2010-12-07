@@ -101,11 +101,11 @@ enum { kSectionUnitTest, kSectionConsole, kSectionMax };
 			switch (indexPath.row) {
 				case kRowConsoleInteractiveShell:
 					cell.textLabel.text = NSLocalizedString(@"Interactive Shell", nil);
-					cell.detailTextLabel.text = @"libcat/Console/script/console.rb";
+					cell.detailTextLabel.text = @"script/console.rb";
 					break;
 				case kRowConsoleLogWatcher:
 					cell.textLabel.text = NSLocalizedString(@"Log Watcher", nil);
-					cell.detailTextLabel.text = @"libcat/Console/script/log_watcher.rb";
+					cell.detailTextLabel.text = @"script/log_watcher.rb";
 					break;
 			}
 			break;
@@ -147,7 +147,6 @@ enum { kSectionUnitTest, kSectionConsole, kSectionMax };
 				UIViewController* vc = [[UIViewController alloc] initWithNibName:nil bundle:nil];
 				[self.navigationController pushViewController:vc animated:true];
 				vc.title = cell.textLabel.text;
-#define FF 255.0
 				float red = get_random(FF)/FF;
 				float green = get_random(FF)/FF;
 				float blue = get_random(FF)/FF;

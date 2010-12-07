@@ -41,9 +41,6 @@
 		DAA9665D12ACD25A00CB4664 /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA9660012ACD25A00CB4664 /* AsyncSocket.m */; };
 		DAA9665E12ACD25A00CB4664 /* HTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA9660212ACD25A00CB4664 /* HTTPServer.m */; };
 		DAA9665F12ACD25A00CB4664 /* LoggerServer.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA9660412ACD25A00CB4664 /* LoggerServer.m */; };
-		DAA9666012ACD25A00CB4664 /* console.rb in Resources */ = {isa = PBXBuildFile; fileRef = DAA9660612ACD25A00CB4664 /* console.rb */; };
-		DAA9666112ACD25A00CB4664 /* log_watcher.rb in Resources */ = {isa = PBXBuildFile; fileRef = DAA9660712ACD25A00CB4664 /* log_watcher.rb */; };
-		DAA9666212ACD25A00CB4664 /* ui_shell.rb in Resources */ = {isa = PBXBuildFile; fileRef = DAA9660812ACD25A00CB4664 /* ui_shell.rb */; };
 		DAA9666312ACD25A00CB4664 /* GeometryExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA9660C12ACD25A00CB4664 /* GeometryExt.m */; };
 		DAA9666412ACD25A00CB4664 /* NSArrayExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA9660F12ACD25A00CB4664 /* NSArrayExt.m */; };
 		DAA9666512ACD25A00CB4664 /* NSBundleExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA9661112ACD25A00CB4664 /* NSBundleExt.m */; };
@@ -92,9 +89,6 @@
 		DAA9669012ACD25A00CB4664 /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA9660012ACD25A00CB4664 /* AsyncSocket.m */; };
 		DAA9669112ACD25A00CB4664 /* HTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA9660212ACD25A00CB4664 /* HTTPServer.m */; };
 		DAA9669212ACD25A00CB4664 /* LoggerServer.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA9660412ACD25A00CB4664 /* LoggerServer.m */; };
-		DAA9669312ACD25A00CB4664 /* console.rb in Resources */ = {isa = PBXBuildFile; fileRef = DAA9660612ACD25A00CB4664 /* console.rb */; };
-		DAA9669412ACD25A00CB4664 /* log_watcher.rb in Resources */ = {isa = PBXBuildFile; fileRef = DAA9660712ACD25A00CB4664 /* log_watcher.rb */; };
-		DAA9669512ACD25A00CB4664 /* ui_shell.rb in Resources */ = {isa = PBXBuildFile; fileRef = DAA9660812ACD25A00CB4664 /* ui_shell.rb */; };
 		DAA9669612ACD25A00CB4664 /* GeometryExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA9660C12ACD25A00CB4664 /* GeometryExt.m */; };
 		DAA9669712ACD25A00CB4664 /* NSArrayExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA9660F12ACD25A00CB4664 /* NSArrayExt.m */; };
 		DAA9669812ACD25A00CB4664 /* NSBundleExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA9661112ACD25A00CB4664 /* NSBundleExt.m */; };
@@ -143,9 +137,6 @@
 		DAA966C312ACD25A00CB4664 /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA9660012ACD25A00CB4664 /* AsyncSocket.m */; };
 		DAA966C412ACD25A00CB4664 /* HTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA9660212ACD25A00CB4664 /* HTTPServer.m */; };
 		DAA966C512ACD25A00CB4664 /* LoggerServer.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA9660412ACD25A00CB4664 /* LoggerServer.m */; };
-		DAA966C612ACD25A00CB4664 /* console.rb in Resources */ = {isa = PBXBuildFile; fileRef = DAA9660612ACD25A00CB4664 /* console.rb */; };
-		DAA966C712ACD25A00CB4664 /* log_watcher.rb in Resources */ = {isa = PBXBuildFile; fileRef = DAA9660712ACD25A00CB4664 /* log_watcher.rb */; };
-		DAA966C812ACD25A00CB4664 /* ui_shell.rb in Resources */ = {isa = PBXBuildFile; fileRef = DAA9660812ACD25A00CB4664 /* ui_shell.rb */; };
 		DAA966C912ACD25A00CB4664 /* GeometryExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA9660C12ACD25A00CB4664 /* GeometryExt.m */; };
 		DAA966CA12ACD25A00CB4664 /* NSArrayExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA9660F12ACD25A00CB4664 /* NSArrayExt.m */; };
 		DAA966CB12ACD25A00CB4664 /* NSBundleExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA9661112ACD25A00CB4664 /* NSBundleExt.m */; };
@@ -336,9 +327,6 @@
 		DAA9660212ACD25A00CB4664 /* HTTPServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPServer.m; sourceTree = "<group>"; };
 		DAA9660312ACD25A00CB4664 /* LoggerServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoggerServer.h; sourceTree = "<group>"; };
 		DAA9660412ACD25A00CB4664 /* LoggerServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoggerServer.m; sourceTree = "<group>"; };
-		DAA9660612ACD25A00CB4664 /* console.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = console.rb; sourceTree = "<group>"; };
-		DAA9660712ACD25A00CB4664 /* log_watcher.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = log_watcher.rb; sourceTree = "<group>"; };
-		DAA9660812ACD25A00CB4664 /* ui_shell.rb */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.ruby; path = ui_shell.rb; sourceTree = "<group>"; };
 		DAA9660A12ACD25A00CB4664 /* ExtHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtHeaders.h; sourceTree = "<group>"; };
 		DAA9660B12ACD25A00CB4664 /* GeometryExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeometryExt.h; sourceTree = "<group>"; };
 		DAA9660C12ACD25A00CB4664 /* GeometryExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeometryExt.m; sourceTree = "<group>"; };
@@ -676,7 +664,6 @@
 			children = (
 				DAA965E912ACD25A00CB4664 /* manager */,
 				DAA965F412ACD25A00CB4664 /* net */,
-				DAA9660512ACD25A00CB4664 /* script */,
 			);
 			path = Console;
 			sourceTree = "<group>";
@@ -733,16 +720,6 @@
 				DAA9660412ACD25A00CB4664 /* LoggerServer.m */,
 			);
 			path = servers;
-			sourceTree = "<group>";
-		};
-		DAA9660512ACD25A00CB4664 /* script */ = {
-			isa = PBXGroup;
-			children = (
-				DAA9660612ACD25A00CB4664 /* console.rb */,
-				DAA9660712ACD25A00CB4664 /* log_watcher.rb */,
-				DAA9660812ACD25A00CB4664 /* ui_shell.rb */,
-			);
-			path = script;
 			sourceTree = "<group>";
 		};
 		DAA9660912ACD25A00CB4664 /* Ext */ = {
@@ -1117,9 +1094,6 @@
 				DAE9D2AE12A81EE500EA3F21 /* README.md in Resources */,
 				DAC5BA9112A99F2300953A23 /* TabBarMainWindow-iPad.xib in Resources */,
 				DAC5BA9212A99F2300953A23 /* TabBarMainWindow.xib in Resources */,
-				DAA966C612ACD25A00CB4664 /* console.rb in Resources */,
-				DAA966C712ACD25A00CB4664 /* log_watcher.rb in Resources */,
-				DAA966C812ACD25A00CB4664 /* ui_shell.rb in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1141,9 +1115,6 @@
 				DAC0C27412A9A79800F669EC /* Default.png in Resources */,
 				DAC0C27512A9A79800F669EC /* Icon.png in Resources */,
 				DAC0C2BB12A9AB2C00F669EC /* InfoPlist.strings in Resources */,
-				DAA9669312ACD25A00CB4664 /* console.rb in Resources */,
-				DAA9669412ACD25A00CB4664 /* log_watcher.rb in Resources */,
-				DAA9669512ACD25A00CB4664 /* ui_shell.rb in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1162,9 +1133,6 @@
 				DAC0C29912A9AA5300F669EC /* InfoPlist.strings in Resources */,
 				DAC0C2A012A9AAE900F669EC /* Default.png in Resources */,
 				DAC0C2A112A9AAE900F669EC /* Icon.png in Resources */,
-				DAA9666012ACD25A00CB4664 /* console.rb in Resources */,
-				DAA9666112ACD25A00CB4664 /* log_watcher.rb in Resources */,
-				DAA9666212ACD25A00CB4664 /* ui_shell.rb in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

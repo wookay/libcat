@@ -14,6 +14,8 @@
 #define FLOAT(num)		[NSNumber numberWithFloat:num]
 #define LONGNUM(num)	[NSNumber numberWithDouble:num]
 
+#define FF 255.0
+
 int get_random(int div) ;
 CGFloat int_to_float(int val) ;
 int float_to_int(float val) ;
