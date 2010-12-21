@@ -107,6 +107,14 @@ NSArray* CUAD(id uno, id dos, id tres, id cuatro) {
 	}
 }
 
+-(id) objectAtFourth {
+	if ([self count] > 3) {
+		return [self objectAtIndex:3];		
+	} else {
+		return nil;
+	}
+}
+
 -(id) objectAtLast {
 	if ([self count] > 0) {
 		return [self lastObject];		

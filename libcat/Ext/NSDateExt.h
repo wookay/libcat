@@ -13,6 +13,7 @@
 #define ONE_YEAR_DAYS		355
 
 #define WEEKDAY_COUNT 7
+#define MONTH_COUNT	12
 #define FIRST_WEEKDAY_OF_CALENDAR [[NSCalendar currentCalendar] firstWeekday]
 
 typedef enum {
@@ -35,9 +36,10 @@ enum PostfixTypes {
 };
 NSString* postfix_string(int postfix) ;
 NSString* hourName_minute_second_SPACE(NSTimeInterval ti) ;
-
-
-
+NSString* monthName_standalone(int month) ;
+NSString* monthName_short_standalone(int month) ;
+NSString* monthName_day_SPACE(int month, int day) ;
+NSString* monthLongName_day_SPACE(int month, int day) ;
 
 @interface NSDate (Ext)
 
@@ -78,6 +80,7 @@ NSString* hourName_minute_second_SPACE(NSTimeInterval ti) ;
 -(NSString*) month_day_DOT ;
 -(NSString*) monthName ;
 -(NSString*) monthName_day_SPACE ;
+-(NSString*) monthLongName_day_SPACE ;
 -(NSString*) monthName_day_weekday_SPACE ;
 -(NSString*) amPM_hourName_minute_SPACE ;
 -(NSString*) amPM_hourName_SPACE ;	

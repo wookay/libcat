@@ -11,3 +11,9 @@
 
 #define IS_LANG_KOREAN		[@"ko" isEqualToString:[[NSLocale preferredLanguages] objectAtIndex:0]]
 #define IS_LOCALE_KOREAN	[@"ko_KR" isEqualToString:[[NSLocale currentLocale] localeIdentifier]]
+
+
+@interface NSLocale (Ext)
++(BOOL) isFirstPreferredLanguage:(NSString*)lang ;
++(BOOL) isCurrentLocaleIdentifier:(NSString*)identifier ;
+@end

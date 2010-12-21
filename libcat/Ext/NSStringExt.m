@@ -22,7 +22,7 @@ NSString* SWF(NSString* format, ...) {
 }
 
 NSArray* _w(NSString* str) {
-	return [str componentsSeparatedByString:SPACE];
+	return [[str strip] componentsSeparatedByString:SPACE];
 }
 
 NSString* char_to_string(char ch) {

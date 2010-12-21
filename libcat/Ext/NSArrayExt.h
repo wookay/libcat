@@ -27,6 +27,7 @@ NSArray* CUAD(id uno, id dos, id tres, id cuatro) ;
 -(id) objectAtFirst ;
 -(id) objectAtSecond ;
 -(id) objectAtThird ;
+-(id) objectAtFourth ;
 -(id) objectAtLast ;
 -(id) at:(int)idx ;
 -(id) last ;

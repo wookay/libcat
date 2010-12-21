@@ -266,6 +266,9 @@
 		DAE9E2B91295E63F00F72551 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		DAE9E2BA1295E63F00F72551 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		DAE9E2BB1295E63F00F72551 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
+		DAEDA12412C014F100360459 /* TestLocale.m in Sources */ = {isa = PBXBuildFile; fileRef = DAEDA12312C014F100360459 /* TestLocale.m */; };
+		DAEDA12512C014F100360459 /* TestLocale.m in Sources */ = {isa = PBXBuildFile; fileRef = DAEDA12312C014F100360459 /* TestLocale.m */; };
+		DAEDA12612C014F100360459 /* TestLocale.m in Sources */ = {isa = PBXBuildFile; fileRef = DAEDA12312C014F100360459 /* TestLocale.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -450,6 +453,7 @@
 		DADD7EE41260AE2C0040E482 /* UIControlViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UIControlViewController.xib; sourceTree = "<group>"; };
 		DAE9D2AC12A81EE500EA3F21 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README.md; path = ../README.md; sourceTree = SOURCE_ROOT; };
 		DAE9E2C01295E63F00F72551 /* NavigationApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NavigationApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DAEDA12312C014F100360459 /* TestLocale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestLocale.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -991,6 +995,7 @@
 				DACAB01512629054006DA76D /* TestNumber.m */,
 				DACAB01612629054006DA76D /* TestString.m */,
 				DAC7AE451263210F0073BED1 /* TestObject.m */,
+				DAEDA12312C014F100360459 /* TestLocale.m */,
 			);
 			path = ExtTestCases;
 			sourceTree = "<group>";
@@ -1212,6 +1217,7 @@
 				DAA966E212ACD25A00CB4664 /* UITouchExt.m in Sources */,
 				DAA966E312ACD25A00CB4664 /* UIViewOpenGLExt.m in Sources */,
 				DAA966E412ACD25A00CB4664 /* UIViewTouchExt.m in Sources */,
+				DAEDA12512C014F100360459 /* TestLocale.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1290,6 +1296,7 @@
 				DAA966AF12ACD25A00CB4664 /* UITouchExt.m in Sources */,
 				DAA966B012ACD25A00CB4664 /* UIViewOpenGLExt.m in Sources */,
 				DAA966B112ACD25A00CB4664 /* UIViewTouchExt.m in Sources */,
+				DAEDA12612C014F100360459 /* TestLocale.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1366,6 +1373,7 @@
 				DAA9667C12ACD25A00CB4664 /* UITouchExt.m in Sources */,
 				DAA9667D12ACD25A00CB4664 /* UIViewOpenGLExt.m in Sources */,
 				DAA9667E12ACD25A00CB4664 /* UIViewTouchExt.m in Sources */,
+				DAEDA12412C014F100360459 /* TestLocale.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

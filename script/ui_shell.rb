@@ -50,7 +50,7 @@ class Shell
     @delegate = block
   end
   def history_push input
-    if not input.empty?
+    if input.strip.size > 0
       HISTORY.push input
       @HISTORY.push input
       @history_file.write "#{input}\n"

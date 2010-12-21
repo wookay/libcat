@@ -72,8 +72,24 @@ CGRect CGRectForRight(CGRect rect, CGFloat width, CGFloat height) {
 	return CGRectMake(rect.origin.x + rect.size.width - width, rect.origin.y + (rect.size.height - height)/2 , width, height);
 }
 
+CGRect CGRectForTop(CGRect rect, CGFloat width, CGFloat height) {
+	return CGRectMake(rect.origin.x + rect.size.width/2 - width/2, 0, width, height);
+}
+
 CGRect CGRectForBottom(CGRect rect, CGFloat width, CGFloat height) {
 	return CGRectMake(rect.origin.x + rect.size.width/2 - width/2, rect.origin.y + rect.size.height - height, width, height);
+}
+
+CGRect CGRectAfterBottom(CGRect rect, CGFloat width, CGFloat height) {
+	return CGRectMake(rect.origin.x + rect.size.width/2 - width/2, rect.origin.y + rect.size.height, width, height);
+}
+
+CGRect CGRectAfterBottomLeft(CGRect rect, CGFloat width, CGFloat height) {
+	return CGRectMake(rect.origin.x, rect.origin.y + rect.size.height, width, height);
+}
+
+CGRect CGRectAfterBottomRight(CGRect rect, CGFloat width, CGFloat height) {
+	return CGRectMake(rect.origin.x + rect.size.width - width, rect.origin.y + rect.size.height, width, height);
 }
 
 CGRect CGRectSideOffset(CGRect rect, CGFloat x, CGFloat y) {

@@ -70,6 +70,32 @@ NSString* hourName_minute_second_SPACE(NSTimeInterval ti) {
 	return [ary componentsJoinedByString:SPACE];
 }
 
+NSString* monthName_standalone(int month) {
+	int idx = month - 1;
+	NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+	NSString* monthName = [[formatter standaloneMonthSymbols] objectAtIndex:idx];
+	[formatter release];
+	return monthName;
+}
+
+NSString* monthName_short_standalone(int month) {
+	int idx = month - 1;
+	NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+	NSString* monthName = [[formatter shortStandaloneMonthSymbols] objectAtIndex:idx];
+	[formatter release];
+	return monthName;
+}
+
+NSString* monthName_day_SPACE(int month, int day) {
+	NSDate* date = [NSDate dateFrom:0 month:month day:day];
+	return [date monthName_day_SPACE];
+}
+
+NSString* monthLongName_day_SPACE(int month, int day) {
+	NSDate* date = [NSDate dateFrom:0 month:month day:day];
+	return [date monthLongName_day_SPACE];
+}
+
 
 #ifdef BUILD_313
 @interface NSDate (Build313)
@@ -263,10 +289,18 @@ NSString* hourName_minute_second_SPACE(NSTimeInterval ti) {
 }
 
 -(NSString*) amPM_hourName_minute_SPACE {
-	if (IS_LOCALE_KOREAN) {
-		return [self formatWith:@"a h시 m분"];
+	if (0 == self.minute) {
+		if (IS_LOCALE_KOREAN) {
+			return [self formatWith:@"a h시"];
+		} else {
+			return [self formatWith:@"a h"];
+		}		
 	} else {
-		return [self formatWith:@"a h:m"];
+		if (IS_LOCALE_KOREAN) {
+			return [self formatWith:@"a h시 m분"];
+		} else {
+			return [self formatWith:@"a h:mm"];
+		}
 	}
 }
 
@@ -311,6 +345,14 @@ NSString* hourName_minute_second_SPACE(NSTimeInterval ti) {
 		return [self formatWith:@"LLL d일"];
 	} else {
 		return [self formatWith:@"d/LLL"];
+	}
+}
+
+-(NSString*) monthLongName_day_SPACE {
+	if (IS_LOCALE_KOREAN) {
+		return [self formatWith:@"LLLL d일"];
+	} else {
+		return [self formatWith:@"d / LLLL"];
 	}
 }
 
@@ -443,11 +485,12 @@ NSString* hourName_minute_second_SPACE(NSTimeInterval ti) {
 }
 
 -(NSArray*) allDaysInMonth {
-	NSDate* date = [self firstDayInMonth];
+	int year_ = self.year;
+	int month_ = self.month;
 	NSMutableArray* ary = [NSMutableArray array];
-	for (int idx = 1; idx <= [self numberOfDaysInMonth]; idx++) {
+	for (int day_ = 1; day_ <= [self numberOfDaysInMonth]; day_++) {
+		NSDate* date = [NSDate dateFrom:year_ month:month_ day:day_];
 		[ary addObject:date];
-		date = [date after:ONE_DAY_SECONDS];
 	}
 	return ary;
 }

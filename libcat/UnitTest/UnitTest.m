@@ -59,9 +59,9 @@
 			expected_message = message;
 		}
 		if ([expected isKindOfClass:[NSDate class]] && [got isKindOfClass:[NSDate class]]) {
-			print_log_info(@"%@%d%@%@%@", file, line, @"Assertion failed\nExpected: %@\nGot: %@", [(NSDate*)expected gmtString], [(NSDate*)got gmtString]);
+			print_log_info(@"%@ #%03d\nAssertion failed\nExpected: %@\nGot: %@\n", file, line, [(NSDate*)expected gmtString], [(NSDate*)got gmtString]);
 		} else {
-			print_log_info(@"%@%d%@%@%@", file, line, @"Assertion failed\nExpected: %@\nGot: %@", expected_message, [got inspect]);
+			print_log_info(@"%@ #%03d\nAssertion failed\nExpected: %@\nGot: %@\n", file, line, expected_message, [got inspect]);
 		}
 	}	
 }
