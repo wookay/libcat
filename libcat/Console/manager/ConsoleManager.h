@@ -15,7 +15,7 @@ typedef enum { kGetterReturnTypeString, kGetterReturnTypeObject } GetterReturnTy
 @interface ConsoleManager : NSObject {
 	id currentTargetObject;
 }
-@property (nonatomic, retain) id currentTargetObject;
+@property (nonatomic, assign) id currentTargetObject;
 
 -(id) input:(NSString*)command arg:(id)arg ;
 -(id) input:(NSString*)input ;

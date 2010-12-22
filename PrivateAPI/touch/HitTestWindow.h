@@ -15,7 +15,7 @@
 	id<HitTestDelegate> hitTestDelegate;
 }
 @property (nonatomic, retain)	UIWindow* realWindow;
-@property (nonatomic, retain)	id<HitTestDelegate> hitTestDelegate;
+@property (nonatomic, assign)	id<HitTestDelegate> hitTestDelegate;
 
 +(HitTestWindow*) sharedWindow ;
 @end

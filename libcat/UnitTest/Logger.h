@@ -24,7 +24,7 @@ void stdout_log_info(BOOL filename_lineno_flag, const char* filename, int lineno
 @interface LoggerManager : NSObject {
 	id<LoggerDelegate> delegate;
 }
-@property (nonatomic, retain)	id<LoggerDelegate> delegate;
+@property (nonatomic, assign)	id<LoggerDelegate> delegate;
 + (LoggerManager*) sharedManager ;
 -(void) show_ip_address ;
 @end

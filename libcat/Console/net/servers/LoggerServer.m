@@ -91,6 +91,14 @@
 
 -(IBAction) touchedToggleLogsButton:(id)sender {
 	BOOL hidden = logTextView.hidden;
+	
+	if (hidden) {
+		CGPoint bottomOffset = CGPointMake(0, [logTextView contentSize].height - logTextView.frame.size.height);
+		if (bottomOffset.y > 0) {
+			[logTextView setContentOffset:bottomOffset animated:YES];
+		}
+	}
+
 	logTextView.hidden = ! hidden;
 }
 
@@ -110,8 +118,7 @@
 
 
 
-- (NSString *) get_local_ip_address
-{
+-(NSString*) get_local_ip_address {
 	BOOL success;
 	struct ifaddrs * addrs;
 	const struct ifaddrs * cursor;
