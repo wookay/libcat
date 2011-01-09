@@ -6,7 +6,6 @@
 //  Copyright 2010 factorcat. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 
 #define _not		!
 

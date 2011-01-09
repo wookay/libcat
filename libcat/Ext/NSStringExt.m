@@ -96,9 +96,9 @@ NSInteger sortByStringComparator(NSString* uno, NSString* dos, void* context) {
 }
 
 -(size_t) to_size_t {
-	unsigned result = 0;
+	double result = 0;
 	NSScanner *scanner = [NSScanner scannerWithString:self];
-	[scanner scanHexInt:&result];
+	[scanner scanHexDouble:&result];
 	return result;
 }
 

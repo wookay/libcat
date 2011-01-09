@@ -17,8 +17,15 @@
 #import "NSArrayExt.h"
 #import <QuartzCore/QuartzCore.h>
 #import "iPadExt.h"
+
+#if USE_COCOA
+	#import "NSWindowExtMac.h"
+	#import "NSViewExtMac.h"
+	#import "UIKitHelper.h"
+#endif
+
 #if USE_OPENGL
-#import "UIViewOpenGLExt.h"
+	#import "UIViewOpenGLExt.h"
 #endif
 
 @implementation ImageResponseHandler
@@ -50,6 +57,13 @@
 		} else {
 			size_t address = [addressStr to_size_t];
 			id obj = (id)address;
+			
+#if USE_COCOA
+			if ([SWF(@"%x", obj) isEqualToString:@"ffffffff"]) {
+				return nil;
+			}
+#endif
+			
 			return [self obj_to_image:obj];
 		}
 	}
@@ -65,6 +79,9 @@
 			}
 		}
 	}
+#if USE_COCOA
+	return (UIImage*)[window.contentView to_image];
+#else
 	CGRect screenRect = [[UIScreen mainScreen] bounds];    
 	UIGraphicsBeginImageContext(screenRect.size);
 	CGContextRef ctx = UIGraphicsGetCurrentContext(); 
@@ -73,13 +90,15 @@
 	[window.layer renderInContext:ctx];
 	UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
 	UIGraphicsEndImageContext();
-	return newImage; 
+	return newImage; 	
+#endif
 }
 
 -(UIImage*) obj_to_image:(id)obj {
 	UIImage* image = nil;
 	if ([obj isKindOfClass:[UIView class]]) {
-		UIView* view = (UIView*)obj;
+		log_info(@"obj_to_image uiview %@", obj);
+		UIView* view = obj;
 		if ([view respondsToSelector:@selector(isOpenGLView)]) {
 			if ([view performSelector:@selector(isOpenGLView)]) {
 				if ([view respondsToSelector:@selector(opengl_to_image)]) {
@@ -91,6 +110,10 @@
 		[view.layer renderInContext: UIGraphicsGetCurrentContext()];
 		image = UIGraphicsGetImageFromCurrentImageContext();
 		UIGraphicsEndImageContext();				
+#if USE_COCOA
+	} else if ([obj isKindOfClass:[NSView class]]) {
+		image = (UIImage*)[obj to_image];
+#endif
 	}
 	return image;
 }

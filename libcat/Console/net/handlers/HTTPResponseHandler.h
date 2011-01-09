@@ -13,8 +13,10 @@
 //
 
 //#if TARGET_OS_IPHONE
-#import <UIKit/UIKit.h>
-#import <CFNetwork/CFNetwork.h>
+#if USE_COCOA
+#else
+	#import <CFNetwork/CFNetwork.h>
+#endif
 //#else
 //#import <Cocoa/Cocoa.h>
 //#endif

@@ -375,52 +375,6 @@
 	}
 }
 
-
--(UIViewController*) get_topViewController {
-	UIViewController* rootVC = [self get_rootViewController];
-	if (nil == rootVC) {
-		return nil;
-	} else {
-		UIViewController* topViewController = nil;
-		if ([rootVC isKindOfClass:[UINavigationController class]]) {
-			UINavigationController* navigationController = (UINavigationController*)rootVC;
-			topViewController = navigationController.topViewController;
-		} else if ([rootVC isKindOfClass:[UITabBarController class]]) {
-			UITabBarController* tabBarController = (UITabBarController*)rootVC;
-			if ([tabBarController.selectedViewController isKindOfClass:[UINavigationController class]]) {
-				UINavigationController* navigationController = (UINavigationController*)tabBarController.selectedViewController;
-				topViewController = navigationController.topViewController;
-			} else {
-				topViewController = tabBarController.selectedViewController;
-			}			
-		} else {
-			topViewController = rootVC;
-		}
-		if (nil == topViewController.modalViewController) {
-			return topViewController;
-		} else {
-			return topViewController.modalViewController;
-		}
-	}
-}
-
--(UIWindow*) get_keyWindow {
-	return [UIApplication sharedApplication].keyWindow;
-}
-
--(UIViewController*) get_rootViewController {
-	id delegate = [UIApplication sharedApplication].delegate;
-	if ([delegate respondsToSelector:@selector(navigationController)]) {
-		return [delegate performSelector:@selector(navigationController)];
-	} else if ([delegate respondsToSelector:@selector(tabBarController)]) {
-		return [delegate performSelector:@selector(tabBarController)];	
-	} else if ([delegate respondsToSelector:@selector(viewController)]) {
-		return [delegate performSelector:@selector(viewController)];	
-	} else {
-		return nil;
-	}
-}
-
 -(id) get_argObject:(NSString*)arg {
 	BOOL foundNewObject = false;
 	NSMutableArray* newObjectArgs = [NSMutableArray array];
@@ -456,6 +410,62 @@
 		return [self input:command arg:arg];		
 	}
 }
+
+
+-(UIViewController*) get_topViewController {
+	UIViewController* rootVC = [self get_rootViewController];
+	if (nil == rootVC) {
+		return nil;
+	} else {
+		UIViewController* topViewController = nil;
+		if ([rootVC isKindOfClass:[UINavigationController class]]) {
+			UINavigationController* navigationController = (UINavigationController*)rootVC;
+			topViewController = navigationController.topViewController;
+		} else if ([rootVC isKindOfClass:[UITabBarController class]]) {
+			UITabBarController* tabBarController = (UITabBarController*)rootVC;
+			if ([tabBarController.selectedViewController isKindOfClass:[UINavigationController class]]) {
+				UINavigationController* navigationController = (UINavigationController*)tabBarController.selectedViewController;
+				topViewController = navigationController.topViewController;
+			} else {
+				topViewController = tabBarController.selectedViewController;
+			}			
+		} else {
+			topViewController = rootVC;
+		}
+		if ([topViewController respondsToSelector:@selector(modalViewController)]) {
+			return topViewController.modalViewController ? topViewController.modalViewController : topViewController;
+		} else {
+			return topViewController;
+		}
+	}
+}
+
+-(UIWindow*) get_keyWindow {
+	return [UIApplication sharedApplication].keyWindow;
+}
+
+-(UIViewController*) get_rootViewController {
+	id delegate = [UIApplication sharedApplication].delegate;
+	if ([delegate respondsToSelector:@selector(navigationController)]) {
+		return [delegate performSelector:@selector(navigationController)];
+	} else if ([delegate respondsToSelector:@selector(tabBarController)]) {
+		return [delegate performSelector:@selector(tabBarController)];	
+	} else if ([delegate respondsToSelector:@selector(viewController)]) {
+		return [delegate performSelector:@selector(viewController)];	
+#if USE_COCOA
+	} else if ([delegate conformsToProtocol:@protocol(NSApplicationDelegate)]) {
+		NSWindow* window = [delegate performSelector:@selector(window)];
+		if (nil == window) {
+			return nil;
+		} else {
+			return window.windowController ? window.windowController : window;
+		}
+#endif
+	} else {
+		return nil;
+	}
+}
+
 
 + (ConsoleManager*) sharedManager {
 	static ConsoleManager*	manager = nil;

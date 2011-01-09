@@ -6,7 +6,10 @@
 //  Copyright 2010 factorcat. All rights reserved.
 //
 
-#import <UIKit/UIDevice.h>
+#if USE_COCOA
+#else
+	#import <UIKit/UIDevice.h>
+#endif
 
 #define IS_IPAD ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
 #define SYSTEM_VERSION [[[UIDevice currentDevice] systemVersion] floatValue]

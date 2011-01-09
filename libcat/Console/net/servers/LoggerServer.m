@@ -19,6 +19,11 @@
 #import "NSNumberExt.h"
 #import "UIButtonBlock.h"
 
+#if USE_COCOA
+	#import "NSWindowExtMac.h"
+#endif
+
+
 #define WELCOME_MSG  0
 #define ECHO_MSG     1
 #define WARNING_MSG  2

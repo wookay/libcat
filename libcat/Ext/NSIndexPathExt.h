@@ -6,9 +6,6 @@
 //  Copyright 2010 factorcat. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
-
 @interface NSIndexPath (Ext)
 +(NSIndexPath*) indexPathWithSection:(NSUInteger)section_ Row:(NSUInteger)row_ ;
 @end

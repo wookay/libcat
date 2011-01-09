@@ -6,8 +6,6 @@
 //  Copyright 2010 factorcat. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
 typedef NSInteger (^PassBlock)() ;
 typedef void (^AnimationBlock)() ;
 typedef void (^TraverseViewBlock)(int depth, UIView* view) ;

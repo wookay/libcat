@@ -6,7 +6,8 @@
 //  Copyright 2010 factorcat. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+
 #define CONSOLEMAN	[ConsoleManager sharedManager]
 
 typedef enum { kGetterReturnTypeString, kGetterReturnTypeObject } GetterReturnType ;
@@ -23,13 +24,14 @@ typedef enum { kGetterReturnTypeString, kGetterReturnTypeObject } GetterReturnTy
 
 -(void) start_servers ;
 -(void) stop_servers ;	
--(UIViewController*) get_topViewController ;
--(UIWindow*) get_keyWindow ;
--(UIViewController*) get_rootViewController ;
 -(id) get_argObject:(NSString*)arg ;
 -(NSString*) getterChain:(id)command arg:(id)arg ;
 -(id) arg_to_proper_object:(id)arg ;
 -(NSString*) setterChain:(id)command arg:(id)arg ;
 -(id) currentTargetObjectOrTopViewController ;
 -(id) getterChainObject:(id)command arg:(id)arg returnType:(GetterReturnType)returnType ;
+
+-(UIViewController*) get_topViewController ;
+-(UIWindow*) get_keyWindow ;
+-(UIViewController*) get_rootViewController ;
 @end

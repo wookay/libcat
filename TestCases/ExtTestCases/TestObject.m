@@ -8,10 +8,25 @@
 
 #import "UnitTest.h"
 
+@interface AssignObject : NSNumber
+@end
+
+@interface RetainObject : NSArray
+@end
+
+@interface CopyObject : NSData
+@end
+
 @interface TestObject : NSObject
+@property (nonatomic, retain) RetainObject* retainObject;
+@property (nonatomic, assign) AssignObject* assignObject;
+@property (nonatomic, copy) CopyObject* copyObject;
 @end
 
 @implementation TestObject
+@synthesize retainObject;
+@synthesize assignObject;
+@synthesize copyObject;
 
 -(void) test_class {
 	assert_nil(NSClassFromString(@"no class"));

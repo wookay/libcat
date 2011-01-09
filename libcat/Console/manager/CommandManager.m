@@ -9,7 +9,6 @@
 #import "CommandManager.h"
 #import "NSMutableDictionaryExt.h"
 #import "NSDictionaryExt.h"
-#import "UIViewControllerBlock.h"
 #import "NSDictionaryBlock.h"
 #import "NSStringExt.h"
 #import "NSIndexPathExt.h"
@@ -23,11 +22,18 @@
 #import "NSObjectExt.h"
 #import "Inspect.h"
 #import "UnitTest.h"
-#import "UIViewBlock.h"
 #import "NewObjectManager.h"
 #import "objc/runtime.h"
 #import <QuartzCore/QuartzCore.h>
 #import "GeometryExt.h"
+#import "UIViewControllerBlock.h"
+#import "UIViewBlock.h"
+
+#if USE_COCOA
+	#import "NSWindowExtMac.h"
+	#import "NSViewExtMac.h"
+#endif
+
 #define TOOLBAR_ITEMS_SECTION_INDEX -1
 
 
@@ -42,6 +48,7 @@ NSArray* array_prefix_index(NSArray* array) {
 @synthesize commandsMap;
 
 #pragma mark HitTestDelegate
+
 -(void) hitTestSentEvent:(UIEvent*)event {
 	log_info(@"hitTestSentEvent %@", event);
 }
@@ -166,7 +173,7 @@ NSArray* array_prefix_index(NSArray* array) {
 	NSArray* pair = [self findTargetObject:currentObject arg:arg];
 	id changeObject = [pair objectAtSecond];
 	if ([changeObject isKindOfClass:[UIView class]]) {
-		UIView* view = (UIView*)changeObject;
+		UIView* view = changeObject;
 		[self flickTargetView:view];
 	} else if ([changeObject isKindOfClass:[UIBarButtonItem	class]]) {
 		UIBarButtonItem* barButtonItem = (UIBarButtonItem*)changeObject;
@@ -176,6 +183,10 @@ NSArray* array_prefix_index(NSArray* array) {
 		} afterDone:^ {
 			barButtonItem.style = style;
 		}];
+#if USE_COCOA
+	} else if ([changeObject isKindOfClass:[NSView class]]) {
+		[changeObject flick];
+#endif
 	}
 	return EMPTY_STRING;
 }
@@ -383,6 +394,11 @@ NSArray* array_prefix_index(NSArray* array) {
 		} else {
 			[ret addObject:PAIR(Enum(LS_VIEW_SUBVIEWS), [view.subviews reverse])];
 		}
+#if USE_COCOA
+	} else if ([currentObject isKindOfClass:[NSWindow class]]) {
+		NSWindow* window = currentObject;
+		[ret addObject:PAIR(Enum(LS_VIEW_SUBVIEWS), [window.contentView subviews])];	
+#endif
 	} else if (currentObject == [currentObject class]) {
 		[ret addObject:PAIR(Enum(LS_CLASS_METHODS), [currentObject class_methods])];
 	}
@@ -427,6 +443,7 @@ NSArray* array_prefix_index(NSArray* array) {
 	} else if ([arg hasPrefix:MEMORY_ADDRESS_PREFIX]) {
 		size_t address = [arg to_size_t];
 		id obj = (id)address;
+		
 		changeObject = obj;
 		actionBlock = [self get_targetObjectActionBlock:obj];
 	} else if ([arg isNumberHasSpace]) {
@@ -535,6 +552,25 @@ NSArray* array_prefix_index(NSArray* array) {
 						actionBlock = Block_copy(block);
 					}
 				}
+#if USE_COCOA
+			} else if ([currentObject isKindOfClass:[NSWindow class]]) {
+				return [self findTargetObject:[currentObject contentView] arg:arg];
+			} else if ([currentObject isKindOfClass:[NSView class]]) {
+				UIView* view = currentObject;
+				if (row < view.subviews.count) {
+					UIView* subview = [view.subviews objectAtIndex:row];				
+					changeObject = subview;
+					found = true;
+					
+					if ([subview isKindOfClass:[NSControl class]]) {
+						ActionBlock block = ^id {				
+							[(NSControl*)subview performClick:subview];
+							return SWF(@"[%@ performClick: %@]", [subview downcasedClassName], @"sender");
+						};
+						actionBlock = Block_copy(block);
+					}
+				}
+#endif
 			}
 		} // TOOLBAR_ITEMS_SECTION_INDEX != section
 		if (! found) {
