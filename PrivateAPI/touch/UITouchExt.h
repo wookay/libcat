@@ -13,4 +13,5 @@
 -(id) initWithTouch:(UITouch *)touch view:(UIView*)view_ ;
 +(UITouch*) touchWithPoint:(CGPoint)point view:(UIView*)view_ phase:(UITouchPhase)phase_ ;
 -(id) initWithPoint:(CGPoint)point view:(UIView*)view_ timestamp:(NSTimeInterval)timestamp_ phase:(UITouchPhase)phase_ tapCount:(NSUInteger)tapCount_ ;
+-(NSDictionary*) to_dict ;
 @end

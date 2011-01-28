@@ -43,6 +43,10 @@ CGRect CGRectWithTwoPoints(CGPoint from, CGPoint to) ;
 CGRect CGRectWithScale(CGRect rect, CGFloat scale) ;
 CGRect CGRectWithScales(CGRect rect, CGFloat widthScale, CGFloat heightScale) ;
 
+CGSize CGSizeTranspose(CGSize size) ;
+CGSize CGSizeExpand(CGSize size, CGFloat dx, CGFloat dy) ;
+
+
 #define SFRect(rect)	NSStringFromCGRect(rect)
 #define SFSize(size)	NSStringFromCGSize(size)
 #define SFPoint(point)  NSStringFromCGPoint(point)

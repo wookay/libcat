@@ -7,15 +7,32 @@
 //
 
 #import "UITouchExt.h"
-
+#import "NSDictionaryExt.h"
+#import "NSStringExt.h"
+#import "GeometryExt.h"
+#import "Logger.h"
 
 @implementation UITouch (Ext)
 
 +(UITouch*) touchWithPoint:(CGPoint)point view:(UIView*)view_ phase:(UITouchPhase)phase_ {
 	NSTimeInterval timestamp_ = [NSDate timeIntervalSinceReferenceDate];
 	NSUInteger tapCount_ = 1;
-	UITouch* touch = [[UITouch alloc] initWithPoint:point view:view_ timestamp:timestamp_ phase:phase_ tapCount:tapCount_];
+	UITouch* touch = [[[UITouch alloc] initWithPoint:point view:view_ timestamp:timestamp_ phase:phase_ tapCount:tapCount_] autorelease];
 	return touch;
+}
+
+-(NSDictionary*) to_dict {
+	NSArray* phases = [@"UITouchPhaseBegan UITouchPhaseMoved UITouchPhaseStationary UITouchPhaseEnded UITouchPhaseCancelled" split];
+	NSDictionary* dict = [NSDictionary dictionaryWithKeysAndObjects:
+							@"timestamp", [NSNumber numberWithDouble:self.timestamp],
+							@"phase", [phases objectAtIndex:self.phase],
+							@"tapCount", [NSNumber numberWithUnsignedInt:self.tapCount],
+							@"locationInView", SFPoint([self locationInView:self.view]),
+							@"previousLocationInView", SFPoint([self previousLocationInView:self.view]),
+							@"locationInWindow", SFPoint([self locationInView:self.window]),
+							@"viewClass", NSStringFromClass([self.view class]),
+							nil];
+	return dict;
 }
 
 -(id) initWithPoint:(CGPoint)point view:(UIView*)view_ timestamp:(NSTimeInterval)timestamp_ phase:(UITouchPhase)phase_ tapCount:(NSUInteger)tapCount_ {

@@ -12,5 +12,6 @@
 @interface UIEvent (Ext)
 
 -(id) initWithTouches:(NSSet*)touches ;
+-(NSDictionary*) to_dict ;
 
 @end

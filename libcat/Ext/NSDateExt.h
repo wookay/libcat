@@ -10,7 +10,8 @@
 #define ONE_DAY_SECONDS		86400 // 1 day = 60*60*24 seconds
 #define ONE_HOUR_SECONDS	3600 // 60*60
 #define ONE_MINUTE_SECONDS	60
-#define ONE_YEAR_DAYS		355
+#define ONE_YEAR_DAYS		365
+#define ONE_DAY_HOURS		24
 
 #define WEEKDAY_COUNT 7
 #define MONTH_COUNT	12

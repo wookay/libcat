@@ -25,7 +25,7 @@
 // used also in console.rb
 #define CONSOLE_SERVER_PORT 8080
 #define LOGGER_SERVER_PORT	8081
-
+#define EVENTS_PATH	@""
 
 @implementation ConsoleManager
 @synthesize currentTargetObject;

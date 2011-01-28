@@ -127,3 +127,13 @@ CGRect CGRectWithScales(CGRect rect, CGFloat widthScale, CGFloat heightScale) {
 					  rect.size.width * widthScale,
 					  rect.size.height * heightScale);
 }
+
+
+#pragma mark CGSize
+CGSize CGSizeTranspose(CGSize size) {
+	return CGSizeMake(size.height, size.width);
+}
+
+CGSize CGSizeExpand(CGSize size, CGFloat dx, CGFloat dy) {
+	return CGSizeMake(size.width+dx, size.height+dy);
+}

@@ -57,25 +57,6 @@
 }
 
 - (void)startResponse {
-//	log_info(@"url %@", url);
-//	log_info(@"requestMethod %@", requestMethod);
-//	log_info(@"headerFields %@", headerFields);
-	
-//	UIView* view = [UIApplication sharedApplication].keyWindow;
-//	for (UIView* subview in view.subviews) {
-//		log_info(@"subview %@", subview);
-//		for (UIView* subview2 in subview.subviews) {
-//			log_info(@"subview2 %@", subview2);
-//		}
-//	}
-//	UIGraphicsBeginImageContext(view.frame.size);
-//	[view.layer renderInContext: UIGraphicsGetCurrentContext()];
-//	UIImage* image = UIGraphicsGetImageFromCurrentImageContext();
-//	UIGraphicsEndImageContext();
-//	
-//	NSData* fileData = UIImagePNGRepresentation(image);
-//	//	NSData *fileData =
-//	//		[NSData dataWithContentsOfFile:[AppTextFileResponse pathForFile]];
 	NSArray* pair = [self url_to_console_input];
 	NSString* command = [pair objectAtFirst];
 	id arg = [pair objectAtSecond];
@@ -83,16 +64,10 @@
 	NSData* fileData = [output to_data];
 	
 	CFHTTPMessageRef response =
-	CFHTTPMessageCreateResponse(
-								kCFAllocatorDefault, 200, NULL, kCFHTTPVersion1_1);
-	CFHTTPMessageSetHeaderFieldValue(
-									 response, (CFStringRef)@"Content-Type", (CFStringRef)@"text/plain");
-	CFHTTPMessageSetHeaderFieldValue(
-									 response, (CFStringRef)@"Connection", (CFStringRef)@"close");
-	CFHTTPMessageSetHeaderFieldValue(
-									 response,
-									 (CFStringRef)@"Content-Length",
-									 (CFStringRef)[NSString stringWithFormat:@"%ld", [fileData length]]);
+	CFHTTPMessageCreateResponse(kCFAllocatorDefault, 200, NULL, kCFHTTPVersion1_1);
+	CFHTTPMessageSetHeaderFieldValue(response, (CFStringRef)@"Content-Type", (CFStringRef)@"text/plain");
+	CFHTTPMessageSetHeaderFieldValue(response, (CFStringRef)@"Connection", (CFStringRef)@"close");
+	CFHTTPMessageSetHeaderFieldValue(response, (CFStringRef)@"Content-Length", (CFStringRef)[NSString stringWithFormat:@"%ld", [fileData length]]);
 	CFDataRef headerData = CFHTTPMessageCopySerializedMessage(response);
 	
 	@try

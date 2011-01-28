@@ -99,10 +99,6 @@ static NSString *replaceAll(NSString *s, NSDictionary *replacements) {
 
 
 - (void)startResponse {
-	//	log_info(@"url %@", url);
-	//	log_info(@"requestMethod %@", requestMethod);
-	//	log_info(@"headerFields %@", headerFields);
-	
 	NSString* arg = nil;
 	NSString* query = [url query];
 	if (nil != query) {

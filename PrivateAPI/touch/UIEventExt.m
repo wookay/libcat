@@ -7,9 +7,23 @@
 //
 
 #import "UIEventExt.h"
-
+#import "UITouchExt.h"
+#import "NSDictionaryExt.h"
+#import "NSStringExt.h"
 
 @implementation UIEvent (Ext)
+
+-(NSDictionary*) to_dict {
+	NSMutableArray* allTouches = [NSMutableArray array];
+	for (UITouch* touch in [self allTouches]) {
+		[allTouches addObject:[touch to_dict]];
+	}
+	NSDictionary* dict = [NSDictionary dictionaryWithKeysAndObjects:
+						  @"timestamp", [NSNumber numberWithDouble:self.timestamp],
+						  @"allTouches", [NSArray arrayWithArray:allTouches],
+						  nil];
+	return dict;
+}
 
 -(id) initWithTouches:(NSSet*)touches {
 #if USE_PRIVATE_API

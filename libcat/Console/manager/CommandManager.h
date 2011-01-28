@@ -19,7 +19,7 @@ enum { LS_OBJECT, LS_VIEWCONTROLLERS, LS_TABLEVIEW, LS_SECTIONS, LS_VIEW, LS_IND
 
 
 @protocol HitTestDelegate
--(void) hitTestSentEvent:(UIEvent*)event ;
+-(void) touchedHitTestView:(UIView*)view ;
 @end
 
 
@@ -35,5 +35,10 @@ enum { LS_OBJECT, LS_VIEWCONTROLLERS, LS_TABLEVIEW, LS_SECTIONS, LS_VIEW, LS_IND
 -(NSArray*) array_ls:(id)currentObject arg:(id)arg ;
 -(NSArray*) get_targetStringAndBlocks:(id)currentObject ;
 -(id) get_targetObjectActionBlock:(id)targetObject ;
--(void) flickTargetView:(UIView*)view ;
+@end
+
+
+
+@interface UIView (Flick)
+-(void) flick ;
 @end

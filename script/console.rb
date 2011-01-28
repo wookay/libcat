@@ -22,6 +22,7 @@ SERVER_URL = "http://#{CONSOLE_SERVER_ADDRESS}:#{CONSOLE_SERVER_PORT}"
 CONSOLE_SERVER_URL = "#{SERVER_URL}/console"
 PROMPT = '> '
 
+
 HELP = <<EOF
 ls			: list current target object (ㄹ)
   [ ls -r ]		: list recursive
@@ -43,8 +44,15 @@ back    		: popViewControllerAnimated: false (b, ㅂ)
 rm N			: removeFromSuperview
 pwd 			: superviews
 
-hitTest			: hitTest (h)
-  off			: hitTest off (h off)
+hitTest			: hitTest on/off (h)
+events			: events (e)
+  record		: record events on/off
+  play 1 2 		: play events
+  cut 2			: cut events
+  clear			: clear events
+  replay NAME	: replay events
+  save NAME		: save events
+  load NAME		: load events
 
 property		: property getter (text, frame ...)
 property = value	: property settter
@@ -64,6 +72,10 @@ CONSOLE_VERSION = 0.1
 ABOUT = <<EOF
 libcat Console #{CONSOLE_VERSION} by wookay
 EOF
+
+EVENTS_PATH = "#{ENV['HOME']}/.console_events"
+require 'fileutils'
+FileUtils.mkdir_p EVENTS_PATH
 
 class Console
   def comment_out line
@@ -95,6 +107,7 @@ class Console
     aliases = {
     't' => 'touch',
     'h' => 'hitTest',
+    'e' => 'events',
     'ㅌ' => 'touch',
     'b' => 'back',
     'f' => 'flash',
@@ -116,6 +129,26 @@ class Console
     Net::HTTP.get_response(URI.parse(URI.escape(req_path)))
   end
 
+  def load_events_base64 arg
+    filename = arg['load '.size..-1].to_s.split(SPACE).last
+    if nil != filename
+      data = open("#{EVENTS_PATH}/#{filename}").read rescue nil
+      data
+    else
+      nil
+    end
+  end
+
+  def save_events_base64 arg, data
+    filename = arg['save '.size..-1].to_s.split(SPACE).last
+    if nil != filename
+      open("#{EVENTS_PATH}/#{filename}",'w') { |f| f.write data }
+      "saved #{filename}"
+    else
+      "events save NAME"
+    end
+  end
+
   def initialize
     @shell = Shell.new :prompt => PROMPT, :print => true
     @proc_block = proc do |env, text|
@@ -123,6 +156,15 @@ class Console
       when ''
       else
         command, arg = command_arg_from_input text
+        case command
+        when 'events'
+          case arg
+          when /^load/
+            arg = "load#{load_events_base64(arg)}"
+          when /^replay/
+            arg = "replay#{load_events_base64(arg)}"
+          end
+        end
         response = console_request command, arg
         case command
         when 'help'
@@ -133,10 +175,17 @@ class Console
            `open #{SERVER_URL}`
         when 'sleep'
           sleep arg.to_f
+        when 'events'
+          case arg
+          when /^save/
+            puts save_events_base64(arg, response.body)
+          else
+            puts response.body if env[:print]
+          end
         when 'completion'
           puts response.body if env[:print]
           response.body
-        when 'cd', 'rm', 'back', 'touch', 'flash', 'watch'
+        when 'cd', 'rm', 'back', 'touch', 'flash', 'watch', 'hitTest'
           puts response.body if response.body.size>0 and env[:print]
           update_prompt
         else

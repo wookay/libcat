@@ -49,8 +49,8 @@ NSArray* array_prefix_index(NSArray* array) {
 
 #pragma mark HitTestDelegate
 
--(void) hitTestSentEvent:(UIEvent*)event {
-	log_info(@"hitTestSentEvent %@", event);
+-(void) touchedHitTestView:(UIView*)view {
+	log_info(@"hitTest %@", view);
 }
 
 -(id) commandNotFound {
@@ -62,6 +62,7 @@ NSArray* array_prefix_index(NSArray* array) {
 			@"echo", @"command_echo:arg:",
 			@"pwd", @"command_pwd:arg:",
 			@"hitTest", @"command_hitTest:arg:",
+			@"events", @"command_events:arg:",			
 			@"cd", @"command_cd:arg:",
 			@"ls", @"command_ls:arg:",
 			@"touch", @"command_touch:arg:",
@@ -147,34 +148,12 @@ NSArray* array_prefix_index(NSArray* array) {
 	return NSLocalizedString(@"Not Found", nil);
 }
 
--(void) flickTargetView:(UIView*)view {
-	CGFloat viewAlpha = view.alpha;
-	UIColor* viewBackgroundColor = view.backgroundColor;
-	CGFloat layerBorderWidth = view.layer.borderWidth;
-	CGColorRef layerBorderColor = view.layer.borderColor;
-	[UIView animateWithDuration:0.7
-					 animations:^{
-						 view.layer.borderWidth = 3;
-						 view.layer.borderColor = [[UIColor blueColor] CGColor];
-						 view.alpha = (1 == viewAlpha) ? 1 - 0.1 : 1;
-						 view.backgroundColor = [UIColor colorWithRed:0.3 green:0.3 blue:0.5 alpha:0.8];
-					 }
-					 completion:^(BOOL finished) {
-						 if (finished) {
-							 view.layer.borderWidth = layerBorderWidth;
-							 view.layer.borderColor = layerBorderColor;
-							 view.alpha = viewAlpha;
-							 view.backgroundColor = viewBackgroundColor;
-						 }
-					 }];		
-}
-
 -(NSString*) command_flash:(id)currentObject arg:(id)arg {
 	NSArray* pair = [self findTargetObject:currentObject arg:arg];
 	id changeObject = [pair objectAtSecond];
 	if ([changeObject isKindOfClass:[UIView class]]) {
 		UIView* view = changeObject;
-		[self flickTargetView:view];
+		[view flick];
 	} else if ([changeObject isKindOfClass:[UIBarButtonItem	class]]) {
 		UIBarButtonItem* barButtonItem = (UIBarButtonItem*)changeObject;
 		UIBarButtonItemStyle style = barButtonItem.style;		
@@ -705,4 +684,33 @@ NSArray* array_prefix_index(NSArray* array) {
 	[super dealloc];
 }
 
+@end
+
+
+
+@implementation UIView (Flick)
+-(void) flick {	
+	if (M_PI == self.layer.borderWidth) {
+	} else {
+		CGFloat viewAlpha = self.alpha;
+		UIColor* viewBackgroundColor = self.backgroundColor;
+		CGFloat layerBorderWidth = self.layer.borderWidth;
+		CGColorRef layerBorderColor = self.layer.borderColor;				
+		[UIView animateWithDuration:0.35
+						 animations:^{
+							 self.layer.borderWidth = M_PI;
+							 self.layer.borderColor = [[UIColor orangeColor] CGColor];
+							 self.alpha = (1 == viewAlpha) ? 1 - 0.1 : 1;
+							 self.backgroundColor = [UIColor colorWithRed:0.8 green:0.8 blue:0.5 alpha:0.8];
+						 }
+						 completion:^(BOOL finished) {
+							 if (finished) {
+								 self.layer.borderWidth = layerBorderWidth;
+								 self.layer.borderColor = layerBorderColor;
+								 self.alpha = viewAlpha;
+								 self.backgroundColor = viewBackgroundColor;
+							 }
+						 }];		
+	}
+}
 @end
