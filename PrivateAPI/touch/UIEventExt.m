@@ -15,9 +15,16 @@
 
 -(NSDictionary*) to_dict {
 	NSMutableArray* allTouches = [NSMutableArray array];
+	UIView* touchView = nil;
 	for (UITouch* touch in [self allTouches]) {
-		[allTouches addObject:[touch to_dict]];
+		if (nil != touch.view) {
+			touchView = touch.view;
+			break;
+		}
 	}
+	for (UITouch* touch in [self allTouches]) {
+		[allTouches addObject:[touch to_dict:touchView]];
+	}	
 	NSDictionary* dict = [NSDictionary dictionaryWithKeysAndObjects:
 						  @"timestamp", [NSNumber numberWithDouble:self.timestamp],
 						  @"allTouches", [NSArray arrayWithArray:allTouches],

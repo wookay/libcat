@@ -21,6 +21,9 @@
 		DA44AF8E1261FC68000F7374 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		DA44AF8F1261FC68000F7374 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */; };
 		DA44B0131261FFBF000F7374 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DA44B0121261FFBF000F7374 /* AppDelegate.m */; };
+		DA89675B12F4ED4C00ADCEC5 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = DA89675A12F4ED4C00ADCEC5 /* Icon-72.png */; };
+		DA89675D12F4ED5A00ADCEC5 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = DA89675C12F4ED5A00ADCEC5 /* Icon-72.png */; };
+		DA89675F12F4ED6200ADCEC5 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = DA89675E12F4ED6200ADCEC5 /* Icon-72.png */; };
 		DAA9664C12ACD25A00CB4664 /* Async.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA965D812ACD25A00CB4664 /* Async.m */; };
 		DAA9664D12ACD25A00CB4664 /* NSArrayBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA965DA12ACD25A00CB4664 /* NSArrayBlock.m */; };
 		DAA9664E12ACD25A00CB4664 /* NSDictionaryBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA965DC12ACD25A00CB4664 /* NSDictionaryBlock.m */; };
@@ -287,6 +290,10 @@
 		DA44AF941261FC68000F7374 /* TabBarApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TabBarApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA44B0111261FFBF000F7374 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		DA44B0121261FFBF000F7374 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		DA89675A12F4ED4C00ADCEC5 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
+		DA89675C12F4ED5A00ADCEC5 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
+		DA89675E12F4ED6200ADCEC5 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
+		DA89678012F4EEAA00ADCEC5 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 		DAA63F631261AC140010F870 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DAA63F651261AC140010F870 /* Korean */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Korean; path = Korean.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DAA63F671261AC140010F870 /* Spanish */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Spanish; path = Spanish.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -577,6 +584,7 @@
 		DA210A79126207A400FBBE35 /* TabBarApp */ = {
 			isa = PBXGroup;
 			children = (
+				DA89675C12F4ED5A00ADCEC5 /* Icon-72.png */,
 				DA210AD112620AC100FBBE35 /* calculator.png */,
 				DA210AD212620AC100FBBE35 /* trend.png */,
 				DA210A7A126207A400FBBE35 /* Default.png */,
@@ -845,6 +853,7 @@
 		DAC0C27112A9A79800F669EC /* OpenGLApp */ = {
 			isa = PBXGroup;
 			children = (
+				DA89675E12F4ED6200ADCEC5 /* Icon-72.png */,
 				DAC0C27212A9A79800F669EC /* Default.png */,
 				DAC0C27312A9A79800F669EC /* Icon.png */,
 			);
@@ -862,6 +871,7 @@
 		DAC0C29D12A9AAE900F669EC /* NavigationApp */ = {
 			isa = PBXGroup;
 			children = (
+				DA89675A12F4ED4C00ADCEC5 /* Icon-72.png */,
 				DAC0C29E12A9AAE900F669EC /* Default.png */,
 				DAC0C29F12A9AAE900F669EC /* Icon.png */,
 			);
@@ -929,6 +939,7 @@
 				DAC5BAEF12A9A25700953A23 /* NavigationApp-Info.plist */,
 				DAC5BAEB12A9A24700953A23 /* TabBarApp-Info.plist */,
 				DAC5BAED12A9A25100953A23 /* OpenGLApp-Info.plist */,
+				DA89678012F4EEAA00ADCEC5 /* Entitlements.plist */,
 			);
 			name = Info.plist;
 			sourceTree = "<group>";
@@ -1099,6 +1110,7 @@
 				DAE9D2AE12A81EE500EA3F21 /* README.md in Resources */,
 				DAC5BA9112A99F2300953A23 /* TabBarMainWindow-iPad.xib in Resources */,
 				DAC5BA9212A99F2300953A23 /* TabBarMainWindow.xib in Resources */,
+				DA89675D12F4ED5A00ADCEC5 /* Icon-72.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1120,6 +1132,7 @@
 				DAC0C27412A9A79800F669EC /* Default.png in Resources */,
 				DAC0C27512A9A79800F669EC /* Icon.png in Resources */,
 				DAC0C2BB12A9AB2C00F669EC /* InfoPlist.strings in Resources */,
+				DA89675F12F4ED6200ADCEC5 /* Icon-72.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1138,6 +1151,7 @@
 				DAC0C29912A9AA5300F669EC /* InfoPlist.strings in Resources */,
 				DAC0C2A012A9AAE900F669EC /* Default.png in Resources */,
 				DAC0C2A112A9AAE900F669EC /* Icon.png in Resources */,
+				DA89675B12F4ED4C00ADCEC5 /* Icon-72.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1454,6 +1468,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = "~/libcat/TestApp/Entitlements.plist";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1471,6 +1486,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = "~/libcat/TestApp/Entitlements.plist";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = TestApp_Prefix.pch;
@@ -1487,6 +1503,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = "~/libcat/TestApp/Entitlements.plist";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1507,6 +1524,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = "~/libcat/TestApp/Entitlements.plist";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = TestApp_Prefix.pch;
@@ -1526,6 +1544,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = "~/libcat/TestApp/Entitlements.plist";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1544,6 +1563,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CODE_SIGN_ENTITLEMENTS = "~/libcat/TestApp/Entitlements.plist";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = TestApp_Prefix.pch;

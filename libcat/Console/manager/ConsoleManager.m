@@ -24,16 +24,20 @@
 
 // used also in console.rb
 #define CONSOLE_SERVER_PORT 8080
-#define LOGGER_SERVER_PORT	8081
+#define LOGGER_SERVER_PORT_OFFSET 10
 #define EVENTS_PATH	@""
 
 @implementation ConsoleManager
 @synthesize currentTargetObject;
 
 -(void) start_servers {
-	[[HTTPServer sharedServer] startWithPort:CONSOLE_SERVER_PORT];
-	[[LoggerServer sharedServer] startWithPort:LOGGER_SERVER_PORT];
-	LOGGERMAN.delegate = [LoggerServer sharedServer];
+	[self start_servers:CONSOLE_SERVER_PORT];
+}
+
+-(void) start_servers:(int)port {
+	[[HTTPServer sharedServer] startWithPort:port];
+	[[LoggerServer sharedServer] startWithPort:port+LOGGER_SERVER_PORT_OFFSET];
+	LOGGERMAN.delegate = [LoggerServer sharedServer];	
 }
 
 -(void) stop_servers {

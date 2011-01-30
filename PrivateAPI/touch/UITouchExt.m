@@ -21,17 +21,17 @@
 	return touch;
 }
 
--(NSDictionary*) to_dict {
+-(NSDictionary*) to_dict:(UIView*)touchView {
 	NSArray* phases = [@"UITouchPhaseBegan UITouchPhaseMoved UITouchPhaseStationary UITouchPhaseEnded UITouchPhaseCancelled" split];
 	NSDictionary* dict = [NSDictionary dictionaryWithKeysAndObjects:
-							@"timestamp", [NSNumber numberWithDouble:self.timestamp],
-							@"phase", [phases objectAtIndex:self.phase],
-							@"tapCount", [NSNumber numberWithUnsignedInt:self.tapCount],
-							@"locationInView", SFPoint([self locationInView:self.view]),
-							@"previousLocationInView", SFPoint([self previousLocationInView:self.view]),
-							@"locationInWindow", SFPoint([self locationInView:self.window]),
-							@"viewClass", NSStringFromClass([self.view class]),
-							nil];
+				@"timestamp", [NSNumber numberWithDouble:self.timestamp],
+				@"phase", [phases objectAtIndex:self.phase],
+				@"tapCount", [NSNumber numberWithUnsignedInt:self.tapCount],
+				@"locationInView", SFPoint([self locationInView:touchView]),
+				@"previousLocationInView", SFPoint([self previousLocationInView:touchView]),
+				@"locationInWindow", SFPoint([self locationInView:self.window]),
+				@"viewClass", NSStringFromClass([touchView class]),
+				nil];		
 	return dict;
 }
 

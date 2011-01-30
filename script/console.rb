@@ -3,23 +3,15 @@
 # console.rb
 #                           wookay.noh at gmail.com
 
-
-
-CONSOLE_SERVER_ADDRESS = ARGV.size>0 ? ARGV.first : 'localhost'
-
-
-
 DIR = "#{File.dirname __FILE__}"
 $LOAD_PATH.unshift DIR
 require 'ui_shell'
 require 'net/http'
 require 'timeout'
 
-
 SPACE = ' '
-CONSOLE_SERVER_PORT = open("#{DIR}/../libcat/Console/manager/ConsoleManager.m").read.lines.select { |line| line =~ /#define CONSOLE_SERVER_PORT/ }.first.split(SPACE).last.to_i # 8080
-SERVER_URL = "http://#{CONSOLE_SERVER_ADDRESS}:#{CONSOLE_SERVER_PORT}"
-CONSOLE_SERVER_URL = "#{SERVER_URL}/console"
+COLON = ':'
+
 PROMPT = '> '
 
 
@@ -46,11 +38,11 @@ pwd 			: superviews
 
 hitTest			: hitTest on/off (h)
 events			: events (e)
-  record		: record events on/off
-  play 1 2 		: play events
-  cut 2			: cut events
+  record		: record events on/off (er)
+  play 			: play events (ep)
+  cut N			: cut events
   clear			: clear events
-  replay NAME	: replay events
+  replay NAME		: replay events (ey)
   save NAME		: save events
   load NAME		: load events
 
@@ -77,6 +69,16 @@ EVENTS_PATH = "#{ENV['HOME']}/.console_events"
 require 'fileutils'
 FileUtils.mkdir_p EVENTS_PATH
 
+
+def resolve_console_server_url
+  console_server_address = ARGV.size>0 ? ARGV.first : 'localhost'
+  console_server_port = open("#{DIR}/../libcat/Console/manager/ConsoleManager.m").read.lines.select { |line| line =~ /#define CONSOLE_SERVER_PORT/ }.first.split(SPACE).last.to_i # 8080
+  server_url = (console_server_address.include? COLON) ? "http://#{console_server_address}" : "http://#{console_server_address}:#{console_server_port}"
+  "#{server_url}/console"
+end
+
+CONSOLE_SERVER_URL = resolve_console_server_url
+
 class Console
   def comment_out line
     line.gsub(/#(.*)$/, '')
@@ -101,13 +103,16 @@ class Console
       command = text_stripped
       arg = nil
     end
-    [resolve_command(command), arg]
+    resolve_command(command, arg)
   end
-  def resolve_command command_str
+  def resolve_command command_str, arg
     aliases = {
     't' => 'touch',
     'h' => 'hitTest',
     'e' => 'events',
+    'er' => 'events record',
+    'ep' => 'events play',
+    'ey' => 'events replay',
     'ㅌ' => 'touch',
     'b' => 'back',
     'f' => 'flash',
@@ -117,7 +122,17 @@ class Console
     '$' => 'new_objects',
     'w' => 'watch',
     }
-    aliases[command_str] or command_str 
+    full_command = aliases[command_str]
+    if full_command
+      if full_command.include? SPACE
+        command, action = full_command.split SPACE
+        [command, [action,arg].join(SPACE)]
+      else
+        [full_command, arg]
+      end
+    else
+      [command_str, arg]
+    end
   end
   def console_request command, arg
     if arg

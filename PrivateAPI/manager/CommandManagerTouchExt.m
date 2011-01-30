@@ -43,9 +43,11 @@ typedef enum {
 									@"save", Enum(kEventsArgSave),
 									@"load", Enum(kEventsArgLoad),
 									nil];
+	NSString* action = NSLocalizedString(@"None", nil);
 	for (NSString* key in [eventsArgTable allKeys]) {
 		if ([arg hasPrefix:key]) {
 			eventsArg = [[eventsArgTable objectForKey:key] intValue];
+			action = key;
 		}
 	}
 
@@ -57,12 +59,19 @@ typedef enum {
 			break;
 
 		case kEventsArgPlay: {
-			//	NSArray* numbers = [[arg slice:[@"play " length] backward:-1] split:SPACE];
+				[hitTestWindow playUserEvents];
 			}
 			break;
 			
 		case kEventsArgCut: {
-			//	NSArray* numbers = [[arg slice:[@"cut " length] backward:-1] split:SPACE];
+				if ([arg length] > [@"cut " length]) {
+					NSArray* ary = [[arg slice:[@"cut " length] backward:-1] split:SPACE];
+					NSMutableArray* frames = [NSMutableArray array];
+					for (NSString* num in ary) {
+						[frames addObject:FIXNUM([num intValue])];
+					}
+					[hitTestWindow cutUserEvents:frames];
+				}
 			}
 			break;
 			
@@ -84,6 +93,7 @@ typedef enum {
 				NSArray* events = [hitTestWindow loadUserEvents:[base64string decode_base64]];
 				[hitTestWindow clearUserEvents];
 				[hitTestWindow.userEvents addObjectsFromArray:events];
+				return [hitTestWindow reportUserEvents];
 			}
 			break;
 		
@@ -93,10 +103,11 @@ typedef enum {
 
 		case kEventsArgNone:
 		default:
+			return [hitTestWindow reportUserEvents];
 			break;
 	}
 	
-	return [hitTestWindow reportUserEvents];
+	return action;
 }
 
 -(NSString*) command_hitTest:(id)currentObject arg:(id)arg {

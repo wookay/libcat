@@ -33,6 +33,8 @@ typedef enum {
 -(void) sendEventWithAllTouchesDict:(NSArray*)allTouches ;
 -(void) sendEvent:(UIEvent *)event recordUserEvents:(BOOL)recordUserEvents ;
 -(void) replayUserEvents:(NSArray*)events ;
+-(void) playUserEvents ;
+-(void) cutUserEvents:(NSArray*)frames ;
 -(NSData*) saveUserEvents ;
 -(NSArray*) loadUserEvents:(NSData*)data ;
 -(void) clearUserEvents ;

@@ -116,10 +116,10 @@
 		}
 		if (recordUserEvents) {
 			[userEvents addObject:[event to_dict]];
-		}		
+		}	
 		UIEvent* realEvent = [[UIEvent alloc] initWithTouches:realTouches];
 		[targetWindow sendEvent:realEvent];
-		[realEvent release];
+		[realEvent release];					
 	}
 }
 
@@ -147,6 +147,19 @@
 
 
 #pragma mark events
+
+-(void) playUserEvents {
+	[self replayUserEvents:userEvents];
+}
+
+-(void) cutUserEvents:(NSArray*)frames {
+	NSMutableIndexSet* indexes = [NSMutableIndexSet indexSet];
+	for (NSNumber* num in frames) {
+		[indexes addIndex:[num unsignedIntValue]];
+	}
+	[userEvents removeObjectsAtIndexes:indexes];
+}
+
 -(void) replayUserEvents:(NSArray*)events {
 	NSTimeInterval currentTimestamp = CERO;
 	for (NSDictionary* dict in [NSArray arrayWithArray:events]) {
@@ -182,6 +195,7 @@
 
 -(NSString*) reportUserEvents {
 	NSMutableArray* ary = [NSMutableArray array];
+	int idx = 0;
 	for (NSDictionary* eventDict in userEvents) {
 		NSMutableArray* touches = [NSMutableArray array];
 		for (NSDictionary* touchDict in [eventDict objectForKey:@"allTouches"]) {
@@ -192,9 +206,14 @@
 								   )];
 
 		}
-		[ary addObject:SWF(@"%g\t[%@]", [[eventDict objectForKey:@"timestamp"] doubleValue], [touches join:COMMA_SPACE])];	
+		[ary addObject:SWF(@"%d\t%g\t[%@]", idx, [[eventDict objectForKey:@"timestamp"] doubleValue], [touches join:COMMA_SPACE])];	
+		idx += 1;
 	}
-	return [ary join:LF];
+	if (0 == ary.count) {
+		return NSLocalizedString(@"no events", nil);
+	} else {
+		return [ary join:LF];
+	}
 }
 
 -(NSString*) enterHitTestMode:(kHitTestMode)hitTestArg {
