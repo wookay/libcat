@@ -28,6 +28,10 @@
 	return dict;
 }
 
++(UITouch*) touchWithPoint:(CGPoint)point view:(UIView*)view_ {
+	return [self touchWithPoint:point view:view_ phase:UITouchPhaseBegan];
+}
+
 +(UITouch*) touchWithPoint:(CGPoint)point view:(UIView*)view_ phase:(UITouchPhase)phase_ {
 	NSTimeInterval timestamp_ = [NSDate timeIntervalSinceReferenceDate];
 	NSUInteger tapCount_ = 1;	

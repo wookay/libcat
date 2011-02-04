@@ -39,5 +39,6 @@
 @interface UIEvent (Ext)
 
 -(NSDictionary*) to_dict ;
+-(id) initWithTouch:(UITouch*)touch ;
 
 @end

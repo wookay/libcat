@@ -13,6 +13,7 @@
 #import "NSArrayExt.h"
 #import "Logger.h"
 #import "Numero.h"
+#import "GeometryExt.h"
 
 #if USE_PRIVATE_API
 @interface UIApplication (Recoder)
@@ -20,23 +21,37 @@
 -(void) _removeRecorder:(id<UIEventRecorder>)recoder ;
 -(void) _playbackEvents:(NSArray*)events atPlaybackRate:(float)playbackRate messageWhenDone:(id)target withSelector:(SEL)action ;
 @end
+
+@interface UIEvent (Synthesize)
+-(id) _initWithEvent:(id)event touches:(NSSet*)touches;
+@end
 #endif
 
 @implementation EventRecorder
 @synthesize recorded;
 @synthesize userEvents;
--(void) recordApplicationEvent:(NSDictionary*)event {
-	[userEvents addObject:event];
+
+-(void) recordApplicationEvent:(NSDictionary*)eventDict {
+	NSMutableDictionary* dict = [NSMutableDictionary dictionaryWithDictionary:eventDict];	
+	NSDictionary* location = [eventDict objectForKey:@"Location"];
+	CGPoint point = CGPointMake([[location objectForKey:@"X"] floatValue], [[location objectForKey:@"Y"] floatValue]);	
+	UITouch* touch = [UITouch touchWithPoint:point view:[UIApplication sharedApplication].keyWindow];
+	UIEvent* event = [[UIEvent alloc] initWithTouch:touch];
+	UIView* view = [[UIApplication sharedApplication].keyWindow hitTest:point withEvent:event];
+	[dict setObject:NSStringFromClass([view class]) forKey:@"viewClass"];
+	[userEvents addObject:dict];
 }
 
 -(NSString*) recordUserEvents {
 	recorded = ! recorded;
 	
+#if USE_PRIVATE_API
 	if (recorded) {
 		[[UIApplication sharedApplication] _addRecorder:self];
 	} else {
 		[[UIApplication sharedApplication] _removeRecorder:self];
 	}
+#endif
 	
 	return recorded ? NSLocalizedString(@"record on", nil) : NSLocalizedString(@"record off", nil);
 }
@@ -56,12 +71,14 @@
 }
 
 -(void) doneReplayEvents:(NSDictionary*)detail {
-	log_info(@"doneReplayEvents %@", detail);
+	// log_info(@"doneReplayEvents %@", detail);
 }
 
 -(NSString*) replayUserEvents:(NSArray*)events {
+#if USE_PRIVATE_API
 	float playbackRate = 1;
 	[[UIApplication sharedApplication] _playbackEvents:events atPlaybackRate:playbackRate messageWhenDone:self withSelector:@selector(doneReplayEvents:)];
+#endif
 	return SWF(@"replay %d events", events.count);
 }
 
@@ -91,16 +108,28 @@
 	NSMutableArray* ary = [NSMutableArray array];
 	int idx = 0;
 	for (NSDictionary* eventDict in userEvents) {
-		log_info(@"eventDict %@", eventDict);
+//		NSData* data = [eventDict objectForKey:@"Data"];
+//		switch (data.length) {
+//			case 60:
+//				break;
+//			case 84:
+//				break;
+//			default:
+//				break;
+//		}
+
 		NSDictionary* location = [eventDict objectForKey:@"Location"];
-		[ary addObject:SWF(@"%d\t%@\t{%@, %@}",
+		[ary addObject:SWF(@"%d\t%@\t{%@, %@}\t%@",
 						   idx,
 						   [eventDict objectForKey:@"Time"],
 						   [location objectForKey:@"X"],
-						   [location objectForKey:@"Y"]
+						   [location objectForKey:@"Y"],
+						   [eventDict objectForKey:@"viewClass"]
 						   )];
 		idx += 1;
 	}
+	
+	
 	if (0 == ary.count) {
 		return NSLocalizedString(@"no events", nil);
 	} else {
@@ -152,6 +181,19 @@
 						  @"allTouches", [NSArray arrayWithArray:allTouches],
 						  nil];
 	return dict;
+}
+
+-(id) initWithTouch:(UITouch*)touch {
+    Class touchesEventClass = objc_getClass("UITouchesEvent");
+    if (touchesEventClass && ![[self class] isEqual:touchesEventClass]) {
+        [self release];
+        self = [touchesEventClass alloc];
+    }
+    
+    self = [self _initWithEvent:[NSNull null] touches:[NSSet setWithObject:touch]];
+    if (nil != self) {
+    }
+    return self;
 }
 
 @end
