@@ -25,6 +25,7 @@
 #import "NewObjectManager.h"
 #import "objc/runtime.h"
 #import <QuartzCore/QuartzCore.h>
+#import "NSTimerExt.h"
 #import "GeometryExt.h"
 #import "UIViewControllerBlock.h"
 #import "UIViewBlock.h"
@@ -689,28 +690,16 @@ NSArray* array_prefix_index(NSArray* array) {
 
 
 @implementation UIView (Flick)
+
 -(void) flick {	
-	if (M_PI == self.layer.borderWidth) {
-	} else {
-		CGFloat viewAlpha = self.alpha;
-		UIColor* viewBackgroundColor = self.backgroundColor;
-		CGFloat layerBorderWidth = self.layer.borderWidth;
-		CGColorRef layerBorderColor = self.layer.borderColor;				
-		[UIView animateWithDuration:0.35
-						 animations:^{
-							 self.layer.borderWidth = M_PI;
-							 self.layer.borderColor = [[UIColor orangeColor] CGColor];
-							 self.alpha = (1 == viewAlpha) ? 1 - 0.1 : 1;
-							 self.backgroundColor = [UIColor colorWithRed:0.8 green:0.8 blue:0.5 alpha:0.8];
-						 }
-						 completion:^(BOOL finished) {
-							 if (finished) {
-								 self.layer.borderWidth = layerBorderWidth;
-								 self.layer.borderColor = layerBorderColor;
-								 self.alpha = viewAlpha;
-								 self.backgroundColor = viewBackgroundColor;
-							 }
-						 }];		
-	}
+	NSTimeInterval ti = 0.35;		
+	CALayer* flickLayer = [CALayer layer];
+	flickLayer.frame = CGRectWithSize(self.layer.frame.size);
+	flickLayer.borderWidth = 3;
+	flickLayer.borderColor = [[UIColor orangeColor] CGColor];
+	flickLayer.backgroundColor = [[UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:0.1] CGColor];
+	[self.layer addSublayer:flickLayer];
+	[flickLayer performSelector:@selector(removeFromSuperlayer) afterDelay:ti];
 }
+
 @end

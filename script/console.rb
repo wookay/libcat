@@ -42,7 +42,7 @@ events			: events (e)
   play 			: play events (ep)
   cut N			: cut events
   clear			: clear events
-  replay NAME		: replay events (ey)
+  replay NAME		: replay events (ee)
   save NAME		: save events
   load NAME		: load events
 
@@ -70,14 +70,14 @@ require 'fileutils'
 FileUtils.mkdir_p EVENTS_PATH
 
 
-def resolve_console_server_url
+def resolve_server_url
   console_server_address = ARGV.size>0 ? ARGV.first : 'localhost'
   console_server_port = open("#{DIR}/../libcat/Console/manager/ConsoleManager.m").read.lines.select { |line| line =~ /#define CONSOLE_SERVER_PORT/ }.first.split(SPACE).last.to_i # 8080
   server_url = (console_server_address.include? COLON) ? "http://#{console_server_address}" : "http://#{console_server_address}:#{console_server_port}"
-  "#{server_url}/console"
 end
 
-CONSOLE_SERVER_URL = resolve_console_server_url
+SERVER_URL = resolve_server_url
+CONSOLE_SERVER_URL = "#{SERVER_URL}/console"
 
 class Console
   def comment_out line
@@ -112,7 +112,7 @@ class Console
     'e' => 'events',
     'er' => 'events record',
     'ep' => 'events play',
-    'ey' => 'events replay',
+    'ee' => 'events replay',
     'ㅌ' => 'touch',
     'b' => 'back',
     'f' => 'flash',

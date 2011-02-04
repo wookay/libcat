@@ -8,10 +8,36 @@
 
 #import <Foundation/Foundation.h>
 
+#define EVENTRECORDER [EventRecorder sharedRecorder]
+
+@protocol UIEventRecorder
+-(void)recordApplicationEvent:(NSDictionary*)event ;
+@end
+
+@interface EventRecorder : NSObject <UIEventRecorder> {
+	NSMutableArray* userEvents;
+	BOOL recorded;
+}
+@property (nonatomic) 	BOOL recorded;
+@property (nonatomic, retain)	NSMutableArray* userEvents;
+
++(EventRecorder*) sharedRecorder ;
+-(NSString*) recordUserEvents ;
+-(NSString*) playUserEvents ;
+-(NSString*) replayUserEvents:(NSArray*)events ;
+-(NSString*) cutUserEvents:(NSArray*)frames ;
+-(NSData*) saveUserEvents ;
+-(NSArray*) loadUserEvents:(NSData*)data ;
+-(void) addUserEvents:(NSArray*)events ;
+-(void) clearUserEvents ;
+-(NSString*) reportUserEvents ;
+@end
+
+
+
 
 @interface UIEvent (Ext)
 
--(id) initWithTouches:(NSSet*)touches ;
 -(NSDictionary*) to_dict ;
 
 @end

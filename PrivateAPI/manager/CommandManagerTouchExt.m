@@ -14,6 +14,7 @@
 #import "NSStringExt.h"
 #import "NSArrayExt.h"
 #import "Inspect.h"
+#import "UIEventExt.h"
 
 @implementation CommandManager (TouchExt)
 
@@ -32,7 +33,11 @@ typedef enum {
 
 
 -(NSString*) command_events:(id)currentObject arg:(id)arg {
-	HitTestWindow* hitTestWindow = [HitTestWindow sharedWindow];
+#if USE_PRIVATE_API
+#else
+	return NSLocalizedString(@"Add USE_PRIVATE_API=1 to Preprocessor Macros", nil);
+#endif
+	
 	kEventsArg eventsArg = kEventsArgNone;		
 	NSDictionary* eventsArgTable = [NSDictionary dictionaryWithKeysAndObjects:
 									@"record", Enum(kEventsArgRecord),
@@ -53,13 +58,12 @@ typedef enum {
 
 	switch (eventsArg) {
 		case kEventsArgRecord: {
-				HitTestWindow* hitTestWindow = [HitTestWindow sharedWindow];
-				return [hitTestWindow enterHitTestMode:kHitTestModeRecordEvents];
+				return [EVENTRECORDER recordUserEvents];
 			}
 			break;
 
 		case kEventsArgPlay: {
-				[hitTestWindow playUserEvents];
+				return [EVENTRECORDER playUserEvents];
 			}
 			break;
 			
@@ -70,40 +74,43 @@ typedef enum {
 					for (NSString* num in ary) {
 						[frames addObject:FIXNUM([num intValue])];
 					}
-					[hitTestWindow cutUserEvents:frames];
+					return [EVENTRECORDER cutUserEvents:frames];
 				}
 			}
 			break;
 			
 		case kEventsArgReplay: {
 				NSString* base64string = [arg slice:[@"replay" length] backward:-1];
-				NSArray* events = [hitTestWindow loadUserEvents:[base64string decode_base64]];
-				[hitTestWindow replayUserEvents:events];
+				if ([base64string isEmpty]) {
+					return NSLocalizedString(@"events replay NAME", nil);
+				}
+				NSArray* events = [EVENTRECORDER loadUserEvents:[base64string decode_base64]];
+				return [EVENTRECORDER replayUserEvents:events];
 			}
 			break;
 			
 		case kEventsArgSave: {
-				NSData* data = [hitTestWindow saveUserEvents];
+				NSData* data = [EVENTRECORDER saveUserEvents];
 				return [data encode_base64];
 			}
 			break;
 
 		case kEventsArgLoad: {
 				NSString* base64string = [arg slice:[@"load" length] backward:-1];
-				NSArray* events = [hitTestWindow loadUserEvents:[base64string decode_base64]];
-				[hitTestWindow clearUserEvents];
-				[hitTestWindow.userEvents addObjectsFromArray:events];
-				return [hitTestWindow reportUserEvents];
+				NSArray* events = [EVENTRECORDER loadUserEvents:[base64string decode_base64]];
+				[EVENTRECORDER clearUserEvents];
+				[EVENTRECORDER addUserEvents:events];
+				return [EVENTRECORDER reportUserEvents];
 			}
 			break;
 		
 		case kEventsArgClear:
-			[hitTestWindow clearUserEvents];
+			[EVENTRECORDER clearUserEvents];
 			break;
 
 		case kEventsArgNone:
 		default:
-			return [hitTestWindow reportUserEvents];
+			return [EVENTRECORDER reportUserEvents];
 			break;
 	}
 	
@@ -111,6 +118,11 @@ typedef enum {
 }
 
 -(NSString*) command_hitTest:(id)currentObject arg:(id)arg {
+#if USE_PRIVATE_API
+#else
+	return NSLocalizedString(@"Add USE_PRIVATE_API=1 to Preprocessor Macros", nil);
+#endif
+	
 	HitTestWindow* hitTestWindow = [HitTestWindow sharedWindow];
 	return [hitTestWindow enterHitTestMode:kHitTestModeHitTestView];
 }

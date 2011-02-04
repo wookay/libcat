@@ -15,6 +15,7 @@
 #import "NSNumberExt.h"
 #import "ConsoleManager.h"
 #import "UIControlViewController.h"
+#import "ScrollViewController.h"
 
 enum { kSectionUnitTest, kSectionConsole, kSectionMax };
 	enum { kRowTests, kRowAssertions, kRowFailures, kRowErrors, kRowMaxUnitTest };
@@ -144,7 +145,7 @@ enum { kSectionUnitTest, kSectionConsole, kSectionMax };
 	
 	switch (indexPath.section) {
 		case kSectionUnitTest: {
-				UIViewController* vc = [[UIViewController alloc] initWithNibName:nil bundle:nil];
+				ScrollViewController* vc = [[ScrollViewController alloc] initWithNibName:@"ScrollViewController" bundle:nil];
 				[self.navigationController pushViewController:vc animated:true];
 				vc.title = cell.textLabel.text;
 				float red = get_random(FF)/FF;

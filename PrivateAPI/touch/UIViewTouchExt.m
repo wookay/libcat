@@ -15,7 +15,7 @@
 -(UIEvent*) tapEventAtPoint:(CGPoint)point {
 	UITouch* began = [UITouch touchWithPoint:point view:self phase:UITouchPhaseBegan];
 	UITouch* ended = [UITouch touchWithPoint:point view:self phase:UITouchPhaseEnded];
-	UIEvent* event = [[[UIEvent alloc] initWithTouches:[NSSet setWithObjects:began, ended, nil]] autorelease];
+	UIEvent* event = [[[UIEvent alloc] performSelector:@selector(initWithTouches:) withObject:[NSSet setWithObjects:began, ended, nil]] autorelease];
 	return event;
 }
 

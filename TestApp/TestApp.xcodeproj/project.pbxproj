@@ -177,6 +177,7 @@
 		DAC0C2A012A9AAE900F669EC /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = DAC0C29E12A9AAE900F669EC /* Default.png */; };
 		DAC0C2A112A9AAE900F669EC /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = DAC0C29F12A9AAE900F669EC /* Icon.png */; };
 		DAC0C2BB12A9AB2C00F669EC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAC0C2B712A9AB2C00F669EC /* InfoPlist.strings */; };
+		DAC3A10A12FBFE010076CD8C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAC5BB7F12A9A37B00953A23 /* QuartzCore.framework */; };
 		DAC3D08F1266A23500CA00D1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAC3D08B1266A23500CA00D1 /* InfoPlist.strings */; };
 		DAC5BA2512A99E5500953A23 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28F335F01007B36200424DE2 /* RootViewController.xib */; };
 		DAC5BA2612A99E5500953A23 /* UIControlViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DADD7EE41260AE2C0040E482 /* UIControlViewController.xib */; };
@@ -227,6 +228,12 @@
 		DAC5BBD012A9A65000953A23 /* OpenGLMainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAC5BBCF12A9A65000953A23 /* OpenGLMainWindow-iPad.xib */; };
 		DAC5BBF112A9A70A00953A23 /* NavigationMainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAC5BBF012A9A70A00953A23 /* NavigationMainWindow-iPad.xib */; };
 		DAC7AE461263210F0073BED1 /* TestObject.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC7AE451263210F0073BED1 /* TestObject.m */; };
+		DAC8198112F638EB005BE2A3 /* ScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC8197F12F638EB005BE2A3 /* ScrollViewController.m */; };
+		DAC8198212F638EB005BE2A3 /* ScrollViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAC8198012F638EB005BE2A3 /* ScrollViewController.xib */; };
+		DAC8198312F638EB005BE2A3 /* ScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC8197F12F638EB005BE2A3 /* ScrollViewController.m */; };
+		DAC8198412F638EB005BE2A3 /* ScrollViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAC8198012F638EB005BE2A3 /* ScrollViewController.xib */; };
+		DAC8198512F638EB005BE2A3 /* ScrollViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC8197F12F638EB005BE2A3 /* ScrollViewController.m */; };
+		DAC8198612F638EB005BE2A3 /* ScrollViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAC8198012F638EB005BE2A3 /* ScrollViewController.xib */; };
 		DACAB02712629054006DA76D /* TestArrayBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB00612629054006DA76D /* TestArrayBlock.m */; };
 		DACAB02812629054006DA76D /* TestAsync.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB00712629054006DA76D /* TestAsync.m */; };
 		DACAB02912629054006DA76D /* TestBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB00812629054006DA76D /* TestBlock.m */; };
@@ -441,6 +448,9 @@
 		DAC5BBCF12A9A65000953A23 /* OpenGLMainWindow-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = "OpenGLMainWindow-iPad.xib"; sourceTree = "<group>"; };
 		DAC5BBF012A9A70A00953A23 /* NavigationMainWindow-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = "NavigationMainWindow-iPad.xib"; sourceTree = "<group>"; };
 		DAC7AE451263210F0073BED1 /* TestObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestObject.m; sourceTree = "<group>"; };
+		DAC8197E12F638EB005BE2A3 /* ScrollViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrollViewController.h; sourceTree = "<group>"; };
+		DAC8197F12F638EB005BE2A3 /* ScrollViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrollViewController.m; sourceTree = "<group>"; };
+		DAC8198012F638EB005BE2A3 /* ScrollViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScrollViewController.xib; sourceTree = "<group>"; };
 		DACAB00612629054006DA76D /* TestArrayBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestArrayBlock.m; sourceTree = "<group>"; };
 		DACAB00712629054006DA76D /* TestAsync.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestAsync.m; sourceTree = "<group>"; };
 		DACAB00812629054006DA76D /* TestBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestBlock.m; sourceTree = "<group>"; };
@@ -496,6 +506,7 @@
 				DAE9E2BA1295E63F00F72551 /* UIKit.framework in Frameworks */,
 				DAE9E2BB1295E63F00F72551 /* CoreGraphics.framework in Frameworks */,
 				DAC5BB1912A9A2B000953A23 /* CFNetwork.framework in Frameworks */,
+				DAC3A10A12FBFE010076CD8C /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -511,6 +522,9 @@
 				DADD7EE21260AE2C0040E482 /* UIControlViewController.h */,
 				DADD7EE31260AE2C0040E482 /* UIControlViewController.m */,
 				DADD7EE41260AE2C0040E482 /* UIControlViewController.xib */,
+				DAC8197E12F638EB005BE2A3 /* ScrollViewController.h */,
+				DAC8197F12F638EB005BE2A3 /* ScrollViewController.m */,
+				DAC8198012F638EB005BE2A3 /* ScrollViewController.xib */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -1111,6 +1125,7 @@
 				DAC5BA9112A99F2300953A23 /* TabBarMainWindow-iPad.xib in Resources */,
 				DAC5BA9212A99F2300953A23 /* TabBarMainWindow.xib in Resources */,
 				DA89675D12F4ED5A00ADCEC5 /* Icon-72.png in Resources */,
+				DAC8198612F638EB005BE2A3 /* ScrollViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1133,6 +1148,7 @@
 				DAC0C27512A9A79800F669EC /* Icon.png in Resources */,
 				DAC0C2BB12A9AB2C00F669EC /* InfoPlist.strings in Resources */,
 				DA89675F12F4ED6200ADCEC5 /* Icon-72.png in Resources */,
+				DAC8198212F638EB005BE2A3 /* ScrollViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1152,6 +1168,7 @@
 				DAC0C2A012A9AAE900F669EC /* Default.png in Resources */,
 				DAC0C2A112A9AAE900F669EC /* Icon.png in Resources */,
 				DA89675B12F4ED4C00ADCEC5 /* Icon-72.png in Resources */,
+				DAC8198412F638EB005BE2A3 /* ScrollViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1232,6 +1249,7 @@
 				DAA966E312ACD25A00CB4664 /* UIViewOpenGLExt.m in Sources */,
 				DAA966E412ACD25A00CB4664 /* UIViewTouchExt.m in Sources */,
 				DAEDA12512C014F100360459 /* TestLocale.m in Sources */,
+				DAC8198512F638EB005BE2A3 /* ScrollViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1311,6 +1329,7 @@
 				DAA966B012ACD25A00CB4664 /* UIViewOpenGLExt.m in Sources */,
 				DAA966B112ACD25A00CB4664 /* UIViewTouchExt.m in Sources */,
 				DAEDA12612C014F100360459 /* TestLocale.m in Sources */,
+				DAC8198112F638EB005BE2A3 /* ScrollViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1388,6 +1407,7 @@
 				DAA9667D12ACD25A00CB4664 /* UIViewOpenGLExt.m in Sources */,
 				DAA9667E12ACD25A00CB4664 /* UIViewTouchExt.m in Sources */,
 				DAEDA12412C014F100360459 /* TestLocale.m in Sources */,
+				DAC8198312F638EB005BE2A3 /* ScrollViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
