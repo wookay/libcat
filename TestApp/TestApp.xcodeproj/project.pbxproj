@@ -246,6 +246,7 @@
 		DACAB03112629054006DA76D /* TestDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB01412629054006DA76D /* TestDictionary.m */; };
 		DACAB03212629054006DA76D /* TestNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB01512629054006DA76D /* TestNumber.m */; };
 		DACAB03312629054006DA76D /* TestString.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB01612629054006DA76D /* TestString.m */; };
+		DACC5A2D12FD415C00AC572F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAC5BB7F12A9A37B00953A23 /* QuartzCore.framework */; };
 		DAE9D2AD12A81EE500EA3F21 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = DAE9D2AC12A81EE500EA3F21 /* README.md */; };
 		DAE9D2AE12A81EE500EA3F21 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = DAE9D2AC12A81EE500EA3F21 /* README.md */; };
 		DAE9E26B1295E63F00F72551 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28F335F01007B36200424DE2 /* RootViewController.xib */; };
@@ -482,6 +483,7 @@
 				DA44AF8E1261FC68000F7374 /* UIKit.framework in Frameworks */,
 				DA44AF8F1261FC68000F7374 /* CoreGraphics.framework in Frameworks */,
 				DAC5BB0C12A9A29B00953A23 /* CFNetwork.framework in Frameworks */,
+				DACC5A2D12FD415C00AC572F /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -579,7 +581,7 @@
 			isa = PBXGroup;
 			children = (
 				DAC5BB7912A9A35E00953A23 /* opengl */,
-				DA054F5B125DDD2600660097 /* net */,
+				DA054F5B125DDD2600660097 /* console */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */,
@@ -587,12 +589,13 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		DA054F5B125DDD2600660097 /* net */ = {
+		DA054F5B125DDD2600660097 /* console */ = {
 			isa = PBXGroup;
 			children = (
+				DAC5BB7F12A9A37B00953A23 /* QuartzCore.framework */,
 				DAC5BB0B12A9A29B00953A23 /* CFNetwork.framework */,
 			);
-			name = net;
+			name = console;
 			sourceTree = "<group>";
 		};
 		DA210A79126207A400FBBE35 /* TabBarApp */ = {
@@ -962,7 +965,6 @@
 			isa = PBXGroup;
 			children = (
 				DAC5BB7A12A9A36700953A23 /* OpenGLES.framework */,
-				DAC5BB7F12A9A37B00953A23 /* QuartzCore.framework */,
 			);
 			name = opengl;
 			sourceTree = "<group>";
