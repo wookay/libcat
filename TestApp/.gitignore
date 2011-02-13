@@ -1,3 +1,5 @@
 build
 TestApp.xcodeproj/*.mode*
 TestApp.xcodeproj/*.pbxuser
+project.xcworkspace
+xcuserdata

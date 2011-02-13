@@ -179,6 +179,18 @@
 		DAC0C2BB12A9AB2C00F669EC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAC0C2B712A9AB2C00F669EC /* InfoPlist.strings */; };
 		DAC3A10A12FBFE010076CD8C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAC5BB7F12A9A37B00953A23 /* QuartzCore.framework */; };
 		DAC3D08F1266A23500CA00D1 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAC3D08B1266A23500CA00D1 /* InfoPlist.strings */; };
+		DAC52088130749EA002A11C9 /* EditPropertyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC52086130749EA002A11C9 /* EditPropertyViewController.m */; };
+		DAC52089130749EA002A11C9 /* EditPropertyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAC52087130749EA002A11C9 /* EditPropertyViewController.xib */; };
+		DAC5208A130749EA002A11C9 /* EditPropertyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC52086130749EA002A11C9 /* EditPropertyViewController.m */; };
+		DAC5208B130749EA002A11C9 /* EditPropertyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAC52087130749EA002A11C9 /* EditPropertyViewController.xib */; };
+		DAC5208C130749EA002A11C9 /* EditPropertyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC52086130749EA002A11C9 /* EditPropertyViewController.m */; };
+		DAC5208D130749EA002A11C9 /* EditPropertyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DAC52087130749EA002A11C9 /* EditPropertyViewController.xib */; };
+		DAC522511307C371002A11C9 /* TypeInfoTable.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC522501307C371002A11C9 /* TypeInfoTable.m */; };
+		DAC522521307C371002A11C9 /* TypeInfoTable.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC522501307C371002A11C9 /* TypeInfoTable.m */; };
+		DAC522531307C371002A11C9 /* TypeInfoTable.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC522501307C371002A11C9 /* TypeInfoTable.m */; };
+		DAC522D21307D037002A11C9 /* PropertyManipulator.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC522D11307D037002A11C9 /* PropertyManipulator.m */; };
+		DAC522D31307D037002A11C9 /* PropertyManipulator.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC522D11307D037002A11C9 /* PropertyManipulator.m */; };
+		DAC522D41307D037002A11C9 /* PropertyManipulator.m in Sources */ = {isa = PBXBuildFile; fileRef = DAC522D11307D037002A11C9 /* PropertyManipulator.m */; };
 		DAC5BA2512A99E5500953A23 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28F335F01007B36200424DE2 /* RootViewController.xib */; };
 		DAC5BA2612A99E5500953A23 /* UIControlViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DADD7EE41260AE2C0040E482 /* UIControlViewController.xib */; };
 		DAC5BA2712A99E5500953A23 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAA63F621261AC140010F870 /* Localizable.strings */; };
@@ -246,6 +258,12 @@
 		DACAB03112629054006DA76D /* TestDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB01412629054006DA76D /* TestDictionary.m */; };
 		DACAB03212629054006DA76D /* TestNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB01512629054006DA76D /* TestNumber.m */; };
 		DACAB03312629054006DA76D /* TestString.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB01612629054006DA76D /* TestString.m */; };
+		DACC5811130691FD0088E046 /* PropertyRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC580F130691FD0088E046 /* PropertyRootViewController.m */; };
+		DACC5812130691FD0088E046 /* PropertyRootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DACC5810130691FD0088E046 /* PropertyRootViewController.xib */; };
+		DACC5813130691FD0088E046 /* PropertyRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC580F130691FD0088E046 /* PropertyRootViewController.m */; };
+		DACC5814130691FD0088E046 /* PropertyRootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DACC5810130691FD0088E046 /* PropertyRootViewController.xib */; };
+		DACC5815130691FD0088E046 /* PropertyRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC580F130691FD0088E046 /* PropertyRootViewController.m */; };
+		DACC5816130691FD0088E046 /* PropertyRootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DACC5810130691FD0088E046 /* PropertyRootViewController.xib */; };
 		DACC5A2D12FD415C00AC572F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAC5BB7F12A9A37B00953A23 /* QuartzCore.framework */; };
 		DAE9D2AD12A81EE500EA3F21 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = DAE9D2AC12A81EE500EA3F21 /* README.md */; };
 		DAE9D2AE12A81EE500EA3F21 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = DAE9D2AC12A81EE500EA3F21 /* README.md */; };
@@ -422,6 +440,13 @@
 		DAC3D08C1266A23500CA00D1 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DAC3D08D1266A23500CA00D1 /* Korean */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Korean; path = Korean.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DAC3D08E1266A23500CA00D1 /* Spanish */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Spanish; path = Spanish.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		DAC52085130749EA002A11C9 /* EditPropertyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditPropertyViewController.h; sourceTree = "<group>"; };
+		DAC52086130749EA002A11C9 /* EditPropertyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditPropertyViewController.m; sourceTree = "<group>"; };
+		DAC52087130749EA002A11C9 /* EditPropertyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditPropertyViewController.xib; sourceTree = "<group>"; };
+		DAC5224F1307C371002A11C9 /* TypeInfoTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TypeInfoTable.h; sourceTree = "<group>"; };
+		DAC522501307C371002A11C9 /* TypeInfoTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TypeInfoTable.m; sourceTree = "<group>"; };
+		DAC522D01307D037002A11C9 /* PropertyManipulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertyManipulator.h; sourceTree = "<group>"; };
+		DAC522D11307D037002A11C9 /* PropertyManipulator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PropertyManipulator.m; sourceTree = "<group>"; };
 		DAC5BA8012A99E5500953A23 /* OpenGLApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenGLApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAC5BA8B12A99F2300953A23 /* TabBarAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarAppDelegate.h; sourceTree = "<group>"; };
 		DAC5BA8C12A99F2300953A23 /* TabBarAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarAppDelegate.m; sourceTree = "<group>"; };
@@ -466,6 +491,9 @@
 		DACAB01412629054006DA76D /* TestDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestDictionary.m; sourceTree = "<group>"; };
 		DACAB01512629054006DA76D /* TestNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestNumber.m; sourceTree = "<group>"; };
 		DACAB01612629054006DA76D /* TestString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestString.m; sourceTree = "<group>"; };
+		DACC580E130691FD0088E046 /* PropertyRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertyRootViewController.h; sourceTree = "<group>"; };
+		DACC580F130691FD0088E046 /* PropertyRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PropertyRootViewController.m; sourceTree = "<group>"; };
+		DACC5810130691FD0088E046 /* PropertyRootViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PropertyRootViewController.xib; sourceTree = "<group>"; };
 		DADD7EE21260AE2C0040E482 /* UIControlViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIControlViewController.h; sourceTree = "<group>"; };
 		DADD7EE31260AE2C0040E482 /* UIControlViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIControlViewController.m; sourceTree = "<group>"; };
 		DADD7EE41260AE2C0040E482 /* UIControlViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UIControlViewController.xib; sourceTree = "<group>"; };
@@ -691,6 +719,7 @@
 		DAA965E812ACD25A00CB4664 /* Console */ = {
 			isa = PBXGroup;
 			children = (
+				DACD42E113065D39008D6831 /* manipulator */,
 				DAA965E912ACD25A00CB4664 /* manager */,
 				DAA965F412ACD25A00CB4664 /* net */,
 			);
@@ -1027,6 +1056,23 @@
 			path = ExtTestCases;
 			sourceTree = "<group>";
 		};
+		DACD42E113065D39008D6831 /* manipulator */ = {
+			isa = PBXGroup;
+			children = (
+				DAC522D01307D037002A11C9 /* PropertyManipulator.h */,
+				DAC522D11307D037002A11C9 /* PropertyManipulator.m */,
+				DACC580E130691FD0088E046 /* PropertyRootViewController.h */,
+				DACC580F130691FD0088E046 /* PropertyRootViewController.m */,
+				DACC5810130691FD0088E046 /* PropertyRootViewController.xib */,
+				DAC52085130749EA002A11C9 /* EditPropertyViewController.h */,
+				DAC52086130749EA002A11C9 /* EditPropertyViewController.m */,
+				DAC52087130749EA002A11C9 /* EditPropertyViewController.xib */,
+				DAC5224F1307C371002A11C9 /* TypeInfoTable.h */,
+				DAC522501307C371002A11C9 /* TypeInfoTable.m */,
+			);
+			path = manipulator;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1128,6 +1174,8 @@
 				DAC5BA9212A99F2300953A23 /* TabBarMainWindow.xib in Resources */,
 				DA89675D12F4ED5A00ADCEC5 /* Icon-72.png in Resources */,
 				DAC8198612F638EB005BE2A3 /* ScrollViewController.xib in Resources */,
+				DACC5814130691FD0088E046 /* PropertyRootViewController.xib in Resources */,
+				DAC5208B130749EA002A11C9 /* EditPropertyViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1151,6 +1199,8 @@
 				DAC0C2BB12A9AB2C00F669EC /* InfoPlist.strings in Resources */,
 				DA89675F12F4ED6200ADCEC5 /* Icon-72.png in Resources */,
 				DAC8198212F638EB005BE2A3 /* ScrollViewController.xib in Resources */,
+				DACC5812130691FD0088E046 /* PropertyRootViewController.xib in Resources */,
+				DAC5208D130749EA002A11C9 /* EditPropertyViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1171,6 +1221,8 @@
 				DAC0C2A112A9AAE900F669EC /* Icon.png in Resources */,
 				DA89675B12F4ED4C00ADCEC5 /* Icon-72.png in Resources */,
 				DAC8198412F638EB005BE2A3 /* ScrollViewController.xib in Resources */,
+				DACC5816130691FD0088E046 /* PropertyRootViewController.xib in Resources */,
+				DAC52089130749EA002A11C9 /* EditPropertyViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1252,6 +1304,10 @@
 				DAA966E412ACD25A00CB4664 /* UIViewTouchExt.m in Sources */,
 				DAEDA12512C014F100360459 /* TestLocale.m in Sources */,
 				DAC8198512F638EB005BE2A3 /* ScrollViewController.m in Sources */,
+				DACC5813130691FD0088E046 /* PropertyRootViewController.m in Sources */,
+				DAC5208A130749EA002A11C9 /* EditPropertyViewController.m in Sources */,
+				DAC522521307C371002A11C9 /* TypeInfoTable.m in Sources */,
+				DAC522D31307D037002A11C9 /* PropertyManipulator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1332,6 +1388,10 @@
 				DAA966B112ACD25A00CB4664 /* UIViewTouchExt.m in Sources */,
 				DAEDA12612C014F100360459 /* TestLocale.m in Sources */,
 				DAC8198112F638EB005BE2A3 /* ScrollViewController.m in Sources */,
+				DACC5811130691FD0088E046 /* PropertyRootViewController.m in Sources */,
+				DAC5208C130749EA002A11C9 /* EditPropertyViewController.m in Sources */,
+				DAC522531307C371002A11C9 /* TypeInfoTable.m in Sources */,
+				DAC522D41307D037002A11C9 /* PropertyManipulator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1410,6 +1470,10 @@
 				DAA9667E12ACD25A00CB4664 /* UIViewTouchExt.m in Sources */,
 				DAEDA12412C014F100360459 /* TestLocale.m in Sources */,
 				DAC8198312F638EB005BE2A3 /* ScrollViewController.m in Sources */,
+				DACC5815130691FD0088E046 /* PropertyRootViewController.m in Sources */,
+				DAC52088130749EA002A11C9 /* EditPropertyViewController.m in Sources */,
+				DAC522511307C371002A11C9 /* TypeInfoTable.m in Sources */,
+				DAC522D21307D037002A11C9 /* PropertyManipulator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

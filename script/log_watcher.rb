@@ -34,7 +34,7 @@ def resolve_logger_server_address_port
 end
 
 LOGGER_SERVER_ADDRESS, LOGGER_SERVER_PORT = resolve_logger_server_address_port
-puts "Log Watcher : feed log_info messages. try to connect #{LOGGER_SERVER_ADDRESS}:#{LOGGER_SERVER_PORT}  (Quit : ^C)"
+puts "Log Watcher : feed log_info messages. waiting a connect #{LOGGER_SERVER_ADDRESS}:#{LOGGER_SERVER_PORT}  (Quit : ^C)"
 EventMachine::run do
   EventMachine::connect LOGGER_SERVER_ADDRESS, LOGGER_SERVER_PORT, LoggerClient
 end

@@ -16,9 +16,9 @@ PROMPT = '> '
 
 
 HELP = <<EOF
-ls			: list current target object (ㄹ)
+ls			: list current target object
   [ ls -r ]		: list recursive
-cd TARGET		: change target object (ㄷ)
+cd TARGET		: change target object
   [ cd ]		: topViewController
   [ cd 0 ]		: at index as listed
   [ cd 1 0 ]		: at section and index
@@ -30,9 +30,9 @@ cd TARGET		: change target object (ㄷ)
   [ cd UIButton ]	: to class
   [ cd 0x6067490 ]	: at memory address
 
-touch TARGET   		: touch target object (t, ㅌ)
+touch TARGET   		: touch target object (t)
 flash TARGET		: flash target object (f)
-back    		: popViewControllerAnimated: false (b, ㅂ)
+back    		: popViewControllerAnimated: false (b)
 rm N			: removeFromSuperview
 pwd 			: superviews
 
@@ -46,6 +46,8 @@ events			: events (e)
   save NAME		: save events
   load NAME		: load events
 
+manipulate TARGET 	: manipulate properties (m)
+
 property		: property getter (text, frame ...)
 property = value	: property settter
 $			: display new objects
@@ -57,8 +59,6 @@ clear			: clear history
 about			: about
 quit			: quit (q)
 EOF
-
-# watch TARGET		: watch target object (w)
 
 CONSOLE_VERSION = 0.1
 ABOUT = <<EOF
@@ -113,14 +113,10 @@ class Console
     'er' => 'events record',
     'ep' => 'events play',
     'ee' => 'events replay',
-    'ㅌ' => 'touch',
+	'm' => 'manipulate',
     'b' => 'back',
     'f' => 'flash',
-    'ㅂ' => 'back',
-    'ㄷ' => 'cd',
-    'ㄹ' => 'ls',
     '$' => 'new_objects',
-    'w' => 'watch',
     }
     full_command = aliases[command_str]
     if full_command
@@ -200,7 +196,7 @@ class Console
         when 'completion'
           puts response.body if env[:print]
           response.body
-        when 'cd', 'rm', 'back', 'touch', 'flash', 'watch', 'hitTest'
+        when 'cd', 'rm', 'back', 'touch', 'flash', 'hitTest'
           puts response.body if response.body.size>0 and env[:print]
           update_prompt
         else
@@ -217,8 +213,8 @@ class Console
         request_prompt
       end
       @shell.options[:prompt] = prompt
-    rescue Timeout::Error
-      puts "Cannot connect to console server #{CONSOLE_SERVER_ADDRESS}:#{CONSOLE_SERVER_PORT}"
+    rescue # Timeout::Error
+      puts "Cannot connect to console server #{SERVER_URL}"
       puts "Please run TestApp"
       prompt = PROMPT
       exit

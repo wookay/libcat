@@ -43,4 +43,5 @@ NSArray* CUAD(id uno, id dos, id tres, id cuatro) ;
 -(NSArray*) undiagonal ;
 -(NSArray*) withoutObject:(id)obj ;
 -(NSArray*) sort ;
+-(NSArray*) sortByFirstObject ;
 @end

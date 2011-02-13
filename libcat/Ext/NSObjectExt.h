@@ -7,15 +7,19 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#define IS_NULL(obj)	(nil == obj || [obj isNull])
 
 @interface NSObject (Ext)
 
 -(void) performSelector:(SEL)selector afterDelay:(NSTimeInterval)ti ;
 -(BOOL) isNull ;
 -(BOOL) isNotNull ;
+-(NSUInteger) class_properties_count ;
+-(NSArray*) class_properties ;
 -(NSArray*) methods ;
 -(NSArray*) class_methods ;
 -(NSString*) downcasedClassName ;
++(id) objectByAddress:(const void *)aValue withObjCType:(const char *)aTypeDescription ;
++(id) objectWithValue:(const void *)aValue withObjCType:(const char *)aTypeDescription ;
 
 @end

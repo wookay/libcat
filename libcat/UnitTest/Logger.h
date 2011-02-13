@@ -7,20 +7,22 @@
 //
 
 #import <Foundation/Foundation.h>
+#define LOGGERMAN	[LoggerManager sharedManager]
+#define PRINT_HERE log_info(@"%@", NSStringFromSelector(_cmd));
+#define log_object(obj)	log_info(@"%@ %@", NSStringFromSelector(_cmd), obj)
+
 #define FILENAME_PADDING 23
-
-void stdout_log_info(BOOL filename_lineno_flag, const char* filename, int lineno, id format, ...) ;
-
 #define __FILENAME__ (strrchr(__FILE__,'/')+1)
 #define log_info(const_chars_fmt, ...) stdout_log_info(1, __FILENAME__, __LINE__, const_chars_fmt, ##__VA_ARGS__)
 #define print_log_info(const_chars_fmt, ...) stdout_log_info(0, __FILENAME__, __LINE__, const_chars_fmt, ##__VA_ARGS__)
+
+void stdout_log_info(BOOL filename_lineno_flag, const char* filename, int lineno, id format, ...) ;
 
 @protocol LoggerDelegate
 -(void) loggerTextOut:(NSString*)text ;
 -(void) show_ip_address ;
 @end
 
-#define LOGGERMAN	[LoggerManager sharedManager]
 @interface LoggerManager : NSObject {
 	id<LoggerDelegate> delegate;
 }

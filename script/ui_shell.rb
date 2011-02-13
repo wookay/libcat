@@ -5,8 +5,6 @@
 require 'readline'
 require 'rubygems'
 require 'irb/completion'
-#require 'map_by_method' # gem install map_by_method
-#require 'what_methods'  # gem install what_methods
 require 'pp'
 include Readline
 

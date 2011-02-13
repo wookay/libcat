@@ -25,6 +25,9 @@ typedef enum {
 }
 
 -(void) test_number {
+	assert_equal(1, 1);
+	assert_equal(1.1, 1.1);
+	
 	assert_equal(FIXNUM(2), [FIXNUM(1) next]);
 	
 	assert_equal(LONGNUM(4), [LONGNUM(3.14) ceiling]);

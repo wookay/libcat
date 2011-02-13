@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "NSObjectExt.h"
 
 #define __FILENAME__ (strrchr(__FILE__,'/')+1)
 
@@ -14,8 +15,8 @@
  do { \
 	__typeof__(expected) __expected = (expected); \
 	__typeof__(got) __got = (got); \
-	NSValue* expected_encoded = [NSValue valueWithValue:&__expected withObjCType: @encode(__typeof__(expected))]; \
-	NSValue* got_encoded = [NSValue valueWithValue:&__got withObjCType: @encode(__typeof__(got))]; \
+	NSValue* expected_encoded = [NSObject objectWithValue:&__expected withObjCType: @encode(__typeof__(expected))]; \
+	NSValue* got_encoded = [NSObject objectWithValue:&__got withObjCType: @encode(__typeof__(got))]; \
 	[UnitTest assert:got_encoded equals:expected_encoded inFile:[NSString stringWithUTF8String:__FILENAME__] atLine:__LINE__]; \
 } while(0)
 
@@ -23,8 +24,8 @@
 do { \
 __typeof__(expected) __expected = (expected); \
 __typeof__(got) __got = (got); \
-NSValue* expected_encoded = [NSValue valueWithValue:&__expected withObjCType: @encode(__typeof__(expected))]; \
-NSValue* got_encoded = [NSValue valueWithValue:&__got withObjCType: @encode(__typeof__(got))]; \
+NSValue* expected_encoded = [NSObject objectWithValue:&__expected withObjCType: @encode(__typeof__(expected))]; \
+NSValue* got_encoded = [NSObject objectWithValue:&__got withObjCType: @encode(__typeof__(got))]; \
 [UnitTest assert:got_encoded equals:expected_encoded message:expected_message inFile:[NSString stringWithUTF8String:__FILENAME__] atLine:__LINE__]; \
 } while(0)
 
@@ -51,11 +52,6 @@ NSValue* got_encoded = [NSValue valueWithValue:&__got withObjCType: @encode(__ty
 -(void) run_test:(SEL)sel ;
 -(void) run_tests ;
 @end
-
-@interface NSValue (Ext)
-+ valueWithValue:(const void *)aValue withObjCType:(const char *)aTypeDescription ;
-@end
-
 
 
 #define UNITTESTMAN [UnitTestManager sharedManager]

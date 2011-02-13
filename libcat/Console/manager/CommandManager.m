@@ -29,6 +29,7 @@
 #import "GeometryExt.h"
 #import "UIViewControllerBlock.h"
 #import "UIViewBlock.h"
+#import "PropertyManipulator.h"
 
 #if USE_COCOA
 	#import "NSWindowExtMac.h"
@@ -69,8 +70,8 @@ NSArray* array_prefix_index(NSArray* array) {
 			@"touch", @"command_touch:arg:",
 			@"flash", @"command_flash:arg:",
 			@"back", @"command_back:arg:",
+			@"manipulate", @"command_manipulate:arg:",
 			@"rm", @"command_rm:arg:",
-			@"watch", @"command_watch:arg:",
 			@"new_objects", @"command_new_objects:arg:",
 			@"completion", @"command_completion:arg:",
 			@"prompt", @"command_prompt:arg:",
@@ -119,20 +120,6 @@ NSArray* array_prefix_index(NSArray* array) {
 		}
 	}
 	return EMPTY_STRING;
-}
-
--(NSString*) command_watch:(id)currentObject arg:(id)arg {
-	NSArray* pair = [self findTargetObject:currentObject arg:arg];
-	id changeObject = [pair objectAtSecond];
-	if ([changeObject isNull]) {
-		id response = [pair objectAtFirst];
-		return response;
-	} else {
-//		[changeObject before_invoke_any_selector:^(SEL sel) {
-//			log_info(@"log %@", NSStringFromSelector(sel));
-//		}];
-		return EMPTY_STRING;
-	}
 }
 
 -(NSString*) command_touch:(id)currentObject arg:(id)arg {
@@ -196,6 +183,23 @@ NSArray* array_prefix_index(NSArray* array) {
 		}
 	}
 	return NSLocalizedString(@"Not Found", nil);
+}
+
+-(NSString*) command_manipulate:(id)currentObject arg:(id)arg {
+	NSArray* pair = [self findTargetObject:currentObject arg:arg];
+	id targetObject = [pair objectAtSecond];	
+	if (IS_NULL(arg)) {
+		if ([PROPERTYMAN isVisible]) {
+			[PROPERTYMAN hide];
+			return NSLocalizedString(@"off", nil);
+		}
+	}
+	
+	if ([targetObject isNull]) {
+		targetObject = currentObject;
+	}
+	
+	return [PROPERTYMAN manipulate:targetObject];
 }
 
 -(NSString*) command_completion:(id)currentObject arg:(id)arg {
