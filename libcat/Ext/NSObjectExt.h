@@ -14,12 +14,13 @@
 -(void) performSelector:(SEL)selector afterDelay:(NSTimeInterval)ti ;
 -(BOOL) isNull ;
 -(BOOL) isNotNull ;
--(NSUInteger) class_properties_count ;
 -(NSArray*) class_properties ;
+-(NSArray*) class_properties:(Class)targetClass ;
 -(NSArray*) methods ;
 -(NSArray*) class_methods ;
 -(NSString*) downcasedClassName ;
 +(id) objectByAddress:(const void *)aValue withObjCType:(const char *)aTypeDescription ;
 +(id) objectWithValue:(const void *)aValue withObjCType:(const char *)aTypeDescription ;
-
+-(NSArray*) class_hierarchy ;
+-(NSArray*) superclasses ;
 @end

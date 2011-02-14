@@ -11,8 +11,13 @@
 
 @interface PropertyRootViewController : UITableViewController <PropertyEditDelegate> {
 	id targetObject;
+	NSArray* hierarchyData;
+	NSArray* propertiesData;
 }
 @property (nonatomic, assign) id targetObject;
+@property (nonatomic, retain) NSArray* hierarchyData;
+@property (nonatomic, retain) NSArray* propertiesData;
+-(void) load_properties_data ;
 @end
 
 

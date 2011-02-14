@@ -21,11 +21,34 @@
 
 @implementation PropertyRootViewController
 @synthesize targetObject;
+@synthesize hierarchyData;
+@synthesize propertiesData;
+
+-(void) updateProperty:(NSString*)propertyName value:(NSString*)value {
+	NSString* setter = SWF(@"set%@FromString:", [propertyName capitalizedString]);
+	SEL sel = NSSelectorFromString(setter);
+	if ([targetObject respondsToSelector:sel]) {
+		[targetObject performSelector:sel withObject:value];
+		[self load_properties_data];
+		[self.tableView reloadData];
+	}
+}
 
 -(void) manipulateTargetObject:(id)targetObject_ {
 	self.targetObject = targetObject_;
 	self.title = SWF(@"%@", targetObject_);
+	self.hierarchyData = [NSArray arrayWithArray:[targetObject_ class_hierarchy]];
+	[self load_properties_data];
 	[self.tableView reloadData];
+}
+
+-(void) load_properties_data {
+	NSMutableArray* ary = [NSMutableArray array];
+	for (int idx = 0; idx < hierarchyData.count - 1; idx++) {
+		Class targetClass = [hierarchyData objectAtIndex:idx];
+		[ary addObject:[targetObject class_properties:targetClass]];
+	}
+	self.propertiesData = [NSArray arrayWithArray:ary];
 }
 
 #pragma mark -
@@ -33,6 +56,16 @@
 
 -(IBAction) touchedDone:(id)sender {
 	[PROPERTYMAN hide];
+}
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+		self.targetObject = nil;
+		self.hierarchyData = [NSArray array];
+		self.propertiesData = [NSArray array];
+    }
+    return self;
 }
 
 - (void)viewDidLoad {
@@ -84,15 +117,19 @@
 #pragma mark -
 #pragma mark Table view data source
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {   // fixed font style. use custom view (UILabel) if you want something different
+	Class targetClass = [self.hierarchyData objectAtIndex:section];
+	return NSStringFromClass(targetClass);
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 1;
+    return self.hierarchyData.count - 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	return [targetObject class_properties_count];
+	return [[self.propertiesData objectAtIndex:section] count];
 }
-
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -101,10 +138,10 @@
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
 	if (cell == nil) {
-		cell = [[[PropertyCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];
+		cell = [[[PropertyCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
 	}
 
-	NSArray* trio = [[targetObject class_properties] objectAtIndex:indexPath.row];
+	NSArray* trio = [[self.propertiesData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
 	NSString* propertyName = [trio objectAtFirst];
 	cell.textLabel.text = propertyName;
 	cell.textLabel.adjustsFontSizeToFitWidth = true;
@@ -138,17 +175,8 @@
     return cell;
 }
 
--(void) updateProperty:(NSString*)propertyName value:(NSString*)value {
-	NSString* setter = SWF(@"set%@FromString:", [propertyName capitalizedString]);
-	SEL sel = NSSelectorFromString(setter);
-	if ([targetObject respondsToSelector:sel]) {
-		[targetObject performSelector:sel withObject:value];
-		[self.tableView reloadData];
-	}
-}
-
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
-	NSArray* trio = [[targetObject class_properties] objectAtIndex:indexPath.row];
+	NSArray* trio = [[self.propertiesData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
 	NSString* propertyName = [trio objectAtFirst];
 	id obj = [trio objectAtSecond];
 //	NSArray* attributes = [trio objectAtThird];
@@ -225,14 +253,14 @@
 #pragma mark Table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
-	NSArray* trio = [[targetObject class_properties] objectAtIndex:indexPath.row];
+	NSArray* trio = [[propertiesData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
 	NSArray* attributes = [trio objectAtThird];
 	if ([attributes containsObject:ATTRIBUTE_READONLY] && ![attributes containsObject:ATTRIBUTE_OBJECT]) {
 	} else {
 		if ([attributes containsObject:ATTRIBUTE_OBJECT]) {
 			id obj = [trio objectAtSecond];
 			PropertyRootViewController* vc = [[PropertyRootViewController alloc] initWithNibName:@"PropertyRootViewController" bundle:nil];
-			vc.targetObject = obj;
+			[vc manipulateTargetObject:obj];
 			[self.navigationController pushViewController:vc animated:true];
 			vc.title = cell.textLabel.text;
 			[vc release];								
@@ -268,6 +296,8 @@
 
 - (void)dealloc {
 	self.targetObject = nil;
+	[hierarchyData release];
+	[propertiesData release];
     [super dealloc];
 }
 

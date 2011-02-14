@@ -7,6 +7,8 @@
 //
 
 #import "UnitTest.h"
+#import "NSObjectExt.h"
+#import "NSArrayExt.h"
 
 @interface AssignObject : NSNumber
 @end
@@ -28,9 +30,15 @@
 @synthesize assignObject;
 @synthesize copyObject;
 
+-(void) test_superclass {
+	assert_equal(_array3([NSMutableString class], [NSString class], [NSObject class]), [@"" superclasses]);
+	assert_equal(_array1([NSObject class]), [NSString superclasses]);
+	assert_equal(_array0(), [NSObject superclasses]);
+}
+
 -(void) test_class {
 	assert_nil(NSClassFromString(@"no class"));
-	assert_not_nil(NSClassFromString(@"UIButton"));
+	assert_not_nil(NSClassFromString(@"NSString"));
 }
 
 @end

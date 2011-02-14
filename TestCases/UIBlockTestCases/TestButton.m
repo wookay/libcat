@@ -70,4 +70,11 @@
 	assert_equal(2, cnt);
 }
 
+-(void) test_superclass {
+	assert_equal(@"UIControl", NSStringFromClass([UIButton superclass]));
+	assert_equal(@"UIView", NSStringFromClass([UIControl superclass]));
+	assert_equal(@"UIResponder", NSStringFromClass([UIView superclass]));
+	assert_equal(@"NSObject", NSStringFromClass([UIResponder superclass]));
+}
+
 @end

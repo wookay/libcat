@@ -11,32 +11,9 @@
 #import "UIBarButtonItemBlock.h"
 #import "Logger.h"
 #import "iPadExt.h"
-#import "ValueManipulator.h"
 #import "NSNumberExt.h"
 
 @implementation UIControlViewController
-
--(void) manipulate_label_objectAtIndex:(ValueManipulator*)manipulator {
-	NSArray* ary = _w(@"a b c d e f g");
-	
-	int idx = [manipulator add_int_slider:@"idx" value:0 minimumValue:0 maximumValue:ary.count - 1];
-	NSString* result = [ary objectAtIndex:idx];
-	
-	[manipulator add_result:result];
-	
-	counterLabel.text = SWF(@"objectAtIndex %@", result);
-}
-
--(void) manipulate_label_indexOfObject:(ValueManipulator*)manipulator {
-	NSArray* ary = _w(@"a b c d e f g");
-	
-	id obj = [manipulator add_segmented_control:@"obj" items:ary];
-	int result = [ary indexOfObject:obj];
-	
-	[manipulator add_result:FIXNUM(result)];
-	
-	counterLabel.text = SWF(@"indexOfObject %d", result);
-}
 
 -(IBAction) touchedUpButton:(id)sender {	
 	counterLabel.text = SWF(@"%d", [counterLabel.text intValue] + 1);

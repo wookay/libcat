@@ -23,7 +23,7 @@
 			NSArray* enumValues = [typedefTable objectForKey:typeName];
 			int idx = [obj intValue];
 			NSString* value = [enumValues objectAtIndex:idx];
-			return SWF(@"%d %@", idx, value);
+			return SWF(@"%d [%@]", idx, value);
 		} else if ([@"BOOL" isEqualToString:typeName]) {
 			BOOL value = [obj boolValue];
 			return SWF(@"%@", value ? @"true" : @"false");

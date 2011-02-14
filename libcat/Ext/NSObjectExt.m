@@ -26,26 +26,29 @@
 	return ! [self isKindOfClass:[NSNull class]];
 }
 
--(NSUInteger) class_properties_count {
-	Class targetClass = [self class];
-	NSUInteger count = 0;
-	objc_property_t *properties = class_copyPropertyList((Class)targetClass, &count);
-	int cnt = 0;
-	for(unsigned int idx = 0; idx < count; idx++ ) {
-        objc_property_t property = properties[idx];
-		const char* name = property_getName(property);
-		NSString* propertyName = SWF(@"%s", name);
-		SEL sel = NSSelectorFromString(propertyName);
-		if ([self respondsToSelector:sel]) {
-			cnt += 1;
-		}
+-(NSArray*) class_hierarchy {
+	Class nsobject = [NSObject class];
+	Class klass = [self class];
+	NSMutableArray* ary = [NSMutableArray arrayWithObject:klass];
+	Class sup = [self superclass];
+	if (klass == sup || nil == sup) {
+		return ary;
 	}
-    free(properties);
-	return cnt;
+	while (true) {
+		[ary addObject:sup];
+		if (sup == nsobject) {
+			break;
+		}		
+		sup = [sup superclass];
+	}
+	return ary;	
 }
 
--(NSArray*) class_properties {
-	Class targetClass = [self class];
+-(NSArray*) superclasses {
+	return [[self class_hierarchy] slice:1 backward:-1];
+}
+
+-(NSArray*) class_properties:(Class)targetClass {
 	NSMutableArray* ary = [NSMutableArray array];
 	unsigned int count = 0;
     objc_property_t *properties = class_copyPropertyList((Class)targetClass, &count);
@@ -57,14 +60,23 @@
 		if ([self respondsToSelector:sel]) {
 			const char* attr = property_getAttributes(property);
 			const char *aTypeDescription = (const char*)&attr[1];
-			NSArray* attributes = [SWF(@"%s", aTypeDescription) split:COMMA];
-			id value = [self performSelector:sel];
-			id obj = [NSObject objectByAddress:value withObjCType:aTypeDescription];
-			[ary addObject:TRIO(propertyName, obj, attributes)];
+			NSString* attributesString = SWF(@"%s", aTypeDescription);
+			if ([attributesString hasPrefix:OPENING_BRACE]) { // struct
+			} else {
+				NSArray* attributes = [attributesString split:COMMA];
+				id value = [self performSelector:sel];
+				id obj = [NSObject objectByAddress:value withObjCType:aTypeDescription];
+				[ary addObject:TRIO(propertyName, obj, attributes)];								
+			}
 		}
     }
     free(properties);
-	return [ary sortByFirstObject];
+	return [ary sortByFirstObject];	
+}
+
+-(NSArray*) class_properties {
+	Class targetClass = [self class];
+	return [self class_properties:targetClass];
 }
 
 -(NSArray*) methods {
@@ -101,7 +113,7 @@
 }
 
 +(id) objectByAddress:(const void *)aValue withObjCType:(const char *)aTypeDescription {
-	if (_C_PTR == *aTypeDescription && nil == *(id *)aValue) {
+	if (_C_PTR == *aTypeDescription && nil == aValue) {
 		return nil; // nil should stay nil, even if it's technically a (void *)
 	}
 	
@@ -136,10 +148,10 @@
 		case _C_PTR: // pointer, no string stuff supported right now
 		case _C_STRUCT_B: // struct, only simple ones containing only basic types right now
 		case _C_ARY_B: // array, of whatever, just gets the address
-			if (NULL == aValue) {
+			if (nil == aValue) {
 				return [NSNull null];
 			} else {
-				return [NSValue valueWithBytes:aValue objCType:aTypeDescription];
+				return [NSValue value:aValue withObjCType:aTypeDescription];
 			}
 	}
 	return [NSValue valueWithBytes:aValue objCType:aTypeDescription];	

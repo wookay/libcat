@@ -41,6 +41,8 @@
 #define CLOSING_PARENTHESE		@")"
 #define OPENING_SQUARE_BRACKET  @"["
 #define CLOSING_SQUARE_BRACKET  @"]"
+#define DOUBLE_QUOTATION_MARK	@"\""
+#define SINGLE_QUOTATION_MARK	@"'"
 
 #define CHAR_BACKSPACE	 '\b'
 #define CHAR_MINUS       '-'
