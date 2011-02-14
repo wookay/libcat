@@ -154,7 +154,12 @@
 				return [NSValue value:aValue withObjCType:aTypeDescription];
 			}
 	}
-	return [NSValue valueWithBytes:aValue objCType:aTypeDescription];	
+	
+	if (nil == aValue) {
+		return [NSNull null];
+	} else {
+		return [NSValue value:aValue withObjCType:aTypeDescription];
+	}
 }
 
 +(id) objectWithValue:(const void *)aValue withObjCType:(const char *)aTypeDescription {

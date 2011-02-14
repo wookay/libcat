@@ -138,7 +138,7 @@
 	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
 	if (cell == nil) {
-		cell = [[[PropertyCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
+		cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
 	}
 
 	NSArray* trio = [[self.propertiesData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
@@ -155,23 +155,20 @@
 	}
 	NSArray* attributes = [trio objectAtThird];
 	
-	@try {
-		cell.accessoryType = UITableViewCellAccessoryNone;
-		if ([attributes containsObject:ATTRIBUTE_READONLY] && ![attributes containsObject:ATTRIBUTE_OBJECT]) {
+	cell.accessoryType = UITableViewCellAccessoryNone;
+	if ([attributes containsObject:ATTRIBUTE_READONLY] && ![attributes containsObject:ATTRIBUTE_OBJECT]) {
+	} else {
+		if ([attributes containsObject:ATTRIBUTE_OBJECT]) {
+			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 		} else {
-			if ([attributes containsObject:ATTRIBUTE_OBJECT]) {
-				cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-			} else {
-				NSString* setter = SWF(@"set%@FromString:", [propertyName capitalizedString]);
-				SEL sel = NSSelectorFromString(setter);
-				if ([targetObject respondsToSelector:sel]) {
-					cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;					
-				}
+			NSString* setter = SWF(@"set%@FromString:", [propertyName capitalizedString]);
+			SEL sel = NSSelectorFromString(setter);
+			if ([targetObject respondsToSelector:sel]) {
+				cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;					
 			}
-		}		
-	} @catch (NSException* exception) {
-	}
-	
+		}
+	}		
+
     return cell;
 }
 
@@ -179,34 +176,21 @@
 	NSArray* trio = [[self.propertiesData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
 	NSString* propertyName = [trio objectAtFirst];
 	id obj = [trio objectAtSecond];
-//	NSArray* attributes = [trio objectAtThird];
-	
-//	if ([attributes containsObject:ATTRIBUTE_READONLY] && ![attributes containsObject:ATTRIBUTE_OBJECT]) {
-//	} else {
-//		if ([attributes containsObject:ATTRIBUTE_OBJECT]) {
-//		} else {
-//			NSString* setter = SWF(@"set%@FromString:", [propertyName capitalizedString]);
-//			SEL sel = NSSelectorFromString(setter);
-//			if ([targetObject respondsToSelector:sel]) {
-				EditPropertyViewController* vc = [[EditPropertyViewController alloc] initWithNibName:@"EditPropertyViewController" bundle:nil];
-				vc.delegate = self;
-//				vc.targetObject = [trio objectAtSecond];
-				NSString* getter = SWF(@"%@ToString", propertyName);
-				SEL sel = NSSelectorFromString(getter);
-				NSString* text = nil;
-				if ([obj isKindOfClass:[NSString class]]) {
-					text = obj;
-				} else if ([obj respondsToSelector:sel]) {
-					text = [obj performSelector:sel];
-				}			
-				vc.propertyName = propertyName;
-				vc.propertyValue = text;
-				[self.navigationController pushViewController:vc animated:true];
-				vc.title = propertyName;
-				[vc release];												
-//			}
-//		}
-//	}
+	EditPropertyViewController* vc = [[EditPropertyViewController alloc] initWithNibName:@"EditPropertyViewController" bundle:nil];
+	vc.delegate = self;
+	NSString* getter = SWF(@"%@ToString", propertyName);
+	SEL sel = NSSelectorFromString(getter);
+	NSString* text = nil;
+	if ([obj isKindOfClass:[NSString class]]) {
+		text = obj;
+	} else if ([obj respondsToSelector:sel]) {
+		text = [obj performSelector:sel];
+	}			
+	vc.propertyName = propertyName;
+	vc.propertyValue = text;
+	[self.navigationController pushViewController:vc animated:true];
+	vc.title = propertyName;
+	[vc release];												
 }
 
 /*
@@ -301,20 +285,5 @@
     [super dealloc];
 }
 
-
-@end
-
-
-
-
-
-@implementation PropertyCell 
-
--(void) layoutSubviews {
-	@try {
-		[super layoutSubviews];
-	} @catch (NSException* exception) {
-	}
-}
 
 @end

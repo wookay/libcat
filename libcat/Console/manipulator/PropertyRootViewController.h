@@ -19,8 +19,3 @@
 @property (nonatomic, retain) NSArray* propertiesData;
 -(void) load_properties_data ;
 @end
-
-
-
-@interface PropertyCell : UITableViewCell
-@end
