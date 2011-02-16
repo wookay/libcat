@@ -8,6 +8,7 @@
 
 #import "NSObjectExt.h"
 #import "objc/runtime.h"
+#import "objc/message.h"
 #import "NSStringExt.h"
 #import "NSArrayExt.h"
 #import "Logger.h"
@@ -61,11 +62,43 @@
 			const char* attr = property_getAttributes(property);
 			const char *aTypeDescription = (const char*)&attr[1];
 			NSString* attributesString = SWF(@"%s", aTypeDescription);
+			NSArray* attributes = [attributesString split:COMMA];
 			if ([attributesString hasPrefix:OPENING_BRACE]) { // struct
+				NSMethodSignature* sig = [self methodSignatureForSelector:sel];
+				NSInvocation* invocation = [NSInvocation invocationWithMethodSignature:sig];
+				[invocation setSelector:sel];
+				[invocation setTarget:self];
+				[invocation invoke];				
+				id obj = nil;
+				if ([attributesString hasPrefix:@"{CGRect"]) {
+					CGRect rect;
+					[invocation getReturnValue:&rect];
+					obj = NSStringFromCGRect(rect);	
+				} else if ([attributesString hasPrefix:@"{CGAffineTransform"]) {
+					CGAffineTransform t;
+					[invocation getReturnValue:&t];
+					obj = NSStringFromCGAffineTransform(t);					
+				} else if ([attributesString hasPrefix:@"{CATransform3D"]) {
+//					CATransform3D t;
+//					[invocation getReturnValue:&t];
+//					obj = [NSValue valueWithCATransform3D:t];										
+				} else if ([attributesString hasPrefix:@"{CGSize"]) {
+					CGSize size;
+					[invocation getReturnValue:&size];
+					obj = NSStringFromCGSize(size);					
+				} else if ([attributesString hasPrefix:@"{CGPoint"]) {
+					CGPoint point;
+					[invocation getReturnValue:&point];
+					obj = NSStringFromCGPoint(point);										
+				} else {
+					log_info(@"propertyName %@ attributesString %@", propertyName, attributesString);
+				}
+				if (nil != obj) {
+					[ary addObject:TRIO(propertyName, obj, attributes)];
+				}
 			} else {
-				NSArray* attributes = [attributesString split:COMMA];
 				id value = [self performSelector:sel];
-				id obj = [NSObject objectByAddress:value withObjCType:aTypeDescription];
+				id obj = [NSObject objectWithValue:&value withObjCType:aTypeDescription];
 				[ary addObject:TRIO(propertyName, obj, attributes)];								
 			}
 		}
@@ -112,55 +145,55 @@
 	return [SWF(@"%@", [self class]) lowercaseString];
 }
 
-+(id) objectByAddress:(const void *)aValue withObjCType:(const char *)aTypeDescription {
-	if (_C_PTR == *aTypeDescription && nil == aValue) {
-		return nil; // nil should stay nil, even if it's technically a (void *)
-	}
-	
-	switch (*aTypeDescription) {
-		case _C_CHR: // BOOL, char
-			if (1 == (size_t)aValue) {
-				return [NSNumber numberWithBool:TRUE];
-			} else if (NULL == aValue) {
-				return [NSNumber numberWithBool:FALSE];
-			} else {
-				return [NSNumber numberWithChar:(size_t)aValue];
-			}
-		case _C_UCHR: return [NSNumber numberWithUnsignedChar:(size_t)aValue];
-		case _C_SHT: return [NSNumber numberWithShort:(size_t)aValue];
-		case _C_USHT: return [NSNumber numberWithUnsignedShort:(size_t)aValue];
-		case _C_INT: 
-			return [NSNumber numberWithInt:(size_t)aValue];
-		case _C_UINT: return [NSNumber numberWithUnsignedInt:(size_t)aValue];
-		case _C_LNG: return [NSNumber numberWithLong:(size_t)aValue];
-		case _C_ULNG: return [NSNumber numberWithUnsignedLong:(size_t)aValue];
-		case _C_LNG_LNG: return [NSNumber numberWithLongLong:(size_t)aValue];
-		case _C_ULNG_LNG: return [NSNumber numberWithUnsignedLongLong:(size_t)aValue];
-		case _C_FLT:
-			return [NSNumber numberWithFloat:(size_t)aValue];
-		case _C_DBL: return [NSNumber numberWithDouble:(size_t)aValue];
-		case _C_ID:
-			if (nil == aValue) {
-				return [NSNull null];
-			} else {
-				return (id)aValue;
-			}
-		case _C_PTR: // pointer, no string stuff supported right now
-		case _C_STRUCT_B: // struct, only simple ones containing only basic types right now
-		case _C_ARY_B: // array, of whatever, just gets the address
-			if (nil == aValue) {
-				return [NSNull null];
-			} else {
-				return [NSValue value:aValue withObjCType:aTypeDescription];
-			}
-	}
-	
-	if (nil == aValue) {
-		return [NSNull null];
-	} else {
-		return [NSValue value:aValue withObjCType:aTypeDescription];
-	}
-}
+//+(id) objectByAddress:(const void *)aValue withObjCType:(const char *)aTypeDescription {
+//	if (_C_PTR == *aTypeDescription && nil == aValue) {
+//		return nil; // nil should stay nil, even if it's technically a (void *)
+//	}
+//	
+//	switch (*aTypeDescription) {
+//		case _C_CHR: // BOOL, char
+//			if (1 == (size_t)aValue) {
+//				return [NSNumber numberWithBool:TRUE];
+//			} else if (NULL == aValue) {
+//				return [NSNumber numberWithBool:FALSE];
+//			} else {
+//				return [NSNumber numberWithChar:(size_t)aValue];
+//			}
+//		case _C_UCHR: return [NSNumber numberWithUnsignedChar:(size_t)aValue];
+//		case _C_SHT: return [NSNumber numberWithShort:(size_t)aValue];
+//		case _C_USHT: return [NSNumber numberWithUnsignedShort:(size_t)aValue];
+//		case _C_INT: 
+//			return [NSNumber numberWithInt:(size_t)aValue];
+//		case _C_UINT: return [NSNumber numberWithUnsignedInt:(size_t)aValue];
+//		case _C_LNG: return [NSNumber numberWithLong:(size_t)aValue];
+//		case _C_ULNG: return [NSNumber numberWithUnsignedLong:(size_t)aValue];
+//		case _C_LNG_LNG: return [NSNumber numberWithLongLong:(size_t)aValue];
+//		case _C_ULNG_LNG: return [NSNumber numberWithUnsignedLongLong:(size_t)aValue];
+//		case _C_FLT:
+//			return [NSNumber numberWithFloat:(size_t)aValue];
+//		case _C_DBL: return [NSNumber numberWithDouble:(size_t)aValue];
+//		case _C_ID:
+//			if (nil == aValue) {
+//				return [NSNull null];
+//			} else {
+//				return (id)aValue;
+//			}
+//		case _C_PTR: // pointer, no string stuff supported right now
+//		case _C_STRUCT_B: // struct, only simple ones containing only basic types right now
+//		case _C_ARY_B: // array, of whatever, just gets the address
+//			if (nil == aValue) {
+//				return [NSNull null];
+//			} else {
+//				return [NSValue valueWithBytes:aValue objCType:aTypeDescription];
+//			}
+//	}
+//	
+//	if (nil == aValue) {
+//		return [NSNull null];
+//	} else {
+//		return [NSValue value:aValue withObjCType:aTypeDescription];
+//	}
+//}
 
 +(id) objectWithValue:(const void *)aValue withObjCType:(const char *)aTypeDescription {
 	if (_C_PTR == *aTypeDescription && nil == *(id *)aValue) {

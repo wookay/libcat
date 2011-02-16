@@ -18,4 +18,5 @@
 @property (nonatomic, retain) NSArray* hierarchyData;
 @property (nonatomic, retain) NSArray* propertiesData;
 -(void) load_properties_data ;
+-(kObjectAttributeType) objectAttributeTypeForProperty:(NSArray*)trio ;
 @end

@@ -9,15 +9,19 @@
 #import "EditPropertyViewController.h"
 #import "Logger.h"
 #import "iPadExt.h"
+#import "NSStringExt.h"
 
 @implementation EditPropertyViewController
 @synthesize textField;
 @synthesize delegate;
+@synthesize propertyType;
 @synthesize propertyName;
 @synthesize propertyValue;
+@synthesize attributeString;
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField_ {
-	[delegate updateProperty:propertyName value:textField.text];
+	id value = textField.text;
+	[delegate updateProperty:propertyName value:value attributeString:attributeString];
 	[self.textField resignFirstResponder];
 	[self.navigationController popViewControllerAnimated:true];
 	return true;
@@ -28,8 +32,10 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+		self.propertyType = kObjectAttributeTypeNone;
 		self.propertyName = nil;
 		self.propertyValue = nil;
+		self.attributeString = nil;
 		self.delegate = nil;
     }
     return self;
@@ -37,7 +43,17 @@
 
 -(void) viewDidLoad {
 	[super viewDidLoad];
-	self.textField.text = propertyValue;
+	self.textField.text = SWF(@"%@", propertyValue);
+	switch (propertyType) {
+		case kObjectAttributeTypeInt:
+			self.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
+			break;
+		case kObjectAttributeTypeFloat:
+			self.textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
+			break;
+		default:
+			break;
+	}
 	[self.textField becomeFirstResponder];
 }
 
@@ -68,6 +84,7 @@
 	[textField release];
 	[propertyName release];
 	[propertyValue release];
+	[attributeString release];
     [super dealloc];
 }
 

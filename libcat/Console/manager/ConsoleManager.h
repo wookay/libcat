@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #define CONSOLEMAN	[ConsoleManager sharedManager]
+#define ARGUMENT_INDEX_ONE 2
 
 typedef enum { kGetterReturnTypeString, kGetterReturnTypeObject } GetterReturnType ;
 

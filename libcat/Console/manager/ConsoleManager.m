@@ -174,7 +174,6 @@
 #define ARGUMENT_COUNT_IS_ZERO	2
 #define ARGUMENT_COUNT_IS_ONE	3
 #define ARGUMENT_COUNT_IS_TWO	4
-#define ARGUMENT_INDEX_ONE 2
 #define ARGUMENT_INDEX_TWO 3
 				case ARGUMENT_COUNT_IS_ZERO:
 					switch (*returnType) {
