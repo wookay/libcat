@@ -14,6 +14,8 @@
 #import "NSObjectExt.h"
 #import "NSArrayExt.h"
 #import "Inspect.h"
+#import <objc/message.h>
+#import <UIKit/UIColor.h>
 
 @implementation PropertyManipulator
 @synthesize navigationController;
@@ -24,16 +26,25 @@
 	NSMutableArray* ary = [NSMutableArray array];
 	for (int idx = 0; idx < hierarchyData.count - 1; idx++) {
 		Class targetClass = [hierarchyData objectAtIndex:idx];
-		[ary addObject:SWF(@"%@", NSStringFromClass(targetClass))];
+		[ary addObject:SWF(@"== %@ ==", NSStringFromClass(targetClass))];
 		NSArray* propertiesData = [targetObject class_properties:targetClass];
 		for (NSArray* trio in propertiesData) {
 			NSString* propertyName = [trio objectAtFirst];
 			id obj = [trio objectAtSecond];
 			NSArray* attributes = [trio objectAtThird];
 			NSString* attributeString = [attributes objectAtFirst];
-#define JUSTIFY_PROPERTY_NAME 37
-#define JUSTIFY_OBJECT 35
-			NSString* line = SWF(@"    %@   %@   %@", [propertyName ljust:JUSTIFY_PROPERTY_NAME], [[SWF(@"%@", obj) truncate:JUSTIFY_OBJECT] ljust:JUSTIFY_OBJECT], attributeString);
+			NSString* attributeStringAndReadonly = nil;
+#define STR_ATTRIBUTE_READONLY @"R"
+#define JUSTIFY_PROPERTY_NAME 31
+#define JUSTIFY_OBJECT 47
+#define JUSTIFY_ATTRIBUTE_STRING 25
+			if ([attributes containsObject:STR_ATTRIBUTE_READONLY]) {
+				attributeStringAndReadonly = SWF(@"%@ %@", [attributeString truncate:JUSTIFY_ATTRIBUTE_STRING], STR_ATTRIBUTE_READONLY);
+			} else {
+				attributeStringAndReadonly = SWF(@"%@", [attributeString truncate:JUSTIFY_ATTRIBUTE_STRING]);
+			}
+			NSString* objectDetail = [PROPERTYMAN.typeInfoTable objectDescription:obj targetClass:NSStringFromClass(targetClass) propertyName:propertyName];
+			NSString* line = SWF(@"    %@   %@   %@", [propertyName ljust:JUSTIFY_PROPERTY_NAME], [[SWF(@"%@", objectDetail) truncate:JUSTIFY_OBJECT] ljust:JUSTIFY_OBJECT], attributeStringAndReadonly);
 			[ary addObject:line];
 		}
 	}
@@ -53,6 +64,25 @@
 -(void) hide {
 	[navigationController popToRootViewControllerAnimated:false];
 	[navigationController.view removeFromSuperview];
+}
+
+-(id) performTypeClassMethod:(id)str targetObject:(id)targetObject propertyName:(NSString*)propertyName failed:(BOOL*)failed {
+	for (Class targetClass in [targetObject superclasses]) {
+		NSString* typeKey = SWF(@"%@ %@", targetClass, propertyName);
+		id typeClassName = [typeInfoTable.propertyTable objectForKey:typeKey];
+		if (nil != typeClassName && [typeClassName hasPrefix:@"UI"]) {
+			Class typeKlass = NSClassFromString(typeClassName);
+			SEL sel = NSSelectorFromString(str);
+			Method method = class_getClassMethod(typeKlass, sel);
+			if (NULL == method) {
+				*failed = true;
+			} else {
+				id obj = objc_msgSend(typeKlass, sel);
+				return obj;
+			}
+		}
+	}
+	return nil;
 }
 
 +(PropertyManipulator*) sharedManipulator {

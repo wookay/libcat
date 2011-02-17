@@ -16,7 +16,12 @@
 @property (nonatomic, retain)	NSDictionary* typedefTable;
 @property (nonatomic, retain)	NSDictionary* propertyTable;
 
+-(NSNumber*) enumTypeToNumber:(NSString*)str ;
+-(NSString*) objectDescription:(id)obj targetClass:(NSString*)targetClass propertyName:(NSString*)propertyName ;
+
+//GEN
 -(void) load_property_table ;
 -(void) load_typedef_table ;
--(NSString*) objectDescription:(id)obj targetClass:(NSString*)targetClass propertyName:(NSString*)propertyName ;
+
 @end
+

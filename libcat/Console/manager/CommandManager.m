@@ -97,7 +97,6 @@ NSArray* array_prefix_index(NSArray* array) {
 	return [ary join:LF];
 }
 
-
 -(NSString*) command_cd:(id)currentObject arg:(id)arg {
 	id changeObject = nil;
 	if (nil == arg) {
@@ -116,6 +115,7 @@ NSArray* array_prefix_index(NSArray* array) {
 				CONSOLEMAN.currentTargetObject = changeObject;
 				return ret;
 			} else {
+				NEWOBJECTMAN.oldOne = CONSOLEMAN.currentTargetObject;
 				CONSOLEMAN.currentTargetObject = changeObject;
 			}
 		}
@@ -176,7 +176,7 @@ NSArray* array_prefix_index(NSArray* array) {
 		UIViewController* controller = currentObject;
 		if ([controller.parentViewController isKindOfClass:[UINavigationController class]]) {
 			if (controller.navigationController.viewControllers.count > 1) {
-				NSString* oldTargetStr = [controller.navigationController downcasedClassName];
+				NSString* oldTargetStr = [controller.navigationController className];
 				[controller.navigationController popViewControllerAnimated:false];
 				CONSOLEMAN.currentTargetObject = nil;
 				return SWF(@"[%@ popViewControllerAnimated: %d]", oldTargetStr, false);
@@ -217,6 +217,13 @@ NSArray* array_prefix_index(NSArray* array) {
 	[ary addObjectsFromArray:[targetStrings allKeys]];
 	if (currentObject == [currentObject class]) {
 		[ary addObjectsFromArray:[currentObject class_methods]];
+	}
+	if ([currentObject isKindOfClass:[UIView class]]) {
+		for(NSString* method in [UIColor class_methods]) {
+			if ([method hasSuffix:@"Color"]) {
+				[ary addObject:method];
+			}
+		}
 	}
 	return [ary join:LF];
 }
@@ -405,6 +412,12 @@ NSArray* array_prefix_index(NSArray* array) {
 		changeObject = [CONSOLEMAN get_rootViewController];
 	} else if ([TILDE isEqualToString:arg]) {
 		changeObject = [CONSOLEMAN get_keyWindow];
+	} else if ([MINUS isEqualToString:arg]) {
+		if (nil == NEWOBJECTMAN.oldOne) {
+			changeObject = currentObject;
+		} else {
+			changeObject = NEWOBJECTMAN.oldOne;
+		}
 	} else if ([DOT isEqualToString:arg]) {
 		changeObject = currentObject;
 		actionBlock = [self get_targetObjectActionBlock:currentObject];		
@@ -439,7 +452,7 @@ NSArray* array_prefix_index(NSArray* array) {
 		
 		changeObject = obj;
 		actionBlock = [self get_targetObjectActionBlock:obj];
-	} else if ([arg isNumberHasSpace]) {
+	} else if ([arg isNumberWithSpace]) {
 		BOOL found = false;
 		int section = 0;
 		int row = 0;
@@ -476,7 +489,7 @@ NSArray* array_prefix_index(NSArray* array) {
 					found = true;
 					ActionBlock block = ^id {
 						tabBarController.selectedIndex = row;
-						return SWF(@"[%@ setSelectedIndex: %d]", [tabBarController downcasedClassName], row);
+						return SWF(@"[%@ setSelectedIndex: %d]", [tabBarController className], row);
 					};
 					actionBlock = Block_copy(block);
 				}			
@@ -511,7 +524,7 @@ NSArray* array_prefix_index(NSArray* array) {
 						if ([subview isKindOfClass:[UIControl class]]) {
 							ActionBlock block = ^id {				
 								[(UIControl*)subview sendActionsForControlEvents:UIControlEventTouchUpInside];
-								return SWF(@"[%@ sendActionsForControlEvents: %@]", [subview downcasedClassName], @"UIControlEventTouchUpInside");
+								return SWF(@"[%@ sendActionsForControlEvents: %@]", [subview className], @"UIControlEventTouchUpInside");
 							};
 							actionBlock = Block_copy(block);
 						}					
@@ -540,7 +553,7 @@ NSArray* array_prefix_index(NSArray* array) {
 					if ([subview isKindOfClass:[UIControl class]]) {
 						ActionBlock block = ^id {				
 							[(UIControl*)subview sendActionsForControlEvents:UIControlEventTouchUpInside];
-							return SWF(@"[%@ sendActionsForControlEvents: %@]", [subview downcasedClassName], @"UIControlEventTouchUpInside");
+							return SWF(@"[%@ sendActionsForControlEvents: %@]", [subview className], @"UIControlEventTouchUpInside");
 						};
 						actionBlock = Block_copy(block);
 					}
@@ -558,7 +571,7 @@ NSArray* array_prefix_index(NSArray* array) {
 					if ([subview isKindOfClass:[NSControl class]]) {
 						ActionBlock block = ^id {				
 							[(NSControl*)subview performClick:subview];
-							return SWF(@"[%@ performClick: %@]", [subview downcasedClassName], @"sender");
+							return SWF(@"[%@ performClick: %@]", [subview className], @"sender");
 						};
 						actionBlock = Block_copy(block);
 					}
@@ -626,7 +639,7 @@ NSArray* array_prefix_index(NSArray* array) {
 	} else if ([targetObject isKindOfClass:[UIControl class]]) {
 		ActionBlock block = ^id {				
 			[targetObject sendActionsForControlEvents:UIControlEventTouchUpInside];
-			return SWF(@"[%@ sendActionsForControlEvents: %@]", [targetObject downcasedClassName], @"UIControlEventTouchUpInside");
+			return SWF(@"[%@ sendActionsForControlEvents: %@]", [targetObject className], @"UIControlEventTouchUpInside");
 		};
 		actionBlock = Block_copy(block);
 	} else if ([targetObject isKindOfClass:[UIBarButtonItem class]]) {
@@ -670,7 +683,7 @@ NSArray* array_prefix_index(NSArray* array) {
 						[targetStrings setObject:subview forKey:titleLabelText];
 						ActionBlock block = ^id {
 							[(UIControl*)subview sendActionsForControlEvents:UIControlEventTouchUpInside];
-							return SWF(@"[%@ sendActionsForControlEvents: %@]", [subview downcasedClassName], @"UIControlEventTouchUpInside");
+							return SWF(@"[%@ sendActionsForControlEvents: %@]", [subview className], @"UIControlEventTouchUpInside");
 						};
 						[targetBlocks setObject:Block_copy(block) forKey:titleLabelText];						
 					}

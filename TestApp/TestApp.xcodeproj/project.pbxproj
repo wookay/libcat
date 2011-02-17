@@ -477,7 +477,6 @@
 		DACAB00A12629054006DA76D /* TestNumberBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestNumberBlock.m; sourceTree = "<group>"; };
 		DACAB00B12629054006DA76D /* TestObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestObserver.h; sourceTree = "<group>"; };
 		DACAB00C12629054006DA76D /* TestObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestObserver.m; sourceTree = "<group>"; };
-		DACAB00F12629054006DA76D /* TestConsole.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestConsole.h; sourceTree = "<group>"; };
 		DACAB01012629054006DA76D /* TestConsole.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestConsole.m; sourceTree = "<group>"; };
 		DACAB01212629054006DA76D /* TestArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestArray.m; sourceTree = "<group>"; };
 		DACAB01312629054006DA76D /* TestDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestDate.m; sourceTree = "<group>"; };
@@ -1029,7 +1028,6 @@
 		DACAB00E12629054006DA76D /* ConsoleTestCases */ = {
 			isa = PBXGroup;
 			children = (
-				DACAB00F12629054006DA76D /* TestConsole.h */,
 				DACAB01012629054006DA76D /* TestConsole.m */,
 			);
 			path = ConsoleTestCases;

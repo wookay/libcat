@@ -74,7 +74,8 @@ NSInteger sortByStringComparator(NSString* uno, NSString* dos, void* context) ;
 -(BOOL) isEmpty ;
 -(BOOL) isNotEmpty ;	
 -(BOOL) isNumber ;
--(BOOL) isNumberHasSpace ;
+-(BOOL) isNumberWithSpace ;
+-(BOOL) isAlphabet ;
 -(BOOL) isSurrounded:(NSString*)a :(NSString*)b ;
 -(BOOL) hasText:(NSString*)str ;
 

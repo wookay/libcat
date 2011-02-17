@@ -19,6 +19,7 @@
 #import "NSIndexPathExt.h"
 #import "NewObjectManager.h"
 #import "NSObjectExt.h"
+#import "PropertyManipulator.h"
 
 // used also in console.rb
 #define CONSOLE_SERVER_PORT 8080
@@ -131,14 +132,33 @@
 		SEL sel = NSSelectorFromString(lastMethodUppercased);
 		if ([target respondsToSelector:sel]) {
 			NSMethodSignature* sig = [target methodSignatureForSelector:sel];
-			const char * argType = [sig getArgumentTypeAtIndex:ARGUMENT_INDEX_ONE];
+			const char* argType = [sig getArgumentTypeAtIndex:ARGUMENT_INDEX_ONE];
 			NSString* attributeString = SWF(@"%s", argType);
-			BOOL updated = [target setProperty:lastMethod value:obj attributeString:attributeString];
+			if (_C_INT == *argType && [obj isAlphabet]) {
+				NSNumber* number = [PROPERTYMAN.typeInfoTable enumTypeToNumber:obj];
+				if (nil != number) {
+					obj = number;
+				}
+			}
+			BOOL updated = false;
+			if ([obj isKindOfClass:[NSString class]]) {
+				BOOL failed = false;
+				id targetObj = [PROPERTYMAN performTypeClassMethod:obj targetObject:target propertyName:lastMethod failed:&failed];
+				if (nil == targetObj) {
+					if (failed) {
+					} else {
+						updated = [target setProperty:lastMethod value:obj attributeString:attributeString];
+					}
+				} else {
+					updated = [target setProperty:lastMethod value:targetObj attributeString:attributeString];
+				}
+			}
 			if (updated) {
-				[ary addObject:SWF(@"%@ = %@", lastMethod, obj)];							
+				NSString* detail = [PROPERTYMAN.typeInfoTable objectDescription:obj targetClass:NSStringFromClass([target class]) propertyName:lastMethod];
+				[ary addObject:SWF(@"%@ = %@", lastMethod, detail)];
 			} else {
 				[ary addObject:SWF(@"[%@ %@%@] %@", [target class], lastMethodUppercased, obj, NSLocalizedString(@"failed", nil))];
-			}		
+			}						
 		} else {
 			[ary addObject:SWF(@"%@ %@", lastMethodUppercased, [COMMANDMAN commandNotFound])];
 		}
@@ -182,7 +202,12 @@
 						BOOL failed = false;
 						id obj = [target getPropertyValue:selector failed:&failed];
 						if (failed) {
-							found = false;
+							if (_C_VOID == *returnType) {
+								[target performSelector:selector];
+								[ary addObject:SWF(@"[%@ %@]", oldTargetStr, method)];
+							} else {
+								found = false;
+							}
 						} else {
 							if (_C_ID == *returnType) {
 								target = obj;

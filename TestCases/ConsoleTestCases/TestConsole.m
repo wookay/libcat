@@ -6,11 +6,11 @@
 //  Copyright 2010 factorcat. All rights reserved.
 //
 
-#import "TestConsole.h"
 #import "ConsoleManager.h"
 #import "Logger.h"
 #import "UnitTest.h"
-
+#import "NSObjectExt.h"
+#import <objc/runtime.h>
 
 @interface TestConsole : NSObject 
 @end
@@ -26,6 +26,10 @@
 	NSURL* url = [NSURL URLWithString:@"/ls?arg=test"];
 	assert_equal(@"/ls", [url path]);
 	assert_equal(@"arg=test", [url query]);
+}
+
+-(void) test_UIColor {
+	assert_equal([UIColor redColor], objc_msgSend([UIColor class], @selector(redColor)));
 }
 
 @end

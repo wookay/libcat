@@ -14,6 +14,7 @@
 @implementation NewObjectManager
 @synthesize newObjects;
 @synthesize newOne;
+@synthesize oldOne;
 
 -(void) setNewObject:(id)obj forKey:(NSString*)key {
 	if ([NEW_ONE_NAME isEqualToString:key]) {
@@ -36,6 +37,10 @@
 	self.newOne = obj;
 }
 
+-(void) updateOldOne:(id)obj {
+	self.oldOne = obj;
+}
+
 + (NewObjectManager*) sharedManager {
 	static NewObjectManager* manager = nil;
 	if (!manager) {
@@ -49,6 +54,7 @@
 	if (self) {
 		self.newObjects = [NSMutableDictionary dictionary];
 		self.newOne = nil;
+		self.oldOne = nil;
 	}
 	return self;
 }
@@ -56,6 +62,7 @@
 - (void)dealloc {
 	[newObjects release];
 	newOne = nil;
+	oldOne = nil;
 	[super dealloc];
 }
 

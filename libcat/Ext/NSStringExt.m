@@ -62,15 +62,25 @@ NSInteger sortByStringComparator(NSString* uno, NSString* dos, void* context) {
 
 -(BOOL) isNumber {	
 	NSScanner* scanner = [NSScanner scannerWithString:self];
-	if ([scanner scanInt:NULL]) {
+	if ([scanner scanFloat:NULL]) {
 		return [scanner isAtEnd];
 	} else {
 		return NO;
 	}
 }
 
--(BOOL) isNumberHasSpace {
+-(BOOL) isNumberWithSpace {
 	return [[self gsub:SPACE to:EMPTY_STRING] isNumber];
+}
+
+-(BOOL) isAlphabet {
+	NSScanner* scanner = [NSScanner scannerWithString:self];
+	NSString* str = nil;
+	if ([scanner scanCharactersFromSet:[NSCharacterSet letterCharacterSet] intoString:&str]) {
+		return [scanner isAtEnd];
+	} else {
+		return NO;
+	}
 }
 
 -(BOOL) isSurrounded:(NSString*)a :(NSString*)b {

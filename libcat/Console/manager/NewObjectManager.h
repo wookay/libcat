@@ -15,9 +15,12 @@
 @interface NewObjectManager : NSObject {
 	NSMutableDictionary* newObjects;
 	id newOne;
+	id oldOne;
 }
 @property (nonatomic, retain) NSMutableDictionary* newObjects;
-@property (nonatomic, retain) id newOne;
+@property (nonatomic, assign) id newOne;
+@property (nonatomic, assign) id oldOne;
+
 + (NewObjectManager*) sharedManager ;
 -(void) setNewObject:(id)obj forKey:(NSString*)key ;
 -(id) newObjectForKey:(NSString*)key ;	

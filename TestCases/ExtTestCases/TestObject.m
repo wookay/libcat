@@ -61,6 +61,12 @@
 
 -(void) test_property {
 	SizeObject* object = [[SizeObject alloc] init];
+	assert_false([object propertyHasObjectType:@selector(size)]);
+	[object release];
+}
+
+-(void) test_invocation {
+	SizeObject* object = [[SizeObject alloc] init];
 	unsigned int count = 0;
     objc_property_t *properties = class_copyPropertyList([SizeObject class], &count);
 	assert_equal(1, count);

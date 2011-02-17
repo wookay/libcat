@@ -73,6 +73,10 @@
 
 -(NSArray*) class_methods {
 	Class targetClass = [self class]->isa;
+	return [self class_methods:targetClass];
+}
+
+-(NSArray*) class_methods:(Class)targetClass {
 	NSMutableArray* ary = [NSMutableArray array];
 	unsigned int methodCount;
 	Method *methods = class_copyMethodList((Class)targetClass, &methodCount);
@@ -82,7 +86,11 @@
 		NSString *selectorName = NSStringFromSelector(selector);
 		[ary addObject:selectorName];
 	}
-	return [ary sort];
+	return [ary sort];	
+}
+
+-(NSString*) className {
+	return SWF(@"%@", [self class]);
 }
 
 -(NSString*) downcasedClassName {
@@ -244,9 +252,8 @@
 		Method m = class_getInstanceMethod([self class], sel);
 		IMP imp = method_getImplementation(m);
 		switch (*argType) {
-			case _C_ID: {
-					[self performSelector:sel withObject:value];
-				}
+			case _C_ID:
+				[self performSelector:sel withObject:value];
 				break;
 				
 			case _C_CHR:
@@ -268,33 +275,36 @@
 				
 			case _C_STRUCT_B:
 			case _C_STRUCT_E: {
-				NSMethodSignature* sig = [self methodSignatureForSelector:sel];
-				NSInvocation* invocation = [NSInvocation invocationWithMethodSignature:sig];
-				[invocation setSelector:sel];
-				[invocation setTarget:self];
-				BOOL invoke = true;
-				int idx = ARGUMENT_INDEX_ONE;
-				if ([attributeString hasPrefix:@"{CGRect"]) {
-					CGRect rect = CGRectForString(value);
-					[invocation setArgument:&rect atIndex:idx];
-				} else if ([attributeString hasPrefix:@"{CGAffineTransform"]) {
-					CGAffineTransform t = CGAffineTransformFromString(value);
-					[invocation setArgument:&t atIndex:idx];
-				} else if ([attributeString hasPrefix:@"{CATransform3D"]) {
-					invoke = false;
-				} else if ([attributeString hasPrefix:@"{CGSize"]) {
-					CGSize size = CGSizeFromString(value);
-					[invocation setArgument:&size atIndex:idx];
-				} else if ([attributeString hasPrefix:@"{CGPoint"]) {
-					CGPoint point = CGPointFromString(value);
-					[invocation setArgument:&point atIndex:idx];
-				} else {
-					invoke = false;
+					NSMethodSignature* sig = [self methodSignatureForSelector:sel];
+					NSInvocation* invocation = [NSInvocation invocationWithMethodSignature:sig];
+					[invocation setSelector:sel];
+					[invocation setTarget:self];
+					BOOL invoke = true;
+					int idx = ARGUMENT_INDEX_ONE;
+					if ([attributeString hasPrefix:@"{CGRect"]) {
+						CGRect rect = CGRectForString(value);
+						[invocation setArgument:&rect atIndex:idx];
+					} else if ([attributeString hasPrefix:@"{CGAffineTransform"]) {
+						CGAffineTransform t = CGAffineTransformFromString(value);
+						[invocation setArgument:&t atIndex:idx];
+					} else if ([attributeString hasPrefix:@"{CATransform3D"]) {
+						invoke = false;
+					} else if ([attributeString hasPrefix:@"{CGSize"]) {
+						CGSize size = CGSizeFromString(value);
+						[invocation setArgument:&size atIndex:idx];
+					} else if ([attributeString hasPrefix:@"{CGPoint"]) {
+						CGPoint point = CGPointFromString(value);
+						[invocation setArgument:&point atIndex:idx];
+					} else {
+						invoke = false;
+					}
+					if (invoke) {
+						[invocation invoke];								
+					}
 				}
-				if (invoke) {
-					[invocation invoke];								
-				}
-			}
+				break;
+			
+			default:
 				break;
 		}		
 		return true;

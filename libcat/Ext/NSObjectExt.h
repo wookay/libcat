@@ -19,6 +19,8 @@
 -(NSArray*) class_properties:(Class)targetClass ;
 -(NSArray*) methods ;
 -(NSArray*) class_methods ;
+-(NSArray*) class_methods:(Class)targetClass ;
+-(NSString*) className ;
 -(NSString*) downcasedClassName ;
 -(NSArray*) class_hierarchy ;
 -(NSArray*) superclasses ;

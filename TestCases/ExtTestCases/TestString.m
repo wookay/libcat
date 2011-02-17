@@ -30,7 +30,15 @@
 	assert_true([@"-1" isNumber]);
 	assert_false([@"a" isNumber]);
 	assert_false([@"1 2" isNumber]);
-	assert_true([@"1 2" isNumberHasSpace]);
+	assert_true([@"3.14" isNumber]);
+	assert_true([@"1 2" isNumberWithSpace]);
+}
+
+-(void) test_isAlphabet {
+	assert_true([@"hello" isAlphabet]);
+	assert_false([@"hello world" isAlphabet]);
+	assert_false([@"a1" isAlphabet]);
+	assert_false([@"1" isAlphabet]);
 }
 
 -(void) test_SWF {
