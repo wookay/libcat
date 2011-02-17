@@ -154,11 +154,31 @@ NSInteger sortByStringComparator(NSString* uno, NSString* dos, void* context) {
 	return [ary componentsJoinedByString:EMPTY_STRING];
 }
 
-
 - (NSString*) reverse {
 	return [[[self split:EMPTY_STRING] reverse] join:EMPTY_STRING];
 }
 
+-(NSString*) truncate:(int)lengthToCut {
+#define STR_DOTS @"..."
+	int lengthDots = [STR_DOTS length];
+	if (lengthToCut < lengthDots) {
+		return self;
+	}
+	if (self.length > lengthToCut) {
+		return SWF(@"%@%@", [self substringToIndex:lengthToCut - lengthDots], STR_DOTS);
+	} else {
+		return self;
+	}
+}
+
+-(NSString*) ljust:(int)justified {
+	if (self.length < justified) {
+		NSString* padStr = SPACE;
+		return SWF(@"%@%@", self, [padStr repeat:justified - self.length]);
+	} else {
+		return self;
+	}
+}
 
 +(NSString*) stringWithCharacter:(unichar) ch {
 	return [NSString stringWithFormat:@"%C", ch];

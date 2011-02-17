@@ -49,9 +49,11 @@ class Shell
   end
   def history_push input
     if input.strip.size > 0
-      HISTORY.push input
-      @HISTORY.push input
-      @history_file.write "#{input}\n"
+      if not @HISTORY.last == input
+        HISTORY.push input
+        @HISTORY.push input
+        @history_file.write "#{input}\n"
+      end
     end
   end
   def start

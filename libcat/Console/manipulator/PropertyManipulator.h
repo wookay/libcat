@@ -22,5 +22,6 @@
 -(NSString*) manipulate:(id)targetObject ;
 -(BOOL) isVisible ;
 -(void) hide ;
+-(NSString*) list_properties:(id)targetObject ;
 
 @end

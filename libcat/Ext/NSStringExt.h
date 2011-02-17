@@ -92,6 +92,8 @@ NSInteger sortByStringComparator(NSString* uno, NSString* dos, void* context) ;
 -(NSString*) uppercaseFirstCharacter ;
 -(NSString*) repeat:(int)times ;
 -(NSString*) reverse ;
+-(NSString*) truncate:(int)lengthToCut ;
+-(NSString*) ljust:(int)justified ;
 +(NSString*) stringWithCharacter:(unichar) ch ;
 +(NSString*) stringFormat:(NSString*)formatString withArray:(NSArray*)arguments ;
 

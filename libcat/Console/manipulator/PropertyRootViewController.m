@@ -233,7 +233,9 @@
 	cell.textLabel.text = propertyName;
 	cell.textLabel.adjustsFontSizeToFitWidth = true;
 	id obj = [trio objectAtSecond];
-	NSString* objectDetail = [PROPERTYMAN.typeInfoTable objectDescription:obj targetClass:NSStringFromClass([targetObject class]) propertyName:propertyName];
+	
+	Class targetClass = [self.hierarchyData objectAtIndex:indexPath.section];
+	NSString* objectDetail = [PROPERTYMAN.typeInfoTable objectDescription:obj targetClass:NSStringFromClass(targetClass) propertyName:propertyName];
 	cell.detailTextLabel.text = objectDetail;
 	if ([@"false" isEqualToString:objectDetail]) {
 		cell.detailTextLabel.textColor = [UIColor grayColor];

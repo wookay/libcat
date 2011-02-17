@@ -29,14 +29,14 @@ cd TARGET		: change target object
   [ cd view ] 		: to property
   [ cd UIButton ]	: to class
   [ cd 0x6067490 ]	: at memory address
+pwd 			: superviews
 
 touch TARGET   		: touch target object (t)
 flash TARGET		: flash target object (f)
 back    		: popViewControllerAnimated: false (b)
 rm N			: removeFromSuperview
-pwd 			: superviews
 
-hitTest			: hitTest on/off (h)
+hit			: hitTest on/off
 events			: events (e)
   record		: record events on/off (er)
   play 			: play events (ep)
@@ -47,7 +47,7 @@ events			: events (e)
   load NAME		: load events
 
 manipulate TARGET 	: manipulate properties (m)
-
+properties		: list properties (p)
 property		: property getter (text, frame ...)
 property = value	: property settter
 $			: display new objects
@@ -55,14 +55,17 @@ $			: display new objects
 
 open			: open Safari to display target UI
 sleep N			: sleep
+history			: show command history
 clear			: clear history
-about			: about
+help			: help (h)
 quit			: quit (q)
+about			: about
 EOF
 
 CONSOLE_VERSION = 0.1
 ABOUT = <<EOF
-libcat Console #{CONSOLE_VERSION} by wookay
+libcat Console #{CONSOLE_VERSION}
+Copyright (c) 2010, 2011 WooKyoung Noh
 EOF
 
 EVENTS_PATH = "#{ENV['HOME']}/.console_events"
@@ -108,12 +111,12 @@ class Console
   def resolve_command command_str, arg
     aliases = {
     't' => 'touch',
-    'h' => 'hitTest',
     'e' => 'events',
     'er' => 'events record',
     'ep' => 'events play',
     'ee' => 'events replay',
 	'm' => 'manipulate',
+	'p' => 'properties',
     'b' => 'back',
     'f' => 'flash',
     '$' => 'new_objects',
@@ -178,7 +181,7 @@ class Console
         end
         response = console_request command, arg
         case command
-        when 'help'
+        when 'h','help'
            puts HELP
 	    when 'about'
            puts ABOUT
@@ -196,7 +199,7 @@ class Console
         when 'completion'
           puts response.body if env[:print]
           response.body
-        when 'cd', 'rm', 'back', 'touch', 'flash', 'hitTest'
+        when 'cd', 'rm', 'back', 'touch', 'flash', 'hit'
           puts response.body if response.body.size>0 and env[:print]
           update_prompt
         else
@@ -243,6 +246,12 @@ class Console
 end
 
 if __FILE__ == $0
-  console = Console.new
-  console.run
+  if ARGV.size > 0 and %w{-h --help}.include? ARGV.first
+    puts <<EOF
+console.rb [IP] [IP:PORT]
+EOF
+  else
+    console = Console.new
+    console.run
+  end
 end

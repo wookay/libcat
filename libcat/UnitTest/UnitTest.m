@@ -26,7 +26,7 @@
 }
 
 +(void) report {
-	UNITTESTMAN.elapsed = ABS([UNITTESTMAN.test_started_at timeIntervalSince1970]);
+	UNITTESTMAN.elapsed = ABS([UNITTESTMAN.test_started_at timeIntervalSinceNow]);
 	print_log_info(@"\nFinished in %.3g seconds.\n", UNITTESTMAN.elapsed);
 	print_log_info(@"\n%d tests, %d assertions, %d failures, %d errors\n", UNITTESTMAN.tests, UNITTESTMAN.assertions, UNITTESTMAN.failures, UNITTESTMAN.errors);
 }

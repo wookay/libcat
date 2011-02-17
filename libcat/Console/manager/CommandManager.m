@@ -63,7 +63,7 @@ NSArray* array_prefix_index(NSArray* array) {
 	return [NSDictionary dictionaryWithKeysAndObjects:
 			@"echo", @"command_echo:arg:",
 			@"pwd", @"command_pwd:arg:",
-			@"hitTest", @"command_hitTest:arg:",
+			@"hit", @"command_hit:arg:",
 			@"events", @"command_events:arg:",			
 			@"cd", @"command_cd:arg:",
 			@"ls", @"command_ls:arg:",
@@ -72,6 +72,7 @@ NSArray* array_prefix_index(NSArray* array) {
 			@"back", @"command_back:arg:",
 			@"manipulate", @"command_manipulate:arg:",
 			@"rm", @"command_rm:arg:",
+			@"properties", @"command_properties:arg:",
 			@"new_objects", @"command_new_objects:arg:",
 			@"completion", @"command_completion:arg:",
 			@"prompt", @"command_prompt:arg:",
@@ -185,6 +186,15 @@ NSArray* array_prefix_index(NSArray* array) {
 	return NSLocalizedString(@"Not Found", nil);
 }
 
+-(NSString*) command_properties:(id)currentObject arg:(id)arg {
+	NSArray* pair = [self findTargetObject:currentObject arg:arg];
+	id targetObject = [pair objectAtSecond];
+	if ([targetObject isNull]) {
+		targetObject = currentObject;
+	}
+	return [PROPERTYMAN list_properties:targetObject];
+}
+
 -(NSString*) command_manipulate:(id)currentObject arg:(id)arg {
 	NSArray* pair = [self findTargetObject:currentObject arg:arg];
 	id targetObject = [pair objectAtSecond];	
@@ -194,11 +204,9 @@ NSArray* array_prefix_index(NSArray* array) {
 			return NSLocalizedString(@"off", nil);
 		}
 	}
-	
 	if ([targetObject isNull]) {
 		targetObject = currentObject;
 	}
-	
 	return [PROPERTYMAN manipulate:targetObject];
 }
 
@@ -285,8 +293,9 @@ NSArray* array_prefix_index(NSArray* array) {
 	
 	if ([currentObject isKindOfClass:[UIView class]]) {
 		UIView* view = currentObject;
+#define JUSTIFY_VIEW 85
 		TraverseViewBlock traverseViewBlock = ^(int depth, UIView* superview) {
-			[ary addObject:SWF(@"%@%@", [TAB repeat:depth], [superview inspect])];
+			[ary addObject:SWF(@"%@%@", [TAB repeat:depth], [[superview inspect] truncate:JUSTIFY_VIEW])];
 		};
 		[view traverseSuperviews:traverseViewBlock];
 	} else if ([currentObject isKindOfClass:[UIViewController class]]) {
@@ -701,7 +710,7 @@ NSArray* array_prefix_index(NSArray* array) {
 	flickLayer.frame = CGRectWithSize(self.layer.frame.size);
 	flickLayer.borderWidth = 3;
 	flickLayer.borderColor = [[UIColor orangeColor] CGColor];
-	flickLayer.backgroundColor = [[UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:0.1] CGColor];
+	flickLayer.backgroundColor = [[UIColor colorWithRed:0.85 green:0.88 blue:0.13 alpha:0.12] CGColor];
 	[self.layer addSublayer:flickLayer];
 	[flickLayer performSelector:@selector(removeFromSuperlayer) afterDelay:ti];
 }

@@ -11,10 +11,34 @@
 #import "Logger.h"
 #import "NSStringExt.h"
 #import "iPadExt.h"
+#import "NSObjectExt.h"
+#import "NSArrayExt.h"
+#import "Inspect.h"
 
 @implementation PropertyManipulator
 @synthesize navigationController;
 @synthesize typeInfoTable;
+
+-(NSString*) list_properties:(id)targetObject {
+	NSArray* hierarchyData = [targetObject class_hierarchy];
+	NSMutableArray* ary = [NSMutableArray array];
+	for (int idx = 0; idx < hierarchyData.count - 1; idx++) {
+		Class targetClass = [hierarchyData objectAtIndex:idx];
+		[ary addObject:SWF(@"%@", NSStringFromClass(targetClass))];
+		NSArray* propertiesData = [targetObject class_properties:targetClass];
+		for (NSArray* trio in propertiesData) {
+			NSString* propertyName = [trio objectAtFirst];
+			id obj = [trio objectAtSecond];
+			NSArray* attributes = [trio objectAtThird];
+			NSString* attributeString = [attributes objectAtFirst];
+#define JUSTIFY_PROPERTY_NAME 37
+#define JUSTIFY_OBJECT 35
+			NSString* line = SWF(@"    %@   %@   %@", [propertyName ljust:JUSTIFY_PROPERTY_NAME], [[SWF(@"%@", obj) truncate:JUSTIFY_OBJECT] ljust:JUSTIFY_OBJECT], attributeString);
+			[ary addObject:line];
+		}
+	}
+	return [ary join:LF];
+}
 
 -(NSString*) manipulate:(id)targetObject {
 	[[UIApplication sharedApplication].keyWindow addSubview:navigationController.view];
@@ -27,6 +51,7 @@
 }
 
 -(void) hide {
+	[navigationController popToRootViewControllerAnimated:false];
 	[navigationController.view removeFromSuperview];
 }
 

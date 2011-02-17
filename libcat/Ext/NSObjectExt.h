@@ -19,7 +19,6 @@
 -(NSArray*) methods ;
 -(NSArray*) class_methods ;
 -(NSString*) downcasedClassName ;
-//+(id) objectByAddress:(const void *)aValue withObjCType:(const char *)aTypeDescription ;
 +(id) objectWithValue:(const void *)aValue withObjCType:(const char *)aTypeDescription ;
 -(NSArray*) class_hierarchy ;
 -(NSArray*) superclasses ;

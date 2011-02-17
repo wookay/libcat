@@ -145,59 +145,9 @@
 	return [SWF(@"%@", [self class]) lowercaseString];
 }
 
-//+(id) objectByAddress:(const void *)aValue withObjCType:(const char *)aTypeDescription {
-//	if (_C_PTR == *aTypeDescription && nil == aValue) {
-//		return nil; // nil should stay nil, even if it's technically a (void *)
-//	}
-//	
-//	switch (*aTypeDescription) {
-//		case _C_CHR: // BOOL, char
-//			if (1 == (size_t)aValue) {
-//				return [NSNumber numberWithBool:TRUE];
-//			} else if (NULL == aValue) {
-//				return [NSNumber numberWithBool:FALSE];
-//			} else {
-//				return [NSNumber numberWithChar:(size_t)aValue];
-//			}
-//		case _C_UCHR: return [NSNumber numberWithUnsignedChar:(size_t)aValue];
-//		case _C_SHT: return [NSNumber numberWithShort:(size_t)aValue];
-//		case _C_USHT: return [NSNumber numberWithUnsignedShort:(size_t)aValue];
-//		case _C_INT: 
-//			return [NSNumber numberWithInt:(size_t)aValue];
-//		case _C_UINT: return [NSNumber numberWithUnsignedInt:(size_t)aValue];
-//		case _C_LNG: return [NSNumber numberWithLong:(size_t)aValue];
-//		case _C_ULNG: return [NSNumber numberWithUnsignedLong:(size_t)aValue];
-//		case _C_LNG_LNG: return [NSNumber numberWithLongLong:(size_t)aValue];
-//		case _C_ULNG_LNG: return [NSNumber numberWithUnsignedLongLong:(size_t)aValue];
-//		case _C_FLT:
-//			return [NSNumber numberWithFloat:(size_t)aValue];
-//		case _C_DBL: return [NSNumber numberWithDouble:(size_t)aValue];
-//		case _C_ID:
-//			if (nil == aValue) {
-//				return [NSNull null];
-//			} else {
-//				return (id)aValue;
-//			}
-//		case _C_PTR: // pointer, no string stuff supported right now
-//		case _C_STRUCT_B: // struct, only simple ones containing only basic types right now
-//		case _C_ARY_B: // array, of whatever, just gets the address
-//			if (nil == aValue) {
-//				return [NSNull null];
-//			} else {
-//				return [NSValue valueWithBytes:aValue objCType:aTypeDescription];
-//			}
-//	}
-//	
-//	if (nil == aValue) {
-//		return [NSNull null];
-//	} else {
-//		return [NSValue value:aValue withObjCType:aTypeDescription];
-//	}
-//}
-
 +(id) objectWithValue:(const void *)aValue withObjCType:(const char *)aTypeDescription {
 	if (_C_PTR == *aTypeDescription && nil == *(id *)aValue) {
-		return nil; // nil should stay nil, even if it's technically a (void *)
+		return nil;
 	}
 	
 	switch (*aTypeDescription) {

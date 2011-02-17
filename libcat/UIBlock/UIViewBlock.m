@@ -51,7 +51,7 @@
 -(void) traverseSuperviews:(TraverseViewBlock)block {
 	int depth = 0;
 	UIView* view = self;
-	while (view = view.superview) {
+	while ((view = view.superview) != nil) {
 		depth += 1;
 	}
 	[self traverseSuperviews:block depth:depth];

@@ -117,7 +117,7 @@ typedef enum {
 	return action;
 }
 
--(NSString*) command_hitTest:(id)currentObject arg:(id)arg {
+-(NSString*) command_hit:(id)currentObject arg:(id)arg {
 #if USE_PRIVATE_API
 #else
 	return NSLocalizedString(@"Add USE_PRIVATE_API=1 to Preprocessor Macros", nil);
