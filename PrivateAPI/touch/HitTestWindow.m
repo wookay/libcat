@@ -12,6 +12,7 @@
 #import "Logger.h"
 #import "UITouchExt.h"
 #import "UIEventExt.h"
+#import "UIViewExt.h"
 #import "NSDictionaryExt.h"
 #import "iPadExt.h"
 #import "Numero.h"

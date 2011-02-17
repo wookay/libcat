@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #define IS_NULL(obj)	(nil == obj || [obj isNull])
+#define ARGUMENT_INDEX_ONE 2
 
 @interface NSObject (Ext)
 
@@ -19,7 +20,11 @@
 -(NSArray*) methods ;
 -(NSArray*) class_methods ;
 -(NSString*) downcasedClassName ;
-+(id) objectWithValue:(const void *)aValue withObjCType:(const char *)aTypeDescription ;
 -(NSArray*) class_hierarchy ;
 -(NSArray*) superclasses ;
++(id) objectWithValue:(const void *)aValue withObjCType:(const char *)aTypeDescription ;
+-(id) getPropertyValue:(SEL)sel failed:(BOOL*)failed ;
+-(BOOL) setProperty:(NSString*)propertyName value:(id)value attributeString:(NSString*)attributeString ;
+-(BOOL) propertyHasObjectType:(SEL)sel ;
+
 @end

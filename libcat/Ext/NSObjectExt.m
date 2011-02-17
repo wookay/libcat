@@ -10,6 +10,7 @@
 #import "objc/runtime.h"
 #import "objc/message.h"
 #import "NSStringExt.h"
+#import "GeometryExt.h"
 #import "NSArrayExt.h"
 #import "Logger.h"
 
@@ -49,63 +50,6 @@
 	return [[self class_hierarchy] slice:1 backward:-1];
 }
 
--(NSArray*) class_properties:(Class)targetClass {
-	NSMutableArray* ary = [NSMutableArray array];
-	unsigned int count = 0;
-    objc_property_t *properties = class_copyPropertyList((Class)targetClass, &count);
-    for(unsigned int idx = 0; idx < count; idx++ ) {
-        objc_property_t property = properties[idx];
-		const char* name = property_getName(property);
-		NSString* propertyName = SWF(@"%s", name);
-		SEL sel = NSSelectorFromString(propertyName);
-		if ([self respondsToSelector:sel]) {
-			const char* attr = property_getAttributes(property);
-			const char *aTypeDescription = (const char*)&attr[1];
-			NSString* attributesString = SWF(@"%s", aTypeDescription);
-			NSArray* attributes = [attributesString split:COMMA];
-			if ([attributesString hasPrefix:OPENING_BRACE]) { // struct
-				NSMethodSignature* sig = [self methodSignatureForSelector:sel];
-				NSInvocation* invocation = [NSInvocation invocationWithMethodSignature:sig];
-				[invocation setSelector:sel];
-				[invocation setTarget:self];
-				[invocation invoke];				
-				id obj = nil;
-				if ([attributesString hasPrefix:@"{CGRect"]) {
-					CGRect rect;
-					[invocation getReturnValue:&rect];
-					obj = NSStringFromCGRect(rect);	
-				} else if ([attributesString hasPrefix:@"{CGAffineTransform"]) {
-					CGAffineTransform t;
-					[invocation getReturnValue:&t];
-					obj = NSStringFromCGAffineTransform(t);					
-				} else if ([attributesString hasPrefix:@"{CATransform3D"]) {
-//					CATransform3D t;
-//					[invocation getReturnValue:&t];
-//					obj = [NSValue valueWithCATransform3D:t];										
-				} else if ([attributesString hasPrefix:@"{CGSize"]) {
-					CGSize size;
-					[invocation getReturnValue:&size];
-					obj = NSStringFromCGSize(size);					
-				} else if ([attributesString hasPrefix:@"{CGPoint"]) {
-					CGPoint point;
-					[invocation getReturnValue:&point];
-					obj = NSStringFromCGPoint(point);										
-				} else {
-					log_info(@"propertyName %@ attributesString %@", propertyName, attributesString);
-				}
-				if (nil != obj) {
-					[ary addObject:TRIO(propertyName, obj, attributes)];
-				}
-			} else {
-				id value = [self performSelector:sel];
-				id obj = [NSObject objectWithValue:&value withObjCType:aTypeDescription];
-				[ary addObject:TRIO(propertyName, obj, attributes)];								
-			}
-		}
-    }
-    free(properties);
-	return [ary sortByFirstObject];	
-}
 
 -(NSArray*) class_properties {
 	Class targetClass = [self class];
@@ -188,6 +132,175 @@
 			}
 	}
 	return [NSValue valueWithBytes:aValue objCType:aTypeDescription];	
+}
+
+-(NSArray*) class_properties:(Class)targetClass {
+	NSMutableArray* ary = [NSMutableArray array];
+	unsigned int count = 0;
+    objc_property_t *properties = class_copyPropertyList((Class)targetClass, &count);
+    for(unsigned int idx = 0; idx < count; idx++ ) {
+        objc_property_t property = properties[idx];
+		const char* name = property_getName(property);
+		NSString* propertyName = SWF(@"%s", name);
+		SEL sel = NSSelectorFromString(propertyName);
+		BOOL failed = false;
+		id obj = [self getPropertyValue:sel failed:&failed];
+		if (failed) {
+		} else {
+			const char* attr = property_getAttributes(property);
+			const char *aTypeDescription = (const char*)&attr[1];
+			NSString* attributesString = SWF(@"%s", aTypeDescription);
+			NSArray* attributes = [attributesString split:COMMA];
+			[ary addObject:TRIO(propertyName, obj, attributes)];								
+		}
+	}
+	free(properties);
+	return [ary sortByFirstObject];	
+}
+
+-(BOOL) propertyHasObjectType:(SEL)sel {
+	if (! [self respondsToSelector:sel]) {
+		return false;
+	}
+	NSMethodSignature* sig = [self methodSignatureForSelector:sel];
+	const char* aTypeDescription = [sig methodReturnType];
+	switch (*aTypeDescription) {
+		case _C_ID:
+			return true;
+			break;
+	
+		default:
+			break;
+	}		
+	return false;
+}
+
+-(id) getPropertyValue:(SEL)sel failed:(BOOL*)failed {
+	if (! [self respondsToSelector:sel]) {
+		*failed = true;
+		return nil;
+	}
+	
+	id obj = nil;
+	NSMethodSignature* sig = [self methodSignatureForSelector:sel];
+	const char* aTypeDescription = [sig methodReturnType];
+	switch (*aTypeDescription) {
+		case _C_VOID:
+			*failed = true;
+			break;
+			
+		case _C_STRUCT_B:
+		case _C_STRUCT_E: {
+				NSInvocation* invocation = [NSInvocation invocationWithMethodSignature:sig];
+				[invocation setSelector:sel];
+				[invocation setTarget:self];
+				[invocation invoke];		
+				NSString* attributesString = SWF(@"%s", aTypeDescription);
+				if ([attributesString hasPrefix:@"{CGRect"]) {
+					CGRect rect;
+					[invocation getReturnValue:&rect];
+					obj = NSStringFromCGRect(rect);	
+				} else if ([attributesString hasPrefix:@"{CGAffineTransform"]) {
+					CGAffineTransform t;
+					[invocation getReturnValue:&t];
+					obj = NSStringFromCGAffineTransform(t);					
+				} else if ([attributesString hasPrefix:@"{CGSize"]) {
+					CGSize size;
+					[invocation getReturnValue:&size];
+					obj = NSStringFromCGSize(size);					
+				} else if ([attributesString hasPrefix:@"{CGPoint"]) {
+					CGPoint point;
+					[invocation getReturnValue:&point];
+					obj = NSStringFromCGPoint(point);										
+				} else if ([attributesString hasPrefix:@"{UIEdgeInsets"]) {					
+					UIEdgeInsets edgeInsets;
+					[invocation getReturnValue:&edgeInsets];
+					obj = NSStringFromUIEdgeInsets(edgeInsets);															
+				} else {
+					// @"{CATransform3D"
+					log_info(@"propertyName %@ attributesString %@", NSStringFromSelector(sel), attributesString);
+				}
+				if (nil == obj) {
+					*failed = true;
+				}
+			}
+			break;
+			
+		default: {
+				id value = [self performSelector:sel];
+				obj = [NSObject objectWithValue:&value withObjCType:aTypeDescription];
+			}
+			break;
+	}
+	return obj;
+}
+
+-(BOOL) setProperty:(NSString*)propertyName value:(id)value attributeString:(NSString*)attributeString {
+	NSString* setter = SWF(@"set%@:", [propertyName uppercaseFirstCharacter]);
+	SEL sel = NSSelectorFromString(setter);
+	if ([self respondsToSelector:sel]) {
+		NSMethodSignature* sig = [self methodSignatureForSelector:sel];
+		const char* argType = [sig getArgumentTypeAtIndex:ARGUMENT_INDEX_ONE];
+		Method m = class_getInstanceMethod([self class], sel);
+		IMP imp = method_getImplementation(m);
+		switch (*argType) {
+			case _C_ID: {
+					[self performSelector:sel withObject:value];
+				}
+				break;
+				
+			case _C_CHR:
+			case _C_BOOL:
+				((void (*)(id, SEL, BOOL))imp)(self, sel, [value boolValue]);
+				break;
+				
+			case _C_INT:
+				((void (*)(id, SEL, int))imp)(self, sel, [value intValue]);
+				break;
+				
+			case _C_UINT:
+				((void (*)(id, SEL, unsigned int))imp)(self, sel, [value unsignedIntValue]);
+				break;
+				
+			case _C_FLT:
+				((void (*)(id, SEL, float))imp)(self, sel, [value floatValue]);
+				break;
+				
+			case _C_STRUCT_B:
+			case _C_STRUCT_E: {
+				NSMethodSignature* sig = [self methodSignatureForSelector:sel];
+				NSInvocation* invocation = [NSInvocation invocationWithMethodSignature:sig];
+				[invocation setSelector:sel];
+				[invocation setTarget:self];
+				BOOL invoke = true;
+				int idx = ARGUMENT_INDEX_ONE;
+				if ([attributeString hasPrefix:@"{CGRect"]) {
+					CGRect rect = CGRectForString(value);
+					[invocation setArgument:&rect atIndex:idx];
+				} else if ([attributeString hasPrefix:@"{CGAffineTransform"]) {
+					CGAffineTransform t = CGAffineTransformFromString(value);
+					[invocation setArgument:&t atIndex:idx];
+				} else if ([attributeString hasPrefix:@"{CATransform3D"]) {
+					invoke = false;
+				} else if ([attributeString hasPrefix:@"{CGSize"]) {
+					CGSize size = CGSizeFromString(value);
+					[invocation setArgument:&size atIndex:idx];
+				} else if ([attributeString hasPrefix:@"{CGPoint"]) {
+					CGPoint point = CGPointFromString(value);
+					[invocation setArgument:&point atIndex:idx];
+				} else {
+					invoke = false;
+				}
+				if (invoke) {
+					[invocation invoke];								
+				}
+			}
+				break;
+		}		
+		return true;
+	} else {
+		return false;
+	}
 }
 
 @end

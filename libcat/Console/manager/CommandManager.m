@@ -11,6 +11,7 @@
 #import "NSDictionaryExt.h"
 #import "NSDictionaryBlock.h"
 #import "NSStringExt.h"
+#import "UIViewExt.h"
 #import "NSIndexPathExt.h"
 #import "Logger.h"
 #import "ConsoleManager.h"
@@ -24,7 +25,6 @@
 #import "UnitTest.h"
 #import "NewObjectManager.h"
 #import "objc/runtime.h"
-#import <QuartzCore/QuartzCore.h>
 #import "NSTimerExt.h"
 #import "GeometryExt.h"
 #import "UIViewControllerBlock.h"
@@ -572,9 +572,13 @@ NSArray* array_prefix_index(NSArray* array) {
 	} else if ([arg isNotEmpty]) {
 		SEL selector = NSSelectorFromString(arg);
 		if ([currentObject respondsToSelector:selector]) {
-			id obj = [currentObject performSelector:selector];			
-			if (nil != obj) {
-				changeObject = obj;
+			if ([currentObject propertyHasObjectType:selector]) {
+				id obj = [currentObject performSelector:selector];			
+				if (nil != obj) {
+					changeObject = obj;
+				}
+			} else {
+				return TRIO(NSLocalizedString(@"Not Object", nil), [NSNull null], [NSNull null]); 
 			}
 		} else { // search by title
 			NSArray* pair = [self get_targetStringAndBlocks:currentObject];
@@ -700,19 +704,3 @@ NSArray* array_prefix_index(NSArray* array) {
 
 @end
 
-
-
-@implementation UIView (Flick)
-
--(void) flick {	
-	NSTimeInterval ti = 0.35;		
-	CALayer* flickLayer = [CALayer layer];
-	flickLayer.frame = CGRectWithSize(self.layer.frame.size);
-	flickLayer.borderWidth = 3;
-	flickLayer.borderColor = [[UIColor orangeColor] CGColor];
-	flickLayer.backgroundColor = [[UIColor colorWithRed:0.85 green:0.88 blue:0.13 alpha:0.12] CGColor];
-	[self.layer addSublayer:flickLayer];
-	[flickLayer performSelector:@selector(removeFromSuperlayer) afterDelay:ti];
-}
-
-@end

@@ -42,6 +42,7 @@ CGRect CGRectSetOriginPoint(CGRect rect, CGPoint point) ;
 CGRect CGRectWithTwoPoints(CGPoint from, CGPoint to) ;
 CGRect CGRectWithScale(CGRect rect, CGFloat scale) ;
 CGRect CGRectWithScales(CGRect rect, CGFloat widthScale, CGFloat heightScale) ;
+CGRect CGRectForString(NSString* str) ;
 
 CGSize CGSizeTranspose(CGSize size) ;
 CGSize CGSizeExpand(CGSize size, CGFloat dx, CGFloat dy) ;

@@ -13,11 +13,7 @@
 #import "NSObjectExt.h"
 #import "NSStringExt.h"
 #import "NSArrayExt.h"
-#import "NSObjectSetValueFromString.h"
-#import "NSObjectValueToString.h"
 #import "EditPropertyViewController.h"
-#import <objc/runtime.h>
-#import "ConsoleManager.h"
 
 @implementation PropertyRootViewController
 @synthesize targetObject;
@@ -25,66 +21,8 @@
 @synthesize propertiesData;
 
 -(void) updateProperty:(NSString*)propertyName value:(id)value attributeString:(NSString*)attributeString {
-	NSString* setter = SWF(@"set%@:", [propertyName uppercaseFirstCharacter]);
-	SEL sel = NSSelectorFromString(setter);
-	if ([targetObject respondsToSelector:sel]) {
-		NSMethodSignature* sig = [targetObject methodSignatureForSelector:sel];
-		const char* argType = [sig getArgumentTypeAtIndex:ARGUMENT_INDEX_ONE];
-		Method m = class_getInstanceMethod([targetObject class], sel);
-		IMP imp = method_getImplementation(m);
-		switch (*argType) {
-			case _C_ID:
-				[targetObject performSelector:sel withObject:value];
-				break;
-
-			case _C_CHR:
-			case _C_BOOL:
-				((void (*)(id, SEL, BOOL))imp)(targetObject, sel, [value boolValue]);
-				break;
-				
-			case _C_INT:
-				((void (*)(id, SEL, int))imp)(targetObject, sel, [value intValue]);
-				break;
-				
-			case _C_UINT:
-				((void (*)(id, SEL, unsigned int))imp)(targetObject, sel, [value unsignedIntValue]);
-				break;
-
-			case _C_FLT:
-				((void (*)(id, SEL, float))imp)(targetObject, sel, [value floatValue]);
-				break;
-				
-			case _C_STRUCT_B:
-			case _C_STRUCT_E: {
-					NSMethodSignature* sig = [targetObject methodSignatureForSelector:sel];
-					NSInvocation* invocation = [NSInvocation invocationWithMethodSignature:sig];
-					[invocation setSelector:sel];
-					[invocation setTarget:targetObject];
-					BOOL invoke = true;
-					int idx = ARGUMENT_INDEX_ONE;
-					if ([attributeString hasPrefix:@"{CGRect"]) {
-						CGRect rect = CGRectFromString(value);
-						[invocation setArgument:&rect atIndex:idx];
-					} else if ([attributeString hasPrefix:@"{CGAffineTransform"]) {
-						CGAffineTransform t = CGAffineTransformFromString(value);
-						[invocation setArgument:&t atIndex:idx];
-					} else if ([attributeString hasPrefix:@"{CATransform3D"]) {
-						invoke = false;
-					} else if ([attributeString hasPrefix:@"{CGSize"]) {
-						CGSize size = CGSizeFromString(value);
-						[invocation setArgument:&size atIndex:idx];
-					} else if ([attributeString hasPrefix:@"{CGPoint"]) {
-						CGPoint point = CGPointFromString(value);
-						[invocation setArgument:&point atIndex:idx];
-					} else {
-						invoke = false;
-					}
-					if (invoke) {
-						[invocation invoke];								
-					}
-				}
-				break;
-		}
+	BOOL updated = [targetObject setProperty:propertyName value:value attributeString:attributeString];
+	if (updated) {
 		[self load_properties_data];
 		[self.tableView reloadData];
 	}

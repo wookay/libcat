@@ -38,7 +38,3 @@ enum { LS_OBJECT, LS_VIEWCONTROLLERS, LS_TABLEVIEW, LS_SECTIONS, LS_VIEW, LS_IND
 @end
 
 
-
-@interface UIView (Flick)
--(void) flick ;
-@end

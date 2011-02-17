@@ -9,6 +9,7 @@
 #import "NSStringExt.h"
 #import "UnitTest.h"
 #import "Logger.h"
+#import "GeometryExt.h"
 
 @interface TestString : NSObject 
 @end
@@ -47,6 +48,12 @@
 	assert_equal(@"abcd", [@"abcff" gsub:@"ff" to:@"d"]);
 	assert_true([@"abcff" hasText:@"ff"]);
 
+}
+
+-(void) test_CGRectForString {
+	assert_equal(CGRectMake(11,12,21,22), CGRectFromString(@"{{11, 12}, {21, 22}}"));
+	assert_equal(CGRectZero, CGRectFromString(@"(11 12; 21 22)"));
+	assert_equal(CGRectMake(11,12,21,22), CGRectForString(@"(11 12; 21 22)"));
 }
 
 @end

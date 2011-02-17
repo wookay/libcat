@@ -7,6 +7,7 @@
 //
 
 #import "GeometryExt.h"
+#import "NSStringExt.h"
 
 #pragma mark CGPoint
 BOOL CGPointIsZero(CGPoint point) {
@@ -128,6 +129,17 @@ CGRect CGRectWithScales(CGRect rect, CGFloat widthScale, CGFloat heightScale) {
 					  rect.size.height * heightScale);
 }
 
+CGRect CGRectForString(NSString* str) {
+	if ([str isSurrounded:OPENING_PARENTHESE :CLOSING_PARENTHESE]) { // (11 12; 21 22)
+		NSArray* cuatro = [[[[str gsub:OPENING_PARENTHESE to:EMPTY_STRING] // ]1
+							 gsub:CLOSING_PARENTHESE to:EMPTY_STRING] // ]2
+							gsub:SEMICOLON to:EMPTY_STRING] split:SPACE]; // ]3 ]4
+		NSString* rectStr = [NSString stringFormat:@"{{%@, %@}, {%@, %@}}" withArray:cuatro];
+		return CGRectFromString(rectStr);
+	} else {
+		return CGRectFromString(str);
+	}	
+}
 
 #pragma mark CGSize
 CGSize CGSizeTranspose(CGSize size) {

@@ -35,8 +35,6 @@
 		DAA9665412ACD25A00CB4664 /* CommandManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA965EB12ACD25A00CB4664 /* CommandManager.m */; };
 		DAA9665512ACD25A00CB4664 /* ConsoleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA965ED12ACD25A00CB4664 /* ConsoleManager.m */; };
 		DAA9665612ACD25A00CB4664 /* NewObjectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA965EF12ACD25A00CB4664 /* NewObjectManager.m */; };
-		DAA9665712ACD25A00CB4664 /* NSObjectSetValueFromString.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA965F112ACD25A00CB4664 /* NSObjectSetValueFromString.m */; };
-		DAA9665812ACD25A00CB4664 /* NSObjectValueToString.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA965F312ACD25A00CB4664 /* NSObjectValueToString.m */; };
 		DAA9665912ACD25A00CB4664 /* ConsoleResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA965F712ACD25A00CB4664 /* ConsoleResponseHandler.m */; };
 		DAA9665A12ACD25A00CB4664 /* HTTPResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA965F912ACD25A00CB4664 /* HTTPResponseHandler.m */; };
 		DAA9665B12ACD25A00CB4664 /* ImageResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA965FB12ACD25A00CB4664 /* ImageResponseHandler.m */; };
@@ -83,8 +81,6 @@
 		DAA9668712ACD25A00CB4664 /* CommandManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA965EB12ACD25A00CB4664 /* CommandManager.m */; };
 		DAA9668812ACD25A00CB4664 /* ConsoleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA965ED12ACD25A00CB4664 /* ConsoleManager.m */; };
 		DAA9668912ACD25A00CB4664 /* NewObjectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA965EF12ACD25A00CB4664 /* NewObjectManager.m */; };
-		DAA9668A12ACD25A00CB4664 /* NSObjectSetValueFromString.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA965F112ACD25A00CB4664 /* NSObjectSetValueFromString.m */; };
-		DAA9668B12ACD25A00CB4664 /* NSObjectValueToString.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA965F312ACD25A00CB4664 /* NSObjectValueToString.m */; };
 		DAA9668C12ACD25A00CB4664 /* ConsoleResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA965F712ACD25A00CB4664 /* ConsoleResponseHandler.m */; };
 		DAA9668D12ACD25A00CB4664 /* HTTPResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA965F912ACD25A00CB4664 /* HTTPResponseHandler.m */; };
 		DAA9668E12ACD25A00CB4664 /* ImageResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA965FB12ACD25A00CB4664 /* ImageResponseHandler.m */; };
@@ -131,8 +127,6 @@
 		DAA966BA12ACD25A00CB4664 /* CommandManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA965EB12ACD25A00CB4664 /* CommandManager.m */; };
 		DAA966BB12ACD25A00CB4664 /* ConsoleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA965ED12ACD25A00CB4664 /* ConsoleManager.m */; };
 		DAA966BC12ACD25A00CB4664 /* NewObjectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA965EF12ACD25A00CB4664 /* NewObjectManager.m */; };
-		DAA966BD12ACD25A00CB4664 /* NSObjectSetValueFromString.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA965F112ACD25A00CB4664 /* NSObjectSetValueFromString.m */; };
-		DAA966BE12ACD25A00CB4664 /* NSObjectValueToString.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA965F312ACD25A00CB4664 /* NSObjectValueToString.m */; };
 		DAA966BF12ACD25A00CB4664 /* ConsoleResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA965F712ACD25A00CB4664 /* ConsoleResponseHandler.m */; };
 		DAA966C012ACD25A00CB4664 /* HTTPResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA965F912ACD25A00CB4664 /* HTTPResponseHandler.m */; };
 		DAA966C112ACD25A00CB4664 /* ImageResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA965FB12ACD25A00CB4664 /* ImageResponseHandler.m */; };
@@ -265,6 +259,9 @@
 		DACC5815130691FD0088E046 /* PropertyRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC580F130691FD0088E046 /* PropertyRootViewController.m */; };
 		DACC5816130691FD0088E046 /* PropertyRootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DACC5810130691FD0088E046 /* PropertyRootViewController.xib */; };
 		DACC5A2D12FD415C00AC572F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAC5BB7F12A9A37B00953A23 /* QuartzCore.framework */; };
+		DACEF254130CEE4100FC9F83 /* UIViewExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF253130CEE4100FC9F83 /* UIViewExt.m */; };
+		DACEF255130CEE4100FC9F83 /* UIViewExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF253130CEE4100FC9F83 /* UIViewExt.m */; };
+		DACEF256130CEE4100FC9F83 /* UIViewExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF253130CEE4100FC9F83 /* UIViewExt.m */; };
 		DAE9D2AD12A81EE500EA3F21 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = DAE9D2AC12A81EE500EA3F21 /* README.md */; };
 		DAE9D2AE12A81EE500EA3F21 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = DAE9D2AC12A81EE500EA3F21 /* README.md */; };
 		DAE9E26B1295E63F00F72551 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28F335F01007B36200424DE2 /* RootViewController.xib */; };
@@ -345,10 +342,6 @@
 		DAA965ED12ACD25A00CB4664 /* ConsoleManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConsoleManager.m; sourceTree = "<group>"; };
 		DAA965EE12ACD25A00CB4664 /* NewObjectManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewObjectManager.h; sourceTree = "<group>"; };
 		DAA965EF12ACD25A00CB4664 /* NewObjectManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewObjectManager.m; sourceTree = "<group>"; };
-		DAA965F012ACD25A00CB4664 /* NSObjectSetValueFromString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSObjectSetValueFromString.h; sourceTree = "<group>"; };
-		DAA965F112ACD25A00CB4664 /* NSObjectSetValueFromString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSObjectSetValueFromString.m; sourceTree = "<group>"; };
-		DAA965F212ACD25A00CB4664 /* NSObjectValueToString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSObjectValueToString.h; sourceTree = "<group>"; };
-		DAA965F312ACD25A00CB4664 /* NSObjectValueToString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSObjectValueToString.m; sourceTree = "<group>"; };
 		DAA965F612ACD25A00CB4664 /* ConsoleResponseHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsoleResponseHandler.h; sourceTree = "<group>"; };
 		DAA965F712ACD25A00CB4664 /* ConsoleResponseHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConsoleResponseHandler.m; sourceTree = "<group>"; };
 		DAA965F812ACD25A00CB4664 /* HTTPResponseHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPResponseHandler.h; sourceTree = "<group>"; };
@@ -494,6 +487,8 @@
 		DACC580E130691FD0088E046 /* PropertyRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertyRootViewController.h; sourceTree = "<group>"; };
 		DACC580F130691FD0088E046 /* PropertyRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PropertyRootViewController.m; sourceTree = "<group>"; };
 		DACC5810130691FD0088E046 /* PropertyRootViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PropertyRootViewController.xib; sourceTree = "<group>"; };
+		DACEF252130CEE4100FC9F83 /* UIViewExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewExt.h; sourceTree = "<group>"; };
+		DACEF253130CEE4100FC9F83 /* UIViewExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIViewExt.m; sourceTree = "<group>"; };
 		DADD7EE21260AE2C0040E482 /* UIControlViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIControlViewController.h; sourceTree = "<group>"; };
 		DADD7EE31260AE2C0040E482 /* UIControlViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIControlViewController.m; sourceTree = "<group>"; };
 		DADD7EE41260AE2C0040E482 /* UIControlViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UIControlViewController.xib; sourceTree = "<group>"; };
@@ -735,10 +730,8 @@
 				DAA965ED12ACD25A00CB4664 /* ConsoleManager.m */,
 				DAA965EE12ACD25A00CB4664 /* NewObjectManager.h */,
 				DAA965EF12ACD25A00CB4664 /* NewObjectManager.m */,
-				DAA965F012ACD25A00CB4664 /* NSObjectSetValueFromString.h */,
-				DAA965F112ACD25A00CB4664 /* NSObjectSetValueFromString.m */,
-				DAA965F212ACD25A00CB4664 /* NSObjectValueToString.h */,
-				DAA965F312ACD25A00CB4664 /* NSObjectValueToString.m */,
+				DACEF252130CEE4100FC9F83 /* UIViewExt.h */,
+				DACEF253130CEE4100FC9F83 /* UIViewExt.m */,
 			);
 			path = manager;
 			sourceTree = "<group>";
@@ -1265,8 +1258,6 @@
 				DAA966BA12ACD25A00CB4664 /* CommandManager.m in Sources */,
 				DAA966BB12ACD25A00CB4664 /* ConsoleManager.m in Sources */,
 				DAA966BC12ACD25A00CB4664 /* NewObjectManager.m in Sources */,
-				DAA966BD12ACD25A00CB4664 /* NSObjectSetValueFromString.m in Sources */,
-				DAA966BE12ACD25A00CB4664 /* NSObjectValueToString.m in Sources */,
 				DAA966BF12ACD25A00CB4664 /* ConsoleResponseHandler.m in Sources */,
 				DAA966C012ACD25A00CB4664 /* HTTPResponseHandler.m in Sources */,
 				DAA966C112ACD25A00CB4664 /* ImageResponseHandler.m in Sources */,
@@ -1308,6 +1299,7 @@
 				DAC5208A130749EA002A11C9 /* EditPropertyViewController.m in Sources */,
 				DAC522521307C371002A11C9 /* TypeInfoTable.m in Sources */,
 				DAC522D31307D037002A11C9 /* PropertyManipulator.m in Sources */,
+				DACEF255130CEE4100FC9F83 /* UIViewExt.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1349,8 +1341,6 @@
 				DAA9668712ACD25A00CB4664 /* CommandManager.m in Sources */,
 				DAA9668812ACD25A00CB4664 /* ConsoleManager.m in Sources */,
 				DAA9668912ACD25A00CB4664 /* NewObjectManager.m in Sources */,
-				DAA9668A12ACD25A00CB4664 /* NSObjectSetValueFromString.m in Sources */,
-				DAA9668B12ACD25A00CB4664 /* NSObjectValueToString.m in Sources */,
 				DAA9668C12ACD25A00CB4664 /* ConsoleResponseHandler.m in Sources */,
 				DAA9668D12ACD25A00CB4664 /* HTTPResponseHandler.m in Sources */,
 				DAA9668E12ACD25A00CB4664 /* ImageResponseHandler.m in Sources */,
@@ -1392,6 +1382,7 @@
 				DAC5208C130749EA002A11C9 /* EditPropertyViewController.m in Sources */,
 				DAC522531307C371002A11C9 /* TypeInfoTable.m in Sources */,
 				DAC522D41307D037002A11C9 /* PropertyManipulator.m in Sources */,
+				DACEF256130CEE4100FC9F83 /* UIViewExt.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1431,8 +1422,6 @@
 				DAA9665412ACD25A00CB4664 /* CommandManager.m in Sources */,
 				DAA9665512ACD25A00CB4664 /* ConsoleManager.m in Sources */,
 				DAA9665612ACD25A00CB4664 /* NewObjectManager.m in Sources */,
-				DAA9665712ACD25A00CB4664 /* NSObjectSetValueFromString.m in Sources */,
-				DAA9665812ACD25A00CB4664 /* NSObjectValueToString.m in Sources */,
 				DAA9665912ACD25A00CB4664 /* ConsoleResponseHandler.m in Sources */,
 				DAA9665A12ACD25A00CB4664 /* HTTPResponseHandler.m in Sources */,
 				DAA9665B12ACD25A00CB4664 /* ImageResponseHandler.m in Sources */,
@@ -1474,6 +1463,7 @@
 				DAC52088130749EA002A11C9 /* EditPropertyViewController.m in Sources */,
 				DAC522511307C371002A11C9 /* TypeInfoTable.m in Sources */,
 				DAC522D21307D037002A11C9 /* PropertyManipulator.m in Sources */,
+				DACEF254130CEE4100FC9F83 /* UIViewExt.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
