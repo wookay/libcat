@@ -137,7 +137,7 @@
 			if (_C_INT == *argType && [obj isAlphabet]) {
 				NSNumber* number = [PROPERTYMAN.typeInfoTable enumTypeToNumber:obj];
 				if (nil != number) {
-					obj = number;
+					obj = SWF(@"%@", number);
 				}
 			}
 			BOOL updated = false;
