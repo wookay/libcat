@@ -21,27 +21,27 @@ PROMPT = '> '
 #Console: [ help (h) ] [ quit (q) ] [ about ]
 
 HELP = <<EOF
-ls                  : list current target object    help     : help (h) 
+ls                  : list current target object    help     : help (h)
   [ ls -r ]         : list recursive                quit     : quit (q)
 cd TARGET           : change target object          about    : about libcat Console
-  [ cd ]            : topViewController             clear    : clear the screen  
-  [ cd 0 ]          : at index as listed            history  : input commands history 
+  [ cd ]            : topViewController             clear    : clear the screen
+  [ cd 0 ]          : at index as listed            history  : input commands history
   [ cd 1 0 ]        : at section and index          sleep N  : sleep N seconds
-  [ cd -1 0 ]       : at index on toolbar           
-  [ cd . ]          : to self                       
-  [ cd .. ]         : to superview                  
-  [ cd Title ]      : labeled as Title             
-  [ cd view ]       : to property                   
-  [ cd UIButton ]   : to class                      
+  [ cd -1 0 ]       : at index on toolbar
+  [ cd . ]          : to self            
+  [ cd .. ]         : to superview       
+  [ cd Title ]      : labeled as Title   
+  [ cd view ]       : to property        
+  [ cd UIButton ]   : to class           
   [ cd 0x6067490 ]  : at memory address             events                   : list touch events (e)
 properties TARGET   : list properties (p)             [ events record ]      : record on/off (er)
   [ text ]          : property getter                 [ events play ]        : play events (ep)
   [ text = hello ]  : property setter                 [ events cut N ]       : cut N events
 pwd                 : view & controller hierarchy     [ events clear ]       : clear events
 manipulate TARGET   : manipulate properties UI (m)    [ events replay NAME ] : replay events (ee)
-open                : open Safari UI                  [ events save NAME ]   : save events                  
-touch TARGET        : touch target object UI (t)      [ events load NAME ]   : load events                  
-back                : popViewController UI (b)   
+open                : open Safari UI                  [ events save NAME ]   : save events
+touch TARGET        : touch target object UI (t)      [ events load NAME ]   : load events
+back                : popViewController UI (b)
 rm TARGET           : removeFromSuperview UI        enum ENUMTYPE            : enum type info
 flash TARGET        : flash target object UI (f)      [ enum UITextAlignmentLeft ]
 hit                 : hitTest UI on/off               [ enum UITextAlignment ]
