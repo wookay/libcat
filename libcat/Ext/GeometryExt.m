@@ -57,6 +57,10 @@ CGRect CGRectBottomLeft(CGRect rect, CGFloat width, CGFloat height) {
 	return CGRectMake(rect.origin.x, rect.origin.y + rect.size.height - height, width, height);
 }
 
+CGRect CGRectBottomRight(CGRect rect, CGFloat width, CGFloat height) {
+	return CGRectMake(rect.origin.x + rect.size.width - width, rect.origin.y + rect.size.height - height, width, height);
+}
+
 CGRect CGRectTopLeft(CGRect rect, CGFloat width, CGFloat height) {
 	return CGRectMake(rect.origin.x, rect.origin.y, width, height);
 }

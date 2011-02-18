@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #define LOGGERMAN	[LoggerManager sharedManager]
+
 #define PRINT_HERE log_info(@"%@", NSStringFromSelector(_cmd));
 #define log_object(obj)	log_info(@"%@ %@", NSStringFromSelector(_cmd), obj)
 
@@ -20,13 +21,16 @@ void stdout_log_info(BOOL filename_lineno_flag, const char* filename, int lineno
 
 @protocol LoggerDelegate
 -(void) loggerTextOut:(NSString*)text ;
--(void) show_ip_address ;
+-(void) addLogTextView ;
+-(void) removeLogTextView ;
 @end
+
+
 
 @interface LoggerManager : NSObject {
 	id<LoggerDelegate> delegate;
 }
 @property (nonatomic, assign)	id<LoggerDelegate> delegate;
 + (LoggerManager*) sharedManager ;
--(void) show_ip_address ;
+//-(void) show_ip_address ;
 @end

@@ -140,7 +140,11 @@ class Console
     else
       req_path = "#{CONSOLE_SERVER_URL}/#{command}"
     end
-    Net::HTTP.get_response(URI.parse(URI.escape(req_path)))
+    begin
+      response = Net::HTTP.get_response(URI.parse(URI.escape(req_path)))
+      response.body
+    rescue URI::InvalidURIError
+    end
   end
 
   def load_events_base64 arg
@@ -179,7 +183,7 @@ class Console
             arg = "replay#{load_events_base64(arg)}"
           end
         end
-        response = console_request command, arg
+        response_body = console_request command, arg
         case command
         when 'h','help'
            puts HELP
@@ -192,18 +196,18 @@ class Console
         when 'events'
           case arg
           when /^save/
-            puts save_events_base64(arg, response.body)
+            puts save_events_base64(arg, response_body)
           else
-            puts response.body if env[:print]
+            puts response_body if env[:print]
           end
         when 'completion'
-          puts response.body if env[:print]
-          response.body
+          puts response_body if env[:print]
+          response_body
         when 'cd', 'rm', 'back', 'touch', 'flash', 'hit'
-          puts response.body if response.body.size>0 and env[:print]
+          puts response_body if response_body.size>0 and env[:print]
           update_prompt
         else
-          puts response.body if env[:print]
+          puts response_body if env[:print]
         end
       end
     end
@@ -225,8 +229,8 @@ class Console
   end
 
   def request_prompt
-    response = console_request 'prompt', nil
-    "#{response.body}#{PROMPT}"
+    response_body = console_request 'prompt', nil
+    "#{response_body}#{PROMPT}"
   end
 
 

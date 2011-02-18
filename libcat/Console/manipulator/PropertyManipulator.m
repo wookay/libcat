@@ -8,11 +8,13 @@
 
 #import "PropertyManipulator.h"
 #import "PropertyRootViewController.h"
+#import "ConsoleViewController.h"
 #import "Logger.h"
 #import "NSStringExt.h"
 #import "iPadExt.h"
 #import "NSObjectExt.h"
 #import "NSArrayExt.h"
+#import "GeometryExt.h"
 #import "Inspect.h"
 #import <objc/message.h>
 #import <UIKit/UIColor.h>
@@ -35,9 +37,10 @@
 			NSString* attributeString = [attributes objectAtFirst];
 			NSString* attributeStringAndReadonly = nil;
 #define STR_ATTRIBUTE_READONLY @"R"
-#define JUSTIFY_PROPERTY_NAME 31
-#define JUSTIFY_OBJECT 47
-#define JUSTIFY_ATTRIBUTE_STRING 25
+#define JUSTIFY_LINE 85
+#define JUSTIFY_PROPERTY_NAME (30)
+#define JUSTIFY_OBJECT (0.47*JUSTIFY_LINE)
+#define JUSTIFY_ATTRIBUTE_STRING (0.25*JUSTIFY_LINE)
 			if ([attributes containsObject:STR_ATTRIBUTE_READONLY]) {
 				attributeStringAndReadonly = SWF(@"%@ %@", [attributeString truncate:JUSTIFY_ATTRIBUTE_STRING], STR_ATTRIBUTE_READONLY);
 			} else {
@@ -51,23 +54,44 @@
 	return [ary join:LF];
 }
 
+-(void) showConsoleController {	
+	if (nil == navigationController.view.superview) {
+		[[UIApplication sharedApplication].keyWindow addSubview:navigationController.view];
+	}
+	navigationController.view.frame = CGRectMake(SCREEN_WIDTH, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+	[UIView beginAnimations:nil context:nil];
+	[UIView setAnimationDuration:0.1];
+	navigationController.view.hidden = false;
+	navigationController.view.frame = SCREEN_FRAME;
+	[UIView commitAnimations];
+}
+
 -(NSString*) manipulate:(id)targetObject {
-	[[UIApplication sharedApplication].keyWindow addSubview:navigationController.view];
-	[navigationController.topViewController performSelector:@selector(manipulateTargetObject:) withObject:targetObject];
+//	[[UIApplication sharedApplication].keyWindow addSubview:navigationController.view];
+	[self showConsoleController];
+
+//	self.navigationController.view.hidden = false;
+	PropertyRootViewController* vc = [[PropertyRootViewController alloc] initWithNibName:@"PropertyRootViewController" bundle:nil];
+	[vc manipulateTargetObject:targetObject];
+	[self.navigationController pushViewController:vc animated:false];
+	[vc release];		
+	
+//	[[navigationController.viewControllers objectAtLast] performSelector:@selector(manipulateTargetObject:) withObject:targetObject];
 	return SWF(@"%@ %@", NSLocalizedString(@"manipulate", nil), targetObject);
 }
 
 -(BOOL) isVisible {
-	return nil != navigationController.view.superview;
+	return navigationController.viewControllers.count > 1;
 }
 
 -(void) hide {
 	[navigationController popToRootViewControllerAnimated:false];
-	[navigationController.view removeFromSuperview];
+	navigationController.view.hidden = true;
+//	[navigationController.view removeFromSuperview];
 }
 
 -(id) performTypeClassMethod:(id)str targetObject:(id)targetObject propertyName:(NSString*)propertyName failed:(BOOL*)failed {
-	for (Class targetClass in [targetObject superclasses]) {
+	for (Class targetClass in [targetObject class_hierarchy]) {
 		NSString* typeKey = SWF(@"%@ %@", targetClass, propertyName);
 		id typeClassName = [typeInfoTable.propertyTable objectForKey:typeKey];
 		if (nil != typeClassName && [typeClassName hasPrefix:@"UI"]) {
@@ -96,7 +120,7 @@
 -(id) init {
 	self = [super init];
 	if (self) {
-		PropertyRootViewController* rootViewController = [[PropertyRootViewController alloc] initWithNibName:@"PropertyRootViewController" bundle:nil];
+		ConsoleViewController* rootViewController = [[ConsoleViewController alloc] initWithNibName:@"ConsoleViewController" bundle:nil];
 		self.navigationController = [[UINavigationController alloc] initWithRootViewController:rootViewController];
 		[rootViewController release];
 		self.typeInfoTable = [[TypeInfoTable alloc] init];

@@ -7,7 +7,6 @@
 //
 
 #import "CommandManagerTouchExt.h"
-#import "HitTestWindow.h"
 #import "Logger.h"
 #import "NSNumberExt.h"
 #import "NSDictionaryExt.h"
@@ -20,17 +19,53 @@
 
 
 
-typedef enum {
-	kEventsArgNone,
-	kEventsArgRecord,
-	kEventsArgPlay,
-	kEventsArgCut,
-	kEventsArgClear,
-	kEventsArgReplay,
-	kEventsArgSave,
-	kEventsArgLoad,
-} kEventsArg;
 
+
+
+-(NSString*) processEvents:(kEventsArg)eventsArg action:(NSString*)action events:(NSArray*)events {	
+	switch (eventsArg) {
+		case kEventsArgRecord:
+			return [EVENTRECORDER toggleRecordUserEvents];
+			break;
+			
+		case kEventsArgPlay:
+			return [EVENTRECORDER playUserEvents];
+			break;
+			
+		case kEventsArgCut:
+			return [EVENTRECORDER cutUserEvents:events];
+			break;
+			
+		case kEventsArgReplay: {
+				return [EVENTRECORDER replayUserEvents:events];
+			}
+			break;
+			
+		case kEventsArgSave: {
+				NSData* data = [EVENTRECORDER saveUserEvents];
+				return [data encode_base64];
+			}
+			break;
+			
+		case kEventsArgLoad: {
+				[EVENTRECORDER clearUserEvents];
+				[EVENTRECORDER addUserEvents:events];
+				return [EVENTRECORDER reportUserEvents];
+			}
+			break;
+			
+		case kEventsArgClear:
+			[EVENTRECORDER clearUserEvents];
+			break;
+			
+		case kEventsArgNone:
+		default:
+			return [EVENTRECORDER reportUserEvents];
+			break;
+	}
+	
+	return action;
+}
 
 -(NSString*) command_events:(id)currentObject arg:(id)arg {
 #if USE_PRIVATE_API
@@ -56,25 +91,16 @@ typedef enum {
 		}
 	}
 
+	NSArray* events = nil;
 	switch (eventsArg) {
-		case kEventsArgRecord: {
-				return [EVENTRECORDER recordUserEvents];
-			}
-			break;
-
-		case kEventsArgPlay: {
-				return [EVENTRECORDER playUserEvents];
-			}
-			break;
-			
 		case kEventsArgCut: {
 				if ([arg length] > [@"cut " length]) {
-					NSArray* ary = [[arg slice:[@"cut " length] backward:-1] split:SPACE];
-					NSMutableArray* frames = [NSMutableArray array];
-					for (NSString* num in ary) {
-						[frames addObject:FIXNUM([num intValue])];
+					NSArray* dummy = [[arg slice:[@"cut " length] backward:-1] split:SPACE];
+					NSMutableArray* ary = [NSMutableArray array];
+					for (NSString* num in dummy) {
+						[ary addObject:FIXNUM([num intValue])];
 					}
-					return [EVENTRECORDER cutUserEvents:frames];
+					events = [NSArray arrayWithArray:ary];
 				}
 			}
 			break;
@@ -84,48 +110,22 @@ typedef enum {
 				if ([base64string isEmpty]) {
 					return NSLocalizedString(@"events replay NAME", nil);
 				}
-				NSArray* events = [EVENTRECORDER loadUserEvents:[base64string decode_base64]];
-				return [EVENTRECORDER replayUserEvents:events];
+				NSData* frames = [base64string decode_base64];
+				events = [EVENTRECORDER loadUserEvents:frames];
 			}
 			break;
 			
-		case kEventsArgSave: {
-				NSData* data = [EVENTRECORDER saveUserEvents];
-				return [data encode_base64];
-			}
-			break;
-
 		case kEventsArgLoad: {
 				NSString* base64string = [arg slice:[@"load" length] backward:-1];
-				NSArray* events = [EVENTRECORDER loadUserEvents:[base64string decode_base64]];
-				[EVENTRECORDER clearUserEvents];
-				[EVENTRECORDER addUserEvents:events];
-				return [EVENTRECORDER reportUserEvents];
-			}
-			break;
-		
-		case kEventsArgClear:
-			[EVENTRECORDER clearUserEvents];
-			break;
-
-		case kEventsArgNone:
-		default:
-			return [EVENTRECORDER reportUserEvents];
+				NSData* frames = [base64string decode_base64];
+				events = [EVENTRECORDER loadUserEvents:frames];
+			}			
 			break;
 	}
-	
-	return action;
+				
+	return [self processEvents:eventsArg action:action events:events];
 }
 
--(NSString*) command_hit:(id)currentObject arg:(id)arg {
-#if USE_PRIVATE_API
-#else
-	return NSLocalizedString(@"Add USE_PRIVATE_API=1 to Preprocessor Macros", nil);
-#endif
-	
-	HitTestWindow* hitTestWindow = [HitTestWindow sharedWindow];
-	return [hitTestWindow enterHitTestMode:kHitTestModeHitTestView];
-}
 
 @end
 

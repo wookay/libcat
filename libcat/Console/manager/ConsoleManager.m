@@ -7,6 +7,7 @@
 //
 
 #import "ConsoleManager.h"
+#import <QuartzCore/QuartzCore.h>
 #import "CommandManager.h"
 #import "HTTPServer.h"
 #import "LoggerServer.h"
@@ -20,29 +21,71 @@
 #import "NewObjectManager.h"
 #import "NSObjectExt.h"
 #import "PropertyManipulator.h"
+#include <arpa/inet.h>
+#include <netdb.h>
+#include <net/if.h>
+#include <ifaddrs.h>
 
 // used also in console.rb
 #define CONSOLE_SERVER_PORT 8080
 #define LOGGER_SERVER_PORT_OFFSET 10
-#define EVENTS_PATH	@""
 
 @implementation ConsoleManager
 @synthesize currentTargetObject;
+@synthesize server_port;
+
+-(void) start_up {
+	[self start_servers];
+	[self show_console_button];
+}
+
+-(void) start_up:(int)port {
+	[self start_servers:port];
+}
 
 -(void) start_servers {
 	[self start_servers:CONSOLE_SERVER_PORT];
 }
 
 -(void) start_servers:(int)port {
+	server_port = port;
 	[[HTTPServer sharedServer] startWithPort:port];
 	[[LoggerServer sharedServer] startWithPort:port+LOGGER_SERVER_PORT_OFFSET];
 	LOGGERMAN.delegate = [LoggerServer sharedServer];	
+	[LOGGERMAN.delegate addLogTextView];
+//	log_info(@"start_servers %@:%d", [self get_local_ip_address], port);
 }
 
--(void) stop_servers {
+-(void) stop {
 	[[HTTPServer sharedServer] stop];
 	[[LoggerServer sharedServer] stop];
-	LOGGERMAN.delegate = nil;
+	[LOGGERMAN.delegate removeLogTextView];
+	LOGGERMAN.delegate = nil;	
+	[self hide_console_button];
+}
+
+-(NSString*) get_local_ip_address {
+	BOOL success;
+	struct ifaddrs * addrs;
+	const struct ifaddrs * cursor;
+	
+	success = getifaddrs(&addrs) == 0;
+	if (success) {
+		cursor = addrs;
+		while (cursor != NULL) {
+			// the second test keeps from picking up the loopback address
+			if (cursor->ifa_addr->sa_family == AF_INET && (cursor->ifa_flags & IFF_LOOPBACK) == 0) 
+			{
+				NSString *name = [NSString stringWithUTF8String:cursor->ifa_name];
+				if ([name isEqualToString:@"en0"])  // Wi-Fi adapter
+					return [NSString stringWithUTF8String:inet_ntoa(((struct sockaddr_in *)cursor->ifa_addr)->sin_addr)];
+			}
+			cursor = cursor->ifa_next;
+		}
+		freeifaddrs(addrs);
+	}
+	
+	return @"localhost";
 }
 
 -(id) input:(NSString*)command arg:(id)arg {
@@ -127,37 +170,44 @@
 		[NEWOBJECTMAN setNewObject:obj forKey:lastMethod];
 		[ary addObject:SWF(@"%@ = %@", lastMethod, obj)];							
 	} else {
-		id obj = [self arg_to_proper_object:arg];
+		id strObj = [self arg_to_proper_object:arg];
 		NSString* lastMethodUppercased = SWF(@"set%@:", [lastMethod uppercaseFirstCharacter]);
 		SEL sel = NSSelectorFromString(lastMethodUppercased);
 		if ([target respondsToSelector:sel]) {
 			NSMethodSignature* sig = [target methodSignatureForSelector:sel];
 			const char* argType = [sig getArgumentTypeAtIndex:ARGUMENT_INDEX_ONE];
 			NSString* attributeString = SWF(@"%s", argType);
-			if (_C_INT == *argType && [obj isAlphabet]) {
-				NSNumber* number = [PROPERTYMAN.typeInfoTable enumTypeToNumber:obj];
+			if (_C_INT == *argType && [strObj isAlphabet]) {
+				NSNumber* number = [PROPERTYMAN.typeInfoTable enumStringToNumber:strObj];
 				if (nil != number) {
-					obj = SWF(@"%@", number);
+					strObj = SWF(@"%@", number);
 				}
+			} else if (_C_ID == *argType) {
+				BOOL failed = false;
+				id obj = [PROPERTYMAN.typeInfoTable objectStringToObject:strObj failed:&failed];
+				if (! failed) {
+					strObj = obj;
+				}				
 			}
 			BOOL updated = false;
-			if ([obj isKindOfClass:[NSString class]]) {
-				BOOL failed = false;
-				id targetObj = [PROPERTYMAN performTypeClassMethod:obj targetObject:target propertyName:lastMethod failed:&failed];
-				if (nil == targetObj) {
-					if (failed) {
-					} else {
-						updated = [target setProperty:lastMethod value:obj attributeString:attributeString];
+			BOOL failed = false;
+			id targetObj = [PROPERTYMAN performTypeClassMethod:strObj targetObject:target propertyName:lastMethod failed:&failed];
+			if (nil == targetObj) {
+				if (failed) {
+					if (nil == strObj) {
+						updated = [target setProperty:lastMethod value:strObj attributeString:attributeString];
 					}
 				} else {
-					updated = [target setProperty:lastMethod value:targetObj attributeString:attributeString];
+					updated = [target setProperty:lastMethod value:strObj attributeString:attributeString];
 				}
+			} else {
+				updated = [target setProperty:lastMethod value:targetObj attributeString:attributeString];
 			}
 			if (updated) {
-				NSString* detail = [PROPERTYMAN.typeInfoTable objectDescription:obj targetClass:NSStringFromClass([target class]) propertyName:lastMethod];
+				NSString* detail = [PROPERTYMAN.typeInfoTable objectDescription:strObj targetClass:NSStringFromClass([target class]) propertyName:lastMethod];
 				[ary addObject:SWF(@"%@ = %@", lastMethod, detail)];
 			} else {
-				[ary addObject:SWF(@"[%@ %@%@] %@", [target class], lastMethodUppercased, obj, NSLocalizedString(@"failed", nil))];
+				[ary addObject:SWF(@"[%@ %@%@] %@", [target class], lastMethodUppercased, strObj, NSLocalizedString(@"failed", nil))];
 			}						
 		} else {
 			[ary addObject:SWF(@"%@ %@", lastMethodUppercased, [COMMANDMAN commandNotFound])];
@@ -179,7 +229,7 @@
 -(id) getterChainObject:(id)command arg:(id)arg returnType:(GetterReturnType)returnType {
 	id target = currentTargetObject;
 	NSMutableArray* ary = [NSMutableArray array];
-	if ([command isNull]) {
+	if ([command isNil]) {
 		return nil;
 	}
 	for (NSString* method in [command split:DOT]) {
@@ -209,10 +259,12 @@
 								found = false;
 							}
 						} else {
+							Class targetClass = [target classForProperty:method]; 
 							if (_C_ID == *returnType) {
 								target = obj;
 							}
-							[ary addObject:SWF(@"[%@ %@]\t===>\t%@", oldTargetStr, method, obj)];
+							NSString* detail = [PROPERTYMAN.typeInfoTable objectDescription:obj targetClass:NSStringFromClass(targetClass) propertyName:method];
+							[ary addObject:SWF(@"[%@ %@]\t===>\t%@", oldTargetStr, method, detail)];
 						}							
 					}
 					break;
@@ -382,7 +434,7 @@
 				}
 				NSArray* pair = [COMMANDMAN findTargetObject:[self currentTargetObjectOrTopViewController] arg:newArg];
 				id obj = [pair objectAtSecond];
-				if ([obj isNotNull]) {
+				if ([obj isNotNil]) {
 					[ary addObject:SWF(@"%@", obj)];
 				} else {
 					[ary addObject:SWF(@"%@\t===>\t%@", method, [COMMANDMAN commandNotFound])];
@@ -488,6 +540,81 @@
 	}
 }
 
+-(IBAction) touchedConsoleButton:(id)sender {
+	[PROPERTYMAN showConsoleController];
+}
+
+
+-(void) show_console_button {
+	UIWindow* window = [UIApplication sharedApplication].keyWindow;
+	CGRect windowFrame = window.frame;
+	CGRect consoleRect = CGRectOffset(CGRectTopRight(windowFrame, 70, 19), -2, 21);
+	UIButton* consoleButton = [[UIButton alloc] initWithFrame:consoleRect];
+	[consoleButton addTarget:self action:@selector(touchedConsoleButton:) forControlEvents:UIControlEventTouchUpInside];
+	consoleButton.titleLabel.font = [UIFont fontWithName:@"Courier-Bold" size:consoleRect.size.height/1.3];
+	consoleButton.titleLabel.textAlignment = UITextAlignmentCenter;
+	consoleButton.titleLabel.baselineAdjustment = UIBaselineAdjustmentAlignCenters;
+	consoleButton.titleLabel.adjustsFontSizeToFitWidth = true;
+	consoleButton.layer.cornerRadius = 4.1;
+	consoleButton.backgroundColor = [UIColor colorWithRed:0.9 green:0.9 blue:0 alpha:0.8];
+	[consoleButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+	[consoleButton setTitleColor:[UIColor orangeColor] forState:UIControlStateHighlighted];
+	[consoleButton setTitleShadowColor:[UIColor whiteColor] forState:UIControlStateNormal];
+	[consoleButton setTitle:NSLocalizedString(@"Console", nil) forState:UIControlStateNormal];
+	[window addSubview:consoleButton];
+	[consoleButton release];
+	
+	CGRect logRect = CGRectOffset(CGRectTopRight(windowFrame, 45, consoleRect.size.height), -10 - consoleRect.size.width, consoleRect.origin.y);
+	UIButton* showLogsButton = [[UIButton alloc] initWithFrame:logRect];
+	BOOL settingConsoleLogsButton = [[NSUserDefaults standardUserDefaults] boolForKey:SETTING_CONSOLE_LOGS_BUTTON];
+	showLogsButton.hidden = settingConsoleLogsButton;
+	showLogsButton.tag = kTagLogsButton;
+	[showLogsButton addTarget:self action:@selector(touchedToggleLogsButton:) forControlEvents:UIControlEventTouchUpInside];
+	showLogsButton.titleLabel.font = consoleButton.titleLabel.font;
+	showLogsButton.titleLabel.textAlignment = consoleButton.titleLabel.textAlignment;
+	showLogsButton.titleLabel.baselineAdjustment = consoleButton.titleLabel.baselineAdjustment;
+	showLogsButton.titleLabel.adjustsFontSizeToFitWidth = consoleButton.titleLabel.adjustsFontSizeToFitWidth;
+	showLogsButton.layer.cornerRadius = consoleButton.layer.cornerRadius;
+	showLogsButton.backgroundColor = consoleButton.backgroundColor;
+	[showLogsButton setTitleColor:[consoleButton titleColorForState:UIControlStateNormal] forState:UIControlStateNormal];
+	[showLogsButton setTitleColor:[consoleButton titleColorForState:UIControlStateHighlighted] forState:UIControlStateHighlighted];
+	[showLogsButton setTitleShadowColor:[consoleButton titleShadowColorForState:UIControlStateNormal] forState:UIControlStateNormal];
+	[showLogsButton setTitle:NSLocalizedString(@"Logs", nil) forState:UIControlStateNormal];	
+	[window addSubview:showLogsButton];
+	[showLogsButton release];		
+}
+
+-(void) toggle_logs_button {
+	UIWindow* window = [UIApplication sharedApplication].keyWindow;
+	UIButton* showLogsButton = (UIButton*)[window viewWithTag:kTagLogsButton];
+	BOOL hidden = showLogsButton.hidden;
+	if (hidden) {
+		[window bringSubviewToFront:showLogsButton];
+	} else {
+		[LoggerServer sharedServer].logTextView.hidden = true;
+	}
+	showLogsButton.hidden = ! hidden;
+}
+
+-(IBAction) touchedToggleLogsButton:(id)sender {
+	BOOL hidden = [LoggerServer sharedServer].logTextView.hidden;
+	if (hidden) {
+		UIWindow* window = [UIApplication sharedApplication].keyWindow;
+		[window bringSubviewToFront:[LoggerServer sharedServer].logTextView];
+	}
+	[LoggerServer sharedServer].logTextView.hidden = ! hidden;
+}
+
+-(void) hide_console_button {
+	UIWindow* window = [UIApplication sharedApplication].keyWindow;
+	for (UIView* view in window.subviews) {
+		if ([view isKindOfClass:[UIButton class]]) {
+			[view removeFromSuperview];
+		} else if ([view isKindOfClass:[UITextView class]]) {
+			[view removeFromSuperview];
+		}
+	}
+}
 
 + (ConsoleManager*) sharedManager {
 	static ConsoleManager*	manager = nil;

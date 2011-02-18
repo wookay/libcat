@@ -50,14 +50,15 @@ void stdout_log_info(BOOL filename_lineno_flag, const char* filename, int lineno
 }
 
 
+
 @implementation LoggerManager
 @synthesize delegate;
 
--(void) show_ip_address {
-	if (nil != delegate) {
-		[delegate show_ip_address];
-	}
-}
+//-(void) show_ip_address {
+//	if (nil != delegate) {
+//		[delegate show_ip_address];
+//	}
+//}
 
 - (id) init {
 	self = [super init];

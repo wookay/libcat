@@ -18,7 +18,7 @@
 @synthesize propertyTable;
 
  
--(NSNumber*) enumTypeToNumber:(NSString*)str {
+-(NSNumber*) enumStringToNumber:(NSString*)str {
 	for (NSArray* typeArray in [typedefTable allValues]) {
 		int idx = [typeArray indexOfObject:str];
 		if (idx == NSNotFound) {
@@ -29,7 +29,22 @@
 	return nil;
 }
 
+-(id) objectStringToObject:(NSString*)str failed:(BOOL*)failed {
+	if ([@"nil" isEqualToString:str]) {
+		return nil;
+	} else if ([str hasPrefix:@"0x"]) {
+		size_t address = [str to_size_t];
+		return (id)address;
+	} else {
+		*failed = true;
+	}
+	return nil;
+}
+
 -(NSString*) objectDescription:(id)obj targetClass:(NSString*)targetClass propertyName:(NSString*)propertyName {
+	if (nil == obj) {
+		return @"nil";
+	}
 	NSString* typeKey = SWF(@"%@ %@", targetClass, propertyName);
 	NSString* typeName = [propertyTable objectForKey:typeKey];
 	if (nil != typeName) {

@@ -13,6 +13,7 @@
 typedef enum {
 	kHitTestModeNone,
 	kHitTestModeHitTestView,
+	kHitTestModeHitTestOnce,
 } kHitTestMode;
 
 @protocol HitTestDelegate;
@@ -24,9 +25,12 @@ typedef enum {
 }
 @property (nonatomic) kHitTestMode hitTestMode;
 @property (nonatomic, retain)	UIWindow* realWindow;
-@property (nonatomic, retain)	NSMutableArray* userEvents;
 @property (nonatomic, assign) 	id<HitTestDelegate> hitTestDelegate;
 
 +(HitTestWindow*) sharedWindow ;
+-(void) makeHitTestOff ;
 -(NSString*) enterHitTestMode:(kHitTestMode)hitTestArg ;
+-(void) hitTestOnce ;
+-(NSString*) hitTestView ;
+
 @end

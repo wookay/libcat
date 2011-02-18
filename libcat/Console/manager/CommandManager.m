@@ -26,6 +26,7 @@
 #import "NewObjectManager.h"
 #import "objc/runtime.h"
 #import "NSTimerExt.h"
+#import "HitTestWindow.h"
 #import "GeometryExt.h"
 #import "UIViewControllerBlock.h"
 #import "UIViewBlock.h"
@@ -76,7 +77,23 @@ NSArray* array_prefix_index(NSArray* array) {
 			@"new_objects", @"command_new_objects:arg:",
 			@"completion", @"command_completion:arg:",
 			@"prompt", @"command_prompt:arg:",
+			@"log", @"command_log:arg:",
 			nil];
+}
+
+-(NSString*) command_hit:(id)currentObject arg:(id)arg {
+	HitTestWindow* hitTestWindow = [HitTestWindow sharedWindow];
+	return [hitTestWindow hitTestView];
+}
+
+-(id) command_log:(id)currentObject arg:(id)arg {
+	NSArray* pair = [self findTargetObject:currentObject arg:arg];
+	id targetObject = [pair objectAtSecond];	
+	if ([targetObject isNil]) {
+		targetObject = currentObject;
+	}
+	log_info(@"%@", targetObject);
+	return SWF(@"%@ %@", NSLocalizedString(@"log", nil), targetObject);
 }
 
 -(id) command_echo:(id)currentObject arg:(id)arg {
@@ -105,7 +122,7 @@ NSArray* array_prefix_index(NSArray* array) {
 	} else {
 		NSArray* pair = [self findTargetObject:currentObject arg:arg];
 		changeObject = [pair objectAtSecond];
-		if ([changeObject isNull]) {
+		if ([changeObject isNil]) {
 			id response = [pair objectAtFirst];
 			return response;
 		} else {
@@ -126,7 +143,7 @@ NSArray* array_prefix_index(NSArray* array) {
 -(NSString*) command_touch:(id)currentObject arg:(id)arg {
 	NSArray* trio = [self findTargetObject:currentObject arg:arg];
 	id actionBlockObj = [trio objectAtThird];
-	if (nil != actionBlockObj && [actionBlockObj isNotNull]) {
+	if (nil != actionBlockObj && [actionBlockObj isNotNil]) {
 		if ([actionBlockObj isKindOfClass:NSClassFromString(@"__NSMallocBlock__")]) {
 			ActionBlock actionBlock = (ActionBlock)actionBlockObj;
 			NSString* methodStr = actionBlock();
@@ -189,7 +206,7 @@ NSArray* array_prefix_index(NSArray* array) {
 -(NSString*) command_properties:(id)currentObject arg:(id)arg {
 	NSArray* pair = [self findTargetObject:currentObject arg:arg];
 	id targetObject = [pair objectAtSecond];
-	if ([targetObject isNull]) {
+	if ([targetObject isNil]) {
 		targetObject = currentObject;
 	}
 	return [PROPERTYMAN list_properties:targetObject];
@@ -198,13 +215,13 @@ NSArray* array_prefix_index(NSArray* array) {
 -(NSString*) command_manipulate:(id)currentObject arg:(id)arg {
 	NSArray* pair = [self findTargetObject:currentObject arg:arg];
 	id targetObject = [pair objectAtSecond];	
-	if (IS_NULL(arg)) {
+	if (IS_NIL(arg)) {
 		if ([PROPERTYMAN isVisible]) {
 			[PROPERTYMAN hide];
 			return NSLocalizedString(@"off", nil);
 		}
 	}
-	if ([targetObject isNull]) {
+	if ([targetObject isNil]) {
 		targetObject = currentObject;
 	}
 	return [PROPERTYMAN manipulate:targetObject];
@@ -591,7 +608,7 @@ NSArray* array_prefix_index(NSArray* array) {
 					changeObject = obj;
 				}
 			} else {
-				return TRIO(NSLocalizedString(@"Not Object", nil), [NSNull null], [NSNull null]); 
+				return TRIO(NSLocalizedString(@"Not Object", nil), [NilClass nilClass], [NilClass nilClass]); 
 			}
 		} else { // search by title
 			NSArray* pair = [self get_targetStringAndBlocks:currentObject];
@@ -614,7 +631,7 @@ NSArray* array_prefix_index(NSArray* array) {
 		}
 	}
 	if (nil == changeObject) {
-		return TRIO(NSLocalizedString(@"Not Found", nil), [NSNull null], [NSNull null]); 
+		return TRIO(NSLocalizedString(@"Not Found", nil), [NilClass nilClass], [NilClass nilClass]); 
 	} else {
 		return TRIO(SWF(@"cd %@", [changeObject class]), changeObject, actionBlock);
 	}	

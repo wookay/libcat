@@ -22,7 +22,7 @@
 @property (nonatomic, retain)	NSMutableArray* userEvents;
 
 +(EventRecorder*) sharedRecorder ;
--(NSString*) recordUserEvents ;
+-(NSString*) toggleRecordUserEvents ;
 -(NSString*) playUserEvents ;
 -(NSString*) replayUserEvents:(NSArray*)events ;
 -(NSString*) cutUserEvents:(NSArray*)frames ;

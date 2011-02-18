@@ -12,7 +12,7 @@
 
 typedef enum {
 	kObjectAttributeTypeNone,
-	kObjectAttributeTypeNull,
+	kObjectAttributeTypeNil,
 	kObjectAttributeTypeObject,
 	kObjectAttributeTypeString,
 	kObjectAttributeTypeInt,

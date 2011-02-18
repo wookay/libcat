@@ -65,7 +65,6 @@
 		DAA9667712ACD25A00CB4664 /* Logger.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA9663912ACD25A00CB4664 /* Logger.m */; };
 		DAA9667812ACD25A00CB4664 /* UnitTest.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA9663B12ACD25A00CB4664 /* UnitTest.m */; };
 		DAA9667912ACD25A00CB4664 /* CommandManagerTouchExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA9664012ACD25A00CB4664 /* CommandManagerTouchExt.m */; };
-		DAA9667A12ACD25A00CB4664 /* HitTestWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA9664312ACD25A00CB4664 /* HitTestWindow.m */; };
 		DAA9667B12ACD25A00CB4664 /* UIEventExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA9664512ACD25A00CB4664 /* UIEventExt.m */; };
 		DAA9667C12ACD25A00CB4664 /* UITouchExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA9664712ACD25A00CB4664 /* UITouchExt.m */; };
 		DAA9667D12ACD25A00CB4664 /* UIViewOpenGLExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA9664912ACD25A00CB4664 /* UIViewOpenGLExt.m */; };
@@ -111,7 +110,6 @@
 		DAA966AA12ACD25A00CB4664 /* Logger.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA9663912ACD25A00CB4664 /* Logger.m */; };
 		DAA966AB12ACD25A00CB4664 /* UnitTest.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA9663B12ACD25A00CB4664 /* UnitTest.m */; };
 		DAA966AC12ACD25A00CB4664 /* CommandManagerTouchExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA9664012ACD25A00CB4664 /* CommandManagerTouchExt.m */; };
-		DAA966AD12ACD25A00CB4664 /* HitTestWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA9664312ACD25A00CB4664 /* HitTestWindow.m */; };
 		DAA966AE12ACD25A00CB4664 /* UIEventExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA9664512ACD25A00CB4664 /* UIEventExt.m */; };
 		DAA966AF12ACD25A00CB4664 /* UITouchExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA9664712ACD25A00CB4664 /* UITouchExt.m */; };
 		DAA966B012ACD25A00CB4664 /* UIViewOpenGLExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA9664912ACD25A00CB4664 /* UIViewOpenGLExt.m */; };
@@ -157,7 +155,6 @@
 		DAA966DD12ACD25A00CB4664 /* Logger.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA9663912ACD25A00CB4664 /* Logger.m */; };
 		DAA966DE12ACD25A00CB4664 /* UnitTest.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA9663B12ACD25A00CB4664 /* UnitTest.m */; };
 		DAA966DF12ACD25A00CB4664 /* CommandManagerTouchExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA9664012ACD25A00CB4664 /* CommandManagerTouchExt.m */; };
-		DAA966E012ACD25A00CB4664 /* HitTestWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA9664312ACD25A00CB4664 /* HitTestWindow.m */; };
 		DAA966E112ACD25A00CB4664 /* UIEventExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA9664512ACD25A00CB4664 /* UIEventExt.m */; };
 		DAA966E212ACD25A00CB4664 /* UITouchExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA9664712ACD25A00CB4664 /* UITouchExt.m */; };
 		DAA966E312ACD25A00CB4664 /* UIViewOpenGLExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA9664912ACD25A00CB4664 /* UIViewOpenGLExt.m */; };
@@ -259,6 +256,15 @@
 		DACC5815130691FD0088E046 /* PropertyRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC580F130691FD0088E046 /* PropertyRootViewController.m */; };
 		DACC5816130691FD0088E046 /* PropertyRootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DACC5810130691FD0088E046 /* PropertyRootViewController.xib */; };
 		DACC5A2D12FD415C00AC572F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAC5BB7F12A9A37B00953A23 /* QuartzCore.framework */; };
+		DACC77C8130DDC720029781D /* ConsoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC77C6130DDC720029781D /* ConsoleViewController.m */; };
+		DACC77C9130DDC720029781D /* ConsoleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DACC77C7130DDC720029781D /* ConsoleViewController.xib */; };
+		DACC77CA130DDC720029781D /* ConsoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC77C6130DDC720029781D /* ConsoleViewController.m */; };
+		DACC77CB130DDC720029781D /* ConsoleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DACC77C7130DDC720029781D /* ConsoleViewController.xib */; };
+		DACC77CC130DDC720029781D /* ConsoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC77C6130DDC720029781D /* ConsoleViewController.m */; };
+		DACC77CD130DDC720029781D /* ConsoleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DACC77C7130DDC720029781D /* ConsoleViewController.xib */; };
+		DACC7AAD130DFBD00029781D /* HitTestWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC7AAC130DFBD00029781D /* HitTestWindow.m */; };
+		DACC7AAE130DFBD00029781D /* HitTestWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC7AAC130DFBD00029781D /* HitTestWindow.m */; };
+		DACC7AAF130DFBD00029781D /* HitTestWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC7AAC130DFBD00029781D /* HitTestWindow.m */; };
 		DACEF254130CEE4100FC9F83 /* UIViewExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF253130CEE4100FC9F83 /* UIViewExt.m */; };
 		DACEF255130CEE4100FC9F83 /* UIViewExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF253130CEE4100FC9F83 /* UIViewExt.m */; };
 		DACEF256130CEE4100FC9F83 /* UIViewExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF253130CEE4100FC9F83 /* UIViewExt.m */; };
@@ -407,8 +413,6 @@
 		DAA9663C12ACD25A00CB4664 /* UserConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserConstants.h; sourceTree = "<group>"; };
 		DAA9663F12ACD25A00CB4664 /* CommandManagerTouchExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommandManagerTouchExt.h; sourceTree = "<group>"; };
 		DAA9664012ACD25A00CB4664 /* CommandManagerTouchExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommandManagerTouchExt.m; sourceTree = "<group>"; };
-		DAA9664212ACD25A00CB4664 /* HitTestWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HitTestWindow.h; sourceTree = "<group>"; };
-		DAA9664312ACD25A00CB4664 /* HitTestWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HitTestWindow.m; sourceTree = "<group>"; };
 		DAA9664412ACD25A00CB4664 /* UIEventExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIEventExt.h; sourceTree = "<group>"; };
 		DAA9664512ACD25A00CB4664 /* UIEventExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIEventExt.m; sourceTree = "<group>"; };
 		DAA9664612ACD25A00CB4664 /* UITouchExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITouchExt.h; sourceTree = "<group>"; };
@@ -486,6 +490,11 @@
 		DACC580E130691FD0088E046 /* PropertyRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertyRootViewController.h; sourceTree = "<group>"; };
 		DACC580F130691FD0088E046 /* PropertyRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PropertyRootViewController.m; sourceTree = "<group>"; };
 		DACC5810130691FD0088E046 /* PropertyRootViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PropertyRootViewController.xib; sourceTree = "<group>"; };
+		DACC77C5130DDC720029781D /* ConsoleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsoleViewController.h; sourceTree = "<group>"; };
+		DACC77C6130DDC720029781D /* ConsoleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConsoleViewController.m; sourceTree = "<group>"; };
+		DACC77C7130DDC720029781D /* ConsoleViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConsoleViewController.xib; sourceTree = "<group>"; };
+		DACC7AAB130DFBD00029781D /* HitTestWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HitTestWindow.h; sourceTree = "<group>"; };
+		DACC7AAC130DFBD00029781D /* HitTestWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HitTestWindow.m; sourceTree = "<group>"; };
 		DACEF252130CEE4100FC9F83 /* UIViewExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewExt.h; sourceTree = "<group>"; };
 		DACEF253130CEE4100FC9F83 /* UIViewExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIViewExt.m; sourceTree = "<group>"; };
 		DADD7EE21260AE2C0040E482 /* UIControlViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIControlViewController.h; sourceTree = "<group>"; };
@@ -864,8 +873,6 @@
 		DAA9664112ACD25A00CB4664 /* touch */ = {
 			isa = PBXGroup;
 			children = (
-				DAA9664212ACD25A00CB4664 /* HitTestWindow.h */,
-				DAA9664312ACD25A00CB4664 /* HitTestWindow.m */,
 				DAA9664412ACD25A00CB4664 /* UIEventExt.h */,
 				DAA9664512ACD25A00CB4664 /* UIEventExt.m */,
 				DAA9664612ACD25A00CB4664 /* UITouchExt.h */,
@@ -1050,6 +1057,8 @@
 		DACD42E113065D39008D6831 /* manipulator */ = {
 			isa = PBXGroup;
 			children = (
+				DACC7AAB130DFBD00029781D /* HitTestWindow.h */,
+				DACC7AAC130DFBD00029781D /* HitTestWindow.m */,
 				DAC522D01307D037002A11C9 /* PropertyManipulator.h */,
 				DAC522D11307D037002A11C9 /* PropertyManipulator.m */,
 				DACC580E130691FD0088E046 /* PropertyRootViewController.h */,
@@ -1058,6 +1067,9 @@
 				DAC52085130749EA002A11C9 /* EditPropertyViewController.h */,
 				DAC52086130749EA002A11C9 /* EditPropertyViewController.m */,
 				DAC52087130749EA002A11C9 /* EditPropertyViewController.xib */,
+				DACC77C5130DDC720029781D /* ConsoleViewController.h */,
+				DACC77C6130DDC720029781D /* ConsoleViewController.m */,
+				DACC77C7130DDC720029781D /* ConsoleViewController.xib */,
 				DAC5224F1307C371002A11C9 /* TypeInfoTable.h */,
 				DAC522501307C371002A11C9 /* TypeInfoTable.m */,
 			);
@@ -1167,6 +1179,7 @@
 				DAC8198612F638EB005BE2A3 /* ScrollViewController.xib in Resources */,
 				DACC5814130691FD0088E046 /* PropertyRootViewController.xib in Resources */,
 				DAC5208B130749EA002A11C9 /* EditPropertyViewController.xib in Resources */,
+				DACC77C9130DDC720029781D /* ConsoleViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1192,6 +1205,7 @@
 				DAC8198212F638EB005BE2A3 /* ScrollViewController.xib in Resources */,
 				DACC5812130691FD0088E046 /* PropertyRootViewController.xib in Resources */,
 				DAC5208D130749EA002A11C9 /* EditPropertyViewController.xib in Resources */,
+				DACC77CD130DDC720029781D /* ConsoleViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1214,6 +1228,7 @@
 				DAC8198412F638EB005BE2A3 /* ScrollViewController.xib in Resources */,
 				DACC5816130691FD0088E046 /* PropertyRootViewController.xib in Resources */,
 				DAC52089130749EA002A11C9 /* EditPropertyViewController.xib in Resources */,
+				DACC77CB130DDC720029781D /* ConsoleViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1286,7 +1301,6 @@
 				DAA966DD12ACD25A00CB4664 /* Logger.m in Sources */,
 				DAA966DE12ACD25A00CB4664 /* UnitTest.m in Sources */,
 				DAA966DF12ACD25A00CB4664 /* CommandManagerTouchExt.m in Sources */,
-				DAA966E012ACD25A00CB4664 /* HitTestWindow.m in Sources */,
 				DAA966E112ACD25A00CB4664 /* UIEventExt.m in Sources */,
 				DAA966E212ACD25A00CB4664 /* UITouchExt.m in Sources */,
 				DAA966E312ACD25A00CB4664 /* UIViewOpenGLExt.m in Sources */,
@@ -1298,6 +1312,8 @@
 				DAC522521307C371002A11C9 /* TypeInfoTable.m in Sources */,
 				DAC522D31307D037002A11C9 /* PropertyManipulator.m in Sources */,
 				DACEF255130CEE4100FC9F83 /* UIViewExt.m in Sources */,
+				DACC77C8130DDC720029781D /* ConsoleViewController.m in Sources */,
+				DACC7AAD130DFBD00029781D /* HitTestWindow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1369,7 +1385,6 @@
 				DAA966AA12ACD25A00CB4664 /* Logger.m in Sources */,
 				DAA966AB12ACD25A00CB4664 /* UnitTest.m in Sources */,
 				DAA966AC12ACD25A00CB4664 /* CommandManagerTouchExt.m in Sources */,
-				DAA966AD12ACD25A00CB4664 /* HitTestWindow.m in Sources */,
 				DAA966AE12ACD25A00CB4664 /* UIEventExt.m in Sources */,
 				DAA966AF12ACD25A00CB4664 /* UITouchExt.m in Sources */,
 				DAA966B012ACD25A00CB4664 /* UIViewOpenGLExt.m in Sources */,
@@ -1381,6 +1396,8 @@
 				DAC522531307C371002A11C9 /* TypeInfoTable.m in Sources */,
 				DAC522D41307D037002A11C9 /* PropertyManipulator.m in Sources */,
 				DACEF256130CEE4100FC9F83 /* UIViewExt.m in Sources */,
+				DACC77CC130DDC720029781D /* ConsoleViewController.m in Sources */,
+				DACC7AAF130DFBD00029781D /* HitTestWindow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1450,7 +1467,6 @@
 				DAA9667712ACD25A00CB4664 /* Logger.m in Sources */,
 				DAA9667812ACD25A00CB4664 /* UnitTest.m in Sources */,
 				DAA9667912ACD25A00CB4664 /* CommandManagerTouchExt.m in Sources */,
-				DAA9667A12ACD25A00CB4664 /* HitTestWindow.m in Sources */,
 				DAA9667B12ACD25A00CB4664 /* UIEventExt.m in Sources */,
 				DAA9667C12ACD25A00CB4664 /* UITouchExt.m in Sources */,
 				DAA9667D12ACD25A00CB4664 /* UIViewOpenGLExt.m in Sources */,
@@ -1462,6 +1478,8 @@
 				DAC522511307C371002A11C9 /* TypeInfoTable.m in Sources */,
 				DAC522D21307D037002A11C9 /* PropertyManipulator.m in Sources */,
 				DACEF254130CEE4100FC9F83 /* UIViewExt.m in Sources */,
+				DACC77CA130DDC720029781D /* ConsoleViewController.m in Sources */,
+				DACC7AAE130DFBD00029781D /* HitTestWindow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

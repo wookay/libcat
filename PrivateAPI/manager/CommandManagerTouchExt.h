@@ -9,9 +9,21 @@
 #import <Foundation/Foundation.h>
 #import "CommandManager.h"
 
-@interface CommandManager (TouchExt)
-@end
 
+typedef enum {
+	kEventsArgNone,
+	kEventsArgRecord,
+	kEventsArgPlay,
+	kEventsArgCut,
+	kEventsArgClear,
+	kEventsArgReplay,
+	kEventsArgSave,
+	kEventsArgLoad,
+} kEventsArg;
+
+@interface CommandManager (TouchExt)
+-(NSString*) processEvents:(kEventsArg)eventsArg action:(NSString*)action events:(NSArray*)events ;
+@end
 
 @interface NSString (Base64Ext)
 - (NSData *) decode_base64  ;

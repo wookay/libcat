@@ -24,5 +24,6 @@
 -(void) hide ;
 -(NSString*) list_properties:(id)targetObject ;
 -(id) performTypeClassMethod:(id)str targetObject:(id)targetObject propertyName:(NSString*)propertyName failed:(BOOL*)failed ;
+-(void) showConsoleController ;
 
 @end

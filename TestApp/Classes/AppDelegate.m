@@ -9,7 +9,6 @@
 #import "AppDelegate.h"
 #import "UnitTest.h"
 #import "ConsoleManager.h"
-#import "Logger.h"
 
 @implementation AppDelegate
 
@@ -27,8 +26,7 @@
     [window makeKeyAndVisible];
 	
 //#if TARGET_IPHONE_SIMULATOR
-	[CONSOLEMAN start_servers];
-	[LOGGERMAN show_ip_address];
+	[CONSOLEMAN start_up];
 	 
 	[UnitTest setup];
 	[UnitTest run_all_tests];
@@ -75,7 +73,7 @@
      See also applicationDidEnterBackground:.
      */
 	
-	[CONSOLEMAN stop_servers];
+	[CONSOLEMAN stop];
 
 }
 

@@ -50,7 +50,7 @@
 				arg = argOne;
 			}
 		}
-		return PAIR(command, (nil == arg) ? [NSNull null] : arg);		
+		return PAIR(command, (nil == arg) ? [NilClass nilClass] : arg);		
 	} else {
 		return PAIR(nil, nil);
 	}
@@ -60,7 +60,7 @@
 	NSArray* pair = [self url_to_console_input];
 	NSString* command = [pair objectAtFirst];
 	id arg = [pair objectAtSecond];
-	id output = [CONSOLEMAN input:command arg:[arg isNull] ? nil : arg];
+	id output = [CONSOLEMAN input:command arg:[arg isNil] ? nil : arg];
 	NSData* fileData = [output to_data];
 	
 	CFHTTPMessageRef response =

@@ -26,6 +26,7 @@ CGRect CGRectWithSize(CGSize size) ;
 CGRect CGRectWithCenterPoint(CGPoint centerPoint, CGFloat width, CGFloat height) ;
 CGRect CGRectExpand(CGRect rect, CGFloat dx, CGFloat dy) ;
 CGRect CGRectBottomLeft(CGRect rect, CGFloat width, CGFloat height) ;
+CGRect CGRectBottomRight(CGRect rect, CGFloat width, CGFloat height) ;
 CGRect CGRectTopLeft(CGRect rect, CGFloat width, CGFloat height) ;
 CGRect CGRectTopRight(CGRect rect, CGFloat width, CGFloat height) ;
 CGRect CGRectForCenter(CGRect rect, CGFloat width, CGFloat height) ;

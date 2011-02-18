@@ -8,6 +8,7 @@
 
 #import "NSArrayBlock.h"
 #import "Logger.h"
+#import "NSObjectExt.h"
 
 @implementation NSArray (Block)
 
@@ -29,7 +30,7 @@
 	NSMutableArray* ary = [NSMutableArray array];
 	[self enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
 		id result = block(obj);
-		[ary addObject:result ? result : [NSNull null]];
+		[ary addObject:result ? result : [NilClass nilClass]];
 	}];
 	return ary;
 }
@@ -38,7 +39,7 @@
 	NSMutableArray* ary = [NSMutableArray array];
 	[self enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
 		id result = block(obj, idx);
-		[ary addObject:result ? result : [NSNull null]];
+		[ary addObject:result ? result : [NilClass nilClass]];
 	}];
 	return ary;	
 }

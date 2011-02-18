@@ -10,31 +10,39 @@
 #import "GeometryExt.h"
 #import "NSStringExt.h"
 #import "Logger.h"
-#import "UITouchExt.h"
-#import "UIEventExt.h"
 #import "UIViewExt.h"
 #import "NSDictionaryExt.h"
 #import "iPadExt.h"
 #import "Numero.h"
-#import "UITouchExt.h"
 #import "CommandManager.h"
 #import "ConsoleManager.h"
 #import "NSArrayExt.h"
 #import "NSDataExt.h"
-
+#import "PropertyManipulator.h"
 
 @implementation HitTestWindow
 @synthesize hitTestMode;
 @synthesize realWindow;
-@synthesize userEvents;
 @synthesize hitTestDelegate;
 
 - (UIView*) hitTest:(CGPoint)point withEvent:(UIEvent *)event {
 	if ([realWindow isEqual:self]) {
 		return self;
-	} else {
+	} else {		
 		UIView* view = [realWindow hitTest:point withEvent:event];
 		switch (hitTestMode) {
+			case kHitTestModeHitTestOnce: {
+					[view flick];
+					if (nil != hitTestDelegate) {
+						[hitTestDelegate touchedHitTestView:view];
+						[PROPERTYMAN manipulate:view];
+					}					
+					CONSOLEMAN.currentTargetObject = view;
+					[self makeHitTestOff];
+					return self;
+				}
+				break;
+				
 			case kHitTestModeHitTestView: {
 					if ([view isEqual:CONSOLEMAN.currentTargetObject]) {
 					} else {
@@ -52,12 +60,24 @@
 	}
 }
 
+-(void) makeHitTestOff {
+	hitTestMode = kHitTestModeNone;
+	if (nil != self.realWindow) {
+		[self.realWindow makeKeyAndVisible];
+	}	
+}
+
+-(NSString*) hitTestView {
+	return [self enterHitTestMode:kHitTestModeHitTestView];
+}
+
+-(void) hitTestOnce {
+	[self enterHitTestMode:kHitTestModeHitTestOnce];
+}
+
 -(NSString*) enterHitTestMode:(kHitTestMode)hitTestArg {	
 	if (kHitTestModeHitTestView == hitTestArg && kHitTestModeHitTestView == hitTestMode) {
-		hitTestMode = kHitTestModeNone;
-		if (nil != self.realWindow) {
-			[self.realWindow makeKeyAndVisible];
-		}
+		[self makeHitTestOff];
 		return NSLocalizedString(@"hitTest off", nil);		
 	} else {
 		hitTestMode = hitTestArg;
@@ -73,7 +93,9 @@
 				self.hitTestDelegate = COMMANDMAN;
 			}
 			[self makeKeyAndVisible];
-			[self flick];			
+			if (kHitTestModeHitTestView == hitTestArg) {
+				[self flick];			
+			}
 		}
 		switch (hitTestMode) {
 			case kHitTestModeHitTestView:
@@ -100,7 +122,6 @@
 		self.frame = SCREEN_FRAME;
 		self.hitTestMode = kHitTestModeNone;
 		self.realWindow = nil;
-		self.userEvents = [NSMutableArray array];
 		self.hitTestDelegate = nil;
 	}
 	return self;
@@ -109,7 +130,6 @@
 - (void) dealloc {
 	hitTestDelegate = nil;
 	realWindow = nil;
-	[userEvents release];
 	[super dealloc];
 }
 

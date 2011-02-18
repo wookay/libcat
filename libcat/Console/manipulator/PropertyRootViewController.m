@@ -31,8 +31,13 @@
 -(void) manipulateTargetObject:(id)targetObject_ {
 	self.targetObject = targetObject_;
 	self.title = SWF(@"%@", targetObject_);
-	self.hierarchyData = [NSArray arrayWithArray:[targetObject_ class_hierarchy]];
-	[self load_properties_data];
+	if (nil == targetObject_) {
+		self.hierarchyData = [NSArray array];
+		self.propertiesData = [NSArray array];
+	} else {
+		self.hierarchyData = [NSArray arrayWithArray:[targetObject_ class_hierarchy]];
+		[self load_properties_data];
+	}
 	[self.tableView reloadData];
 }
 
@@ -62,6 +67,12 @@
     return self;
 }
 
+-(IBAction) enableDoneButton:(NSTimer*)timer {
+	if (nil != self.navigationItem.rightBarButtonItem) {
+		self.navigationItem.rightBarButtonItem.enabled = true;
+	}
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
@@ -70,7 +81,10 @@
 																					target:self
 																					action:@selector(touchedDone:)];						
 		self.navigationItem.rightBarButtonItem = doneButton;
+		doneButton.enabled = false;
 		[doneButton release];		
+		
+		[NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(enableDoneButton:) userInfo:nil repeats:false];
 	}
 
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
@@ -130,11 +144,11 @@
 	NSArray* attributes = [trio objectAtThird];
 	NSString* attributeString = [attributes objectAtFirst];
 
-	if ([obj isNull]) {
+	if ([obj isNil]) {
 		if ([_w(@"@\"UIColor\"") containsObject:attributeString]) {
 			return kObjectAttributeTypeObject;
 		} else {
-			return kObjectAttributeTypeNull;
+			return kObjectAttributeTypeNil;
 		}
 	} else {
 #define STR_FLOAT @"f"
@@ -194,7 +208,7 @@
 			break;
 			
 		case kObjectAttributeTypeNone:
-		case kObjectAttributeTypeNull:
+		case kObjectAttributeTypeNil:
 		default:
 			cell.accessoryType = UITableViewCellAccessoryNone;
 			break;
@@ -263,7 +277,6 @@
 #pragma mark -
 #pragma mark Table view delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
 	NSArray* trio = [[self.propertiesData objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
 	kObjectAttributeType type = [self objectAttributeTypeForProperty:trio];
 	switch (type) {
@@ -273,6 +286,7 @@
 				PropertyRootViewController* vc = [[PropertyRootViewController alloc] initWithNibName:@"PropertyRootViewController" bundle:nil];
 				[vc manipulateTargetObject:obj];
 				[self.navigationController pushViewController:vc animated:true];
+				UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
 				vc.title = cell.textLabel.text;
 				[vc release];								
 			}
@@ -299,6 +313,7 @@
 
 
 - (void)dealloc {
+	self.navigationItem.rightBarButtonItem  = nil;
 	self.targetObject = nil;
 	[hierarchyData release];
 	[propertiesData release];

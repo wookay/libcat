@@ -16,18 +16,6 @@
 
 @implementation NSObject (Ext)
 
--(void) performSelector:(SEL)selector afterDelay:(NSTimeInterval)ti {
-	[self performSelector:selector withObject:nil afterDelay:ti];
-}
-
--(BOOL) isNull {
-	return [self isKindOfClass:[NSNull class]];
-}
-
--(BOOL) isNotNull {
-	return ! [self isKindOfClass:[NSNull class]];
-}
-
 -(NSArray*) class_hierarchy {
 	Class nsobject = [NSObject class];
 	Class klass = [self class];
@@ -89,6 +77,42 @@
 	return [ary sort];	
 }
 
+-(NSArray*) class_properties:(Class)targetClass {
+	NSMutableArray* ary = [NSMutableArray array];
+	unsigned int count = 0;
+    objc_property_t *properties = class_copyPropertyList((Class)targetClass, &count);
+    for(unsigned int idx = 0; idx < count; idx++ ) {
+        objc_property_t property = properties[idx];
+		const char* name = property_getName(property);
+		NSString* propertyName = SWF(@"%s", name);
+		SEL sel = NSSelectorFromString(propertyName);
+		BOOL failed = false;
+		id obj = [self getPropertyValue:sel failed:&failed];
+		if (failed) {
+		} else {
+			const char* attr = property_getAttributes(property);
+			const char *aTypeDescription = (const char*)&attr[1];
+			NSString* attributesString = SWF(@"%s", aTypeDescription);
+			NSArray* attributes = [attributesString split:COMMA];
+			[ary addObject:TRIO(propertyName, obj, attributes)];								
+		}
+	}
+	free(properties);
+	return [ary sortByFirstObject];	
+}
+
+-(void) performSelector:(SEL)selector afterDelay:(NSTimeInterval)ti {
+	[self performSelector:selector withObject:nil afterDelay:ti];
+}
+
+-(BOOL) isNil {
+	return [self isKindOfClass:[NilClass class]];
+}
+
+-(BOOL) isNotNil {
+	return ! [self isNil];
+}
+
 -(NSString*) className {
 	return SWF(@"%@", [self class]);
 }
@@ -126,7 +150,7 @@
 		case _C_DBL: return [NSNumber numberWithDouble:*(double *)aValue];
 		case _C_ID:
 			if (nil == aValue) {
-				return [NSNull null];
+				return nil;
 			} else {
 				return *(id *)aValue;
 			}
@@ -134,36 +158,12 @@
 		case _C_STRUCT_B: // struct, only simple ones containing only basic types right now
 		case _C_ARY_B: // array, of whatever, just gets the address
 			if (NULL == aValue) {
-				return [NSNull null];
+				return nil;
 			} else {
 				return [NSValue valueWithBytes:aValue objCType:aTypeDescription];
 			}
 	}
 	return [NSValue valueWithBytes:aValue objCType:aTypeDescription];	
-}
-
--(NSArray*) class_properties:(Class)targetClass {
-	NSMutableArray* ary = [NSMutableArray array];
-	unsigned int count = 0;
-    objc_property_t *properties = class_copyPropertyList((Class)targetClass, &count);
-    for(unsigned int idx = 0; idx < count; idx++ ) {
-        objc_property_t property = properties[idx];
-		const char* name = property_getName(property);
-		NSString* propertyName = SWF(@"%s", name);
-		SEL sel = NSSelectorFromString(propertyName);
-		BOOL failed = false;
-		id obj = [self getPropertyValue:sel failed:&failed];
-		if (failed) {
-		} else {
-			const char* attr = property_getAttributes(property);
-			const char *aTypeDescription = (const char*)&attr[1];
-			NSString* attributesString = SWF(@"%s", aTypeDescription);
-			NSArray* attributes = [attributesString split:COMMA];
-			[ary addObject:TRIO(propertyName, obj, attributes)];								
-		}
-	}
-	free(properties);
-	return [ary sortByFirstObject];	
 }
 
 -(BOOL) propertyHasObjectType:(SEL)sel {
@@ -181,6 +181,28 @@
 			break;
 	}		
 	return false;
+}
+
+-(Class) classForProperty:(NSString*)propertyName {
+	for (Class targetClass in [self class_hierarchy]) {
+		unsigned int count = 0;
+		objc_property_t *properties = class_copyPropertyList((Class)targetClass, &count);
+		BOOL found = false;
+		for(unsigned int idx = 0; idx < count; idx++ ) {
+			objc_property_t property = properties[idx];
+			const char* name = property_getName(property);
+			NSString* targetPropertyName = SWF(@"%s", name);
+			if ([targetPropertyName isEqualToString:propertyName]) {
+				found = true;
+				break;
+			}
+		}
+		free(properties);
+		if (found) {
+			return targetClass;
+		}
+	}
+	return NULL;
 }
 
 -(id) getPropertyValue:(SEL)sel failed:(BOOL*)failed {
@@ -313,4 +335,22 @@
 	}
 }
 
+@end
+
+
+
+@implementation NilClass
+-(NSString*) description {
+	return @"nil";
+}
+-(BOOL) isNil {
+	return true;
+}
++(NilClass*) nilClass {
+	static NilClass* nilClass = nil;
+	if (!nilClass) {
+		nilClass = [NilClass new];
+	}
+	return nilClass;
+}
 @end

@@ -7,31 +7,32 @@
 //
 
 #import "NSArrayExt.h"
+#import "NSObjectExt.h"
 #import "NSStringExt.h"
 #import "NSMutableArrayExt.h"
 #import "Logger.h"
 
 NSArray* PAIR(id uno, id dos) {
 	NSMutableArray* ary = [NSMutableArray array];
-	[ary addObject:(nil == uno) ? [NSNull null] : uno];
-	[ary addObject:(nil == dos) ? [NSNull null] : dos];
+	[ary addObject:(nil == uno) ? [NilClass nilClass] : uno];
+	[ary addObject:(nil == dos) ? [NilClass nilClass] : dos];
 	return ary;
 }
 
 NSArray* TRIO(id uno, id dos, id tres) {
 	NSMutableArray* ary = [NSMutableArray array];
-	[ary addObject:(nil == uno) ? [NSNull null] : uno];
-	[ary addObject:(nil == dos) ? [NSNull null] : dos];
-	[ary addObject:(nil == tres) ? [NSNull null] : tres];
+	[ary addObject:(nil == uno) ? [NilClass nilClass] : uno];
+	[ary addObject:(nil == dos) ? [NilClass nilClass] : dos];
+	[ary addObject:(nil == tres) ? [NilClass nilClass] : tres];
 	return ary;	
 }
 
 NSArray* CUAD(id uno, id dos, id tres, id cuatro) {
 	NSMutableArray* ary = [NSMutableArray array];
-	[ary addObject:(nil == uno) ? [NSNull null] : uno];
-	[ary addObject:(nil == dos) ? [NSNull null] : dos];
-	[ary addObject:(nil == tres) ? [NSNull null] : tres];
-	[ary addObject:(nil == cuatro) ? [NSNull null] : cuatro];
+	[ary addObject:(nil == uno) ? [NilClass nilClass] : uno];
+	[ary addObject:(nil == dos) ? [NilClass nilClass] : dos];
+	[ary addObject:(nil == tres) ? [NilClass nilClass] : tres];
+	[ary addObject:(nil == cuatro) ? [NilClass nilClass] : cuatro];
 	return ary;	
 }
 

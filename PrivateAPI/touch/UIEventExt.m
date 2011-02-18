@@ -21,7 +21,6 @@
 -(void) _removeRecorder:(id<UIEventRecorder>)recoder ;
 -(void) _playbackEvents:(NSArray*)events atPlaybackRate:(float)playbackRate messageWhenDone:(id)target withSelector:(SEL)action ;
 @end
-
 @interface UIEvent (Synthesize)
 -(id) _initWithEvent:(id)event touches:(NSSet*)touches;
 @end
@@ -42,7 +41,7 @@
 	[userEvents addObject:dict];
 }
 
--(NSString*) recordUserEvents {
+-(NSString*) toggleRecordUserEvents {
 	recorded = ! recorded;
 	
 #if USE_PRIVATE_API
@@ -184,6 +183,7 @@
 }
 
 -(id) initWithTouch:(UITouch*)touch {
+#if USE_PRIVATE_API
     Class touchesEventClass = objc_getClass("UITouchesEvent");
     if (touchesEventClass && ![[self class] isEqual:touchesEventClass]) {
         [self release];
@@ -193,6 +193,9 @@
     self = [self _initWithEvent:[NSNull null] touches:[NSSet setWithObject:touch]];
     if (nil != self) {
     }
+#else
+	self = [super init];
+#endif
     return self;
 }
 
