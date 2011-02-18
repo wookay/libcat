@@ -21,12 +21,13 @@ PROMPT = '> '
 #Console: [ help (h) ] [ quit (q) ] [ about ]
 
 HELP = <<EOF
-ls                  : list current target object    help     : help (h)
-  [ ls -r ]         : list recursive                quit     : quit (q)
-cd TARGET           : change target object          about    : about libcat Console
-  [ cd ]            : topViewController             clear    : clear the screen
-  [ cd 0 ]          : at index as listed            history  : input commands history
-  [ cd 1 0 ]        : at section and index          sleep N  : sleep N seconds
+ls TARGET           : list target object (l)        help     : help (h)
+  [ ls ]            : list current object           quit     : quit (q)
+  [ ls -r ]         : list recursive                about    : about libcat Console
+cd TARGET           : change target object          clear    : clear the screen
+  [ cd ]            : to topViewController          history  : input commands history
+  [ cd 0 ]          : at index as listed            sleep N  : sleep N seconds
+  [ cd 1 0 ]        : at section and index          
   [ cd -1 0 ]       : at index on toolbar
   [ cd . ]          : to self            
   [ cd .. ]         : to superview       
@@ -95,6 +96,7 @@ class Console
   end
   def resolve_command command_str, arg
     aliases = {
+    'l' => 'ls',
     't' => 'touch',
     'e' => 'events',
     'er' => 'events record',

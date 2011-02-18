@@ -265,8 +265,14 @@ NSArray* array_prefix_index(NSArray* array) {
 }
 
 -(NSString*) command_ls:(id)currentObject arg:(id)arg {
+	NSArray* pair = [self findTargetObject:currentObject arg:arg];
+	id targetObject = [pair objectAtSecond];	
+	if ([targetObject isNil]) {
+		targetObject = currentObject;
+	}
+		
 	NSMutableArray* ary = [NSMutableArray array];
-	NSArray* arrayLS = [self array_ls:currentObject arg:arg];
+	NSArray* arrayLS = [self array_ls:targetObject arg:arg];
 	for (NSArray* pair in arrayLS) {
 		int lsType = [[pair objectAtFirst] intValue];
 		id obj = [pair objectAtSecond];
