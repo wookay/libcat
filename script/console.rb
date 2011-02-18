@@ -14,55 +14,40 @@ COLON = ':'
 
 PROMPT = '> '
 
+#== Shell ==
+##open: open Safari to display target UI
+###sleep N: sleep
+#History: [ history ] [ clear ]
+#Console: [ help (h) ] [ quit (q) ] [ about ]
 
 HELP = <<EOF
-ls			: list current target object
-  [ ls -r ]		: list recursive
-cd TARGET		: change target object
-  [ cd ]		: topViewController
-  [ cd 0 ]		: at index as listed
-  [ cd 1 0 ]		: at section and index
-  [ cd -1 0 ]		: at index on toolbar
-  [ cd . ]		: to self
-  [ cd .. ]		: to superview
-  [ cd Title ]		: labeled as Title
-  [ cd view ] 		: to property
-  [ cd UIButton ]	: to class
-  [ cd 0x6067490 ]	: at memory address
-pwd 			: superviews
-
-touch TARGET   		: touch target object (t)
-flash TARGET		: flash target object (f)
-back    		: popViewControllerAnimated: false (b)
-rm N			: removeFromSuperview
-
-hit			: hitTest on/off
-events			: events (e)
-  record		: record events on/off (er)
-  play 			: play events (ep)
-  cut N			: cut events
-  clear			: clear events
-  replay NAME		: replay events (ee)
-  save NAME		: save events
-  load NAME		: load events
-
-manipulate TARGET 	: manipulate properties (m)
-properties		: list properties (p)
-property		: property getter (text, frame ...)
-property = value	: property settter
-$			: display new objects
-  [ $1 = property ]     : set new object
-
-open			: open Safari to display target UI
-sleep N			: sleep
-history			: show command history
-clear			: clear history
-help			: help (h)
-quit			: quit (q)
-about			: about
+ls                  : list current target object    help     : help (h) 
+  [ ls -r ]         : list recursive                quit     : quit (q)
+cd TARGET           : change target object          about    : about libcat Console
+  [ cd ]            : topViewController             clear    : clear the screen  
+  [ cd 0 ]          : at index as listed            history  : input commands history 
+  [ cd 1 0 ]        : at section and index          sleep N  : sleep N seconds
+  [ cd -1 0 ]       : at index on toolbar           
+  [ cd . ]          : to self                       
+  [ cd .. ]         : to superview                  
+  [ cd Title ]      : labeled as Title             
+  [ cd view ]       : to property                   
+  [ cd UIButton ]   : to class                      
+  [ cd 0x6067490 ]  : at memory address             events                   : list touch events (e)
+properties TARGET   : list properties (p)             [ events record ]      : record on/off (er)
+  [ text ]          : property getter                 [ events play ]        : play events (ep)
+  [ text = hello ]  : property setter                 [ events cut N ]       : cut N events
+pwd                 : view & controller hierarchy     [ events clear ]       : clear events
+manipulate TARGET   : manipulate properties UI (m)    [ events replay NAME ] : replay events (ee)
+open                : open Safari UI                  [ events save NAME ]   : save events                  
+touch TARGET        : touch target object UI (t)      [ events load NAME ]   : load events                  
+back                : popViewController UI (b)   
+rm TARGET           : removeFromSuperview UI        enum ENUMTYPE            : enum type info
+flash TARGET        : flash target object UI (f)      [ enum UITextAlignmentLeft ]
+hit                 : hitTest UI on/off               [ enum UITextAlignment ]
 EOF
 
-CONSOLE_VERSION = 0.1
+CONSOLE_VERSION = 0.2
 ABOUT = <<EOF
 libcat Console #{CONSOLE_VERSION}
 Copyright (c) 2010, 2011 WooKyoung Noh

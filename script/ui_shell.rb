@@ -11,7 +11,7 @@ include Readline
 HISTORY_PATH = "#{ENV['HOME']}/.console_history"
 LF = "\n"
 
-COMMANDS = %w{help open history clear quit}
+COMMANDS = %w{open help quit about clear history sleep} + %w{back cd commands echo enum events flash hit log ls manipulate new_objects prompt properties pwd rm touch}
 
 def force_encoding_utf8 str
   if str.respond_to? :force_encoding
@@ -63,20 +63,24 @@ class Shell
     while input = readline(@options[:prompt], true)
       case input.strip
       when 'clear'
-        @HISTORY = []
-        @history_file.close
-        open(HISTORY_PATH,'w') do |f|
-          f.write("")
+        puts "\e[H\e[2J"
+      when /^history/
+        if input.include? ' clear'
+          @HISTORY = []
+          @history_file.close
+          open(HISTORY_PATH,'w') do |f|
+            f.write("")
+          end
+          @history_file = open(HISTORY_PATH,'a')
+        else
+          idx = @HISTORY.size
+          ary = @HISTORY.map do |obj|
+            s = "%3d  %s" % [idx, obj]
+            idx -= 1
+            s
+          end
+          puts ary
         end
-        @history_file = open(HISTORY_PATH,'a')
-      when 'history'
-        idx = @HISTORY.size
-        ary = @HISTORY.map do |obj|
-          s = "%3d  %s" % [idx, obj]
-          idx -= 1
-          s
-        end
-        puts ary
       when /^\!/
         n = input.gsub(/^\!/,'').strip.to_i
         input = @HISTORY[-n].strip

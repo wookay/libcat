@@ -12,6 +12,7 @@
 #import "NSObjectExt.h"
 #import "NSArrayExt.h"
 #import <objc/message.h>
+#import "Inspect.h"
 
 @implementation TypeInfoTable
 @synthesize typedefTable;
@@ -41,6 +42,36 @@
 	return nil;
 }
 
+-(NSString*) findEnumDefinitionByEnumString:(NSString*)str {
+	NSString* foundType = nil;
+	NSArray* foundTypes = nil;
+	NSArray* value = [typedefTable objectForKey:str];
+	if (nil == value) {
+		for (NSString* key in [typedefTable allKeys]) {
+			NSArray* types = [typedefTable objectForKey:key];
+			if ([types containsObject:str]) {
+				foundType = key;
+				foundTypes = types;
+				break;
+			}
+		}
+	} else {
+		foundType = str;
+		foundTypes = value;
+	}
+	if (foundType) {
+		NSMutableArray* ary = [NSMutableArray array];
+		[ary addObject:SWF(@"%@", foundType)];		
+		for (int idx = 0; idx < foundTypes.count; idx++) {
+			NSString* typeStr = [foundTypes objectAtIndex:idx];
+			[ary addObject:SWF(@"  %d %@ ", idx, typeStr)];
+		}
+		return [ary join:LF];
+	} else {
+		return nil;
+	}
+}
+
 -(NSString*) objectDescription:(id)obj targetClass:(NSString*)targetClass propertyName:(NSString*)propertyName {
 	if (nil == obj) {
 		return @"nil";
@@ -61,7 +92,17 @@
 		} else if ([@"CGPoint" isEqualToString:typeName]) {
 		}
 	}
-	return SWF(@"%@", obj);
+	BOOL needInspect = false;
+	if ([obj isKindOfClass:[NSArray class]]) {
+		needInspect = true;
+	} else if ([obj isKindOfClass:[NSDictionary class]]) {
+		needInspect = true;
+	}
+	if (needInspect) {
+		return SWF(@"%@", [[obj inspect] gsub:@"\n  " to:EMPTY_STRING]);
+	} else {
+		return SWF(@"%@", obj);
+	}
 }
 
 

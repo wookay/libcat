@@ -17,6 +17,7 @@
 @property (nonatomic, retain)	NSDictionary* propertyTable;
 
 -(NSNumber*) enumStringToNumber:(NSString*)str ;
+-(NSString*) findEnumDefinitionByEnumString:(NSString*)str ;
 -(id) objectStringToObject:(NSString*)str failed:(BOOL*)failed ;
 -(NSString*) objectDescription:(id)obj targetClass:(NSString*)targetClass propertyName:(NSString*)propertyName ;
 

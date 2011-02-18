@@ -74,11 +74,30 @@ NSArray* array_prefix_index(NSArray* array) {
 			@"manipulate", @"command_manipulate:arg:",
 			@"rm", @"command_rm:arg:",
 			@"properties", @"command_properties:arg:",
+			@"commands", @"command_commands:arg:",
+			@"enum", @"command_enum:arg:",
 			@"new_objects", @"command_new_objects:arg:",
 			@"completion", @"command_completion:arg:",
 			@"prompt", @"command_prompt:arg:",
 			@"log", @"command_log:arg:",
 			nil];
+}
+
+-(NSString*) command_commands:(id)currentObject arg:(id)arg {
+	NSMutableArray* ary = [NSMutableArray array];
+	for (NSString* command in [commandsMap allKeys]) {
+		[ary addObject:SWF(@"%@", command)];
+	}
+	return [[ary sort] join:LF];
+}
+
+-(NSString*) command_enum:(id)currentObject arg:(id)arg {
+	NSString* definition = [PROPERTYMAN.typeInfoTable findEnumDefinitionByEnumString:arg];
+	if (nil == definition) {
+		return NSLocalizedString(@"Not Found", nil);
+	} else {
+		return definition;
+	}
 }
 
 -(NSString*) command_hit:(id)currentObject arg:(id)arg {
