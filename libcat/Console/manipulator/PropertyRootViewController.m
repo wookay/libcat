@@ -76,6 +76,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	
+	self.tableView.backgroundColor = [UIColor colorWithRed:0.87 green:0.89 blue:0.60 alpha:0.9];
+
 	if (nil == self.navigationController.parentViewController) {
 		UIBarButtonItem* doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
 																					target:self

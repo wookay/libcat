@@ -45,7 +45,7 @@
 					<object class="IBUITextField" id="349413903">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{18, 62}, {286, 31}}</string>
+						<string key="NSFrame">{{20, 101}, {286, 31}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -171,7 +171,7 @@
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform">
-						<bytes key="NSTransformStruct">P4AAAL+AAABCeAAAwsAAAA</bytes>
+						<bytes key="NSTransformStruct">P4AAAL+AAABBoAAAwuIAAA</bytes>
 					</object>
 				</object>
 			</object>
@@ -289,21 +289,7 @@
 					<string key="className">UIView</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">../libcat/Console/manager/CommandManager.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">UIView</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier" id="389059787">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">../libcat/Console/manager/NSObjectSetValueFromString.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">UIView</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">../libcat/Console/manager/NSObjectValueToString.h</string>
+						<string key="minorKey">../libcat/Console/manager/UIViewExt.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -312,10 +298,6 @@
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">../libcat/UIBlock/UIViewBlock.h</string>
 					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">UIViewController</string>
-					<reference key="sourceIdentifier" ref="389059787"/>
 				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">UIViewController</string>

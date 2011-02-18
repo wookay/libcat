@@ -40,7 +40,7 @@
 		CGRect rect = CGRectOffset(CGRectExpand(SCREEN_FRAME, 0, -60), 0, 60);
 		self.logTextView = [[UITextView alloc] initWithFrame:rect];
 		[window addSubview:logTextView];
-		logTextView.backgroundColor = [UIColor colorWithRed:230/FF green:230/FF blue:177/FF alpha:0.81];
+		logTextView.backgroundColor = [UIColor colorWithRed:0.87 green:0.89 blue:0.60 alpha:0.9];
 		logTextView.textColor = [UIColor blackColor];
 		logTextView.editable = false;
 		logTextView.hidden = true;

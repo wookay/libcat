@@ -43,6 +43,9 @@
 
 -(void) viewDidLoad {
 	[super viewDidLoad];
+	
+	self.view.backgroundColor = [UIColor colorWithRed:0.87 green:0.89 blue:0.60 alpha:1];
+
 	self.textField.text = SWF(@"%@", propertyValue);
 	switch (propertyType) {
 		case kObjectAttributeTypeInt:

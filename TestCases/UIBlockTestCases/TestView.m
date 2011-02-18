@@ -20,7 +20,7 @@
 
 @implementation TestView
 
--(void) test_animation {
+-(void) x_test_animation {
 	[FIXNUM(2) times:^{
 		[UIView animate:^{
 					[UIApplication sharedApplication].keyWindow.alpha = 0.98;

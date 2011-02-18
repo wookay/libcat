@@ -77,7 +77,9 @@
 	if ([sheet respondsToSelector:showTarget]) {
 		if (IS_IPAD) {
 		} else {
-			[sheet performSelector:showTarget withObject:view];
+			if (nil != view) {
+				[sheet performSelector:showTarget withObject:view];
+			}
 		}
 	}
 	

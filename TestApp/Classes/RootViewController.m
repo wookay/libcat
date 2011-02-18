@@ -17,9 +17,9 @@
 #import "UIControlViewController.h"
 #import "ScrollViewController.h"
 
-enum { kSectionUnitTest, kSectionConsole, kSectionMax };
+enum { kSectionSampleControllers, kSectionUnitTest, kSectionMax };
+	enum { kSectionSampleControllersRowScrollView, kSectionSampleControllersRowCounter, kSectionSampleControllersRowCount };
 	enum { kRowTests, kRowAssertions, kRowFailures, kRowErrors, kRowMaxUnitTest };
-	enum { kRowConsoleInteractiveShell, kRowConsoleLogWatcher, kRowMaxConsole };
 
 @implementation RootViewController
 
@@ -35,6 +35,10 @@ enum { kSectionUnitTest, kSectionConsole, kSectionMax };
 	[super viewWillAppear:animated];
 }
 
+-(void) viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
+}
+	
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return kSectionMax;
 }
@@ -44,9 +48,8 @@ enum { kSectionUnitTest, kSectionConsole, kSectionMax };
 		case kSectionUnitTest:
 			return kRowMaxUnitTest;
 			break;
-		case kSectionConsole:
-			return kRowMaxConsole;
-			break;
+		case kSectionSampleControllers:
+			return kSectionSampleControllersRowCount;
 		default:
 			break;
 	}
@@ -55,10 +58,10 @@ enum { kSectionUnitTest, kSectionConsole, kSectionMax };
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *CellIdentifier = @"Cell";
+	NSString *CellIdentifier = SWF(@"Cell %d", indexPath.section);
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-		int style = (kSectionUnitTest == indexPath.section) ? UITableViewCellStyleValue1 : UITableViewCellStyleValue2;
+		int style = (kSectionUnitTest == indexPath.section) ? UITableViewCellStyleValue1 : UITableViewCellStyleDefault;
         cell = [[[UITableViewCell alloc] initWithStyle:style reuseIdentifier:CellIdentifier] autorelease];
     }
     
@@ -96,17 +99,16 @@ enum { kSectionUnitTest, kSectionConsole, kSectionMax };
 			}
 			break;
 
-		case kSectionConsole:
+		case kSectionSampleControllers:
 			cell.textLabel.adjustsFontSizeToFitWidth = true;
 			cell.detailTextLabel.adjustsFontSizeToFitWidth = true;
+			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 			switch (indexPath.row) {
-				case kRowConsoleInteractiveShell:
-					cell.textLabel.text = NSLocalizedString(@"Interactive Shell", nil);
-					cell.detailTextLabel.text = @"script/console.rb";
+				case kSectionSampleControllersRowScrollView:
+					cell.textLabel.text = NSLocalizedString(@"Scroll View", nil);
 					break;
-				case kRowConsoleLogWatcher:
-					cell.textLabel.text = NSLocalizedString(@"Log Watcher", nil);
-					cell.detailTextLabel.text = @"script/log_watcher.rb";
+				case kSectionSampleControllersRowCounter:
+					cell.textLabel.text = NSLocalizedString(@"Counter", nil);
 					break;
 			}
 			break;
@@ -115,13 +117,17 @@ enum { kSectionUnitTest, kSectionConsole, kSectionMax };
 	return cell;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+	return 41;
+}
+
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
 	switch (section) {
 		case kSectionUnitTest:
 			return NSLocalizedString(@"Unit Test", nil);
 			break;
-		case kSectionConsole:
-			return NSLocalizedString(@"Console", nil);
+		case kSectionSampleControllers:
+			return NSLocalizedString(@"Sample Controllers", nil);
 			break;
 	}
 	return nil;
@@ -140,34 +146,33 @@ enum { kSectionUnitTest, kSectionConsole, kSectionMax };
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {	
-	log_info(@"didSelectRowAtIndexPath %@", indexPath);
 	UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
 	
 	switch (indexPath.section) {
-		case kSectionUnitTest: {
-				ScrollViewController* vc = [[ScrollViewController alloc] initWithNibName:@"ScrollViewController" bundle:nil];
-				[self.navigationController pushViewController:vc animated:true];
-				vc.title = cell.textLabel.text;
-				float red = get_random(FF)/FF;
-				float green = get_random(FF)/FF;
-				float blue = get_random(FF)/FF;
-				vc.view.backgroundColor = [UIColor colorWithRed:red green:green blue:blue alpha:1];
-				[vc release];			
+		case kSectionSampleControllers:
+			switch (indexPath.row) {
+				case kSectionSampleControllersRowScrollView: {
+						ScrollViewController* vc = [[ScrollViewController alloc] initWithNibName:@"ScrollViewController" bundle:nil];
+						[self.navigationController pushViewController:vc animated:true];
+						vc.title = cell.textLabel.text;
+						float red = get_random(FF)/FF;
+						float green = get_random(FF)/FF;
+						float blue = get_random(FF)/FF;
+						vc.view.backgroundColor = [UIColor colorWithRed:red green:green blue:blue alpha:1];
+						[vc release];			
+					}					
+					break;
+				case kSectionSampleControllersRowCounter: {
+						UIControlViewController* vc = [[UIControlViewController alloc] initWithNibName:@"UIControlViewController" bundle:nil];
+						[self.navigationController pushViewController:vc animated:true];
+						vc.title = cell.textLabel.text;
+						[vc release];						
+					}					
+					break;
 			}
-			break;
-			
-		case kSectionConsole: {
-				UIControlViewController* vc = [[UIControlViewController alloc] initWithNibName:@"UIControlViewController" bundle:nil];
-				[self.navigationController pushViewController:vc animated:true];
-				vc.title = cell.textLabel.text;
-				[vc release];						
-			}
-			break;
-			
-		default:
 			break;
 	}
-
+	
     [tableView deselectRowAtIndexPath:indexPath animated:true];
 }
 

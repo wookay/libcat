@@ -14,3 +14,9 @@
 }
 -(void) refreshEventsSection ;
 @end
+
+
+
+@interface ConsoleTableViewCell : UITableViewCell {
+}
+@end

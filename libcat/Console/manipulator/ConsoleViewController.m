@@ -20,21 +20,21 @@
 #endif
 
 typedef enum {
-	kConsoleSectionInfo,
 	kConsoleSectionCommands,
 	kConsoleSectionEvents,
+	kConsoleSectionInfo,
 	kConsoleSectionCount,
 } kConsoleSection;
 
 typedef enum {
 	kConsoleSectionInfoRowConsoleServer,
+	kConsoleSectionInfoRowLogsButton,
 	kConsoleSectionInfoRowCount,
 } kConsoleSectionInfoRow;
 
 typedef enum {
-	kConsoleSectionCommandsRowPropertyManipulator,
 	kConsoleSectionCommandsRowSelectUIObject,
-	kConsoleSectionCommandsRowLogsButton,
+	kConsoleSectionCommandsRowPropertyManipulator,
 	kConsoleSectionCommandsRowCount,
 } kConsoleSectionCommandsRow;
 
@@ -60,6 +60,8 @@ typedef enum {
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+	self.tableView.backgroundColor = [UIColor colorWithRed:0.87 green:0.89 blue:0.60 alpha:0.9];
+	
 	self.title = NSLocalizedString(@"Console", nil);
 	if (nil == self.navigationController.parentViewController) {
 		UIBarButtonItem* doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
@@ -141,6 +143,53 @@ typedef enum {
     return 0;
 }
 
+//- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+//	switch (section) {
+//		case kConsoleSectionInfo: {
+//				CGFloat height = [self tableView:tableView heightForFooterInSection:section];
+//				UILabel*label = [[[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, height)] autorelease];
+//				label.textAlignment = UITextAlignmentCenter;
+//				label.text = [self tableView:tableView titleForFooterInSection:section];
+//				label.backgroundColor = [UIColor clearColor];
+//				label.font = [UIFont fontWithName:@"Futura-Medium" size:14];
+//				[label sizeToFit];
+//				return label;
+//			}
+//			break;
+//	}
+//			
+//	return nil;
+//}
+
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
+	switch (section) {
+		case kConsoleSectionInfo:
+			return NSLocalizedString(@"Run script/console.rb", nil);
+			break;
+	}	
+	return nil;	
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+	switch (section) {
+		case kConsoleSectionInfo:
+			return 30;
+			break;
+	}	
+	return 0;	
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+	switch (indexPath.section) {
+		case kConsoleSectionCommands:
+			if (kConsoleSectionCommandsRowPropertyManipulator == indexPath.row) {
+				return 45;
+			}
+			break;
+	}	
+	return 40;
+}
+
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {   // fixed font style. use custom view (UILabel) if you want something different
 	switch (section) {
 		case kConsoleSectionInfo:
@@ -150,7 +199,7 @@ typedef enum {
 			return NSLocalizedString(@"Commands", nil);
 			break;
 		case kConsoleSectionEvents:
-			return NSLocalizedString(@"UI Events", nil);
+			return NSLocalizedString(@"Touch Events", nil);
 			break;			
 		default:
 			break;
@@ -165,28 +214,35 @@ typedef enum {
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
+	UITableViewCellStyle style = UITableViewCellStyleDefault;
+	switch (indexPath.section) {	
+		case kConsoleSectionInfo:
+			style = UITableViewCellStyleValue2;
+			break;
+		case kConsoleSectionCommands:
+			style = UITableViewCellStyleSubtitle;
+			break;
+		case kConsoleSectionEvents:
+			style = UITableViewCellStyleValue1;
+			break;
+	}
+			
+	if (cell == nil) {
+		cell = [[[ConsoleTableViewCell alloc] initWithStyle:style reuseIdentifier:CellIdentifier] autorelease];
+	}	
+			
+	cell.userInteractionEnabled = true;
+
     // Configure the cell...
 	switch (indexPath.section) {
 		case kConsoleSectionInfo:
-			if (cell == nil) {
-				cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:CellIdentifier] autorelease];
-			}			
 			switch (indexPath.row) {
 				case kConsoleSectionInfoRowConsoleServer:
+					cell.userInteractionEnabled = false;
 					cell.textLabel.text = NSLocalizedString(@"Console Server", nil);
 					cell.detailTextLabel.text = SWF(@"%@:%d", [CONSOLEMAN get_local_ip_address], CONSOLEMAN.server_port);
 					break;
-				default:
-					break;
-			}
-			break;
-			
-		case kConsoleSectionCommands:
-			if (cell == nil) {
-				cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier] autorelease];
-			}			
-			switch (indexPath.row) {
-				case kConsoleSectionCommandsRowLogsButton: {
+				case kConsoleSectionInfoRowLogsButton: {
 						cell.textLabel.text = NSLocalizedString(@"Logs Button", nil);
 						UIWindow* window = [UIApplication sharedApplication].keyWindow;
 						UIButton* showLogsButton = (UIButton*)[window viewWithTag:kTagLogsButton];
@@ -196,7 +252,14 @@ typedef enum {
 							cell.accessoryType = UITableViewCellAccessoryCheckmark;
 						}
 					}
+					break;					
+				default:
 					break;
+			}
+			break;
+			
+		case kConsoleSectionCommands:
+			switch (indexPath.row) {
 				case kConsoleSectionCommandsRowPropertyManipulator: {
 						cell.textLabel.text = NSLocalizedString(@"Property Manipulator", nil);
 						id targetObject = [CONSOLEMAN currentTargetObjectOrTopViewController];
@@ -213,25 +276,22 @@ typedef enum {
 			break;
 
 		case kConsoleSectionEvents:
-			if (cell == nil) {
-				cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];
-			}			
 #if USE_PRIVATE_API
-			cell.userInteractionEnabled = true;
 			cell.contentView.alpha = 1;
 			cell.detailTextLabel.text = nil;
 			
+#define DISABLED_VIEW_ALPHA 0.6
 			switch (indexPath.row) {
 				case kConsoleSectionEventsRowStopRecord:
-					cell.textLabel.text = NSLocalizedString(@"Stop Record UI Events", nil);
+					cell.textLabel.text = NSLocalizedString(@"Stop Record Touch Events", nil);
 					if (! EVENTRECORDER.recorded) {
 						cell.userInteractionEnabled = false;
-						cell.contentView.alpha = 0.5;
+						cell.contentView.alpha = DISABLED_VIEW_ALPHA;
 					}					
 					break;
 					
 				case kConsoleSectionEventsRowRecord: {
-					cell.textLabel.text = NSLocalizedString(@"Record UI Events", nil);
+					cell.textLabel.text = NSLocalizedString(@"Record Touch Events", nil);
 					if (EVENTRECORDER.recorded) {
 						cell.detailTextLabel.text = NSLocalizedString(@"Recording...", nil);
 					} else {
@@ -239,26 +299,26 @@ typedef enum {
 					}
 					if (EVENTRECORDER.recorded) {
 						cell.userInteractionEnabled = false;
-						cell.contentView.alpha = 0.5;
+						cell.contentView.alpha = DISABLED_VIEW_ALPHA;
 					}
 				}
 				break;
 					
 				case kConsoleSectionEventsRowPlay: {
-						cell.textLabel.text = NSLocalizedString(@"Play UI Events", nil);
+						cell.textLabel.text = NSLocalizedString(@"Play Touch Events", nil);
 						cell.detailTextLabel.text = SWF(@"%d", EVENTRECORDER.userEvents.count);
 						if (EVENTRECORDER.recorded || 0==EVENTRECORDER.userEvents.count) {
 							cell.userInteractionEnabled = false;
-							cell.contentView.alpha = 0.5;
+							cell.contentView.alpha = DISABLED_VIEW_ALPHA;
 						}
 					}
 					break;					
 					
 				case kConsoleSectionEventsRowClear: {
-						cell.textLabel.text = NSLocalizedString(@"Clear UI Events", nil);
+						cell.textLabel.text = NSLocalizedString(@"Clear Touch Events", nil);
 						if (EVENTRECORDER.recorded || 0 == EVENTRECORDER.userEvents.count) {
 							cell.userInteractionEnabled = false;
-							cell.contentView.alpha = 0.5;
+							cell.contentView.alpha = DISABLED_VIEW_ALPHA;
 						}
 					}
 					break;
@@ -281,17 +341,21 @@ typedef enum {
 	[tableView deselectRowAtIndexPath:indexPath animated:true];
 
 	switch (indexPath.section) {
-		case kConsoleSectionCommands:
+		case kConsoleSectionInfo:
 			switch (indexPath.row) {
-				case kConsoleSectionCommandsRowLogsButton: {
+				case kConsoleSectionInfoRowLogsButton: {
 						[CONSOLEMAN toggle_logs_button];
 						[self.tableView reloadData];
 						UIWindow* window = [UIApplication sharedApplication].keyWindow;
 						UIButton* showLogsButton = (UIButton*)[window viewWithTag:kTagLogsButton];
 						[[NSUserDefaults standardUserDefaults] setBool:(showLogsButton.hidden) forKey:SETTING_CONSOLE_LOGS_BUTTON];
 					}
-					break;
-					
+					break;					
+			}
+			break;
+			
+		case kConsoleSectionCommands:
+			switch (indexPath.row) {					
 				case kConsoleSectionCommandsRowPropertyManipulator: {
 						id targetObject = [CONSOLEMAN currentTargetObjectOrTopViewController];
 						[PROPERTYMAN manipulate:targetObject];
@@ -388,3 +452,23 @@ typedef enum {
 
 @end
 
+
+
+
+
+
+
+@implementation ConsoleTableViewCell
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    if ((self = [super initWithStyle:style reuseIdentifier:reuseIdentifier])) {
+		self.backgroundColor = [UIColor clearColor];
+    }
+    return self;
+}
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated {	
+    [super setSelected:selected animated:animated];
+}
+- (void)dealloc {
+    [super dealloc];
+}
+@end

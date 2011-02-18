@@ -21,16 +21,16 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
     
     // Override point for customization after application launch.
-	
+
     // Add the tab bar controller's view to the window and display.
     [window makeKeyAndVisible];
 	
 //#if TARGET_IPHONE_SIMULATOR
-	[CONSOLEMAN start_up];
-	 
 	[UnitTest setup];
 	[UnitTest run_all_tests];
 	[UnitTest report];
+	
+	[CONSOLEMAN start_up];
 //#endif
 	
     return YES;

@@ -122,6 +122,8 @@
 	if (self) {
 		ConsoleViewController* rootViewController = [[ConsoleViewController alloc] initWithNibName:@"ConsoleViewController" bundle:nil];
 		self.navigationController = [[UINavigationController alloc] initWithRootViewController:rootViewController];
+		self.navigationController.navigationBar.tintColor = [UIColor colorWithRed:0.3 green:0.3 blue:0.0 alpha:0.1];
+		self.navigationController.navigationBar.translucent = true;
 		[rootViewController release];
 		self.typeInfoTable = [[TypeInfoTable alloc] init];
 	}
