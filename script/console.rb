@@ -8,56 +8,89 @@ $LOAD_PATH.unshift DIR
 require 'ui_shell'
 require 'net/http'
 require 'timeout'
+require 'fileutils'
+
+EVENTS_PATH = "#{ENV['HOME']}/.console/events"
+FileUtils.mkdir_p EVENTS_PATH
 
 SPACE = ' '
 COLON = ':'
-
 PROMPT = '> '
-
-#== Shell ==
-##open: open Safari to display target UI
-###sleep N: sleep
-#History: [ history ] [ clear ]
-#Console: [ help (h) ] [ quit (q) ] [ about ]
-
-HELP = <<EOF
-ls TARGET           : list target object (l)        help     : help (h)
-  [ ls ]            : list current object           quit     : quit (q)
-  [ ls -r ]         : list recursive                about    : about libcat Console
-cd TARGET           : change target object          clear    : clear the screen
-  [ cd ]            : to topViewController          history  : input commands history
-  [ cd 0 ]          : at index as listed            sleep N  : sleep N seconds
-  [ cd 1 0 ]        : at section and index          
-  [ cd -1 0 ]       : at index on toolbar
-  [ cd . ]          : to self            
-  [ cd .. ]         : to superview       
-  [ cd Title ]      : labeled as Title   
-  [ cd view ]       : to property        
-  [ cd UIButton ]   : to class           
-  [ cd 0x6067490 ]  : at memory address             events                   : list touch events (e)
-properties TARGET   : list properties (p)             [ events record ]      : record on/off (er)
-  [ text ]          : property getter                 [ events play ]        : play events (ep)
-  [ text = hello ]  : property setter                 [ events cut N ]       : cut N events
-pwd                 : view & controller hierarchy     [ events clear ]       : clear events
-manipulate TARGET   : manipulate properties UI (m)    [ events replay NAME ] : replay events (ee)
-open                : open Safari UI                  [ events save NAME ]   : save events
-touch TARGET        : touch target object UI (t)      [ events load NAME ]   : load events
-back                : popViewController UI (b)
-rm TARGET           : removeFromSuperview UI        enum ENUMTYPE            : enum type info
-flash TARGET        : flash target object UI (f)      [ enum UITextAlignmentLeft ]
-hit                 : hitTest UI on/off               [ enum UITextAlignment ]
-EOF
-
 CONSOLE_VERSION = 0.2
 ABOUT = <<EOF
 libcat Console #{CONSOLE_VERSION}
 Copyright (c) 2010, 2011 WooKyoung Noh
 EOF
 
-EVENTS_PATH = "#{ENV['HOME']}/.console_events"
-require 'fileutils'
-FileUtils.mkdir_p EVENTS_PATH
+DEFAULT_ENV_COLUMNS = 100
+$COLUMNS = 100 #`tput cols`.to_i
 
+def print_help
+  help_pages = []
+  help_pages.push <<EOF
+ls TARGET           : list target object (l)      
+  [ ls ]            : list current object         
+  [ ls -r ]         : list recursive              
+cd TARGET           : change target object        
+  [ cd ]            : to topViewController        
+  [ cd 0 ]          : at index as listed          
+  [ cd 1 0 ]        : at section and index        
+  [ cd -1 0 ]       : at index on toolbar
+  [ cd . ]          : to self            
+  [ cd .. ]         : to superview       
+  [ cd Title ]      : labeled as Title   
+  [ cd view ]       : to property        
+  [ cd UIButton ]   : to class           
+  [ cd 0x6067490 ]  : at memory address           
+properties TARGET   : list properties (p)         
+  [ text ]          : property getter             
+  [ text = hello ]  : property setter             
+pwd                 : view & controller hierarchy 
+manipulate TARGET   : manipulate properties UI (m)
+open                : open Safari UI              
+touch TARGET        : touch target object UI (t)  
+back                : popViewController UI (b)
+rm TARGET           : removeFromSuperview UI      
+flash TARGET        : flash target object UI (f)  
+hit                 : hitTest UI on/off           
+EOF
+  help_pages.push <<EOF
+help     : help (h)
+quit     : quit (q)
+about    : about libcat Console
+clear    : clear the screen
+history  : input commands history
+sleep N  : sleep N seconds
+
+events                   : list touch events (e)
+  [ events record ]      : record on/off (er)
+  [ events play ]        : play events (ep)
+  [ events cut N ]       : cut N events
+  [ events clear ]       : clear events
+  [ events replay NAME ] : replay events (ee)
+  [ events save NAME ]   : save events
+  [ events load NAME ]   : load events
+
+enum ENUMTYPE            : enum type info
+  [ enum UITextAlignmentLeft ]
+  [ enum UITextAlignment ]
+EOF
+  if $COLUMNS >= DEFAULT_ENV_COLUMNS
+    first_page_lines = help_pages.first.split(LF)
+    max_width = first_page_lines.max_by {|x| x.length }.length
+    result_lines = first_page_lines.map {|x| x.ljust(max_width + 2) }
+    for page in help_pages[1..-1]
+      lines = page.split LF
+      0.upto lines.count do |line_no|
+        line = lines[line_no]
+        result_lines[line_no].concat line if line
+      end
+    end
+    puts result_lines.join(LF)
+  else
+    puts help_pages.join(LF)
+  end
+end
 
 def resolve_server_url
   console_server_address = ARGV.size>0 ? ARGV.first : 'localhost'
@@ -173,7 +206,7 @@ class Console
         response_body = console_request command, arg
         case command
         when 'h','help'
-           puts HELP
+           print_help
 	    when 'about'
            puts ABOUT
         when 'open'
@@ -204,6 +237,7 @@ class Console
   def connect_to_server
     begin
       prompt = Timeout::timeout 1 do
+        request_COLUMNS
         request_prompt
       end
       @shell.options[:prompt] = prompt
@@ -213,6 +247,10 @@ class Console
       prompt = PROMPT
       exit
     end
+  end
+
+  def request_COLUMNS
+    response_body = console_request 'COLUMNS', " = #{$COLUMNS}"
   end
 
   def request_prompt

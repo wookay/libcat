@@ -26,6 +26,8 @@
 #include <net/if.h>
 #include <ifaddrs.h>
 
+#define DEFAULT_ENV_COLUMNS 100
+
 // used also in console.rb
 #define CONSOLE_SERVER_PORT 8080
 #define LOGGER_SERVER_PORT_OFFSET 10
@@ -33,6 +35,7 @@
 @implementation ConsoleManager
 @synthesize currentTargetObject;
 @synthesize server_port;
+@synthesize COLUMNS;
 
 -(void) start_up {
 	[self start_servers];
@@ -113,7 +116,6 @@
 		return self.currentTargetObject;
 	}
 }
-
 
 -(NSString*) setterChain:(id)command arg:(id)arg {
 	NSMutableArray* ary = [NSMutableArray array];
@@ -210,7 +212,21 @@
 				[ary addObject:SWF(@"[%@ %@%@] %@", [target class], lastMethodUppercased, strObj, NSLocalizedString(@"failed", nil))];
 			}						
 		} else {
-			[ary addObject:SWF(@"%@ %@", lastMethodUppercased, [COMMANDMAN commandNotFound])];
+			if ([self respondsToSelector:sel]) {
+				NSMethodSignature* sig = [self methodSignatureForSelector:sel];
+				const char* argType = [sig getArgumentTypeAtIndex:ARGUMENT_INDEX_ONE];
+				if (_C_INT == *argType) {
+					Method m = class_getInstanceMethod([self class], sel);
+					IMP imp = method_getImplementation(m);					
+					((void (*)(id, SEL, int))imp)(self, sel, [strObj intValue]);
+				} else {
+					[self performSelector:sel withObject:strObj];
+				}
+				NSString* detail = [PROPERTYMAN.typeInfoTable objectDescription:strObj targetClass:NSStringFromClass([self class]) propertyName:lastMethod];
+				[ary addObject:SWF(@"%@ = %@", lastMethod, detail)];
+			} else {
+				[ary addObject:SWF(@"%@ %@", lastMethodUppercased, [COMMANDMAN commandNotFound])];
+			}
 		}
 	}
 	return [ary join:LF];
@@ -226,7 +242,7 @@
 	return [self getterChainObject:command arg:arg returnType:kGetterReturnTypeString];
 }
 
--(id) getterChainObject:(id)command arg:(id)arg returnType:(GetterReturnType)returnType {
+-(id) getterChainObject:(id)command arg:(id)arg returnType:(GetterReturnType)getterReturnType {
 	id target = currentTargetObject;
 	NSMutableArray* ary = [NSMutableArray array];
 	if ([command isNil]) {
@@ -442,7 +458,7 @@
 			}
 		}
 	} // for
-	if (kGetterReturnTypeObject == returnType) {
+	if (kGetterReturnTypeObject == getterReturnType) {
 		return target;
 	} else {
 		return [ary join:LF];
@@ -628,6 +644,7 @@
 	self = [super init];
 	if (self) {
 		self.currentTargetObject = nil;
+		self.COLUMNS = DEFAULT_ENV_COLUMNS;
 	}
 	return self;
 }

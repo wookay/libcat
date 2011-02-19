@@ -18,9 +18,11 @@ typedef enum { kGetterReturnTypeString, kGetterReturnTypeObject } GetterReturnTy
 @interface ConsoleManager : NSObject {
 	id currentTargetObject; // TARGET
 	int server_port;
+	int COLUMNS;
 }
 @property (nonatomic, retain) id currentTargetObject; // retain to get the view class in command_prompt:arg:
 @property (nonatomic, readonly) int server_port;
+@property (nonatomic) int COLUMNS;
 
 -(id) input:(NSString*)command arg:(id)arg ;
 -(id) input:(NSString*)input ;

@@ -62,10 +62,9 @@ NSArray* array_prefix_index(NSArray* array) {
 
 -(NSDictionary*) load_system_commands {
 	return [NSDictionary dictionaryWithKeysAndObjects:
-			@"echo", @"command_echo:arg:",
 			@"pwd", @"command_pwd:arg:",
 			@"hit", @"command_hit:arg:",
-			@"events", @"command_events:arg:",			
+			@"events", @"command_events:arg:",
 			@"cd", @"command_cd:arg:",
 			@"ls", @"command_ls:arg:",
 			@"touch", @"command_touch:arg:",
@@ -80,6 +79,7 @@ NSArray* array_prefix_index(NSArray* array) {
 			@"completion", @"command_completion:arg:",
 			@"prompt", @"command_prompt:arg:",
 			@"log", @"command_log:arg:",
+			@"echo", @"command_echo:arg:",
 			nil];
 }
 

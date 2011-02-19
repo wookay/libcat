@@ -6,9 +6,13 @@ require 'readline'
 require 'rubygems'
 require 'irb/completion'
 require 'pp'
+require 'fileutils'
+
 include Readline
 
-HISTORY_PATH = "#{ENV['HOME']}/.console_history"
+COLSOLE_PATH = "#{ENV['HOME']}/.console/"
+HISTORY_PATH = "#{COLSOLE_PATH}history"
+FileUtils.mkdir_p COLSOLE_PATH
 LF = "\n"
 
 COMMANDS = %w{open help quit about clear history sleep} + %w{back cd commands echo enum events flash hit log ls manipulate new_objects prompt properties pwd rm touch}

@@ -17,6 +17,7 @@
 #import "GeometryExt.h"
 #import "Inspect.h"
 #import <objc/message.h>
+#import "ConsoleManager.h"
 #import <UIKit/UIColor.h>
 
 @implementation PropertyManipulator
@@ -24,6 +25,11 @@
 @synthesize typeInfoTable;
 
 -(NSString*) list_properties:(id)targetObject {
+	int JUSTIFY_LINE = CONSOLEMAN.COLUMNS - 18;
+	int JUSTIFY_PROPERTY_NAME = 28;
+	int JUSTIFY_OBJECT = 0.45*JUSTIFY_LINE;
+	int JUSTIFY_ATTRIBUTE_STRING = 0.30*JUSTIFY_LINE;
+	
 	NSArray* hierarchyData = [targetObject class_hierarchy];
 	NSMutableArray* ary = [NSMutableArray array];
 	for (int idx = 0; idx < hierarchyData.count - 1; idx++) {
@@ -37,10 +43,6 @@
 			NSString* attributeString = [attributes objectAtFirst];
 			NSString* attributeStringAndReadonly = nil;
 #define STR_ATTRIBUTE_READONLY @"R"
-#define JUSTIFY_LINE 85
-#define JUSTIFY_PROPERTY_NAME (30)
-#define JUSTIFY_OBJECT (0.47*JUSTIFY_LINE)
-#define JUSTIFY_ATTRIBUTE_STRING (0.25*JUSTIFY_LINE)
 			if ([attributes containsObject:STR_ATTRIBUTE_READONLY]) {
 				attributeStringAndReadonly = SWF(@"%@ %@", [attributeString truncate:JUSTIFY_ATTRIBUTE_STRING], STR_ATTRIBUTE_READONLY);
 			} else {
