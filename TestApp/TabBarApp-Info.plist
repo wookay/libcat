@@ -31,5 +31,16 @@
 	<string>TabBarMainWindow</string>
 	<key>NSMainNibFile~ipad</key>
 	<string>TabBarMainWindow-iPad</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>libcat.TabBarApp</string>
+			</array>
+			<key>CFBundleURLName</key>
+			<string>libcat.TabBarApp</string>
+		</dict>
+	</array>
 </dict>
 </plist>

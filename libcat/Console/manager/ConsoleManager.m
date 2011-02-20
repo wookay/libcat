@@ -43,7 +43,6 @@
 
 -(void) start_up {
 	[self start_servers];
-	[self make_console_buttons];
 }
 
 -(void) start_up:(int)port {
@@ -55,19 +54,26 @@
 }
 
 -(void) start_servers:(int)port {
+	if (SERVER_STATE_RUNNING == [HTTPServer sharedServer].state) {
+		[self stop];
+	}
+
 	server_port = port;
 	[[HTTPServer sharedServer] startWithPort:port];
 	[[LoggerServer sharedServer] startWithPort:port+LOGGER_SERVER_PORT_OFFSET];
 	LOGGERMAN.delegate = [LoggerServer sharedServer];	
 	[LOGGERMAN.delegate addLogTextView];
-//	log_info(@"start_servers %@:%d", [self get_local_ip_address], port);
+	log_info(@"started Console %@:%d", [self get_local_ip_address], port);
+	
+	[self make_console_buttons];
 }
 
 -(void) stop {
 	[[HTTPServer sharedServer] stop];
 	[[LoggerServer sharedServer] stop];
 	[LOGGERMAN.delegate removeLogTextView];
-	LOGGERMAN.delegate = nil;	
+	LOGGERMAN.delegate = nil;
+	
 	[self hide_console_button];
 }
 
@@ -568,7 +574,7 @@
 	UIWindow* window = [UIApplication sharedApplication].keyWindow;
 	CGRect windowFrame = window.frame;
 
-	CGRect consoleRect = CGRectOffset(CGRectTopRight(windowFrame, 70, 19), -40, 21);
+	CGRect consoleRect = CGRectOffset(CGRectTopRight(windowFrame, 70, 19), -50, 21);
 	UIButton* consoleButton = [[ConsoleButton alloc] initWithFrame:consoleRect];
 	[consoleButton addTarget:self action:@selector(touchedConsoleButton:) forControlEvents:UIControlEventTouchUpInside];
 	[consoleButton setTitle:NSLocalizedString(@"Console", nil) forState:UIControlStateNormal];

@@ -32,11 +32,12 @@
 
 #pragma mark LoggerDelegate
 -(void) removeLogTextView {
-	[logTextView removeFromSuperview];
+	[self.logTextView removeFromSuperview];
+	self.logTextView = nil;
 }
 
 -(void) addLogTextView {
-	if (nil == logTextView) {
+	if (nil == self.logTextView) {
 		UIWindow* window = [UIApplication sharedApplication].keyWindow;
 		CGRect rect = CGRectOffset(CGRectExpand(SCREEN_FRAME, 0, -60), 0, 60);
 		self.logTextView = [[UITextView alloc] initWithFrame:rect];

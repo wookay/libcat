@@ -31,5 +31,16 @@
 	<string>NavigationMainWindow</string>
 	<key>NSMainNibFile~ipad</key>
 	<string>NavigationMainWindow-iPad</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>libcat.NavigationApp</string>
+			</array>
+			<key>CFBundleURLName</key>
+			<string>libcat.NavigationApp</string>
+		</dict>
+	</array>
 </dict>
 </plist>

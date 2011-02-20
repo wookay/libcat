@@ -31,5 +31,16 @@
 		<string>Icon.png</string>
 		<string>Icon-72.png</string>
 	</array>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>libcat.OpenGLApp</string>
+			</array>
+			<key>CFBundleURLName</key>
+			<string>libcat.OpenGLApp</string>
+		</dict>
+	</array>
 </dict>
 </plist>

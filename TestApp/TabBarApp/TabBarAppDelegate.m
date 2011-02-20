@@ -7,11 +7,19 @@
 //
 
 #import "TabBarAppDelegate.h"
+#import "ConsoleManager.h"
+#import "Logger.h"
 
 
 @implementation TabBarAppDelegate
 
 @synthesize tabBarController;
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+	log_info(@"openURL %@ %@ %@", url, sourceApplication, annotation);
+	[CONSOLEMAN start_up:8082];
+	return true;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
     [window addSubview:tabBarController.view];

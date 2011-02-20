@@ -78,9 +78,17 @@ NSArray* array_prefix_index(NSArray* array) {
 			@"new_objects", @"command_new_objects:arg:",
 			@"completion", @"command_completion:arg:",
 			@"prompt", @"command_prompt:arg:",
+			@"openURL", @"command_openURL:arg:",
 			@"log", @"command_log:arg:",
 			@"echo", @"command_echo:arg:",
 			nil];
+}
+
+-(NSString*) command_openURL:(id)currentObject arg:(id)arg {
+	NSString* urlScheme = SWF(@"%@://", arg);
+	NSURL* appURL = [NSURL URLWithString:urlScheme];
+	[[UIApplication sharedApplication] performSelector:@selector(openURL:) withObject:appURL afterDelay:0.3];	
+	return SWF(@"openURL %@", urlScheme);
 }
 
 -(NSString*) command_commands:(id)currentObject arg:(id)arg {

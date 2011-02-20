@@ -221,7 +221,6 @@ typedef enum {
 		case kConsoleSectionInfo:
 			switch (indexPath.row) {
 				case kConsoleSectionInfoRowConsoleServer:
-					cell.userInteractionEnabled = false;
 					cell.textLabel.text = NSLocalizedString(@"Console Server", nil);
 					cell.detailTextLabel.text = SWF(@"%@:%d", [CONSOLEMAN get_local_ip_address], CONSOLEMAN.server_port);
 					break;

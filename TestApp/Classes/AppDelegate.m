@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "UnitTest.h"
 #import "ConsoleManager.h"
+#import "Logger.h"
 
 @implementation AppDelegate
 
@@ -73,7 +74,7 @@
      See also applicationDidEnterBackground:.
      */
 	
-	[CONSOLEMAN stop];
+	// [CONSOLEMAN stop];
 
 }
 

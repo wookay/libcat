@@ -25,7 +25,7 @@
 #import <CFNetwork/CFNetwork.h>
 #endif
 #import "HTTPResponseHandler.h"
-
+#import "Logger.h"
 
 
 
@@ -114,6 +114,7 @@ NSString * const HTTPServerNotificationStateChanged = @"ServerNotificationStateC
 //
 - (void)errorWithName:(NSString *)errorName
 {
+	log_info(@"%@", errorName);
 	self.lastError = [NSError
 		errorWithDomain:@"HTTPServerError"
 		code:0
