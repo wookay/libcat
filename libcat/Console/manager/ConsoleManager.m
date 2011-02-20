@@ -25,6 +25,10 @@
 #include <netdb.h>
 #include <net/if.h>
 #include <ifaddrs.h>
+#if USE_PRIVATE_API
+#import "UIEventExt.h"
+#endif
+
 
 #define DEFAULT_ENV_COLUMNS 100
 
@@ -39,7 +43,7 @@
 
 -(void) start_up {
 	[self start_servers];
-	[self show_console_button];
+	[self make_console_buttons];
 }
 
 -(void) start_up:(int)port {
@@ -560,56 +564,72 @@
 	[PROPERTYMAN showConsoleController];
 }
 
-
--(void) show_console_button {
+-(void) make_console_buttons {
 	UIWindow* window = [UIApplication sharedApplication].keyWindow;
 	CGRect windowFrame = window.frame;
-	CGRect consoleRect = CGRectOffset(CGRectTopRight(windowFrame, 70, 19), -2, 21);
-	UIButton* consoleButton = [[UIButton alloc] initWithFrame:consoleRect];
+
+	CGRect consoleRect = CGRectOffset(CGRectTopRight(windowFrame, 70, 19), -40, 21);
+	UIButton* consoleButton = [[ConsoleButton alloc] initWithFrame:consoleRect];
 	[consoleButton addTarget:self action:@selector(touchedConsoleButton:) forControlEvents:UIControlEventTouchUpInside];
-	consoleButton.titleLabel.font = [UIFont fontWithName:@"Courier-Bold" size:consoleRect.size.height/1.3];
-	consoleButton.titleLabel.textAlignment = UITextAlignmentCenter;
-	consoleButton.titleLabel.baselineAdjustment = UIBaselineAdjustmentAlignCenters;
-	consoleButton.titleLabel.adjustsFontSizeToFitWidth = true;
-	consoleButton.layer.cornerRadius = 4.1;
-	consoleButton.backgroundColor = [UIColor colorWithRed:0.9 green:0.9 blue:0 alpha:0.8];
-	[consoleButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-	[consoleButton setTitleColor:[UIColor orangeColor] forState:UIControlStateHighlighted];
-	[consoleButton setTitleShadowColor:[UIColor whiteColor] forState:UIControlStateNormal];
 	[consoleButton setTitle:NSLocalizedString(@"Console", nil) forState:UIControlStateNormal];
 	[window addSubview:consoleButton];
 	[consoleButton release];
-	
-	CGRect logRect = CGRectOffset(CGRectTopRight(windowFrame, 45, consoleRect.size.height), -10 - consoleRect.size.width, consoleRect.origin.y);
-	UIButton* showLogsButton = [[UIButton alloc] initWithFrame:logRect];
+
+#define BUTTON_MARGIN 20
+	CGRect logsRect = CGRectMake(consoleRect.origin.x - 45 - BUTTON_MARGIN, consoleRect.origin.y, 45, consoleRect.size.height);
+	UIButton* logsButton = [[ConsoleButton alloc] initWithFrame:logsRect];
 	BOOL settingConsoleLogsButton = [[NSUserDefaults standardUserDefaults] boolForKey:SETTING_CONSOLE_LOGS_BUTTON];
-	showLogsButton.hidden = settingConsoleLogsButton;
-	showLogsButton.tag = kTagLogsButton;
-	[showLogsButton addTarget:self action:@selector(touchedToggleLogsButton:) forControlEvents:UIControlEventTouchUpInside];
-	showLogsButton.titleLabel.font = consoleButton.titleLabel.font;
-	showLogsButton.titleLabel.textAlignment = consoleButton.titleLabel.textAlignment;
-	showLogsButton.titleLabel.baselineAdjustment = consoleButton.titleLabel.baselineAdjustment;
-	showLogsButton.titleLabel.adjustsFontSizeToFitWidth = consoleButton.titleLabel.adjustsFontSizeToFitWidth;
-	showLogsButton.layer.cornerRadius = consoleButton.layer.cornerRadius;
-	showLogsButton.backgroundColor = consoleButton.backgroundColor;
-	[showLogsButton setTitleColor:[consoleButton titleColorForState:UIControlStateNormal] forState:UIControlStateNormal];
-	[showLogsButton setTitleColor:[consoleButton titleColorForState:UIControlStateHighlighted] forState:UIControlStateHighlighted];
-	[showLogsButton setTitleShadowColor:[consoleButton titleShadowColorForState:UIControlStateNormal] forState:UIControlStateNormal];
-	[showLogsButton setTitle:NSLocalizedString(@"Logs", nil) forState:UIControlStateNormal];	
-	[window addSubview:showLogsButton];
-	[showLogsButton release];		
+	logsButton.hidden = settingConsoleLogsButton;
+	logsButton.tag = kTagLogsButton;
+	[logsButton addTarget:self action:@selector(touchedToggleLogsButton:) forControlEvents:UIControlEventTouchUpInside];
+	[logsButton setTitle:NSLocalizedString(@"Logs", nil) forState:UIControlStateNormal];	
+	[window addSubview:logsButton];
+	[logsButton release];		
+	
+//#if USE_PRIVATE_API
+//	CGRect recordRect = CGRectMake(logsRect.origin.x - 45 - BUTTON_MARGIN, consoleRect.origin.y, 45, consoleRect.size.height);
+//	UIButton* recordButton = [[ConsoleButton alloc] initWithFrame:recordRect];
+//	BOOL settingConsoleRecordButton = [[NSUserDefaults standardUserDefaults] boolForKey:SETTING_CONSOLE_RECORD_BUTTON];
+//	recordButton.hidden = settingConsoleRecordButton;
+//	recordButton.tag = kTagRecordButton;
+//	[recordButton addTarget:self action:@selector(touchedToggleRecordButton:) forControlEvents:UIControlEventTouchUpInside];
+//	[window addSubview:recordButton];
+//	[self update_record_button];
+//	[recordButton release];		
+//#endif
+}
+
+-(void) update_record_button {
+#if USE_PRIVATE_API
+	UIWindow* window = [UIApplication sharedApplication].keyWindow;
+	UIButton* recordButton = (UIButton*)[window viewWithTag:kTagRecordButton];
+	if (EVENTRECORDER.recorded) {
+		[recordButton setTitle:NSLocalizedString(@"Stop", nil) forState:UIControlStateNormal];	
+		[recordButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+	} else {
+		[recordButton setTitle:NSLocalizedString(@"Record", nil) forState:UIControlStateNormal];	
+		[recordButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+	}
+#endif
 }
 
 -(void) toggle_logs_button {
 	UIWindow* window = [UIApplication sharedApplication].keyWindow;
-	UIButton* showLogsButton = (UIButton*)[window viewWithTag:kTagLogsButton];
-	BOOL hidden = showLogsButton.hidden;
+	UIButton* logsButton = (UIButton*)[window viewWithTag:kTagLogsButton];
+	BOOL hidden = logsButton.hidden;
 	if (hidden) {
-		[window bringSubviewToFront:showLogsButton];
+		[window bringSubviewToFront:logsButton];
 	} else {
 		[LoggerServer sharedServer].logTextView.hidden = true;
 	}
-	showLogsButton.hidden = ! hidden;
+	logsButton.hidden = ! hidden;
+}
+
+-(IBAction) touchedToggleRecordButton:(id)sender {
+#if USE_PRIVATE_API
+	[EVENTRECORDER toggleRecordUserEvents];
+	[self update_record_button];
+#endif
 }
 
 -(IBAction) touchedToggleLogsButton:(id)sender {
@@ -625,7 +645,12 @@
 	UIWindow* window = [UIApplication sharedApplication].keyWindow;
 	for (UIView* view in window.subviews) {
 		if ([view isKindOfClass:[UIButton class]]) {
-			[view removeFromSuperview];
+			UIButton* button = (UIButton*)view;
+			NSArray* actions = [button actionsForTarget:self forControlEvent:UIControlEventTouchUpInside];
+			for (NSString* selName in actions) {
+				[button removeTarget:self action:NSSelectorFromString(selName) forControlEvents:UIControlEventTouchUpInside];
+			}
+			[button removeFromSuperview];
 		} else if ([view isKindOfClass:[UITextView class]]) {
 			[view removeFromSuperview];
 		}
@@ -654,4 +679,23 @@
 	[super dealloc];
 }
 
+@end
+
+
+@implementation ConsoleButton
+-(id) initWithFrame:(CGRect)frame {
+	self = [super initWithFrame:frame];
+	if (self) {
+		self.titleLabel.font = [UIFont fontWithName:@"Courier-Bold" size:frame.size.height/1.3];
+		self.titleLabel.textAlignment = UITextAlignmentCenter;
+		self.titleLabel.baselineAdjustment = UIBaselineAdjustmentAlignCenters;
+		self.titleLabel.adjustsFontSizeToFitWidth = true;
+		self.layer.cornerRadius = 4.1;
+		self.backgroundColor = [UIColor colorWithRed:0.9 green:0.9 blue:0 alpha:0.8];
+		[self setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+		[self setTitleColor:[UIColor orangeColor] forState:UIControlStateHighlighted];
+		[self setTitleShadowColor:[UIColor whiteColor] forState:UIControlStateNormal];
+	}
+	return self;
+}
 @end

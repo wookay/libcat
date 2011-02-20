@@ -65,11 +65,11 @@ sleep N  : sleep N seconds
 events                   : list touch events (e)
   [ events record ]      : record on/off (er)
   [ events play ]        : play events (ep)
-  [ events cut N ]       : cut N events
-  [ events clear ]       : clear events
+  [ events cut N ]       : cut N events (ex)
+  [ events clear ]       : clear events (ec)
   [ events replay NAME ] : replay events (ee)
-  [ events save NAME ]   : save events
-  [ events load NAME ]   : load events
+  [ events save NAME ]   : save events (es)
+  [ events load NAME ]   : load events (el)
 
 enum ENUMTYPE            : enum type info
   [ enum UITextAlignmentLeft ]
@@ -135,6 +135,10 @@ class Console
     'er' => 'events record',
     'ep' => 'events play',
     'ee' => 'events replay',
+    'ex' => 'events cut',
+    'ec' => 'events clear',
+    'es' => 'events save',
+    'el' => 'events load',
 	'm' => 'manipulate',
 	'p' => 'properties',
     'b' => 'back',

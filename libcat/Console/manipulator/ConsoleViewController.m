@@ -143,24 +143,6 @@ typedef enum {
     return 0;
 }
 
-//- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-//	switch (section) {
-//		case kConsoleSectionInfo: {
-//				CGFloat height = [self tableView:tableView heightForFooterInSection:section];
-//				UILabel*label = [[[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, height)] autorelease];
-//				label.textAlignment = UITextAlignmentCenter;
-//				label.text = [self tableView:tableView titleForFooterInSection:section];
-//				label.backgroundColor = [UIColor clearColor];
-//				label.font = [UIFont fontWithName:@"Futura-Medium" size:14];
-//				[label sizeToFit];
-//				return label;
-//			}
-//			break;
-//	}
-//			
-//	return nil;
-//}
-
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
 	switch (section) {
 		case kConsoleSectionInfo:
@@ -232,6 +214,7 @@ typedef enum {
 	}	
 			
 	cell.userInteractionEnabled = true;
+	cell.accessoryType = UITableViewCellAccessoryNone;
 
     // Configure the cell...
 	switch (indexPath.section) {
@@ -247,7 +230,6 @@ typedef enum {
 						UIWindow* window = [UIApplication sharedApplication].keyWindow;
 						UIButton* showLogsButton = (UIButton*)[window viewWithTag:kTagLogsButton];
 						if (showLogsButton.hidden) {
-							cell.accessoryType = UITableViewCellAccessoryNone;
 						} else {
 							cell.accessoryType = UITableViewCellAccessoryCheckmark;
 						}

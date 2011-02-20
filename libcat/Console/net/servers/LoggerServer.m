@@ -30,6 +30,7 @@
 @implementation LoggerServer
 @synthesize logTextView;
 
+#pragma mark LoggerDelegate
 -(void) removeLogTextView {
 	[logTextView removeFromSuperview];
 }
@@ -46,78 +47,6 @@
 		logTextView.hidden = true;
 		[logTextView release];
 	}
-}
-
-//-(void) show_ip_address {
-//	NSString* ip_address = [CONSOLEMAN get_local_ip_address];
-//	if (nil == ip_address) {
-//		ip_address = NSLocalizedString(@"Unknown IP", nil);
-//	} else {
-//		print_log_info(@"~/libcat/script$ ruby console.rb %@\n", ip_address);
-//	}
-//	
-//	UIWindow* window = [UIApplication sharedApplication].keyWindow;
-//	CGRect windowFrame = window.frame;
-//	CGRect ipRect = CGRectBottomLeft(windowFrame, 90, 20);
-//	UIButton* ipButton = [[UIButton alloc] initWithFrame:ipRect];
-//	[ipButton addTarget:self action:@selector(touchedIpButton:) forControlEvents:UIControlEventTouchUpInside];
-//	ipButton.titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:ipRect.size.height/1.5];
-//	ipButton.titleLabel.textAlignment = UITextAlignmentCenter;
-//	ipButton.titleLabel.baselineAdjustment = UIBaselineAdjustmentAlignCenters;
-//	ipButton.titleLabel.adjustsFontSizeToFitWidth = true;
-//	ipButton.layer.cornerRadius = 3;
-//	ipButton.backgroundColor = [UIColor yellowColor];
-//	[ipButton setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
-//	[ipButton setTitle:ip_address forState:UIControlStateNormal];
-//	[window addSubview:ipButton];
-//	[ipButton release];
-//	
-//	if (nil == logTextView) {
-//		CGRect rect = CGRectOffset(SCREEN_FRAME, 0, 20);
-//		self.logTextView = [[UITextView alloc] initWithFrame:rect];
-//		[window addSubview:logTextView];
-//		logTextView.backgroundColor = [UIColor colorWithRed:230/FF green:230/FF blue:177/FF alpha:0.81];
-//		logTextView.textColor = [UIColor blackColor];
-//		logTextView.editable = false;
-//		logTextView.hidden = true;
-//		[logTextView release];
-//	}		
-//	
-//	CGRect logRect = CGRectOffset(CGRectBottomLeft(windowFrame, 39, 20), ipRect.size.width + 18, 0);
-//	UIButton* showLogsButton = [[UIButton alloc] initWithFrame:logRect];
-//	[showLogsButton addTarget:self action:@selector(touchedToggleLogsButton:) forControlEvents:UIControlEventTouchUpInside];
-//	showLogsButton.titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:logRect.size.height/1.5];
-//	showLogsButton.titleLabel.textAlignment = UITextAlignmentCenter;
-//	showLogsButton.titleLabel.baselineAdjustment = UIBaselineAdjustmentAlignCenters;
-//	showLogsButton.titleLabel.adjustsFontSizeToFitWidth = true;
-//	showLogsButton.layer.cornerRadius = 3;
-//	showLogsButton.backgroundColor = [UIColor orangeColor];
-//	[showLogsButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-//	[showLogsButton setTitle:@"log" forState:UIControlStateNormal];	
-//	[window addSubview:showLogsButton];
-//	[showLogsButton release];	
-//}
-
--(IBAction) touchedIpButton:(id)sender {
-	for (UIView* view in [UIApplication sharedApplication].keyWindow.subviews) {
-		if ([view isKindOfClass:[UIButton class]]) {
-			[view removeFromSuperview];
-		}
-	}
-	[logTextView removeFromSuperview];
-}
-
--(IBAction) touchedToggleLogsButton:(id)sender {
-	BOOL hidden = logTextView.hidden;
-	
-	if (hidden) {
-		CGPoint bottomOffset = CGPointMake(0, [logTextView contentSize].height - logTextView.frame.size.height);
-		if (bottomOffset.y > 0) {
-			[logTextView setContentOffset:bottomOffset animated:YES];
-		}
-	}
-
-	logTextView.hidden = ! hidden;
 }
 
 -(void) loggerTextOut:(NSString *)text {
@@ -140,6 +69,8 @@
 		}
 	}
 }
+
+
 
 + (LoggerServer*) sharedServer {
 	static LoggerServer*	manager = nil;
@@ -201,12 +132,6 @@
 - (void)onSocket:(AsyncSocket *)sock didConnectToHost:(NSString *)host port:(UInt16)port
 {
 	log_info(@"Accepted client %@:%hu", host, port);
-	
-//	NSString *welcomeMsg = @"Welcome to the AsyncSocket Echo Server\r\n";
-//	NSData *welcomeData = [welcomeMsg dataUsingEncoding:NSUTF8StringEncoding];
-//	[sock writeData:welcomeData withTimeout:-1 tag:WELCOME_MSG];
-	
-//	[sock readDataToData:[AsyncSocket CRLFData] withTimeout:READ_TIMEOUT tag:0];
 }
 
 

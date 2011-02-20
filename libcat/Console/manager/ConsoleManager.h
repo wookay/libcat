@@ -9,8 +9,12 @@
 #import <Foundation/Foundation.h>
 
 #define CONSOLEMAN	[ConsoleManager sharedManager]
-#define kTagLogsButton 50
+enum {
+	kTagLogsButton = 50,
+	kTagRecordButton,
+};
 #define SETTING_CONSOLE_LOGS_BUTTON @"Console Logs Button"
+#define SETTING_CONSOLE_RECORD_BUTTON @"Console Record Button"
 
 typedef enum { kGetterReturnTypeString, kGetterReturnTypeObject } GetterReturnType ;
 
@@ -44,9 +48,14 @@ typedef enum { kGetterReturnTypeString, kGetterReturnTypeObject } GetterReturnTy
 -(void) start_servers ;
 -(void) start_servers:(int)port ;
 -(void) stop ;
--(void) show_console_button ;
--(void) hide_console_button ;
 -(NSString*) get_local_ip_address ;
+-(void) make_console_buttons ;
+-(void) hide_console_button ;
 -(void) toggle_logs_button ;
+-(void) update_record_button ;
+@end
 
+
+
+@interface ConsoleButton : UIButton
 @end

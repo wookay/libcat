@@ -10,6 +10,7 @@
 #import "UITouchExt.h"
 #import "NSDictionaryExt.h"
 #import "NSStringExt.h"
+#import "UIViewExt.h"
 #import "NSArrayExt.h"
 #import "Logger.h"
 #import "Numero.h"
@@ -47,6 +48,7 @@
 #if USE_PRIVATE_API
 	if (recorded) {
 		[[UIApplication sharedApplication] _addRecorder:self];
+		[[UIApplication sharedApplication].keyWindow flick];
 	} else {
 		[[UIApplication sharedApplication] _removeRecorder:self];
 	}
