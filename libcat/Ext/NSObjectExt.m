@@ -248,7 +248,7 @@
 					obj = NSStringFromUIEdgeInsets(edgeInsets);															
 				} else {
 					// @"{CATransform3D"
-					log_info(@"propertyName %@ attributesString %@", NSStringFromSelector(sel), attributesString);
+//					log_info(@"propertyName %@ attributesString %@", NSStringFromSelector(sel), attributesString);
 				}
 				if (nil == obj) {
 					*failed = true;

@@ -201,7 +201,7 @@ typedef enum {
 	UITableViewCellStyle style = UITableViewCellStyleDefault;
 	switch (indexPath.section) {	
 		case kConsoleSectionInfo:
-			style = UITableViewCellStyleValue2;
+			style = UITableViewCellStyleValue1;
 			break;
 		case kConsoleSectionCommands:
 			style = UITableViewCellStyleSubtitle;
