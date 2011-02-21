@@ -38,6 +38,7 @@ NSValue* got_encoded = [NSObject objectWithValue:&__got withObjCType: @encode(__
 
 @interface UnitTest : NSObject
 
++(void) run ;
 +(void) setup ;
 +(void) report ;
 +(void) assert:(NSValue*)got equals:(NSValue*)expected inFile:(NSString*)file atLine:(int)line ;

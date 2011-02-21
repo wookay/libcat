@@ -130,6 +130,11 @@ NSString* monthLongName_day_SPACE(int month, int day) ;
 @end
 
 
+@interface NSDate (Year)
++(NSArray*) daysFromYear:(int)year ;
+@end
+
+
 #pragma mark AMPM
 typedef struct AMPMHour12 {
 	int ampm;
@@ -140,4 +145,9 @@ enum { HOUR_AM, HOUR_PM };
 @interface NSDate (AMPM)
 +(int) ampm:(int)amPm hour12_to_hour24:(int)hour12 ;
 +(AMPMHour12) hour24_to_ampm_hour12:(int)hour24 ;
+@end
+
+
+@interface NSDateComponents (Description)
+-(NSString*) gmtString ;
 @end

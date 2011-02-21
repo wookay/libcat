@@ -20,6 +20,12 @@
 
 @implementation UnitTest
 
++(void) run {
+	[self setup];
+	[self run_all_tests];
+	[self report];
+}
+
 +(void) setup {
 	UNITTESTMAN.test_started_at = [NSDate date];
 	print_log_info(@"Started\n");

@@ -576,8 +576,23 @@ NSString* monthLongName_day_SPACE(int month, int day) {
 
 @end
 
-			
-			
+
+@implementation NSDate (Year)
++(NSArray*) daysFromYear:(int)year {
+	unsigned unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit | NSWeekCalendarUnit | NSWeekdayCalendarUnit ;
+	NSDate* jan1th = [NSDate dateFrom:year month:1 day:1];
+	NSDate* day = jan1th;
+	NSMutableArray* ary = [NSMutableArray array];
+	for (int idx = 1; idx <= ONE_YEAR_DAYS; idx++) {
+		NSDateComponents* comp = [[NSCalendar currentCalendar] components:unitFlags fromDate:day];
+		[ary addObject:comp];
+		day = [day tomorrow];
+	}
+	return ary;
+}
+@end
+
+
 @implementation NSDate (AMPM)
 +(int) ampm:(int)amPm hour12_to_hour24:(int)hour12 {
 	switch (amPm) {
@@ -599,5 +614,12 @@ NSString* monthLongName_day_SPACE(int month, int day) {
 		amPmHour12.hour12 = hour24;
 	}
 	return amPmHour12;
+}
+@end
+
+
+@implementation NSDateComponents (Description)
+-(NSString*) gmtString {
+	return SWF(@"%04d-%02d-%02d %02d:%02d:%02d %d,%d", [self year], [self month], [self day], [self hour], [self minute], [self second], [self week], [self weekday]);
 }
 @end

@@ -21,7 +21,9 @@
 
 typedef enum {
 	kConsoleSectionCommands,
+#if USE_PRIVATE_API
 	kConsoleSectionEvents,
+#endif
 	kConsoleSectionInfo,
 	kConsoleSectionCount,
 } kConsoleSection;
@@ -117,11 +119,7 @@ typedef enum {
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-#if USE_PRIVATE_API
     return kConsoleSectionCount;
-#else
-	return kConsoleSectionCount - 1;
-#endif
 }
 
 
@@ -134,9 +132,11 @@ typedef enum {
 		case kConsoleSectionCommands:
 			return kConsoleSectionCommandsRowCount;
 			break;
+#if USE_PRIVATE_API
 		case kConsoleSectionEvents:
 			return kConsoleSectionEventsRowCount;
 			break;			
+#endif
 		default:
 			break;
 	}
@@ -180,9 +180,11 @@ typedef enum {
 		case kConsoleSectionCommands:
 			return NSLocalizedString(@"Commands", nil);
 			break;
+#if USE_PRIVATE_API
 		case kConsoleSectionEvents:
 			return NSLocalizedString(@"Touch Events", nil);
-			break;			
+			break;
+#endif
 		default:
 			break;
 	}
@@ -204,9 +206,11 @@ typedef enum {
 		case kConsoleSectionCommands:
 			style = UITableViewCellStyleSubtitle;
 			break;
+#if USE_PRIVATE_API
 		case kConsoleSectionEvents:
 			style = UITableViewCellStyleValue1;
 			break;
+#endif
 	}
 			
 	if (cell == nil) {
@@ -255,9 +259,9 @@ typedef enum {
 					break;
 			}			
 			break;
-
-		case kConsoleSectionEvents:
+			
 #if USE_PRIVATE_API
+		case kConsoleSectionEvents:
 			cell.contentView.alpha = 1;
 			cell.detailTextLabel.text = nil;
 			
@@ -305,8 +309,8 @@ typedef enum {
 					break;
 
 			}
-#endif
 			break;
+#endif
 
 		default:
 			break;
@@ -398,8 +402,10 @@ typedef enum {
 }
 
 -(void) refreshEventsSection {
+#if USE_PRIVATE_API
 	NSIndexSet* indexSet = [NSIndexSet indexSetWithIndex:kConsoleSectionEvents];
 	[self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationBottom];
+#endif
 }
 
 -(void) event_record_toggler {

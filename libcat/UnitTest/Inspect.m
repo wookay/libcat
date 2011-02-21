@@ -62,6 +62,8 @@
 		return SWF(@"%@\"%@\"", AT_SIGN, anObject);
 	} else if ([anObject isKindOfClass:[NSDate class]]) {
 		return [anObject gmtString];
+	} else if ([anObject isKindOfClass:[NSDateComponents class]]) {
+		return [anObject gmtString];
 	} else if ([anObject isKindOfClass:[NSValue class]]) {
 		const char* aTypeDescription = [(NSValue*)anObject objCType];
 		switch (*aTypeDescription) {
@@ -132,6 +134,8 @@
 	} else if ([anObject isKindOfClass:[NSString class]]) {
 		return SWF(@"\"%@\"", anObject);
 	} else if ([anObject isKindOfClass:[NSDate class]]) {
+		return [anObject gmtString];
+	} else if ([anObject isKindOfClass:[NSDateComponents class]]) {
 		return [anObject gmtString];
 	} else if ([anObject isKindOfClass:[NSValue class]]) {
 		const char* aTypeDescription = [(NSValue*)anObject objCType];
