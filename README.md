@@ -21,3 +21,4 @@ Console
 Feedback
 --------
  * Subscribe to google groups <http://groups.google.com/group/interactivelibcat>
+ * Reddit libcat <http://www.reddit.com/r/libcat/>
