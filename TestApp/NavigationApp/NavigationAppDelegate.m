@@ -19,9 +19,15 @@
 #pragma mark Application lifecycle
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-	log_info(@"openURL %@ %@ %@", url, sourceApplication, annotation);
-	[CONSOLEMAN start_up:8081];
-	return true;
+	NSString* password = [url resourceSpecifier];
+	log_info(@"openURL url:%@ password:%@ sourceApplication:%@ annotation:%@", url, password, sourceApplication, annotation);
+
+#define STR_PASSWORD @"8081"
+	if ([password isEqualToString:STR_PASSWORD]) {
+		[CONSOLEMAN start_up:8081];
+		return true;
+	}
+	return false;
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    

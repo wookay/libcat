@@ -85,7 +85,15 @@ NSArray* array_prefix_index(NSArray* array) {
 }
 
 -(NSString*) command_openURL:(id)currentObject arg:(id)arg {
-	NSString* urlScheme = SWF(@"%@://", arg);
+#define STR_COLON @":"
+	NSString* urlScheme;
+	if ([arg hasText:STR_COLON]) {
+		urlScheme = arg;
+	} else if ([arg hasText:SPACE]) {
+		urlScheme = [[arg split:SPACE] join:STR_COLON];
+	} else {
+		urlScheme = SWF(@"%@%@", arg, STR_COLON);
+	}
 	NSURL* appURL = [NSURL URLWithString:urlScheme];
 	[[UIApplication sharedApplication] performSelector:@selector(openURL:) withObject:appURL afterDelay:0.3];	
 	return SWF(@"openURL %@", urlScheme);

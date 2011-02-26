@@ -40,6 +40,30 @@
 	[self setObject:ary forKey:key];
 }
 
+-(void) updateDictionaryWithObject:(id)obj innerKey:(id)innerKey forKey:(id)key {
+	NSDictionary* exist = [self objectForKey:key];
+	NSMutableDictionary* dict;
+	if (nil == exist) {
+		dict = [NSMutableDictionary dictionary];
+	} else {
+		dict = [NSMutableDictionary dictionaryWithDictionary:exist];
+	}
+	[dict setObject:obj forKey:innerKey];
+	[self setObject:dict forKey:key];
+}
+
+-(void) updateDictionaryWithDictionary:(NSDictionary*)obj forKey:(id)key {
+	NSDictionary* exist = [self objectForKey:key];
+	NSMutableDictionary* dict;
+	if (nil == exist) {
+		dict = [NSMutableDictionary dictionary];
+	} else {
+		dict = [NSMutableDictionary dictionaryWithDictionary:exist];
+	}
+	[dict addEntriesFromDictionary:obj];
+	[self setObject:dict forKey:key];
+}
+
 -(NSArray*) arrayForKey:(id)key {
 	NSArray* exist = [self objectForKey:key];
 	if (nil == exist) {

@@ -10,7 +10,6 @@
 #define ONE_DAY_SECONDS		86400 // 1 day = 60*60*24 seconds
 #define ONE_HOUR_SECONDS	3600 // 60*60
 #define ONE_MINUTE_SECONDS	60
-#define ONE_YEAR_DAYS		365
 #define ONE_DAY_HOURS		24
 
 #define WEEKDAY_COUNT 7
@@ -69,6 +68,7 @@ NSString* monthLongName_day_SPACE(int month, int day) ;
 #pragma mark NSDateComponents
 -(NSDateComponents*) today_components ;
 -(NSDateComponents*) tomorrow_components ;
+-(NSDateComponents*) yesterday_components ;
 
 #pragma mark NSString
 -(NSString*) year_month_day_MINUS ;
@@ -115,9 +115,11 @@ NSString* monthLongName_day_SPACE(int month, int day) ;
 
 
 @interface NSDate (Weekday)
-+(NSArray*) weekdayNames ;
-+(int) sundayWeekdayIndex ;
 -(NSString*) weekdayName ;
+-(NSArray*) weekdayNames ;
+-(NSString*) shortWeekdayName ;
+-(NSArray*) shortWeekdayNames ;
++(int) sundayWeekdayIndex ;
 -(BOOL) isSunday ;
 @end
 
@@ -130,6 +132,8 @@ NSString* monthLongName_day_SPACE(int month, int day) ;
 @end
 
 
+//#define DAY_UNIT_FLAGS (NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit | NSWeekCalendarUnit | NSWeekdayCalendarUnit)
+#define DAY_UNIT_FLAGS (NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekCalendarUnit | NSWeekdayCalendarUnit)
 @interface NSDate (Year)
 +(NSArray*) daysFromYear:(int)year ;
 @end
@@ -148,6 +152,7 @@ enum { HOUR_AM, HOUR_PM };
 @end
 
 
-@interface NSDateComponents (Description)
+@interface NSDateComponents (Ext)
+-(NSDate*) to_date ;
 -(NSString*) gmtString ;
 @end

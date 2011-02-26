@@ -248,14 +248,21 @@ NSString* monthLongName_day_SPACE(int month, int day) {
 
 #pragma mark NSDateComponents
 -(NSDateComponents*) today_components {
-	unsigned unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit;
+	unsigned unitFlags = DAY_UNIT_FLAGS;
 	NSDateComponents* comps = [[NSCalendar currentCalendar] components:unitFlags fromDate:self];
 	return comps;	
 }
 
 -(NSDateComponents*) tomorrow_components {
-	unsigned unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit;
+	unsigned unitFlags = DAY_UNIT_FLAGS;
 	NSDate* tomorrow = [self internal_dateByAddingTimeInterval:ONE_DAY_SECONDS];
+	NSDateComponents* comps = [[NSCalendar currentCalendar] components:unitFlags fromDate:tomorrow];
+	return comps;
+}
+
+-(NSDateComponents*) yesterday_components {
+	unsigned unitFlags = DAY_UNIT_FLAGS;
+	NSDate* tomorrow = [self internal_dateByAddingTimeInterval:-ONE_DAY_SECONDS];
 	NSDateComponents* comps = [[NSCalendar currentCalendar] components:unitFlags fromDate:tomorrow];
 	return comps;
 }
@@ -416,11 +423,13 @@ NSString* monthLongName_day_SPACE(int month, int day) {
 }
 
 -(NSDate*) tomorrow {
-	return [self after:ONE_DAY_SECONDS];
+	NSDateComponents* comp = [self tomorrow_components];
+	return [[NSCalendar currentCalendar] dateFromComponents:comp];
 }
 
 -(NSDate*) yesterday {
-	return [self after:-ONE_DAY_SECONDS];
+	NSDateComponents* comp = [self yesterday_components];
+	return [[NSCalendar currentCalendar] dateFromComponents:comp];
 }
 
 
@@ -522,18 +531,43 @@ NSString* monthLongName_day_SPACE(int month, int day) {
 
 
 
+
+@interface NSDate (WeekdayPrivate)
+-(NSString*) weekdayNameBy:(SEL)sel ;
++(NSArray*) weekdayNamesBy:(SEL)sel ;
+@end
+@implementation NSDate (WeekdayPrivate)
+-(NSString*) weekdayNameBy:(SEL)sel {
+	int idx = [self weekday] - FIRST_WEEKDAY_OF_CALENDAR;
+	return [[NSDate weekdayNamesBy:sel] objectAtIndex:idx];
+}
+
++(NSArray*) weekdayNamesBy:(SEL)sel {
+	NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];	
+	NSArray* names = [[dateFormatter performSelector:sel] rshift:FIRST_WEEKDAY_OF_CALENDAR - 1];
+	[dateFormatter release];
+	return names;
+}
+@end
+
+
+
 @implementation NSDate (Weekday)
 
 -(NSString*) weekdayName {
-	int idx = [self weekday] - FIRST_WEEKDAY_OF_CALENDAR;
-	return [[NSDate weekdayNames] objectAtIndex:idx];
+	return [self weekdayNameBy:@selector(weekdaySymbols)];
 }
 
-+(NSArray*) weekdayNames {
-	NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];	
-	NSArray* names = [[dateFormatter shortWeekdaySymbols] rshift:FIRST_WEEKDAY_OF_CALENDAR - 1];
-	[dateFormatter release];
-	return names;
+-(NSArray*) weekdayNames {
+	return [NSDate weekdayNamesBy:@selector(weekdaySymbols)];
+}
+
+-(NSString*) shortWeekdayName {
+	return [self weekdayNameBy:@selector(shortWeekdaySymbols)];
+}
+
+-(NSArray*) shortWeekdayNames {
+	return [NSDate weekdayNamesBy:@selector(shortWeekdaySymbols)];
 }
 
 +(int) sundayWeekdayIndex {
@@ -579,15 +613,14 @@ NSString* monthLongName_day_SPACE(int month, int day) {
 
 @implementation NSDate (Year)
 +(NSArray*) daysFromYear:(int)year {
-	unsigned unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit | NSWeekCalendarUnit | NSWeekdayCalendarUnit ;
-	NSDate* jan1th = [NSDate dateFrom:year month:1 day:1];
-	NSDate* day = jan1th;
 	NSMutableArray* ary = [NSMutableArray array];
-	for (int idx = 1; idx <= ONE_YEAR_DAYS; idx++) {
-		NSDateComponents* comp = [[NSCalendar currentCalendar] components:unitFlags fromDate:day];
-		[ary addObject:comp];
-		day = [day tomorrow];
-	}
+	for (int monthIdx = 1; monthIdx <= MONTH_COUNT; monthIdx++) {
+		NSDate* monthDate = [NSDate dateFrom:year month:monthIdx day:1];
+		for (int dayIdx = 1; dayIdx <= [monthDate numberOfDaysInMonth]; dayIdx++) {
+			NSDate* date = [NSDate dateFrom:year month:monthIdx day:dayIdx];
+			[ary addObject:[date today_components]];
+		}
+	}	
 	return ary;
 }
 @end
@@ -618,7 +651,10 @@ NSString* monthLongName_day_SPACE(int month, int day) {
 @end
 
 
-@implementation NSDateComponents (Description)
+@implementation NSDateComponents (Ext)
+-(NSDate*) to_date {
+	return [[NSCalendar currentCalendar] dateFromComponents:self];
+}
 -(NSString*) gmtString {
 	return SWF(@"%04d-%02d-%02d %02d:%02d:%02d %d,%d", [self year], [self month], [self day], [self hour], [self minute], [self second], [self week], [self weekday]);
 }
