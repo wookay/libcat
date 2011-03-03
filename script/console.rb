@@ -33,11 +33,13 @@ ls TARGET           : list target object (l)
   [ ls -r ]         : list recursive              
 cd TARGET           : change target object        
   [ cd ]            : to topViewController        
+  [ cd . ]          : to self            
+  [ cd .. ]         : to superview       
+  [ cd / ]          : to rootViewController
+  [ cd ~ ]          : to keyWindow
   [ cd 0 ]          : at index as listed          
   [ cd 1 0 ]        : at section and index        
   [ cd -1 0 ]       : at index on toolbar
-  [ cd . ]          : to self            
-  [ cd .. ]         : to superview       
   [ cd Title ]      : labeled as Title   
   [ cd view ]       : to property        
   [ cd UIButton ]   : to class           
