@@ -6,6 +6,7 @@
 //  Copyright 2010 factorcat. All rights reserved.
 //
 
+#import "NSDateComponentsExt.h"
 
 #define ONE_DAY_SECONDS		86400 // 1 day = 60*60*24 seconds
 #define ONE_HOUR_SECONDS	3600 // 60*60
@@ -15,6 +16,7 @@
 #define WEEKDAY_COUNT 7
 #define MONTH_COUNT	12
 #define FIRST_WEEKDAY_OF_CALENDAR [[NSCalendar currentCalendar] firstWeekday]
+#define TIMEINTERVAL_CHALNA 0.00000000000000000000001
 
 typedef enum {
 	WEEKDAY_NONE = 0,
@@ -27,19 +29,17 @@ typedef enum {
 	WEEKDAY_SATURDAY = 7
 } kWeekdayIndex ;
 
-enum PostfixTypes {
-	POSTFIX_YEAR = 1,
-	POSTFIX_MONTH = 2,
-	POSTFIX_DAY = 3,
-	POSTFIX_HOUR = 4,
-	POSTFIX_MINUTE = 5,
-};
-NSString* postfix_string(int postfix) ;
 NSString* hourName_minute_second_SPACE(NSTimeInterval ti) ;
 NSString* monthName_standalone(int month) ;
 NSString* monthName_short_standalone(int month) ;
 NSString* monthName_day_SPACE(int month, int day) ;
 NSString* monthLongName_day_SPACE(int month, int day) ;
+NSString* int_to_yearName(int year) ;
+NSString* int_to_monthName(int month) ;
+NSString* int_to_dayName(int day) ;
+NSString* int_to_hourName(int hour) ;
+NSString* int_to_minuteName(int minute) ;
+NSString* int_to_secondName(int second) ;
 
 @interface NSDate (Ext)
 
@@ -66,11 +66,13 @@ NSString* monthLongName_day_SPACE(int month, int day) ;
 -(int) countDownOfTheDay:(NSDate*)comingDate ;
 
 #pragma mark NSDateComponents
--(NSDateComponents*) today_components ;
--(NSDateComponents*) tomorrow_components ;
--(NSDateComponents*) yesterday_components ;
+-(NSDateComponents*) to_dateComponents ;
+-(NSDateComponents*) today_dateComponents ;
+-(NSDateComponents*) tomorrow_dateComponents ;
+-(NSDateComponents*) yesterday_dateComponents ;
 
 #pragma mark NSString
+-(NSString*) yearName ;
 -(NSString*) year_month_day_MINUS ;
 -(NSString*) year_month_day_DOT_SPACE ;	
 -(NSString*) year_month_day_MINUS_hour_minute_COLON ;
@@ -119,6 +121,8 @@ NSString* monthLongName_day_SPACE(int month, int day) ;
 -(NSArray*) weekdayNames ;
 -(NSString*) shortWeekdayName ;
 -(NSArray*) shortWeekdayNames ;
+-(NSString*) shortWeekdayHanjaName ;
+-(NSArray*) shortWeekdayHanjaNames ;	
 +(int) sundayWeekdayIndex ;
 -(BOOL) isSunday ;
 @end
@@ -132,13 +136,6 @@ NSString* monthLongName_day_SPACE(int month, int day) ;
 @end
 
 
-//#define DAY_UNIT_FLAGS (NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit | NSWeekCalendarUnit | NSWeekdayCalendarUnit)
-#define DAY_UNIT_FLAGS (NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSWeekCalendarUnit | NSWeekdayCalendarUnit)
-@interface NSDate (Year)
-+(NSArray*) daysFromYear:(int)year ;
-@end
-
-
 #pragma mark AMPM
 typedef struct AMPMHour12 {
 	int ampm;
@@ -149,10 +146,4 @@ enum { HOUR_AM, HOUR_PM };
 @interface NSDate (AMPM)
 +(int) ampm:(int)amPm hour12_to_hour24:(int)hour12 ;
 +(AMPMHour12) hour24_to_ampm_hour12:(int)hour24 ;
-@end
-
-
-@interface NSDateComponents (Ext)
--(NSDate*) to_date ;
--(NSString*) gmtString ;
 @end

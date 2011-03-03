@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "NSDictionaryExt.h"
 
 @interface NSMutableDictionary (UpdateArray)
 
@@ -16,7 +16,5 @@
 -(void) updateArrayWithArray:(NSArray*)obj forKey:(id)key ;
 -(void) updateDictionaryWithObject:(id)obj innerKey:(id)innerKey forKey:(id)key ;
 -(void) updateDictionaryWithDictionary:(NSDictionary*)obj forKey:(id)key ;
--(NSArray*) arrayForKey:(id)key ;
--(int) arrayCountForKey:(id)key ;
 
 @end

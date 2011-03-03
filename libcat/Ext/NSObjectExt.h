@@ -21,6 +21,7 @@
 -(NSArray*) superclasses ;
 
 -(void) performSelector:(SEL)selector afterDelay:(NSTimeInterval)ti ;
+-(void) performSelectorAfterChalna:(SEL)selector ;
 -(BOOL) isNil ;
 -(BOOL) isNotNil ;
 -(NSString*) className ;

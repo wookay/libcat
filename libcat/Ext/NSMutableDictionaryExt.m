@@ -64,16 +64,4 @@
 	[self setObject:dict forKey:key];
 }
 
--(NSArray*) arrayForKey:(id)key {
-	NSArray* exist = [self objectForKey:key];
-	if (nil == exist) {
-		return [NSArray array];
-	}
-	return exist;
-}
-
--(int) arrayCountForKey:(id)key {
-	return [[self arrayForKey:key] count];
-}
-
 @end

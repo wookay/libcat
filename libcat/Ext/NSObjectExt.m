@@ -13,6 +13,7 @@
 #import "GeometryExt.h"
 #import "NSArrayExt.h"
 #import "Logger.h"
+#import "NSDateExt.h"
 
 @implementation NSObject (Ext)
 
@@ -103,6 +104,10 @@
 
 -(void) performSelector:(SEL)selector afterDelay:(NSTimeInterval)ti {
 	[self performSelector:selector withObject:nil afterDelay:ti];
+}
+
+-(void) performSelectorAfterChalna:(SEL)selector {
+	[self performSelector:selector afterDelay:TIMEINTERVAL_CHALNA];
 }
 
 -(BOOL) isNil {

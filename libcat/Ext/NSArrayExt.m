@@ -42,10 +42,6 @@ NSInteger sortByFirstObjectComparator(NSArray* uno, NSArray* dos, void* context)
 
 @implementation NSArray (Ext)
 
--(NSArray*) sortedArrayUsingFunction:(NSInteger (*)(id, id, void *))comparator {
-	return [self sortedArrayUsingFunction:comparator context:nil];
-}
-
 -(BOOL) isEmpty {
 	return 0 == self.count;
 }
@@ -194,6 +190,11 @@ NSInteger sortByFirstObjectComparator(NSArray* uno, NSArray* dos, void* context)
 }
 	
 -(NSArray*) sortByFirstObject {
-	return [self sortedArrayUsingFunction:sortByFirstObjectComparator];
+	return [self sortByFunction:sortByFirstObjectComparator];
 }
+
+-(NSArray*) sortByFunction:(NSInteger (*)(id, id, void *))comparator {
+	return [self sortedArrayUsingFunction:comparator context:nil];
+}
+
 @end

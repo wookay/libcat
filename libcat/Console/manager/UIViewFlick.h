@@ -1,5 +1,5 @@
 //
-//  UIViewExt.h
+//  UIViewFlick.h
 //  TestApp
 //
 //  Created by WooKyoung Noh on 17/02/11.

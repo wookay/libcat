@@ -36,7 +36,6 @@ NSArray* CUAD(id uno, id dos, id tres, id cuatro) ;
 -(NSArray*) slice:(int)loc backward:(int)backward ;
 -(NSString*) join:(NSString*)separator ;
 -(NSString*) join ;
--(NSArray*) sortedArrayUsingFunction:(NSInteger (*)(id, id, void *))comparator ;
 -(NSArray*) reverse ;
 -(NSArray*) transpose ;
 -(NSArray*) diagonal:(id)padding ;
@@ -44,4 +43,5 @@ NSArray* CUAD(id uno, id dos, id tres, id cuatro) ;
 -(NSArray*) withoutObject:(id)obj ;
 -(NSArray*) sort ;
 -(NSArray*) sortByFirstObject ;
+-(NSArray*) sortByFunction:(NSInteger (*)(id, id, void *))comparator ;
 @end

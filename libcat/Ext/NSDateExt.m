@@ -11,32 +11,12 @@
 #import "NSStringExt.h"
 #import "NSLocaleExt.h"
 #import "Numero.h"
+#import "NSDictionaryExt.h"
 #import "NSArrayExt.h"
 #import "Inspect.h"
 
 
-
-NSString* postfix_string(int postfix) {
-	if (IS_LOCALE_KOREAN) {
-		switch (postfix) {
-			case POSTFIX_YEAR:
-				return @"년";
-			case POSTFIX_MONTH:
-				return @"월";
-			case POSTFIX_DAY:
-				return @"일";
-			case POSTFIX_HOUR:
-				return @"시";
-			case POSTFIX_MINUTE:
-				return @"분";
-			default:
-				break;
-		}
-	}
-	return EMPTY_STRING;
-}
-
-NSString* hourName_minute_second_SPACE(NSTimeInterval ti) {
+NSString* timeInterval_to_hourName_minute_second_SPACE(NSTimeInterval ti) {
 	NSMutableArray* ary = [NSMutableArray array];
 	NSTimeInterval left = ti;
 	if (left > ONE_HOUR_SECONDS) {
@@ -45,28 +25,60 @@ NSString* hourName_minute_second_SPACE(NSTimeInterval ti) {
 		if (IS_LANG_KOREAN) {
 			[ary addObject:SWF(@"%d시간", hour)];
 		} else {
-			[ary addObject:SWF(@"%02d hour", hour)];
+			[ary addObject:SWF(@"%d %@", hour, 1 == hour ? NSLocalizedString(@"hour", nil) : NSLocalizedString(@"hours", nil))];
 		}
 	}
 	if (left > ONE_MINUTE_SECONDS) {
 		int minute = left/ONE_MINUTE_SECONDS;
 		left -= minute*ONE_MINUTE_SECONDS;
-		if (IS_LANG_KOREAN) {
-			[ary addObject:SWF(@"%d분", minute)];
-		} else {
-			[ary addObject:SWF(@"%02d min", minute)];
-		}
+		[ary addObject:int_to_minuteName(minute)];
 	}
 	int seconds = left;
 	if (0 == seconds) {
 	} else {
-		if (IS_LANG_KOREAN) {
-			[ary addObject:SWF(@"%d초", seconds)];
-		} else {
-			[ary addObject:SWF(@"%02d secs", seconds)];
-		}
+		[ary addObject:int_to_minuteName(seconds)];
 	}
 	return [ary componentsJoinedByString:SPACE];
+}
+
+NSString* int_to_yearName(int year) {
+	return [[NSDate dateFrom:year month:1 day:1] yearName];
+}
+
+NSString* int_to_monthName(int month) {
+	return [[NSDate dateFrom:1 month:month day:1] monthName];
+}
+
+NSString* int_to_dayName(int day) {
+	if (IS_LANG_KOREAN) {
+		return SWF(@"%d일", day);
+	} else {
+		return SWF(@"%d", day);
+	}	
+}
+
+NSString* int_to_hourName(int hour) {
+	if (IS_LANG_KOREAN) {
+		return SWF(@"%d시", hour);
+	} else {
+		return SWF(@"%d", hour);
+	}		
+}
+
+NSString* int_to_minuteName(int minute) {
+	if (IS_LANG_KOREAN) {
+		return SWF(@"%02d분", minute);
+	} else {
+		return SWF(@"%02d", minute);
+	}		
+}
+
+NSString* int_to_secondName(int second) {
+	if (IS_LANG_KOREAN) {
+		return SWF(@"%d초", second);
+	} else {
+		return SWF(@"%02d", second);
+	}	
 }
 
 NSString* monthName_standalone(int month) {
@@ -137,53 +149,44 @@ NSString* monthLongName_day_SPACE(int month, int day) {
 
 @implementation NSDate (Ext)
 
-#pragma mark int
 
+#pragma mark int
 -(int) year {
-	unsigned unitFlags = NSYearCalendarUnit;
-	NSDateComponents* comps = [[NSCalendar currentCalendar] components:unitFlags fromDate:self];
+	NSDateComponents* comps = [[NSCalendar currentCalendar] components:NSYearCalendarUnit fromDate:self];
 	return comps.year;
 }
 
 -(int) month {
-	unsigned unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit;
-	NSDateComponents* comps = [[NSCalendar currentCalendar] components:unitFlags fromDate:self];
+	NSDateComponents* comps = [[NSCalendar currentCalendar] components:NSMonthCalendarUnit fromDate:self];
 	return comps.month;
 }
 
 -(int) day {
-	unsigned unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit;
-	NSDateComponents* comps = [[NSCalendar currentCalendar] components:unitFlags fromDate:self];
+	NSDateComponents* comps = [[NSCalendar currentCalendar] components:NSDayCalendarUnit fromDate:self];
 	return comps.day;
 }
 
 -(int) hour {
-	unsigned unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit | NSHourCalendarUnit ;
-	NSDateComponents* comps = [[NSCalendar currentCalendar] components:unitFlags fromDate:self];
+	NSDateComponents* comps = [[NSCalendar currentCalendar] components:NSHourCalendarUnit fromDate:self];
 	return comps.hour;	
 }
 -(int) minute {
-	unsigned unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit;
-	NSDateComponents* comps = [[NSCalendar currentCalendar] components:unitFlags fromDate:self];
+	NSDateComponents* comps = [[NSCalendar currentCalendar] components:NSMinuteCalendarUnit fromDate:self];
 	return comps.minute;	
 }
 
 -(int) second {
-	unsigned unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit ;
-	NSDateComponents* comps = [[NSCalendar currentCalendar] components:unitFlags fromDate:self];
+	NSDateComponents* comps = [[NSCalendar currentCalendar] components:NSSecondCalendarUnit fromDate:self];
 	return comps.second;	
 }
 
 -(int) weekday {
-	unsigned unitFlags = NSWeekdayCalendarUnit ;
-	NSDateComponents* comps = [[NSCalendar currentCalendar] components:unitFlags fromDate:self];
+	NSDateComponents* comps = [[NSCalendar currentCalendar] components:NSWeekdayCalendarUnit fromDate:self];
 	return comps.weekday;	
 }
 
 
 #pragma mark NSDate
-
-
 +(NSDate*) dateFrom:(int)year month:(int)month day:(int)day {
 	return [self dateFrom:year month:month day:day hour:0];
 }
@@ -193,30 +196,19 @@ NSString* monthLongName_day_SPACE(int month, int day) {
 }
 
 +(NSDate*) dateFrom:(int)year month:(int)month day:(int)day hour:(int)hour minute:(int)minute {
-	unsigned unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit ;
-	NSDateComponents* comps = [[NSCalendar currentCalendar] components:unitFlags fromDate:self];
-	comps.year = year;
-	comps.month = month;
-	comps.day = day;
-	comps.hour = hour;
-	comps.minute = minute;
-	NSDate* date = [[NSCalendar currentCalendar] dateFromComponents:comps];
-	return date;
+	return [self dateFrom:year month:month day:day hour:hour minute:0 second:0];
 }
 
 +(NSDate*) dateFrom:(int)year month:(int)month day:(int)day hour:(int)hour minute:(int)minute second:(int)second {
-	unsigned unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit |  NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit ;
-	NSDateComponents* comps = [[NSCalendar currentCalendar] components:unitFlags fromDate:self];
+	NSDateComponents* comps = [[NSCalendar currentCalendar] components:UNIT_FLAGS_YMDHMS fromDate:self];
 	comps.year = year;
 	comps.month = month;
 	comps.day = day;
 	comps.hour = hour;
 	comps.minute = minute;
 	comps.second = second;
-	NSDate* date = [[NSCalendar currentCalendar] dateFromComponents:comps];
-	return date;	
+	return [[NSCalendar currentCalendar] dateFromComponents:comps];
 }
-
 
 -(NSDate*) after:(NSTimeInterval)ti {
 	return [self internal_dateByAddingTimeInterval:ti];
@@ -246,22 +238,29 @@ NSString* monthLongName_day_SPACE(int month, int day) {
 	return [[comingDate beginOfDate] timeIntervalSinceDate:[self beginOfDate]] / ONE_DAY_SECONDS;
 }
 
+
 #pragma mark NSDateComponents
--(NSDateComponents*) today_components {
-	unsigned unitFlags = DAY_UNIT_FLAGS;
+-(NSDateComponents*) to_dateComponents {
+	unsigned unitFlags = UNIT_FLAGS_YMDHMSWW;
 	NSDateComponents* comps = [[NSCalendar currentCalendar] components:unitFlags fromDate:self];
 	return comps;	
 }
 
--(NSDateComponents*) tomorrow_components {
-	unsigned unitFlags = DAY_UNIT_FLAGS;
+-(NSDateComponents*) today_dateComponents {
+	unsigned unitFlags = UNIT_FLAGS_YMDWW;
+	NSDateComponents* comps = [[NSCalendar currentCalendar] components:unitFlags fromDate:self];
+	return comps;	
+}
+
+-(NSDateComponents*) tomorrow_dateComponents {
+	unsigned unitFlags = UNIT_FLAGS_YMDWW;
 	NSDate* tomorrow = [self internal_dateByAddingTimeInterval:ONE_DAY_SECONDS];
 	NSDateComponents* comps = [[NSCalendar currentCalendar] components:unitFlags fromDate:tomorrow];
 	return comps;
 }
 
--(NSDateComponents*) yesterday_components {
-	unsigned unitFlags = DAY_UNIT_FLAGS;
+-(NSDateComponents*) yesterday_dateComponents {
+	unsigned unitFlags = UNIT_FLAGS_YMDWW;
 	NSDate* tomorrow = [self internal_dateByAddingTimeInterval:-ONE_DAY_SECONDS];
 	NSDateComponents* comps = [[NSCalendar currentCalendar] components:unitFlags fromDate:tomorrow];
 	return comps;
@@ -276,6 +275,14 @@ NSString* monthLongName_day_SPACE(int month, int day) {
 
 -(NSString*) month_day_DOT {
 	return [self formatWith:@"M.d"];
+}
+
+-(NSString*) yearName {
+	if (IS_LOCALE_KOREAN) {
+		return [self formatWith:@"yyyy년"];
+	} else {
+		return [self formatWith:@"yyyy"];
+	}	
 }
 
 -(NSString*) year_monthName_SPACE {
@@ -423,12 +430,12 @@ NSString* monthLongName_day_SPACE(int month, int day) {
 }
 
 -(NSDate*) tomorrow {
-	NSDateComponents* comp = [self tomorrow_components];
+	NSDateComponents* comp = [self tomorrow_dateComponents];
 	return [[NSCalendar currentCalendar] dateFromComponents:comp];
 }
 
 -(NSDate*) yesterday {
-	NSDateComponents* comp = [self yesterday_components];
+	NSDateComponents* comp = [self yesterday_dateComponents];
 	return [[NSCalendar currentCalendar] dateFromComponents:comp];
 }
 
@@ -538,13 +545,13 @@ NSString* monthLongName_day_SPACE(int month, int day) {
 @end
 @implementation NSDate (WeekdayPrivate)
 -(NSString*) weekdayNameBy:(SEL)sel {
-	int idx = [self weekday] - FIRST_WEEKDAY_OF_CALENDAR;
+	int idx = [self weekday] - WEEKDAY_SUNDAY;
 	return [[NSDate weekdayNamesBy:sel] objectAtIndex:idx];
 }
 
 +(NSArray*) weekdayNamesBy:(SEL)sel {
 	NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];	
-	NSArray* names = [[dateFormatter performSelector:sel] rshift:FIRST_WEEKDAY_OF_CALENDAR - 1];
+	NSArray* names = [dateFormatter performSelector:sel];
 	[dateFormatter release];
 	return names;
 }
@@ -568,6 +575,38 @@ NSString* monthLongName_day_SPACE(int month, int day) {
 
 -(NSArray*) shortWeekdayNames {
 	return [NSDate weekdayNamesBy:@selector(shortWeekdaySymbols)];
+}
+
+-(NSString*) shortWeekdayHanjaName {
+	int idx = [self weekday] - WEEKDAY_SUNDAY;
+	return [[self shortWeekdayHanjaNames] objectAtIndex:idx];
+}
+
+-(NSArray*) shortWeekdayHanjaNames {
+	NSArray* shortWeekdayNames = [self shortWeekdayNames];
+	if (IS_LOCALE_KOREAN) {
+		NSDictionary* dict = [NSDictionary dictionaryWithKeysAndObjects:
+							  @"일", @"日", // 1
+							  @"월", @"月", // 2
+							  @"화", @"火",
+							  @"수", @"水",
+							  @"목", @"木",
+							  @"금", @"金",
+							  @"토", @"土",
+							  nil];
+		NSMutableArray* ary = [NSMutableArray array];
+		for (NSString* shortWeekdayName in shortWeekdayNames) {
+			NSString* hanja = [dict objectForKey:shortWeekdayName];
+			if (nil == hanja) {
+				[ary addObject:shortWeekdayName];
+			} else {
+				[ary addObject:hanja];
+			}
+		}
+		return ary;
+	} else {
+		return shortWeekdayNames;
+	}
 }
 
 +(int) sundayWeekdayIndex {
@@ -611,20 +650,6 @@ NSString* monthLongName_day_SPACE(int month, int day) {
 @end
 
 
-@implementation NSDate (Year)
-+(NSArray*) daysFromYear:(int)year {
-	NSMutableArray* ary = [NSMutableArray array];
-	for (int monthIdx = 1; monthIdx <= MONTH_COUNT; monthIdx++) {
-		NSDate* monthDate = [NSDate dateFrom:year month:monthIdx day:1];
-		for (int dayIdx = 1; dayIdx <= [monthDate numberOfDaysInMonth]; dayIdx++) {
-			NSDate* date = [NSDate dateFrom:year month:monthIdx day:dayIdx];
-			[ary addObject:[date today_components]];
-		}
-	}	
-	return ary;
-}
-@end
-
 
 @implementation NSDate (AMPM)
 +(int) ampm:(int)amPm hour12_to_hour24:(int)hour12 {
@@ -647,15 +672,5 @@ NSString* monthLongName_day_SPACE(int month, int day) {
 		amPmHour12.hour12 = hour24;
 	}
 	return amPmHour12;
-}
-@end
-
-
-@implementation NSDateComponents (Ext)
--(NSDate*) to_date {
-	return [[NSCalendar currentCalendar] dateFromComponents:self];
-}
--(NSString*) gmtString {
-	return SWF(@"%04d-%02d-%02d %02d:%02d:%02d %d,%d", [self year], [self month], [self day], [self hour], [self minute], [self second], [self week], [self weekday]);
 }
 @end

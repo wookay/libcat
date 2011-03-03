@@ -47,12 +47,14 @@ properties TARGET   : list properties (p)
   [ text = hello ]  : property setter             
 pwd                 : view & controller hierarchy 
 manipulate TARGET   : manipulate properties UI (m)
-open                : open Safari UI              
-touch TARGET        : touch target object UI (t)  
+open                : open Safari UI
+touch TARGET        : touch target UI (t)  
 back                : popViewController UI (b)
 rm TARGET           : removeFromSuperview UI      
-flash TARGET        : flash target object UI (f)  
-hit                 : hitTest UI on/off           
+flash TARGET        : flash target UI (f)  
+png TARGET          : capture target as image UI
+fill_rect RECT      : fill rect UI
+hit                 : hitTest UI on/off
 EOF
   help_pages.push <<EOF
 help     : help (h)

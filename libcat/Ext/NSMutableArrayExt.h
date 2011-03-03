@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-
 @interface NSMutableArray (Stack)
 
 - (id) push:(id)obj ;

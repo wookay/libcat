@@ -19,20 +19,8 @@
 @implementation TestConsole
 
 -(void) test_openURL {
-	NSURL* scheme = [NSURL URLWithString:@"libcat.TabBarApp:console:password"];
-	log_info(@"absoluteString %@", [scheme absoluteString]);
-	log_info(@"relativeString %@", [scheme relativeString]);
-	log_info(@"scheme %@", [scheme scheme]);
-	log_info(@"resourceSpecifier %@", [scheme resourceSpecifier]);
-	log_info(@"host %@", [scheme host]);
-	log_info(@"port %@", [scheme port]);
-	log_info(@"user %@", [scheme user]);
-	log_info(@"password %@", [scheme password]);
-	log_info(@"path %@", [scheme path]);
-	log_info(@"fragment %@", [scheme fragment]);
-	log_info(@"parameterString %@", [scheme parameterString]);
-	log_info(@"query %@", [scheme query]);
-	log_info(@"relativePath %@", [scheme relativePath]);
+	NSURL* scheme = [NSURL URLWithString:@"libcat.TabBarApp:password"];
+	assert_equal(@"password", [scheme resourceSpecifier]);
 }
 
 -(void) test_unescape {

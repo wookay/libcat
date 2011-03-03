@@ -1,12 +1,12 @@
 //
-//  UIViewExt.m
+//  UIViewFlick.m
 //  TestApp
 //
 //  Created by WooKyoung Noh on 17/02/11.
 //  Copyright 2011 factorcat. All rights reserved.
 //
 
-#import "UIViewExt.h"
+#import "UIViewFlick.h"
 #import <QuartzCore/QuartzCore.h>
 #import "NSStringExt.h"
 #import "GeometryExt.h"

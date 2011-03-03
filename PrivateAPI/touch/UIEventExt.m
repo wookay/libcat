@@ -10,7 +10,7 @@
 #import "UITouchExt.h"
 #import "NSDictionaryExt.h"
 #import "NSStringExt.h"
-#import "UIViewExt.h"
+#import "UIViewFlick.h"
 #import "NSArrayExt.h"
 #import "Logger.h"
 #import "Numero.h"

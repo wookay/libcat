@@ -27,6 +27,16 @@ NSDictionary* HashSTAR(NSArray* ary) {
 	return [[self objectForKey:key] intValue];
 }
 
+-(id) objectAtIndexSortedKeys:(int)idx {
+	id key = [[self sortedKeys] objectAtIndex:idx];
+	id obj = [self objectForKey:key];
+	return obj;
+}
+
+-(NSArray*) sortedKeys {
+	return [[self allKeys] sort];
+}
+
 -(NSArray*) sortedKeys:(SEL)selector {
 	return [[self allKeys] sortedArrayUsingSelector:selector];
 }
@@ -89,6 +99,18 @@ NSDictionary* HashSTAR(NSArray* ary) {
 	}
 	va_end(args);
 	return [NSDictionary dictionaryWithObjects:objects forKeys:keys];
+}
+
+-(NSArray*) arrayForKey:(id)key {
+	NSArray* exist = [self objectForKey:key];
+	if (nil == exist) {
+		return [NSArray array];
+	}
+	return exist;
+}
+
+-(int) arrayCountForKey:(id)key {
+	return [[self arrayForKey:key] count];
 }
 
 @end

@@ -19,6 +19,40 @@
 
 @implementation TestDate
 
+-(void) test_weekdayIndexForCalendar {
+	NSCalendar* calendar = [[NSCalendar alloc] initWithCalendarIdentifier:@"gregorian"];
+	
+	NSLocale* locale_es_ES = [[NSLocale alloc] initWithLocaleIdentifier:@"es_ES"];	
+	[calendar setLocale:locale_es_ES];
+	assert_equal(WEEKDAY_MONDAY, [calendar firstWeekday]);
+	NSDateComponents* mar = [NSDateComponents dateComponentsFrom:2011 month:2 day:1];
+	assert_equal(WEEKDAY_TUESDAY, [mar weekday]);
+	assert_equal(1, [mar weekdayIndexForCalendar:calendar]);	
+	NSDateComponents* mie = [NSDateComponents dateComponentsFrom:2011 month:2 day:2];
+	assert_equal(WEEKDAY_WEDNESDAY, [mie weekday]);
+	assert_equal(2, [mie weekdayIndexForCalendar:calendar]);
+	NSDateComponents* dom = [NSDateComponents dateComponentsFrom:2011 month:2 day:6];
+	assert_equal(WEEKDAY_SUNDAY, [dom weekday]);
+	assert_equal(6, [dom weekdayIndexForCalendar:calendar]);
+	[locale_es_ES release];
+	
+	NSLocale* locale_ko_KR = [[NSLocale alloc] initWithLocaleIdentifier:@"ko_KR"];		
+	[calendar setLocale:locale_ko_KR];
+	assert_equal(WEEKDAY_SUNDAY, [calendar firstWeekday]);
+	NSDateComponents* hwa = [NSDateComponents dateComponentsFrom:2011 month:2 day:1];
+	assert_equal(WEEKDAY_TUESDAY, [hwa weekday]);
+	assert_equal(2, [hwa weekdayIndexForCalendar:calendar]);
+	NSDateComponents* su = [NSDateComponents dateComponentsFrom:2011 month:2 day:2];
+	assert_equal(WEEKDAY_WEDNESDAY, [su weekday]);
+	assert_equal(3, [su weekdayIndexForCalendar:calendar]);
+	NSDateComponents* il = [NSDateComponents dateComponentsFrom:2011 month:2 day:6];
+	assert_equal(WEEKDAY_SUNDAY, [il weekday]);
+	assert_equal(0, [il weekdayIndexForCalendar:calendar]);	
+	[locale_ko_KR release];
+	
+	[calendar release];
+}
+
 -(void) test_date {
 	NSDate* date = [NSDate dateFrom:2010 month:8 day:15 hour:13 minute:26 second:57];
 	assert_equal(date.day, [date endOfDate].day);

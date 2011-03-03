@@ -10,7 +10,7 @@
 #import "GeometryExt.h"
 #import "NSStringExt.h"
 #import "Logger.h"
-#import "UIViewExt.h"
+#import "UIViewFlick.h"
 #import "NSDictionaryExt.h"
 #import "iPadExt.h"
 #import "Numero.h"

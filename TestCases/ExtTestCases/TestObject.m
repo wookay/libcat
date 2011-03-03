@@ -19,6 +19,11 @@
 @end
 @implementation TestObject
 
+-(void) test_null {
+	id obj = [NSNull null];
+	assert_false(nil == obj);
+}
+
 -(void) test_superclass {
 	assert_equal(_array3([NSMutableString class], [NSString class], [NSObject class]), [@"" superclasses]);
 	assert_equal(_array1([NSObject class]), [NSString superclasses]);

@@ -11,7 +11,7 @@
 #import "NSDictionaryExt.h"
 #import "NSDictionaryBlock.h"
 #import "NSStringExt.h"
-#import "UIViewExt.h"
+#import "UIViewFlick.h"
 #import "NSIndexPathExt.h"
 #import "Logger.h"
 #import "ConsoleManager.h"
@@ -31,6 +31,7 @@
 #import "UIViewControllerBlock.h"
 #import "UIViewBlock.h"
 #import "PropertyManipulator.h"
+#import <QuartzCore/QuartzCore.h>
 
 #if USE_COCOA
 	#import "NSWindowExtMac.h"
@@ -71,10 +72,14 @@ NSArray* array_prefix_index(NSArray* array) {
 			@"flash", @"command_flash:arg:",
 			@"back", @"command_back:arg:",
 			@"manipulate", @"command_manipulate:arg:",
+			@"png", @"command_png:arg:",
+			@"hide_console", @"command_hide_console:arg:",
+			@"show_console", @"command_show_console:arg:",
 			@"rm", @"command_rm:arg:",
 			@"properties", @"command_properties:arg:",
 			@"commands", @"command_commands:arg:",
 			@"enum", @"command_enum:arg:",
+			@"fill_rect", @"command_fill_rect:arg:",
 			@"new_objects", @"command_new_objects:arg:",
 			@"completion", @"command_completion:arg:",
 			@"prompt", @"command_prompt:arg:",
@@ -82,6 +87,28 @@ NSArray* array_prefix_index(NSArray* array) {
 			@"log", @"command_log:arg:",
 			@"echo", @"command_echo:arg:",
 			nil];
+}
+
+#define STR_CLEAR @"clear"
+#define kTagFillRect 50
+-(NSString*) command_fill_rect:(id)currentObject arg:(id)arg {
+	if ([STR_CLEAR isEqualToString:arg]) {
+		for (UIView* view in [UIApplication sharedApplication].keyWindow.subviews) {
+			if (kTagFillRect == view.tag) {
+				[view removeFromSuperview];
+			}
+		}
+		return SWF(@"%@ %@", NSLocalizedString(@"fill_rect", nil), NSLocalizedString(@"clear", nil));
+	} else {
+		CGRect rect = CGRectForString(arg);
+		UIView* view = [[UIView alloc] initWithFrame:rect];
+		view.tag = kTagFillRect;
+		view.backgroundColor = [UIColor blueColor];
+		[[UIApplication sharedApplication].keyWindow addSubview:view];
+		[view release];
+		[view flick];
+		return SWF(@"%@ %@", NSLocalizedString(@"fill_rect", nil), SFRect(rect));
+	}
 }
 
 -(NSString*) command_openURL:(id)currentObject arg:(id)arg {
@@ -97,6 +124,26 @@ NSArray* array_prefix_index(NSArray* array) {
 	NSURL* appURL = [NSURL URLWithString:urlScheme];
 	[[UIApplication sharedApplication] performSelector:@selector(openURL:) withObject:appURL afterDelay:0.3];	
 	return SWF(@"openURL %@", urlScheme);
+}
+
+-(NSString*) command_show_console:(id)currentObject arg:(id)arg {
+	UIWindow* window = [UIApplication sharedApplication].keyWindow;
+	for (UIView* view in window.subviews) {
+		if ([view isKindOfClass:[ConsoleButton class]]) {
+			view.hidden = false;
+		}
+	}	
+	return NSLocalizedString(@"show", nil);
+}
+
+-(NSString*) command_hide_console:(id)currentObject arg:(id)arg {
+	UIWindow* window = [UIApplication sharedApplication].keyWindow;
+	for (UIView* view in window.subviews) {
+		if ([view isKindOfClass:[ConsoleButton class]]) {
+			view.hidden = true;
+		}
+	}
+	return NSLocalizedString(@"hide", nil);
 }
 
 -(NSString*) command_commands:(id)currentObject arg:(id)arg {
@@ -119,6 +166,38 @@ NSArray* array_prefix_index(NSArray* array) {
 -(NSString*) command_hit:(id)currentObject arg:(id)arg {
 	HitTestWindow* hitTestWindow = [HitTestWindow sharedWindow];
 	return [hitTestWindow hitTestView];
+}
+
+-(id) command_png:(id)currentObject arg:(id)arg {
+	NSArray* pair = [self findTargetObject:currentObject arg:arg];
+	id targetObject = [pair objectAtSecond];	
+	if ([targetObject isNil]) {
+		targetObject = currentObject;
+	}
+	
+	UIImage* image = nil;
+	if ([targetObject isKindOfClass:[UIImage class]]) {
+		image = (UIImage*)targetObject;
+	} else if ([targetObject isKindOfClass:[UIView class]]) {
+		UIView* view = (UIView*)targetObject;
+		UIGraphicsBeginImageContextWithOptions(view.bounds.size, view.opaque, [[UIScreen mainScreen] scale]);
+		[view.layer renderInContext:UIGraphicsGetCurrentContext()];
+		image = UIGraphicsGetImageFromCurrentImageContext();
+		UIGraphicsEndImageContext();
+	}
+	
+	NSString* ret;
+	if (nil == image) {
+		ret = NSLocalizedString(@"Not UIView Class", nil);
+	} else {
+		NSArray* searchPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+		NSString* fileName = SWF(@"%p.png", targetObject);
+		NSString* path = [[searchPath objectAtFirst] stringByAppendingPathComponent:fileName];
+		NSData* imageData = UIImagePNGRepresentation(image);
+		[imageData writeToFile:path atomically:true];
+		ret = SWF(@"%@ %@", NSLocalizedString(@"Saved to", nil), path);
+	}
+	return ret;
 }
 
 -(id) command_log:(id)currentObject arg:(id)arg {
