@@ -69,7 +69,7 @@ NSArray* array_prefix_index(NSArray* array) {
 			@"cd", @"command_cd:arg:",
 			@"ls", @"command_ls:arg:",
 			@"touch", @"command_touch:arg:",
-			@"flash", @"command_flash:arg:",
+			@"flick", @"command_flick:arg:",
 			@"back", @"command_back:arg:",
 			@"manipulate", @"command_manipulate:arg:",
 			@"png", @"command_png:arg:",
@@ -80,6 +80,7 @@ NSArray* array_prefix_index(NSArray* array) {
 			@"commands", @"command_commands:arg:",
 			@"enum", @"command_enum:arg:",
 			@"fill_rect", @"command_fill_rect:arg:",
+			@"add_ui", @"command_add_ui:arg:",
 			@"new_objects", @"command_new_objects:arg:",
 			@"completion", @"command_completion:arg:",
 			@"prompt", @"command_prompt:arg:",
@@ -89,8 +90,35 @@ NSArray* array_prefix_index(NSArray* array) {
 			nil];
 }
 
+#define kTagFillRect 51
+-(NSString*) command_add_ui:(id)currentObject arg:(id)arg {
+	Class klass = NSClassFromString(arg);
+	
+	if (nil == klass) {
+		return NSLocalizedString(@"Not Found", nil);
+	}
+		
+	CGRect rect = CGRectZero;
+	for (UIView* view in [UIApplication sharedApplication].keyWindow.subviews) {
+		if (kTagFillRect == view.tag) {
+			rect = view.frame;
+			[view removeFromSuperview];
+			break;
+		}
+	}
+	if (CGRectIsEmpty(rect)) {
+		rect = CGRectMake(60,190,200,50);
+	}
+	
+	UIView* ui = [[klass alloc] initWithFrame:rect];
+	[[UIApplication sharedApplication].keyWindow addSubview:ui];
+	CONSOLEMAN.currentTargetObject = ui;
+	[ui flick];
+	[ui release];
+	return SWF(@"%@ %@", NSLocalizedString(@"add_ui", nil), ui);
+}
+
 #define STR_CLEAR @"clear"
-#define kTagFillRect 50
 -(NSString*) command_fill_rect:(id)currentObject arg:(id)arg {
 	if ([STR_CLEAR isEqualToString:arg]) {
 		for (UIView* view in [UIApplication sharedApplication].keyWindow.subviews) {
@@ -268,9 +296,12 @@ NSArray* array_prefix_index(NSArray* array) {
 	return NSLocalizedString(@"Not Found", nil);
 }
 
--(NSString*) command_flash:(id)currentObject arg:(id)arg {
+-(NSString*) command_flick:(id)currentObject arg:(id)arg {
 	NSArray* pair = [self findTargetObject:currentObject arg:arg];
 	id changeObject = [pair objectAtSecond];
+	if ([changeObject isNil]) {
+		changeObject = CONSOLEMAN.currentTargetObject;
+	}
 	if ([changeObject isKindOfClass:[UIView class]]) {
 		UIView* view = changeObject;
 		[view flick];

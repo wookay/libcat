@@ -53,9 +53,10 @@ open                : open Safari UI
 touch TARGET        : touch target UI (t)  
 back                : popViewController UI (b)
 rm TARGET           : removeFromSuperview UI      
-flash TARGET        : flash target UI (f)  
+flick TARGET        : flick target UI (f)  
 png TARGET          : capture target as image UI
 fill_rect RECT      : fill rect UI
+add_ui UILabel      : add UI
 hit                 : hitTest UI on/off
 EOF
   help_pages.push <<EOF
@@ -146,7 +147,7 @@ class Console
 	'm' => 'manipulate',
 	'p' => 'properties',
     'b' => 'back',
-    'f' => 'flash',
+    'f' => 'flick',
     '$' => 'new_objects',
     }
     full_command = aliases[command_str]
@@ -231,7 +232,7 @@ class Console
         when 'completion'
           puts response_body if env[:print]
           response_body
-        when 'cd', 'rm', 'back', 'touch', 'flash', 'hit'
+        when 'cd', 'rm', 'back', 'touch', 'flick', 'hit', 'add_ui'
           puts response_body if response_body.size>0 and env[:print]
           update_prompt
         else
