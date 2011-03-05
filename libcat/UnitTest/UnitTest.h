@@ -41,6 +41,7 @@ NSValue* got_encoded = [NSObject objectWithValue:&__got withObjCType: @encode(__
 +(void) run ;
 +(void) setup ;
 +(void) report ;
++(void) report_on_window ;
 +(void) assert:(NSValue*)got equals:(NSValue*)expected inFile:(NSString*)file atLine:(int)line ;
 +(void) assert:(NSValue*)got equals:(NSValue*)expected message:(NSString*)message inFile:(NSString*)file atLine:(int)line ;
 +(id) target:(NSString*)targetClassString ;

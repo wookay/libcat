@@ -110,7 +110,24 @@ NSArray* array_prefix_index(NSArray* array) {
 		rect = CGRectMake(60,190,200,50);
 	}
 	
-	UIView* ui = [[klass alloc] initWithFrame:rect];
+	UIView* ui = nil;
+	if (klass == [UIButton class]) {
+		ui = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+		[(UIButton*)ui setTitle:NSLocalizedString(@"Title", nil) forState:UIControlStateNormal];
+	} else if (klass == [UIProgressView class]) {
+		ui = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
+	} else if (klass == [UISegmentedControl class]) {
+		NSArray* items = [NSArray arrayWithObjects:@"item 0", @"item 1", nil];
+		ui = [[UISegmentedControl alloc] initWithItems:items];
+	} else {
+		ui = [[klass alloc] initWithFrame:CGRectZero];
+		if ([ui isKindOfClass:[UILabel class]]) {
+			((UILabel*)ui).text = NSLocalizedString(@"Text", nil);
+		} else if ([ui isKindOfClass:[UITextField class]]) {
+			ui.backgroundColor = [UIColor lightGrayColor];
+		}
+	}
+	ui.frame = rect;
 	[[UIApplication sharedApplication].keyWindow addSubview:ui];
 	CONSOLEMAN.currentTargetObject = ui;
 	[ui flick];

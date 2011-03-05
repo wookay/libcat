@@ -37,6 +37,21 @@
 	print_log_info(@"\n%d tests, %d assertions, %d failures, %d errors\n", UNITTESTMAN.tests, UNITTESTMAN.assertions, UNITTESTMAN.failures, UNITTESTMAN.errors);
 }
 
++(void) report_on_window {
+	UIWindow* window = [UIApplication sharedApplication].keyWindow;
+	UILabel* label = [[UILabel alloc] initWithFrame:window.frame];
+	label.text = SWF(@"%d tests, %d assertions, %d failures, %d errors\n", UNITTESTMAN.tests, UNITTESTMAN.assertions, UNITTESTMAN.failures, UNITTESTMAN.errors);
+	label.textAlignment = UITextAlignmentCenter;
+	label.adjustsFontSizeToFitWidth = true;
+	if (UNITTESTMAN.failures > 0) {
+		label.backgroundColor = [UIColor redColor];
+	} else if (UNITTESTMAN.assertions > 0) {
+		label.backgroundColor = [UIColor greenColor];
+	}
+	[window addSubview:label];
+	[label release];
+}
+
 +(void) assert:(NSValue*)got equals:(NSValue*)expected message:(NSString*)message inFile:(NSString*)file atLine:(int)line {	
 	UNITTESTMAN.assertions += 1;
 	BOOL equals = false;
