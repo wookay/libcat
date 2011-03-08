@@ -57,7 +57,7 @@
 #define SECTION_INDEX_TITLE_FOR_SEARCH			@"{search}"
 #define INDEX_OF_SECTION_INDEX_TITLE_FOR_SEARCH 0
 
-#define YES_NO(yn)		(yn ? @"YES" : @"NO")
+#define STR_YES_OR_NO(yn)		(yn ? @"YES" : @"NO")
 
 #define CP949_ENCODING 0x80000422
 

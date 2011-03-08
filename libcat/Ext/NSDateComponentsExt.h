@@ -19,6 +19,7 @@
 +(NSDateComponents*) dateComponentsFrom:(int)year month:(int)month day:(int)day ;
 +(NSArray*) daysFromYear:(int)year ;
 -(int) weekdayIndexForCalendar:(NSCalendar*)calendar ;
++(int) sundayIndexForCalendar:(NSCalendar*)calendar ;
 -(NSDate*) to_date ;
 -(NSString*) gmtString ;
 @end

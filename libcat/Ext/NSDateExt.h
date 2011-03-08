@@ -63,6 +63,7 @@ NSString* int_to_secondName(int second) ;
 -(NSDate*) oneYearAgo ;
 -(NSDate*) oneYearAfter ;
 -(NSDate*) oneDayBefore ;
+-(NSDate*) nDaysAfter:(int)nDays ;
 -(int) countDownOfTheDay:(NSDate*)comingDate ;
 
 #pragma mark NSDateComponents

@@ -48,7 +48,7 @@
 	} else {
 		dict = [NSMutableDictionary dictionaryWithDictionary:exist];
 	}
-	[dict setObject:obj forKey:innerKey];
+	[dict updateArrayWithObject:obj forKey:innerKey];
 	[self setObject:dict forKey:key];
 }
 

@@ -226,6 +226,14 @@ NSString* monthLongName_day_SPACE(int month, int day) {
 	return [self internal_dateByAddingTimeInterval: -ONE_DAY_SECONDS];
 }
 
+-(NSDate*) nDaysAfter:(int)nDays {
+	NSDateComponents* comps = [[NSDateComponents alloc] init];
+	comps.day = nDays;
+	NSDate* date = [[NSCalendar currentCalendar] dateByAddingComponents:comps toDate:self options:0];
+	[comps release];
+	return date;
+}
+
 -(NSDate*) oneYearAgo {
 	return [NSDate dateFrom:[self year]-1 month:[self month] day:[self day]];
 }
