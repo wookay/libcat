@@ -1,8 +1,7 @@
-#! /opt/local/bin/ruby1.9
-
+#! /usr/bin/ruby
 
 require 'rubygems'
-require 'eventmachine' #sudo gem1.9 install eventmachine
+require 'eventmachine' # sudo gem install eventmachine
 
 DIR = "#{File.dirname __FILE__}"
 SPACE = ' '
