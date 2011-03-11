@@ -64,5 +64,28 @@
 	}
 	block(depth, self);
 }
+@end
+
+
+
+
+@implementation CALayer (Block)
+
+-(void) traverseSuperlayers:(TraverseLayerBlock)block {
+	int depth = 0;
+	CALayer* layer_ = self;
+	while ((layer_ = layer_.superlayer) != nil) {
+		depth += 1;
+	}
+	[self traverseSuperlayers:block depth:depth];
+}
+
+-(void) traverseSuperlayers:(TraverseLayerBlock)block depth:(int)depth {
+	CALayer* superlayer_ = self.superlayer;
+	if (nil != superlayer_) {
+		[superlayer_ traverseSuperlayers:block depth:depth-1];
+	}
+	block(depth, self);
+}
 
 @end

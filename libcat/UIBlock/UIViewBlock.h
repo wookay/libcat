@@ -10,6 +10,7 @@ typedef NSInteger (^PassBlock)() ;
 typedef void (^AnimationBlock)() ;
 typedef void (^TraverseViewBlock)(int depth, UIView* view) ;
 
+
 @interface UIView (Block)
 
 +(void) animate:(AnimationBlock)block ;
@@ -20,4 +21,12 @@ typedef void (^TraverseViewBlock)(int depth, UIView* view) ;
 -(void) traverseSuperviews:(TraverseViewBlock)block ;
 -(void) traverseSuperviews:(TraverseViewBlock)block depth:(int)depth ;
 
+@end
+
+
+#import <QuartzCore/QuartzCore.h>
+typedef void (^TraverseLayerBlock)(int depth, CALayer* layer) ;
+@interface CALayer (Block)
+-(void) traverseSuperlayers:(TraverseLayerBlock)block ;
+-(void) traverseSuperlayers:(TraverseLayerBlock)block depth:(int)depth ;	
 @end

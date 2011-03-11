@@ -490,6 +490,12 @@ NSArray* array_prefix_index(NSArray* array) {
 			[ary addObject:SWF(@"%@%@", [TAB repeat:depth], [[superview inspect] truncate:JUSTIFY_VIEW])];
 		};
 		[view traverseSuperviews:traverseViewBlock];
+	} else if ([currentObject isKindOfClass:[CALayer class]]) {
+			CALayer* layer = currentObject;
+			TraverseLayerBlock traverseLayerBlock = ^(int depth, CALayer* superlayer) {
+				[ary addObject:SWF(@"%@%@", [TAB repeat:depth], [[superlayer inspect] truncate:JUSTIFY_VIEW])];
+			};
+			[layer traverseSuperlayers:traverseLayerBlock];			
 	} else if ([currentObject isKindOfClass:[UIViewController class]]) {
 		TraverseViewControllerBlock traverseViewControllerBlock = ^(int depth, UIViewController* parentViewController) {
 			[ary addObject:SWF(@"%@%@", [TAB repeat:depth], [parentViewController inspect])];

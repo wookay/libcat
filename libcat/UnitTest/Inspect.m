@@ -12,6 +12,7 @@
 #import "objc/runtime.h"
 #import "NSNumberExt.h"
 #import "NSDateExt.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation NSObject (Inspect)
 -(id) inspect {
@@ -163,6 +164,8 @@
 		return [anObject gmtString];
 	} else if ([anObject isKindOfClass:[NSDateComponents class]]) {
 		return [anObject gmtString];
+	} else if ([anObject isKindOfClass:[CALayer class]]) {
+		return SWF(@"<<<%@: %p, delegate : %@>>>", [anObject class], anObject, [anObject performSelector:@selector(delegate)]);
 	} else if ([anObject isKindOfClass:[NSValue class]]) {
 		const char* aTypeDescription = [(NSValue*)anObject objCType];
 		switch (*aTypeDescription) {

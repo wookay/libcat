@@ -1,19 +1,19 @@
 //
-//  AppDelegate.m
-//  TestApp
+//  LibcatPresentationAppDelegate.m
+//  LibcatPresentation
 //
-//  Created by wookyoung noh on 10/10/10.
-//  Copyright 2010 factorcat. All rights reserved.
+//  Created by WooKyoung Noh on 09/03/11.
+//  Copyright 2011 factorcat. All rights reserved.
 //
 
-#import "AppDelegate.h"
-#import "UnitTest.h"
+#import "LibcatPresentationAppDelegate.h"
+#import "RootViewController.h"
 #import "ConsoleManager.h"
-#import "Logger.h"
 
-@implementation AppDelegate
+@implementation LibcatPresentationAppDelegate
 
 @synthesize window;
+@synthesize navigationController;
 
 
 #pragma mark -
@@ -22,16 +22,13 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
     
     // Override point for customization after application launch.
+    
+    // Add the navigation controller's view to the window and display.
+    [self.window addSubview:navigationController.view];
+    [self.window makeKeyAndVisible];
 
-    // Add the tab bar controller's view to the window and display.
-    [window makeKeyAndVisible];
-	
-//#if TARGET_IPHONE_SIMULATOR
-	[UnitTest run];
-	
 	[CONSOLEMAN start_up];
-//#endif
-	
+	[CONSOLEMAN hide_console_button];
     return YES;
 }
 
@@ -71,9 +68,6 @@
      Called when the application is about to terminate.
      See also applicationDidEnterBackground:.
      */
-	
-	// [CONSOLEMAN stop];
-
 }
 
 
@@ -88,8 +82,11 @@
 
 
 - (void)dealloc {
+	[navigationController release];
 	[window release];
-    [super dealloc];
+	[super dealloc];
 }
 
+
 @end
+

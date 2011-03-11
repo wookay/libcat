@@ -22,12 +22,14 @@ CGPoint CGPointOffset(CGPoint point, CGFloat x, CGFloat y) {
 	return CGPointMake(point.x + x, point.y + y);
 }
 
-CGFloat CGPointDiffX(CGPoint from, CGPoint to) {
-	return from.x - to.x;
+CGPoint CGPointsDiff(CGPoint from, CGPoint to) {
+	return CGPointMake(from.x - to.x, from.y - to.y);
 }
 
-CGFloat CGPointDiffY(CGPoint from, CGPoint to) {
-	return from.y - to.y;
+CGFloat CGPointsDistance(CGPoint from, CGPoint to) {
+	CGFloat xDifferenceSquared = pow(from.x - to.x, 2);
+	CGFloat yDifferenceSquared = pow(from.y - to.y, 2);
+	return sqrt(xDifferenceSquared + yDifferenceSquared);
 }
 
 #pragma mark CGRect
@@ -152,4 +154,19 @@ CGSize CGSizeTranspose(CGSize size) {
 
 CGSize CGSizeExpand(CGSize size, CGFloat dx, CGFloat dy) {
 	return CGSizeMake(size.width+dx, size.height+dy);
+}
+
+
+#pragma mark CATransform3D
+NSString* NSStringFromCATransform3D(CATransform3D transform3D) {
+    NSMutableString *str = [NSMutableString string];
+	[str appendString:LF];
+    const CGFloat *np = (const CGFloat*)&transform3D;
+    for (int idx = 0 ; idx < 16; idx++) {
+        if( idx > 0 && 0 == (idx%4)) {
+            [str appendString:LF];
+		}
+        [str appendFormat: @"%7.2f ", *np++];
+    }
+    return str;
 }

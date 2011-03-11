@@ -14,8 +14,8 @@
 BOOL CGPointIsZero(CGPoint point) ;
 CGPoint CGPointOffset(CGPoint point, CGFloat x, CGFloat y) ;
 CGPoint CGPointWithOffset(CGPoint point, CGPoint offset) ;
-CGFloat CGPointDiffX(CGPoint from, CGPoint to) ;
-CGFloat CGPointDiffY(CGPoint from, CGPoint to) ;	
+CGPoint CGPointsDiff(CGPoint from, CGPoint to) ;
+CGFloat CGPointsDistance(CGPoint from, CGPoint to) ;
 #define CGPointMinusOne		CGPointMake(-1, -1)
 #define CGPointIsMinusOne(point)	CGPointEqualToPoint(point, CGPointMinusOne)
 
@@ -48,10 +48,15 @@ CGRect CGRectForString(NSString* str) ;
 CGSize CGSizeTranspose(CGSize size) ;
 CGSize CGSizeExpand(CGSize size, CGFloat dx, CGFloat dy) ;
 
+#import <QuartzCore/QuartzCore.h>
+NSString* NSStringFromCATransform3D(CATransform3D transform3D) ;
 
 #define SFRect(rect)	NSStringFromCGRect(rect)
 #define SFSize(size)	NSStringFromCGSize(size)
 #define SFPoint(point)  NSStringFromCGPoint(point)
+#define SFAffineTransform(transform)	NSStringFromCGAffineTransform(transform)
+#define SFTransform3D(transform3D)		NSStringFromCATransform3D(transform3D)
+
 #define SFRange(range)	[NSString stringWithFormat:@"{location=%d, length=%d}", range.location, range.length]
 #define VFPoint(point)	[NSValue valueWithCGPoint:point]
 #define VFRect(rect)	[NSValue valueWithCGRect:rect]
@@ -62,4 +67,5 @@ CGSize CGSizeExpand(CGSize size, CGFloat dx, CGFloat dy) ;
 
 #define kDegreeToRadian 0.017453292519943295769236907684886 
 #define kRadianToDegree 57.295779513082320876798154814105
-#define to_radian(x)	((x)*kDegreeToRadian)
+#define degree_to_radian(degree)	((degree)*kDegreeToRadian)
+#define radian_to_degree(radian)	((radian)*kRadianToDegree)
