@@ -99,7 +99,7 @@
 		needInspect = true;
 	}
 	if (needInspect) {
-		return SWF(@"%@", [[obj inspect] gsub:@"\n  " to:EMPTY_STRING]);
+		return SWF(@"%@", [obj inspect]);// gsub:@"\n  " to:EMPTY_STRING]);
 	} else {
 		return SWF(@"%@", obj);
 	}
