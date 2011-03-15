@@ -66,6 +66,7 @@ about    : about libcat Console
 clear    : clear the screen
 history  : input commands history
 sleep N  : sleep N seconds
+map ARG  : map array items
 
 events                   : list touch events (e)
   [ events record ]      : record on/off (er)

@@ -48,7 +48,7 @@
 			} else {
 				attributeStringAndReadonly = SWF(@"%@", [attributeString truncate:JUSTIFY_ATTRIBUTE_STRING]);
 			}
-			NSString* objectDetail = [PROPERTYMAN.typeInfoTable objectDescription:obj targetClass:NSStringFromClass(targetClass) propertyName:propertyName];
+			NSString* objectDetail = [PROPERTYMAN.typeInfoTable objectDescriptionForProperty:obj targetClass:NSStringFromClass(targetClass) propertyName:propertyName];
 			NSString* line = SWF(@"    %@   %@   %@", [propertyName ljust:JUSTIFY_PROPERTY_NAME], [[SWF(@"%@", objectDetail) truncate:JUSTIFY_OBJECT] ljust:JUSTIFY_OBJECT], attributeStringAndReadonly);
 			[ary addObject:line];
 		}

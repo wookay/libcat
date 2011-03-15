@@ -19,7 +19,10 @@
 -(NSNumber*) enumStringToNumber:(NSString*)str ;
 -(NSString*) findEnumDefinitionByEnumString:(NSString*)str ;
 -(id) objectStringToObject:(NSString*)str failed:(BOOL*)failed ;
+
+-(NSString*) objectDescriptionForProperty:(id)obj targetClass:(NSString*)targetClass propertyName:(NSString*)propertyName ;
 -(NSString*) objectDescription:(id)obj targetClass:(NSString*)targetClass propertyName:(NSString*)propertyName ;
+-(NSString*) objectDescriptionInternal:(id)obj targetClass:(NSString*)targetClass propertyName:(NSString*)propertyName removeLF:(BOOL)removeLF ;
 
 //GEN
 -(void) load_property_table ;

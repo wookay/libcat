@@ -32,6 +32,7 @@ typedef enum { kGetterReturnTypeString, kGetterReturnTypeObject } GetterReturnTy
 -(id) input:(NSString*)input ;
 + (ConsoleManager*) sharedManager ;
 
+-(NSArray*) mapTargetObject:(id)targetObject arg:(id)arg ;
 -(id) get_argObject:(NSString*)arg ;
 -(NSString*) getterChain:(id)command arg:(id)arg ;
 -(id) arg_to_proper_object:(id)arg ;

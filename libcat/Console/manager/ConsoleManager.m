@@ -131,7 +131,6 @@
 	NSMutableArray* ary = [NSMutableArray array];
 	id target = currentTargetObject;
 	NSString* lastMethod = nil;
-	
 	NSArray* commands = [command split:DOT];
 	if (commands.count > 1) {
 		lastMethod = [commands objectAtLast];
@@ -247,6 +246,36 @@
 	return obj;
 }
 
+-(NSArray*) mapTargetObject:(id)targetObject arg:(id)arg {
+	NSMutableArray* ary = [NSMutableArray array];
+	if ([targetObject conformsToProtocol:@protocol(NSFastEnumeration)]) {
+		for (id obj in targetObject) {
+			NSArray* args = [arg split:SPACE];
+			if (args.count > 0) {
+				NSMutableArray* line = [NSMutableArray array];
+				for (id prop in args) {
+					SEL sel = NSSelectorFromString(prop);
+					if ([obj respondsToSelector:sel]) {
+						BOOL failed = false;
+						id value = [obj getPropertyValue:sel failed:&failed];
+						if (! failed) {
+							[line addObject:SWF(@"%@ : %@", prop , value)];
+						}
+					}
+				}
+				if (line.count > 0) {
+					[ary addObject:SWF(@"<%@: %p, %@>", [obj class], obj, [line join:COMMA_SPACE])];
+				} else {
+					[ary addObject:SWF(@"<%@: %p>", [obj class], obj)];
+				}
+			} else {
+				[ary addObject:SWF(@"%@", obj)];
+			}
+		}
+	}
+	return ary;
+}
+
 
 -(NSString*) getterChain:(id)command arg:(id)arg {
 	return [self getterChainObject:command arg:arg returnType:kGetterReturnTypeString];
@@ -258,13 +287,29 @@
 	if ([command isNil]) {
 		return nil;
 	}
-	for (NSString* method in [command split:DOT]) {
+	NSArray* commands = [command split:DOT];
+	BOOL lastOperationIsMap = false;
+#define STR_MAP @"map"
+	if (commands.count > 0) {
+		lastOperationIsMap = [[commands objectAtLast] isEqualToString:STR_MAP];
+	}
+	for (int commandIndex = 0; commandIndex < commands.count; commandIndex++) {
+		NSString* method = [commands objectAtIndex:commandIndex];
 		if ([method isEmpty]) {
 			continue;
 		}
 		
 		SEL selector = NSSelectorFromString(method);
 		NSString* oldTargetStr = SWF(@"%@", [target class]);
+
+		if ((commands.count - 2) == commandIndex && lastOperationIsMap) {
+			if ([target respondsToSelector:selector]) {
+				[ary addObject:SWF(@"[%@ %@.%@]\t===>\t%@", oldTargetStr, method, STR_MAP,
+								[[self mapTargetObject:[target performSelector:selector] arg:arg] inspect])];
+			}
+			break;
+		}
+		
 		if ([target respondsToSelector:selector]) {
 			BOOL found = true;
 			NSMethodSignature* sig = [target methodSignatureForSelector:selector];

@@ -86,6 +86,7 @@ NSArray* array_prefix_index(NSArray* array) {
 			@"prompt", @"command_prompt:arg:",
 			@"openURL", @"command_openURL:arg:",
 			@"log", @"command_log:arg:",
+			@"map", @"command_map:arg:",
 			@"echo", @"command_echo:arg:",
 			nil];
 }
@@ -257,6 +258,10 @@ NSArray* array_prefix_index(NSArray* array) {
 
 -(id) command_echo:(id)currentObject arg:(id)arg {
 	return arg;
+}
+
+-(id) command_map:(id)currentObject arg:(id)arg {
+	return [[CONSOLEMAN mapTargetObject:currentObject arg:arg] join:LF];
 }
 
 -(id) command_prompt:(id)currentObject arg:(id)arg {

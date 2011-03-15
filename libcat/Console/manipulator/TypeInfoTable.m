@@ -72,7 +72,15 @@
 	}
 }
 
+-(NSString*) objectDescriptionForProperty:(id)obj targetClass:(NSString*)targetClass propertyName:(NSString*)propertyName {
+	return [self objectDescriptionInternal:obj targetClass:targetClass propertyName:propertyName removeLF:true];
+}
+
 -(NSString*) objectDescription:(id)obj targetClass:(NSString*)targetClass propertyName:(NSString*)propertyName {
+	return [self objectDescriptionInternal:obj targetClass:targetClass propertyName:propertyName removeLF:false];
+}
+
+-(NSString*) objectDescriptionInternal:(id)obj targetClass:(NSString*)targetClass propertyName:(NSString*)propertyName removeLF:(BOOL)removeLF {
 	if (nil == obj) {
 		return @"nil";
 	}
@@ -99,7 +107,11 @@
 		needInspect = true;
 	}
 	if (needInspect) {
-		return SWF(@"%@", [obj inspect]);// gsub:@"\n  " to:EMPTY_STRING]);
+		if (removeLF) {
+			return SWF(@"%@", [[obj inspect] gsub:@"\n  " to:EMPTY_STRING]);
+		} else {
+			return SWF(@"%@", [obj inspect]);
+		}
 	} else {
 		return SWF(@"%@", obj);
 	}
