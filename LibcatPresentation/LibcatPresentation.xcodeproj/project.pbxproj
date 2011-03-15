@@ -69,7 +69,6 @@
 		DA7A2389132A0D020040CAF2 /* UnitTest.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7A2354132A0D020040CAF2 /* UnitTest.m */; };
 		DA7D3A0013284E350020E9D6 /* SlideDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7D39FF13284E350020E9D6 /* SlideDataSource.m */; };
 		DA7D3AC7132856CC0020E9D6 /* PresentationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA7D3AC5132856CC0020E9D6 /* PresentationViewController.xib */; };
-		DA7D3B3313285BA10020E9D6 /* bombi.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA7D3B3213285BA10020E9D6 /* bombi.ttf */; };
 		DA7D3C00132862FE0020E9D6 /* graphs_languages.png in Resources */ = {isa = PBXBuildFile; fileRef = DA7D3BFF132862FE0020E9D6 /* graphs_languages.png */; };
 		DA7D3C50132868A40020E9D6 /* unittest_example.png in Resources */ = {isa = PBXBuildFile; fileRef = DA7D3C4F132868A40020E9D6 /* unittest_example.png */; };
 		DA7D3C6F132869CB0020E9D6 /* unittest_run.png in Resources */ = {isa = PBXBuildFile; fileRef = DA7D3C6E132869CB0020E9D6 /* unittest_run.png */; };
@@ -78,6 +77,10 @@
 		DA82D33013276C44002CC33B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA82D32E13276C44002CC33B /* QuartzCore.framework */; };
 		DA82D33113276C44002CC33B /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA82D32F13276C44002CC33B /* CFNetwork.framework */; };
 		DA82D33A13276C52002CC33B /* PresentationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA82D33813276C52002CC33B /* PresentationViewController.m */; };
+		DA93AFFB132F61DC0016810D /* SeoulHangangB.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA93AFFA132F61DC0016810D /* SeoulHangangB.ttf */; };
+		DA93B037132F63B50016810D /* GotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA93B036132F63B50016810D /* GotoView.m */; };
+		DA93B0E3132F6B070016810D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA93B0DB132F6B070016810D /* InfoPlist.strings */; };
+		DA93B0E4132F6B070016810D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA93B0DD132F6B070016810D /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -202,7 +205,6 @@
 		DA7D39FE13284E350020E9D6 /* SlideDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideDataSource.h; sourceTree = "<group>"; };
 		DA7D39FF13284E350020E9D6 /* SlideDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideDataSource.m; sourceTree = "<group>"; };
 		DA7D3AC5132856CC0020E9D6 /* PresentationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PresentationViewController.xib; sourceTree = "<group>"; };
-		DA7D3B3213285BA10020E9D6 /* bombi.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = bombi.ttf; sourceTree = "<group>"; };
 		DA7D3B7813285CCC0020E9D6 /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
 		DA7D3BFF132862FE0020E9D6 /* graphs_languages.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = graphs_languages.png; sourceTree = "<group>"; };
 		DA7D3C4F132868A40020E9D6 /* unittest_example.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unittest_example.png; sourceTree = "<group>"; };
@@ -213,6 +215,15 @@
 		DA82D32F13276C44002CC33B /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		DA82D33713276C52002CC33B /* PresentationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PresentationViewController.h; sourceTree = "<group>"; };
 		DA82D33813276C52002CC33B /* PresentationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PresentationViewController.m; sourceTree = "<group>"; };
+		DA93AFFA132F61DC0016810D /* SeoulHangangB.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SeoulHangangB.ttf; sourceTree = "<group>"; };
+		DA93B035132F63B50016810D /* GotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GotoView.h; sourceTree = "<group>"; };
+		DA93B036132F63B50016810D /* GotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GotoView.m; sourceTree = "<group>"; };
+		DA93B0DC132F6B070016810D /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		DA93B0DE132F6B070016810D /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
+		DA93B0DF132F6B070016810D /* Korean */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Korean; path = Korean.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		DA93B0E0132F6B070016810D /* Korean */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Korean; path = Korean.lproj/Localizable.strings; sourceTree = "<group>"; };
+		DA93B0E1132F6B070016810D /* Spanish */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Spanish; path = Spanish.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		DA93B0E2132F6B070016810D /* Spanish */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Spanish; path = Spanish.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -277,8 +288,9 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				DA93B0DA132F6B070016810D /* Languages */,
 				DA7D3BFE132862F80020E9D6 /* slide_images */,
-				DA7D3B3213285BA10020E9D6 /* bombi.ttf */,
+				DA93AFFA132F61DC0016810D /* SeoulHangangB.ttf */,
 				28F335F01007B36200424DE2 /* RootViewController.xib */,
 				28AD735F0D9D9599002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* LibcatPresentation-Info.plist */,
@@ -527,8 +539,19 @@
 				DA7D39FE13284E350020E9D6 /* SlideDataSource.h */,
 				DA7D39FF13284E350020E9D6 /* SlideDataSource.m */,
 				DA7D3B7813285CCC0020E9D6 /* Settings.h */,
+				DA93B035132F63B50016810D /* GotoView.h */,
+				DA93B036132F63B50016810D /* GotoView.m */,
 			);
 			name = presentation;
+			sourceTree = "<group>";
+		};
+		DA93B0DA132F6B070016810D /* Languages */ = {
+			isa = PBXGroup;
+			children = (
+				DA93B0DB132F6B070016810D /* InfoPlist.strings */,
+				DA93B0DD132F6B070016810D /* Localizable.strings */,
+			);
+			path = Languages;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -566,6 +589,8 @@
 				French,
 				German,
 				en,
+				Korean,
+				Spanish,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
@@ -584,7 +609,6 @@
 				28AD73600D9D9599002E5188 /* MainWindow.xib in Resources */,
 				28F335F11007B36200424DE2 /* RootViewController.xib in Resources */,
 				DA7D3AC7132856CC0020E9D6 /* PresentationViewController.xib in Resources */,
-				DA7D3B3313285BA10020E9D6 /* bombi.ttf in Resources */,
 				DA7D3C00132862FE0020E9D6 /* graphs_languages.png in Resources */,
 				DA7D3C50132868A40020E9D6 /* unittest_example.png in Resources */,
 				DA7D3C6F132869CB0020E9D6 /* unittest_run.png in Resources */,
@@ -593,6 +617,9 @@
 				DA7A2363132A0D020040CAF2 /* ConsoleViewController.xib in Resources */,
 				DA7A2365132A0D020040CAF2 /* EditPropertyViewController.xib in Resources */,
 				DA7A2369132A0D020040CAF2 /* PropertyRootViewController.xib in Resources */,
+				DA93AFFB132F61DC0016810D /* SeoulHangangB.ttf in Resources */,
+				DA93B0E3132F6B070016810D /* InfoPlist.strings in Resources */,
+				DA93B0E4132F6B070016810D /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -657,10 +684,34 @@
 				DA7A2387132A0D020040CAF2 /* Inspect.m in Sources */,
 				DA7A2388132A0D020040CAF2 /* Logger.m in Sources */,
 				DA7A2389132A0D020040CAF2 /* UnitTest.m in Sources */,
+				DA93B037132F63B50016810D /* GotoView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		DA93B0DB132F6B070016810D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DA93B0DC132F6B070016810D /* English */,
+				DA93B0DF132F6B070016810D /* Korean */,
+				DA93B0E1132F6B070016810D /* Spanish */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		DA93B0DD132F6B070016810D /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DA93B0DE132F6B070016810D /* English */,
+				DA93B0E0132F6B070016810D /* Korean */,
+				DA93B0E2132F6B070016810D /* Spanish */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		1D6058940D05DD3E006BFB54 /* Debug */ = {

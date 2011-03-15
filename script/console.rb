@@ -38,7 +38,7 @@ cd TARGET           : change target object
   [ cd / ]          : to rootViewController
   [ cd ~ ]          : to keyWindow
   [ cd 0 ]          : at index as listed          
-  [ cd 1 0 ]        : at section and index        
+  [ cd 1 0 ]        : at section and row
   [ cd -1 0 ]       : at index on toolbar
   [ cd Title ]      : labeled as Title   
   [ cd view ]       : to property        
@@ -117,7 +117,7 @@ class Console
     end
   end
   def input text
-    puts "#{@shell.options[:prompt]}#{text}"
+    display_info "#{@shell.options[:prompt]}#{text}"
     @proc_block.call @shell.options, text
   end
   def command_arg_from_input text
@@ -227,16 +227,16 @@ class Console
           when /^save/
             puts save_events_base64(arg, response_body)
           else
-            puts response_body if env[:print]
+            display_info response_body if env[:print]
           end
         when 'completion'
-          puts response_body if env[:print]
-          response_body
+          display_info response_body if env[:print]
         when 'cd', 'rm', 'back', 'touch', 'flick', 'hit', 'add_ui'
-          puts response_body if response_body.size>0 and env[:print]
+          display_info response_body if response_body.size>0 and env[:print]
           update_prompt
+          response_body
         else
-          puts response_body if env[:print]
+          display_info response_body if env[:print]
         end
       end
     end
@@ -282,6 +282,18 @@ class Console
     @shell.start
   end
 end
+
+def display_info data
+  if defined? DISPLAY_INPUT_OUTPUT
+    if DISPLAY_INPUT_OUTPUT
+      puts data
+    end
+  else
+    puts data
+  end
+  data
+end
+
 
 if __FILE__ == $0
   if ARGV.size > 0 and %w{-h --help}.include? ARGV.first

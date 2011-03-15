@@ -1,10 +1,11 @@
-#! /opt/local/bin/ruby1.9
+#! /usr/bin/ruby
 # encoding: utf-8
 
-require '../../libcat/Console/script/console'
+require '../../script/console'
 
 #RUN_ALL = false
 RUN_ALL = true
+DISPLAY_INPUT_OUTPUT = false
 
 c = Console.new
 rootVC = c.input 'cd /'

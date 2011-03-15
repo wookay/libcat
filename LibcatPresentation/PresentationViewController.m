@@ -12,24 +12,38 @@
 #import "SlideDataSource.h"
 #import "NSArrayExt.h"
 #import "Settings.h"
+#import "GotoView.h"
 
 @implementation PresentationViewController
 @synthesize tableView;
 @synthesize pageControl;
 
--(IBAction) touchedPageControl:(id)sender {
+-(IBAction) touchedGotoButton:(id)sender {
+	[GotoView showGotoAlertView:NSLocalizedString(@"Page", nil) currentPage:pageControl.currentPage numberOfPages:pageControl.numberOfPages delegate:self];
+}
+
+-(void) changedSlidePage:(int)page {
+	if (pageControl.currentPage != page) {
+		[self changeSlidePage:page];
+		pageControl.currentPage = page;
+	}
+}
+
+-(void) changeSlidePage:(int)page {
 	UITableViewRowAnimation animation;
-	if ([SlideDataSource sharedInstance].currentSlideIndex > pageControl.currentPage) {
+	if ([SlideDataSource sharedInstance].currentSlideIndex > page) {
 		animation = UITableViewRowAnimationRight;
 	} else {
 		animation = UITableViewRowAnimationLeft;
 	}
-	[SlideDataSource sharedInstance].currentSlideIndex = pageControl.currentPage;
-//	[tableView reloadData];
-	
+	[SlideDataSource sharedInstance].currentSlideIndex = page;	
 	NSIndexSet* indexSet = [NSIndexSet indexSetWithIndex:0];
 	[tableView reloadSections:indexSet withRowAnimation:animation];	
-	log_info(@"c %d", pageControl.currentPage);
+	log_info(@"c %d", page);
+}
+
+-(IBAction) touchedPageControl:(id)sender {
+	[self changeSlidePage:pageControl.currentPage];
 }
 
 // The designated initializer.  Override if you create the controller programmatically and want to perform customization that is not appropriate for viewDidLoad.
@@ -84,12 +98,17 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView_ heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-	id item = [[[[SlideDataSource sharedInstance].slides objectAtIndex:pageControl.currentPage] objectAtSecond] objectAtIndex:indexPath.row];
-	if ([item isKindOfClass:[UIImage class]]) {
-		return 150;
-	} else {
-		return 50;
+	if ([SlideDataSource sharedInstance].slides.count > pageControl.currentPage) {
+		NSArray* slidePair = [[SlideDataSource sharedInstance].slides objectAtIndex:pageControl.currentPage];
+		NSArray* items = [slidePair objectAtSecond];
+		if (items.count > indexPath.row) {
+			id item = [items objectAtIndex:indexPath.row];
+			if ([item isKindOfClass:[UIImage class]]) {
+				return 150;
+			}
+		}
 	}
+	return 50;
 }
 
 - (UIView*) tableView:(UITableView *)tableView_ viewForHeaderInSection:(NSInteger)section {

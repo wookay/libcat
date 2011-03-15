@@ -23,25 +23,23 @@ void SLIDE_PAGE(NSString* slideTitle, NSArray* slideItems) {
 @synthesize currentSlideIndex;
 
 -(void) loadSlideData {
-	
-	//
-//	SLIDE_PAGE(@"", [NSArray arrayWithObjects:@"5시 15분", nil]);	
-
-	
-	
 	SLIDE_PAGE(@"libcat", [NSArray arrayWithObjects:SPACE, SPACE, PAIR([[NSDate date] year_monthName_day_SPACE], Enum(UITextAlignmentRight)), PAIR(@"ㄴㅇㄱ ", Enum(UITextAlignmentRight)), nil]);	
-	SLIDE_PAGE(@"libcat", [NSArray arrayWithObjects:@"https://github.com/wookay/libcat", @"오픈 소스 프로젝트", @"아이폰 앱 개발을 동적으로 하자", @"허세 코딩", nil]);
-	SLIDE_PAGE(@"사용 언어", [NSArray arrayWithObjects:[UIImage imageNamed:@"graphs_languages.png"], nil]);
-	SLIDE_PAGE(@"구성", [NSArray arrayWithObjects:@"Ext", @"Block", @"Unit Test, Logger", @"Console", nil]);
+	SLIDE_PAGE(@"libcat", [NSArray arrayWithObjects:@"https://github.com/wookay/libcat",
+						   NSLocalizedString(@"Open Source Project", nil),
+						   NSLocalizedString(@"Interactive iPhone application development", nil),
+						   NSLocalizedString(@"Bluff Coding", nil),
+						   nil]);
+	SLIDE_PAGE(NSLocalizedString(@"Languages", nil), [NSArray arrayWithObjects:[UIImage imageNamed:@"graphs_languages.png"], nil]);
+	SLIDE_PAGE(NSLocalizedString(@"Features", nil), [NSArray arrayWithObjects:@"Ext", @"Block", @"Unit Test, Logger", @"Console", nil]);
 	SLIDE_PAGE(@"Ext", [NSArray arrayWithObjects:@"Objective-C Library", @"Foundation Extensions & Macros", nil]);
 	SLIDE_PAGE(@"Ext", [NSArray arrayWithObjects:@"NSStringExt", @"NSArrayExt", @"NSDictionaryExt", @"...", nil]);
 	SLIDE_PAGE(@"Block", [NSArray arrayWithObjects:@"Block Extensions", @" for array, dictionary, number", @"UIBlock Extensions", nil]);
-	SLIDE_PAGE(@"Unit Test", [NSArray arrayWithObjects:@"유닛 테스트 코드 작성", @"재사용 가능한 코드 유지", nil]);
+	SLIDE_PAGE(@"Unit Test", [NSArray arrayWithObjects:NSLocalizedString(@"Writing Unit Test Codes", nil), NSLocalizedString(@"Make Reusable Code", nil), nil]);
 	SLIDE_PAGE(@"Unit Test ( Example )", [NSArray arrayWithObjects:[UIImage imageNamed:@"unittest_example.png"], nil]);
 	SLIDE_PAGE(@"Unit Test ( Run )", [NSArray arrayWithObjects:[UIImage imageNamed:@"unittest_run.png"], nil]);
 	SLIDE_PAGE(@"Unit Test ( Report )", [NSArray arrayWithObjects:[UIImage imageNamed:@"unittest_report.png"], nil]);
 	SLIDE_PAGE(@"Logger", [NSArray arrayWithObjects:@"log_info(@\"message\")", @"  RootViewController.m #032   message", @"log_info(@\"idx %d\", idx)", @"  RootViewController.m #033   idx 1    ", nil]);
-	SLIDE_PAGE(@"Console", [NSArray arrayWithObjects:@"Command shell debugging environment", @"스크립팅", @"자동화", nil]);
+	SLIDE_PAGE(@"Console", [NSArray arrayWithObjects:@"Command shell debugging environment", NSLocalizedString(@"Scripting", nil), NSLocalizedString(@"Automation", nil), nil]);
 	SLIDE_PAGE(@"ls", [NSArray arrayWithObjects:
 @"[ ls ]          : list current object",      
 @"[ ls -r ]     : list recursive      ", nil]);
@@ -52,8 +50,8 @@ void SLIDE_PAGE(NSString* slideTitle, NSArray* slideItems) {
 @"	[ cd .. ]         : to superview        ",
 @"	[ cd / ]          : to rootViewController",
 @"	[ cd ~ ]          : to keyWindow",
-@"	[ cd 0 ]          : at index as listed          ",
-@"	[ cd 1 0 ]        : at section and index        ",
+@"	[ cd 0 ]          : at index as listed",
+@"	[ cd 1 0 ]        : at section and row",
 @"	[ cd -1 0 ]       : at index on toolbar",
 @"	[ cd Title ]      : labeled as Title   ",
 @"	[ cd view ]       : to property        ",
@@ -66,13 +64,13 @@ void SLIDE_PAGE(NSString* slideTitle, NSArray* slideItems) {
 @"[ text ]          : property getter",
 @"[ text = hello ]  : property setter",
 					  nil]);
-	SLIDE_PAGE(@"t", [NSArray arrayWithObjects:@"터치 이벤트", nil]);
+	SLIDE_PAGE(@"t", [NSArray arrayWithObjects:NSLocalizedString(@"Touch Events", nil), nil]);
 	SLIDE_PAGE(@"b", [NSArray arrayWithObjects:@"popViewController", nil]);
 	SLIDE_PAGE(@"rm", [NSArray arrayWithObjects:@"removeFromSuperview", nil]);
 	SLIDE_PAGE(@"f", [NSArray arrayWithObjects:@"flick target UI", nil]);
 	SLIDE_PAGE(@"open", [NSArray arrayWithObjects:@"open Safari UI", nil]);
 	SLIDE_PAGE(@"hit", [NSArray arrayWithObjects:@"hitTest UI on/off", nil]);
-	SLIDE_PAGE(@"events", [NSArray arrayWithObjects:@"터치 이벤트 기록, 재생", @"USE_PRIVATE_API=1", nil]);
+	SLIDE_PAGE(@"events", [NSArray arrayWithObjects:NSLocalizedString(@"Record, Play the touch events", nil), @"USE_PRIVATE_API=1", nil]);
 	SLIDE_PAGE(@"events", [NSArray arrayWithObjects:
 @"[ events record ]      : record on/off (er)",
 @"[ events play ]        : play events (ep)",
@@ -82,9 +80,9 @@ void SLIDE_PAGE(NSString* slideTitle, NSArray* slideItems) {
 @"[ events save NAME ]   : save events (es)",
 @"[ events load NAME ]   : load events (el)",
 	SPACE, nil]);
-	SLIDE_PAGE(@"피드백", [NSArray arrayWithObjects:@"구글 그룹 구독", @"http://groups.google.com/group/interactivelibcat", nil]);
-	SLIDE_PAGE(@"질문?", [NSArray arrayWithObjects:@"", nil]);
-	SLIDE_PAGE(@"FIN", [NSArray arrayWithObjects:SPACE, PAIR(@"감사합니다", Enum(UITextAlignmentCenter)), nil]);
+	SLIDE_PAGE(NSLocalizedString(@"Feedback", nil), [NSArray arrayWithObjects:NSLocalizedString(@"Subscribe to google groups", nil), @"http://groups.google.com/group/interactivelibcat", nil]);
+	SLIDE_PAGE(NSLocalizedString(@"Questions?", nil), [NSArray arrayWithObjects:@"", nil]);
+	SLIDE_PAGE(@"FIN", [NSArray arrayWithObjects:SPACE, PAIR(NSLocalizedString(@"Thanks", nil), Enum(UITextAlignmentCenter)), nil]);
 
 }
 
@@ -103,12 +101,18 @@ void SLIDE_PAGE(NSString* slideTitle, NSArray* slideItems) {
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [[[slides objectAtIndex:currentSlideIndex] objectAtSecond] count];
+	if (slides.count > currentSlideIndex) {
+		return [[[slides objectAtIndex:currentSlideIndex] objectAtSecond] count];
+	}
+	return 0;
 }
 
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {   // fixed font style. use custom view (UILabel) if you want something different
-	return [[slides objectAtIndex:currentSlideIndex] objectAtFirst];
+	if (slides.count > currentSlideIndex) {
+		return [[slides objectAtIndex:currentSlideIndex] objectAtFirst];
+	}
+	return nil;
 }
 
 // Customize the appearance of table view cells.
@@ -140,7 +144,7 @@ void SLIDE_PAGE(NSString* slideTitle, NSArray* slideItems) {
 		cell.textLabel.adjustsFontSizeToFitWidth = true;
 		cell.textLabel.text = itemText;
 		cell.textLabel.numberOfLines = [itemText split:LF].count;
-		cell.textLabel.font = [UIFont fontWithName:@"HeummBombi152" size:40];
+		cell.textLabel.font = [UIFont fontWithName:@"SeoulHangangB" size:36];
 		cell.textLabel.textColor = COLOR_RGBA_FF(0x06, 0x10, 0x2b, 1);
 	}
     return cell;

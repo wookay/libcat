@@ -1,5 +1,5 @@
 build
-TestApp.xcodeproj/*.mode*
-TestApp.xcodeproj/*.pbxuser
+*.xcodeproj/*.mode*
+*.xcodeproj/*.pbxuser
 project.xcworkspace
 xcuserdata

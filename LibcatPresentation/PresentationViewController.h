@@ -7,14 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GotoView.h"
 
-@interface PresentationViewController : UIViewController <UITableViewDelegate> {
+@interface PresentationViewController : UIViewController <GotoDelegate, UITableViewDelegate> {
 	IBOutlet UITableView* tableView;
 	IBOutlet UIPageControl* pageControl;
 }
 @property(nonatomic,retain) UITableView* tableView;
 @property(nonatomic,retain) UIPageControl* pageControl;
 
-
+-(IBAction) touchedGotoButton:(id)sender ;
 -(IBAction) touchedPageControl:(id)sender ;
+-(void) changeSlidePage:(int)page ;
+
 @end

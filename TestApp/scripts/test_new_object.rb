@@ -1,7 +1,7 @@
 #! /opt/local/bin/ruby1.9
 # encoding: utf-8
 
-require '../../libcat/Console/script/console'
+require '../../script/console'
 
 #RUN_ALL = false
 RUN_ALL = true
