@@ -81,6 +81,8 @@
 		DA93B037132F63B50016810D /* GotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = DA93B036132F63B50016810D /* GotoView.m */; };
 		DA93B0E3132F6B070016810D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA93B0DB132F6B070016810D /* InfoPlist.strings */; };
 		DA93B0E4132F6B070016810D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DA93B0DD132F6B070016810D /* Localizable.strings */; };
+		DADCD7C8133066490082B437 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = DADCD7C6133066490082B437 /* Icon.png */; };
+		DADCD810133069AB0082B437 /* Default-Landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = DADCD80F133069AB0082B437 /* Default-Landscape.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -224,6 +226,8 @@
 		DA93B0E0132F6B070016810D /* Korean */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Korean; path = Korean.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DA93B0E1132F6B070016810D /* Spanish */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Spanish; path = Spanish.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		DA93B0E2132F6B070016810D /* Spanish */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Spanish; path = Spanish.lproj/Localizable.strings; sourceTree = "<group>"; };
+		DADCD7C6133066490082B437 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		DADCD80F133069AB0082B437 /* Default-Landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -288,6 +292,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				DADCD7C4133066410082B437 /* Images */,
 				DA93B0DA132F6B070016810D /* Languages */,
 				DA7D3BFE132862F80020E9D6 /* slide_images */,
 				DA93AFFA132F61DC0016810D /* SeoulHangangB.ttf */,
@@ -554,6 +559,15 @@
 			path = Languages;
 			sourceTree = "<group>";
 		};
+		DADCD7C4133066410082B437 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				DADCD80F133069AB0082B437 /* Default-Landscape.png */,
+				DADCD7C6133066490082B437 /* Icon.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -620,6 +634,8 @@
 				DA93AFFB132F61DC0016810D /* SeoulHangangB.ttf in Resources */,
 				DA93B0E3132F6B070016810D /* InfoPlist.strings in Resources */,
 				DA93B0E4132F6B070016810D /* Localizable.strings in Resources */,
+				DADCD7C8133066490082B437 /* Icon.png in Resources */,
+				DADCD810133069AB0082B437 /* Default-Landscape.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

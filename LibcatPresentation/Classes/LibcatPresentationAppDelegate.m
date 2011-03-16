@@ -28,6 +28,8 @@
     [self.window addSubview:navigationController.view];
     [self.window makeKeyAndVisible];
 
+
+	[NSThread sleepForTimeInterval:1];
 	[CONSOLEMAN start_up];
 	[CONSOLEMAN hide_console_button];
     return YES;

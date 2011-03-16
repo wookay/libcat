@@ -24,8 +24,8 @@
 
 -(void) changedSlidePage:(int)page {
 	if (pageControl.currentPage != page) {
-		[self changeSlidePage:page];
 		pageControl.currentPage = page;
+		[self changeSlidePage:page];
 	}
 }
 
