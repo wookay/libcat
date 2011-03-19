@@ -41,12 +41,25 @@
 #define TOOLBAR_ITEMS_SECTION_INDEX -1
 
 
+
+
 NSArray* array_prefix_index(NSArray* array) {
-	return [array map_with_index:^id(id obj, int idx) { 
-		return SWF(@"[%d] %@", idx, [obj inspect]); 
-	}];
+	NSMutableArray* ary = [NSMutableArray array];
+	for (int idx = 0; idx < array.count; idx++) {
+		id obj = [array objectAtIndex:idx];
+		[ary addObject:SWF(@"  [%d] %@", idx, [obj inspect])];
+	}
+	return ary;
 }
 
+NSString* surrounded_array_prefix_index(NSArray* array) {
+	NSArray* ary = array_prefix_index(array);
+	if (ary.count > 0) {
+		return SWF(@"\n%@", [ary join:LF]);
+	} else {
+		return @"[]";
+	}
+}
 
 @implementation CommandManager
 @synthesize commandsMap;
@@ -261,7 +274,7 @@ NSArray* array_prefix_index(NSArray* array) {
 }
 
 -(id) command_map:(id)currentObject arg:(id)arg {
-	return [[CONSOLEMAN mapTargetObject:currentObject arg:arg] join:LF];
+	return SWF(@"[%@]: %@", [currentObject class], [[CONSOLEMAN mapTargetObject:currentObject arg:arg] arrayDescription]);
 }
 
 -(id) command_prompt:(id)currentObject arg:(id)arg {
@@ -327,6 +340,9 @@ NSArray* array_prefix_index(NSArray* array) {
 	if ([changeObject isKindOfClass:[UIView class]]) {
 		UIView* view = changeObject;
 		[view flick];
+	} else if ([changeObject isKindOfClass:[CALayer class]]) {
+		CALayer* layer = changeObject;
+		[layer flick];			
 	} else if ([changeObject isKindOfClass:[UIBarButtonItem	class]]) {
 		UIBarButtonItem* barButtonItem = (UIBarButtonItem*)changeObject;
 		UIBarButtonItemStyle style = barButtonItem.style;		
@@ -348,9 +364,31 @@ NSArray* array_prefix_index(NSArray* array) {
 	id changeObject = [pair objectAtSecond];
 	if ([changeObject isKindOfClass:[UIView class]]) {
 		UIView* view = (UIView*)changeObject;
-		CONSOLEMAN.currentTargetObject = view.superview;
-		[view removeFromSuperview];
-		return SWF(@"cd %@", [CONSOLEMAN.currentTargetObject class]);
+		UIView* superview = view.superview;
+		if (nil == superview) {
+			return NSLocalizedString(@"Not Found Superview", nil);
+		}  else {
+			CONSOLEMAN.currentTargetObject = superview;
+			[view removeFromSuperview];
+			return SWF(@"cd %@", [CONSOLEMAN.currentTargetObject class]);
+		}
+	} else if ([changeObject isKindOfClass:[CALayer class]]) {
+		CALayer* layer = (CALayer*)changeObject;
+		CALayer* superlayer = layer.superlayer;
+		if (nil == superlayer) {
+			return NSLocalizedString(@"Not Found Superlayer", nil);
+		} else {
+			if (1 == superlayer.sublayers.count) {
+				if ([layer.delegate isKindOfClass:[UIView class]]) {
+					[layer.delegate removeFromSuperview];
+					CONSOLEMAN.currentTargetObject = superlayer.delegate;
+				}
+			} else {
+				[layer removeFromSuperlayer];
+				CONSOLEMAN.currentTargetObject = superlayer;
+			}
+			return SWF(@"cd %@", [CONSOLEMAN.currentTargetObject class]);
+		}
 	}
 	return NSLocalizedString(@"Not Found", nil);
 }
@@ -434,28 +472,36 @@ NSArray* array_prefix_index(NSArray* array) {
 				}
 				break;
 			case LS_VIEWCONTROLLERS:
-				[ary addObject:SWF(@"VIEWCONTROLLERS: %@", [array_prefix_index(obj) inspect])];
+				[ary addObject:SWF(@"VIEWCONTROLLERS: %@", surrounded_array_prefix_index(obj))];
 				break;
 			case LS_TABLEVIEW:
 				[ary addObject:SWF(@"TABLEVIEW: %@", [obj inspect])];
 				break;
 			case LS_SECTIONS: {
-					[ary addObject:@"SECTIONS: "];
+					NSArray* sectionTitles = [pair objectAtThird];
+					[ary addObject:@"SECTIONS:"];
 					[(NSArray*)obj each_with_index:^(id sectionAry, int idx) {
-						[ary addObject:SWF(@"\t%d %@", idx, [array_prefix_index(sectionAry) inspect])];
-					}];
+						NSString* sectionTitle = [sectionTitles objectAtIndex:idx];
+						if (nil == sectionTitle) {
+							[ary addObject:SWF(@"== %@ %d ==", NSLocalizedString(@"Section", nil), idx)];
+						} else {
+							[ary addObject:SWF(@"== %@ %d : %@ ==", NSLocalizedString(@"Section", nil), idx, sectionTitle)];
+						}
+						[ary addObject:[array_prefix_index(sectionAry) join:LF]];
+					}];				
 				}
 				break;
 			case LS_VIEW:
 				[ary addObject:SWF(@"VIEW: %@", [obj inspect])];
 				break;
-			case LS_INDENTED_VIEW: {
+			case LS_INDENTED_VIEW:
+			case LS_INDENTED_LAYER: {
 					int depth = [[pair objectAtThird] intValue];
 					[ary addObject:SWF(@"%@%@", [TAB repeat:depth], [obj inspect])];
 				}
 				break;				
 			case LS_VIEW_SUBVIEWS:
-				[ary addObject:SWF(@"VIEW.SUBVIEWS: %@", [array_prefix_index(obj) inspect])];
+				[ary addObject:SWF(@"VIEW.SUBVIEWS: %@", surrounded_array_prefix_index(obj))];
 				break;
 			case LS_TABBAR:
 				[ary addObject:SWF(@"TABBAR: %@", [obj inspect])];				
@@ -467,17 +513,23 @@ NSArray* array_prefix_index(NSArray* array) {
 				[ary addObject:SWF(@"NAVIGATIONCONTROLLER_TOOLBAR: %@", [obj inspect])];				
 				break;								
 			case LS_NAVIGATIONCONTROLLER_TOOLBAR_ITEMS:
-				[ary addObject:SWF(@"NAVIGATIONCONTROLLER_TOOLBAR_ITEMS: %d %@", TOOLBAR_ITEMS_SECTION_INDEX, [array_prefix_index(obj) inspect])];				
+				[ary addObject:SWF(@"NAVIGATIONCONTROLLER_TOOLBAR_ITEMS:\n%d%@", TOOLBAR_ITEMS_SECTION_INDEX, surrounded_array_prefix_index(obj))];				
 				break;												
 			case LS_TOOLBAR:
 				[ary addObject:SWF(@"TOOLBAR: %@", [obj inspect])];				
 				break;								
 			case LS_TOOLBAR_ITEMS:
-				[ary addObject:SWF(@"TOOLBAR_ITEMS: %d %@", TOOLBAR_ITEMS_SECTION_INDEX, [array_prefix_index(obj) inspect])];				
+				[ary addObject:SWF(@"TOOLBAR_ITEMS: %d %@", TOOLBAR_ITEMS_SECTION_INDEX, surrounded_array_prefix_index(obj))];				
 				break;																
 			case LS_CLASS_METHODS:
 				[ary addObject:SWF(@"CLASS_METHODS: %@", [obj inspect])];				
-				break;																				
+				break;	
+			case LS_LAYER:
+				[ary addObject:SWF(@"LAYER: %@", [obj inspect])];
+				break;												
+			case LS_LAYER_SUBLAYERS:
+				[ary addObject:SWF(@"LAYER.SUBLAYERS: %@", surrounded_array_prefix_index(obj))];
+				break;		
 			default:
 				break;
 		}
@@ -543,6 +595,7 @@ NSArray* array_prefix_index(NSArray* array) {
 		if ([controller.view isKindOfClass:[UITableView class]]) {
 			UITableView* tableView = (UITableView*)controller.view;
 			NSMutableArray* sections = [NSMutableArray array];
+			NSMutableArray* sectionTitles = [NSMutableArray array];
 			for (int section = 0; section < [tableView numberOfSections]; section++) {
 				NSMutableArray* ary = [NSMutableArray array];
 				for (int row = 0; row < [tableView numberOfRowsInSection:section]; row++) {
@@ -553,9 +606,10 @@ NSArray* array_prefix_index(NSArray* array) {
 					}
 				}
 				[sections addObject:ary];
+				[sectionTitles addObject:[tableView.dataSource tableView:tableView titleForHeaderInSection:section]];
 			}
 			[ret addObject:PAIR(Enum(LS_TABLEVIEW), tableView)];
-			[ret addObject:PAIR(Enum(LS_SECTIONS), sections)];
+			[ret addObject:TRIO(Enum(LS_SECTIONS), sections, sectionTitles)];
 		} else {
 			if (recursive) {
 				[controller.view traverseSubviews:traverseBlock reverse:true];
@@ -571,6 +625,7 @@ NSArray* array_prefix_index(NSArray* array) {
 	} else if ([currentObject isKindOfClass:[UITableView class]]) {
 		UITableView* tableView = currentObject;
 		NSMutableArray* sections = [NSMutableArray array];
+		NSMutableArray* sectionTitles = [NSMutableArray array];
 		for (int section = 0; section < [tableView numberOfSections]; section++) {
 			NSMutableArray* ary = [NSMutableArray array];
 			for (int row = 0; row < [tableView numberOfRowsInSection:section]; row++) {
@@ -581,8 +636,9 @@ NSArray* array_prefix_index(NSArray* array) {
 				}
 			}
 			[sections addObject:ary];
+			[sectionTitles addObject:[tableView.dataSource tableView:tableView titleForHeaderInSection:section]];
 		}
-		[ret addObject:PAIR(Enum(LS_SECTIONS), sections)];
+		[ret addObject:TRIO(Enum(LS_SECTIONS), sections, sectionTitles)];
 	} else if ([currentObject isKindOfClass:[UIView class]]) {
 		UIView* view = currentObject;
 		if (recursive) {
@@ -590,6 +646,16 @@ NSArray* array_prefix_index(NSArray* array) {
 		} else {
 			[ret addObject:PAIR(Enum(LS_VIEW_SUBVIEWS), [view.subviews reverse])];
 		}
+	} else if ([currentObject isKindOfClass:[CALayer class]]) {
+		TraverseLayerBlock traverseLayerBlock = ^(int depth, CALayer* sublayer) {
+			[ret addObject:TRIO(Enum(LS_INDENTED_LAYER), sublayer, FIXNUM(depth))];
+		};		
+		CALayer* layer = currentObject;
+		if (recursive) {
+			[layer traverseSublayers:traverseLayerBlock reverse:true];
+		} else {
+			[ret addObject:PAIR(Enum(LS_LAYER_SUBLAYERS), layer.sublayers == nil ? [NSArray array] : [layer.sublayers reverse])];
+		}		
 #if USE_COCOA
 	} else if ([currentObject isKindOfClass:[NSWindow class]]) {
 		NSWindow* window = currentObject;
@@ -636,19 +702,23 @@ NSArray* array_prefix_index(NSArray* array) {
 				} else {
 					changeObject = view.superview;
 				}
+			} else if ([currentObject isKindOfClass:[CALayer class]]) {
+				CALayer* layer = currentObject;
+				if (nil != layer.delegate && [layer.delegate isKindOfClass:[UIView class]]) {
+					changeObject = layer.delegate;
+				}
 			}
 		}		
 	} else if ([arg hasPrefix:NEW_OBJECT_PREFIX]) {
 		id obj = [CONSOLEMAN get_argObject:arg];
 		changeObject = obj;
-#define MEMORY_ADDRESS_PREFIX @"0x"
 	} else if ([arg hasPrefix:MEMORY_ADDRESS_PREFIX]) {
 		size_t address = [arg to_size_t];
 		id obj = (id)address;
 		
 		changeObject = obj;
 		actionBlock = [self get_targetObjectActionBlock:obj];
-	} else if ([arg isNumberWithSpace]) {
+	} else if ([arg isIntegerNumberWithSpace]) {
 		BOOL found = false;
 		int section = 0;
 		int row = 0;
@@ -745,7 +815,6 @@ NSArray* array_prefix_index(NSArray* array) {
 					UIView* subview = [[view.subviews reverse] objectAtIndex:row];				
 					changeObject = subview;
 					found = true;
-					
 					if ([subview isKindOfClass:[UIControl class]]) {
 						ActionBlock block = ^id {				
 							[(UIControl*)subview sendActionsForControlEvents:UIControlEventTouchUpInside];
@@ -753,6 +822,13 @@ NSArray* array_prefix_index(NSArray* array) {
 						};
 						actionBlock = Block_copy(block);
 					}
+				}
+			} else if ([currentObject isKindOfClass:[CALayer class]]) {
+				CALayer* layer = currentObject;
+				if (row < layer.sublayers.count) {
+					CALayer* sublayer = [[layer.sublayers reverse] objectAtIndex:row];				
+					changeObject = sublayer;
+					found = true;
 				}
 #if USE_COCOA
 			} else if ([currentObject isKindOfClass:[NSWindow class]]) {
@@ -789,7 +865,20 @@ NSArray* array_prefix_index(NSArray* array) {
 			} else {
 				return TRIO(NSLocalizedString(@"Not Object", nil), [NilClass nilClass], [NilClass nilClass]); 
 			}
-		} else { // search by title
+		} else if ([arg hasText:DOT]) {
+			id cur = currentObject;
+			for (id item in [arg split:DOT]) {
+				NSArray* trio = [self findTargetObject:cur arg:item];
+				id obj = [trio objectAtSecond];
+				if (IS_NIL(obj)) {
+					break;
+				}
+				cur = obj;
+			}
+			changeObject = cur;
+		}
+		
+		if (nil == changeObject) { // search by title
 			NSArray* pair = [self get_targetStringAndBlocks:currentObject];
 			NSDictionary* targetStrings = [pair objectAtFirst];
 			NSDictionary* targetBlocks = [pair objectAtSecond];

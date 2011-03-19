@@ -15,6 +15,10 @@
 	return [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"];	
 }
 
++ (NSString*) bundleDisplayName {
+	return [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];	
+}
+
 + (NSString*) bundleVersion {
 	return [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];	
 }

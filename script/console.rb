@@ -295,6 +295,11 @@ def display_info data
   data
 end
 
+def assert_equal expected, got
+  puts expected == got ?
+    "passed: #{expected}" :
+    "Assertion failed\nExpected: #{expected}\nGot: #{got}"
+end
 
 if __FILE__ == $0
   if ARGV.size > 0 and %w{-h --help}.include? ARGV.first

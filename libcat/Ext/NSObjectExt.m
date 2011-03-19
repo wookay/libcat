@@ -224,6 +224,17 @@
 			*failed = true;
 			break;
 			
+		case _C_FLT: {
+				NSInvocation* invocation = [NSInvocation invocationWithMethodSignature:sig];
+				[invocation setSelector:sel];
+				[invocation setTarget:self];
+				[invocation invoke];		
+				CGFloat f;
+				[invocation getReturnValue:&f];
+				return [NSNumber numberWithFloat:f];
+			}
+			break;
+
 		case _C_STRUCT_B:
 		case _C_STRUCT_E: {
 				NSInvocation* invocation = [NSInvocation invocationWithMethodSignature:sig];
@@ -234,26 +245,27 @@
 				if ([attributesString hasPrefix:@"{CGRect"]) {
 					CGRect rect;
 					[invocation getReturnValue:&rect];
-					obj = NSStringFromCGRect(rect);	
+					obj = [NSValue valueWithCGRect:rect];	
 				} else if ([attributesString hasPrefix:@"{CGAffineTransform"]) {
 					CGAffineTransform t;
 					[invocation getReturnValue:&t];
-					obj = NSStringFromCGAffineTransform(t);					
+					obj = [NSValue valueWithCGAffineTransform:t];	
 				} else if ([attributesString hasPrefix:@"{CGSize"]) {
 					CGSize size;
 					[invocation getReturnValue:&size];
-					obj = NSStringFromCGSize(size);					
+					obj = [NSValue valueWithCGSize:size];	
 				} else if ([attributesString hasPrefix:@"{CGPoint"]) {
 					CGPoint point;
 					[invocation getReturnValue:&point];
-					obj = NSStringFromCGPoint(point);										
+					obj = [NSValue valueWithCGPoint:point];	
 				} else if ([attributesString hasPrefix:@"{UIEdgeInsets"]) {					
 					UIEdgeInsets edgeInsets;
 					[invocation getReturnValue:&edgeInsets];
-					obj = NSStringFromUIEdgeInsets(edgeInsets);															
-				} else {
-					// @"{CATransform3D"
-//					log_info(@"propertyName %@ attributesString %@", NSStringFromSelector(sel), attributesString);
+					obj = [NSValue valueWithUIEdgeInsets:edgeInsets];	
+				} else if ([attributesString hasPrefix:@"{CATransform3D"]) {					
+					CATransform3D transform3D;
+					[invocation getReturnValue:&transform3D];
+					obj = [NSValue valueWithCATransform3D:transform3D];	
 				}
 				if (nil == obj) {
 					*failed = true;
@@ -346,7 +358,7 @@
 
 @implementation NilClass
 -(NSString*) description {
-	return @"nil";
+	return STR_NIL;
 }
 -(BOOL) isNil {
 	return true;

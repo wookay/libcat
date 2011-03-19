@@ -60,17 +60,17 @@ NSInteger sortByStringComparator(NSString* uno, NSString* dos, void* context) {
 	return self.length > 0;
 }
 
--(BOOL) isNumber {	
+-(BOOL) isIntegerNumber {	
 	NSScanner* scanner = [NSScanner scannerWithString:self];
-	if ([scanner scanFloat:NULL]) {
+	if ([scanner scanInt:NULL]) {
 		return [scanner isAtEnd];
 	} else {
 		return NO;
 	}
 }
 
--(BOOL) isNumberWithSpace {
-	return [[self gsub:SPACE to:EMPTY_STRING] isNumber];
+-(BOOL) isIntegerNumberWithSpace {
+	return [[self gsub:SPACE to:EMPTY_STRING] isIntegerNumber];
 }
 
 -(BOOL) isAlphabet {

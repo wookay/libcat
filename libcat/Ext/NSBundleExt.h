@@ -11,5 +11,6 @@
 
 @interface NSBundle (Ext)
 + (NSString*) bundleName ;
++ (NSString*) bundleDisplayName ;
 + (NSString*) bundleVersion ;
 @end

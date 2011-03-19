@@ -89,6 +89,14 @@
 	return [self assert:got equals:expected message:nil inFile:file atLine:line];
 }
 
++(void) assertBlock:(AssertBlock)block raise:(NSString*)exceptionName inFile:(NSString*)file atLine:(int)line {
+	@try {
+		block();
+	} @catch (NSException* exception) {
+		[self assert:(NSValue*)exception.name equals:(NSValue*)exceptionName message:nil inFile:file atLine:line];
+	}
+}
+
 +(id) target:(NSString*)targetClassString {
 	Class* targetClass = (Class*)NSClassFromString(targetClassString);
 	return [[[(id)targetClass alloc] init] autorelease];

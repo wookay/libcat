@@ -21,6 +21,7 @@
 #import "NewObjectManager.h"
 #import "NSObjectExt.h"
 #import "PropertyManipulator.h"
+#import "UIViewFlick.h"
 #include <arpa/inet.h>
 #include <netdb.h>
 #include <net/if.h>
@@ -107,14 +108,25 @@
 		if ([[arg strip] hasPrefix:EQUAL]) {
 			return [self setterChain:command arg:arg];
 		} else {
-			return [self getterChain:command arg:arg];
+			id obj = [self getterChain:command arg:arg];
+			if ([obj isKindOfClass:[NSException class]]) {
+				return SWF(@"%@", obj);
+			} else {
+				return obj;
+			}
 		}
 	} else {
 		SEL selector = NSSelectorFromString(selectorStr);
 		if ([COMMANDMAN respondsToSelector:selector]) {
 			return [COMMANDMAN performSelector:selector withObject:[self currentTargetObjectOrTopViewController] withObject:arg];
 		} else {
-			return SWF(@"%@ : %@", NSLocalizedString(@"Command Not Found", nil), command);
+			NSArray* trio = [COMMANDMAN findTargetObject:[self currentTargetObjectOrTopViewController] arg:command];
+			id obj = [trio objectAtSecond];
+			if (IS_NIL(obj)) {
+				return SWF(@"%@ : %@", NSLocalizedString(@"Command Not Found", nil), command);
+			} else {
+				return SWF(@"%@", obj);
+			}
 		}
 	}
 }
@@ -134,32 +146,7 @@
 	NSArray* commands = [command split:DOT];
 	if (commands.count > 1) {
 		lastMethod = [commands objectAtLast];
-		for (NSString* method in [commands slice:0 backward:-2]) {
-			SEL selector = NSSelectorFromString(method);
-			if ([target respondsToSelector:selector]) {
-				NSMethodSignature* sig = [target methodSignatureForSelector:selector];
-				const char* returnType = [sig methodReturnType];
-				switch (*returnType) {
-					case _C_ID:
-						target = [target performSelector:selector];
-						[ary addObject:SWF(@"%@\t===>\t%@", method, target)];
-						break;
-					default: {
-						SEL sel = NSSelectorFromString(method);
-						if ([target respondsToSelector:sel]) {
-							BOOL failed = false;
-							target = [target getPropertyValue:sel failed:&failed];
-							[ary addObject:SWF(@"%@\t===>\t%@", method, target)];
-						} else {
-							[ary addObject:SWF(@"%@\t===>\t%@", method, @"???")];
-						}
-					}
-						break;
-				}
-			} else {
-				[ary addObject:SWF(@"%@\t===>\t%@", method, [COMMANDMAN commandNotFound])];
-			}
-		}
+		target = [self getterChainObject:target command:[[commands slice:0 backward:-2] join:DOT] arg:EMPTY_STRING returnType:kGetterReturnTypeObject];
 	} else if (commands.count == 1) {
 		lastMethod = [commands objectAtFirst];
 	} else {
@@ -177,11 +164,11 @@
 			getterCommand = [arg slice:0 :commandRange.location];
 			getterArg = [arg slice:commandRange.location backward:-1];
 		}
-		id obj = [self getterChainObject:getterCommand arg:getterArg returnType:kGetterReturnTypeObject];
+		id obj = [self getterChainObject:currentTargetObject command:getterCommand arg:getterArg returnType:kGetterReturnTypeObject];
 		[NEWOBJECTMAN setNewObject:obj forKey:lastMethod];
 		[ary addObject:SWF(@"%@ = %@", lastMethod, obj)];							
 	} else {
-		id strObj = [self arg_to_proper_object:arg];
+		id strObj = [self get_argObject:[[[arg strip] slice:1 backward:-1] strip]];
 		NSString* lastMethodUppercased = SWF(@"set%@:", [lastMethod uppercaseFirstCharacter]);
 		SEL sel = NSSelectorFromString(lastMethodUppercased);
 		if ([target respondsToSelector:sel]) {
@@ -241,11 +228,6 @@
 	return [ary join:LF];
 }
 
--(id) arg_to_proper_object:(id)arg {
-	id obj = [self get_argObject:[[[arg strip] slice:1 backward:-1] strip]];
-	return obj;
-}
-
 -(NSArray*) mapTargetObject:(id)targetObject arg:(id)arg {
 	NSMutableArray* ary = [NSMutableArray array];
 	if ([targetObject conformsToProtocol:@protocol(NSFastEnumeration)]) {
@@ -254,35 +236,39 @@
 			if (args.count > 0) {
 				NSMutableArray* line = [NSMutableArray array];
 				for (id prop in args) {
-					SEL sel = NSSelectorFromString(prop);
-					if ([obj respondsToSelector:sel]) {
-						BOOL failed = false;
-						id value = [obj getPropertyValue:sel failed:&failed];
-						if (! failed) {
-							[line addObject:SWF(@"%@ : %@", prop , value)];
+					NSValue* value;
+					BOOL failed = false;
+					if ([prop hasText:DOT]) {
+						value = [self getterChainObject:obj command:prop arg:EMPTY_STRING returnType:kGetterReturnTypeObject];
+						if ([value isKindOfClass:[NSException class]]) {
+							failed = true;
 						}
+					} else {
+						SEL sel = NSSelectorFromString(prop);
+						value = [obj getPropertyValue:sel failed:&failed];
+					}
+					if (! failed) {
+						[line addObject:SWF(@"%@ = %@", prop , [value inspect])];
 					}
 				}
 				if (line.count > 0) {
-					[ary addObject:SWF(@"<%@: %p, %@>", [obj class], obj, [line join:COMMA_SPACE])];
+					[ary addObject:SWF(@"  <%@: %p, %@>", [obj class], obj, [line join:SEMICOLON_SPACE])];
 				} else {
-					[ary addObject:SWF(@"<%@: %p>", [obj class], obj)];
+					[ary addObject:SWF(@"  <%@: %p>", [obj class], obj)];
 				}
 			} else {
-				[ary addObject:SWF(@"%@", obj)];
+				[ary addObject:SWF(@"  %@", obj)];
 			}
 		}
 	}
 	return ary;
 }
 
-
 -(NSString*) getterChain:(id)command arg:(id)arg {
-	return [self getterChainObject:command arg:arg returnType:kGetterReturnTypeString];
+	return [self getterChainObject:currentTargetObject command:command arg:arg returnType:kGetterReturnTypeInspect];
 }
 
--(id) getterChainObject:(id)command arg:(id)arg returnType:(GetterReturnType)getterReturnType {
-	id target = currentTargetObject;
+-(id) getterChainObject:(id)target command:(id)command arg:(id)arg returnType:(GetterReturnType)getterReturnType {
 	NSMutableArray* ary = [NSMutableArray array];
 	if ([command isNil]) {
 		return nil;
@@ -290,10 +276,11 @@
 	NSArray* commands = [command split:DOT];
 	BOOL lastOperationIsMap = false;
 #define STR_MAP @"map"
-	if (commands.count > 0) {
+	int commandsCount = commands.count;
+	if (commandsCount > 0) {
 		lastOperationIsMap = [[commands objectAtLast] isEqualToString:STR_MAP];
 	}
-	for (int commandIndex = 0; commandIndex < commands.count; commandIndex++) {
+	for (int commandIndex = 0; commandIndex < commandsCount; commandIndex++) {
 		NSString* method = [commands objectAtIndex:commandIndex];
 		if ([method isEmpty]) {
 			continue;
@@ -301,11 +288,20 @@
 		
 		SEL selector = NSSelectorFromString(method);
 		NSString* oldTargetStr = SWF(@"%@", [target class]);
+		if ((commandsCount - 2) == commandIndex && lastOperationIsMap) {
 
-		if ((commands.count - 2) == commandIndex && lastOperationIsMap) {
 			if ([target respondsToSelector:selector]) {
-				[ary addObject:SWF(@"[%@ %@.%@]\t===>\t%@", oldTargetStr, method, STR_MAP,
-								[[self mapTargetObject:[target performSelector:selector] arg:arg] inspect])];
+				target = [self mapTargetObject:[target performSelector:selector] arg:arg];
+				[ary addObject:SWF(@"[%@ %@.%@]\t===>\t%@", oldTargetStr, method, STR_MAP, target)];
+				if (kGetterReturnTypeInspect == getterReturnType) {
+					return [target arrayDescription];
+				} else {
+					if (nil == target) {
+						return STR_NIL;
+					} else {
+						return [target inspect];
+					}
+				}
 			}
 			break;
 		}
@@ -318,7 +314,7 @@
 #define ARGUMENT_COUNT_IS_ZERO	2
 #define ARGUMENT_COUNT_IS_ONE	3
 #define ARGUMENT_COUNT_IS_TWO	4
-#define ARGUMENT_INDEX_TWO 3
+#define ARGUMENT_INDEX_TWO		3
 				case ARGUMENT_COUNT_IS_ZERO: {
 						BOOL failed = false;
 						id obj = [target getPropertyValue:selector failed:&failed];
@@ -331,9 +327,7 @@
 							}
 						} else {
 							Class targetClass = [target classForProperty:method]; 
-							if (_C_ID == *returnType) {
-								target = obj;
-							}
+							target = obj;
 							NSString* detail = [PROPERTYMAN.typeInfoTable objectDescription:obj targetClass:NSStringFromClass(targetClass) propertyName:method];
 							[ary addObject:SWF(@"[%@ %@]\t===>\t%@", oldTargetStr, method, detail)];
 						}							
@@ -498,17 +492,18 @@
 				[ary addObject:SWF(@"[%@ %@]\t===>\t%@", oldTargetStr, method, target)];
 			} else {
 				NSString* newArg = nil;
-				if (nil == arg) {
-					newArg = method;
-				} else {
+				if ((commandsCount - 1) == commandIndex && nil != arg) {
 					newArg = SWF(@"%@ %@", method, arg);
+				} else {
+					newArg = method;
 				}
-				NSArray* pair = [COMMANDMAN findTargetObject:[self currentTargetObjectOrTopViewController] arg:newArg];
+				NSArray* pair = [COMMANDMAN findTargetObject:target arg:newArg];
 				id obj = [pair objectAtSecond];
 				if ([obj isNotNil]) {
 					[ary addObject:SWF(@"%@", obj)];
+					target = obj;
 				} else {
-					[ary addObject:SWF(@"%@\t===>\t%@", method, [COMMANDMAN commandNotFound])];
+					return [NSException exceptionWithName:@"Command Not Found" reason:nil userInfo:nil];
 				}
 			}
 		}
@@ -516,11 +511,18 @@
 	if (kGetterReturnTypeObject == getterReturnType) {
 		return target;
 	} else {
-		return [ary join:LF];
+		if (nil == target) {
+			return STR_NIL;
+		} else {
+			return [target inspect];
+		}
 	}
 }
 
 -(id) get_argObject:(NSString*)arg {
+	if ([STR_NIL isEqualToString:arg]) {
+		return nil;
+	}
 	BOOL foundNewObject = false;
 	NSMutableArray* newObjectArgs = [NSMutableArray array];
 	for (NSString* one in [arg split:SPACE]) {

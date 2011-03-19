@@ -20,8 +20,6 @@
 #import "Inspect.h"
 #import "NSBundleExt.h"
 
-#define inspectObject(obj) SWF(@"%@", [obj inspect])
-
 @interface NSString (HTMLExtensions)
 
 + (NSDictionary *)htmlEscapes;
@@ -118,7 +116,7 @@ static NSString *replaceAll(NSString *s, NSDictionary *replacements) {
 		switch (lsType) {
 			case LS_OBJECT: {
 					NSString* classNameUpper = [SWF(@"%@", [obj class]) uppercaseString];
-					[ary addObject:SWF(@"[%@]: %@", classNameUpper, [inspectObject(obj) htmlEscapedString])];
+					[ary addObject:SWF(@"[%@]: %@", classNameUpper, [[obj inspect] htmlEscapedString])];
 					if ([obj isKindOfClass:[UIView class]]) {
 						[ary addObject:SWF(@"<img src='/image/%p.png' /><hr />", obj)];
 					} else if ([obj respondsToSelector:@selector(title)]) {
@@ -132,10 +130,10 @@ static NSString *replaceAll(NSString *s, NSDictionary *replacements) {
 				}
 				break;
 			case LS_VIEWCONTROLLERS:
-				[ary addObject:SWF(@"VIEWCONTROLLERS: %@", [inspectObject(array_prefix_index(obj)) htmlEscapedString])];
+				[ary addObject:SWF(@"VIEWCONTROLLERS: %@", [surrounded_array_prefix_index(obj) htmlEscapedString])];
 				break;
 			case LS_TABLEVIEW:
-				[ary addObject:SWF(@"TABLEVIEW: %@", [inspectObject(obj) htmlEscapedString])];
+				[ary addObject:SWF(@"TABLEVIEW: %@", [[obj inspect] htmlEscapedString])];
 				break;
 			case LS_SECTIONS: {
 					[ary addObject:SWF(@"SECTIONS: ")];
@@ -143,7 +141,7 @@ static NSString *replaceAll(NSString *s, NSDictionary *replacements) {
 					for (NSArray* sectionArray in (NSArray*)obj) {
 						int row = 0;
 						for (id cell in sectionArray) {
-							[ary addObject:SWF(@"[%d %d] %@<br /><img src='/image/%p.png' /><hr />", section, row, [inspectObject(cell) htmlEscapedString], cell)];
+							[ary addObject:SWF(@"[%d %d] %@<br /><img src='/image/%p.png' /><hr />", section, row, [[cell inspect] htmlEscapedString], cell)];
 							row += 1;
 						}
 						section += 1;
@@ -151,36 +149,36 @@ static NSString *replaceAll(NSString *s, NSDictionary *replacements) {
 				}
 				break;
 			case LS_VIEW:
-				[ary addObject:SWF(@"VIEW: %@", [inspectObject(obj) htmlEscapedString])];
+				[ary addObject:SWF(@"VIEW: %@", [[obj inspect] htmlEscapedString])];
 				[ary addObject:SWF(@"<img src='/image/%p.png' /><hr />", obj)];
 				break;
 			case LS_INDENTED_VIEW: {
 					int depth = [[pair objectAtThird] intValue];
-					[ary addObject:SWF(@"%@%@<br /><img src='/image/%p.png' /><hr />", [TAB repeat:depth], [inspectObject(obj) htmlEscapedString], obj)];
+					[ary addObject:SWF(@"%@%@<br /><img src='/image/%p.png' /><hr />", [TAB repeat:depth], [[obj inspect] htmlEscapedString], obj)];
 				}
 				break;				
 			case LS_VIEW_SUBVIEWS: {
 					[ary addObject:SWF(@"VIEW.SUBVIEWS: ")];
 					int idx = 0;
 					for (id subview in (NSArray*)obj) {
-						[ary addObject:SWF(@"[%d] %@<br /><img src='/image/%p.png' /><hr />", idx, [inspectObject(subview) htmlEscapedString], subview)];
+						[ary addObject:SWF(@"[%d] %@<br /><img src='/image/%p.png' /><hr />", idx, [[subview inspect] htmlEscapedString], subview)];
 						idx += 1;
 					}				
 				}
 				break;
 			case LS_TABBAR:
-				[ary addObject:SWF(@"TABBAR: %@", [inspectObject(obj) htmlEscapedString])];
+				[ary addObject:SWF(@"TABBAR: %@", [[obj inspect] htmlEscapedString])];
 				[ary addObject:SWF(@"<img src='/image/%p.png' /><hr />", obj)];
 				break;				
 			case LS_NAVIGATIONITEM:
-				[ary addObject:SWF(@"NAVIGATIONITEM: %@", [inspectObject(obj) htmlEscapedString])];
+				[ary addObject:SWF(@"NAVIGATIONITEM: %@", [[obj inspect] htmlEscapedString])];
 				break;																
 			case LS_NAVIGATIONCONTROLLER_TOOLBAR:
-				[ary addObject:SWF(@"NAVIGATIONCONTROLLER_TOOLBAR: %@", [inspectObject(obj) htmlEscapedString])];				
+				[ary addObject:SWF(@"NAVIGATIONCONTROLLER_TOOLBAR: %@", [[obj inspect] htmlEscapedString])];				
 				[ary addObject:SWF(@"<img src='/image/%p.png' /><hr />", obj)];
 				break;								
 			case LS_NAVIGATIONCONTROLLER_TOOLBAR_ITEMS:
-				[ary addObject:SWF(@"NAVIGATIONCONTROLLER_TOOLBAR_ITEMS: %@", [inspectObject(obj) htmlEscapedString])];				
+				[ary addObject:SWF(@"NAVIGATIONCONTROLLER_TOOLBAR_ITEMS: %@", [[obj inspect] htmlEscapedString])];				
 				break;																
 			default:
 				break;

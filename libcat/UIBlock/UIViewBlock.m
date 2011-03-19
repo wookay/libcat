@@ -71,6 +71,20 @@
 
 @implementation CALayer (Block)
 
+-(void) traverseSublayers:(TraverseLayerBlock)block reverse:(BOOL)reverse {
+	[self traverseSublayers:block depth:0 reverse:reverse];
+}
+
+-(void) traverseSublayers:(TraverseLayerBlock)block depth:(int)depth reverse:(BOOL)reverse {
+	block(depth, self);
+	NSArray* sublayers_ = [self sublayers];
+	if (nil != sublayers_) {
+		for (CALayer* sublayer in (reverse ? [sublayers_ reverse] : sublayers_)) {
+			[sublayer traverseSublayers:block depth:depth+1 reverse:reverse];
+		}
+	}
+}
+
 -(void) traverseSuperlayers:(TraverseLayerBlock)block {
 	int depth = 0;
 	CALayer* layer_ = self;

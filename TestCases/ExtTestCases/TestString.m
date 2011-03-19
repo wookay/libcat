@@ -24,14 +24,14 @@
 	assert_equal(self, obj);
 }
 
--(void) test_isNumber {
-	assert_true([@"0" isNumber]);
-	assert_true([@" 0" isNumber]);
-	assert_true([@"-1" isNumber]);
-	assert_false([@"a" isNumber]);
-	assert_false([@"1 2" isNumber]);
-	assert_true([@"3.14" isNumber]);
-	assert_true([@"1 2" isNumberWithSpace]);
+-(void) test_isIntegerNumber {
+	assert_true([@"0" isIntegerNumber]);
+	assert_true([@" 0" isIntegerNumber]);
+	assert_true([@"-1" isIntegerNumber]);
+	assert_false([@"a" isIntegerNumber]);
+	assert_false([@"1 2" isIntegerNumber]);
+	assert_false([@"3.14" isIntegerNumber]);
+	assert_true([@"1 2" isIntegerNumberWithSpace]);
 }
 
 -(void) test_isAlphabet {

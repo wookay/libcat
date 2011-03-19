@@ -9,7 +9,7 @@
 #import "Inspect.h"
 #import "NSStringExt.h"
 #import "Logger.h"
-#import "objc/runtime.h"
+#import <objc/runtime.h>
 #import "NSNumberExt.h"
 #import "NSDateExt.h"
 #import <QuartzCore/QuartzCore.h>
@@ -165,10 +165,44 @@
 	} else if ([anObject isKindOfClass:[NSDateComponents class]]) {
 		return [anObject gmtString];
 	} else if ([anObject isKindOfClass:[CALayer class]]) {
-		return SWF(@"<<<%@: %p, delegate : %@>>>", [anObject class], anObject, [anObject performSelector:@selector(delegate)]);
+		if ([anObject isKindOfClass:[CALayer class]]) {
+			CALayer* layer = anObject;
+			id layerDelegate = layer.delegate;
+			return SWF(@"<%@: %p; delegate = <%@: %p>; frame = %@>", [layer class], layer, [layerDelegate class], layerDelegate, NSStringFromCGRect(layer.frame));
+		} else {
+			return SWF(@"%@", anObject);
+		}
 	} else if ([anObject isKindOfClass:[NSValue class]]) {
 		const char* aTypeDescription = [(NSValue*)anObject objCType];
 		switch (*aTypeDescription) {
+			case _C_SEL: {
+					SEL value = [anObject pointerValue];
+					if (NULL == value) {
+						return @"(nil)";
+					} else {
+						return NSStringFromSelector(value);
+					}
+				}
+				break;
+
+			case _C_CLASS:
+				return SWF(@"%@", [anObject pointerValue]);
+				break;
+				
+			case _C_STRUCT_B:
+			case _C_STRUCT_E: {
+					NSString* structName = SWF(@"%s", aTypeDescription);
+					if ([structName hasPrefix:@"{CGRect"]) {
+						return NSStringFromCGRect([anObject CGRectValue]);
+					} else if ([structName hasPrefix:@"{CGSize"]) {
+						return NSStringFromCGSize([anObject CGSizeValue]);
+					} else if ([structName hasPrefix:@"{CGPoint"]) {
+						return NSStringFromCGPoint([anObject CGPointValue]);
+					} else if ([structName hasPrefix:@"{UIEdgeInsets"]) {
+						return NSStringFromUIEdgeInsets([anObject UIEdgeInsetsValue]);
+					}
+				}
+				break;
 			case _C_FLT: {
 				float value = [anObject doubleValue];
 				if ([[anObject floor_down] doubleValue] == value) {

@@ -12,13 +12,25 @@ rootVC = c.input 'cd /'
 IS_TABBARCONTROLLER = 'UITabBarController> ' == rootVC
 
 c.input 'cd'
+
+alpha = c.input 'view.alpha'
+assert_equal 1, alpha.to_f
+
+c.input 'view.alpha = 0.5'
+alpha = c.input 'view.alpha'
+assert_equal 0.5, alpha.to_f
+
+c.input 'view.alpha = 1'
+
+assert_equal 1, c.input('navigationController.viewControllers.count').to_i
+
 c.input_commands <<EOF if RUN_ALL
 ls
 navigationController.viewControllers.count
 EOF
 
 c.input_commands <<EOF if RUN_ALL
-t Tests			# touch
+t Scroll View	# touch
 sleep 0.5
 b				# back
 sleep 0.5
@@ -49,32 +61,18 @@ sleep 0.5
 EOF
 
 c.input_commands <<EOF if RUN_ALL
-cd Tests
+cd Scroll View
 ls
-contentView.backgroundColor = yellow
+contentView.backgroundColor = yellowColor
 sleep 0.5
 t .
 sleep 0.5
 b
 sleep 0.5
-cd Tests
-contentView.backgroundColor = clear
+cd Scroll View
+contentView.backgroundColor = clearColor
 cd
 EOF
-
-c.input_commands <<EOF if RUN_ALL
-cd Tests
-text = 브왁
-t .
-view.backgroundColor = red
-sleep 0.5
-b
-sleep 0.5
-cd
-cd 브왁
-text = Tests
-EOF
-
 
 if IS_TABBARCONTROLLER
   c.input_commands <<EOF if RUN_ALL

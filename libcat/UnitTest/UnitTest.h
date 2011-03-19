@@ -22,11 +22,11 @@
 
 #define assert_equal_message(expected, got, expected_message) \
 do { \
-__typeof__(expected) __expected = (expected); \
-__typeof__(got) __got = (got); \
-NSValue* expected_encoded = [NSObject objectWithValue:&__expected withObjCType: @encode(__typeof__(expected))]; \
-NSValue* got_encoded = [NSObject objectWithValue:&__got withObjCType: @encode(__typeof__(got))]; \
-[UnitTest assert:got_encoded equals:expected_encoded message:expected_message inFile:[NSString stringWithUTF8String:__FILENAME__] atLine:__LINE__]; \
+	__typeof__(expected) __expected = (expected); \
+	__typeof__(got) __got = (got); \
+	NSValue* expected_encoded = [NSObject objectWithValue:&__expected withObjCType: @encode(__typeof__(expected))]; \
+	NSValue* got_encoded = [NSObject objectWithValue:&__got withObjCType: @encode(__typeof__(got))]; \
+	[UnitTest assert:got_encoded equals:expected_encoded message:expected_message inFile:[NSString stringWithUTF8String:__FILENAME__] atLine:__LINE__]; \
 } while(0)
 
 #define assert_true(expr) assert_equal_message(true, expr, @"true")
@@ -36,6 +36,12 @@ NSValue* got_encoded = [NSObject objectWithValue:&__got withObjCType: @encode(__
 #define assert_not_null(expr) assert_equal_message(false, NULL == expr, @"not NULL")
 #define assert_not_equals(not_expected, got) assert_equal_message(false, not_expected == got, @"not equals")
 
+typedef void (^AssertBlock)();
+#define assert_raise(exceptionName, block) \
+do { \
+	[UnitTest assertBlock:block raise:exceptionName inFile:[NSString stringWithUTF8String:__FILENAME__] atLine:__LINE__]; \
+} while(0)
+
 @interface UnitTest : NSObject
 
 +(void) run ;
@@ -44,6 +50,7 @@ NSValue* got_encoded = [NSObject objectWithValue:&__got withObjCType: @encode(__
 +(void) report_on_window ;
 +(void) assert:(NSValue*)got equals:(NSValue*)expected inFile:(NSString*)file atLine:(int)line ;
 +(void) assert:(NSValue*)got equals:(NSValue*)expected message:(NSString*)message inFile:(NSString*)file atLine:(int)line ;
++(void) assertBlock:(AssertBlock)block raise:(NSString*)exceptionName inFile:(NSString*)file atLine:(int)line ;
 +(id) target:(NSString*)targetClassString ;
 +(void) run_all_tests ;
 

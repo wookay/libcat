@@ -19,6 +19,13 @@
 @end
 @implementation TestObject
 
+-(void) test_raise {
+	assert_raise(NSRangeException, ^{
+		NSArray* ary = [NSArray array];
+		[ary objectAtIndex:1];
+	});
+}
+
 -(void) test_null {
 	id obj = [NSNull null];
 	assert_false(nil == obj);

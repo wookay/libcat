@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import <QuartzCore/QuartzCore.h>
 
 
 @interface UINavigationItem (Inspect)
@@ -22,4 +22,24 @@
 
 @interface UIView (Flick)
 -(void) flick ;
+@end
+
+@interface CALayer (Flick)
+-(void) flick ;
+@end	
+
+
+@interface NSValue (CGExt)
+-(NSValue*) origin ;
+-(NSValue*) size ;
+-(CGFloat) x ;
+-(CGFloat) y ;
+-(CGFloat) width ;
+-(CGFloat) height ;
+@end
+
+
+
+@interface NSArray (Description)
+-(NSString*) arrayDescription ;
 @end

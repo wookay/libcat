@@ -17,6 +17,7 @@
 #define EQUAL            @"="
 #define COLON            @":"
 #define SEMICOLON		 @";"
+#define SEMICOLON_SPACE	 @"; "
 #define COMMA            @","
 #define UNDERBAR		 @"_"
 #define COMMA_SPACE		 @", "
@@ -47,6 +48,10 @@
 #define CHAR_BACKSPACE	 '\b'
 #define CHAR_MINUS       '-'
 
+#define STR_TRUE	@"true"
+#define STR_FALSE	@"false"
+#define STR_NIL		@"nil"
+
 #define TEXT_ALERT		NSLocalizedString(@"Alert", nil)
 #define TEXT_WARNING	NSLocalizedString(@"Warning", nil)
 #define TEXT_OK			NSLocalizedString(@"OK", nil)
@@ -57,7 +62,6 @@
 #define SECTION_INDEX_TITLE_FOR_SEARCH			@"{search}"
 #define INDEX_OF_SECTION_INDEX_TITLE_FOR_SEARCH 0
 
-#define STR_YES_OR_NO(yn)		(yn ? @"YES" : @"NO")
 
 #define CP949_ENCODING 0x80000422
 
@@ -73,8 +77,8 @@ NSInteger sortByStringComparator(NSString* uno, NSString* dos, void* context) ;
 @interface NSString (Ext)
 -(BOOL) isEmpty ;
 -(BOOL) isNotEmpty ;	
--(BOOL) isNumber ;
--(BOOL) isNumberWithSpace ;
+-(BOOL) isIntegerNumber ;
+-(BOOL) isIntegerNumberWithSpace ;
 -(BOOL) isAlphabet ;
 -(BOOL) isSurrounded:(NSString*)a :(NSString*)b ;
 -(BOOL) hasText:(NSString*)str ;

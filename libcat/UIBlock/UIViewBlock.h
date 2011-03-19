@@ -27,6 +27,8 @@ typedef void (^TraverseViewBlock)(int depth, UIView* view) ;
 #import <QuartzCore/QuartzCore.h>
 typedef void (^TraverseLayerBlock)(int depth, CALayer* layer) ;
 @interface CALayer (Block)
+-(void) traverseSublayers:(TraverseLayerBlock)block reverse:(BOOL)reverse ;
+-(void) traverseSublayers:(TraverseLayerBlock)block depth:(int)depth reverse:(BOOL)reverse ;	
 -(void) traverseSuperlayers:(TraverseLayerBlock)block ;
 -(void) traverseSuperlayers:(TraverseLayerBlock)block depth:(int)depth ;	
 @end

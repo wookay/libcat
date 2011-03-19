@@ -13,6 +13,8 @@
 #import "NSArrayExt.h"
 #import <objc/message.h>
 #import "Inspect.h"
+#import "ConsoleManager.h"
+#import "Logger.h"
 
 @implementation TypeInfoTable
 @synthesize typedefTable;
@@ -31,9 +33,9 @@
 }
 
 -(id) objectStringToObject:(NSString*)str failed:(BOOL*)failed {
-	if ([@"nil" isEqualToString:str]) {
+	if ([STR_NIL isEqualToString:str]) {
 		return nil;
-	} else if ([str hasPrefix:@"0x"]) {
+	} else if ([str hasPrefix:MEMORY_ADDRESS_PREFIX]) {
 		size_t address = [str to_size_t];
 		return (id)address;
 	} else {
@@ -82,7 +84,7 @@
 
 -(NSString*) objectDescriptionInternal:(id)obj targetClass:(NSString*)targetClass propertyName:(NSString*)propertyName removeLF:(BOOL)removeLF {
 	if (nil == obj) {
-		return @"nil";
+		return STR_NIL;
 	}
 	NSString* typeKey = SWF(@"%@ %@", targetClass, propertyName);
 	NSString* typeName = [propertyTable objectForKey:typeKey];
@@ -95,27 +97,19 @@
 		} else if ([@"BOOL" isEqualToString:typeName]) {
 			BOOL value = [obj boolValue];
 			return SWF(@"%@", value ? @"true" : @"false");
-		} else if ([@"CGRect" isEqualToString:typeName]) {
-		} else if ([@"CGSize" isEqualToString:typeName]) {
-		} else if ([@"CGPoint" isEqualToString:typeName]) {
+//		} else if ([@"CGRect" isEqualToString:typeName]) {
+//		} else if ([@"CGSize" isEqualToString:typeName]) {
+//		} else if ([@"CGPoint" isEqualToString:typeName]) {
+//		} else if ([@"CGFloat" isEqualToString:typeName]) {
 		}
 	}
-	BOOL needInspect = false;
-	if ([obj isKindOfClass:[NSArray class]]) {
-		needInspect = true;
-	} else if ([obj isKindOfClass:[NSDictionary class]]) {
-		needInspect = true;
-	}
-	if (needInspect) {
-		if (removeLF) {
-			return SWF(@"%@", [[obj inspect] gsub:@"\n  " to:EMPTY_STRING]);
-		} else {
-			return SWF(@"%@", [obj inspect]);
-		}
+	if (removeLF) {
+		return [SWF(@"%@", [obj inspect]) gsub:@"\n  " to:EMPTY_STRING];
 	} else {
 		return SWF(@"%@", obj);
 	}
 }
+
 
 
 

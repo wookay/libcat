@@ -16,7 +16,10 @@ enum {
 #define SETTING_CONSOLE_LOGS_BUTTON @"Console Logs Button"
 #define SETTING_CONSOLE_RECORD_BUTTON @"Console Record Button"
 
-typedef enum { kGetterReturnTypeString, kGetterReturnTypeObject } GetterReturnType ;
+#define LS_OPTION_RECURSIVE		@"-r"
+#define MEMORY_ADDRESS_PREFIX	@"0x"
+
+typedef enum { kGetterReturnTypeInspect, kGetterReturnTypeObject } GetterReturnType ;
 
 
 @interface ConsoleManager : NSObject {
@@ -35,10 +38,9 @@ typedef enum { kGetterReturnTypeString, kGetterReturnTypeObject } GetterReturnTy
 -(NSArray*) mapTargetObject:(id)targetObject arg:(id)arg ;
 -(id) get_argObject:(NSString*)arg ;
 -(NSString*) getterChain:(id)command arg:(id)arg ;
--(id) arg_to_proper_object:(id)arg ;
 -(NSString*) setterChain:(id)command arg:(id)arg ;
 -(id) currentTargetObjectOrTopViewController ;
--(id) getterChainObject:(id)command arg:(id)arg returnType:(GetterReturnType)returnType ;
+-(id) getterChainObject:(id)target command:(id)command arg:(id)arg returnType:(GetterReturnType)getterReturnType ;
 
 -(UIViewController*) get_topViewController ;
 -(UIWindow*) get_keyWindow ;
