@@ -17,7 +17,6 @@
 #import "ConsoleManager.h"
 #import "NSArrayExt.h"
 #import "NSArrayBlock.h"
-#import "NSObjectExt.h"
 #import "Async.h"
 #import "NSNumberExt.h"
 #import "NSObjectExt.h"
@@ -101,6 +100,11 @@ NSString* surrounded_array_prefix_index(NSArray* array) {
 			@"log", @"command_log:arg:",
 			@"map", @"command_map:arg:",
 			@"echo", @"command_echo:arg:",
+			@"classInfo", @"command_classInfo:arg:",
+			@"classMethods", @"command_classMethods:arg:",
+			@"methods", @"command_methods:arg:",
+			@"ivars", @"command_ivars:arg:",
+			@"protocols", @"command_protocols:arg:",			
 			nil];
 }
 
@@ -431,6 +435,47 @@ NSString* surrounded_array_prefix_index(NSArray* array) {
 		targetObject = currentObject;
 	}
 	return [PROPERTYMAN list_properties:targetObject];
+}
+
+-(id) findTargetObjectOrCurrentObject:(id)currentObject arg:(id)arg {
+	NSArray* pair = [self findTargetObject:currentObject arg:arg];
+	id targetObject = [pair objectAtSecond];
+	if ([targetObject isNil]) {
+		targetObject = currentObject;
+	}
+	if ([targetObject isKindOfClass:[DisquotatedObject class]]) {
+		targetObject = [targetObject object];
+	}
+	return targetObject;
+}
+
+-(NSString*) command_classInfo:(id)currentObject arg:(id)arg {
+	id targetObject = [self findTargetObjectOrCurrentObject:currentObject arg:arg];
+	if ([targetObject isKindOfClass:[ProtocolClass class]]) {
+		return [[DisquotatedObject disquotatedObjectWithObject:targetObject descript:[targetObject protocolInfo]] inspect];
+	} else {
+		return [[DisquotatedObject disquotatedObjectWithObject:targetObject descript:[targetObject classInfo]] inspect];
+	}
+}
+
+-(NSString*) command_methods:(id)currentObject arg:(id)arg {
+	id targetObject = [self findTargetObjectOrCurrentObject:currentObject arg:arg];
+	return [[DisquotatedObject disquotatedObjectWithObject:targetObject descript:[targetObject methods]] inspect];
+}
+
+-(NSString*) command_classMethods:(id)currentObject arg:(id)arg {
+	id targetObject = [self findTargetObjectOrCurrentObject:currentObject arg:arg];
+	return [[DisquotatedObject disquotatedObjectWithObject:targetObject descript:[targetObject classMethods]] inspect];
+}
+
+-(NSString*) command_ivars:(id)currentObject arg:(id)arg {
+	id targetObject = [self findTargetObjectOrCurrentObject:currentObject arg:arg];
+	return [[DisquotatedObject disquotatedObjectWithObject:targetObject descript:[targetObject ivars]] inspect];
+}
+
+-(NSString*) command_protocols:(id)currentObject arg:(id)arg {
+	id targetObject = [self findTargetObjectOrCurrentObject:currentObject arg:arg];
+	return [[DisquotatedObject disquotatedObjectWithObject:targetObject descript:[targetObject protocols]] inspect];
 }
 
 -(NSString*) command_manipulate:(id)currentObject arg:(id)arg {
@@ -918,7 +963,7 @@ NSString* surrounded_array_prefix_index(NSArray* array) {
 			NSString* protocolName = [arg slice:1 backward:-3];
 			Protocol* protocol = NSProtocolFromString(protocolName);
 			if (nil != protocol) {
-				changeObject = [DisquotatedObject disquotatedObjectWithObject:protocol descript:[NSObject methodsForProtocol:protocol]];
+				changeObject = [DisquotatedObject disquotatedObjectWithObject:[ProtocolClass protocolWithProtocol:protocol] descript:[NSObject protocolInfoForProtocol:protocol]];
 			}			
 		}
 		
@@ -935,7 +980,7 @@ NSString* surrounded_array_prefix_index(NSArray* array) {
 				if (nil == klass) {
 					Protocol* protocol = NSProtocolFromString(arg);
 					if (nil != protocol) {
-						changeObject = [DisquotatedObject disquotatedObjectWithObject:protocol descript:[NSObject methodsForProtocol:protocol]];
+						changeObject = [DisquotatedObject disquotatedObjectWithObject:[ProtocolClass protocolWithProtocol:protocol] descript:[NSObject protocolInfoForProtocol:protocol]];
 					}
 				} else {
 					changeObject = [DisquotatedObject disquotatedObjectWithObject:klass descript:[NSObject interfaceForClass:klass]];;

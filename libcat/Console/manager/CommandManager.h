@@ -29,6 +29,7 @@ enum { LS_OBJECT, LS_VIEWCONTROLLERS, LS_TABLEVIEW, LS_SECTIONS, LS_VIEW, LS_IND
 
 -(NSDictionary*) load_system_commands ;
 -(NSArray*) findTargetObject:(id)currentObject arg:(id)arg ;
+-(id) findTargetObjectOrCurrentObject:(id)currentObject arg:(id)arg ;
 + (CommandManager*) sharedManager ;
 -(id) commandNotFound ;
 -(NSArray*) array_ls:(id)currentObject arg:(id)arg ;

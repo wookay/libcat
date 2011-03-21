@@ -82,14 +82,14 @@ enum ENUMTYPE            : enum type info
   > enum UITextAlignment
 
 map ARGS
-  > view.subviews.map frame.size
+  > view.subviews.map text frame.size
 
 object introspection
-  > classInfo (c)
-  > methods (m)
-  > classMethods
-  > ivars
-  > protocols
+  > classInfo TARGET (c)
+  > methods TARGET (m)
+  > classMethods TARGET
+  > ivars TARGET
+  > protocols TARGET
   > UIApplication
   > UITableViewDelegate
 EOF

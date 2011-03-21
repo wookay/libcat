@@ -232,7 +232,7 @@ NSString* TypeEncodingDescription(char* code) {
 	return ary;	
 }
 
-+(NSArray*) methodsForProtocol:(Protocol*)protocol {
++(NSArray*) protocolInfoForProtocol:(Protocol*)protocol {
 	NSString* protocolName = SWF(@"%s", protocol_getName(protocol));
 	NSMutableArray* ary = [NSMutableArray array];
 	NSArray* protocols = [self protocolsForProtocol:protocol];
@@ -655,4 +655,30 @@ NSString* TypeEncodingDescription(char* code) {
 	[super dealloc];
 }
 
+@end
+
+@implementation ProtocolClass
+@synthesize protocol;
+-(NSArray*) protocolInfo {
+	return [NSObject protocolInfoForProtocol:protocol];
+}
+//-(NSString*) description {
+//	return [[NSObject protocolInfoForProtocol:protocol] join:LF];
+//}
++(id) protocolWithProtocol:(Protocol*)protocol_ {
+	ProtocolClass* protocolClass = [[[self alloc] init] autorelease];
+	protocolClass.protocol = protocol_;
+	return protocolClass;
+}
+-(id) init {
+	self = [super init];
+	if (self) {
+		self.protocol = nil;
+	}
+	return self;
+}
+- (void)dealloc {
+	[protocol release];
+	[super dealloc];
+}
 @end

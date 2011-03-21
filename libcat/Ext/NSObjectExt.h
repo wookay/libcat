@@ -14,7 +14,7 @@
 
 +(unsigned int) countMethodsForClass:(Class)targetClass ;
 +(NSArray*) methodsForProtocol:(Protocol*)protocol isRequiredMethod:(BOOL)isRequiredMethod isInstanceMethod:(BOOL)isInstanceMethod ;
-+(NSArray*) methodsForProtocol:(Protocol*)protocol ;
++(NSArray*) protocolInfoForProtocol:(Protocol*)protocol ;
 +(NSArray*) methodsForClass:(Class)targetClass ;
 +(NSArray*) ivarsForClass:(Class)targetClass ;
 +(NSArray*) interfaceForClass:(Class)targetClass ;
@@ -24,6 +24,7 @@
 -(NSArray*) classInfo ;
 -(NSArray*) propertiesForClass:(Class)targetClass ;
 -(NSArray*) classMethods ;
+-(NSArray*) methods ;
 -(NSArray*) ivars ;
 -(NSArray*) methodNames ;
 -(NSArray*) protocols ;
@@ -62,4 +63,13 @@
 @property (nonatomic, retain)	id object;
 @property (nonatomic, retain)	id descript;
 +(id) disquotatedObjectWithObject:(id)object_ descript:(id)descript_ ;
+@end
+
+
+@interface ProtocolClass : NSObject {
+	Protocol* protocol;
+}
+@property (nonatomic, retain)	Protocol* protocol;
+-(NSArray*) protocolInfo ;
++(id) protocolWithProtocol:(Protocol*)protocol_ ;
 @end
