@@ -121,6 +121,10 @@
 				events = [EVENTRECORDER loadUserEvents:frames];
 			}			
 			break;
+			
+		case kEventsArgNone:
+		default:
+			break;
 	}
 				
 	return [self processEvents:eventsArg action:action events:events];

@@ -84,7 +84,7 @@ enum ENUMTYPE            : enum type info
 map ARGS
   > view.subviews.map text frame.size
 
-object introspection
+class introspection
   > classInfo TARGET (c)
   > methods TARGET (m)
   > classMethods TARGET

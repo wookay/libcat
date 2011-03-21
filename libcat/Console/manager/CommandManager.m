@@ -475,7 +475,7 @@ NSString* surrounded_array_prefix_index(NSArray* array) {
 
 -(NSString*) command_protocols:(id)currentObject arg:(id)arg {
 	id targetObject = [self findTargetObjectOrCurrentObject:currentObject arg:arg];
-	return [[DisquotatedObject disquotatedObjectWithObject:targetObject descript:[targetObject protocols]] inspect];
+	return [[DisquotatedObject disquotatedObjectWithObject:targetObject descript:SWF(@"<%@>", [[targetObject protocols] join:COMMA_SPACE])] inspect];
 }
 
 -(NSString*) command_manipulate:(id)currentObject arg:(id)arg {

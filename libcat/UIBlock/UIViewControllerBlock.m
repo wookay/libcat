@@ -13,7 +13,7 @@
 -(void) traverseParentViewControllers:(TraverseViewControllerBlock)block {
 	int depth = 0;
 	UIViewController* viewController = self;
-	while (viewController = viewController.parentViewController) {
+	while ((viewController = viewController.parentViewController)) {
 		depth += 1;
 	}
 	[self traverseParentViewControllers:block depth:depth];

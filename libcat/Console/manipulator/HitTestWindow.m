@@ -55,6 +55,10 @@
 					return self;
 				}
 				break;
+				
+			case kHitTestModeNone:
+			default:
+				break;
 		}
 		return view;
 	}

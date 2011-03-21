@@ -293,6 +293,10 @@
 				[vc release];								
 			}
 			break;
+			
+		case kObjectAttributeTypeNone:
+		default:
+			break;
 	}
 	[tableView deselectRowAtIndexPath:indexPath animated:true];
 }
