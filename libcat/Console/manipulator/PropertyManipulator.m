@@ -30,12 +30,12 @@
 	int JUSTIFY_OBJECT = 0.45*JUSTIFY_LINE;
 	int JUSTIFY_ATTRIBUTE_STRING = 0.30*JUSTIFY_LINE;
 	
-	NSArray* hierarchyData = [targetObject class_hierarchy];
+	NSArray* hierarchyData = [targetObject classHierarchy];
 	NSMutableArray* ary = [NSMutableArray array];
 	for (int idx = 0; idx < hierarchyData.count - 1; idx++) {
 		Class targetClass = [hierarchyData objectAtIndex:idx];
 		[ary addObject:SWF(@"== %@ ==", NSStringFromClass(targetClass))];
-		NSArray* propertiesData = [targetObject class_properties:targetClass];
+		NSArray* propertiesData = [targetObject propertiesForClass:targetClass];
 		for (NSArray* trio in propertiesData) {
 			NSString* propertyName = [trio objectAtFirst];
 			id obj = [trio objectAtSecond];
@@ -93,7 +93,7 @@
 }
 
 -(id) performTypeClassMethod:(id)str targetObject:(id)targetObject propertyName:(NSString*)propertyName failed:(BOOL*)failed {
-	for (Class targetClass in [targetObject class_hierarchy]) {
+	for (Class targetClass in [targetObject classHierarchy]) {
 		NSString* typeKey = SWF(@"%@ %@", targetClass, propertyName);
 		id typeClassName = [typeInfoTable.propertyTable objectForKey:typeKey];
 		if (nil != typeClassName && [typeClassName hasPrefix:@"UI"]) {

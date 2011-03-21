@@ -97,7 +97,6 @@
 -(UIImage*) obj_to_image:(id)obj {
 	UIImage* image = nil;
 	if ([obj isKindOfClass:[UIView class]]) {
-		log_info(@"obj_to_image uiview %@", obj);
 		UIView* view = obj;
 		if ([view respondsToSelector:@selector(isOpenGLView)]) {
 			if ([view performSelector:@selector(isOpenGLView)]) {
@@ -110,6 +109,12 @@
 		[view.layer renderInContext: UIGraphicsGetCurrentContext()];
 		image = UIGraphicsGetImageFromCurrentImageContext();
 		UIGraphicsEndImageContext();				
+	} else if ([obj isKindOfClass:[CALayer class]]) {
+		CALayer* layer = obj;
+		UIGraphicsBeginImageContext(layer.frame.size);
+		[layer renderInContext: UIGraphicsGetCurrentContext()];
+		image = UIGraphicsGetImageFromCurrentImageContext();
+		UIGraphicsEndImageContext();						
 #if USE_COCOA
 	} else if ([obj isKindOfClass:[NSView class]]) {
 		image = (UIImage*)[obj to_image];

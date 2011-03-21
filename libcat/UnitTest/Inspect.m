@@ -10,9 +10,12 @@
 #import "NSStringExt.h"
 #import "Logger.h"
 #import <objc/runtime.h>
+#import "NSObjectExt.h"
 #import "NSNumberExt.h"
 #import "NSDateExt.h"
 #import <QuartzCore/QuartzCore.h>
+#import "GeometryExt.h"
+#import "NSArrayExt.h"
 
 @implementation NSObject (Inspect)
 -(id) inspect {
@@ -107,11 +110,15 @@
 
 
 @interface NSFormatterToInspect (Private)
+-(NSString*) stringForFont:(UIFont*)font ;
 -(NSString*) stringForArray:(NSArray*)myAry ;
 @end
 
 
 @implementation NSFormatterToInspect
+-(NSString*) stringForFont:(UIFont*)font {
+	return SWF(@"<%@: %p; %@ %g>", [font class], font, font.fontName, font.pointSize);
+}
 -(NSString*) stringForArray:(NSArray*)myAry {
 	switch (myAry.count) {
 		case 1:
@@ -164,6 +171,10 @@
 		return [anObject gmtString];
 	} else if ([anObject isKindOfClass:[NSDateComponents class]]) {
 		return [anObject gmtString];
+	} else if ([anObject isKindOfClass:[UIFont class]]) {
+		return [self stringForFont:anObject];
+	} else if ([anObject isKindOfClass:[UIColor class]]) {
+		return NSStringFromCGColor([anObject CGColor]);
 	} else if ([anObject isKindOfClass:[CALayer class]]) {
 		if ([anObject isKindOfClass:[CALayer class]]) {
 			CALayer* layer = anObject;
@@ -171,6 +182,14 @@
 			return SWF(@"<%@: %p; delegate = <%@: %p>; frame = %@>", [layer class], layer, [layerDelegate class], layerDelegate, NSStringFromCGRect(layer.frame));
 		} else {
 			return SWF(@"%@", anObject);
+		}
+	} else if ([anObject isKindOfClass:[DisquotatedObject class]]) {
+		DisquotatedObject* disq = (DisquotatedObject*) anObject;
+		if ([disq.object isKindOfClass:[NSArray class]]) {
+			NSArray* ary = disq.object;
+			return [ary join:LF];
+		} else if ([disq.object isKindOfClass:[NSString class]]) {
+			return SWF(@"%@", disq.object);
 		}
 	} else if ([anObject isKindOfClass:[NSValue class]]) {
 		const char* aTypeDescription = [(NSValue*)anObject objCType];
@@ -188,6 +207,14 @@
 			case _C_CLASS:
 				return SWF(@"%@", [anObject pointerValue]);
 				break;
+			
+			case _C_PTR: {
+					NSString* structName = SWF(@"%s", aTypeDescription);
+					if ([structName hasPrefix:@"^{CGColor"]) {
+						return NSStringFromCGColor([anObject pointerValue]);
+					}
+				}
+				break;
 				
 			case _C_STRUCT_B:
 			case _C_STRUCT_E: {
@@ -198,9 +225,13 @@
 						return NSStringFromCGSize([anObject CGSizeValue]);
 					} else if ([structName hasPrefix:@"{CGPoint"]) {
 						return NSStringFromCGPoint([anObject CGPointValue]);
+					} else if ([structName hasPrefix:@"{CGAffineTransform"]) {
+						return NSStringFromCGAffineTransform([anObject CGAffineTransformValue]);						
 					} else if ([structName hasPrefix:@"{UIEdgeInsets"]) {
 						return NSStringFromUIEdgeInsets([anObject UIEdgeInsetsValue]);
-					}
+					} else if ([structName hasPrefix:@"{CATransform3D"]) {
+						return NSStringFromCATransform3D([anObject CATransform3DValue]);
+					} 
 				}
 				break;
 			case _C_FLT: {
@@ -220,3 +251,20 @@
 }
 @end
 
+
+
+NSString* NSStringFromCGColor(CGColorRef colorRef) {
+	const CGFloat* components = CGColorGetComponents(colorRef);
+	float red, green, blue;
+	if (2 == CGColorGetNumberOfComponents(colorRef)) {
+		red = components[0];
+		green = components[0];
+		blue = components[0];
+	} else {
+		red = components[0];
+		green = components[1];
+		blue = components[2];		
+	}
+	float alpha = CGColorGetAlpha(colorRef);
+	return [NSString stringWithFormat:@"[%g %g %g %g #%02x%02x%02x]", red, green, blue, alpha, red * FF, green * FF, blue *FF];
+}

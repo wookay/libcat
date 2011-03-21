@@ -137,7 +137,7 @@
 }
 
 -(void) run_tests {
-	NSArray* methods = [self methods];
+	NSArray* methods = [self methodNames];
 	NSMutableArray* ary = [NSMutableArray array];
 	for (NSString* methodStr in methods) {
 		if ([methodStr isEqualToString:@"setup"]) {

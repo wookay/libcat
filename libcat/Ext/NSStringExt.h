@@ -80,7 +80,7 @@ NSInteger sortByStringComparator(NSString* uno, NSString* dos, void* context) ;
 -(BOOL) isIntegerNumber ;
 -(BOOL) isIntegerNumberWithSpace ;
 -(BOOL) isAlphabet ;
--(BOOL) isSurrounded:(NSString*)a :(NSString*)b ;
+-(BOOL) hasSurrounded:(NSString*)a :(NSString*)b ;
 -(BOOL) hasText:(NSString*)str ;
 
 -(int) to_int ;
@@ -89,6 +89,7 @@ NSInteger sortByStringComparator(NSString* uno, NSString* dos, void* context) ;
 -(size_t) to_size_t ;
 
 -(NSString*) stringAtIndex:(int)idx ;
+-(unichar) unicharAtIndex:(int)idx ;
 -(NSString*) last ;
 -(NSString*) strip ;
 -(NSString*) slice:(int)loc :(int)length_ ;
@@ -109,3 +110,4 @@ NSInteger sortByStringComparator(NSString* uno, NSString* dos, void* context) ;
 -(NSData*) to_data ;
 
 @end
+

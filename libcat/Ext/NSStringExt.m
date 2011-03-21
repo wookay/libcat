@@ -83,7 +83,7 @@ NSInteger sortByStringComparator(NSString* uno, NSString* dos, void* context) {
 	}
 }
 
--(BOOL) isSurrounded:(NSString*)a :(NSString*)b {
+-(BOOL) hasSurrounded:(NSString*)a :(NSString*)b {
 	return [self hasPrefix:a] && [self hasSuffix:b];
 }
 
@@ -146,6 +146,10 @@ NSInteger sortByStringComparator(NSString* uno, NSString* dos, void* context) {
 
 -(NSString*) stringAtIndex:(int)idx {
 	return [self substringWithRange:NSMakeRange(idx, 1)];
+}
+
+-(unichar) unicharAtIndex:(int)idx {
+	return [[self stringAtIndex:idx] to_unichar];
 }
 
 -(NSString*) last {
@@ -239,3 +243,5 @@ NSInteger sortByStringComparator(NSString* uno, NSString* dos, void* context) {
 }
 
 @end
+
+

@@ -15,9 +15,88 @@
 #import "Logger.h"
 #import "NSDateExt.h"
 
+NSString* TypeEncodingDescription(char* code) {
+	switch (code[0]) {
+		case _C_ID:
+			return @"id";
+		case _C_CLASS:
+			return @"Class";
+		case _C_SEL:
+			return @"SEL";
+		case _C_CHR:
+			return @"char";
+		case _C_UCHR:
+			return @"u_char";
+		case _C_SHT:
+			return @"short";
+		case _C_USHT:
+			return @"ushort";
+		case _C_INT:
+			return @"int";
+		case _C_UINT:
+			return @"uint";
+		case _C_LNG:
+			return @"long";
+		case _C_ULNG:
+			return @"u_long";
+		case _C_LNG_LNG:
+			return @"long long";
+		case _C_ULNG_LNG:
+			return @"unsigned long long";
+		case _C_FLT:
+			return @"float";
+		case _C_DBL:
+			return @"double";
+		case _C_BFLD:
+			return @"bit field";
+		case _C_BOOL:
+			return @"BOOL";
+		case _C_VOID:
+			return @"void";
+		case _C_UNDEF:
+			return @"unknown";
+		case _C_PTR:
+			return @"void*";
+		case _C_CHARPTR:
+			return @"char*";
+		case _C_ATOM:
+			return @"atom";
+		case _C_ARY_B:
+		case _C_ARY_E:
+			return @"array";
+		case _C_UNION_B:
+		case _C_UNION_E:
+			return @"union";
+		case _C_STRUCT_B:
+		case _C_STRUCT_E:
+			return [[[[SWF(@"%s", code) gsub:@"{_" to:EMPTY_STRING] gsub:OPENING_BRACE to:EMPTY_STRING] split:EQUAL] first];
+		case _C_VECTOR:
+			return @"vector";
+		case _C_CONST:
+			return @"const";
+	}
+	return SWF(@"%s", code);
+}
+
 @implementation NSObject (Ext)
 
--(NSArray*) class_hierarchy {
+-(NSArray*) methodNames {
+	return [NSObject methodNamesForClass:[self class]];
+}
+
+-(NSArray*) properties {
+	NSMutableArray* ary = [NSMutableArray array];
+	for (NSArray* trio in [self propertiesForClass:[self class]]) {
+		[ary addObject:[trio objectAtFirst]];
+	}
+	return ary;
+}
+
+-(NSArray*) protocols {
+	return [NSObject protocolsForClass:[self class]];
+}
+
+-(NSArray*) classHierarchy {
 	Class nsobject = [NSObject class];
 	Class klass = [self class];
 	NSMutableArray* ary = [NSMutableArray arrayWithObject:klass];
@@ -36,17 +115,29 @@
 }
 
 -(NSArray*) superclasses {
-	return [[self class_hierarchy] slice:1 backward:-1];
+	return [[self classHierarchy] slice:1 backward:-1];
 }
 
-
--(NSArray*) class_properties {
-	Class targetClass = [self class];
-	return [self class_properties:targetClass];
+-(NSArray*) classMethodNames {
+	Class targetClass = [self class]->isa;
+	return [NSObject methodNamesForClass:targetClass];
 }
+
+-(NSArray*) classMethods {
+	Class targetClass = [self class]->isa;
+	return [NSObject methodsForClass:targetClass];
+}
+
 
 -(NSArray*) methods {
-	Class targetClass = [self class];
+	return [NSObject methodsForClass:[self class]];
+}
+
+-(NSArray*) ivars {
+	return [NSObject ivarsForClass:[self class]];
+}
+
++(NSArray*) methodNamesForClass:(Class)targetClass {
 	NSMutableArray* ary = [NSMutableArray array];
 	unsigned int methodCount;
 	Method *methods = class_copyMethodList((Class)targetClass, &methodCount);
@@ -57,28 +148,157 @@
 		[ary addObject:selectorName];
 	}
 	free(methods);
-	return [ary sort];
-}
-
--(NSArray*) class_methods {
-	Class targetClass = [self class]->isa;
-	return [self class_methods:targetClass];
-}
-
--(NSArray*) class_methods:(Class)targetClass {
-	NSMutableArray* ary = [NSMutableArray array];
-	unsigned int methodCount;
-	Method *methods = class_copyMethodList((Class)targetClass, &methodCount);
-	for (size_t idx = 0; idx < methodCount; ++idx) {
-		Method method = methods[idx];
-		SEL selector = method_getName(method);
-		NSString *selectorName = NSStringFromSelector(selector);
-		[ary addObject:selectorName];
-	}
 	return [ary sort];	
 }
 
--(NSArray*) class_properties:(Class)targetClass {
++(NSArray*) ivarsForClass:(Class)targetClass {
+	NSMutableArray* ary = [NSMutableArray array];
+	unsigned int count;
+	Ivar* ivarList = class_copyIvarList((Class)targetClass, &count);
+	int retStrMax = 0;
+	for (unsigned int idx = 0; idx < count; ++idx) {
+		Ivar ivar = ivarList[idx];
+		const char* name = ivar_getName(ivar);
+		const char* typeEncoding = ivar_getTypeEncoding(ivar);
+		NSString* retStr = SWF(@"%@", TypeEncodingDescription((char*)typeEncoding));
+		[ary addObject:PAIR(SWF(@"%s", name), retStr)];
+		retStrMax = MAX(retStrMax, retStr.length);
+	}
+	free(ivarList);
+	NSMutableArray* ret = [NSMutableArray array];
+	for (NSArray* pair in [ary sortByFirstObject]) {
+		[ret addObject:SWF(@"  %@ %@;", [[pair objectAtSecond] ljust:retStrMax], [pair objectAtFirst])];
+	}
+	return ret;	
+}
+
++(NSArray*) methodsForProtocol:(Protocol*)protocol isRequiredMethod:(BOOL)isRequiredMethod isInstanceMethod:(BOOL)isInstanceMethod {
+	NSMutableArray* ary = [NSMutableArray array];
+	unsigned int outCount;
+	struct objc_method_description* methodDescriptionList = protocol_copyMethodDescriptionList(protocol, isRequiredMethod, isInstanceMethod, &outCount);
+	for (unsigned int idx = 0; idx < outCount; ++idx) {
+		struct objc_method_description methodDescription = methodDescriptionList[idx];
+		SEL selector = methodDescription.name;
+		NSString* selectorString = NSStringFromSelector(selector);
+		[ary addObject:SWF(@"    %@", selectorString)];
+	}
+	free(methodDescriptionList);	
+	return [ary sort];
+}
+
++(NSArray*) protocolsForProtocol:(Protocol*)protocol {
+	NSMutableArray* ary = [NSMutableArray array];
+	unsigned int outCount;
+	Protocol** protocolList = protocol_copyProtocolList(protocol, &outCount);
+	for (unsigned int idx = 0; idx < outCount; ++idx) {
+		Protocol* proto = protocolList[idx];
+		[ary addObject:SWF(@"%s", protocol_getName(proto))];
+	}
+	free(protocolList);
+	return [ary sort];
+}
+
++(NSArray*) interfaceForClass:(Class)targetClass {
+	NSString* className = NSStringFromClass(targetClass);
+	NSString* superclassName = NSStringFromClass([targetClass superclass]);
+	NSString* superclassPart = nil == superclassName ? EMPTY_STRING : SWF(@" : %@", superclassName);
+	NSMutableArray* ary = [NSMutableArray array];
+	NSArray* protocols = [self protocolsForClass:targetClass];
+	NSArray* ivars = [self ivarsForClass:targetClass];
+	NSString* protocolPart = protocols.count > 0 ? SWF(@" <%@>", [protocols join:COMMA_SPACE]) : EMPTY_STRING;
+	NSString* ivarsPart = ivars.count > 0 ? SWF(@" {\n%@\n}", [ivars join:LF]) : EMPTY_STRING;
+	[ary addObject:SWF(@"@interface %@%@%@%@", className, superclassPart, protocolPart, ivarsPart)];
+	return ary;	
+}
+
++(NSArray*) methodsForProtocol:(Protocol*)protocol {
+	NSString* protocolName = SWF(@"%s", protocol_getName(protocol));
+	NSMutableArray* ary = [NSMutableArray array];
+	NSArray* protocols = [self protocolsForProtocol:protocol];
+	NSString* protocolPart = protocols.count > 0 ? SWF(@" <%@>", [protocols join:COMMA_SPACE]) : EMPTY_STRING;
+	[ary addObject:SWF(@"@protocol %@%@", protocolName, protocolPart)];
+	NSMutableArray* optional = [NSMutableArray array];
+	[optional addObjectsFromArray:[self methodsForProtocol:protocol isRequiredMethod:false isInstanceMethod:false]];
+	[optional addObjectsFromArray:[self methodsForProtocol:protocol isRequiredMethod:false isInstanceMethod:true]];
+	if (optional.count > 0) {
+		[ary addObject:@"  @optional"];
+		[ary addObjectsFromArray:optional];
+	}
+	NSMutableArray* required = [NSMutableArray array];
+	[required addObjectsFromArray:[self methodsForProtocol:protocol isRequiredMethod:true isInstanceMethod:false]];
+	[required addObjectsFromArray:[self methodsForProtocol:protocol isRequiredMethod:true isInstanceMethod:true]];
+	if (required.count > 0) {
+		[ary addObject:@"  @required"];
+		[ary addObjectsFromArray:required];
+	}
+	return ary;
+}
+
++(NSArray*) methodsForClass:(Class)targetClass {
+	NSMutableArray* ary = [NSMutableArray array];
+	unsigned int count;
+	Method *methods = class_copyMethodList((Class)targetClass, &count);
+	int retStrMax = 0;
+	for (unsigned int idx = 0; idx < count; ++idx) {
+		Method method = methods[idx];
+		SEL selector = method_getName(method);
+		NSString *selectorName = NSStringFromSelector(selector);
+#define ARGUMENT_OFFSET 2
+		unsigned int numberOfArguments = method_getNumberOfArguments(method) - ARGUMENT_OFFSET;
+		NSString* selName;
+		if (numberOfArguments > 0) {
+			NSMutableArray* selArray = [NSMutableArray array];
+			NSArray* selArgs = [selectorName split:COLON];
+			for (unsigned int argIdx = 0; argIdx < numberOfArguments; argIdx++) {
+				NSString* argString = [selArgs objectAtIndex:argIdx];
+				char* argType = method_copyArgumentType(method, argIdx + ARGUMENT_OFFSET);
+				NSString* argTypeString = TypeEncodingDescription(argType);
+				free(argType);
+				NSString* shortArgStr;
+				NSRange range = [argString rangeOfCharacterFromSet:[NSCharacterSet uppercaseLetterCharacterSet] options:NSBackwardsSearch];
+				if (NSNotFound == range.location) {
+					shortArgStr = argString;
+				} else {
+					shortArgStr = [[argString substringFromIndex:range.location] lowercaseString];
+				}
+				[selArray addObject:SWF(@"%@:(%@)%@", argString, argTypeString, shortArgStr)];
+			}
+			selName = [selArray join:SPACE];
+		} else {
+			selName = selectorName;
+		}
+		char* returnType = method_copyReturnType(method);
+		NSString* returnTypeString = TypeEncodingDescription(returnType);
+		free(returnType);		 
+		NSString* retStr = SWF(@"%@(%@)", class_isMetaClass(targetClass) ? @"+" : @"-", returnTypeString);
+		[ary addObject:PAIR(selName, retStr)];
+		retStrMax = MAX(retStrMax, retStr.length);
+	}
+	free(methods);
+	NSMutableArray* ret = [NSMutableArray array];
+	for (NSArray* pair in [ary sortByFirstObject]) {
+		[ret addObject:SWF(@"%@ %@ ;", [[pair objectAtSecond] ljust:retStrMax], [pair objectAtFirst])];
+	}
+	return ret;
+}
+
++(NSArray*) protocolsForClass:(Class)targetClass {
+	NSMutableArray* ary = [NSMutableArray array];
+	unsigned int count = 0;
+    Protocol** protocols = class_copyProtocolList((Class)targetClass, &count);
+	if (nil != protocols) {
+		for (int idx = 0 ; idx < count ; idx++) {
+			Protocol* protocol = protocols[idx];
+			const char* name = protocol_getName(protocol);
+			NSString* protocolName = SWF(@"%s", name);
+			[ary addObject:protocolName];
+		}
+	}
+	free(protocols);
+	return [ary sort];	
+}
+
+-(NSArray*) propertiesForClass:(Class)targetClass {
 	NSMutableArray* ary = [NSMutableArray array];
 	unsigned int count = 0;
     objc_property_t *properties = class_copyPropertyList((Class)targetClass, &count);
@@ -188,8 +408,9 @@
 	return false;
 }
 
+
 -(Class) classForProperty:(NSString*)propertyName {
-	for (Class targetClass in [self class_hierarchy]) {
+	for (Class targetClass in [self classHierarchy]) {
 		unsigned int count = 0;
 		objc_property_t *properties = class_copyPropertyList((Class)targetClass, &count);
 		BOOL found = false;
@@ -209,6 +430,7 @@
 	}
 	return NULL;
 }
+
 
 -(id) getPropertyValue:(SEL)sel failed:(BOOL*)failed {
 	if (! [self respondsToSelector:sel]) {
@@ -266,6 +488,10 @@
 					CATransform3D transform3D;
 					[invocation getReturnValue:&transform3D];
 					obj = [NSValue valueWithCATransform3D:transform3D];	
+				} else if ([attributesString hasPrefix:@"{_NSRange"]) {					
+					NSRange range;
+					[invocation getReturnValue:&range];
+					obj = [NSValue valueWithRange:range];
 				}
 				if (nil == obj) {
 					*failed = true;
@@ -370,4 +596,31 @@
 	}
 	return nilClass;
 }
+@end
+
+
+
+
+@implementation DisquotatedObject
+@synthesize object;
+-(NSString*) description {
+	return [NSString stringWithFormat:@"<%@: %p; object = %@>", [self class], self, object];
+}
++(id) disquotatedObjectWithObject:(id)object_ {
+	DisquotatedObject* disq = [[[self alloc] init] autorelease];
+	disq.object = object_;
+	return disq;
+}
+-(id) init {
+	self = [super init];
+	if (self) {
+		self.object = nil;
+	}
+	return self;
+}
+- (void)dealloc {
+	[object release];
+	[super dealloc];
+}
+
 @end

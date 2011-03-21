@@ -243,11 +243,24 @@ NSString* surrounded_array_prefix_index(NSArray* array) {
 		[view.layer renderInContext:UIGraphicsGetCurrentContext()];
 		image = UIGraphicsGetImageFromCurrentImageContext();
 		UIGraphicsEndImageContext();
+	} else if ([targetObject isKindOfClass:[CALayer class]]) {
+		CALayer* layer = (CALayer*)targetObject;
+		UIGraphicsBeginImageContextWithOptions(layer.bounds.size, layer.opaque, [[UIScreen mainScreen] scale]);
+		[layer renderInContext:UIGraphicsGetCurrentContext()];
+		image = UIGraphicsGetImageFromCurrentImageContext();
+		UIGraphicsEndImageContext();		
+	}
+	
+	if (nil == image) {
+		NSString* description = SWF(@"%@", targetObject);
+		if ([description hasPrefix:@"<CGImage 0x"]) {
+			image = [UIImage imageWithCGImage:(CGImageRef)targetObject];
+		}
 	}
 	
 	NSString* ret;
 	if (nil == image) {
-		ret = NSLocalizedString(@"Not UIView Class", nil);
+		ret = NSLocalizedString(@"Not UIImage, UIView, CALayer, CGImage", nil);
 	} else {
 		NSArray* searchPath = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 		NSString* fileName = SWF(@"%p.png", targetObject);
@@ -435,13 +448,13 @@ NSString* surrounded_array_prefix_index(NSArray* array) {
 -(NSString*) command_completion:(id)currentObject arg:(id)arg {
 	NSArray* pair = [self get_targetStringAndBlocks:currentObject];
 	NSDictionary* targetStrings = [pair objectAtFirst];
-	NSMutableArray* ary = [NSMutableArray arrayWithArray:[currentObject methods]];
+	NSMutableArray* ary = [NSMutableArray arrayWithArray:[currentObject methodNames]];
 	[ary addObjectsFromArray:[targetStrings allKeys]];
 	if (currentObject == [currentObject class]) {
-		[ary addObjectsFromArray:[currentObject class_methods]];
+		[ary addObjectsFromArray:[currentObject classMethodNames]];
 	}
 	if ([currentObject isKindOfClass:[UIView class]]) {
-		for(NSString* method in [UIColor class_methods]) {
+		for(NSString* method in [UIColor classMethodNames]) {
 			if ([method hasSuffix:@"Color"]) {
 				[ary addObject:method];
 			}
@@ -522,7 +535,7 @@ NSString* surrounded_array_prefix_index(NSArray* array) {
 				[ary addObject:SWF(@"TOOLBAR_ITEMS: %d %@", TOOLBAR_ITEMS_SECTION_INDEX, surrounded_array_prefix_index(obj))];				
 				break;																
 			case LS_CLASS_METHODS:
-				[ary addObject:SWF(@"CLASS_METHODS: %@", [obj inspect])];				
+				[ary addObject:SWF(@"CLASS_METHODS:\n%@", [obj inspect])];				
 				break;	
 			case LS_LAYER:
 				[ary addObject:SWF(@"LAYER: %@", [obj inspect])];
@@ -530,6 +543,9 @@ NSString* surrounded_array_prefix_index(NSArray* array) {
 			case LS_LAYER_SUBLAYERS:
 				[ary addObject:SWF(@"LAYER.SUBLAYERS: %@", surrounded_array_prefix_index(obj))];
 				break;		
+			case LS_WINDOWS:
+				[ary addObject:SWF(@"WINDOWS: %@", surrounded_array_prefix_index(obj))];
+				break;						
 			default:
 				break;
 		}
@@ -542,9 +558,14 @@ NSString* surrounded_array_prefix_index(NSArray* array) {
 	
 	if ([currentObject isKindOfClass:[UIView class]]) {
 		UIView* view = currentObject;
+		int depthOffset = 0;
+		if ([view isKindOfClass:[UIWindow class]]) {
+			depthOffset += 1;
+			[ary addObject:SWF(@"%@", [UIApplication sharedApplication])];		
+		}
 #define JUSTIFY_VIEW 85
 		TraverseViewBlock traverseViewBlock = ^(int depth, UIView* superview) {
-			[ary addObject:SWF(@"%@%@", [TAB repeat:depth], [[superview inspect] truncate:JUSTIFY_VIEW])];
+			[ary addObject:SWF(@"%@%@", [TAB repeat:depth + depthOffset], [[superview inspect] truncate:JUSTIFY_VIEW])];
 		};
 		[view traverseSuperviews:traverseViewBlock];
 	} else if ([currentObject isKindOfClass:[CALayer class]]) {
@@ -656,13 +677,16 @@ NSString* surrounded_array_prefix_index(NSArray* array) {
 		} else {
 			[ret addObject:PAIR(Enum(LS_LAYER_SUBLAYERS), layer.sublayers == nil ? [NSArray array] : [layer.sublayers reverse])];
 		}		
+	} else if ([currentObject isKindOfClass:[UIApplication class]]) {
+		UIApplication* application = currentObject;
+		[ret addObject:PAIR(Enum(LS_WINDOWS), application.windows)];
 #if USE_COCOA
 	} else if ([currentObject isKindOfClass:[NSWindow class]]) {
 		NSWindow* window = currentObject;
 		[ret addObject:PAIR(Enum(LS_VIEW_SUBVIEWS), [window.contentView subviews])];	
 #endif
 	} else if (currentObject == [currentObject class]) {
-		[ret addObject:PAIR(Enum(LS_CLASS_METHODS), [currentObject class_methods])];
+		[ret addObject:PAIR(Enum(LS_CLASS_METHODS), [DisquotatedObject disquotatedObjectWithObject:[currentObject classMethods]])];
 	}
 	return ret;
 }
@@ -673,7 +697,10 @@ NSString* surrounded_array_prefix_index(NSArray* array) {
 	if ([SLASH isEqualToString:arg]) {
 		changeObject = [CONSOLEMAN get_rootViewController];
 	} else if ([TILDE isEqualToString:arg]) {
-		changeObject = [CONSOLEMAN get_keyWindow];
+		changeObject = [UIApplication sharedApplication].keyWindow;
+#define TILDE_TILDE @"~~"
+	} else if ([TILDE_TILDE isEqualToString:arg]) {
+		changeObject = [UIApplication sharedApplication];
 	} else if ([MINUS isEqualToString:arg]) {
 		if (nil == NEWOBJECTMAN.oldOne) {
 			changeObject = currentObject;
@@ -690,6 +717,8 @@ NSString* surrounded_array_prefix_index(NSArray* array) {
 			if ([currentObject isKindOfClass:[UIViewController class]]) {
 				UIViewController* controller = currentObject;
 				changeObject = controller.parentViewController;
+			} else if ([currentObject isKindOfClass:[UIWindow class]]) {
+				changeObject = [UIApplication sharedApplication];
 			} else if ([currentObject isKindOfClass:[UIView class]]) {
 				UIView* view = currentObject;
 				Class klass_UIViewControllerWrapperView = NSClassFromString(@"UIViewControllerWrapperView");
@@ -830,6 +859,12 @@ NSString* surrounded_array_prefix_index(NSArray* array) {
 					changeObject = sublayer;
 					found = true;
 				}
+			} else if ([currentObject isKindOfClass:[UIApplication class]]) {
+				UIApplication* application = currentObject;
+				if (row < application.windows.count) {
+					changeObject = [application.windows objectAtIndex:row];
+					found = true;
+				}
 #if USE_COCOA
 			} else if ([currentObject isKindOfClass:[NSWindow class]]) {
 				return [self findTargetObject:[currentObject contentView] arg:arg];
@@ -876,6 +911,12 @@ NSString* surrounded_array_prefix_index(NSArray* array) {
 				cur = obj;
 			}
 			changeObject = cur;
+		} else if ([arg hasSurrounded:LESS_THAN :GREATER_THAN]) {
+			NSString* protocolName = [arg slice:1 backward:-3];
+			Protocol* protocol = NSProtocolFromString(protocolName);
+			if (nil != protocol) {
+				changeObject = [DisquotatedObject disquotatedObjectWithObject:[NSObject methodsForProtocol:protocol]];
+			}			
 		}
 		
 		if (nil == changeObject) { // search by title
@@ -888,8 +929,13 @@ NSString* surrounded_array_prefix_index(NSArray* array) {
 			}
 			if (nil == obj) {
 				Class klass = NSClassFromString(arg);
-				if (nil != klass) {
-					changeObject = klass;
+				if (nil == klass) {
+					Protocol* protocol = NSProtocolFromString(arg);
+					if (nil != protocol) {
+						changeObject = [DisquotatedObject disquotatedObjectWithObject:[NSObject methodsForProtocol:protocol]];
+					}
+				} else {
+					changeObject = [DisquotatedObject disquotatedObjectWithObject:[NSObject interfaceForClass:klass]];;
 					[NEWOBJECTMAN updateNewOne:changeObject];
 				}
 			} else {

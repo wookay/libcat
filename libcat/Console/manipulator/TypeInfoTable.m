@@ -104,7 +104,7 @@
 		}
 	}
 	if (removeLF) {
-		return [SWF(@"%@", [obj inspect]) gsub:@"\n  " to:EMPTY_STRING];
+		return [SWF(@"%@", [obj inspect]) gsub:LF to:EMPTY_STRING];
 	} else {
 		return SWF(@"%@", obj);
 	}

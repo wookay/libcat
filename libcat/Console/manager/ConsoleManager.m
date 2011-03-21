@@ -103,31 +103,45 @@
 }
 
 -(id) input:(NSString*)command arg:(id)arg {
-	NSString* selectorStr = [COMMANDMAN.commandsMap objectForKey:command];
-	if (nil == selectorStr) {
-		if ([[arg strip] hasPrefix:EQUAL]) {
-			return [self setterChain:command arg:arg];
-		} else {
-			id obj = [self getterChain:command arg:arg];
-			if ([obj isKindOfClass:[NSException class]]) {
-				return SWF(@"%@", obj);
+	@try {
+		if (nil == self.currentTargetObject) {
+			self.currentTargetObject = [self get_topViewController];
+		}
+		NSString* selectorStr = [COMMANDMAN.commandsMap objectForKey:command];
+		if (nil == selectorStr) {
+			if ([[arg strip] hasPrefix:EQUAL]) {
+				return [self setterChain:command arg:arg];
 			} else {
-				return obj;
+				id obj = [self getterChain:command arg:arg];
+				if ([obj isKindOfClass:[NSException class]]) {
+					return SWF(@"%@", obj);
+				} else {
+					return obj;
+				}
+			}
+		} else {
+			SEL selector = NSSelectorFromString(selectorStr);
+			id targetObject = [self currentTargetObjectOrTopViewController];
+			if ([COMMANDMAN respondsToSelector:selector]) {
+				return [COMMANDMAN performSelector:selector withObject:targetObject withObject:arg];
+			} else {
+				NSArray* trio = [COMMANDMAN findTargetObject:targetObject arg:command];
+				id obj = [trio objectAtSecond];
+				if (IS_NIL(obj)) {
+					return SWF(@"%@ : %@", NSLocalizedString(@"Command Not Found", nil), command);
+				} else {
+					return SWF(@"%@", obj);
+				}
 			}
 		}
-	} else {
-		SEL selector = NSSelectorFromString(selectorStr);
-		if ([COMMANDMAN respondsToSelector:selector]) {
-			return [COMMANDMAN performSelector:selector withObject:[self currentTargetObjectOrTopViewController] withObject:arg];
+	} @catch (NSException* exception) {
+		NSString* userInfo;
+		if (nil == exception.userInfo) {
+			userInfo = EMPTY_STRING;
 		} else {
-			NSArray* trio = [COMMANDMAN findTargetObject:[self currentTargetObjectOrTopViewController] arg:command];
-			id obj = [trio objectAtSecond];
-			if (IS_NIL(obj)) {
-				return SWF(@"%@ : %@", NSLocalizedString(@"Command Not Found", nil), command);
-			} else {
-				return SWF(@"%@", obj);
-			}
+			userInfo = SWF(@"%@\n", exception.userInfo);
 		}
+		return SWF(@"%@ : %@\n%@%@", exception.name, exception.reason, userInfo, exception.callStackSymbols);
 	}
 }
 
@@ -265,7 +279,7 @@
 }
 
 -(NSString*) getterChain:(id)command arg:(id)arg {
-	return [self getterChainObject:currentTargetObject command:command arg:arg returnType:kGetterReturnTypeInspect];
+	return [self getterChainObject:self.currentTargetObject command:command arg:arg returnType:kGetterReturnTypeInspect];
 }
 
 -(id) getterChainObject:(id)target command:(id)command arg:(id)arg returnType:(GetterReturnType)getterReturnType {
@@ -305,7 +319,7 @@
 			}
 			break;
 		}
-		
+				
 		if ([target respondsToSelector:selector]) {
 			BOOL found = true;
 			NSMethodSignature* sig = [target methodSignatureForSelector:selector];
@@ -327,7 +341,17 @@
 							}
 						} else {
 							Class targetClass = [target classForProperty:method]; 
-							target = obj;
+#define DISQUOTATING_METHODS  _w(@"methods classMethods ivars protocols")
+							if ([DISQUOTATING_METHODS containsObject:method]) {
+								if ([@"protocols" isEqualToString:method]) {
+									NSArray* protocols = obj;
+									target = [DisquotatedObject disquotatedObjectWithObject:SWF(@"<%@>", [protocols join:COMMA_SPACE])];
+								} else {
+									target = [DisquotatedObject disquotatedObjectWithObject:obj];
+								}
+							} else {
+								target = obj;
+							}
 							NSString* detail = [PROPERTYMAN.typeInfoTable objectDescription:obj targetClass:NSStringFromClass(targetClass) propertyName:method];
 							[ary addObject:SWF(@"[%@ %@]\t===>\t%@", oldTargetStr, method, detail)];
 						}							
@@ -387,7 +411,7 @@
 						case _C_UINT:
 							switch (*returnType) {
 								case _C_ID:
-									target = [target performSelector:selector withObject:(id)[arg unsignedIntValue]];
+									target = [target performSelector:selector withObject:(id)[arg integerValue]];
 									[ary addObject:SWF(@"[%@ @% %@]\t===>\t%@", oldTargetStr, method, arg, target)];
 									break;
 									
@@ -585,10 +609,6 @@
 			return topViewController;
 		}
 	}
-}
-
--(UIWindow*) get_keyWindow {
-	return [UIApplication sharedApplication].keyWindow;
 }
 
 -(UIViewController*) get_rootViewController {

@@ -43,7 +43,6 @@ typedef enum { kGetterReturnTypeInspect, kGetterReturnTypeObject } GetterReturnT
 -(id) getterChainObject:(id)target command:(id)command arg:(id)arg returnType:(GetterReturnType)getterReturnType ;
 
 -(UIViewController*) get_topViewController ;
--(UIWindow*) get_keyWindow ;
 -(UIViewController*) get_rootViewController ;
 
 -(void) start_up ;

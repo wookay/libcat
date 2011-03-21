@@ -108,6 +108,13 @@ static NSString *replaceAll(NSString *s, NSDictionary *replacements) {
 	BOOL recursive = [arg isEqualToString:LS_OPTION_RECURSIVE];
 	NSMutableArray* ary = [NSMutableArray array];
 	NSMutableArray* topLinks = [NSMutableArray array];
+	
+	if (recursive) {
+		[topLinks addObject:@"<a href='/'>recursive off</a>"];
+	} else {
+		[topLinks addObject:@"<a href='/?arg=-r'>recursive on</a>"];
+	}
+	
 	NSArray* arrayLS = [COMMANDMAN array_ls:[CONSOLEMAN currentTargetObjectOrTopViewController] arg:arg];
 	NSString* title = [NSBundle bundleName];
 	for (NSArray* pair in arrayLS) {
@@ -121,11 +128,6 @@ static NSString *replaceAll(NSString *s, NSDictionary *replacements) {
 						[ary addObject:SWF(@"<img src='/image/%p.png' /><hr />", obj)];
 					} else if ([obj respondsToSelector:@selector(title)]) {
 						title = SWF(@"%@ :: %@", [NSBundle bundleName], [obj title]);
-						if (recursive) {
-							[topLinks addObject:@"<a href='/'>recursive off</a>"];
-						} else {
-							[topLinks addObject:@"<a href='/?arg=-r'>recursive on</a>"];
-						}
 					}
 				}
 				break;
@@ -179,7 +181,34 @@ static NSString *replaceAll(NSString *s, NSDictionary *replacements) {
 				break;								
 			case LS_NAVIGATIONCONTROLLER_TOOLBAR_ITEMS:
 				[ary addObject:SWF(@"NAVIGATIONCONTROLLER_TOOLBAR_ITEMS: %@", [[obj inspect] htmlEscapedString])];				
-				break;																
+				break;					
+			case LS_LAYER:
+				[ary addObject:SWF(@"LAYER: %@", [[obj inspect] htmlEscapedString])];
+				[ary addObject:SWF(@"<img src='/image/%p.png' /><hr />", obj)];
+				break;					
+			case LS_LAYER_SUBLAYERS: {
+					[ary addObject:SWF(@"LAYER.SUBLAYERS: ")];
+					int idx = 0;
+					for (id sublayer in (NSArray*)obj) {
+						[ary addObject:SWF(@"[%d] %@<br /><img src='/image/%p.png' /><hr />", idx, [[sublayer inspect] htmlEscapedString], sublayer)];
+						idx += 1;
+					}				
+				}
+				break;
+			case LS_INDENTED_LAYER: {
+					int depth = [[pair objectAtThird] intValue];
+					[ary addObject:SWF(@"%@%@<br /><img src='/image/%p.png' /><hr />", [TAB repeat:depth], [[obj inspect] htmlEscapedString], obj)];
+				}
+				break;				
+			case LS_WINDOWS: {
+					[ary addObject:SWF(@"WINDOWS: ")];
+					int idx = 0;
+					for (id window in (NSArray*)obj) {
+						[ary addObject:SWF(@"[%d] %@<br /><img src='/image/%p.png' /><hr />", idx, [[window inspect] htmlEscapedString], window)];
+						idx += 1;
+					}				
+				}
+				break;					
 			default:
 				break;
 		}

@@ -19,3 +19,7 @@
 
 @interface NSFormatterToInspectObjC : NSFormatter
 @end
+
+
+
+NSString* NSStringFromCGColor(CGColorRef colorRef) ;

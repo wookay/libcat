@@ -12,12 +12,22 @@
 
 @interface NSObject (Ext)
 
--(NSArray*) class_properties ;
--(NSArray*) class_properties:(Class)targetClass ;
--(NSArray*) methods ;
--(NSArray*) class_methods ;
--(NSArray*) class_methods:(Class)targetClass ;
--(NSArray*) class_hierarchy ;
++(NSArray*) methodsForProtocol:(Protocol*)protocol isRequiredMethod:(BOOL)isRequiredMethod isInstanceMethod:(BOOL)isInstanceMethod ;
++(NSArray*) methodsForProtocol:(Protocol*)protocol ;
++(NSArray*) methodsForClass:(Class)targetClass ;
++(NSArray*) ivarsForClass:(Class)targetClass ;
++(NSArray*) interfaceForClass:(Class)targetClass ;
++(NSArray*) protocolsForClass:(Class)targetClass ;
++(NSArray*) protocolsForProtocol:(Protocol*)protocol ;
++(NSArray*) methodNamesForClass:(Class)targetClass ;
+-(NSArray*) propertiesForClass:(Class)targetClass ;
+-(NSArray*) classMethods ;
+-(NSArray*) ivars ;
+-(NSArray*) methodNames ;
+-(NSArray*) protocols ;
+-(NSArray*) properties ;
+-(NSArray*) classMethodNames ;
+-(NSArray*) classHierarchy ;
 -(NSArray*) superclasses ;
 
 -(void) performSelector:(SEL)selector afterDelay:(NSTimeInterval)ti ;
@@ -39,4 +49,13 @@
 @interface NilClass : NSObject
 +(NilClass*) nilClass ;
 -(BOOL) isNil ;
+@end
+
+
+
+@interface DisquotatedObject : NSObject {
+	id object;
+}
+@property (nonatomic, retain)	id object;
++(id) disquotatedObjectWithObject:(id)object_ ;
 @end

@@ -136,7 +136,7 @@ CGRect CGRectWithScales(CGRect rect, CGFloat widthScale, CGFloat heightScale) {
 }
 
 CGRect CGRectForString(NSString* str) {
-	if ([str isSurrounded:OPENING_PARENTHESE :CLOSING_PARENTHESE]) { // (11 12; 21 22)
+	if ([str hasSurrounded:OPENING_PARENTHESE :CLOSING_PARENTHESE]) { // (11 12; 21 22)
 		NSArray* cuatro = [[[[str gsub:OPENING_PARENTHESE to:EMPTY_STRING] // ]1
 							 gsub:CLOSING_PARENTHESE to:EMPTY_STRING] // ]2
 							gsub:SEMICOLON to:EMPTY_STRING] split:SPACE]; // ]3 ]4
@@ -160,13 +160,12 @@ CGSize CGSizeExpand(CGSize size, CGFloat dx, CGFloat dy) {
 #pragma mark CATransform3D
 NSString* NSStringFromCATransform3D(CATransform3D transform3D) {
     NSMutableString *str = [NSMutableString string];
-	[str appendString:LF];
     const CGFloat *np = (const CGFloat*)&transform3D;
     for (int idx = 0 ; idx < 16; idx++) {
         if( idx > 0 && 0 == (idx%4)) {
             [str appendString:LF];
 		}
-        [str appendFormat: @"%7.2f ", *np++];
+        [str appendFormat: @"%-7.2f ", *np++];
     }
     return str;
 }

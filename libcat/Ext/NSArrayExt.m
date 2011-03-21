@@ -127,8 +127,16 @@ NSInteger sortByFirstObjectComparator(NSArray* uno, NSArray* dos, void* context)
 	return [self objectAtIndex:idx];
 }
 
+-(id) first {
+	return [self objectAtFirst];
+}
+
 -(id) last {
 	return [self lastObject];
+}
+
+-(int) index:(id)obj {
+	return [self indexOfObject:obj];
 }
 
 -(NSArray*) reverse {

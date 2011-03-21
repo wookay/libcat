@@ -35,7 +35,7 @@
 		self.hierarchyData = [NSArray array];
 		self.propertiesData = [NSArray array];
 	} else {
-		self.hierarchyData = [NSArray arrayWithArray:[targetObject_ class_hierarchy]];
+		self.hierarchyData = [NSArray arrayWithArray:[targetObject_ classHierarchy]];
 		[self load_properties_data];
 	}
 	[self.tableView reloadData];
@@ -45,7 +45,7 @@
 	NSMutableArray* ary = [NSMutableArray array];
 	for (int idx = 0; idx < hierarchyData.count - 1; idx++) {
 		Class targetClass = [hierarchyData objectAtIndex:idx];
-		[ary addObject:[targetObject class_properties:targetClass]];
+		[ary addObject:[targetObject propertiesForClass:targetClass]];
 	}
 	self.propertiesData = [NSArray arrayWithArray:ary];
 }
