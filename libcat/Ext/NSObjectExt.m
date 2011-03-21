@@ -151,11 +151,25 @@ NSString* TypeEncodingDescription(char* code) {
 	return [NSObject ivarsForClass:[self class] withObject:self];
 }
 
++(NSArray*) ivarNamesForClass:(Class)targetClass {
+	NSMutableArray* ary = [NSMutableArray array];
+	unsigned int count;
+	Ivar* ivarList = class_copyIvarList(targetClass, &count);
+	for (unsigned int idx = 0; idx < count; idx++) {
+		Ivar ivar = ivarList[idx];
+		const char* name = ivar_getName(ivar);
+		NSString* nameStr = SWF(@"%s", name);
+		[ary addObject:nameStr];
+	}
+	free(ivarList);
+	return [ary sort];
+}
+
 +(NSArray*) methodNamesForClass:(Class)targetClass {
 	NSMutableArray* ary = [NSMutableArray array];
-	unsigned int methodCount;
-	Method *methods = class_copyMethodList((Class)targetClass, &methodCount);
-	for (size_t idx = 0; idx < methodCount; ++idx) {
+	unsigned int count;
+	Method *methods = class_copyMethodList((Class)targetClass, &count);
+	for (size_t idx = 0; idx < count; ++idx) {
 		Method method = methods[idx];
 		SEL selector = method_getName(method);
 		NSString *selectorName = NSStringFromSelector(selector);
@@ -186,7 +200,7 @@ NSString* TypeEncodingDescription(char* code) {
 	for (NSArray* pair in [ary sortByFirstObject]) {
 		NSString* name = [pair objectAtFirst];
 		NSString* decl = SWF(@"  %@ %@", [[pair objectAtSecond] ljust:retStrMax], name);
-		if (nil == object) {
+		if (nil == object || object == [object class]) {
 			[ret addObject:SWF(@"%@ ;", decl)];
 		} else {
 			BOOL failed = false;
@@ -442,7 +456,11 @@ NSString* TypeEncodingDescription(char* code) {
 		case _C_ID:
 			return true;
 			break;
-	
+
+		case _C_CLASS:
+			return true;
+			break;
+			
 		default:
 			break;
 	}		

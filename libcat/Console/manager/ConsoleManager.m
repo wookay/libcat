@@ -556,6 +556,8 @@
 	} else {
 		if (nil == target) {
 			return STR_NIL;
+		} else if (target == [target class]) {
+			return [[DisquotatedObject disquotatedObjectWithObject:target descript:[target classInfo]] inspect];
 		} else {
 			return [target inspect];
 		}

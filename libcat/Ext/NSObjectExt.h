@@ -26,13 +26,13 @@
 -(NSArray*) classMethods ;
 -(NSArray*) methods ;
 -(NSArray*) ivars ;
--(NSArray*) methodNames ;
 -(NSArray*) protocols ;
 -(NSArray*) properties ;
--(NSArray*) classMethodNames ;
 -(NSArray*) classHierarchy ;
 -(NSArray*) superclasses ;
-
+-(NSArray*) classMethodNames ;
+-(NSArray*) methodNames ;
++(NSArray*) ivarNamesForClass:(Class)targetClass ;
 -(void) performSelector:(SEL)selector afterDelay:(NSTimeInterval)ti ;
 -(void) performSelectorAfterChalna:(SEL)selector ;
 -(BOOL) isNil ;

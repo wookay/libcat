@@ -266,7 +266,7 @@ NSString* NSStringFromCGColor(CGColorRef colorRef) {
 		blue = components[2];		
 	}
 	float alpha = CGColorGetAlpha(colorRef);
-	return [NSString stringWithFormat:@"[%g %g %g %g #%02x%02x%02x]", red, green, blue, alpha, red * FF, green * FF, blue *FF];
+	return SWF(@"[%g %g %g %g]", red, green, blue, alpha);
 }
 
 

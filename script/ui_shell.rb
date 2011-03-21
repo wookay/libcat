@@ -40,13 +40,15 @@ class Shell
     end
     Readline.completion_proc = proc do |input|
       self.completion_list.sort.uniq.select do |history| 
-          history.size != input.size and 0 == force_encoding_utf8(history).index(input)
+          history.size != input.size and force_encoding_utf8(history).index(input) == 0
+      end.map do |history|
+        history.strip
       end
     end
   end
   def completion_list
     methods = @delegate.call({}, 'completion')
-    (methods or '').split(LF).map {|x| x } + COMMANDS + @HISTORY
+    (methods or '').split(LF).map {|x| x.strip } + COMMANDS + @HISTORY
   end
   def delegate &block
     @delegate = block

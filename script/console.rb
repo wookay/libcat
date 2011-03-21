@@ -159,11 +159,11 @@ class Console
     'el' => 'events load',
 	'm' => 'methods',
 	'M' => 'classMethods',
-	'i' => 'ivars',
 	'p' => 'properties',
     'b' => 'back',
     'f' => 'flick',
     'c' => 'classInfo',
+    'i' => 'ivars',
     '$' => 'new_objects',
     }
     full_command = aliases[command_str]
@@ -254,6 +254,7 @@ class Console
         else
           display_info response_body if env[:print]
         end
+        response_body
       end
     end
     connect_to_server

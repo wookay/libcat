@@ -499,7 +499,10 @@ NSString* surrounded_array_prefix_index(NSArray* array) {
 	NSMutableArray* ary = [NSMutableArray arrayWithArray:[currentObject methodNames]];
 	[ary addObjectsFromArray:[targetStrings allKeys]];
 	if (currentObject == [currentObject class]) {
-		[ary addObjectsFromArray:[currentObject classMethodNames]];
+		[ary addObjectsFromArray:[NSObject methodNamesForClass:currentObject->isa]];
+		[ary addObjectsFromArray:[NSObject ivarNamesForClass:currentObject->isa]];
+	} else {
+		[ary addObjectsFromArray:[NSObject ivarNamesForClass:[currentObject class]]];		
 	}
 	if ([currentObject isKindOfClass:[UIView class]]) {
 		for(NSString* method in [UIColor classMethodNames]) {
@@ -983,7 +986,7 @@ NSString* surrounded_array_prefix_index(NSArray* array) {
 						changeObject = [DisquotatedObject disquotatedObjectWithObject:[ProtocolClass protocolWithProtocol:protocol] descript:[NSObject protocolInfoForProtocol:protocol]];
 					}
 				} else {
-					changeObject = [DisquotatedObject disquotatedObjectWithObject:klass descript:[NSObject interfaceForClass:klass withObject:nil]];;
+					changeObject = klass;
 					[NEWOBJECTMAN updateNewOne:changeObject];
 				}
 			} else {
