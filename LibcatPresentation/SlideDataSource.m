@@ -42,7 +42,7 @@ void SLIDE_PAGE(NSString* slideTitle, NSArray* slideItems) {
 	SLIDE_PAGE(@"Console", [NSArray arrayWithObjects:@"Command shell debugging environment", NSLocalizedString(@"Scripting", nil), NSLocalizedString(@"Automation", nil), nil]);
 	SLIDE_PAGE(@"ls", [NSArray arrayWithObjects:
 @"[ ls ]          : list current object",      
-@"[ ls -r ]     : list recursive      ", nil]);
+@"[ ls -r ]		  : list recursive      ", nil]);
 	SLIDE_PAGE(@"cd", [NSArray arrayWithObjects:
 @"	cd TARGET         : change target object",
 @"	[ cd ]            : to topViewController",
@@ -50,6 +50,7 @@ void SLIDE_PAGE(NSString* slideTitle, NSArray* slideItems) {
 @"	[ cd .. ]         : to superview        ",
 @"	[ cd / ]          : to rootViewController",
 @"	[ cd ~ ]          : to keyWindow",
+@"	[ cd ~~ ]         : to UIApplication",
 @"	[ cd 0 ]          : at index as listed",
 @"	[ cd 1 0 ]        : at section and row",
 @"	[ cd -1 0 ]       : at index on toolbar",
@@ -80,6 +81,8 @@ void SLIDE_PAGE(NSString* slideTitle, NSArray* slideItems) {
 @"[ events save NAME ]   : save events (es)",
 @"[ events load NAME ]   : load events (el)",
 	SPACE, nil]);
+	SLIDE_PAGE(@"object chaining", [NSArray arrayWithObjects:@"[ textLabel.text ]", @"[ 0.text ]", @"[ 0.text = Hello ]", nil]);
+	SLIDE_PAGE(@"map", [NSArray arrayWithObjects:@"map items", @"[ subviews.map frame.size ]", nil]);
 	SLIDE_PAGE(NSLocalizedString(@"Feedback", nil), [NSArray arrayWithObjects:NSLocalizedString(@"Subscribe to google groups", nil), @"http://groups.google.com/group/interactivelibcat", nil]);
 	SLIDE_PAGE(NSLocalizedString(@"Questions?", nil), [NSArray arrayWithObjects:@"", nil]);
 	SLIDE_PAGE(@"FIN", [NSArray arrayWithObjects:SPACE, PAIR(NSLocalizedString(@"Thanks", nil), Enum(UITextAlignmentCenter)), nil]);

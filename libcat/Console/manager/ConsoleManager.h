@@ -48,6 +48,7 @@ typedef enum { kGetterReturnTypeInspect, kGetterReturnTypeObject } GetterReturnT
 +(void) run ;
 +(void) run:(int)port ;
 +(void) stop ;
++(void) hide_console_button ;
 -(void) start_servers ;
 -(void) start_servers:(int)port ;
 -(void) stop ;

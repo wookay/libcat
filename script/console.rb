@@ -29,26 +29,27 @@ def print_help
   help_pages = []
   help_pages.push <<EOF
 ls TARGET           : list target object (l)      
-  [ ls ]            : list current object         
-  [ ls -r ]         : list recursive              
+  > ls              : list current object         
+  > ls -r           : list recursive              
 cd TARGET           : change target object        
-  [ cd ]            : to topViewController        
-  [ cd . ]          : to self            
-  [ cd .. ]         : to superview       
-  [ cd / ]          : to rootViewController
-  [ cd ~ ]          : to keyWindow
-  [ cd 0 ]          : at index as listed          
-  [ cd 1 0 ]        : at section and row
-  [ cd -1 0 ]       : at index on toolbar
-  [ cd Title ]      : labeled as Title   
-  [ cd view ]       : to property        
-  [ cd UIButton ]   : to class           
-  [ cd 0x6067490 ]  : at memory address           
+  > cd              : to topViewController        
+  > cd .            : to self            
+  > cd ..           : to superview       
+  > cd /            : to rootViewController
+  > cd ~            : to keyWindow
+  > cd ~~           : to UIApplication
+  > cd 0            : at index as listed          
+  > cd 1 0          : at section and row
+  > cd -1 0         : at index on toolbar
+  > cd Title        : labeled as Title   
+  > cd view         : to property        
+  > cd UIButton     : to class           
+  > cd 0x6067490    : at memory address           
 properties TARGET   : list properties (p)         
-  [ text ]          : property getter             
-  [ text = hello ]  : property setter             
+  > text            : property getter             
+  > text = hello    : property setter             
 pwd                 : view & controller hierarchy 
-manipulate TARGET   : manipulate properties UI (m)
+manipulate TARGET   : manipulate properties UI
 open                : open Safari UI
 touch TARGET        : touch target UI (t)  
 back                : popViewController UI (b)
@@ -66,20 +67,31 @@ about    : about libcat Console
 clear    : clear the screen
 history  : input commands history
 sleep N  : sleep N seconds
-map ARG  : map array items
 
 events                   : list touch events (e)
-  [ events record ]      : record on/off (er)
-  [ events play ]        : play events (ep)
-  [ events cut N ]       : cut N events (ex)
-  [ events clear ]       : clear events (ec)
-  [ events replay NAME ] : replay events (ee)
-  [ events save NAME ]   : save events (es)
-  [ events load NAME ]   : load events (el)
+  > events record        : record on/off (er)
+  > events play          : play events (ep)
+  > events cut N         : cut N events (ex)
+  > events clear         : clear events (ec)
+  > events replay NAME   : replay events (ee)
+  > events save NAME     : save events (es)
+  > events load NAME     : load events (el)
 
 enum ENUMTYPE            : enum type info
-  [ enum UITextAlignmentLeft ]
-  [ enum UITextAlignment ]
+  > enum UITextAlignmentLeft
+  > enum UITextAlignment
+
+map ARGS
+  > view.subviews.map frame.size
+
+object introspection
+  > classInfo (c)
+  > methods (m)
+  > classMethods
+  > ivars
+  > protocols
+  > UIApplication
+  > UITableViewDelegate
 EOF
   if $COLUMNS >= DEFAULT_ENV_COLUMNS
     first_page_lines = help_pages.first.split(LF)
@@ -145,10 +157,11 @@ class Console
     'ec' => 'events clear',
     'es' => 'events save',
     'el' => 'events load',
-	'm' => 'manipulate',
+	'm' => 'methods',
 	'p' => 'properties',
     'b' => 'back',
     'f' => 'flick',
+    'c' => 'classInfo',
     '$' => 'new_objects',
     }
     full_command = aliases[command_str]

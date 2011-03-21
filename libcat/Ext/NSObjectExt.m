@@ -68,17 +68,30 @@ NSString* TypeEncodingDescription(char* code) {
 		case _C_UNION_E:
 			return @"union";
 		case _C_STRUCT_B:
-		case _C_STRUCT_E:
-			return [[[[SWF(@"%s", code) gsub:@"{_" to:EMPTY_STRING] gsub:OPENING_BRACE to:EMPTY_STRING] split:EQUAL] first];
+		case _C_STRUCT_E: {
+				NSString* structStr = [[[[SWF(@"%s", code) gsub:@"{_" to:EMPTY_STRING] gsub:OPENING_BRACE to:EMPTY_STRING] split:EQUAL] first];
+				if ([QUESTION_MARK isEqualToString:structStr]) {
+					return @"struct";
+				} else {
+					return structStr;
+				}
+			}
+			break;
 		case _C_VECTOR:
 			return @"vector";
 		case _C_CONST:
 			return @"const";
+		default:
+			break;
 	}
 	return SWF(@"%s", code);
 }
 
 @implementation NSObject (Ext)
+
+-(NSArray*) classInfo {
+	return [NSObject interfaceForClass:[self class]];
+}
 
 -(NSArray*) methodNames {
 	return [NSObject methodNamesForClass:[self class]];
@@ -208,6 +221,14 @@ NSString* TypeEncodingDescription(char* code) {
 	NSString* protocolPart = protocols.count > 0 ? SWF(@" <%@>", [protocols join:COMMA_SPACE]) : EMPTY_STRING;
 	NSString* ivarsPart = ivars.count > 0 ? SWF(@" {\n%@\n}", [ivars join:LF]) : EMPTY_STRING;
 	[ary addObject:SWF(@"@interface %@%@%@%@", className, superclassPart, protocolPart, ivarsPart)];
+	unsigned int classMethodsCount = [self countMethodsForClass:targetClass->isa];
+	unsigned int instanceMethodsCount = [self countMethodsForClass:targetClass];
+	if (classMethodsCount > 0) {
+		[ary addObject:SWF(@"+ %d classMethods ...", classMethodsCount)];
+	}
+	if (instanceMethodsCount > 0) {
+		[ary addObject:SWF(@"- %d methods ...", instanceMethodsCount)];
+	}
 	return ary;	
 }
 
@@ -232,6 +253,13 @@ NSString* TypeEncodingDescription(char* code) {
 		[ary addObjectsFromArray:required];
 	}
 	return ary;
+}
+
++(unsigned int) countMethodsForClass:(Class)targetClass {
+	unsigned int count;
+	Method* methods = class_copyMethodList(targetClass, &count);
+	free(methods);
+	return count;
 }
 
 +(NSArray*) methodsForClass:(Class)targetClass {
@@ -603,23 +631,27 @@ NSString* TypeEncodingDescription(char* code) {
 
 @implementation DisquotatedObject
 @synthesize object;
+@synthesize descript;
 -(NSString*) description {
-	return [NSString stringWithFormat:@"<%@: %p; object = %@>", [self class], self, object];
+	return [NSString stringWithFormat:@"<%@: %p; object = %@ discript = %@>", [self class], self, object, descript];
 }
-+(id) disquotatedObjectWithObject:(id)object_ {
++(id) disquotatedObjectWithObject:(id)object_ descript:(id)descript_ {
 	DisquotatedObject* disq = [[[self alloc] init] autorelease];
 	disq.object = object_;
+	disq.descript = descript_;
 	return disq;
 }
 -(id) init {
 	self = [super init];
 	if (self) {
 		self.object = nil;
+		self.descript = nil;
 	}
 	return self;
 }
 - (void)dealloc {
 	[object release];
+	[descript release];
 	[super dealloc];
 }
 

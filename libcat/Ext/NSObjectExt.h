@@ -12,6 +12,7 @@
 
 @interface NSObject (Ext)
 
++(unsigned int) countMethodsForClass:(Class)targetClass ;
 +(NSArray*) methodsForProtocol:(Protocol*)protocol isRequiredMethod:(BOOL)isRequiredMethod isInstanceMethod:(BOOL)isInstanceMethod ;
 +(NSArray*) methodsForProtocol:(Protocol*)protocol ;
 +(NSArray*) methodsForClass:(Class)targetClass ;
@@ -20,6 +21,7 @@
 +(NSArray*) protocolsForClass:(Class)targetClass ;
 +(NSArray*) protocolsForProtocol:(Protocol*)protocol ;
 +(NSArray*) methodNamesForClass:(Class)targetClass ;
+-(NSArray*) classInfo ;
 -(NSArray*) propertiesForClass:(Class)targetClass ;
 -(NSArray*) classMethods ;
 -(NSArray*) ivars ;
@@ -55,7 +57,9 @@
 
 @interface DisquotatedObject : NSObject {
 	id object;
+	id descript;
 }
 @property (nonatomic, retain)	id object;
-+(id) disquotatedObjectWithObject:(id)object_ ;
+@property (nonatomic, retain)	id descript;
++(id) disquotatedObjectWithObject:(id)object_ descript:(id)descript_ ;
 @end

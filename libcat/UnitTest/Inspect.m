@@ -185,11 +185,11 @@
 		}
 	} else if ([anObject isKindOfClass:[DisquotatedObject class]]) {
 		DisquotatedObject* disq = (DisquotatedObject*) anObject;
-		if ([disq.object isKindOfClass:[NSArray class]]) {
-			NSArray* ary = disq.object;
+		if ([disq.descript isKindOfClass:[NSArray class]]) {
+			NSArray* ary = disq.descript;
 			return [ary join:LF];
-		} else if ([disq.object isKindOfClass:[NSString class]]) {
-			return SWF(@"%@", disq.object);
+		} else if ([disq.descript isKindOfClass:[NSString class]]) {
+			return SWF(@"%@", disq.descript);
 		}
 	} else if ([anObject isKindOfClass:[NSValue class]]) {
 		const char* aTypeDescription = [(NSValue*)anObject objCType];

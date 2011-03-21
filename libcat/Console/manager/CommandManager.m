@@ -316,6 +316,9 @@ NSString* surrounded_array_prefix_index(NSArray* array) {
 			id response = [pair objectAtFirst];
 			return response;
 		} else {
+			if ([changeObject isKindOfClass:[DisquotatedObject class]]) {
+				changeObject = [changeObject object];
+			}
 			if (changeObject == [changeObject class] && nil != CONSOLEMAN.currentTargetObject) {
 				NSString* ret = SWF(@"%@ = %@", NEW_ONE_NAME, CONSOLEMAN.currentTargetObject);
 				[NEWOBJECTMAN updateNewOne:CONSOLEMAN.currentTargetObject];
@@ -436,7 +439,7 @@ NSString* surrounded_array_prefix_index(NSArray* array) {
 	if (IS_NIL(arg)) {
 		if ([PROPERTYMAN isVisible]) {
 			[PROPERTYMAN hide];
-			return NSLocalizedString(@"off", nil);
+			return NSLocalizedString(@"manipulate off", nil);
 		}
 	}
 	if ([targetObject isNil]) {
@@ -686,7 +689,7 @@ NSString* surrounded_array_prefix_index(NSArray* array) {
 		[ret addObject:PAIR(Enum(LS_VIEW_SUBVIEWS), [window.contentView subviews])];	
 #endif
 	} else if (currentObject == [currentObject class]) {
-		[ret addObject:PAIR(Enum(LS_CLASS_METHODS), [DisquotatedObject disquotatedObjectWithObject:[currentObject classMethods]])];
+		[ret addObject:PAIR(Enum(LS_CLASS_METHODS), [DisquotatedObject disquotatedObjectWithObject:currentObject descript:[currentObject classMethods]])];
 	}
 	return ret;
 }
@@ -915,7 +918,7 @@ NSString* surrounded_array_prefix_index(NSArray* array) {
 			NSString* protocolName = [arg slice:1 backward:-3];
 			Protocol* protocol = NSProtocolFromString(protocolName);
 			if (nil != protocol) {
-				changeObject = [DisquotatedObject disquotatedObjectWithObject:[NSObject methodsForProtocol:protocol]];
+				changeObject = [DisquotatedObject disquotatedObjectWithObject:protocol descript:[NSObject methodsForProtocol:protocol]];
 			}			
 		}
 		
@@ -932,10 +935,10 @@ NSString* surrounded_array_prefix_index(NSArray* array) {
 				if (nil == klass) {
 					Protocol* protocol = NSProtocolFromString(arg);
 					if (nil != protocol) {
-						changeObject = [DisquotatedObject disquotatedObjectWithObject:[NSObject methodsForProtocol:protocol]];
+						changeObject = [DisquotatedObject disquotatedObjectWithObject:protocol descript:[NSObject methodsForProtocol:protocol]];
 					}
 				} else {
-					changeObject = [DisquotatedObject disquotatedObjectWithObject:[NSObject interfaceForClass:klass]];;
+					changeObject = [DisquotatedObject disquotatedObjectWithObject:klass descript:[NSObject interfaceForClass:klass]];;
 					[NEWOBJECTMAN updateNewOne:changeObject];
 				}
 			} else {

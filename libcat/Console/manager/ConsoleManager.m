@@ -54,6 +54,10 @@
 	[[self sharedManager] stop];
 }
 
++(void) hide_console_button {
+	[[self sharedManager] hide_console_button];
+}
+
 -(void) start_servers {
 	[self start_servers:CONSOLE_SERVER_PORT];
 }
@@ -345,13 +349,13 @@
 							}
 						} else {
 							Class targetClass = [target classForProperty:method]; 
-#define DISQUOTATING_METHODS  _w(@"methods classMethods ivars protocols")
+#define DISQUOTATING_METHODS  _w(@"classInfo methods classMethods ivars protocols")
 							if ([DISQUOTATING_METHODS containsObject:method]) {
 								if ([@"protocols" isEqualToString:method]) {
 									NSArray* protocols = obj;
-									target = [DisquotatedObject disquotatedObjectWithObject:SWF(@"<%@>", [protocols join:COMMA_SPACE])];
+									target = [DisquotatedObject disquotatedObjectWithObject:obj descript:SWF(@"<%@>", [protocols join:COMMA_SPACE])];
 								} else {
-									target = [DisquotatedObject disquotatedObjectWithObject:obj];
+									target = [DisquotatedObject disquotatedObjectWithObject:obj descript:obj];
 								}
 							} else {
 								target = obj;
