@@ -42,12 +42,16 @@
 @synthesize server_port;
 @synthesize COLUMNS;
 
--(void) start_up {
-	[self start_servers];
++(void) run {
+	[[self sharedManager] start_servers];
 }
 
--(void) start_up:(int)port {
-	[self start_servers:port];
++(void) run:(int)port {
+	[[self sharedManager] start_servers:port];
+}
+
++(void) stop {
+	[[self sharedManager] stop];
 }
 
 -(void) start_servers {
@@ -728,6 +732,15 @@
 			[view removeFromSuperview];
 		}
 	}
+}
+
+// deprecated
+-(void) start_up {
+	[self start_servers];
+}
+
+-(void) start_up:(int)port {
+	[self start_servers:port];
 }
 
 + (ConsoleManager*) sharedManager {

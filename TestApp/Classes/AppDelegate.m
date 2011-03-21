@@ -28,8 +28,7 @@
 	
 //#if TARGET_IPHONE_SIMULATOR
 	[UnitTest run];
-	
-	[CONSOLEMAN start_up];
+	[ConsoleManager run];
 //#endif
 	
     return YES;

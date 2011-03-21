@@ -45,8 +45,9 @@ typedef enum { kGetterReturnTypeInspect, kGetterReturnTypeObject } GetterReturnT
 -(UIViewController*) get_topViewController ;
 -(UIViewController*) get_rootViewController ;
 
--(void) start_up ;
--(void) start_up:(int)port ;
++(void) run ;
++(void) run:(int)port ;
++(void) stop ;
 -(void) start_servers ;
 -(void) start_servers:(int)port ;
 -(void) stop ;
@@ -55,6 +56,10 @@ typedef enum { kGetterReturnTypeInspect, kGetterReturnTypeObject } GetterReturnT
 -(void) hide_console_button ;
 -(void) toggle_logs_button ;
 -(void) update_record_button ;
+
+// deprecated
+-(void) start_up ;
+-(void) start_up:(int)port ;
 @end
 
 
