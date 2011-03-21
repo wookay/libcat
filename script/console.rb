@@ -16,7 +16,7 @@ FileUtils.mkdir_p EVENTS_PATH
 SPACE = ' '
 COLON = ':'
 PROMPT = '> '
-CONSOLE_VERSION = 0.2
+CONSOLE_VERSION = 0.3
 ABOUT = <<EOF
 libcat Console #{CONSOLE_VERSION}
 Copyright (c) 2010, 2011 WooKyoung Noh
