@@ -13,11 +13,54 @@
 #import "Logger.h"
 #import "objc/runtime.h"
 #import "objc/message.h"
+#import "NSNumberExt.h"
 
+
+@interface SizeObject : NSObject {
+	CGSize size;
+	float _float;
+	int _int;
+	id _id;
+}
+@property (nonatomic) CGSize size;
+@end
 
 @interface TestObject : NSObject
 @end
 @implementation TestObject
+
+-(void) test_ivar {
+	SizeObject* sizeObject = [[SizeObject alloc] init];
+	BOOL failed = false;
+	id value = [sizeObject getInstanceVariableValue:@"size" failed:&failed];
+	assert_false(failed);
+	assert_true([value isKindOfClass:[NSValue class]]);
+	assert_equal(CGSizeMake(1.5, 1.2), [value CGSizeValue]);
+
+	assert_equal(3.16, 3.16);
+	assert_equal(FLOAT(3.15), [NSNumber numberWithFloat:3.15]);
+
+	value = [sizeObject getInstanceVariableValue:@"_float" failed:&failed];
+	assert_equal(FLOAT(3.14), value);
+
+	value = [sizeObject getInstanceVariableValue:@"_int" failed:&failed];
+	assert_equal(42, [value intValue]);
+
+	[sizeObject setInstanceVariable:@"_int" value:(void*)45];
+
+	value = [sizeObject getInstanceVariableValue:@"_int" failed:&failed];
+	assert_equal(45, [value intValue]);
+
+	value = [sizeObject getInstanceVariableValue:@"_id" failed:&failed];
+	assert_equal(@"abc", value);
+
+	[sizeObject setInstanceVariable:@"_id" value:@"def"];
+
+	value = [sizeObject getInstanceVariableValue:@"_id" failed:&failed];
+	assert_equal(@"def", value);
+	
+	[sizeObject release];
+}
 
 -(void) test_raise {
 	assert_raise(NSRangeException, ^{
@@ -47,17 +90,15 @@
 
 
 
-@interface SizeObject : NSObject {
-	CGSize size;
-}
-@property (nonatomic) CGSize size;
-@end
 @implementation SizeObject
 @synthesize size;
 -(id) init {
 	self = [super init];
 	if (self) {
 		self.size = CGSizeMake(1.5, 1.2);
+		_float = 3.14;
+		_int = 42;
+		_id = @"abc";			
 	}
 	return self;
 }

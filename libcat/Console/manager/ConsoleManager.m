@@ -227,8 +227,15 @@
 				NSString* detail = [PROPERTYMAN.typeInfoTable objectDescription:strObj targetClass:NSStringFromClass([target class]) propertyName:lastMethod];
 				[ary addObject:SWF(@"%@ = %@", lastMethod, detail)];
 			} else {
-				[ary addObject:SWF(@"[%@ %@%@] %@", [target class], lastMethodUppercased, strObj, NSLocalizedString(@"failed", nil))];
+				[ary addObject:SWF(@"[%@ %@%@] %@", [target class], lastMethodUppercased, strObj, NSLocalizedString(@"Failed", nil))];
 			}						
+		} else if ([target hasInstanceVariable:lastMethod]) {
+			BOOL updated = [target setInstanceVariable:lastMethod withString:strObj];
+			if (updated) {
+				[ary addObject:SWF(@"%@ = %@", lastMethod, strObj)];
+			} else {
+				[ary addObject:NSLocalizedString(@"Failed to set instance variable. Supported types are float, int, struct.", nil)];
+			}
 		} else {
 			if ([self respondsToSelector:sel]) {
 				NSMethodSignature* sig = [self methodSignatureForSelector:sel];
@@ -521,6 +528,10 @@
 			if ([target respondsToSelector:sel]) {
 				BOOL failed = false;
 				target = [target getPropertyValue:sel failed:&failed];
+				[ary addObject:SWF(@"[%@ %@]\t===>\t%@", oldTargetStr, method, target)];
+			} else if ([target hasInstanceVariable:method]) {
+				BOOL failed = false;
+				target = [target getInstanceVariableValue:method failed:&failed];
 				[ary addObject:SWF(@"[%@ %@]\t===>\t%@", oldTargetStr, method, target)];
 			} else {
 				NSString* newArg = nil;

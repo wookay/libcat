@@ -23,3 +23,6 @@
 
 
 NSString* NSStringFromCGColor(CGColorRef colorRef) ;
+
+
+NSString* objectInspect(id obj) ;

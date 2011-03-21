@@ -983,7 +983,7 @@ NSString* surrounded_array_prefix_index(NSArray* array) {
 						changeObject = [DisquotatedObject disquotatedObjectWithObject:[ProtocolClass protocolWithProtocol:protocol] descript:[NSObject protocolInfoForProtocol:protocol]];
 					}
 				} else {
-					changeObject = [DisquotatedObject disquotatedObjectWithObject:klass descript:[NSObject interfaceForClass:klass]];;
+					changeObject = [DisquotatedObject disquotatedObjectWithObject:klass descript:[NSObject interfaceForClass:klass withObject:nil]];;
 					[NEWOBJECTMAN updateNewOne:changeObject];
 				}
 			} else {

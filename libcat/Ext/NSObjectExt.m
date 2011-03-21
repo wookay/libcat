@@ -14,6 +14,7 @@
 #import "NSArrayExt.h"
 #import "Logger.h"
 #import "NSDateExt.h"
+#import "Inspect.h"
 
 NSString* TypeEncodingDescription(char* code) {
 	switch (code[0]) {
@@ -90,7 +91,7 @@ NSString* TypeEncodingDescription(char* code) {
 @implementation NSObject (Ext)
 
 -(NSArray*) classInfo {
-	return [NSObject interfaceForClass:[self class]];
+	return [NSObject interfaceForClass:[self class] withObject:self];
 }
 
 -(NSArray*) methodNames {
@@ -147,7 +148,7 @@ NSString* TypeEncodingDescription(char* code) {
 }
 
 -(NSArray*) ivars {
-	return [NSObject ivarsForClass:[self class]];
+	return [NSObject ivarsForClass:[self class] withObject:self];
 }
 
 +(NSArray*) methodNamesForClass:(Class)targetClass {
@@ -164,23 +165,34 @@ NSString* TypeEncodingDescription(char* code) {
 	return [ary sort];	
 }
 
-+(NSArray*) ivarsForClass:(Class)targetClass {
++(NSArray*) ivarsForClass:(Class)targetClass withObject:(id)object {
 	NSMutableArray* ary = [NSMutableArray array];
 	unsigned int count;
 	Ivar* ivarList = class_copyIvarList((Class)targetClass, &count);
 	int retStrMax = 0;
+	int nameStrMax = 0;
 	for (unsigned int idx = 0; idx < count; ++idx) {
 		Ivar ivar = ivarList[idx];
 		const char* name = ivar_getName(ivar);
+		NSString* nameStr = SWF(@"%s", name);
 		const char* typeEncoding = ivar_getTypeEncoding(ivar);
 		NSString* retStr = SWF(@"%@", TypeEncodingDescription((char*)typeEncoding));
-		[ary addObject:PAIR(SWF(@"%s", name), retStr)];
+		[ary addObject:PAIR(nameStr, retStr)];
 		retStrMax = MAX(retStrMax, retStr.length);
+		nameStrMax = MAX(nameStrMax, nameStr.length);
 	}
 	free(ivarList);
 	NSMutableArray* ret = [NSMutableArray array];
 	for (NSArray* pair in [ary sortByFirstObject]) {
-		[ret addObject:SWF(@"  %@ %@;", [[pair objectAtSecond] ljust:retStrMax], [pair objectAtFirst])];
+		NSString* name = [pair objectAtFirst];
+		NSString* decl = SWF(@"  %@ %@", [[pair objectAtSecond] ljust:retStrMax], name);
+		if (nil == object) {
+			[ret addObject:SWF(@"%@ ;", decl)];
+		} else {
+			BOOL failed = false;
+			id value = [object getInstanceVariableValue:name failed:&failed];
+			[ret addObject:SWF(@"%@ %@", [decl ljust:retStrMax + nameStrMax + 3], objectInspect(value))];
+		}
 	}
 	return ret;	
 }
@@ -211,13 +223,13 @@ NSString* TypeEncodingDescription(char* code) {
 	return [ary sort];
 }
 
-+(NSArray*) interfaceForClass:(Class)targetClass {
++(NSArray*) interfaceForClass:(Class)targetClass withObject:(id)object {
 	NSString* className = NSStringFromClass(targetClass);
 	NSString* superclassName = NSStringFromClass([targetClass superclass]);
 	NSString* superclassPart = nil == superclassName ? EMPTY_STRING : SWF(@" : %@", superclassName);
 	NSMutableArray* ary = [NSMutableArray array];
 	NSArray* protocols = [self protocolsForClass:targetClass];
-	NSArray* ivars = [self ivarsForClass:targetClass];
+	NSArray* ivars = [self ivarsForClass:targetClass withObject:object];
 	NSString* protocolPart = protocols.count > 0 ? SWF(@" <%@>", [protocols join:COMMA_SPACE]) : EMPTY_STRING;
 	NSString* ivarsPart = ivars.count > 0 ? SWF(@" {\n%@\n}", [ivars join:LF]) : EMPTY_STRING;
 	[ary addObject:SWF(@"@interface %@%@%@%@", className, superclassPart, protocolPart, ivarsPart)];
@@ -325,6 +337,7 @@ NSString* TypeEncodingDescription(char* code) {
 	free(protocols);
 	return [ary sort];	
 }
+
 
 -(NSArray*) propertiesForClass:(Class)targetClass {
 	NSMutableArray* ary = [NSMutableArray array];
@@ -459,6 +472,83 @@ NSString* TypeEncodingDescription(char* code) {
 	return NULL;
 }
 
+-(id) getInstanceVariableValue:(NSString*)name failed:(BOOL*)failed {
+	Ivar ivar = object_getInstanceVariable(self, [name UTF8String], NULL);
+	if (ivar) {
+		id outValue = (void *)((char *)self + ivar_getOffset(ivar));
+		const char* aTypeDescription = ivar_getTypeEncoding(ivar);
+		return [NSObject objectWithValue:outValue withObjCType:aTypeDescription];
+	} else {
+		*failed = true;
+		return nil;
+	}
+}
+
+-(BOOL) hasInstanceVariable:(NSString*)name {
+	Ivar ivar = class_getInstanceVariable([self class], [name UTF8String]);
+	return NULL != ivar;
+}
+
+-(BOOL) setInstanceVariable:(NSString*)name withString:(NSString*)strObj {
+	Ivar ivar = object_getInstanceVariable(self, [name UTF8String], NULL);
+	if (ivar) {
+		id value = nil;
+		const char* aTypeDescription = ivar_getTypeEncoding(ivar);
+		switch (*aTypeDescription) {
+			case _C_ID:
+				return false;
+				break;
+			case _C_FLT:
+				value = [[NSNumber numberWithFloat:[strObj floatValue]] pointerValue];
+				break;
+			case _C_INT:
+				value = [[NSNumber numberWithInt:[strObj intValue]] pointerValue];
+				break;				
+			case _C_STRUCT_B:
+			case _C_STRUCT_E: {
+					NSString* attributeString = SWF(@"%s", aTypeDescription);
+					if ([attributeString hasPrefix:@"{CGRect"]) {
+						CGRect rect = CGRectForString(strObj);
+						value = [[NSValue valueWithCGRect:rect] pointerValue];
+					} else if ([attributeString hasPrefix:@"{CGAffineTransform"]) {
+						CGAffineTransform t = CGAffineTransformFromString(strObj);
+						value = [[NSValue valueWithCGAffineTransform:t] pointerValue];
+					} else if ([attributeString hasPrefix:@"{CGSize"]) {
+						CGSize size = CGSizeFromString(strObj);
+						value = [[NSValue valueWithCGSize:size] pointerValue];
+					} else if ([attributeString hasPrefix:@"{CGPoint"]) {
+						CGPoint point = CGPointFromString(strObj);
+						value = [[NSValue valueWithCGPoint:point] pointerValue];					
+					} else if ([attributeString hasPrefix:@"{UIEdgeInsets"]) {					
+						UIEdgeInsets edgeInsets = UIEdgeInsetsFromString(strObj);
+						value = [[NSValue valueWithUIEdgeInsets:edgeInsets] pointerValue];
+					} else if ([attributeString hasPrefix:@"{CATransform3D"]) {
+						return false;
+					} else {
+						return false;
+					}
+				}
+				break;
+			default:
+				return false;
+				break;
+		}
+		return [self setInstanceVariable:name value:value];
+	} else {
+		return false;
+	}
+}
+
+-(BOOL) setInstanceVariable:(NSString*)name value:(id)value {
+	Ivar ivar = class_getInstanceVariable([self class], [name UTF8String]);
+	if (ivar) {
+		void** varIndex = (void **)((char *)self + ivar_getOffset(ivar));
+		*varIndex = value;
+		return true;
+	} else {
+		return false;
+	}
+}
 
 -(id) getPropertyValue:(SEL)sel failed:(BOOL*)failed {
 	if (! [self respondsToSelector:sel]) {

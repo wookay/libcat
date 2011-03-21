@@ -52,13 +52,13 @@
 	[label release];
 }
 
-+(void) assert:(NSValue*)got equals:(NSValue*)expected message:(NSString*)message inFile:(NSString*)file atLine:(int)line {	
++(void) assert:(id)got equals:(id)expected message:(NSString*)message inFile:(NSString*)file atLine:(int)line {	
 	UNITTESTMAN.assertions += 1;
 	BOOL equals = false;
 	if (nil == expected && nil == got) {
 		equals = true;
-	} else {		
-		equals =[expected isEqual:got];
+	} else {
+		equals = [expected isEqual:got];
 	}
 	
 	if (equals) {

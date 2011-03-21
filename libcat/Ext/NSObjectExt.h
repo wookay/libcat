@@ -16,8 +16,8 @@
 +(NSArray*) methodsForProtocol:(Protocol*)protocol isRequiredMethod:(BOOL)isRequiredMethod isInstanceMethod:(BOOL)isInstanceMethod ;
 +(NSArray*) protocolInfoForProtocol:(Protocol*)protocol ;
 +(NSArray*) methodsForClass:(Class)targetClass ;
-+(NSArray*) ivarsForClass:(Class)targetClass ;
-+(NSArray*) interfaceForClass:(Class)targetClass ;
++(NSArray*) ivarsForClass:(Class)targetClass withObject:(id)object ;
++(NSArray*) interfaceForClass:(Class)targetClass withObject:(id)object ;
 +(NSArray*) protocolsForClass:(Class)targetClass ;
 +(NSArray*) protocolsForProtocol:(Protocol*)protocol ;
 +(NSArray*) methodNamesForClass:(Class)targetClass ;
@@ -45,6 +45,12 @@
 -(BOOL) setProperty:(NSString*)propertyName value:(id)value attributeString:(NSString*)attributeString ;
 -(BOOL) propertyHasObjectType:(SEL)sel ;
 -(Class) classForProperty:(NSString*)propertyName ;
+
+-(BOOL) hasInstanceVariable:(NSString*)name ;
+-(id) getInstanceVariableValue:(NSString*)name failed:(BOOL*)failed ;
+-(BOOL) setInstanceVariable:(NSString*)name value:(id)value ;
+-(BOOL) setInstanceVariable:(NSString*)name withString:(NSString*)strObj ;
+
 
 @end
 

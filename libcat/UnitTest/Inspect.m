@@ -196,8 +196,8 @@
 		switch (*aTypeDescription) {
 			case _C_SEL: {
 					SEL value = [anObject pointerValue];
-					if (NULL == value) {
-						return @"(nil)";
+					if (nil == value) {
+						return STR_NIL;
 					} else {
 						return NSStringFromSelector(value);
 					}
@@ -231,7 +231,7 @@
 						return NSStringFromUIEdgeInsets([anObject UIEdgeInsetsValue]);
 					} else if ([structName hasPrefix:@"{CATransform3D"]) {
 						return NSStringFromCATransform3D([anObject CATransform3DValue]);
-					} 
+					}
 				}
 				break;
 			case _C_FLT: {
@@ -267,4 +267,14 @@ NSString* NSStringFromCGColor(CGColorRef colorRef) {
 	}
 	float alpha = CGColorGetAlpha(colorRef);
 	return [NSString stringWithFormat:@"[%g %g %g %g #%02x%02x%02x]", red, green, blue, alpha, red * FF, green * FF, blue *FF];
+}
+
+
+
+NSString* objectInspect(id obj) {
+	if (nil == obj) {
+		return STR_NIL;
+	} else {
+		return [obj inspect];
+	}
 }

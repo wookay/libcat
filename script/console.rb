@@ -87,8 +87,8 @@ map ARGS
 class introspection
   > classInfo TARGET (c)
   > methods TARGET (m)
-  > classMethods TARGET
-  > ivars TARGET
+  > classMethods TARGET (M)
+  > ivars TARGET (i)
   > protocols TARGET
   > UIApplication
   > UITableViewDelegate
@@ -158,6 +158,8 @@ class Console
     'es' => 'events save',
     'el' => 'events load',
 	'm' => 'methods',
+	'M' => 'classMethods',
+	'i' => 'ivars',
 	'p' => 'properties',
     'b' => 'back',
     'f' => 'flick',
