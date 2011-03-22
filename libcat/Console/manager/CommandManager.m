@@ -324,10 +324,7 @@ NSString* surrounded_array_prefix_index(NSArray* array) {
 				changeObject = [changeObject object];
 			}
 			if (changeObject == [changeObject class] && nil != CONSOLEMAN.currentTargetObject) {
-				NSString* ret = SWF(@"%@ = %@", NEW_ONE_NAME, CONSOLEMAN.currentTargetObject);
-				[NEWOBJECTMAN updateNewOne:CONSOLEMAN.currentTargetObject];
 				CONSOLEMAN.currentTargetObject = changeObject;
-				return ret;
 			} else {
 				NEWOBJECTMAN.oldOne = CONSOLEMAN.currentTargetObject;
 				CONSOLEMAN.currentTargetObject = changeObject;
@@ -454,7 +451,13 @@ NSString* surrounded_array_prefix_index(NSArray* array) {
 	if ([targetObject isKindOfClass:[ProtocolClass class]]) {
 		return [[DisquotatedObject disquotatedObjectWithObject:targetObject descript:[targetObject protocolInfo]] inspect];
 	} else {
-		return [[DisquotatedObject disquotatedObjectWithObject:targetObject descript:[targetObject classInfo]] inspect];
+		NSArray* classInfo;
+		if ([currentObject isKindOfClass:[targetObject class]]) {
+			classInfo = [NSObject interfaceForClass:[targetObject class] withObject:currentObject];
+		} else {
+			classInfo = [targetObject classInfo];
+		}
+		return [[DisquotatedObject disquotatedObjectWithObject:targetObject descript:classInfo] inspect];
 	}
 }
 
@@ -470,7 +473,13 @@ NSString* surrounded_array_prefix_index(NSArray* array) {
 
 -(NSString*) command_ivars:(id)currentObject arg:(id)arg {
 	id targetObject = [self findTargetObjectOrCurrentObject:currentObject arg:arg];
-	return [[DisquotatedObject disquotatedObjectWithObject:targetObject descript:[targetObject ivars]] inspect];
+	NSArray* ivars;
+	if ([currentObject isKindOfClass:[targetObject class]]) {
+		ivars = [NSObject ivarsForClass:[targetObject class] withObject:currentObject];
+	} else {
+		ivars = [targetObject ivars];
+	}
+	return [[DisquotatedObject disquotatedObjectWithObject:targetObject descript:ivars] inspect];
 }
 
 -(NSString*) command_protocols:(id)currentObject arg:(id)arg {
@@ -496,19 +505,19 @@ NSString* surrounded_array_prefix_index(NSArray* array) {
 -(NSString*) command_completion:(id)currentObject arg:(id)arg {
 	NSArray* pair = [self get_targetStringAndBlocks:currentObject];
 	NSDictionary* targetStrings = [pair objectAtFirst];
-	NSMutableArray* ary = [NSMutableArray arrayWithArray:[currentObject methodNames]];
+	NSMutableArray* ary = [NSMutableArray array];
 	[ary addObjectsFromArray:[targetStrings allKeys]];
+	[ary addObjectsFromArray:[currentObject methodNames]];
+	[ary addObjectsFromArray:[currentObject classHierarchy]];
 	if (currentObject == [currentObject class]) {
 		[ary addObjectsFromArray:[NSObject methodNamesForClass:currentObject->isa]];
 		[ary addObjectsFromArray:[NSObject ivarNamesForClass:currentObject->isa]];
 	} else {
 		[ary addObjectsFromArray:[NSObject ivarNamesForClass:[currentObject class]]];		
 	}
-	if ([currentObject isKindOfClass:[UIView class]]) {
-		for(NSString* method in [UIColor classMethodNames]) {
-			if ([method hasSuffix:@"Color"]) {
-				[ary addObject:method];
-			}
+	for(NSString* method in [UIColor classMethodNames]) {
+		if ([method hasSuffix:@"Color"]) {
+			[ary addObject:method];
 		}
 	}
 	return [ary join:LF];
@@ -949,7 +958,7 @@ NSString* surrounded_array_prefix_index(NSArray* array) {
 					changeObject = obj;
 				}
 			} else {
-				return TRIO(NSLocalizedString(@"Not Object", nil), [NilClass nilClass], [NilClass nilClass]); 
+				return TRIO(NSLocalizedString(@"is not kind of NSObject", nil), [NilClass nilClass], [NilClass nilClass]); 
 			}
 		} else if ([arg hasText:DOT]) {
 			id cur = currentObject;

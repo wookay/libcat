@@ -41,48 +41,78 @@ void SLIDE_PAGE(NSString* slideTitle, NSArray* slideItems) {
 	SLIDE_PAGE(@"Logger", [NSArray arrayWithObjects:@"log_info(@\"message\")", @"  RootViewController.m #032   message", @"log_info(@\"idx %d\", idx)", @"  RootViewController.m #033   idx 1    ", nil]);
 	SLIDE_PAGE(@"Console", [NSArray arrayWithObjects:@"Command shell debugging environment", NSLocalizedString(@"Scripting", nil), NSLocalizedString(@"Automation", nil), nil]);
 	SLIDE_PAGE(@"ls", [NSArray arrayWithObjects:
-@"[ ls ]          : list current object",      
-@"[ ls -r ]		  : list recursive      ", nil]);
+						@"ls TARGET           : list target object (l)      ",
+						@"  > ls              : list current object         ",
+						@"  > ls -r           : list recursive              ",
+							  nil]);
 	SLIDE_PAGE(@"cd", [NSArray arrayWithObjects:
-@"	cd TARGET         : change target object",
-@"	[ cd ]            : to topViewController",
-@"	[ cd . ]          : to self             ",
-@"	[ cd .. ]         : to superview        ",
-@"	[ cd / ]          : to rootViewController",
-@"	[ cd ~ ]          : to keyWindow",
-@"	[ cd ~~ ]         : to UIApplication",
-@"	[ cd 0 ]          : at index as listed",
-@"	[ cd 1 0 ]        : at section and row",
-@"	[ cd -1 0 ]       : at index on toolbar",
-@"	[ cd Title ]      : labeled as Title   ",
-@"	[ cd view ]       : to property        ",
-@"	[ cd UIButton ]   : to class           ",
-@"	[ cd 0x6067490 ]  : at memory address   ",
+					   @"cd TARGET           : change target object        ",
+					   @"  > cd              : to topViewController        ",
+					   @"  > cd .            : to self            ",
+					   @"  > cd ..           : to superview       ",
+					   @"  > cd /            : to rootViewController",
+					   @"  > cd ~            : to keyWindow",
+					   @"  > cd ~~           : to UIApplication",
+					   @"  > cd 0            : at index as listed          ",
+					   @"  > cd 1 0          : at section and row",
+					   @"  > cd -1 0         : at index on toolbar",
+					   @"  > cd Title        : labeled as Title   ",
+					   @"  > cd view         : to property        ",
+					   @"  > cd UIButton     : to class           ",
+					   @"  > cd 0x6067490    : at memory address           ",
 					   SPACE,
 					   nil]);
 	SLIDE_PAGE(@"pwd", [NSArray arrayWithObjects:@"view & controller hierarchy", nil]);
-	SLIDE_PAGE(@"p", [NSArray arrayWithObjects:@"properties",
-@"[ text ]          : property getter",
-@"[ text = hello ]  : property setter",
+	SLIDE_PAGE(@"properties", [NSArray arrayWithObjects:
+					  @"properties TARGET   : list properties (p)         ",
+					  @"  > text            : property getter             ",
+					  @"  > text = hello    : property setter             ",
 					  nil]);
-	SLIDE_PAGE(@"t", [NSArray arrayWithObjects:NSLocalizedString(@"Touch Events", nil), nil]);
-	SLIDE_PAGE(@"b", [NSArray arrayWithObjects:@"popViewController", nil]);
-	SLIDE_PAGE(@"rm", [NSArray arrayWithObjects:@"removeFromSuperview", nil]);
-	SLIDE_PAGE(@"f", [NSArray arrayWithObjects:@"flick target UI", nil]);
+	SLIDE_PAGE(@"touch", [NSArray arrayWithObjects:
+					  @"touch TARGET        : touch target UI (t)  ",
+					  nil]);
+	SLIDE_PAGE(@"back", [NSArray arrayWithObjects:
+					  @"back                : popViewController UI (b)",
+					  nil]);
+	SLIDE_PAGE(@"rm", [NSArray arrayWithObjects:
+					   @"rm TARGET           : removeFromSuperview UI      ",
+					   nil]);
+	SLIDE_PAGE(@"flick", [NSArray arrayWithObjects:
+					  @"flick TARGET        : flick target UI (f)  ",
+					  nil]);
 	SLIDE_PAGE(@"open", [NSArray arrayWithObjects:@"open Safari UI", nil]);
 	SLIDE_PAGE(@"hit", [NSArray arrayWithObjects:@"hitTest UI on/off", nil]);
 	SLIDE_PAGE(@"events", [NSArray arrayWithObjects:NSLocalizedString(@"Record, Play the touch events", nil), @"USE_PRIVATE_API=1", nil]);
 	SLIDE_PAGE(@"events", [NSArray arrayWithObjects:
-@"[ events record ]      : record on/off (er)",
-@"[ events play ]        : play events (ep)",
-@"[ events cut N ]       : cut N events (ex)",
-@"[ events clear ]       : clear events (ec)",
-@"[ events replay NAME ] : replay events (ee)",
-@"[ events save NAME ]   : save events (es)",
-@"[ events load NAME ]   : load events (el)",
-	SPACE, nil]);
-	SLIDE_PAGE(@"object chaining", [NSArray arrayWithObjects:@"[ textLabel.text ]", @"[ 0.text ]", @"[ 0.text = Hello ]", nil]);
-	SLIDE_PAGE(@"map", [NSArray arrayWithObjects:@"map items", @"[ subviews.map frame.size ]", nil]);
+						   @"events                   : list touch events (e)",
+						   @"  > events record        : record on/off (er)",
+						   @"  > events play          : play events (ep)",
+						   @"  > events cut N         : cut N events (ex)",
+						   @"  > events clear         : clear events (ec)",
+						   @"  > events replay NAME   : replay events (ee)",
+						   @"  > events save NAME     : save events (es)",
+						   @"  > events load NAME     : load events (el)",
+						   SPACE,
+						   nil]);
+	SLIDE_PAGE(@"object chaining", [NSArray arrayWithObjects:
+						@"  > view.subviews.count",
+						@"  > 0.layer.delegate",
+						@"  > UIApplication.sharedApplication",
+						nil]);
+	SLIDE_PAGE(@"map", [NSArray arrayWithObjects:
+						@"map ARGS",
+						@"  > view.subviews.map text frame.size",
+						nil]);
+	SLIDE_PAGE(@"class introspection", [NSArray arrayWithObjects:
+										@"  > classInfo TARGET (c)",
+										@"  > methods TARGET (m)",
+										@"  > classMethods TARGET (M)",
+										@"  > ivars TARGET (i)",
+										@"  > protocols TARGET",
+										@"  > UIApplication",
+										@"  > UITableViewDelegate",
+										SPACE,
+										nil]);
 	SLIDE_PAGE(NSLocalizedString(@"Feedback", nil), [NSArray arrayWithObjects:NSLocalizedString(@"Subscribe to google groups", nil), @"http://groups.google.com/group/interactivelibcat", nil]);
 	SLIDE_PAGE(NSLocalizedString(@"Questions?", nil), [NSArray arrayWithObjects:@"", nil]);
 	SLIDE_PAGE(@"FIN", [NSArray arrayWithObjects:SPACE, PAIR(NSLocalizedString(@"Thanks", nil), Enum(UITextAlignmentCenter)), nil]);

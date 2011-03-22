@@ -558,8 +558,10 @@
 			return STR_NIL;
 		} else if (target == [target class]) {
 			return [[DisquotatedObject disquotatedObjectWithObject:target descript:[target classInfo]] inspect];
-		} else {
+		} else if ([target isKindOfClass:[NSObject class]]) {
 			return [target inspect];
+		} else {
+			return NSLocalizedString(@"is not kind of NSObject", nil);
 		}
 	}
 }

@@ -104,7 +104,11 @@
 		}
 	}
 	if (removeLF) {
-		return [SWF(@"%@", [obj inspect]) gsub:LF to:EMPTY_STRING];
+		if ([obj isKindOfClass:[NSObject class]]) {
+			return [SWF(@"%@", [obj inspect]) gsub:LF to:EMPTY_STRING];
+		} else {
+			return EMPTY_STRING;
+		}
 	} else {
 		return SWF(@"%@", obj);
 	}

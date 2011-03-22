@@ -45,10 +45,10 @@ cd TARGET           : change target object
   > cd view         : to property        
   > cd UIButton     : to class           
   > cd 0x6067490    : at memory address           
+pwd                 : view & controller hierarchy 
 properties TARGET   : list properties (p)         
   > text            : property getter             
   > text = hello    : property setter             
-pwd                 : view & controller hierarchy 
 manipulate TARGET   : manipulate properties UI
 open                : open Safari UI
 touch TARGET        : touch target UI (t)  
@@ -247,12 +247,9 @@ class Console
           end
         when 'completion'
           display_info response_body if env[:print]
-        when 'cd', 'rm', 'back', 'touch', 'flick', 'hit', 'add_ui'
+        else
           display_info response_body if response_body.size>0 and env[:print]
           update_prompt
-          response_body
-        else
-          display_info response_body if env[:print]
         end
         response_body
       end

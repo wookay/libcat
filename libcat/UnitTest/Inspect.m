@@ -274,7 +274,9 @@ NSString* NSStringFromCGColor(CGColorRef colorRef) {
 NSString* objectInspect(id obj) {
 	if (nil == obj) {
 		return STR_NIL;
-	} else {
+	} else if ([obj isKindOfClass:[NSObject class]]) {
 		return [obj inspect];
+	} else {
+		return EMPTY_STRING;
 	}
 }
