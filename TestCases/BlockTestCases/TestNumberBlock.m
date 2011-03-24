@@ -16,10 +16,7 @@
 @implementation TestNumberBlock
 
 -(void) test_number_block {
-	
-	
-	
-	
+
 	__block int cnt = 0;
 	[FIXNUM(5) times:^(int idx) {
 		cnt += 1;

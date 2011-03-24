@@ -18,13 +18,7 @@
 @implementation TestBlock
 
 -(void) test_lambda {
-	id lambda;
-	lambda = ^ {
-		assert_equal(@"a", @"a");
-	};
-	[_w(@"a") each:lambda];
-	
-	lambda = ^(id obj) {
+	id lambda = ^(id obj) {
 		assert_equal(@"a", obj);
 	};
 	[_w(@"a") each:lambda];

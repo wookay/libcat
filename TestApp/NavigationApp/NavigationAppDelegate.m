@@ -24,7 +24,7 @@
 
 #define STR_PASSWORD @"8081"
 	if ([password isEqualToString:STR_PASSWORD]) {
-		[CONSOLEMAN start_up:8081];
+		[ConsoleManager run:8081];
 		return true;
 	}
 	return false;

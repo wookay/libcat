@@ -753,15 +753,6 @@
 	}
 }
 
-// deprecated
--(void) start_up {
-	[self start_servers];
-}
-
--(void) start_up:(int)port {
-	[self start_servers:port];
-}
-
 + (ConsoleManager*) sharedManager {
 	static ConsoleManager*	manager = nil;
 	if (!manager) {

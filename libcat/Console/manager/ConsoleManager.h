@@ -58,9 +58,6 @@ typedef enum { kGetterReturnTypeInspect, kGetterReturnTypeObject } GetterReturnT
 -(void) toggle_logs_button ;
 -(void) update_record_button ;
 
-// deprecated
--(void) start_up ;
--(void) start_up:(int)port ;
 @end
 
 

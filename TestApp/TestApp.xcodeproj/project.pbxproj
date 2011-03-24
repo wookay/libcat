@@ -1630,7 +1630,7 @@
 				);
 				INFOPLIST_FILE = "OpenGLApp-Info.plist";
 				PRODUCT_NAME = OpenGLApp;
-				SDKROOT = iphoneos4.2;
+				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -1669,7 +1669,7 @@
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				INFOPLIST_FILE = "NavigationApp-Info.plist";
 				PRODUCT_NAME = NavigationApp;
-				SDKROOT = iphoneos4.2;
+				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
