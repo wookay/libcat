@@ -17,7 +17,7 @@ How to use it on your project
 
     #import "ConsoleManager.h"
 
-    [ConsoleManager run]
+    [ConsoleManager run];
 
 3. Add QuartzCore.framework, CFNetwork.framework
 4. Launch your App
