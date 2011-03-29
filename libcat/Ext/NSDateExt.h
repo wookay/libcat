@@ -119,11 +119,11 @@ NSString* int_to_secondName(int second) ;
 
 @interface NSDate (Weekday)
 -(NSString*) weekdayName ;
--(NSArray*) weekdayNames ;
++(NSArray*) weekdayNames ;
 -(NSString*) shortWeekdayName ;
--(NSArray*) shortWeekdayNames ;
++(NSArray*) shortWeekdayNames ;
 -(NSString*) shortWeekdayHanjaName ;
--(NSArray*) shortWeekdayHanjaNames ;	
++(NSArray*) shortWeekdayHanjaNames ;	
 +(int) sundayWeekdayIndex ;
 -(BOOL) isSunday ;
 @end

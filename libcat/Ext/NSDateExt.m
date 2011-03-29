@@ -573,7 +573,7 @@ NSString* monthLongName_day_SPACE(int month, int day) {
 	return [self weekdayNameBy:@selector(weekdaySymbols)];
 }
 
--(NSArray*) weekdayNames {
++(NSArray*) weekdayNames {
 	return [NSDate weekdayNamesBy:@selector(weekdaySymbols)];
 }
 
@@ -581,16 +581,16 @@ NSString* monthLongName_day_SPACE(int month, int day) {
 	return [self weekdayNameBy:@selector(shortWeekdaySymbols)];
 }
 
--(NSArray*) shortWeekdayNames {
++(NSArray*) shortWeekdayNames {
 	return [NSDate weekdayNamesBy:@selector(shortWeekdaySymbols)];
 }
 
 -(NSString*) shortWeekdayHanjaName {
 	int idx = [self weekday] - WEEKDAY_SUNDAY;
-	return [[self shortWeekdayHanjaNames] objectAtIndex:idx];
+	return [[NSDate shortWeekdayHanjaNames] objectAtIndex:idx];
 }
 
--(NSArray*) shortWeekdayHanjaNames {
++(NSArray*) shortWeekdayHanjaNames {
 	NSArray* shortWeekdayNames = [self shortWeekdayNames];
 	if (IS_LOCALE_KOREAN) {
 		NSDictionary* dict = [NSDictionary dictionaryWithKeysAndObjects:

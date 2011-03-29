@@ -540,7 +540,11 @@ NSString* surrounded_array_prefix_index(NSArray* array) {
 					if (nil == obj) {
 					} else {
 						NSString* classNameUpper = [SWF(@"%@", [obj class]) uppercaseString];
-						[ary addObject:SWF(@"[%@]: %@", classNameUpper, [obj inspect])];
+						if ([obj isKindOfClass:[NSArray class]]) {
+							[ary addObject:SWF(@"[%@]: ", classNameUpper)];
+						} else {
+							[ary addObject:SWF(@"[%@]: %@", classNameUpper, [obj inspect])];
+						}
 					}
 				}
 				break;
@@ -555,7 +559,7 @@ NSString* surrounded_array_prefix_index(NSArray* array) {
 					[ary addObject:@"SECTIONS:"];
 					[(NSArray*)obj each_with_index:^(id sectionAry, int idx) {
 						NSString* sectionTitle = [sectionTitles objectAtIndex:idx];
-						if (nil == sectionTitle) {
+						if (IS_NIL(sectionTitle)) {
 							[ary addObject:SWF(@"== %@ %d ==", NSLocalizedString(@"Section", nil), idx)];
 						} else {
 							[ary addObject:SWF(@"== %@ %d : %@ ==", NSLocalizedString(@"Section", nil), idx, sectionTitle)];
@@ -606,6 +610,9 @@ NSString* surrounded_array_prefix_index(NSArray* array) {
 			case LS_WINDOWS:
 				[ary addObject:SWF(@"WINDOWS: %@", surrounded_array_prefix_index(obj))];
 				break;						
+			case LS_ARRAY:
+				[ary addObject:[array_prefix_index(obj) join:LF]];
+				break;										
 			default:
 				break;
 		}
@@ -687,7 +694,11 @@ NSString* surrounded_array_prefix_index(NSArray* array) {
 					}
 				}
 				[sections addObject:ary];
-				[sectionTitles addObject:[tableView.dataSource tableView:tableView titleForHeaderInSection:section]];
+				if ([tableView.dataSource respondsToSelector:@selector(tableView: titleForHeaderInSection:)]) {
+					[sectionTitles addObject:[tableView.dataSource tableView:tableView titleForHeaderInSection:section]];
+				} else {
+					[sectionTitles addObject:[NilClass nilClass]];
+				}
 			}
 			[ret addObject:PAIR(Enum(LS_TABLEVIEW), tableView)];
 			[ret addObject:TRIO(Enum(LS_SECTIONS), sections, sectionTitles)];
@@ -717,7 +728,11 @@ NSString* surrounded_array_prefix_index(NSArray* array) {
 				}
 			}
 			[sections addObject:ary];
-			[sectionTitles addObject:[tableView.dataSource tableView:tableView titleForHeaderInSection:section]];
+			if ([tableView.dataSource respondsToSelector:@selector(tableView: titleForHeaderInSection:)]) {
+				[sectionTitles addObject:[tableView.dataSource tableView:tableView titleForHeaderInSection:section]];
+			} else {
+				[sectionTitles addObject:[NilClass nilClass]];
+			}
 		}
 		[ret addObject:TRIO(Enum(LS_SECTIONS), sections, sectionTitles)];
 	} else if ([currentObject isKindOfClass:[UIView class]]) {
@@ -740,6 +755,8 @@ NSString* surrounded_array_prefix_index(NSArray* array) {
 	} else if ([currentObject isKindOfClass:[UIApplication class]]) {
 		UIApplication* application = currentObject;
 		[ret addObject:PAIR(Enum(LS_WINDOWS), application.windows)];
+	} else if ([currentObject isKindOfClass:[NSArray class]]) {
+		[ret addObject:PAIR(Enum(LS_ARRAY), currentObject)];
 #if USE_COCOA
 	} else if ([currentObject isKindOfClass:[NSWindow class]]) {
 		NSWindow* window = currentObject;
@@ -923,6 +940,12 @@ NSString* surrounded_array_prefix_index(NSArray* array) {
 				UIApplication* application = currentObject;
 				if (row < application.windows.count) {
 					changeObject = [application.windows objectAtIndex:row];
+					found = true;
+				}
+			} else if ([currentObject isKindOfClass:[NSArray class]]) {
+				NSArray* array = currentObject;
+				if (row < array.count) {
+					changeObject = [array objectAtIndex:row];
 					found = true;
 				}
 #if USE_COCOA

@@ -18,7 +18,7 @@
 	id oldOne;
 }
 @property (nonatomic, retain) NSMutableDictionary* newObjects;
-@property (nonatomic, assign) id newOne;
+@property (nonatomic, retain) id newOne;
 @property (nonatomic, assign) id oldOne;
 
 + (NewObjectManager*) sharedManager ;

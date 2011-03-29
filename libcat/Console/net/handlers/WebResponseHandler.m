@@ -123,11 +123,27 @@ static NSString *replaceAll(NSString *s, NSDictionary *replacements) {
 		switch (lsType) {
 			case LS_OBJECT: {
 					NSString* classNameUpper = [SWF(@"%@", [obj class]) uppercaseString];
-					[ary addObject:SWF(@"[%@]: %@", classNameUpper, [[obj inspect] htmlEscapedString])];
-					if ([obj isKindOfClass:[UIView class]]) {
+					if ([obj isKindOfClass:[NSArray class]]) {
+						[ary addObject:SWF(@"[%@]: ", classNameUpper)];
+					} else {
+						[ary addObject:SWF(@"[%@]: %@", classNameUpper, [[obj inspect] htmlEscapedString])];
+					}
+					if ([obj isKindOfClass:[UIView class]] || [obj isKindOfClass:[UIImage class]]) {
 						[ary addObject:SWF(@"<img src='/image/%p.png' /><hr />", obj)];
 					} else if ([obj respondsToSelector:@selector(title)]) {
 						title = SWF(@"%@ :: %@", [NSBundle bundleName], [obj title]);
+					}
+				}
+				break;
+			case LS_ARRAY: {
+					int idx = 0;
+					for (id elt in (NSArray*)obj) {
+						if ([elt isKindOfClass:[UIView class]] || [elt isKindOfClass:[UIImage class]]) {
+							[ary addObject:SWF(@"[%d] %@<br /><img src='/image/%p.png' /><hr />", idx, [[elt inspect] htmlEscapedString], elt)];
+						} else {
+							[ary addObject:SWF(@"[%d] %@<br />", idx, [[elt inspect] htmlEscapedString])];
+						}
+						idx += 1;
 					}
 				}
 				break;

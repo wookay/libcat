@@ -118,162 +118,165 @@
 		DACAB03212629054006DA76D /* TestNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB01512629054006DA76D /* TestNumber.m */; };
 		DACAB03312629054006DA76D /* TestString.m in Sources */ = {isa = PBXBuildFile; fileRef = DACAB01612629054006DA76D /* TestString.m */; };
 		DACC5A2D12FD415C00AC572F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAC5BB7F12A9A37B00953A23 /* QuartzCore.framework */; };
-		DACEF98C131A652A00E9E462 /* Async.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF91A131A652900E9E462 /* Async.m */; };
-		DACEF98D131A652A00E9E462 /* NSArrayBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF91C131A652900E9E462 /* NSArrayBlock.m */; };
-		DACEF98E131A652A00E9E462 /* NSDictionaryBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF91E131A652900E9E462 /* NSDictionaryBlock.m */; };
-		DACEF98F131A652A00E9E462 /* NSNumberBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF920131A652900E9E462 /* NSNumberBlock.m */; };
-		DACEF990131A652A00E9E462 /* NSObjectObserverExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF923131A652900E9E462 /* NSObjectObserverExt.m */; };
-		DACEF991131A652A00E9E462 /* Observer.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF925131A652900E9E462 /* Observer.m */; };
-		DACEF992131A652A00E9E462 /* ObserverManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF927131A652900E9E462 /* ObserverManager.m */; };
-		DACEF993131A652A00E9E462 /* ProxyMutableDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF929131A652900E9E462 /* ProxyMutableDictionary.m */; };
-		DACEF994131A652A00E9E462 /* CommandManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF92D131A652900E9E462 /* CommandManager.m */; };
-		DACEF995131A652A00E9E462 /* ConsoleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF92F131A652900E9E462 /* ConsoleManager.m */; };
-		DACEF996131A652A00E9E462 /* NewObjectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF931131A652900E9E462 /* NewObjectManager.m */; };
-		DACEF997131A652A00E9E462 /* UIViewFlick.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF933131A652900E9E462 /* UIViewFlick.m */; };
-		DACEF998131A652A00E9E462 /* ConsoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF936131A652900E9E462 /* ConsoleViewController.m */; };
-		DACEF999131A652A00E9E462 /* ConsoleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DACEF937131A652900E9E462 /* ConsoleViewController.xib */; };
-		DACEF99A131A652A00E9E462 /* EditPropertyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF939131A652900E9E462 /* EditPropertyViewController.m */; };
-		DACEF99B131A652A00E9E462 /* EditPropertyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DACEF93A131A652900E9E462 /* EditPropertyViewController.xib */; };
-		DACEF99C131A652A00E9E462 /* HitTestWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF93C131A652900E9E462 /* HitTestWindow.m */; };
-		DACEF99D131A652A00E9E462 /* PropertyManipulator.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF93E131A652900E9E462 /* PropertyManipulator.m */; };
-		DACEF99E131A652A00E9E462 /* PropertyRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF940131A652900E9E462 /* PropertyRootViewController.m */; };
-		DACEF99F131A652A00E9E462 /* PropertyRootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DACEF941131A652900E9E462 /* PropertyRootViewController.xib */; };
-		DACEF9A0131A652A00E9E462 /* TypeInfoTable.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF943131A652900E9E462 /* TypeInfoTable.m */; };
-		DACEF9A1131A652A00E9E462 /* ConsoleResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF947131A652900E9E462 /* ConsoleResponseHandler.m */; };
-		DACEF9A2131A652A00E9E462 /* HTTPResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF949131A652900E9E462 /* HTTPResponseHandler.m */; };
-		DACEF9A3131A652A00E9E462 /* ImageResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF94B131A652900E9E462 /* ImageResponseHandler.m */; };
-		DACEF9A4131A652A00E9E462 /* WebResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF94D131A652900E9E462 /* WebResponseHandler.m */; };
-		DACEF9A5131A652A00E9E462 /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF950131A652900E9E462 /* AsyncSocket.m */; };
-		DACEF9A6131A652A00E9E462 /* HTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF952131A652900E9E462 /* HTTPServer.m */; };
-		DACEF9A7131A652A00E9E462 /* LoggerServer.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF954131A652900E9E462 /* LoggerServer.m */; };
-		DACEF9A8131A652A00E9E462 /* GeometryExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF958131A652900E9E462 /* GeometryExt.m */; };
-		DACEF9A9131A652A00E9E462 /* NSArrayExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF95B131A652900E9E462 /* NSArrayExt.m */; };
-		DACEF9AA131A652A00E9E462 /* NSBundleExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF95D131A652900E9E462 /* NSBundleExt.m */; };
-		DACEF9AB131A652A00E9E462 /* NSDataExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF95F131A652900E9E462 /* NSDataExt.m */; };
-		DACEF9AC131A652A00E9E462 /* NSDateComponentsExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF961131A652900E9E462 /* NSDateComponentsExt.m */; };
-		DACEF9AD131A652A00E9E462 /* NSDateExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF963131A652900E9E462 /* NSDateExt.m */; };
-		DACEF9AE131A652A00E9E462 /* NSDictionaryExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF965131A652900E9E462 /* NSDictionaryExt.m */; };
-		DACEF9AF131A652A00E9E462 /* NSIndexPathExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF967131A652900E9E462 /* NSIndexPathExt.m */; };
-		DACEF9B0131A652A00E9E462 /* NSLocaleExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF969131A652900E9E462 /* NSLocaleExt.m */; };
-		DACEF9B1131A652A00E9E462 /* NSMutableArrayExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF96B131A652900E9E462 /* NSMutableArrayExt.m */; };
-		DACEF9B2131A652A00E9E462 /* NSMutableDictionaryExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF96D131A652900E9E462 /* NSMutableDictionaryExt.m */; };
-		DACEF9B3131A652A00E9E462 /* NSNumberExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF96F131A652900E9E462 /* NSNumberExt.m */; };
-		DACEF9B4131A652A00E9E462 /* NSObjectExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF971131A652900E9E462 /* NSObjectExt.m */; };
-		DACEF9B5131A652A00E9E462 /* NSStringExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF973131A652900E9E462 /* NSStringExt.m */; };
-		DACEF9B6131A652A00E9E462 /* NSTimerExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF975131A652900E9E462 /* NSTimerExt.m */; };
-		DACEF9B7131A652A00E9E462 /* UIActionSheetBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF979131A652900E9E462 /* UIActionSheetBlock.m */; };
-		DACEF9B8131A652A00E9E462 /* UIAlertViewBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF97B131A652900E9E462 /* UIAlertViewBlock.m */; };
-		DACEF9B9131A652A00E9E462 /* UIBarButtonItemBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF97D131A652900E9E462 /* UIBarButtonItemBlock.m */; };
-		DACEF9BA131A652A00E9E462 /* UIButtonBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF97F131A652900E9E462 /* UIButtonBlock.m */; };
-		DACEF9BB131A652A00E9E462 /* UIViewBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF981131A652900E9E462 /* UIViewBlock.m */; };
-		DACEF9BC131A652A00E9E462 /* UIViewControllerBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF983131A652900E9E462 /* UIViewControllerBlock.m */; };
-		DACEF9BD131A652A00E9E462 /* Inspect.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF986131A652A00E9E462 /* Inspect.m */; };
-		DACEF9BE131A652A00E9E462 /* Logger.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF988131A652A00E9E462 /* Logger.m */; };
-		DACEF9BF131A652A00E9E462 /* UnitTest.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF98A131A652A00E9E462 /* UnitTest.m */; };
-		DACEF9C0131A652A00E9E462 /* Async.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF91A131A652900E9E462 /* Async.m */; };
-		DACEF9C1131A652A00E9E462 /* NSArrayBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF91C131A652900E9E462 /* NSArrayBlock.m */; };
-		DACEF9C2131A652A00E9E462 /* NSDictionaryBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF91E131A652900E9E462 /* NSDictionaryBlock.m */; };
-		DACEF9C3131A652A00E9E462 /* NSNumberBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF920131A652900E9E462 /* NSNumberBlock.m */; };
-		DACEF9C4131A652A00E9E462 /* NSObjectObserverExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF923131A652900E9E462 /* NSObjectObserverExt.m */; };
-		DACEF9C5131A652A00E9E462 /* Observer.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF925131A652900E9E462 /* Observer.m */; };
-		DACEF9C6131A652A00E9E462 /* ObserverManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF927131A652900E9E462 /* ObserverManager.m */; };
-		DACEF9C7131A652A00E9E462 /* ProxyMutableDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF929131A652900E9E462 /* ProxyMutableDictionary.m */; };
-		DACEF9C8131A652A00E9E462 /* CommandManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF92D131A652900E9E462 /* CommandManager.m */; };
-		DACEF9C9131A652A00E9E462 /* ConsoleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF92F131A652900E9E462 /* ConsoleManager.m */; };
-		DACEF9CA131A652A00E9E462 /* NewObjectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF931131A652900E9E462 /* NewObjectManager.m */; };
-		DACEF9CB131A652A00E9E462 /* UIViewFlick.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF933131A652900E9E462 /* UIViewFlick.m */; };
-		DACEF9CC131A652A00E9E462 /* ConsoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF936131A652900E9E462 /* ConsoleViewController.m */; };
-		DACEF9CD131A652A00E9E462 /* ConsoleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DACEF937131A652900E9E462 /* ConsoleViewController.xib */; };
-		DACEF9CE131A652A00E9E462 /* EditPropertyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF939131A652900E9E462 /* EditPropertyViewController.m */; };
-		DACEF9CF131A652A00E9E462 /* EditPropertyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DACEF93A131A652900E9E462 /* EditPropertyViewController.xib */; };
-		DACEF9D0131A652A00E9E462 /* HitTestWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF93C131A652900E9E462 /* HitTestWindow.m */; };
-		DACEF9D1131A652A00E9E462 /* PropertyManipulator.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF93E131A652900E9E462 /* PropertyManipulator.m */; };
-		DACEF9D2131A652A00E9E462 /* PropertyRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF940131A652900E9E462 /* PropertyRootViewController.m */; };
-		DACEF9D3131A652A00E9E462 /* PropertyRootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DACEF941131A652900E9E462 /* PropertyRootViewController.xib */; };
-		DACEF9D4131A652A00E9E462 /* TypeInfoTable.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF943131A652900E9E462 /* TypeInfoTable.m */; };
-		DACEF9D5131A652A00E9E462 /* ConsoleResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF947131A652900E9E462 /* ConsoleResponseHandler.m */; };
-		DACEF9D6131A652A00E9E462 /* HTTPResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF949131A652900E9E462 /* HTTPResponseHandler.m */; };
-		DACEF9D7131A652A00E9E462 /* ImageResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF94B131A652900E9E462 /* ImageResponseHandler.m */; };
-		DACEF9D8131A652A00E9E462 /* WebResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF94D131A652900E9E462 /* WebResponseHandler.m */; };
-		DACEF9D9131A652A00E9E462 /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF950131A652900E9E462 /* AsyncSocket.m */; };
-		DACEF9DA131A652A00E9E462 /* HTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF952131A652900E9E462 /* HTTPServer.m */; };
-		DACEF9DB131A652A00E9E462 /* LoggerServer.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF954131A652900E9E462 /* LoggerServer.m */; };
-		DACEF9DC131A652A00E9E462 /* GeometryExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF958131A652900E9E462 /* GeometryExt.m */; };
-		DACEF9DD131A652A00E9E462 /* NSArrayExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF95B131A652900E9E462 /* NSArrayExt.m */; };
-		DACEF9DE131A652A00E9E462 /* NSBundleExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF95D131A652900E9E462 /* NSBundleExt.m */; };
-		DACEF9DF131A652A00E9E462 /* NSDataExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF95F131A652900E9E462 /* NSDataExt.m */; };
-		DACEF9E0131A652A00E9E462 /* NSDateComponentsExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF961131A652900E9E462 /* NSDateComponentsExt.m */; };
-		DACEF9E1131A652A00E9E462 /* NSDateExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF963131A652900E9E462 /* NSDateExt.m */; };
-		DACEF9E2131A652A00E9E462 /* NSDictionaryExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF965131A652900E9E462 /* NSDictionaryExt.m */; };
-		DACEF9E3131A652A00E9E462 /* NSIndexPathExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF967131A652900E9E462 /* NSIndexPathExt.m */; };
-		DACEF9E4131A652A00E9E462 /* NSLocaleExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF969131A652900E9E462 /* NSLocaleExt.m */; };
-		DACEF9E5131A652A00E9E462 /* NSMutableArrayExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF96B131A652900E9E462 /* NSMutableArrayExt.m */; };
-		DACEF9E6131A652A00E9E462 /* NSMutableDictionaryExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF96D131A652900E9E462 /* NSMutableDictionaryExt.m */; };
-		DACEF9E7131A652A00E9E462 /* NSNumberExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF96F131A652900E9E462 /* NSNumberExt.m */; };
-		DACEF9E8131A652A00E9E462 /* NSObjectExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF971131A652900E9E462 /* NSObjectExt.m */; };
-		DACEF9E9131A652A00E9E462 /* NSStringExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF973131A652900E9E462 /* NSStringExt.m */; };
-		DACEF9EA131A652A00E9E462 /* NSTimerExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF975131A652900E9E462 /* NSTimerExt.m */; };
-		DACEF9EB131A652A00E9E462 /* UIActionSheetBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF979131A652900E9E462 /* UIActionSheetBlock.m */; };
-		DACEF9EC131A652A00E9E462 /* UIAlertViewBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF97B131A652900E9E462 /* UIAlertViewBlock.m */; };
-		DACEF9ED131A652A00E9E462 /* UIBarButtonItemBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF97D131A652900E9E462 /* UIBarButtonItemBlock.m */; };
-		DACEF9EE131A652A00E9E462 /* UIButtonBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF97F131A652900E9E462 /* UIButtonBlock.m */; };
-		DACEF9EF131A652A00E9E462 /* UIViewBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF981131A652900E9E462 /* UIViewBlock.m */; };
-		DACEF9F0131A652A00E9E462 /* UIViewControllerBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF983131A652900E9E462 /* UIViewControllerBlock.m */; };
-		DACEF9F1131A652A00E9E462 /* Inspect.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF986131A652A00E9E462 /* Inspect.m */; };
-		DACEF9F2131A652A00E9E462 /* Logger.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF988131A652A00E9E462 /* Logger.m */; };
-		DACEF9F3131A652A00E9E462 /* UnitTest.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF98A131A652A00E9E462 /* UnitTest.m */; };
-		DACEF9F4131A652A00E9E462 /* Async.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF91A131A652900E9E462 /* Async.m */; };
-		DACEF9F5131A652A00E9E462 /* NSArrayBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF91C131A652900E9E462 /* NSArrayBlock.m */; };
-		DACEF9F6131A652A00E9E462 /* NSDictionaryBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF91E131A652900E9E462 /* NSDictionaryBlock.m */; };
-		DACEF9F7131A652A00E9E462 /* NSNumberBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF920131A652900E9E462 /* NSNumberBlock.m */; };
-		DACEF9F8131A652A00E9E462 /* NSObjectObserverExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF923131A652900E9E462 /* NSObjectObserverExt.m */; };
-		DACEF9F9131A652A00E9E462 /* Observer.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF925131A652900E9E462 /* Observer.m */; };
-		DACEF9FA131A652A00E9E462 /* ObserverManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF927131A652900E9E462 /* ObserverManager.m */; };
-		DACEF9FB131A652A00E9E462 /* ProxyMutableDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF929131A652900E9E462 /* ProxyMutableDictionary.m */; };
-		DACEF9FC131A652A00E9E462 /* CommandManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF92D131A652900E9E462 /* CommandManager.m */; };
-		DACEF9FD131A652A00E9E462 /* ConsoleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF92F131A652900E9E462 /* ConsoleManager.m */; };
-		DACEF9FE131A652A00E9E462 /* NewObjectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF931131A652900E9E462 /* NewObjectManager.m */; };
-		DACEF9FF131A652A00E9E462 /* UIViewFlick.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF933131A652900E9E462 /* UIViewFlick.m */; };
-		DACEFA00131A652A00E9E462 /* ConsoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF936131A652900E9E462 /* ConsoleViewController.m */; };
-		DACEFA01131A652A00E9E462 /* ConsoleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DACEF937131A652900E9E462 /* ConsoleViewController.xib */; };
-		DACEFA02131A652A00E9E462 /* EditPropertyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF939131A652900E9E462 /* EditPropertyViewController.m */; };
-		DACEFA03131A652A00E9E462 /* EditPropertyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DACEF93A131A652900E9E462 /* EditPropertyViewController.xib */; };
-		DACEFA04131A652A00E9E462 /* HitTestWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF93C131A652900E9E462 /* HitTestWindow.m */; };
-		DACEFA05131A652A00E9E462 /* PropertyManipulator.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF93E131A652900E9E462 /* PropertyManipulator.m */; };
-		DACEFA06131A652A00E9E462 /* PropertyRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF940131A652900E9E462 /* PropertyRootViewController.m */; };
-		DACEFA07131A652A00E9E462 /* PropertyRootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DACEF941131A652900E9E462 /* PropertyRootViewController.xib */; };
-		DACEFA08131A652A00E9E462 /* TypeInfoTable.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF943131A652900E9E462 /* TypeInfoTable.m */; };
-		DACEFA09131A652A00E9E462 /* ConsoleResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF947131A652900E9E462 /* ConsoleResponseHandler.m */; };
-		DACEFA0A131A652A00E9E462 /* HTTPResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF949131A652900E9E462 /* HTTPResponseHandler.m */; };
-		DACEFA0B131A652A00E9E462 /* ImageResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF94B131A652900E9E462 /* ImageResponseHandler.m */; };
-		DACEFA0C131A652A00E9E462 /* WebResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF94D131A652900E9E462 /* WebResponseHandler.m */; };
-		DACEFA0D131A652A00E9E462 /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF950131A652900E9E462 /* AsyncSocket.m */; };
-		DACEFA0E131A652A00E9E462 /* HTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF952131A652900E9E462 /* HTTPServer.m */; };
-		DACEFA0F131A652A00E9E462 /* LoggerServer.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF954131A652900E9E462 /* LoggerServer.m */; };
-		DACEFA10131A652A00E9E462 /* GeometryExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF958131A652900E9E462 /* GeometryExt.m */; };
-		DACEFA11131A652A00E9E462 /* NSArrayExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF95B131A652900E9E462 /* NSArrayExt.m */; };
-		DACEFA12131A652A00E9E462 /* NSBundleExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF95D131A652900E9E462 /* NSBundleExt.m */; };
-		DACEFA13131A652A00E9E462 /* NSDataExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF95F131A652900E9E462 /* NSDataExt.m */; };
-		DACEFA14131A652A00E9E462 /* NSDateComponentsExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF961131A652900E9E462 /* NSDateComponentsExt.m */; };
-		DACEFA15131A652A00E9E462 /* NSDateExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF963131A652900E9E462 /* NSDateExt.m */; };
-		DACEFA16131A652A00E9E462 /* NSDictionaryExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF965131A652900E9E462 /* NSDictionaryExt.m */; };
-		DACEFA17131A652A00E9E462 /* NSIndexPathExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF967131A652900E9E462 /* NSIndexPathExt.m */; };
-		DACEFA18131A652A00E9E462 /* NSLocaleExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF969131A652900E9E462 /* NSLocaleExt.m */; };
-		DACEFA19131A652A00E9E462 /* NSMutableArrayExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF96B131A652900E9E462 /* NSMutableArrayExt.m */; };
-		DACEFA1A131A652A00E9E462 /* NSMutableDictionaryExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF96D131A652900E9E462 /* NSMutableDictionaryExt.m */; };
-		DACEFA1B131A652A00E9E462 /* NSNumberExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF96F131A652900E9E462 /* NSNumberExt.m */; };
-		DACEFA1C131A652A00E9E462 /* NSObjectExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF971131A652900E9E462 /* NSObjectExt.m */; };
-		DACEFA1D131A652A00E9E462 /* NSStringExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF973131A652900E9E462 /* NSStringExt.m */; };
-		DACEFA1E131A652A00E9E462 /* NSTimerExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF975131A652900E9E462 /* NSTimerExt.m */; };
-		DACEFA1F131A652A00E9E462 /* UIActionSheetBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF979131A652900E9E462 /* UIActionSheetBlock.m */; };
-		DACEFA20131A652A00E9E462 /* UIAlertViewBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF97B131A652900E9E462 /* UIAlertViewBlock.m */; };
-		DACEFA21131A652A00E9E462 /* UIBarButtonItemBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF97D131A652900E9E462 /* UIBarButtonItemBlock.m */; };
-		DACEFA22131A652A00E9E462 /* UIButtonBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF97F131A652900E9E462 /* UIButtonBlock.m */; };
-		DACEFA23131A652A00E9E462 /* UIViewBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF981131A652900E9E462 /* UIViewBlock.m */; };
-		DACEFA24131A652A00E9E462 /* UIViewControllerBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF983131A652900E9E462 /* UIViewControllerBlock.m */; };
-		DACEFA25131A652A00E9E462 /* Inspect.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF986131A652A00E9E462 /* Inspect.m */; };
-		DACEFA26131A652A00E9E462 /* Logger.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF988131A652A00E9E462 /* Logger.m */; };
-		DACEFA27131A652A00E9E462 /* UnitTest.m in Sources */ = {isa = PBXBuildFile; fileRef = DACEF98A131A652A00E9E462 /* UnitTest.m */; };
+		DACC815713417EF0005F3F15 /* Async.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC80E313417EF0005F3F15 /* Async.m */; };
+		DACC815813417EF0005F3F15 /* NSArrayBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC80E513417EF0005F3F15 /* NSArrayBlock.m */; };
+		DACC815913417EF0005F3F15 /* NSDictionaryBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC80E713417EF0005F3F15 /* NSDictionaryBlock.m */; };
+		DACC815A13417EF0005F3F15 /* NSNumberBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC80E913417EF0005F3F15 /* NSNumberBlock.m */; };
+		DACC815B13417EF0005F3F15 /* NSObjectObserverExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC80EC13417EF0005F3F15 /* NSObjectObserverExt.m */; };
+		DACC815C13417EF0005F3F15 /* Observer.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC80EE13417EF0005F3F15 /* Observer.m */; };
+		DACC815D13417EF0005F3F15 /* ObserverManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC80F013417EF0005F3F15 /* ObserverManager.m */; };
+		DACC815E13417EF0005F3F15 /* ProxyMutableDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC80F213417EF0005F3F15 /* ProxyMutableDictionary.m */; };
+		DACC815F13417EF0005F3F15 /* CommandManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC80F613417EF0005F3F15 /* CommandManager.m */; };
+		DACC816013417EF0005F3F15 /* ConsoleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC80F813417EF0005F3F15 /* ConsoleManager.m */; };
+		DACC816113417EF0005F3F15 /* NewObjectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC80FA13417EF0005F3F15 /* NewObjectManager.m */; };
+		DACC816213417EF0005F3F15 /* UIViewFlick.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC80FC13417EF0005F3F15 /* UIViewFlick.m */; };
+		DACC816313417EF0005F3F15 /* ConsoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC80FF13417EF0005F3F15 /* ConsoleViewController.m */; };
+		DACC816413417EF0005F3F15 /* ConsoleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DACC810013417EF0005F3F15 /* ConsoleViewController.xib */; };
+		DACC816513417EF0005F3F15 /* EditPropertyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC810213417EF0005F3F15 /* EditPropertyViewController.m */; };
+		DACC816613417EF0005F3F15 /* EditPropertyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DACC810313417EF0005F3F15 /* EditPropertyViewController.xib */; };
+		DACC816713417EF0005F3F15 /* HitTestWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC810513417EF0005F3F15 /* HitTestWindow.m */; };
+		DACC816813417EF0005F3F15 /* PropertyManipulator.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC810713417EF0005F3F15 /* PropertyManipulator.m */; };
+		DACC816913417EF0005F3F15 /* PropertyRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC810913417EF0005F3F15 /* PropertyRootViewController.m */; };
+		DACC816A13417EF0005F3F15 /* PropertyRootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DACC810A13417EF0005F3F15 /* PropertyRootViewController.xib */; };
+		DACC816B13417EF0005F3F15 /* TypeInfoTable.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC810C13417EF0005F3F15 /* TypeInfoTable.m */; };
+		DACC816C13417EF0005F3F15 /* ConsoleResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC811013417EF0005F3F15 /* ConsoleResponseHandler.m */; };
+		DACC816D13417EF0005F3F15 /* HTTPResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC811213417EF0005F3F15 /* HTTPResponseHandler.m */; };
+		DACC816E13417EF0005F3F15 /* ImageResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC811413417EF0005F3F15 /* ImageResponseHandler.m */; };
+		DACC816F13417EF0005F3F15 /* libcat_statusbar.png in Resources */ = {isa = PBXBuildFile; fileRef = DACC811613417EF0005F3F15 /* libcat_statusbar.png */; };
+		DACC817013417EF0005F3F15 /* WebResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC811813417EF0005F3F15 /* WebResponseHandler.m */; };
+		DACC817113417EF0005F3F15 /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC811B13417EF0005F3F15 /* AsyncSocket.m */; };
+		DACC817213417EF0005F3F15 /* HTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC811D13417EF0005F3F15 /* HTTPServer.m */; };
+		DACC817313417EF0005F3F15 /* LoggerServer.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC811F13417EF0005F3F15 /* LoggerServer.m */; };
+		DACC817413417EF0005F3F15 /* GeometryExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC812313417EF0005F3F15 /* GeometryExt.m */; };
+		DACC817513417EF0005F3F15 /* NSArrayExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC812613417EF0005F3F15 /* NSArrayExt.m */; };
+		DACC817613417EF0005F3F15 /* NSBundleExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC812813417EF0005F3F15 /* NSBundleExt.m */; };
+		DACC817713417EF0005F3F15 /* NSDataExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC812A13417EF0005F3F15 /* NSDataExt.m */; };
+		DACC817813417EF0005F3F15 /* NSDateComponentsExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC812C13417EF0005F3F15 /* NSDateComponentsExt.m */; };
+		DACC817913417EF0005F3F15 /* NSDateExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC812E13417EF0005F3F15 /* NSDateExt.m */; };
+		DACC817A13417EF0005F3F15 /* NSDictionaryExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC813013417EF0005F3F15 /* NSDictionaryExt.m */; };
+		DACC817B13417EF0005F3F15 /* NSIndexPathExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC813213417EF0005F3F15 /* NSIndexPathExt.m */; };
+		DACC817C13417EF0005F3F15 /* NSLocaleExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC813413417EF0005F3F15 /* NSLocaleExt.m */; };
+		DACC817D13417EF0005F3F15 /* NSMutableArrayExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC813613417EF0005F3F15 /* NSMutableArrayExt.m */; };
+		DACC817E13417EF0005F3F15 /* NSMutableDictionaryExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC813813417EF0005F3F15 /* NSMutableDictionaryExt.m */; };
+		DACC817F13417EF0005F3F15 /* NSNumberExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC813A13417EF0005F3F15 /* NSNumberExt.m */; };
+		DACC818013417EF0005F3F15 /* NSObjectExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC813C13417EF0005F3F15 /* NSObjectExt.m */; };
+		DACC818113417EF0005F3F15 /* NSStringExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC813E13417EF0005F3F15 /* NSStringExt.m */; };
+		DACC818213417EF0005F3F15 /* NSTimerExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC814013417EF0005F3F15 /* NSTimerExt.m */; };
+		DACC818313417EF0005F3F15 /* UIActionSheetBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC814413417EF0005F3F15 /* UIActionSheetBlock.m */; };
+		DACC818413417EF0005F3F15 /* UIAlertViewBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC814613417EF0005F3F15 /* UIAlertViewBlock.m */; };
+		DACC818513417EF0005F3F15 /* UIBarButtonItemBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC814813417EF0005F3F15 /* UIBarButtonItemBlock.m */; };
+		DACC818613417EF0005F3F15 /* UIButtonBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC814A13417EF0005F3F15 /* UIButtonBlock.m */; };
+		DACC818713417EF0005F3F15 /* UIViewBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC814C13417EF0005F3F15 /* UIViewBlock.m */; };
+		DACC818813417EF0005F3F15 /* UIViewControllerBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC814E13417EF0005F3F15 /* UIViewControllerBlock.m */; };
+		DACC818913417EF0005F3F15 /* Inspect.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC815113417EF0005F3F15 /* Inspect.m */; };
+		DACC818A13417EF0005F3F15 /* Logger.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC815313417EF0005F3F15 /* Logger.m */; };
+		DACC818B13417EF0005F3F15 /* UnitTest.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC815513417EF0005F3F15 /* UnitTest.m */; };
+		DACC818C13417EF0005F3F15 /* Async.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC80E313417EF0005F3F15 /* Async.m */; };
+		DACC818D13417EF0005F3F15 /* NSArrayBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC80E513417EF0005F3F15 /* NSArrayBlock.m */; };
+		DACC818E13417EF0005F3F15 /* NSDictionaryBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC80E713417EF0005F3F15 /* NSDictionaryBlock.m */; };
+		DACC818F13417EF0005F3F15 /* NSNumberBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC80E913417EF0005F3F15 /* NSNumberBlock.m */; };
+		DACC819013417EF0005F3F15 /* NSObjectObserverExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC80EC13417EF0005F3F15 /* NSObjectObserverExt.m */; };
+		DACC819113417EF0005F3F15 /* Observer.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC80EE13417EF0005F3F15 /* Observer.m */; };
+		DACC819213417EF0005F3F15 /* ObserverManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC80F013417EF0005F3F15 /* ObserverManager.m */; };
+		DACC819313417EF0005F3F15 /* ProxyMutableDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC80F213417EF0005F3F15 /* ProxyMutableDictionary.m */; };
+		DACC819413417EF0005F3F15 /* CommandManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC80F613417EF0005F3F15 /* CommandManager.m */; };
+		DACC819513417EF0005F3F15 /* ConsoleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC80F813417EF0005F3F15 /* ConsoleManager.m */; };
+		DACC819613417EF0005F3F15 /* NewObjectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC80FA13417EF0005F3F15 /* NewObjectManager.m */; };
+		DACC819713417EF0005F3F15 /* UIViewFlick.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC80FC13417EF0005F3F15 /* UIViewFlick.m */; };
+		DACC819813417EF0005F3F15 /* ConsoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC80FF13417EF0005F3F15 /* ConsoleViewController.m */; };
+		DACC819913417EF0005F3F15 /* ConsoleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DACC810013417EF0005F3F15 /* ConsoleViewController.xib */; };
+		DACC819A13417EF0005F3F15 /* EditPropertyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC810213417EF0005F3F15 /* EditPropertyViewController.m */; };
+		DACC819B13417EF0005F3F15 /* EditPropertyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DACC810313417EF0005F3F15 /* EditPropertyViewController.xib */; };
+		DACC819C13417EF0005F3F15 /* HitTestWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC810513417EF0005F3F15 /* HitTestWindow.m */; };
+		DACC819D13417EF0005F3F15 /* PropertyManipulator.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC810713417EF0005F3F15 /* PropertyManipulator.m */; };
+		DACC819E13417EF0005F3F15 /* PropertyRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC810913417EF0005F3F15 /* PropertyRootViewController.m */; };
+		DACC819F13417EF0005F3F15 /* PropertyRootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DACC810A13417EF0005F3F15 /* PropertyRootViewController.xib */; };
+		DACC81A013417EF0005F3F15 /* TypeInfoTable.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC810C13417EF0005F3F15 /* TypeInfoTable.m */; };
+		DACC81A113417EF0005F3F15 /* ConsoleResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC811013417EF0005F3F15 /* ConsoleResponseHandler.m */; };
+		DACC81A213417EF0005F3F15 /* HTTPResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC811213417EF0005F3F15 /* HTTPResponseHandler.m */; };
+		DACC81A313417EF0005F3F15 /* ImageResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC811413417EF0005F3F15 /* ImageResponseHandler.m */; };
+		DACC81A413417EF0005F3F15 /* libcat_statusbar.png in Resources */ = {isa = PBXBuildFile; fileRef = DACC811613417EF0005F3F15 /* libcat_statusbar.png */; };
+		DACC81A513417EF0005F3F15 /* WebResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC811813417EF0005F3F15 /* WebResponseHandler.m */; };
+		DACC81A613417EF0005F3F15 /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC811B13417EF0005F3F15 /* AsyncSocket.m */; };
+		DACC81A713417EF0005F3F15 /* HTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC811D13417EF0005F3F15 /* HTTPServer.m */; };
+		DACC81A813417EF0005F3F15 /* LoggerServer.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC811F13417EF0005F3F15 /* LoggerServer.m */; };
+		DACC81A913417EF0005F3F15 /* GeometryExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC812313417EF0005F3F15 /* GeometryExt.m */; };
+		DACC81AA13417EF0005F3F15 /* NSArrayExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC812613417EF0005F3F15 /* NSArrayExt.m */; };
+		DACC81AB13417EF0005F3F15 /* NSBundleExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC812813417EF0005F3F15 /* NSBundleExt.m */; };
+		DACC81AC13417EF0005F3F15 /* NSDataExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC812A13417EF0005F3F15 /* NSDataExt.m */; };
+		DACC81AD13417EF0005F3F15 /* NSDateComponentsExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC812C13417EF0005F3F15 /* NSDateComponentsExt.m */; };
+		DACC81AE13417EF0005F3F15 /* NSDateExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC812E13417EF0005F3F15 /* NSDateExt.m */; };
+		DACC81AF13417EF0005F3F15 /* NSDictionaryExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC813013417EF0005F3F15 /* NSDictionaryExt.m */; };
+		DACC81B013417EF0005F3F15 /* NSIndexPathExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC813213417EF0005F3F15 /* NSIndexPathExt.m */; };
+		DACC81B113417EF0005F3F15 /* NSLocaleExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC813413417EF0005F3F15 /* NSLocaleExt.m */; };
+		DACC81B213417EF0005F3F15 /* NSMutableArrayExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC813613417EF0005F3F15 /* NSMutableArrayExt.m */; };
+		DACC81B313417EF0005F3F15 /* NSMutableDictionaryExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC813813417EF0005F3F15 /* NSMutableDictionaryExt.m */; };
+		DACC81B413417EF0005F3F15 /* NSNumberExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC813A13417EF0005F3F15 /* NSNumberExt.m */; };
+		DACC81B513417EF0005F3F15 /* NSObjectExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC813C13417EF0005F3F15 /* NSObjectExt.m */; };
+		DACC81B613417EF0005F3F15 /* NSStringExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC813E13417EF0005F3F15 /* NSStringExt.m */; };
+		DACC81B713417EF0005F3F15 /* NSTimerExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC814013417EF0005F3F15 /* NSTimerExt.m */; };
+		DACC81B813417EF0005F3F15 /* UIActionSheetBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC814413417EF0005F3F15 /* UIActionSheetBlock.m */; };
+		DACC81B913417EF0005F3F15 /* UIAlertViewBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC814613417EF0005F3F15 /* UIAlertViewBlock.m */; };
+		DACC81BA13417EF0005F3F15 /* UIBarButtonItemBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC814813417EF0005F3F15 /* UIBarButtonItemBlock.m */; };
+		DACC81BB13417EF0005F3F15 /* UIButtonBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC814A13417EF0005F3F15 /* UIButtonBlock.m */; };
+		DACC81BC13417EF0005F3F15 /* UIViewBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC814C13417EF0005F3F15 /* UIViewBlock.m */; };
+		DACC81BD13417EF0005F3F15 /* UIViewControllerBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC814E13417EF0005F3F15 /* UIViewControllerBlock.m */; };
+		DACC81BE13417EF0005F3F15 /* Inspect.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC815113417EF0005F3F15 /* Inspect.m */; };
+		DACC81BF13417EF0005F3F15 /* Logger.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC815313417EF0005F3F15 /* Logger.m */; };
+		DACC81C013417EF0005F3F15 /* UnitTest.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC815513417EF0005F3F15 /* UnitTest.m */; };
+		DACC81C113417EF0005F3F15 /* Async.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC80E313417EF0005F3F15 /* Async.m */; };
+		DACC81C213417EF0005F3F15 /* NSArrayBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC80E513417EF0005F3F15 /* NSArrayBlock.m */; };
+		DACC81C313417EF0005F3F15 /* NSDictionaryBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC80E713417EF0005F3F15 /* NSDictionaryBlock.m */; };
+		DACC81C413417EF0005F3F15 /* NSNumberBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC80E913417EF0005F3F15 /* NSNumberBlock.m */; };
+		DACC81C513417EF0005F3F15 /* NSObjectObserverExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC80EC13417EF0005F3F15 /* NSObjectObserverExt.m */; };
+		DACC81C613417EF0005F3F15 /* Observer.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC80EE13417EF0005F3F15 /* Observer.m */; };
+		DACC81C713417EF0005F3F15 /* ObserverManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC80F013417EF0005F3F15 /* ObserverManager.m */; };
+		DACC81C813417EF0005F3F15 /* ProxyMutableDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC80F213417EF0005F3F15 /* ProxyMutableDictionary.m */; };
+		DACC81C913417EF0005F3F15 /* CommandManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC80F613417EF0005F3F15 /* CommandManager.m */; };
+		DACC81CA13417EF0005F3F15 /* ConsoleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC80F813417EF0005F3F15 /* ConsoleManager.m */; };
+		DACC81CB13417EF0005F3F15 /* NewObjectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC80FA13417EF0005F3F15 /* NewObjectManager.m */; };
+		DACC81CC13417EF0005F3F15 /* UIViewFlick.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC80FC13417EF0005F3F15 /* UIViewFlick.m */; };
+		DACC81CD13417EF0005F3F15 /* ConsoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC80FF13417EF0005F3F15 /* ConsoleViewController.m */; };
+		DACC81CE13417EF0005F3F15 /* ConsoleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DACC810013417EF0005F3F15 /* ConsoleViewController.xib */; };
+		DACC81CF13417EF0005F3F15 /* EditPropertyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC810213417EF0005F3F15 /* EditPropertyViewController.m */; };
+		DACC81D013417EF0005F3F15 /* EditPropertyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DACC810313417EF0005F3F15 /* EditPropertyViewController.xib */; };
+		DACC81D113417EF0005F3F15 /* HitTestWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC810513417EF0005F3F15 /* HitTestWindow.m */; };
+		DACC81D213417EF0005F3F15 /* PropertyManipulator.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC810713417EF0005F3F15 /* PropertyManipulator.m */; };
+		DACC81D313417EF0005F3F15 /* PropertyRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC810913417EF0005F3F15 /* PropertyRootViewController.m */; };
+		DACC81D413417EF0005F3F15 /* PropertyRootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DACC810A13417EF0005F3F15 /* PropertyRootViewController.xib */; };
+		DACC81D513417EF0005F3F15 /* TypeInfoTable.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC810C13417EF0005F3F15 /* TypeInfoTable.m */; };
+		DACC81D613417EF0005F3F15 /* ConsoleResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC811013417EF0005F3F15 /* ConsoleResponseHandler.m */; };
+		DACC81D713417EF0005F3F15 /* HTTPResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC811213417EF0005F3F15 /* HTTPResponseHandler.m */; };
+		DACC81D813417EF0005F3F15 /* ImageResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC811413417EF0005F3F15 /* ImageResponseHandler.m */; };
+		DACC81D913417EF0005F3F15 /* libcat_statusbar.png in Resources */ = {isa = PBXBuildFile; fileRef = DACC811613417EF0005F3F15 /* libcat_statusbar.png */; };
+		DACC81DA13417EF0005F3F15 /* WebResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC811813417EF0005F3F15 /* WebResponseHandler.m */; };
+		DACC81DB13417EF0005F3F15 /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC811B13417EF0005F3F15 /* AsyncSocket.m */; };
+		DACC81DC13417EF0005F3F15 /* HTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC811D13417EF0005F3F15 /* HTTPServer.m */; };
+		DACC81DD13417EF0005F3F15 /* LoggerServer.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC811F13417EF0005F3F15 /* LoggerServer.m */; };
+		DACC81DE13417EF0005F3F15 /* GeometryExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC812313417EF0005F3F15 /* GeometryExt.m */; };
+		DACC81DF13417EF0005F3F15 /* NSArrayExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC812613417EF0005F3F15 /* NSArrayExt.m */; };
+		DACC81E013417EF0005F3F15 /* NSBundleExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC812813417EF0005F3F15 /* NSBundleExt.m */; };
+		DACC81E113417EF0005F3F15 /* NSDataExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC812A13417EF0005F3F15 /* NSDataExt.m */; };
+		DACC81E213417EF0005F3F15 /* NSDateComponentsExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC812C13417EF0005F3F15 /* NSDateComponentsExt.m */; };
+		DACC81E313417EF0005F3F15 /* NSDateExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC812E13417EF0005F3F15 /* NSDateExt.m */; };
+		DACC81E413417EF0005F3F15 /* NSDictionaryExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC813013417EF0005F3F15 /* NSDictionaryExt.m */; };
+		DACC81E513417EF0005F3F15 /* NSIndexPathExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC813213417EF0005F3F15 /* NSIndexPathExt.m */; };
+		DACC81E613417EF0005F3F15 /* NSLocaleExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC813413417EF0005F3F15 /* NSLocaleExt.m */; };
+		DACC81E713417EF0005F3F15 /* NSMutableArrayExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC813613417EF0005F3F15 /* NSMutableArrayExt.m */; };
+		DACC81E813417EF0005F3F15 /* NSMutableDictionaryExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC813813417EF0005F3F15 /* NSMutableDictionaryExt.m */; };
+		DACC81E913417EF0005F3F15 /* NSNumberExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC813A13417EF0005F3F15 /* NSNumberExt.m */; };
+		DACC81EA13417EF0005F3F15 /* NSObjectExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC813C13417EF0005F3F15 /* NSObjectExt.m */; };
+		DACC81EB13417EF0005F3F15 /* NSStringExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC813E13417EF0005F3F15 /* NSStringExt.m */; };
+		DACC81EC13417EF0005F3F15 /* NSTimerExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC814013417EF0005F3F15 /* NSTimerExt.m */; };
+		DACC81ED13417EF0005F3F15 /* UIActionSheetBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC814413417EF0005F3F15 /* UIActionSheetBlock.m */; };
+		DACC81EE13417EF0005F3F15 /* UIAlertViewBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC814613417EF0005F3F15 /* UIAlertViewBlock.m */; };
+		DACC81EF13417EF0005F3F15 /* UIBarButtonItemBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC814813417EF0005F3F15 /* UIBarButtonItemBlock.m */; };
+		DACC81F013417EF0005F3F15 /* UIButtonBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC814A13417EF0005F3F15 /* UIButtonBlock.m */; };
+		DACC81F113417EF0005F3F15 /* UIViewBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC814C13417EF0005F3F15 /* UIViewBlock.m */; };
+		DACC81F213417EF0005F3F15 /* UIViewControllerBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC814E13417EF0005F3F15 /* UIViewControllerBlock.m */; };
+		DACC81F313417EF0005F3F15 /* Inspect.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC815113417EF0005F3F15 /* Inspect.m */; };
+		DACC81F413417EF0005F3F15 /* Logger.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC815313417EF0005F3F15 /* Logger.m */; };
+		DACC81F513417EF0005F3F15 /* UnitTest.m in Sources */ = {isa = PBXBuildFile; fileRef = DACC815513417EF0005F3F15 /* UnitTest.m */; };
 		DAE9D2AD12A81EE500EA3F21 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = DAE9D2AC12A81EE500EA3F21 /* README.md */; };
 		DAE9D2AE12A81EE500EA3F21 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = DAE9D2AC12A81EE500EA3F21 /* README.md */; };
 		DAE9E26B1295E63F00F72551 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28F335F01007B36200424DE2 /* RootViewController.xib */; };
@@ -401,111 +404,112 @@
 		DACAB01412629054006DA76D /* TestDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestDictionary.m; sourceTree = "<group>"; };
 		DACAB01512629054006DA76D /* TestNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestNumber.m; sourceTree = "<group>"; };
 		DACAB01612629054006DA76D /* TestString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestString.m; sourceTree = "<group>"; };
-		DACEF919131A652900E9E462 /* Async.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Async.h; sourceTree = "<group>"; };
-		DACEF91A131A652900E9E462 /* Async.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Async.m; sourceTree = "<group>"; };
-		DACEF91B131A652900E9E462 /* NSArrayBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSArrayBlock.h; sourceTree = "<group>"; };
-		DACEF91C131A652900E9E462 /* NSArrayBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSArrayBlock.m; sourceTree = "<group>"; };
-		DACEF91D131A652900E9E462 /* NSDictionaryBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDictionaryBlock.h; sourceTree = "<group>"; };
-		DACEF91E131A652900E9E462 /* NSDictionaryBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDictionaryBlock.m; sourceTree = "<group>"; };
-		DACEF91F131A652900E9E462 /* NSNumberBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSNumberBlock.h; sourceTree = "<group>"; };
-		DACEF920131A652900E9E462 /* NSNumberBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSNumberBlock.m; sourceTree = "<group>"; };
-		DACEF922131A652900E9E462 /* NSObjectObserverExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSObjectObserverExt.h; sourceTree = "<group>"; };
-		DACEF923131A652900E9E462 /* NSObjectObserverExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSObjectObserverExt.m; sourceTree = "<group>"; };
-		DACEF924131A652900E9E462 /* Observer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Observer.h; sourceTree = "<group>"; };
-		DACEF925131A652900E9E462 /* Observer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Observer.m; sourceTree = "<group>"; };
-		DACEF926131A652900E9E462 /* ObserverManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObserverManager.h; sourceTree = "<group>"; };
-		DACEF927131A652900E9E462 /* ObserverManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObserverManager.m; sourceTree = "<group>"; };
-		DACEF928131A652900E9E462 /* ProxyMutableDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProxyMutableDictionary.h; sourceTree = "<group>"; };
-		DACEF929131A652900E9E462 /* ProxyMutableDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProxyMutableDictionary.m; sourceTree = "<group>"; };
-		DACEF92C131A652900E9E462 /* CommandManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommandManager.h; sourceTree = "<group>"; };
-		DACEF92D131A652900E9E462 /* CommandManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommandManager.m; sourceTree = "<group>"; };
-		DACEF92E131A652900E9E462 /* ConsoleManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsoleManager.h; sourceTree = "<group>"; };
-		DACEF92F131A652900E9E462 /* ConsoleManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConsoleManager.m; sourceTree = "<group>"; };
-		DACEF930131A652900E9E462 /* NewObjectManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewObjectManager.h; sourceTree = "<group>"; };
-		DACEF931131A652900E9E462 /* NewObjectManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewObjectManager.m; sourceTree = "<group>"; };
-		DACEF932131A652900E9E462 /* UIViewFlick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewFlick.h; sourceTree = "<group>"; };
-		DACEF933131A652900E9E462 /* UIViewFlick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIViewFlick.m; sourceTree = "<group>"; };
-		DACEF935131A652900E9E462 /* ConsoleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsoleViewController.h; sourceTree = "<group>"; };
-		DACEF936131A652900E9E462 /* ConsoleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConsoleViewController.m; sourceTree = "<group>"; };
-		DACEF937131A652900E9E462 /* ConsoleViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConsoleViewController.xib; sourceTree = "<group>"; };
-		DACEF938131A652900E9E462 /* EditPropertyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditPropertyViewController.h; sourceTree = "<group>"; };
-		DACEF939131A652900E9E462 /* EditPropertyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditPropertyViewController.m; sourceTree = "<group>"; };
-		DACEF93A131A652900E9E462 /* EditPropertyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditPropertyViewController.xib; sourceTree = "<group>"; };
-		DACEF93B131A652900E9E462 /* HitTestWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HitTestWindow.h; sourceTree = "<group>"; };
-		DACEF93C131A652900E9E462 /* HitTestWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HitTestWindow.m; sourceTree = "<group>"; };
-		DACEF93D131A652900E9E462 /* PropertyManipulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertyManipulator.h; sourceTree = "<group>"; };
-		DACEF93E131A652900E9E462 /* PropertyManipulator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PropertyManipulator.m; sourceTree = "<group>"; };
-		DACEF93F131A652900E9E462 /* PropertyRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertyRootViewController.h; sourceTree = "<group>"; };
-		DACEF940131A652900E9E462 /* PropertyRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PropertyRootViewController.m; sourceTree = "<group>"; };
-		DACEF941131A652900E9E462 /* PropertyRootViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PropertyRootViewController.xib; sourceTree = "<group>"; };
-		DACEF942131A652900E9E462 /* TypeInfoTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TypeInfoTable.h; sourceTree = "<group>"; };
-		DACEF943131A652900E9E462 /* TypeInfoTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TypeInfoTable.m; sourceTree = "<group>"; };
-		DACEF946131A652900E9E462 /* ConsoleResponseHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsoleResponseHandler.h; sourceTree = "<group>"; };
-		DACEF947131A652900E9E462 /* ConsoleResponseHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConsoleResponseHandler.m; sourceTree = "<group>"; };
-		DACEF948131A652900E9E462 /* HTTPResponseHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPResponseHandler.h; sourceTree = "<group>"; };
-		DACEF949131A652900E9E462 /* HTTPResponseHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPResponseHandler.m; sourceTree = "<group>"; };
-		DACEF94A131A652900E9E462 /* ImageResponseHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageResponseHandler.h; sourceTree = "<group>"; };
-		DACEF94B131A652900E9E462 /* ImageResponseHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageResponseHandler.m; sourceTree = "<group>"; };
-		DACEF94C131A652900E9E462 /* WebResponseHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebResponseHandler.h; sourceTree = "<group>"; };
-		DACEF94D131A652900E9E462 /* WebResponseHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebResponseHandler.m; sourceTree = "<group>"; };
-		DACEF94F131A652900E9E462 /* AsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncSocket.h; sourceTree = "<group>"; };
-		DACEF950131A652900E9E462 /* AsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncSocket.m; sourceTree = "<group>"; };
-		DACEF951131A652900E9E462 /* HTTPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPServer.h; sourceTree = "<group>"; };
-		DACEF952131A652900E9E462 /* HTTPServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPServer.m; sourceTree = "<group>"; };
-		DACEF953131A652900E9E462 /* LoggerServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoggerServer.h; sourceTree = "<group>"; };
-		DACEF954131A652900E9E462 /* LoggerServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoggerServer.m; sourceTree = "<group>"; };
-		DACEF956131A652900E9E462 /* ExtHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtHeaders.h; sourceTree = "<group>"; };
-		DACEF957131A652900E9E462 /* GeometryExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeometryExt.h; sourceTree = "<group>"; };
-		DACEF958131A652900E9E462 /* GeometryExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeometryExt.m; sourceTree = "<group>"; };
-		DACEF959131A652900E9E462 /* iPadExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iPadExt.h; sourceTree = "<group>"; };
-		DACEF95A131A652900E9E462 /* NSArrayExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSArrayExt.h; sourceTree = "<group>"; };
-		DACEF95B131A652900E9E462 /* NSArrayExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSArrayExt.m; sourceTree = "<group>"; };
-		DACEF95C131A652900E9E462 /* NSBundleExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSBundleExt.h; sourceTree = "<group>"; };
-		DACEF95D131A652900E9E462 /* NSBundleExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSBundleExt.m; sourceTree = "<group>"; };
-		DACEF95E131A652900E9E462 /* NSDataExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDataExt.h; sourceTree = "<group>"; };
-		DACEF95F131A652900E9E462 /* NSDataExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDataExt.m; sourceTree = "<group>"; };
-		DACEF960131A652900E9E462 /* NSDateComponentsExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDateComponentsExt.h; sourceTree = "<group>"; };
-		DACEF961131A652900E9E462 /* NSDateComponentsExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDateComponentsExt.m; sourceTree = "<group>"; };
-		DACEF962131A652900E9E462 /* NSDateExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDateExt.h; sourceTree = "<group>"; };
-		DACEF963131A652900E9E462 /* NSDateExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDateExt.m; sourceTree = "<group>"; };
-		DACEF964131A652900E9E462 /* NSDictionaryExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDictionaryExt.h; sourceTree = "<group>"; };
-		DACEF965131A652900E9E462 /* NSDictionaryExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDictionaryExt.m; sourceTree = "<group>"; };
-		DACEF966131A652900E9E462 /* NSIndexPathExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSIndexPathExt.h; sourceTree = "<group>"; };
-		DACEF967131A652900E9E462 /* NSIndexPathExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSIndexPathExt.m; sourceTree = "<group>"; };
-		DACEF968131A652900E9E462 /* NSLocaleExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSLocaleExt.h; sourceTree = "<group>"; };
-		DACEF969131A652900E9E462 /* NSLocaleExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSLocaleExt.m; sourceTree = "<group>"; };
-		DACEF96A131A652900E9E462 /* NSMutableArrayExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSMutableArrayExt.h; sourceTree = "<group>"; };
-		DACEF96B131A652900E9E462 /* NSMutableArrayExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSMutableArrayExt.m; sourceTree = "<group>"; };
-		DACEF96C131A652900E9E462 /* NSMutableDictionaryExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSMutableDictionaryExt.h; sourceTree = "<group>"; };
-		DACEF96D131A652900E9E462 /* NSMutableDictionaryExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSMutableDictionaryExt.m; sourceTree = "<group>"; };
-		DACEF96E131A652900E9E462 /* NSNumberExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSNumberExt.h; sourceTree = "<group>"; };
-		DACEF96F131A652900E9E462 /* NSNumberExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSNumberExt.m; sourceTree = "<group>"; };
-		DACEF970131A652900E9E462 /* NSObjectExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSObjectExt.h; sourceTree = "<group>"; };
-		DACEF971131A652900E9E462 /* NSObjectExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSObjectExt.m; sourceTree = "<group>"; };
-		DACEF972131A652900E9E462 /* NSStringExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSStringExt.h; sourceTree = "<group>"; };
-		DACEF973131A652900E9E462 /* NSStringExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSStringExt.m; sourceTree = "<group>"; };
-		DACEF974131A652900E9E462 /* NSTimerExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSTimerExt.h; sourceTree = "<group>"; };
-		DACEF975131A652900E9E462 /* NSTimerExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSTimerExt.m; sourceTree = "<group>"; };
-		DACEF976131A652900E9E462 /* Numero.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Numero.h; sourceTree = "<group>"; };
-		DACEF978131A652900E9E462 /* UIActionSheetBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIActionSheetBlock.h; sourceTree = "<group>"; };
-		DACEF979131A652900E9E462 /* UIActionSheetBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIActionSheetBlock.m; sourceTree = "<group>"; };
-		DACEF97A131A652900E9E462 /* UIAlertViewBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIAlertViewBlock.h; sourceTree = "<group>"; };
-		DACEF97B131A652900E9E462 /* UIAlertViewBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIAlertViewBlock.m; sourceTree = "<group>"; };
-		DACEF97C131A652900E9E462 /* UIBarButtonItemBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBarButtonItemBlock.h; sourceTree = "<group>"; };
-		DACEF97D131A652900E9E462 /* UIBarButtonItemBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIBarButtonItemBlock.m; sourceTree = "<group>"; };
-		DACEF97E131A652900E9E462 /* UIButtonBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIButtonBlock.h; sourceTree = "<group>"; };
-		DACEF97F131A652900E9E462 /* UIButtonBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIButtonBlock.m; sourceTree = "<group>"; };
-		DACEF980131A652900E9E462 /* UIViewBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewBlock.h; sourceTree = "<group>"; };
-		DACEF981131A652900E9E462 /* UIViewBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIViewBlock.m; sourceTree = "<group>"; };
-		DACEF982131A652900E9E462 /* UIViewControllerBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewControllerBlock.h; sourceTree = "<group>"; };
-		DACEF983131A652900E9E462 /* UIViewControllerBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIViewControllerBlock.m; sourceTree = "<group>"; };
-		DACEF985131A652A00E9E462 /* Inspect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Inspect.h; sourceTree = "<group>"; };
-		DACEF986131A652A00E9E462 /* Inspect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Inspect.m; sourceTree = "<group>"; };
-		DACEF987131A652A00E9E462 /* Logger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Logger.h; sourceTree = "<group>"; };
-		DACEF988131A652A00E9E462 /* Logger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Logger.m; sourceTree = "<group>"; };
-		DACEF989131A652A00E9E462 /* UnitTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnitTest.h; sourceTree = "<group>"; };
-		DACEF98A131A652A00E9E462 /* UnitTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnitTest.m; sourceTree = "<group>"; };
-		DACEF98B131A652A00E9E462 /* UserConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserConstants.h; sourceTree = "<group>"; };
+		DACC80E213417EF0005F3F15 /* Async.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Async.h; sourceTree = "<group>"; };
+		DACC80E313417EF0005F3F15 /* Async.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Async.m; sourceTree = "<group>"; };
+		DACC80E413417EF0005F3F15 /* NSArrayBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSArrayBlock.h; sourceTree = "<group>"; };
+		DACC80E513417EF0005F3F15 /* NSArrayBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSArrayBlock.m; sourceTree = "<group>"; };
+		DACC80E613417EF0005F3F15 /* NSDictionaryBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDictionaryBlock.h; sourceTree = "<group>"; };
+		DACC80E713417EF0005F3F15 /* NSDictionaryBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDictionaryBlock.m; sourceTree = "<group>"; };
+		DACC80E813417EF0005F3F15 /* NSNumberBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSNumberBlock.h; sourceTree = "<group>"; };
+		DACC80E913417EF0005F3F15 /* NSNumberBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSNumberBlock.m; sourceTree = "<group>"; };
+		DACC80EB13417EF0005F3F15 /* NSObjectObserverExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSObjectObserverExt.h; sourceTree = "<group>"; };
+		DACC80EC13417EF0005F3F15 /* NSObjectObserverExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSObjectObserverExt.m; sourceTree = "<group>"; };
+		DACC80ED13417EF0005F3F15 /* Observer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Observer.h; sourceTree = "<group>"; };
+		DACC80EE13417EF0005F3F15 /* Observer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Observer.m; sourceTree = "<group>"; };
+		DACC80EF13417EF0005F3F15 /* ObserverManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObserverManager.h; sourceTree = "<group>"; };
+		DACC80F013417EF0005F3F15 /* ObserverManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ObserverManager.m; sourceTree = "<group>"; };
+		DACC80F113417EF0005F3F15 /* ProxyMutableDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProxyMutableDictionary.h; sourceTree = "<group>"; };
+		DACC80F213417EF0005F3F15 /* ProxyMutableDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProxyMutableDictionary.m; sourceTree = "<group>"; };
+		DACC80F513417EF0005F3F15 /* CommandManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommandManager.h; sourceTree = "<group>"; };
+		DACC80F613417EF0005F3F15 /* CommandManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommandManager.m; sourceTree = "<group>"; };
+		DACC80F713417EF0005F3F15 /* ConsoleManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsoleManager.h; sourceTree = "<group>"; };
+		DACC80F813417EF0005F3F15 /* ConsoleManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConsoleManager.m; sourceTree = "<group>"; };
+		DACC80F913417EF0005F3F15 /* NewObjectManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewObjectManager.h; sourceTree = "<group>"; };
+		DACC80FA13417EF0005F3F15 /* NewObjectManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewObjectManager.m; sourceTree = "<group>"; };
+		DACC80FB13417EF0005F3F15 /* UIViewFlick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewFlick.h; sourceTree = "<group>"; };
+		DACC80FC13417EF0005F3F15 /* UIViewFlick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIViewFlick.m; sourceTree = "<group>"; };
+		DACC80FE13417EF0005F3F15 /* ConsoleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsoleViewController.h; sourceTree = "<group>"; };
+		DACC80FF13417EF0005F3F15 /* ConsoleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConsoleViewController.m; sourceTree = "<group>"; };
+		DACC810013417EF0005F3F15 /* ConsoleViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConsoleViewController.xib; sourceTree = "<group>"; };
+		DACC810113417EF0005F3F15 /* EditPropertyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditPropertyViewController.h; sourceTree = "<group>"; };
+		DACC810213417EF0005F3F15 /* EditPropertyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditPropertyViewController.m; sourceTree = "<group>"; };
+		DACC810313417EF0005F3F15 /* EditPropertyViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditPropertyViewController.xib; sourceTree = "<group>"; };
+		DACC810413417EF0005F3F15 /* HitTestWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HitTestWindow.h; sourceTree = "<group>"; };
+		DACC810513417EF0005F3F15 /* HitTestWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HitTestWindow.m; sourceTree = "<group>"; };
+		DACC810613417EF0005F3F15 /* PropertyManipulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertyManipulator.h; sourceTree = "<group>"; };
+		DACC810713417EF0005F3F15 /* PropertyManipulator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PropertyManipulator.m; sourceTree = "<group>"; };
+		DACC810813417EF0005F3F15 /* PropertyRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PropertyRootViewController.h; sourceTree = "<group>"; };
+		DACC810913417EF0005F3F15 /* PropertyRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PropertyRootViewController.m; sourceTree = "<group>"; };
+		DACC810A13417EF0005F3F15 /* PropertyRootViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PropertyRootViewController.xib; sourceTree = "<group>"; };
+		DACC810B13417EF0005F3F15 /* TypeInfoTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TypeInfoTable.h; sourceTree = "<group>"; };
+		DACC810C13417EF0005F3F15 /* TypeInfoTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TypeInfoTable.m; sourceTree = "<group>"; };
+		DACC810F13417EF0005F3F15 /* ConsoleResponseHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsoleResponseHandler.h; sourceTree = "<group>"; };
+		DACC811013417EF0005F3F15 /* ConsoleResponseHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConsoleResponseHandler.m; sourceTree = "<group>"; };
+		DACC811113417EF0005F3F15 /* HTTPResponseHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPResponseHandler.h; sourceTree = "<group>"; };
+		DACC811213417EF0005F3F15 /* HTTPResponseHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPResponseHandler.m; sourceTree = "<group>"; };
+		DACC811313417EF0005F3F15 /* ImageResponseHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageResponseHandler.h; sourceTree = "<group>"; };
+		DACC811413417EF0005F3F15 /* ImageResponseHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageResponseHandler.m; sourceTree = "<group>"; };
+		DACC811613417EF0005F3F15 /* libcat_statusbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = libcat_statusbar.png; sourceTree = "<group>"; };
+		DACC811713417EF0005F3F15 /* WebResponseHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebResponseHandler.h; sourceTree = "<group>"; };
+		DACC811813417EF0005F3F15 /* WebResponseHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebResponseHandler.m; sourceTree = "<group>"; };
+		DACC811A13417EF0005F3F15 /* AsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncSocket.h; sourceTree = "<group>"; };
+		DACC811B13417EF0005F3F15 /* AsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AsyncSocket.m; sourceTree = "<group>"; };
+		DACC811C13417EF0005F3F15 /* HTTPServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTTPServer.h; sourceTree = "<group>"; };
+		DACC811D13417EF0005F3F15 /* HTTPServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPServer.m; sourceTree = "<group>"; };
+		DACC811E13417EF0005F3F15 /* LoggerServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoggerServer.h; sourceTree = "<group>"; };
+		DACC811F13417EF0005F3F15 /* LoggerServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoggerServer.m; sourceTree = "<group>"; };
+		DACC812113417EF0005F3F15 /* ExtHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtHeaders.h; sourceTree = "<group>"; };
+		DACC812213417EF0005F3F15 /* GeometryExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeometryExt.h; sourceTree = "<group>"; };
+		DACC812313417EF0005F3F15 /* GeometryExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeometryExt.m; sourceTree = "<group>"; };
+		DACC812413417EF0005F3F15 /* iPadExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iPadExt.h; sourceTree = "<group>"; };
+		DACC812513417EF0005F3F15 /* NSArrayExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSArrayExt.h; sourceTree = "<group>"; };
+		DACC812613417EF0005F3F15 /* NSArrayExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSArrayExt.m; sourceTree = "<group>"; };
+		DACC812713417EF0005F3F15 /* NSBundleExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSBundleExt.h; sourceTree = "<group>"; };
+		DACC812813417EF0005F3F15 /* NSBundleExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSBundleExt.m; sourceTree = "<group>"; };
+		DACC812913417EF0005F3F15 /* NSDataExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDataExt.h; sourceTree = "<group>"; };
+		DACC812A13417EF0005F3F15 /* NSDataExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDataExt.m; sourceTree = "<group>"; };
+		DACC812B13417EF0005F3F15 /* NSDateComponentsExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDateComponentsExt.h; sourceTree = "<group>"; };
+		DACC812C13417EF0005F3F15 /* NSDateComponentsExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDateComponentsExt.m; sourceTree = "<group>"; };
+		DACC812D13417EF0005F3F15 /* NSDateExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDateExt.h; sourceTree = "<group>"; };
+		DACC812E13417EF0005F3F15 /* NSDateExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDateExt.m; sourceTree = "<group>"; };
+		DACC812F13417EF0005F3F15 /* NSDictionaryExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSDictionaryExt.h; sourceTree = "<group>"; };
+		DACC813013417EF0005F3F15 /* NSDictionaryExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDictionaryExt.m; sourceTree = "<group>"; };
+		DACC813113417EF0005F3F15 /* NSIndexPathExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSIndexPathExt.h; sourceTree = "<group>"; };
+		DACC813213417EF0005F3F15 /* NSIndexPathExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSIndexPathExt.m; sourceTree = "<group>"; };
+		DACC813313417EF0005F3F15 /* NSLocaleExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSLocaleExt.h; sourceTree = "<group>"; };
+		DACC813413417EF0005F3F15 /* NSLocaleExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSLocaleExt.m; sourceTree = "<group>"; };
+		DACC813513417EF0005F3F15 /* NSMutableArrayExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSMutableArrayExt.h; sourceTree = "<group>"; };
+		DACC813613417EF0005F3F15 /* NSMutableArrayExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSMutableArrayExt.m; sourceTree = "<group>"; };
+		DACC813713417EF0005F3F15 /* NSMutableDictionaryExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSMutableDictionaryExt.h; sourceTree = "<group>"; };
+		DACC813813417EF0005F3F15 /* NSMutableDictionaryExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSMutableDictionaryExt.m; sourceTree = "<group>"; };
+		DACC813913417EF0005F3F15 /* NSNumberExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSNumberExt.h; sourceTree = "<group>"; };
+		DACC813A13417EF0005F3F15 /* NSNumberExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSNumberExt.m; sourceTree = "<group>"; };
+		DACC813B13417EF0005F3F15 /* NSObjectExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSObjectExt.h; sourceTree = "<group>"; };
+		DACC813C13417EF0005F3F15 /* NSObjectExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSObjectExt.m; sourceTree = "<group>"; };
+		DACC813D13417EF0005F3F15 /* NSStringExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSStringExt.h; sourceTree = "<group>"; };
+		DACC813E13417EF0005F3F15 /* NSStringExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSStringExt.m; sourceTree = "<group>"; };
+		DACC813F13417EF0005F3F15 /* NSTimerExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSTimerExt.h; sourceTree = "<group>"; };
+		DACC814013417EF0005F3F15 /* NSTimerExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSTimerExt.m; sourceTree = "<group>"; };
+		DACC814113417EF0005F3F15 /* Numero.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Numero.h; sourceTree = "<group>"; };
+		DACC814313417EF0005F3F15 /* UIActionSheetBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIActionSheetBlock.h; sourceTree = "<group>"; };
+		DACC814413417EF0005F3F15 /* UIActionSheetBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIActionSheetBlock.m; sourceTree = "<group>"; };
+		DACC814513417EF0005F3F15 /* UIAlertViewBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIAlertViewBlock.h; sourceTree = "<group>"; };
+		DACC814613417EF0005F3F15 /* UIAlertViewBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIAlertViewBlock.m; sourceTree = "<group>"; };
+		DACC814713417EF0005F3F15 /* UIBarButtonItemBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIBarButtonItemBlock.h; sourceTree = "<group>"; };
+		DACC814813417EF0005F3F15 /* UIBarButtonItemBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIBarButtonItemBlock.m; sourceTree = "<group>"; };
+		DACC814913417EF0005F3F15 /* UIButtonBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIButtonBlock.h; sourceTree = "<group>"; };
+		DACC814A13417EF0005F3F15 /* UIButtonBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIButtonBlock.m; sourceTree = "<group>"; };
+		DACC814B13417EF0005F3F15 /* UIViewBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewBlock.h; sourceTree = "<group>"; };
+		DACC814C13417EF0005F3F15 /* UIViewBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIViewBlock.m; sourceTree = "<group>"; };
+		DACC814D13417EF0005F3F15 /* UIViewControllerBlock.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewControllerBlock.h; sourceTree = "<group>"; };
+		DACC814E13417EF0005F3F15 /* UIViewControllerBlock.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIViewControllerBlock.m; sourceTree = "<group>"; };
+		DACC815013417EF0005F3F15 /* Inspect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Inspect.h; sourceTree = "<group>"; };
+		DACC815113417EF0005F3F15 /* Inspect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Inspect.m; sourceTree = "<group>"; };
+		DACC815213417EF0005F3F15 /* Logger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Logger.h; sourceTree = "<group>"; };
+		DACC815313417EF0005F3F15 /* Logger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Logger.m; sourceTree = "<group>"; };
+		DACC815413417EF0005F3F15 /* UnitTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnitTest.h; sourceTree = "<group>"; };
+		DACC815513417EF0005F3F15 /* UnitTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UnitTest.m; sourceTree = "<group>"; };
+		DACC815613417EF0005F3F15 /* UserConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserConstants.h; sourceTree = "<group>"; };
 		DADD7EE21260AE2C0040E482 /* UIControlViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIControlViewController.h; sourceTree = "<group>"; };
 		DADD7EE31260AE2C0040E482 /* UIControlViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIControlViewController.m; sourceTree = "<group>"; };
 		DADD7EE41260AE2C0040E482 /* UIControlViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UIControlViewController.xib; sourceTree = "<group>"; };
@@ -585,7 +589,7 @@
 			isa = PBXGroup;
 			children = (
 				DAE9D2AC12A81EE500EA3F21 /* README.md */,
-				DACEF917131A652900E9E462 /* libcat */,
+				DACC80E013417EF0005F3F15 /* libcat */,
 				DAA9663D12ACD25A00CB4664 /* PrivateAPI */,
 				DACAB00312629054006DA76D /* TestCases */,
 				080E96DDFE201D6D7F000001 /* Classes */,
@@ -887,203 +891,212 @@
 			path = ExtTestCases;
 			sourceTree = "<group>";
 		};
-		DACEF917131A652900E9E462 /* libcat */ = {
+		DACC80E013417EF0005F3F15 /* libcat */ = {
 			isa = PBXGroup;
 			children = (
-				DACEF918131A652900E9E462 /* Block */,
-				DACEF92A131A652900E9E462 /* Console */,
-				DACEF955131A652900E9E462 /* Ext */,
-				DACEF977131A652900E9E462 /* UIBlock */,
-				DACEF984131A652900E9E462 /* UnitTest */,
+				DACC80E113417EF0005F3F15 /* Block */,
+				DACC80F313417EF0005F3F15 /* Console */,
+				DACC812013417EF0005F3F15 /* Ext */,
+				DACC814213417EF0005F3F15 /* UIBlock */,
+				DACC814F13417EF0005F3F15 /* UnitTest */,
 			);
 			name = libcat;
 			path = ../libcat;
 			sourceTree = SOURCE_ROOT;
 		};
-		DACEF918131A652900E9E462 /* Block */ = {
+		DACC80E113417EF0005F3F15 /* Block */ = {
 			isa = PBXGroup;
 			children = (
-				DACEF919131A652900E9E462 /* Async.h */,
-				DACEF91A131A652900E9E462 /* Async.m */,
-				DACEF91B131A652900E9E462 /* NSArrayBlock.h */,
-				DACEF91C131A652900E9E462 /* NSArrayBlock.m */,
-				DACEF91D131A652900E9E462 /* NSDictionaryBlock.h */,
-				DACEF91E131A652900E9E462 /* NSDictionaryBlock.m */,
-				DACEF91F131A652900E9E462 /* NSNumberBlock.h */,
-				DACEF920131A652900E9E462 /* NSNumberBlock.m */,
-				DACEF921131A652900E9E462 /* Observer */,
+				DACC80E213417EF0005F3F15 /* Async.h */,
+				DACC80E313417EF0005F3F15 /* Async.m */,
+				DACC80E413417EF0005F3F15 /* NSArrayBlock.h */,
+				DACC80E513417EF0005F3F15 /* NSArrayBlock.m */,
+				DACC80E613417EF0005F3F15 /* NSDictionaryBlock.h */,
+				DACC80E713417EF0005F3F15 /* NSDictionaryBlock.m */,
+				DACC80E813417EF0005F3F15 /* NSNumberBlock.h */,
+				DACC80E913417EF0005F3F15 /* NSNumberBlock.m */,
+				DACC80EA13417EF0005F3F15 /* Observer */,
 			);
 			path = Block;
 			sourceTree = "<group>";
 		};
-		DACEF921131A652900E9E462 /* Observer */ = {
+		DACC80EA13417EF0005F3F15 /* Observer */ = {
 			isa = PBXGroup;
 			children = (
-				DACEF922131A652900E9E462 /* NSObjectObserverExt.h */,
-				DACEF923131A652900E9E462 /* NSObjectObserverExt.m */,
-				DACEF924131A652900E9E462 /* Observer.h */,
-				DACEF925131A652900E9E462 /* Observer.m */,
-				DACEF926131A652900E9E462 /* ObserverManager.h */,
-				DACEF927131A652900E9E462 /* ObserverManager.m */,
-				DACEF928131A652900E9E462 /* ProxyMutableDictionary.h */,
-				DACEF929131A652900E9E462 /* ProxyMutableDictionary.m */,
+				DACC80EB13417EF0005F3F15 /* NSObjectObserverExt.h */,
+				DACC80EC13417EF0005F3F15 /* NSObjectObserverExt.m */,
+				DACC80ED13417EF0005F3F15 /* Observer.h */,
+				DACC80EE13417EF0005F3F15 /* Observer.m */,
+				DACC80EF13417EF0005F3F15 /* ObserverManager.h */,
+				DACC80F013417EF0005F3F15 /* ObserverManager.m */,
+				DACC80F113417EF0005F3F15 /* ProxyMutableDictionary.h */,
+				DACC80F213417EF0005F3F15 /* ProxyMutableDictionary.m */,
 			);
 			path = Observer;
 			sourceTree = "<group>";
 		};
-		DACEF92A131A652900E9E462 /* Console */ = {
+		DACC80F313417EF0005F3F15 /* Console */ = {
 			isa = PBXGroup;
 			children = (
-				DACEF92B131A652900E9E462 /* manager */,
-				DACEF934131A652900E9E462 /* manipulator */,
-				DACEF944131A652900E9E462 /* net */,
+				DACC80F413417EF0005F3F15 /* manager */,
+				DACC80FD13417EF0005F3F15 /* manipulator */,
+				DACC810D13417EF0005F3F15 /* net */,
 			);
 			path = Console;
 			sourceTree = "<group>";
 		};
-		DACEF92B131A652900E9E462 /* manager */ = {
+		DACC80F413417EF0005F3F15 /* manager */ = {
 			isa = PBXGroup;
 			children = (
-				DACEF92C131A652900E9E462 /* CommandManager.h */,
-				DACEF92D131A652900E9E462 /* CommandManager.m */,
-				DACEF92E131A652900E9E462 /* ConsoleManager.h */,
-				DACEF92F131A652900E9E462 /* ConsoleManager.m */,
-				DACEF930131A652900E9E462 /* NewObjectManager.h */,
-				DACEF931131A652900E9E462 /* NewObjectManager.m */,
-				DACEF932131A652900E9E462 /* UIViewFlick.h */,
-				DACEF933131A652900E9E462 /* UIViewFlick.m */,
+				DACC80F513417EF0005F3F15 /* CommandManager.h */,
+				DACC80F613417EF0005F3F15 /* CommandManager.m */,
+				DACC80F713417EF0005F3F15 /* ConsoleManager.h */,
+				DACC80F813417EF0005F3F15 /* ConsoleManager.m */,
+				DACC80F913417EF0005F3F15 /* NewObjectManager.h */,
+				DACC80FA13417EF0005F3F15 /* NewObjectManager.m */,
+				DACC80FB13417EF0005F3F15 /* UIViewFlick.h */,
+				DACC80FC13417EF0005F3F15 /* UIViewFlick.m */,
 			);
 			path = manager;
 			sourceTree = "<group>";
 		};
-		DACEF934131A652900E9E462 /* manipulator */ = {
+		DACC80FD13417EF0005F3F15 /* manipulator */ = {
 			isa = PBXGroup;
 			children = (
-				DACEF935131A652900E9E462 /* ConsoleViewController.h */,
-				DACEF936131A652900E9E462 /* ConsoleViewController.m */,
-				DACEF937131A652900E9E462 /* ConsoleViewController.xib */,
-				DACEF938131A652900E9E462 /* EditPropertyViewController.h */,
-				DACEF939131A652900E9E462 /* EditPropertyViewController.m */,
-				DACEF93A131A652900E9E462 /* EditPropertyViewController.xib */,
-				DACEF93B131A652900E9E462 /* HitTestWindow.h */,
-				DACEF93C131A652900E9E462 /* HitTestWindow.m */,
-				DACEF93D131A652900E9E462 /* PropertyManipulator.h */,
-				DACEF93E131A652900E9E462 /* PropertyManipulator.m */,
-				DACEF93F131A652900E9E462 /* PropertyRootViewController.h */,
-				DACEF940131A652900E9E462 /* PropertyRootViewController.m */,
-				DACEF941131A652900E9E462 /* PropertyRootViewController.xib */,
-				DACEF942131A652900E9E462 /* TypeInfoTable.h */,
-				DACEF943131A652900E9E462 /* TypeInfoTable.m */,
+				DACC80FE13417EF0005F3F15 /* ConsoleViewController.h */,
+				DACC80FF13417EF0005F3F15 /* ConsoleViewController.m */,
+				DACC810013417EF0005F3F15 /* ConsoleViewController.xib */,
+				DACC810113417EF0005F3F15 /* EditPropertyViewController.h */,
+				DACC810213417EF0005F3F15 /* EditPropertyViewController.m */,
+				DACC810313417EF0005F3F15 /* EditPropertyViewController.xib */,
+				DACC810413417EF0005F3F15 /* HitTestWindow.h */,
+				DACC810513417EF0005F3F15 /* HitTestWindow.m */,
+				DACC810613417EF0005F3F15 /* PropertyManipulator.h */,
+				DACC810713417EF0005F3F15 /* PropertyManipulator.m */,
+				DACC810813417EF0005F3F15 /* PropertyRootViewController.h */,
+				DACC810913417EF0005F3F15 /* PropertyRootViewController.m */,
+				DACC810A13417EF0005F3F15 /* PropertyRootViewController.xib */,
+				DACC810B13417EF0005F3F15 /* TypeInfoTable.h */,
+				DACC810C13417EF0005F3F15 /* TypeInfoTable.m */,
 			);
 			path = manipulator;
 			sourceTree = "<group>";
 		};
-		DACEF944131A652900E9E462 /* net */ = {
+		DACC810D13417EF0005F3F15 /* net */ = {
 			isa = PBXGroup;
 			children = (
-				DACEF945131A652900E9E462 /* handlers */,
-				DACEF94E131A652900E9E462 /* servers */,
+				DACC810E13417EF0005F3F15 /* handlers */,
+				DACC811913417EF0005F3F15 /* servers */,
 			);
 			path = net;
 			sourceTree = "<group>";
 		};
-		DACEF945131A652900E9E462 /* handlers */ = {
+		DACC810E13417EF0005F3F15 /* handlers */ = {
 			isa = PBXGroup;
 			children = (
-				DACEF946131A652900E9E462 /* ConsoleResponseHandler.h */,
-				DACEF947131A652900E9E462 /* ConsoleResponseHandler.m */,
-				DACEF948131A652900E9E462 /* HTTPResponseHandler.h */,
-				DACEF949131A652900E9E462 /* HTTPResponseHandler.m */,
-				DACEF94A131A652900E9E462 /* ImageResponseHandler.h */,
-				DACEF94B131A652900E9E462 /* ImageResponseHandler.m */,
-				DACEF94C131A652900E9E462 /* WebResponseHandler.h */,
-				DACEF94D131A652900E9E462 /* WebResponseHandler.m */,
+				DACC810F13417EF0005F3F15 /* ConsoleResponseHandler.h */,
+				DACC811013417EF0005F3F15 /* ConsoleResponseHandler.m */,
+				DACC811113417EF0005F3F15 /* HTTPResponseHandler.h */,
+				DACC811213417EF0005F3F15 /* HTTPResponseHandler.m */,
+				DACC811313417EF0005F3F15 /* ImageResponseHandler.h */,
+				DACC811413417EF0005F3F15 /* ImageResponseHandler.m */,
+				DACC811513417EF0005F3F15 /* images */,
+				DACC811713417EF0005F3F15 /* WebResponseHandler.h */,
+				DACC811813417EF0005F3F15 /* WebResponseHandler.m */,
 			);
 			path = handlers;
 			sourceTree = "<group>";
 		};
-		DACEF94E131A652900E9E462 /* servers */ = {
+		DACC811513417EF0005F3F15 /* images */ = {
 			isa = PBXGroup;
 			children = (
-				DACEF94F131A652900E9E462 /* AsyncSocket.h */,
-				DACEF950131A652900E9E462 /* AsyncSocket.m */,
-				DACEF951131A652900E9E462 /* HTTPServer.h */,
-				DACEF952131A652900E9E462 /* HTTPServer.m */,
-				DACEF953131A652900E9E462 /* LoggerServer.h */,
-				DACEF954131A652900E9E462 /* LoggerServer.m */,
+				DACC811613417EF0005F3F15 /* libcat_statusbar.png */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
+		DACC811913417EF0005F3F15 /* servers */ = {
+			isa = PBXGroup;
+			children = (
+				DACC811A13417EF0005F3F15 /* AsyncSocket.h */,
+				DACC811B13417EF0005F3F15 /* AsyncSocket.m */,
+				DACC811C13417EF0005F3F15 /* HTTPServer.h */,
+				DACC811D13417EF0005F3F15 /* HTTPServer.m */,
+				DACC811E13417EF0005F3F15 /* LoggerServer.h */,
+				DACC811F13417EF0005F3F15 /* LoggerServer.m */,
 			);
 			path = servers;
 			sourceTree = "<group>";
 		};
-		DACEF955131A652900E9E462 /* Ext */ = {
+		DACC812013417EF0005F3F15 /* Ext */ = {
 			isa = PBXGroup;
 			children = (
-				DACEF956131A652900E9E462 /* ExtHeaders.h */,
-				DACEF957131A652900E9E462 /* GeometryExt.h */,
-				DACEF958131A652900E9E462 /* GeometryExt.m */,
-				DACEF959131A652900E9E462 /* iPadExt.h */,
-				DACEF95A131A652900E9E462 /* NSArrayExt.h */,
-				DACEF95B131A652900E9E462 /* NSArrayExt.m */,
-				DACEF95C131A652900E9E462 /* NSBundleExt.h */,
-				DACEF95D131A652900E9E462 /* NSBundleExt.m */,
-				DACEF95E131A652900E9E462 /* NSDataExt.h */,
-				DACEF95F131A652900E9E462 /* NSDataExt.m */,
-				DACEF960131A652900E9E462 /* NSDateComponentsExt.h */,
-				DACEF961131A652900E9E462 /* NSDateComponentsExt.m */,
-				DACEF962131A652900E9E462 /* NSDateExt.h */,
-				DACEF963131A652900E9E462 /* NSDateExt.m */,
-				DACEF964131A652900E9E462 /* NSDictionaryExt.h */,
-				DACEF965131A652900E9E462 /* NSDictionaryExt.m */,
-				DACEF966131A652900E9E462 /* NSIndexPathExt.h */,
-				DACEF967131A652900E9E462 /* NSIndexPathExt.m */,
-				DACEF968131A652900E9E462 /* NSLocaleExt.h */,
-				DACEF969131A652900E9E462 /* NSLocaleExt.m */,
-				DACEF96A131A652900E9E462 /* NSMutableArrayExt.h */,
-				DACEF96B131A652900E9E462 /* NSMutableArrayExt.m */,
-				DACEF96C131A652900E9E462 /* NSMutableDictionaryExt.h */,
-				DACEF96D131A652900E9E462 /* NSMutableDictionaryExt.m */,
-				DACEF96E131A652900E9E462 /* NSNumberExt.h */,
-				DACEF96F131A652900E9E462 /* NSNumberExt.m */,
-				DACEF970131A652900E9E462 /* NSObjectExt.h */,
-				DACEF971131A652900E9E462 /* NSObjectExt.m */,
-				DACEF972131A652900E9E462 /* NSStringExt.h */,
-				DACEF973131A652900E9E462 /* NSStringExt.m */,
-				DACEF974131A652900E9E462 /* NSTimerExt.h */,
-				DACEF975131A652900E9E462 /* NSTimerExt.m */,
-				DACEF976131A652900E9E462 /* Numero.h */,
+				DACC812113417EF0005F3F15 /* ExtHeaders.h */,
+				DACC812213417EF0005F3F15 /* GeometryExt.h */,
+				DACC812313417EF0005F3F15 /* GeometryExt.m */,
+				DACC812413417EF0005F3F15 /* iPadExt.h */,
+				DACC812513417EF0005F3F15 /* NSArrayExt.h */,
+				DACC812613417EF0005F3F15 /* NSArrayExt.m */,
+				DACC812713417EF0005F3F15 /* NSBundleExt.h */,
+				DACC812813417EF0005F3F15 /* NSBundleExt.m */,
+				DACC812913417EF0005F3F15 /* NSDataExt.h */,
+				DACC812A13417EF0005F3F15 /* NSDataExt.m */,
+				DACC812B13417EF0005F3F15 /* NSDateComponentsExt.h */,
+				DACC812C13417EF0005F3F15 /* NSDateComponentsExt.m */,
+				DACC812D13417EF0005F3F15 /* NSDateExt.h */,
+				DACC812E13417EF0005F3F15 /* NSDateExt.m */,
+				DACC812F13417EF0005F3F15 /* NSDictionaryExt.h */,
+				DACC813013417EF0005F3F15 /* NSDictionaryExt.m */,
+				DACC813113417EF0005F3F15 /* NSIndexPathExt.h */,
+				DACC813213417EF0005F3F15 /* NSIndexPathExt.m */,
+				DACC813313417EF0005F3F15 /* NSLocaleExt.h */,
+				DACC813413417EF0005F3F15 /* NSLocaleExt.m */,
+				DACC813513417EF0005F3F15 /* NSMutableArrayExt.h */,
+				DACC813613417EF0005F3F15 /* NSMutableArrayExt.m */,
+				DACC813713417EF0005F3F15 /* NSMutableDictionaryExt.h */,
+				DACC813813417EF0005F3F15 /* NSMutableDictionaryExt.m */,
+				DACC813913417EF0005F3F15 /* NSNumberExt.h */,
+				DACC813A13417EF0005F3F15 /* NSNumberExt.m */,
+				DACC813B13417EF0005F3F15 /* NSObjectExt.h */,
+				DACC813C13417EF0005F3F15 /* NSObjectExt.m */,
+				DACC813D13417EF0005F3F15 /* NSStringExt.h */,
+				DACC813E13417EF0005F3F15 /* NSStringExt.m */,
+				DACC813F13417EF0005F3F15 /* NSTimerExt.h */,
+				DACC814013417EF0005F3F15 /* NSTimerExt.m */,
+				DACC814113417EF0005F3F15 /* Numero.h */,
 			);
 			path = Ext;
 			sourceTree = "<group>";
 		};
-		DACEF977131A652900E9E462 /* UIBlock */ = {
+		DACC814213417EF0005F3F15 /* UIBlock */ = {
 			isa = PBXGroup;
 			children = (
-				DACEF978131A652900E9E462 /* UIActionSheetBlock.h */,
-				DACEF979131A652900E9E462 /* UIActionSheetBlock.m */,
-				DACEF97A131A652900E9E462 /* UIAlertViewBlock.h */,
-				DACEF97B131A652900E9E462 /* UIAlertViewBlock.m */,
-				DACEF97C131A652900E9E462 /* UIBarButtonItemBlock.h */,
-				DACEF97D131A652900E9E462 /* UIBarButtonItemBlock.m */,
-				DACEF97E131A652900E9E462 /* UIButtonBlock.h */,
-				DACEF97F131A652900E9E462 /* UIButtonBlock.m */,
-				DACEF980131A652900E9E462 /* UIViewBlock.h */,
-				DACEF981131A652900E9E462 /* UIViewBlock.m */,
-				DACEF982131A652900E9E462 /* UIViewControllerBlock.h */,
-				DACEF983131A652900E9E462 /* UIViewControllerBlock.m */,
+				DACC814313417EF0005F3F15 /* UIActionSheetBlock.h */,
+				DACC814413417EF0005F3F15 /* UIActionSheetBlock.m */,
+				DACC814513417EF0005F3F15 /* UIAlertViewBlock.h */,
+				DACC814613417EF0005F3F15 /* UIAlertViewBlock.m */,
+				DACC814713417EF0005F3F15 /* UIBarButtonItemBlock.h */,
+				DACC814813417EF0005F3F15 /* UIBarButtonItemBlock.m */,
+				DACC814913417EF0005F3F15 /* UIButtonBlock.h */,
+				DACC814A13417EF0005F3F15 /* UIButtonBlock.m */,
+				DACC814B13417EF0005F3F15 /* UIViewBlock.h */,
+				DACC814C13417EF0005F3F15 /* UIViewBlock.m */,
+				DACC814D13417EF0005F3F15 /* UIViewControllerBlock.h */,
+				DACC814E13417EF0005F3F15 /* UIViewControllerBlock.m */,
 			);
 			path = UIBlock;
 			sourceTree = "<group>";
 		};
-		DACEF984131A652900E9E462 /* UnitTest */ = {
+		DACC814F13417EF0005F3F15 /* UnitTest */ = {
 			isa = PBXGroup;
 			children = (
-				DACEF985131A652A00E9E462 /* Inspect.h */,
-				DACEF986131A652A00E9E462 /* Inspect.m */,
-				DACEF987131A652A00E9E462 /* Logger.h */,
-				DACEF988131A652A00E9E462 /* Logger.m */,
-				DACEF989131A652A00E9E462 /* UnitTest.h */,
-				DACEF98A131A652A00E9E462 /* UnitTest.m */,
-				DACEF98B131A652A00E9E462 /* UserConstants.h */,
+				DACC815013417EF0005F3F15 /* Inspect.h */,
+				DACC815113417EF0005F3F15 /* Inspect.m */,
+				DACC815213417EF0005F3F15 /* Logger.h */,
+				DACC815313417EF0005F3F15 /* Logger.m */,
+				DACC815413417EF0005F3F15 /* UnitTest.h */,
+				DACC815513417EF0005F3F15 /* UnitTest.m */,
+				DACC815613417EF0005F3F15 /* UserConstants.h */,
 			);
 			path = UnitTest;
 			sourceTree = "<group>";
@@ -1189,9 +1202,10 @@
 				DAC5BA9212A99F2300953A23 /* TabBarMainWindow.xib in Resources */,
 				DA89675D12F4ED5A00ADCEC5 /* Icon-72.png in Resources */,
 				DAC8198612F638EB005BE2A3 /* ScrollViewController.xib in Resources */,
-				DACEF999131A652A00E9E462 /* ConsoleViewController.xib in Resources */,
-				DACEF99B131A652A00E9E462 /* EditPropertyViewController.xib in Resources */,
-				DACEF99F131A652A00E9E462 /* PropertyRootViewController.xib in Resources */,
+				DACC81CE13417EF0005F3F15 /* ConsoleViewController.xib in Resources */,
+				DACC81D013417EF0005F3F15 /* EditPropertyViewController.xib in Resources */,
+				DACC81D413417EF0005F3F15 /* PropertyRootViewController.xib in Resources */,
+				DACC81D913417EF0005F3F15 /* libcat_statusbar.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1215,9 +1229,10 @@
 				DAC0C2BB12A9AB2C00F669EC /* InfoPlist.strings in Resources */,
 				DA89675F12F4ED6200ADCEC5 /* Icon-72.png in Resources */,
 				DAC8198212F638EB005BE2A3 /* ScrollViewController.xib in Resources */,
-				DACEFA01131A652A00E9E462 /* ConsoleViewController.xib in Resources */,
-				DACEFA03131A652A00E9E462 /* EditPropertyViewController.xib in Resources */,
-				DACEFA07131A652A00E9E462 /* PropertyRootViewController.xib in Resources */,
+				DACC816413417EF0005F3F15 /* ConsoleViewController.xib in Resources */,
+				DACC816613417EF0005F3F15 /* EditPropertyViewController.xib in Resources */,
+				DACC816A13417EF0005F3F15 /* PropertyRootViewController.xib in Resources */,
+				DACC816F13417EF0005F3F15 /* libcat_statusbar.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1238,9 +1253,10 @@
 				DAC0C2A112A9AAE900F669EC /* Icon.png in Resources */,
 				DA89675B12F4ED4C00ADCEC5 /* Icon-72.png in Resources */,
 				DAC8198412F638EB005BE2A3 /* ScrollViewController.xib in Resources */,
-				DACEF9CD131A652A00E9E462 /* ConsoleViewController.xib in Resources */,
-				DACEF9CF131A652A00E9E462 /* EditPropertyViewController.xib in Resources */,
-				DACEF9D3131A652A00E9E462 /* PropertyRootViewController.xib in Resources */,
+				DACC819913417EF0005F3F15 /* ConsoleViewController.xib in Resources */,
+				DACC819B13417EF0005F3F15 /* EditPropertyViewController.xib in Resources */,
+				DACC819F13417EF0005F3F15 /* PropertyRootViewController.xib in Resources */,
+				DACC81A413417EF0005F3F15 /* libcat_statusbar.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1279,55 +1295,55 @@
 				DAA966E412ACD25A00CB4664 /* UIViewTouchExt.m in Sources */,
 				DAEDA12512C014F100360459 /* TestLocale.m in Sources */,
 				DAC8198512F638EB005BE2A3 /* ScrollViewController.m in Sources */,
-				DACEF98C131A652A00E9E462 /* Async.m in Sources */,
-				DACEF98D131A652A00E9E462 /* NSArrayBlock.m in Sources */,
-				DACEF98E131A652A00E9E462 /* NSDictionaryBlock.m in Sources */,
-				DACEF98F131A652A00E9E462 /* NSNumberBlock.m in Sources */,
-				DACEF990131A652A00E9E462 /* NSObjectObserverExt.m in Sources */,
-				DACEF991131A652A00E9E462 /* Observer.m in Sources */,
-				DACEF992131A652A00E9E462 /* ObserverManager.m in Sources */,
-				DACEF993131A652A00E9E462 /* ProxyMutableDictionary.m in Sources */,
-				DACEF994131A652A00E9E462 /* CommandManager.m in Sources */,
-				DACEF995131A652A00E9E462 /* ConsoleManager.m in Sources */,
-				DACEF996131A652A00E9E462 /* NewObjectManager.m in Sources */,
-				DACEF997131A652A00E9E462 /* UIViewFlick.m in Sources */,
-				DACEF998131A652A00E9E462 /* ConsoleViewController.m in Sources */,
-				DACEF99A131A652A00E9E462 /* EditPropertyViewController.m in Sources */,
-				DACEF99C131A652A00E9E462 /* HitTestWindow.m in Sources */,
-				DACEF99D131A652A00E9E462 /* PropertyManipulator.m in Sources */,
-				DACEF99E131A652A00E9E462 /* PropertyRootViewController.m in Sources */,
-				DACEF9A0131A652A00E9E462 /* TypeInfoTable.m in Sources */,
-				DACEF9A1131A652A00E9E462 /* ConsoleResponseHandler.m in Sources */,
-				DACEF9A2131A652A00E9E462 /* HTTPResponseHandler.m in Sources */,
-				DACEF9A3131A652A00E9E462 /* ImageResponseHandler.m in Sources */,
-				DACEF9A4131A652A00E9E462 /* WebResponseHandler.m in Sources */,
-				DACEF9A5131A652A00E9E462 /* AsyncSocket.m in Sources */,
-				DACEF9A6131A652A00E9E462 /* HTTPServer.m in Sources */,
-				DACEF9A7131A652A00E9E462 /* LoggerServer.m in Sources */,
-				DACEF9A8131A652A00E9E462 /* GeometryExt.m in Sources */,
-				DACEF9A9131A652A00E9E462 /* NSArrayExt.m in Sources */,
-				DACEF9AA131A652A00E9E462 /* NSBundleExt.m in Sources */,
-				DACEF9AB131A652A00E9E462 /* NSDataExt.m in Sources */,
-				DACEF9AC131A652A00E9E462 /* NSDateComponentsExt.m in Sources */,
-				DACEF9AD131A652A00E9E462 /* NSDateExt.m in Sources */,
-				DACEF9AE131A652A00E9E462 /* NSDictionaryExt.m in Sources */,
-				DACEF9AF131A652A00E9E462 /* NSIndexPathExt.m in Sources */,
-				DACEF9B0131A652A00E9E462 /* NSLocaleExt.m in Sources */,
-				DACEF9B1131A652A00E9E462 /* NSMutableArrayExt.m in Sources */,
-				DACEF9B2131A652A00E9E462 /* NSMutableDictionaryExt.m in Sources */,
-				DACEF9B3131A652A00E9E462 /* NSNumberExt.m in Sources */,
-				DACEF9B4131A652A00E9E462 /* NSObjectExt.m in Sources */,
-				DACEF9B5131A652A00E9E462 /* NSStringExt.m in Sources */,
-				DACEF9B6131A652A00E9E462 /* NSTimerExt.m in Sources */,
-				DACEF9B7131A652A00E9E462 /* UIActionSheetBlock.m in Sources */,
-				DACEF9B8131A652A00E9E462 /* UIAlertViewBlock.m in Sources */,
-				DACEF9B9131A652A00E9E462 /* UIBarButtonItemBlock.m in Sources */,
-				DACEF9BA131A652A00E9E462 /* UIButtonBlock.m in Sources */,
-				DACEF9BB131A652A00E9E462 /* UIViewBlock.m in Sources */,
-				DACEF9BC131A652A00E9E462 /* UIViewControllerBlock.m in Sources */,
-				DACEF9BD131A652A00E9E462 /* Inspect.m in Sources */,
-				DACEF9BE131A652A00E9E462 /* Logger.m in Sources */,
-				DACEF9BF131A652A00E9E462 /* UnitTest.m in Sources */,
+				DACC81C113417EF0005F3F15 /* Async.m in Sources */,
+				DACC81C213417EF0005F3F15 /* NSArrayBlock.m in Sources */,
+				DACC81C313417EF0005F3F15 /* NSDictionaryBlock.m in Sources */,
+				DACC81C413417EF0005F3F15 /* NSNumberBlock.m in Sources */,
+				DACC81C513417EF0005F3F15 /* NSObjectObserverExt.m in Sources */,
+				DACC81C613417EF0005F3F15 /* Observer.m in Sources */,
+				DACC81C713417EF0005F3F15 /* ObserverManager.m in Sources */,
+				DACC81C813417EF0005F3F15 /* ProxyMutableDictionary.m in Sources */,
+				DACC81C913417EF0005F3F15 /* CommandManager.m in Sources */,
+				DACC81CA13417EF0005F3F15 /* ConsoleManager.m in Sources */,
+				DACC81CB13417EF0005F3F15 /* NewObjectManager.m in Sources */,
+				DACC81CC13417EF0005F3F15 /* UIViewFlick.m in Sources */,
+				DACC81CD13417EF0005F3F15 /* ConsoleViewController.m in Sources */,
+				DACC81CF13417EF0005F3F15 /* EditPropertyViewController.m in Sources */,
+				DACC81D113417EF0005F3F15 /* HitTestWindow.m in Sources */,
+				DACC81D213417EF0005F3F15 /* PropertyManipulator.m in Sources */,
+				DACC81D313417EF0005F3F15 /* PropertyRootViewController.m in Sources */,
+				DACC81D513417EF0005F3F15 /* TypeInfoTable.m in Sources */,
+				DACC81D613417EF0005F3F15 /* ConsoleResponseHandler.m in Sources */,
+				DACC81D713417EF0005F3F15 /* HTTPResponseHandler.m in Sources */,
+				DACC81D813417EF0005F3F15 /* ImageResponseHandler.m in Sources */,
+				DACC81DA13417EF0005F3F15 /* WebResponseHandler.m in Sources */,
+				DACC81DB13417EF0005F3F15 /* AsyncSocket.m in Sources */,
+				DACC81DC13417EF0005F3F15 /* HTTPServer.m in Sources */,
+				DACC81DD13417EF0005F3F15 /* LoggerServer.m in Sources */,
+				DACC81DE13417EF0005F3F15 /* GeometryExt.m in Sources */,
+				DACC81DF13417EF0005F3F15 /* NSArrayExt.m in Sources */,
+				DACC81E013417EF0005F3F15 /* NSBundleExt.m in Sources */,
+				DACC81E113417EF0005F3F15 /* NSDataExt.m in Sources */,
+				DACC81E213417EF0005F3F15 /* NSDateComponentsExt.m in Sources */,
+				DACC81E313417EF0005F3F15 /* NSDateExt.m in Sources */,
+				DACC81E413417EF0005F3F15 /* NSDictionaryExt.m in Sources */,
+				DACC81E513417EF0005F3F15 /* NSIndexPathExt.m in Sources */,
+				DACC81E613417EF0005F3F15 /* NSLocaleExt.m in Sources */,
+				DACC81E713417EF0005F3F15 /* NSMutableArrayExt.m in Sources */,
+				DACC81E813417EF0005F3F15 /* NSMutableDictionaryExt.m in Sources */,
+				DACC81E913417EF0005F3F15 /* NSNumberExt.m in Sources */,
+				DACC81EA13417EF0005F3F15 /* NSObjectExt.m in Sources */,
+				DACC81EB13417EF0005F3F15 /* NSStringExt.m in Sources */,
+				DACC81EC13417EF0005F3F15 /* NSTimerExt.m in Sources */,
+				DACC81ED13417EF0005F3F15 /* UIActionSheetBlock.m in Sources */,
+				DACC81EE13417EF0005F3F15 /* UIAlertViewBlock.m in Sources */,
+				DACC81EF13417EF0005F3F15 /* UIBarButtonItemBlock.m in Sources */,
+				DACC81F013417EF0005F3F15 /* UIButtonBlock.m in Sources */,
+				DACC81F113417EF0005F3F15 /* UIViewBlock.m in Sources */,
+				DACC81F213417EF0005F3F15 /* UIViewControllerBlock.m in Sources */,
+				DACC81F313417EF0005F3F15 /* Inspect.m in Sources */,
+				DACC81F413417EF0005F3F15 /* Logger.m in Sources */,
+				DACC81F513417EF0005F3F15 /* UnitTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1365,55 +1381,55 @@
 				DAA966B112ACD25A00CB4664 /* UIViewTouchExt.m in Sources */,
 				DAEDA12612C014F100360459 /* TestLocale.m in Sources */,
 				DAC8198112F638EB005BE2A3 /* ScrollViewController.m in Sources */,
-				DACEF9F4131A652A00E9E462 /* Async.m in Sources */,
-				DACEF9F5131A652A00E9E462 /* NSArrayBlock.m in Sources */,
-				DACEF9F6131A652A00E9E462 /* NSDictionaryBlock.m in Sources */,
-				DACEF9F7131A652A00E9E462 /* NSNumberBlock.m in Sources */,
-				DACEF9F8131A652A00E9E462 /* NSObjectObserverExt.m in Sources */,
-				DACEF9F9131A652A00E9E462 /* Observer.m in Sources */,
-				DACEF9FA131A652A00E9E462 /* ObserverManager.m in Sources */,
-				DACEF9FB131A652A00E9E462 /* ProxyMutableDictionary.m in Sources */,
-				DACEF9FC131A652A00E9E462 /* CommandManager.m in Sources */,
-				DACEF9FD131A652A00E9E462 /* ConsoleManager.m in Sources */,
-				DACEF9FE131A652A00E9E462 /* NewObjectManager.m in Sources */,
-				DACEF9FF131A652A00E9E462 /* UIViewFlick.m in Sources */,
-				DACEFA00131A652A00E9E462 /* ConsoleViewController.m in Sources */,
-				DACEFA02131A652A00E9E462 /* EditPropertyViewController.m in Sources */,
-				DACEFA04131A652A00E9E462 /* HitTestWindow.m in Sources */,
-				DACEFA05131A652A00E9E462 /* PropertyManipulator.m in Sources */,
-				DACEFA06131A652A00E9E462 /* PropertyRootViewController.m in Sources */,
-				DACEFA08131A652A00E9E462 /* TypeInfoTable.m in Sources */,
-				DACEFA09131A652A00E9E462 /* ConsoleResponseHandler.m in Sources */,
-				DACEFA0A131A652A00E9E462 /* HTTPResponseHandler.m in Sources */,
-				DACEFA0B131A652A00E9E462 /* ImageResponseHandler.m in Sources */,
-				DACEFA0C131A652A00E9E462 /* WebResponseHandler.m in Sources */,
-				DACEFA0D131A652A00E9E462 /* AsyncSocket.m in Sources */,
-				DACEFA0E131A652A00E9E462 /* HTTPServer.m in Sources */,
-				DACEFA0F131A652A00E9E462 /* LoggerServer.m in Sources */,
-				DACEFA10131A652A00E9E462 /* GeometryExt.m in Sources */,
-				DACEFA11131A652A00E9E462 /* NSArrayExt.m in Sources */,
-				DACEFA12131A652A00E9E462 /* NSBundleExt.m in Sources */,
-				DACEFA13131A652A00E9E462 /* NSDataExt.m in Sources */,
-				DACEFA14131A652A00E9E462 /* NSDateComponentsExt.m in Sources */,
-				DACEFA15131A652A00E9E462 /* NSDateExt.m in Sources */,
-				DACEFA16131A652A00E9E462 /* NSDictionaryExt.m in Sources */,
-				DACEFA17131A652A00E9E462 /* NSIndexPathExt.m in Sources */,
-				DACEFA18131A652A00E9E462 /* NSLocaleExt.m in Sources */,
-				DACEFA19131A652A00E9E462 /* NSMutableArrayExt.m in Sources */,
-				DACEFA1A131A652A00E9E462 /* NSMutableDictionaryExt.m in Sources */,
-				DACEFA1B131A652A00E9E462 /* NSNumberExt.m in Sources */,
-				DACEFA1C131A652A00E9E462 /* NSObjectExt.m in Sources */,
-				DACEFA1D131A652A00E9E462 /* NSStringExt.m in Sources */,
-				DACEFA1E131A652A00E9E462 /* NSTimerExt.m in Sources */,
-				DACEFA1F131A652A00E9E462 /* UIActionSheetBlock.m in Sources */,
-				DACEFA20131A652A00E9E462 /* UIAlertViewBlock.m in Sources */,
-				DACEFA21131A652A00E9E462 /* UIBarButtonItemBlock.m in Sources */,
-				DACEFA22131A652A00E9E462 /* UIButtonBlock.m in Sources */,
-				DACEFA23131A652A00E9E462 /* UIViewBlock.m in Sources */,
-				DACEFA24131A652A00E9E462 /* UIViewControllerBlock.m in Sources */,
-				DACEFA25131A652A00E9E462 /* Inspect.m in Sources */,
-				DACEFA26131A652A00E9E462 /* Logger.m in Sources */,
-				DACEFA27131A652A00E9E462 /* UnitTest.m in Sources */,
+				DACC815713417EF0005F3F15 /* Async.m in Sources */,
+				DACC815813417EF0005F3F15 /* NSArrayBlock.m in Sources */,
+				DACC815913417EF0005F3F15 /* NSDictionaryBlock.m in Sources */,
+				DACC815A13417EF0005F3F15 /* NSNumberBlock.m in Sources */,
+				DACC815B13417EF0005F3F15 /* NSObjectObserverExt.m in Sources */,
+				DACC815C13417EF0005F3F15 /* Observer.m in Sources */,
+				DACC815D13417EF0005F3F15 /* ObserverManager.m in Sources */,
+				DACC815E13417EF0005F3F15 /* ProxyMutableDictionary.m in Sources */,
+				DACC815F13417EF0005F3F15 /* CommandManager.m in Sources */,
+				DACC816013417EF0005F3F15 /* ConsoleManager.m in Sources */,
+				DACC816113417EF0005F3F15 /* NewObjectManager.m in Sources */,
+				DACC816213417EF0005F3F15 /* UIViewFlick.m in Sources */,
+				DACC816313417EF0005F3F15 /* ConsoleViewController.m in Sources */,
+				DACC816513417EF0005F3F15 /* EditPropertyViewController.m in Sources */,
+				DACC816713417EF0005F3F15 /* HitTestWindow.m in Sources */,
+				DACC816813417EF0005F3F15 /* PropertyManipulator.m in Sources */,
+				DACC816913417EF0005F3F15 /* PropertyRootViewController.m in Sources */,
+				DACC816B13417EF0005F3F15 /* TypeInfoTable.m in Sources */,
+				DACC816C13417EF0005F3F15 /* ConsoleResponseHandler.m in Sources */,
+				DACC816D13417EF0005F3F15 /* HTTPResponseHandler.m in Sources */,
+				DACC816E13417EF0005F3F15 /* ImageResponseHandler.m in Sources */,
+				DACC817013417EF0005F3F15 /* WebResponseHandler.m in Sources */,
+				DACC817113417EF0005F3F15 /* AsyncSocket.m in Sources */,
+				DACC817213417EF0005F3F15 /* HTTPServer.m in Sources */,
+				DACC817313417EF0005F3F15 /* LoggerServer.m in Sources */,
+				DACC817413417EF0005F3F15 /* GeometryExt.m in Sources */,
+				DACC817513417EF0005F3F15 /* NSArrayExt.m in Sources */,
+				DACC817613417EF0005F3F15 /* NSBundleExt.m in Sources */,
+				DACC817713417EF0005F3F15 /* NSDataExt.m in Sources */,
+				DACC817813417EF0005F3F15 /* NSDateComponentsExt.m in Sources */,
+				DACC817913417EF0005F3F15 /* NSDateExt.m in Sources */,
+				DACC817A13417EF0005F3F15 /* NSDictionaryExt.m in Sources */,
+				DACC817B13417EF0005F3F15 /* NSIndexPathExt.m in Sources */,
+				DACC817C13417EF0005F3F15 /* NSLocaleExt.m in Sources */,
+				DACC817D13417EF0005F3F15 /* NSMutableArrayExt.m in Sources */,
+				DACC817E13417EF0005F3F15 /* NSMutableDictionaryExt.m in Sources */,
+				DACC817F13417EF0005F3F15 /* NSNumberExt.m in Sources */,
+				DACC818013417EF0005F3F15 /* NSObjectExt.m in Sources */,
+				DACC818113417EF0005F3F15 /* NSStringExt.m in Sources */,
+				DACC818213417EF0005F3F15 /* NSTimerExt.m in Sources */,
+				DACC818313417EF0005F3F15 /* UIActionSheetBlock.m in Sources */,
+				DACC818413417EF0005F3F15 /* UIAlertViewBlock.m in Sources */,
+				DACC818513417EF0005F3F15 /* UIBarButtonItemBlock.m in Sources */,
+				DACC818613417EF0005F3F15 /* UIButtonBlock.m in Sources */,
+				DACC818713417EF0005F3F15 /* UIViewBlock.m in Sources */,
+				DACC818813417EF0005F3F15 /* UIViewControllerBlock.m in Sources */,
+				DACC818913417EF0005F3F15 /* Inspect.m in Sources */,
+				DACC818A13417EF0005F3F15 /* Logger.m in Sources */,
+				DACC818B13417EF0005F3F15 /* UnitTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1449,55 +1465,55 @@
 				DAA9667E12ACD25A00CB4664 /* UIViewTouchExt.m in Sources */,
 				DAEDA12412C014F100360459 /* TestLocale.m in Sources */,
 				DAC8198312F638EB005BE2A3 /* ScrollViewController.m in Sources */,
-				DACEF9C0131A652A00E9E462 /* Async.m in Sources */,
-				DACEF9C1131A652A00E9E462 /* NSArrayBlock.m in Sources */,
-				DACEF9C2131A652A00E9E462 /* NSDictionaryBlock.m in Sources */,
-				DACEF9C3131A652A00E9E462 /* NSNumberBlock.m in Sources */,
-				DACEF9C4131A652A00E9E462 /* NSObjectObserverExt.m in Sources */,
-				DACEF9C5131A652A00E9E462 /* Observer.m in Sources */,
-				DACEF9C6131A652A00E9E462 /* ObserverManager.m in Sources */,
-				DACEF9C7131A652A00E9E462 /* ProxyMutableDictionary.m in Sources */,
-				DACEF9C8131A652A00E9E462 /* CommandManager.m in Sources */,
-				DACEF9C9131A652A00E9E462 /* ConsoleManager.m in Sources */,
-				DACEF9CA131A652A00E9E462 /* NewObjectManager.m in Sources */,
-				DACEF9CB131A652A00E9E462 /* UIViewFlick.m in Sources */,
-				DACEF9CC131A652A00E9E462 /* ConsoleViewController.m in Sources */,
-				DACEF9CE131A652A00E9E462 /* EditPropertyViewController.m in Sources */,
-				DACEF9D0131A652A00E9E462 /* HitTestWindow.m in Sources */,
-				DACEF9D1131A652A00E9E462 /* PropertyManipulator.m in Sources */,
-				DACEF9D2131A652A00E9E462 /* PropertyRootViewController.m in Sources */,
-				DACEF9D4131A652A00E9E462 /* TypeInfoTable.m in Sources */,
-				DACEF9D5131A652A00E9E462 /* ConsoleResponseHandler.m in Sources */,
-				DACEF9D6131A652A00E9E462 /* HTTPResponseHandler.m in Sources */,
-				DACEF9D7131A652A00E9E462 /* ImageResponseHandler.m in Sources */,
-				DACEF9D8131A652A00E9E462 /* WebResponseHandler.m in Sources */,
-				DACEF9D9131A652A00E9E462 /* AsyncSocket.m in Sources */,
-				DACEF9DA131A652A00E9E462 /* HTTPServer.m in Sources */,
-				DACEF9DB131A652A00E9E462 /* LoggerServer.m in Sources */,
-				DACEF9DC131A652A00E9E462 /* GeometryExt.m in Sources */,
-				DACEF9DD131A652A00E9E462 /* NSArrayExt.m in Sources */,
-				DACEF9DE131A652A00E9E462 /* NSBundleExt.m in Sources */,
-				DACEF9DF131A652A00E9E462 /* NSDataExt.m in Sources */,
-				DACEF9E0131A652A00E9E462 /* NSDateComponentsExt.m in Sources */,
-				DACEF9E1131A652A00E9E462 /* NSDateExt.m in Sources */,
-				DACEF9E2131A652A00E9E462 /* NSDictionaryExt.m in Sources */,
-				DACEF9E3131A652A00E9E462 /* NSIndexPathExt.m in Sources */,
-				DACEF9E4131A652A00E9E462 /* NSLocaleExt.m in Sources */,
-				DACEF9E5131A652A00E9E462 /* NSMutableArrayExt.m in Sources */,
-				DACEF9E6131A652A00E9E462 /* NSMutableDictionaryExt.m in Sources */,
-				DACEF9E7131A652A00E9E462 /* NSNumberExt.m in Sources */,
-				DACEF9E8131A652A00E9E462 /* NSObjectExt.m in Sources */,
-				DACEF9E9131A652A00E9E462 /* NSStringExt.m in Sources */,
-				DACEF9EA131A652A00E9E462 /* NSTimerExt.m in Sources */,
-				DACEF9EB131A652A00E9E462 /* UIActionSheetBlock.m in Sources */,
-				DACEF9EC131A652A00E9E462 /* UIAlertViewBlock.m in Sources */,
-				DACEF9ED131A652A00E9E462 /* UIBarButtonItemBlock.m in Sources */,
-				DACEF9EE131A652A00E9E462 /* UIButtonBlock.m in Sources */,
-				DACEF9EF131A652A00E9E462 /* UIViewBlock.m in Sources */,
-				DACEF9F0131A652A00E9E462 /* UIViewControllerBlock.m in Sources */,
-				DACEF9F1131A652A00E9E462 /* Inspect.m in Sources */,
-				DACEF9F2131A652A00E9E462 /* Logger.m in Sources */,
-				DACEF9F3131A652A00E9E462 /* UnitTest.m in Sources */,
+				DACC818C13417EF0005F3F15 /* Async.m in Sources */,
+				DACC818D13417EF0005F3F15 /* NSArrayBlock.m in Sources */,
+				DACC818E13417EF0005F3F15 /* NSDictionaryBlock.m in Sources */,
+				DACC818F13417EF0005F3F15 /* NSNumberBlock.m in Sources */,
+				DACC819013417EF0005F3F15 /* NSObjectObserverExt.m in Sources */,
+				DACC819113417EF0005F3F15 /* Observer.m in Sources */,
+				DACC819213417EF0005F3F15 /* ObserverManager.m in Sources */,
+				DACC819313417EF0005F3F15 /* ProxyMutableDictionary.m in Sources */,
+				DACC819413417EF0005F3F15 /* CommandManager.m in Sources */,
+				DACC819513417EF0005F3F15 /* ConsoleManager.m in Sources */,
+				DACC819613417EF0005F3F15 /* NewObjectManager.m in Sources */,
+				DACC819713417EF0005F3F15 /* UIViewFlick.m in Sources */,
+				DACC819813417EF0005F3F15 /* ConsoleViewController.m in Sources */,
+				DACC819A13417EF0005F3F15 /* EditPropertyViewController.m in Sources */,
+				DACC819C13417EF0005F3F15 /* HitTestWindow.m in Sources */,
+				DACC819D13417EF0005F3F15 /* PropertyManipulator.m in Sources */,
+				DACC819E13417EF0005F3F15 /* PropertyRootViewController.m in Sources */,
+				DACC81A013417EF0005F3F15 /* TypeInfoTable.m in Sources */,
+				DACC81A113417EF0005F3F15 /* ConsoleResponseHandler.m in Sources */,
+				DACC81A213417EF0005F3F15 /* HTTPResponseHandler.m in Sources */,
+				DACC81A313417EF0005F3F15 /* ImageResponseHandler.m in Sources */,
+				DACC81A513417EF0005F3F15 /* WebResponseHandler.m in Sources */,
+				DACC81A613417EF0005F3F15 /* AsyncSocket.m in Sources */,
+				DACC81A713417EF0005F3F15 /* HTTPServer.m in Sources */,
+				DACC81A813417EF0005F3F15 /* LoggerServer.m in Sources */,
+				DACC81A913417EF0005F3F15 /* GeometryExt.m in Sources */,
+				DACC81AA13417EF0005F3F15 /* NSArrayExt.m in Sources */,
+				DACC81AB13417EF0005F3F15 /* NSBundleExt.m in Sources */,
+				DACC81AC13417EF0005F3F15 /* NSDataExt.m in Sources */,
+				DACC81AD13417EF0005F3F15 /* NSDateComponentsExt.m in Sources */,
+				DACC81AE13417EF0005F3F15 /* NSDateExt.m in Sources */,
+				DACC81AF13417EF0005F3F15 /* NSDictionaryExt.m in Sources */,
+				DACC81B013417EF0005F3F15 /* NSIndexPathExt.m in Sources */,
+				DACC81B113417EF0005F3F15 /* NSLocaleExt.m in Sources */,
+				DACC81B213417EF0005F3F15 /* NSMutableArrayExt.m in Sources */,
+				DACC81B313417EF0005F3F15 /* NSMutableDictionaryExt.m in Sources */,
+				DACC81B413417EF0005F3F15 /* NSNumberExt.m in Sources */,
+				DACC81B513417EF0005F3F15 /* NSObjectExt.m in Sources */,
+				DACC81B613417EF0005F3F15 /* NSStringExt.m in Sources */,
+				DACC81B713417EF0005F3F15 /* NSTimerExt.m in Sources */,
+				DACC81B813417EF0005F3F15 /* UIActionSheetBlock.m in Sources */,
+				DACC81B913417EF0005F3F15 /* UIAlertViewBlock.m in Sources */,
+				DACC81BA13417EF0005F3F15 /* UIBarButtonItemBlock.m in Sources */,
+				DACC81BB13417EF0005F3F15 /* UIButtonBlock.m in Sources */,
+				DACC81BC13417EF0005F3F15 /* UIViewBlock.m in Sources */,
+				DACC81BD13417EF0005F3F15 /* UIViewControllerBlock.m in Sources */,
+				DACC81BE13417EF0005F3F15 /* Inspect.m in Sources */,
+				DACC81BF13417EF0005F3F15 /* Logger.m in Sources */,
+				DACC81C013417EF0005F3F15 /* UnitTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

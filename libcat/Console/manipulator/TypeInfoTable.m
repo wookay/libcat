@@ -92,8 +92,12 @@
 		if ([typedefTable hasKey:typeName]) {
 			NSArray* enumValues = [typedefTable objectForKey:typeName];
 			int idx = [obj intValue];
-			NSString* value = [enumValues objectAtIndex:idx];
-			return SWF(@"%d [%@]", idx, value);
+			if (enumValues.count > idx) {
+				NSString* value = [enumValues objectAtIndex:idx];
+				return SWF(@"%d [%@]", idx, value);
+			} else {
+				return SWF(@"%d", idx);
+			}
 		} else if ([@"BOOL" isEqualToString:typeName]) {
 			BOOL value = [obj boolValue];
 			return SWF(@"%@", value ? @"true" : @"false");

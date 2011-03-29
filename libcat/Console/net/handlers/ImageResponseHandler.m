@@ -87,7 +87,15 @@
 	CGContextRef ctx = UIGraphicsGetCurrentContext(); 
 	[[UIColor blackColor] set]; 
 	CGContextFillRect(ctx, screenRect);
-	[window.layer renderInContext:ctx];
+	for (UIWindow* window in [UIApplication sharedApplication].windows) {
+		[window.layer renderInContext:ctx];		
+	}
+	if (CGSizeEqualToSize(CGSizeMake(320,480), screenRect.size)) {
+		CALayer* statusbarLayer = [CALayer layer];		
+		statusbarLayer.frame = [UIApplication sharedApplication].statusBarFrame;		
+		statusbarLayer.contents = (id) [[UIImage imageNamed:@"libcat_statusbar.png"] CGImage];
+		[statusbarLayer renderInContext:ctx];
+	}
 	UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
 	UIGraphicsEndImageContext();
 	return newImage; 	
@@ -108,7 +116,9 @@
 		UIGraphicsBeginImageContext(view.frame.size);
 		[view.layer renderInContext: UIGraphicsGetCurrentContext()];
 		image = UIGraphicsGetImageFromCurrentImageContext();
-		UIGraphicsEndImageContext();				
+		UIGraphicsEndImageContext();	
+	} else if ([obj isKindOfClass:[UIImage class]]) {
+		image = obj;
 	} else if ([obj isKindOfClass:[CALayer class]]) {
 		CALayer* layer = obj;
 		UIGraphicsBeginImageContext(layer.frame.size);
