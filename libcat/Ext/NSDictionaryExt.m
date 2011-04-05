@@ -9,6 +9,8 @@
 #import "NSDictionaryExt.h"
 #import "Inspect.h"
 #import "NSArrayExt.h"
+#import "Logger.h"
+#import "NSNumberExt.h"
 
 NSDictionary* HashSTAR(NSArray* ary) {
 	NSMutableDictionary* dict = [NSMutableDictionary dictionary];
@@ -41,6 +43,25 @@ NSDictionary* HashSTAR(NSArray* ary) {
 	return [[self allKeys] sortedArrayUsingSelector:selector];
 }
 
+-(NSArray*) sortedKeysByCountOfObjects {
+	NSMutableArray* ary = [NSMutableArray array];
+	NSArray* unsortedKeys = [self allKeys];
+	for (id key in unsortedKeys) {
+		id obj = [self objectForKey:key];
+		if ([obj isKindOfClass:[NSArray class]]) {
+			NSArray* items = obj;
+			[ary addObject:PAIR(FIXNUM(items.count), key)];
+		} else {
+			return unsortedKeys;
+		}
+	}
+	NSMutableArray* ret = [NSMutableArray array];
+	for (NSArray* pair in [ary sortByFirstObject]) {
+		[ret addObject:[pair objectAtSecond]];
+	}
+	return ret;
+}
+
 -(NSDictionary*) append:(NSDictionary*)dict {
 	NSMutableDictionary* mut = [NSMutableDictionary dictionaryWithDictionary:self];
 	[mut addEntriesFromDictionary:dict];
@@ -48,24 +69,42 @@ NSDictionary* HashSTAR(NSArray* ary) {
 }
 
 -(BOOL) valuesHaveObject:(id)obj {
-	return [[self allValues] containsObject:obj];
+	NSEnumerator* enumerator = [self objectEnumerator];
+	id objectForKey;
+	while ((objectForKey = [enumerator nextObject])) {
+		if ([objectForKey isEqual:obj]) {
+			return true;
+		}
+	}		
+	return false;
+	
 }
 
 -(BOOL) hasKey:(id)key {
-	return [[self allKeys] containsObject:key];	
+	NSEnumerator* enumerator = [self keyEnumerator];
+	id k;
+	while ((k = [enumerator nextObject])) {
+		if ([k isEqual:key]) {
+			return true;
+		}
+	}		
+	return false;
 }
 
 -(BOOL) hasNotKey:(id)key {
-	return ! [[self allKeys] containsObject:key];	
+	return ! [self hasNotKey:key];
 }
 
 -(id) keyForObject:(id)obj {
-	NSArray* ary = [self allKeysForObject:obj];
-	if (ary.count > 0) {
-		return [ary objectAtFirst];
-	} else {
-		return nil;
+	NSEnumerator* enumerator = [self keyEnumerator];
+	id key;
+	while ((key = [enumerator nextObject])) {
+		id objectForKey = [self objectForKey:key];
+		if ([objectForKey isEqual:obj]) {
+			return key;
+		}
 	}
+	return nil;
 }
 
 -(BOOL) isEmpty {

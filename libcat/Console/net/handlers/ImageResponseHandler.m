@@ -90,10 +90,10 @@
 	for (UIWindow* window in [UIApplication sharedApplication].windows) {
 		[window.layer renderInContext:ctx];		
 	}
-	if (CGSizeEqualToSize(CGSizeMake(320,480), screenRect.size)) {
-		CALayer* statusbarLayer = [CALayer layer];		
+	if (! CGRectIsEmpty([UIApplication sharedApplication].statusBarFrame)) {
+		CALayer* statusbarLayer = [CALayer layer];
 		statusbarLayer.frame = [UIApplication sharedApplication].statusBarFrame;		
-		statusbarLayer.contents = (id) [[UIImage imageNamed:@"libcat_statusbar.png"] CGImage];
+		statusbarLayer.contents = (id) [[UIImage imageNamed:(IS_IPAD ? @"libcat_statusbar~ipad.png" : @"libcat_statusbar.png")] CGImage];
 		[statusbarLayer renderInContext:ctx];
 	}
 	UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();

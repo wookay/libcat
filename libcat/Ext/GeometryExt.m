@@ -32,6 +32,18 @@ CGFloat CGPointsDistance(CGPoint from, CGPoint to) {
 	return sqrt(xDifferenceSquared + yDifferenceSquared);
 }
 
+CGPoint CGPointWithScale(CGPoint point, CGFloat scale) {
+	return CGPointMake(point.x * scale, point.y * scale);
+}
+
+CGPoint CGPointDivideByScale(CGPoint point, CGFloat scale) {
+	return CGPointMake(point.x / scale, point.y / scale);
+}
+
+CGPoint CGPointDivideByScaleWithFloorDown(CGPoint point, CGFloat scale) {
+	return CGPointMake(floor(point.x / scale), floor(point.y / scale));
+}
+
 #pragma mark CGRect
 BOOL CGRectHasPoint(CGRect rect, CGPoint point) {
 	return true == CGRectContainsPoint(rect, point);

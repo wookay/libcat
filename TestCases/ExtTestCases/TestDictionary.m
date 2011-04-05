@@ -16,6 +16,16 @@
 
 @implementation TestDictionary
 
+-(void) test_sortedKeysByCountOfObjects {
+	NSDictionary* dict = [NSDictionary dictionaryWithKeysAndObjects:
+							@"a", _w(@"1 2 3"),
+							@"b", _w(@"1 2"),
+							@"c", _w(@"1 2 3 4 5"),
+						  nil];
+	NSArray* keys = [dict sortedKeysByCountOfObjects];
+	assert_equal(_w(@"b a c"), keys);
+}
+
 -(void) test_dictionaryWithKeysAndObjects {
 	NSDictionary* expected = [NSDictionary dictionaryWithObjectsAndKeys:
 											@"object", @"key",

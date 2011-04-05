@@ -73,6 +73,9 @@ NSString* double_to_string(double n) ;
 NSString* unichar_to_string(unichar ch) ;
 NSString* nil_to_empty_string(NSString* str) ;
 NSInteger sortByStringComparator(NSString* uno, NSString* dos, void* context) ;
+char unichar_high(unichar uch) ;
+unsigned short unichar_low(unichar uch) ;
+
 
 @interface NSString (Ext)
 -(BOOL) isEmpty ;

@@ -25,6 +25,5 @@ NSData* unichar_to_data(unichar ch) ;
 @interface NSData (UTF8EncodingExt)
 - (unichar) to_unichar ;
 - (NSData*) swap ;
-- (NSString*) ucs2_to_utf8_string ;
 - (NSString*) to_utf8_string ;
 @end

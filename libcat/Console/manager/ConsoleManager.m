@@ -674,7 +674,11 @@
 #define BUTTON_MARGIN 20
 	CGRect logsRect = CGRectMake(consoleRect.origin.x - 45 - BUTTON_MARGIN, consoleRect.origin.y, 45, consoleRect.size.height);
 	UIButton* logsButton = [[ConsoleButton alloc] initWithFrame:logsRect];
-	BOOL settingConsoleLogsButton = [[NSUserDefaults standardUserDefaults] boolForKey:SETTING_CONSOLE_LOGS_BUTTON];
+	id consoleLogsButtonHidden = [[NSUserDefaults standardUserDefaults] objectForKey:SETTING_CONSOLE_LOGS_BUTTON];
+	BOOL settingConsoleLogsButton = true;
+	if (nil != consoleLogsButtonHidden) {
+		settingConsoleLogsButton = [[NSUserDefaults standardUserDefaults] boolForKey:SETTING_CONSOLE_LOGS_BUTTON];
+	}
 	logsButton.hidden = settingConsoleLogsButton;
 	logsButton.tag = kTagLogsButton;
 	[logsButton addTarget:self action:@selector(touchedToggleLogsButton:) forControlEvents:UIControlEventTouchUpInside];

@@ -49,6 +49,14 @@ NSInteger sortByStringComparator(NSString* uno, NSString* dos, void* context) {
 	return [uno localizedCaseInsensitiveCompare:dos];
 }
 
+char unichar_high(unichar uch) {
+	return uch >> 8;
+}
+
+unsigned short unichar_low(unichar uch) {
+	return uch & 0xFF;
+}
+
 @implementation NSString (Ext)
 
 // BOOL

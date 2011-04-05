@@ -9,6 +9,13 @@
 
 @implementation NSLocale (Ext)
 
+// zh-Hant 번체
+// zh-Hans 간체
+
++(NSString*) firstPreferredLanguage {
+	return [[NSLocale preferredLanguages] objectAtIndex:0];
+}
+
 +(BOOL) isFirstPreferredLanguage:(NSString*)lang {
 	return [lang isEqualToString:[[NSLocale preferredLanguages] objectAtIndex:0]];
 }

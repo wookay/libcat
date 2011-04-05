@@ -14,6 +14,7 @@
 
 
 @interface NSLocale (Ext)
++(NSString*) firstPreferredLanguage ;
 +(BOOL) isFirstPreferredLanguage:(NSString*)lang ;
 +(BOOL) isCurrentLocaleIdentifier:(NSString*)identifier ;
 @end
