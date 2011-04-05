@@ -92,7 +92,7 @@ NSDictionary* HashSTAR(NSArray* ary) {
 }
 
 -(BOOL) hasNotKey:(id)key {
-	return ! [self hasNotKey:key];
+	return ! [self hasKey:key];
 }
 
 -(id) keyForObject:(id)obj {
