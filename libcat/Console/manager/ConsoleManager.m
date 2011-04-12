@@ -673,14 +673,9 @@
 
 #define BUTTON_MARGIN 20
 	CGRect logsRect = CGRectMake(consoleRect.origin.x - 45 - BUTTON_MARGIN, consoleRect.origin.y, 45, consoleRect.size.height);
-	UIButton* logsButton = [[ConsoleButton alloc] initWithFrame:logsRect];
-	id consoleLogsButtonHidden = [[NSUserDefaults standardUserDefaults] objectForKey:SETTING_CONSOLE_LOGS_BUTTON];
-	BOOL settingConsoleLogsButton = true;
-	if (nil != consoleLogsButtonHidden) {
-		settingConsoleLogsButton = [[NSUserDefaults standardUserDefaults] boolForKey:SETTING_CONSOLE_LOGS_BUTTON];
-	}
-	logsButton.hidden = settingConsoleLogsButton;
-	logsButton.tag = kTagLogsButton;
+	UIButton* logsButton = [[LogsButton alloc] initWithFrame:logsRect];
+	BOOL showLogsButton = [[NSUserDefaults standardUserDefaults] boolForKey:SETTING_CONSOLE_SHOW_LOGS_BUTTON];
+	logsButton.hidden = ! showLogsButton;
 	[logsButton addTarget:self action:@selector(touchedToggleLogsButton:) forControlEvents:UIControlEventTouchUpInside];
 	[logsButton setTitle:NSLocalizedString(@"Logs", nil) forState:UIControlStateNormal];	
 	[window addSubview:logsButton];
@@ -699,30 +694,35 @@
 //#endif
 }
 
--(void) update_record_button {
-#if USE_PRIVATE_API
-	UIWindow* window = [UIApplication sharedApplication].keyWindow;
-	UIButton* recordButton = (UIButton*)[window viewWithTag:kTagRecordButton];
-	if (EVENTRECORDER.recorded) {
-		[recordButton setTitle:NSLocalizedString(@"Stop", nil) forState:UIControlStateNormal];	
-		[recordButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-	} else {
-		[recordButton setTitle:NSLocalizedString(@"Record", nil) forState:UIControlStateNormal];	
-		[recordButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-	}
-#endif
-}
+//-(void) update_record_button {
+//#if USE_PRIVATE_API
+//	UIWindow* window = [UIApplication sharedApplication].keyWindow;
+//	UIButton* recordButton = (UIButton*)[window viewWithTag:kTagRecordButton];
+//	if (EVENTRECORDER.recorded) {
+//		[recordButton setTitle:NSLocalizedString(@"Stop", nil) forState:UIControlStateNormal];	
+//		[recordButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+//	} else {
+//		[recordButton setTitle:NSLocalizedString(@"Record", nil) forState:UIControlStateNormal];	
+//		[recordButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+//	}
+//#endif
+//}
 
 -(void) toggle_logs_button {
 	UIWindow* window = [UIApplication sharedApplication].keyWindow;
-	UIButton* logsButton = (UIButton*)[window viewWithTag:kTagLogsButton];
-	BOOL hidden = logsButton.hidden;
-	if (hidden) {
-		[window bringSubviewToFront:logsButton];
-	} else {
-		[LoggerServer sharedServer].logTextView.hidden = true;
+	for (UIButton* button in window.subviews) {
+		if ([button isKindOfClass:[LogsButton class]]) {
+			BOOL hidden = button.hidden;
+			if (hidden) {
+				[window bringSubviewToFront:button];
+			} else {
+				[LoggerServer sharedServer].logTextView.hidden = true;
+			}
+			button.hidden = ! hidden;
+			[[NSUserDefaults standardUserDefaults] setBool:(! button.hidden) forKey:SETTING_CONSOLE_SHOW_LOGS_BUTTON];
+			[[NSUserDefaults standardUserDefaults] synchronize];
+		}
 	}
-	logsButton.hidden = ! hidden;
 }
 
 -(IBAction) touchedToggleRecordButton:(id)sender {
@@ -795,6 +795,15 @@
 		[self setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
 		[self setTitleColor:[UIColor orangeColor] forState:UIControlStateHighlighted];
 		[self setTitleShadowColor:[UIColor whiteColor] forState:UIControlStateNormal];
+	}
+	return self;
+}
+@end
+
+@implementation LogsButton
+-(id) initWithFrame:(CGRect)frame {
+	self = [super initWithFrame:frame];
+	if (self) {
 	}
 	return self;
 }

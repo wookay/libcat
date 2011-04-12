@@ -9,11 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #define CONSOLEMAN	[ConsoleManager sharedManager]
-enum {
-	kTagLogsButton = 50,
-	kTagRecordButton,
-};
-#define SETTING_CONSOLE_LOGS_BUTTON @"Console Logs Button"
+#define SETTING_CONSOLE_SHOW_LOGS_BUTTON @"Console Show Logs Button"
 #define SETTING_CONSOLE_RECORD_BUTTON @"Console Record Button"
 
 #define LS_OPTION_RECURSIVE		@"-r"
@@ -56,11 +52,14 @@ typedef enum { kGetterReturnTypeInspect, kGetterReturnTypeObject } GetterReturnT
 -(void) make_console_buttons ;
 -(void) hide_console_button ;
 -(void) toggle_logs_button ;
--(void) update_record_button ;
+//-(void) update_record_button ;
 
 @end
 
 
 
 @interface ConsoleButton : UIButton
+@end
+
+@interface LogsButton : ConsoleButton
 @end

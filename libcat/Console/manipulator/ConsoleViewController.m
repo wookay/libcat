@@ -231,10 +231,14 @@ typedef enum {
 				case kConsoleSectionInfoRowLogsButton: {
 						cell.textLabel.text = NSLocalizedString(@"Logs Button", nil);
 						UIWindow* window = [UIApplication sharedApplication].keyWindow;
-						UIButton* showLogsButton = (UIButton*)[window viewWithTag:kTagLogsButton];
-						if (showLogsButton.hidden) {
-						} else {
-							cell.accessoryType = UITableViewCellAccessoryCheckmark;
+						for (UIButton* button in window.subviews) {
+							if ([button isKindOfClass:[LogsButton class]]) {
+								if (button
+									.hidden) {
+								} else {
+									cell.accessoryType = UITableViewCellAccessoryCheckmark;
+								}
+							}
 						}
 					}
 					break;					
@@ -331,9 +335,6 @@ typedef enum {
 				case kConsoleSectionInfoRowLogsButton: {
 						[CONSOLEMAN toggle_logs_button];
 						[self.tableView reloadData];
-						UIWindow* window = [UIApplication sharedApplication].keyWindow;
-						UIButton* showLogsButton = (UIButton*)[window viewWithTag:kTagLogsButton];
-						[[NSUserDefaults standardUserDefaults] setBool:(showLogsButton.hidden) forKey:SETTING_CONSOLE_LOGS_BUTTON];
 					}
 					break;					
 			}
