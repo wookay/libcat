@@ -729,7 +729,12 @@ NSString* surrounded_array_prefix_index(NSArray* array) {
 			}
 			[sections addObject:ary];
 			if ([tableView.dataSource respondsToSelector:@selector(tableView: titleForHeaderInSection:)]) {
-				[sectionTitles addObject:[tableView.dataSource tableView:tableView titleForHeaderInSection:section]];
+				id title = [tableView.dataSource tableView:tableView titleForHeaderInSection:section];
+				if (nil == title) {
+					[sectionTitles addObject:[NilClass nilClass]];
+				} else {
+					[sectionTitles addObject:title];
+				}
 			} else {
 				[sectionTitles addObject:[NilClass nilClass]];
 			}

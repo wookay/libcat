@@ -110,38 +110,42 @@
 	return @"localhost";
 }
 
+-(id) inputCommand:(NSString*)command arg:(id)arg {
+	if (nil == self.currentTargetObject) {
+		self.currentTargetObject = [self get_topViewController];
+	}
+	NSString* selectorStr = [COMMANDMAN.commandsMap objectForKey:command];
+	if (nil == selectorStr) {
+		if ([[arg strip] hasPrefix:EQUAL]) {
+			return [self setterChain:command arg:arg];
+		} else {
+			id obj = [self getterChain:command arg:arg];
+			if ([obj isKindOfClass:[NSException class]]) {
+				return SWF(@"%@", obj);
+			} else {
+				return obj;
+			}
+		}
+	} else {
+		SEL selector = NSSelectorFromString(selectorStr);
+		id targetObject = [self currentTargetObjectOrTopViewController];
+		if ([COMMANDMAN respondsToSelector:selector]) {
+			return [COMMANDMAN performSelector:selector withObject:targetObject withObject:arg];
+		} else {
+			NSArray* trio = [COMMANDMAN findTargetObject:targetObject arg:command];
+			id obj = [trio objectAtSecond];
+			if (IS_NIL(obj)) {
+				return SWF(@"%@ : %@", NSLocalizedString(@"Command Not Found", nil), command);
+			} else {
+				return SWF(@"%@", obj);
+			}
+		}
+	}
+}
+
 -(id) input:(NSString*)command arg:(id)arg {
 	@try {
-		if (nil == self.currentTargetObject) {
-			self.currentTargetObject = [self get_topViewController];
-		}
-		NSString* selectorStr = [COMMANDMAN.commandsMap objectForKey:command];
-		if (nil == selectorStr) {
-			if ([[arg strip] hasPrefix:EQUAL]) {
-				return [self setterChain:command arg:arg];
-			} else {
-				id obj = [self getterChain:command arg:arg];
-				if ([obj isKindOfClass:[NSException class]]) {
-					return SWF(@"%@", obj);
-				} else {
-					return obj;
-				}
-			}
-		} else {
-			SEL selector = NSSelectorFromString(selectorStr);
-			id targetObject = [self currentTargetObjectOrTopViewController];
-			if ([COMMANDMAN respondsToSelector:selector]) {
-				return [COMMANDMAN performSelector:selector withObject:targetObject withObject:arg];
-			} else {
-				NSArray* trio = [COMMANDMAN findTargetObject:targetObject arg:command];
-				id obj = [trio objectAtSecond];
-				if (IS_NIL(obj)) {
-					return SWF(@"%@ : %@", NSLocalizedString(@"Command Not Found", nil), command);
-				} else {
-					return SWF(@"%@", obj);
-				}
-			}
-		}
+		return [self inputCommand:command arg:arg];
 	} @catch (NSException* exception) {
 		NSString* userInfo;
 		if (nil == exception.userInfo) {

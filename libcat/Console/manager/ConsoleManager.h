@@ -27,6 +27,7 @@ typedef enum { kGetterReturnTypeInspect, kGetterReturnTypeObject } GetterReturnT
 @property (nonatomic, readonly) int server_port;
 @property (nonatomic) int COLUMNS;
 
+-(id) inputCommand:(NSString*)command arg:(id)arg ;
 -(id) input:(NSString*)command arg:(id)arg ;
 -(id) input:(NSString*)input ;
 + (ConsoleManager*) sharedManager ;
