@@ -385,14 +385,6 @@ NSString* TypeEncodingDescription(char* code) {
 	[self performSelector:selector afterDelay:TIMEINTERVAL_CHALNA];
 }
 
--(BOOL) isNil {
-	return [self isKindOfClass:[NilClass class]];
-}
-
--(BOOL) isNotNil {
-	return ! [self isNil];
-}
-
 -(NSString*) className {
 	return SWF(@"%@", [self class]);
 }
@@ -721,9 +713,6 @@ NSString* TypeEncodingDescription(char* code) {
 @implementation NilClass
 -(NSString*) description {
 	return STR_NIL;
-}
--(BOOL) isNil {
-	return true;
 }
 +(NilClass*) nilClass {
 	static NilClass* nilClass = nil;

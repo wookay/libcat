@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#define IS_NIL(obj)	(nil == obj || [obj isNil])
+#define IS_NIL(obj)	(nil == obj || [obj isKindOfClass:[NilClass class]])
 #define IS_NOT_NIL(obj)	(! IS_NIL(obj))
 #define ARGUMENT_INDEX_ONE 2
 
@@ -36,8 +36,6 @@
 +(NSArray*) ivarNamesForClass:(Class)targetClass ;
 -(void) performSelector:(SEL)selector afterDelay:(NSTimeInterval)ti ;
 -(void) performSelectorAfterChalna:(SEL)selector ;
--(BOOL) isNil ;
--(BOOL) isNotNil ;
 -(NSString*) className ;
 -(NSString*) downcasedClassName ;
 
@@ -58,7 +56,6 @@
 
 @interface NilClass : NSObject
 +(NilClass*) nilClass ;
--(BOOL) isNil ;
 @end
 
 

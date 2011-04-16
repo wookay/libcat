@@ -100,52 +100,31 @@ NSInteger sortByFirstObjectComparator(NSArray* uno, NSArray* dos, void* context)
 }
 
 -(id) objectAtIndexPath:(NSIndexPath*)indexPath {
-	return [[self objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+	return [[self at:indexPath.section] at:indexPath.row];
+}
+
+-(id) first {
+	return [self objectAtFirst];
 }
 
 -(id) objectAtFirst {
-	if ([self count] > 0) {
-		id obj = [self objectAtIndex:0];		
-		return obj;
-	} else {
-		return nil;
-	}
+	return [self at:0];
 }
 
 -(id) objectAtSecond {
-	if ([self count] > 1) {
-		id obj = [self objectAtIndex:1];		
-		return obj;
-	} else {
-		return nil;
-	}
+	return [self at:1];		
 }
 
 -(id) objectAtThird {
-	if ([self count] > 2) {
-		id obj = [self objectAtIndex:2];		
-		return obj;
-	} else {
-		return nil;
-	}
+	return [self at:2];		
 }
 
 -(id) objectAtFourth {
-	if ([self count] > 3) {
-		id obj = [self objectAtIndex:3];		
-		return obj;
-	} else {
-		return nil;
-	}
+	return [self at:3];		
 }
 
 -(id) objectAtLast {
-	if ([self count] > 0) {
-		id obj = [self lastObject];		
-		return obj;
-	} else {
-		return nil;
-	}
+	return [self last];		
 }
 
 -(NSArray*) arrayAtIndex:(int)idx {
@@ -155,18 +134,27 @@ NSInteger sortByFirstObjectComparator(NSArray* uno, NSArray* dos, void* context)
 -(id) at:(int)idx {
 	if ([self count] > idx) {
 		id obj = [self objectAtIndex:idx];
-		return obj;
+		if (IS_NIL(obj)) {
+			return nil;
+		} else {
+			return obj;
+		}
 	} else {
 		return nil;
 	}
 }
 
--(id) first {
-	return [self objectAtFirst];
-}
-
 -(id) last {
-	return [self lastObject];
+	if ([self count] > 0) {
+		id obj = [self lastObject];
+		if (IS_NIL(obj)) {
+			return nil;
+		} else {
+			return obj;
+		}		
+	} else {
+		return nil;
+	}
 }
 
 -(int) index:(id)obj {

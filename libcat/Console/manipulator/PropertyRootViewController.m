@@ -146,7 +146,7 @@
 	NSArray* attributes = [trio objectAtThird];
 	NSString* attributeString = [attributes objectAtFirst];
 
-	if ([obj isNil]) {
+	if (nil == obj) {
 		if ([_w(@"@\"UIColor\"") containsObject:attributeString]) {
 			return kObjectAttributeTypeObject;
 		} else {

@@ -60,7 +60,7 @@
 	NSArray* pair = [self url_to_console_input];
 	NSString* command = [pair objectAtFirst];
 	id arg = [pair objectAtSecond];
-	id output = [CONSOLEMAN input:command arg:[arg isNil] ? nil : arg];
+	id output = [CONSOLEMAN input:command arg:arg];
 	NSData* fileData = [output to_data];
 	
 	CFHTTPMessageRef response =

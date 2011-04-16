@@ -234,7 +234,7 @@ NSString* surrounded_array_prefix_index(NSArray* array) {
 -(id) command_png:(id)currentObject arg:(id)arg {
 	NSArray* pair = [self findTargetObject:currentObject arg:arg];
 	id targetObject = [pair objectAtSecond];	
-	if ([targetObject isNil]) {
+	if (nil == targetObject) {
 		targetObject = currentObject;
 	}
 	
@@ -279,7 +279,7 @@ NSString* surrounded_array_prefix_index(NSArray* array) {
 -(id) command_log:(id)currentObject arg:(id)arg {
 	NSArray* pair = [self findTargetObject:currentObject arg:arg];
 	id targetObject = [pair objectAtSecond];	
-	if ([targetObject isNil]) {
+	if (nil == targetObject) {
 		targetObject = currentObject;
 	}
 	log_info(@"%@", targetObject);
@@ -316,7 +316,7 @@ NSString* surrounded_array_prefix_index(NSArray* array) {
 	} else {
 		NSArray* pair = [self findTargetObject:currentObject arg:arg];
 		changeObject = [pair objectAtSecond];
-		if ([changeObject isNil]) {
+		if (nil == changeObject) {
 			id response = [pair objectAtFirst];
 			return response;
 		} else {
@@ -337,7 +337,7 @@ NSString* surrounded_array_prefix_index(NSArray* array) {
 -(NSString*) command_touch:(id)currentObject arg:(id)arg {
 	NSArray* trio = [self findTargetObject:currentObject arg:arg];
 	id actionBlockObj = [trio objectAtThird];
-	if (nil != actionBlockObj && [actionBlockObj isNotNil]) {
+	if (nil != actionBlockObj) {
 		if ([actionBlockObj isKindOfClass:NSClassFromString(@"__NSMallocBlock__")]) {
 			ActionBlock actionBlock = (ActionBlock)actionBlockObj;
 			NSString* methodStr = actionBlock();
@@ -351,7 +351,7 @@ NSString* surrounded_array_prefix_index(NSArray* array) {
 -(NSString*) command_flick:(id)currentObject arg:(id)arg {
 	NSArray* pair = [self findTargetObject:currentObject arg:arg];
 	id changeObject = [pair objectAtSecond];
-	if ([changeObject isNil]) {
+	if (nil == changeObject) {
 		changeObject = CONSOLEMAN.currentTargetObject;
 	}
 	if ([changeObject isKindOfClass:[UIView class]]) {
@@ -428,7 +428,7 @@ NSString* surrounded_array_prefix_index(NSArray* array) {
 -(NSString*) command_properties:(id)currentObject arg:(id)arg {
 	NSArray* pair = [self findTargetObject:currentObject arg:arg];
 	id targetObject = [pair objectAtSecond];
-	if ([targetObject isNil]) {
+	if (nil == targetObject) {
 		targetObject = currentObject;
 	}
 	return [PROPERTYMAN list_properties:targetObject];
@@ -437,7 +437,7 @@ NSString* surrounded_array_prefix_index(NSArray* array) {
 -(id) findTargetObjectOrCurrentObject:(id)currentObject arg:(id)arg {
 	NSArray* pair = [self findTargetObject:currentObject arg:arg];
 	id targetObject = [pair objectAtSecond];
-	if ([targetObject isNil]) {
+	if (nil == targetObject) {
 		targetObject = currentObject;
 	}
 	if ([targetObject isKindOfClass:[DisquotatedObject class]]) {
@@ -496,7 +496,7 @@ NSString* surrounded_array_prefix_index(NSArray* array) {
 			return NSLocalizedString(@"manipulate off", nil);
 		}
 	}
-	if ([targetObject isNil]) {
+	if (nil == targetObject) {
 		targetObject = currentObject;
 	}
 	return [PROPERTYMAN manipulate:targetObject];
@@ -526,7 +526,7 @@ NSString* surrounded_array_prefix_index(NSArray* array) {
 -(NSString*) command_ls:(id)currentObject arg:(id)arg {
 	NSArray* pair = [self findTargetObject:currentObject arg:arg];
 	id targetObject = [pair objectAtSecond];	
-	if ([targetObject isNil]) {
+	if (nil == targetObject) {
 		targetObject = currentObject;
 	}
 		

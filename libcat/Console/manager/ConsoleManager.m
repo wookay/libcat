@@ -299,7 +299,7 @@
 
 -(id) getterChainObject:(id)target command:(id)command arg:(id)arg returnType:(GetterReturnType)getterReturnType {
 	NSMutableArray* ary = [NSMutableArray array];
-	if ([command isNil]) {
+	if (nil == command) {
 		return nil;
 	}
 	NSArray* commands = [command split:DOT];
@@ -542,11 +542,11 @@
 				}
 				NSArray* pair = [COMMANDMAN findTargetObject:target arg:newArg];
 				id obj = [pair objectAtSecond];
-				if ([obj isNotNil]) {
+				if (nil == obj) {
+					return [NSException exceptionWithName:@"Command Not Found" reason:nil userInfo:nil];
+				} else {
 					[ary addObject:SWF(@"%@", obj)];
 					target = obj;
-				} else {
-					return [NSException exceptionWithName:@"Command Not Found" reason:nil userInfo:nil];
 				}
 			}
 		}
