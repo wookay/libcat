@@ -31,6 +31,9 @@
 	int JUSTIFY_ATTRIBUTE_STRING = 0.30*JUSTIFY_LINE;
 	
 	NSArray* hierarchyData = [targetObject classHierarchy];
+	if (nil == hierarchyData) {
+		return EMPTY_STRING;
+	}
 	NSMutableArray* ary = [NSMutableArray array];
 	for (int idx = 0; idx < hierarchyData.count - 1; idx++) {
 		Class targetClass = [hierarchyData objectAtIndex:idx];

@@ -78,6 +78,7 @@ NSString* int_to_secondName(int second) ;
 -(NSString*) year_month_day_DOT_SPACE ;	
 -(NSString*) year_month_day_MINUS_hour_minute_COLON ;
 -(NSString*) year_month_day_MINUS_hour_minute_second_COLON ;
+-(NSString*) year_month_day_MINUS_hour_minute_second_MINUS ;
 -(NSString*) year_month_day_MINUS_AMPM_hour_minute_COLON ;
 -(NSString*) year_monthName_SPACE ;
 -(NSString*) year_monthName_day_SPACE ;
@@ -94,6 +95,7 @@ NSString* int_to_secondName(int second) ;
 -(NSString*) hour_minute_COLON ;
 -(NSString*) hour_minute_second_COLON ;
 -(NSString*) gmtString ;
++(NSDate*) dateWithGMTString:(NSString*)str ;
 
 @end
 

@@ -728,7 +728,7 @@
 -(IBAction) touchedToggleRecordButton:(id)sender {
 #if USE_PRIVATE_API
 	[EVENTRECORDER toggleRecordUserEvents];
-	[self update_record_button];
+//	[self update_record_button];
 #endif
 }
 

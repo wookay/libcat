@@ -10,11 +10,11 @@
 #import <QuartzCore/QuartzCore.h>
 
 
-@interface UINavigationItem (Inspect)
+@interface UINavigationItem (ObjectInspect)
 -(NSString*) inspect ;
 @end
 
-@interface UIBarButtonItem (Inspect)
+@interface UIBarButtonItem (ObjectInspect)
 -(NSString*) inspect ;
 @end
 

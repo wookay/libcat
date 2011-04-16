@@ -246,7 +246,6 @@ NSString* monthLongName_day_SPACE(int month, int day) {
 	return [[comingDate beginOfDate] timeIntervalSinceDate:[self beginOfDate]] / ONE_DAY_SECONDS;
 }
 
-
 #pragma mark NSDateComponents
 -(NSDateComponents*) to_dateComponents {
 	unsigned unitFlags = UNIT_FLAGS_YMDHMSWW;
@@ -413,9 +412,22 @@ NSString* monthLongName_day_SPACE(int month, int day) {
 	return [self formatWith:@"yyyy-MM-dd HH:mm:ss"];
 }
 
+-(NSString*) year_month_day_MINUS_hour_minute_second_MINUS {
+	return [self formatWith:@"yyyy-MM-dd HH-mm-ss"];
+}
+
 -(NSString*) gmtString {
 	return [self formatWith:@"yyyy-MM-dd HH:mm:ss Z"];
 }
+
++(NSDate*) dateWithGMTString:(NSString*)str {
+	NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
+	[dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss Z"];
+	NSDate* date = [dateFormatter dateFromString:str];
+	[dateFormatter release];
+	return date;
+}
+
 @end
 
 

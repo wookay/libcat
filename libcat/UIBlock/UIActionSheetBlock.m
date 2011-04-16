@@ -75,12 +75,12 @@
 		showTarget = @selector(showInView:);
 	}
 	if ([sheet respondsToSelector:showTarget]) {
-		if (IS_IPAD) {
-		} else {
+//		if (IS_IPAD) {
+//		} else {
 			if (nil != view) {
 				[sheet performSelector:showTarget withObject:view];
 			}
-		}
+//		}
 	}
 	
 	if (nil != passBlock) {

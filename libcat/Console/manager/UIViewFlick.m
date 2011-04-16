@@ -14,13 +14,13 @@
 #import "NSArrayExt.h"
 
 
-@implementation UINavigationItem (Inspect)
+@implementation UINavigationItem (ObjectInspect)
 -(NSString*) inspect {
 	return SWF(@"<UINavigationItem: %p; title = '%@'>", self, self.title);
 }
 @end
 
-@implementation UIBarButtonItem (Inspect)
+@implementation UIBarButtonItem (ObjectInspect)
 -(NSString*) inspect {	
 	return SWF(@"<UIBarButtonItem: %p; title = '%@'; target = %@; action=%@>", self, self.title, self.target, NSStringFromSelector(self.action));
 }

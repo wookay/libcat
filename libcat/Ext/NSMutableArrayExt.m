@@ -11,6 +11,13 @@
 
 @implementation NSMutableArray (Stack)
 
+-(void) addObjectIfNotContains:(id)obj {
+	if ([self containsObject:obj]) {
+	} else {
+		[self addObject:obj];
+	}
+}
+
 - (id) push:(id)obj {
 	[self addObject:obj];
 	return self;

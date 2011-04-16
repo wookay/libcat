@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #define IS_NIL(obj)	(nil == obj || [obj isNil])
+#define IS_NOT_NIL(obj)	(! IS_NIL(obj))
 #define ARGUMENT_INDEX_ONE 2
 
 @interface NSObject (Ext)

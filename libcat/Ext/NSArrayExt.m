@@ -83,9 +83,30 @@ NSInteger sortByFirstObjectComparator(NSArray* uno, NSArray* dos, void* context)
 	return [[self subarrayWithRange:left] arrayByAddingObjectsFromArray:[self subarrayWithRange:right]];
 }
 
+-(NSArray*) arrayAtFirst {
+	return [self objectAtFirst];
+}
+
+-(NSArray*) arrayAtSecond {
+	return [self objectAtSecond];
+}
+
+-(NSDictionary*) dictionaryAtFirst {
+	return [self objectAtFirst];
+}
+
+-(NSDictionary*) dictionaryAtSecond {
+	return [self objectAtSecond];
+}
+
+-(id) objectAtIndexPath:(NSIndexPath*)indexPath {
+	return [[self objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+}
+
 -(id) objectAtFirst {
 	if ([self count] > 0) {
-		return [self objectAtIndex:0];		
+		id obj = [self objectAtIndex:0];		
+		return obj;
 	} else {
 		return nil;
 	}
@@ -93,7 +114,8 @@ NSInteger sortByFirstObjectComparator(NSArray* uno, NSArray* dos, void* context)
 
 -(id) objectAtSecond {
 	if ([self count] > 1) {
-		return [self objectAtIndex:1];		
+		id obj = [self objectAtIndex:1];		
+		return obj;
 	} else {
 		return nil;
 	}
@@ -101,7 +123,8 @@ NSInteger sortByFirstObjectComparator(NSArray* uno, NSArray* dos, void* context)
 
 -(id) objectAtThird {
 	if ([self count] > 2) {
-		return [self objectAtIndex:2];		
+		id obj = [self objectAtIndex:2];		
+		return obj;
 	} else {
 		return nil;
 	}
@@ -109,7 +132,8 @@ NSInteger sortByFirstObjectComparator(NSArray* uno, NSArray* dos, void* context)
 
 -(id) objectAtFourth {
 	if ([self count] > 3) {
-		return [self objectAtIndex:3];		
+		id obj = [self objectAtIndex:3];		
+		return obj;
 	} else {
 		return nil;
 	}
@@ -117,14 +141,24 @@ NSInteger sortByFirstObjectComparator(NSArray* uno, NSArray* dos, void* context)
 
 -(id) objectAtLast {
 	if ([self count] > 0) {
-		return [self lastObject];		
+		id obj = [self lastObject];		
+		return obj;
 	} else {
 		return nil;
 	}
 }
 
+-(NSArray*) arrayAtIndex:(int)idx {
+	return [self at:idx];
+}
+
 -(id) at:(int)idx {
-	return [self objectAtIndex:idx];
+	if ([self count] > idx) {
+		id obj = [self objectAtIndex:idx];
+		return obj;
+	} else {
+		return nil;
+	}
 }
 
 -(id) first {

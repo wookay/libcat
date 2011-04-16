@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface NSObject (Inspect)
+@interface NSObject (ObjectInspect)
 -(id) inspect ;
 -(id) inspect_objc ;
 @end

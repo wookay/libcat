@@ -17,7 +17,7 @@
 #import "GeometryExt.h"
 #import "NSArrayExt.h"
 
-@implementation NSObject (Inspect)
+@implementation NSObject (ObjectInspect)
 -(id) inspect {
 	NSFormatterToInspect* formatter = [[NSFormatterToInspect alloc] init];
 	NSString* str = [formatter stringForObjectValue:self];
