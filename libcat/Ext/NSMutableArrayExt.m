@@ -32,6 +32,15 @@
 	return obj;
 }
 
+- (id) dequeue {
+    if ([self count] == 0) {
+        return nil;
+    }
+    id obj = [[[self objectAtIndex:0] retain] autorelease];
+    [self removeObjectAtIndex:0];
+    return obj;
+}
+
 -(void) setObject:(id)obj atIndex:(int)idx {
 	if (idx < self.count) {
 		[self replaceObjectAtIndex:idx withObject:obj];

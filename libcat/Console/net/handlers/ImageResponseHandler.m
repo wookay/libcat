@@ -83,7 +83,9 @@
 	return (UIImage*)[window.contentView to_image];
 #else
 	CGRect screenRect = [[UIScreen mainScreen] bounds];    
-	UIGraphicsBeginImageContext(screenRect.size);
+//	UIGraphicsBeginImageContext(screenRect.size);
+    UIGraphicsBeginImageContextWithOptions(window.bounds.size, window.opaque, 0.0);
+    log_info(@"windowboundssize %@", SFSize(window.bounds.size));
 	CGContextRef ctx = UIGraphicsGetCurrentContext(); 
 	[[UIColor blackColor] set]; 
 	CGContextFillRect(ctx, screenRect);
@@ -93,7 +95,11 @@
 	if (! CGRectIsEmpty([UIApplication sharedApplication].statusBarFrame)) {
 		CALayer* statusbarLayer = [CALayer layer];
 		statusbarLayer.frame = [UIApplication sharedApplication].statusBarFrame;		
-		statusbarLayer.contents = (id) [[UIImage imageNamed:(IS_IPAD ? @"libcat_statusbar~ipad.png" : @"libcat_statusbar.png")] CGImage];
+        if (IS_IPAD) {
+            statusbarLayer.contents = (id) [[UIImage imageNamed:@"libcat_statusbar~ipad.png"] CGImage];            
+        } else {
+            statusbarLayer.contents = (id) [[UIImage imageNamed:(IS_RETINA ? @"libcat_statusbar@2x.png" : @"libcat_statusbar.png")] CGImage];
+        }
 		[statusbarLayer renderInContext:ctx];
 	}
 	UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
@@ -113,7 +119,8 @@
 				}
 			}
 		}
-		UIGraphicsBeginImageContext(view.frame.size);
+//		UIGraphicsBeginImageContext(view.frame.size);
+        UIGraphicsBeginImageContextWithOptions(view.frame.size, view.opaque, 0.0);
 		[view.layer renderInContext: UIGraphicsGetCurrentContext()];
 		image = UIGraphicsGetImageFromCurrentImageContext();
 		UIGraphicsEndImageContext();	

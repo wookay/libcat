@@ -12,6 +12,11 @@
 #endif
 
 #define IS_IPAD ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
+#define IS_RETINA ( \
+    [[UIScreen mainScreen] respondsToSelector:@selector(displayLinkWithTarget:selector:)] && \
+    [UIScreen mainScreen].scale == 2.0 \
+)
+
 #define SYSTEM_VERSION [[[UIDevice currentDevice] systemVersion] floatValue]
 
 // screen frame

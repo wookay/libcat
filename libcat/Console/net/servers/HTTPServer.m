@@ -37,7 +37,6 @@ NSString * const HTTPServerNotificationStateChanged = @"ServerNotificationStateC
 //
 @interface HTTPServer ()
 @property (nonatomic, readwrite, retain) NSError *lastError;
-@property (readwrite, assign) HTTPServerState state;
 @end
 
 @implementation HTTPServer

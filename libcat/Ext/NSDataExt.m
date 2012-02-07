@@ -10,8 +10,6 @@
 #import "NSStringExt.h"
 #import "Logger.h"
 
-
-
 @implementation NSData (Ext)
 
 -(NSData*) slice:(int)loc :(int)length_ {

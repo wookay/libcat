@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B6D200A14E1D1FD0016D124 /* libcat_statusbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B6D200914E1D1FD0016D124 /* libcat_statusbar@2x.png */; };
+		2B6D200B14E1D1FD0016D124 /* libcat_statusbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B6D200914E1D1FD0016D124 /* libcat_statusbar@2x.png */; };
+		2B6D200C14E1D1FD0016D124 /* libcat_statusbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B6D200914E1D1FD0016D124 /* libcat_statusbar@2x.png */; };
 		DA210A7C126207A400FBBE35 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = DA210A7A126207A400FBBE35 /* Default.png */; };
 		DA210A7D126207A400FBBE35 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = DA210A7B126207A400FBBE35 /* Icon.png */; };
 		DA210AD312620AC100FBBE35 /* calculator.png in Resources */ = {isa = PBXBuildFile; fileRef = DA210AD112620AC100FBBE35 /* calculator.png */; };
@@ -324,6 +327,7 @@
 		28C286E00D94DF7D0034E888 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		28F335F01007B36200424DE2 /* RootViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = RootViewController.xib; path = ../RootViewController.xib; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		2B6D200914E1D1FD0016D124 /* libcat_statusbar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "libcat_statusbar@2x.png"; sourceTree = "<group>"; };
 		DA210A7A126207A400FBBE35 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		DA210A7B126207A400FBBE35 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		DA210AD112620AC100FBBE35 /* calculator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = calculator.png; sourceTree = "<group>"; };
@@ -1015,6 +1019,7 @@
 			isa = PBXGroup;
 			children = (
 				DACCADD113483E5A0095EA8C /* libcat_statusbar.png */,
+				2B6D200914E1D1FD0016D124 /* libcat_statusbar@2x.png */,
 				DACCADD213483E5A0095EA8C /* libcat_statusbar~ipad.png */,
 			);
 			path = images;
@@ -1212,6 +1217,7 @@
 				DACCAE9213483E5A0095EA8C /* PropertyRootViewController.xib in Resources */,
 				DACCAE9713483E5A0095EA8C /* libcat_statusbar.png in Resources */,
 				DACCAE9813483E5A0095EA8C /* libcat_statusbar~ipad.png in Resources */,
+				2B6D200B14E1D1FD0016D124 /* libcat_statusbar@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1240,6 +1246,7 @@
 				DACCAE2613483E5A0095EA8C /* PropertyRootViewController.xib in Resources */,
 				DACCAE2B13483E5A0095EA8C /* libcat_statusbar.png in Resources */,
 				DACCAE2C13483E5A0095EA8C /* libcat_statusbar~ipad.png in Resources */,
+				2B6D200C14E1D1FD0016D124 /* libcat_statusbar@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1265,6 +1272,7 @@
 				DACCAE5C13483E5A0095EA8C /* PropertyRootViewController.xib in Resources */,
 				DACCAE6113483E5A0095EA8C /* libcat_statusbar.png in Resources */,
 				DACCAE6213483E5A0095EA8C /* libcat_statusbar~ipad.png in Resources */,
+				2B6D200A14E1D1FD0016D124 /* libcat_statusbar@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1673,7 +1681,7 @@
 				);
 				INFOPLIST_FILE = "OpenGLApp-Info.plist";
 				PRODUCT_NAME = OpenGLApp;
-				SDKROOT = iphoneos4.2;
+				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};

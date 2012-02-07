@@ -10,7 +10,7 @@
 #import "Logger.h"
 #import "UnitTest.h"
 #import "NSObjectExt.h"
-#import <objc/runtime.h>
+#import <objc/message.h>
 
 @interface TestConsole : NSObject 
 @end

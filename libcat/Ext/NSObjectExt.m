@@ -16,6 +16,7 @@
 #import "NSDateExt.h"
 #import "Inspect.h"
 
+NSString* TypeEncodingDescription(char* code) ;
 NSString* TypeEncodingDescription(char* code) {
 	switch (code[0]) {
 		case _C_ID:
@@ -228,7 +229,7 @@ NSString* TypeEncodingDescription(char* code) {
 +(NSArray*) protocolsForProtocol:(Protocol*)protocol {
 	NSMutableArray* ary = [NSMutableArray array];
 	unsigned int outCount;
-	Protocol** protocolList = protocol_copyProtocolList(protocol, &outCount);
+	Protocol** protocolList = (Protocol**)protocol_copyProtocolList(protocol, &outCount);
 	for (unsigned int idx = 0; idx < outCount; ++idx) {
 		Protocol* proto = protocolList[idx];
 		[ary addObject:SWF(@"%s", protocol_getName(proto))];
@@ -339,7 +340,7 @@ NSString* TypeEncodingDescription(char* code) {
 +(NSArray*) protocolsForClass:(Class)targetClass {
 	NSMutableArray* ary = [NSMutableArray array];
 	unsigned int count = 0;
-    Protocol** protocols = class_copyProtocolList((Class)targetClass, &count);
+    Protocol** protocols = (Protocol**)class_copyProtocolList((Class)targetClass, &count);
 	if (nil != protocols) {
 		for (int idx = 0 ; idx < count ; idx++) {
 			Protocol* protocol = protocols[idx];

@@ -20,7 +20,6 @@
 -(UITouchPhase) savedPhase ;
 -(unsigned int) firstTouchForView ;
 -(unsigned int) isTap ;
--(unsigned int) isWarped ;
 -(unsigned int) isDelayed ;
 -(unsigned int) sentTouchesEnded ;
 -(UInt8) pathIndex ;

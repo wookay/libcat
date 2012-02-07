@@ -54,7 +54,6 @@
         _previousLocationInWindow = point;
         _touchFlags._firstTouchForView = 1;
         _touchFlags._isTap = 1;
-        _touchFlags._isWarped = 0;
         _touchFlags._isDelayed = 0;
         _touchFlags._sentTouchesEnded = 0;
 #endif
@@ -81,7 +80,6 @@
 		_pathMajorRadius = touch.pathMajorRadius;
         _touchFlags._firstTouchForView = touch.firstTouchForView;
         _touchFlags._isTap = touch.isTap;
-        _touchFlags._isWarped = touch.isWarped;
         _touchFlags._isDelayed = touch.isDelayed;
         _touchFlags._sentTouchesEnded = touch.sentTouchesEnded;
 #endif
@@ -98,9 +96,6 @@
 }
 -(unsigned int) isTap {
 	return _touchFlags._isTap;
-}
--(unsigned int) isWarped {
-	return _touchFlags._isWarped;
 }
 -(unsigned int) isDelayed {
 	return _touchFlags._isDelayed;

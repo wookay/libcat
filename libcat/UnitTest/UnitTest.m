@@ -10,7 +10,7 @@
 #import "NSStringExt.h"
 #import "Inspect.h"
 #import "Logger.h"
-#import "objc/runtime.h"
+#import "objc/message.h"
 #import "NSDateExt.h"
 #import "NSArrayExt.h"
 

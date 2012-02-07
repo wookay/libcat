@@ -12,29 +12,29 @@
 #import "ConsoleManager.h"
 
 @implementation NewObjectManager
-@synthesize newObjects;
-@synthesize newOne;
+@synthesize neoObjects;
+@synthesize neoOne;
 @synthesize oldOne;
 
 -(void) setNewObject:(id)obj forKey:(NSString*)key {
 	if ([NEW_ONE_NAME isEqualToString:key]) {
-		self.newOne = obj;
+		self.neoOne = obj;
 	} else {
-		[self.newObjects setObject:obj forKey:key];
+		[self.neoObjects setObject:obj forKey:key];
 	}	
 }
 
 -(id) newObjectForKey:(NSString*)key {
 	if ([NEW_ONE_NAME isEqualToString:key]) {
-		return newOne;
+		return neoOne;
 	} else {
-		return [newObjects objectForKey:key];
+		return [neoObjects objectForKey:key];
 	}
 }
 
 
 -(void) updateNewOne:(id)obj {
-	self.newOne = obj;
+	self.neoOne = obj;
 }
 
 -(void) updateOldOne:(id)obj {
@@ -52,16 +52,16 @@
 - (id) init {
 	self = [super init];
 	if (self) {
-		self.newObjects = [NSMutableDictionary dictionary];
-		self.newOne = nil;
+		self.neoObjects = [NSMutableDictionary dictionary];
+		self.neoOne = nil;
 		self.oldOne = nil;
 	}
 	return self;
 }
 
 - (void)dealloc {
-	[newObjects release];
-	newOne = nil;
+	[neoObjects release];
+	neoOne = nil;
 	oldOne = nil;
 	[super dealloc];
 }

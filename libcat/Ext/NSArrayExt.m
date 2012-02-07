@@ -36,6 +36,7 @@ NSArray* CUAD(id uno, id dos, id tres, id cuatro) {
 	return ary;	
 }
 
+NSInteger sortByFirstObjectComparator(NSArray* uno, NSArray* dos, void* context) ;
 NSInteger sortByFirstObjectComparator(NSArray* uno, NSArray* dos, void* context) {
 	return [[uno objectAtFirst] compare:[dos objectAtFirst]];
 }

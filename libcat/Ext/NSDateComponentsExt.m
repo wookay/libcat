@@ -44,9 +44,12 @@
 }
 
 +(int) sundayIndexForCalendar:(NSCalendar*)calendar {
-	return (WEEKDAY_COUNT - [calendar firstWeekday] + 1) % WEEKDAY_COUNT;
+	return (WEEKDAY_COUNT - [calendar firstWeekday] + WEEKDAY_SUNDAY) % WEEKDAY_COUNT;
 }
 
++(int) saturdayIndexForCalendar:(NSCalendar*)calendar {
+	return (WEEKDAY_COUNT - [calendar firstWeekday] + WEEKDAY_SATURDAY) % WEEKDAY_COUNT;
+}
 
 -(NSDate*) to_date {
 	return [[NSCalendar currentCalendar] dateFromComponents:self];

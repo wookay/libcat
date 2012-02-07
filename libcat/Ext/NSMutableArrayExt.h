@@ -12,6 +12,7 @@
 
 - (id) push:(id)obj ;
 - (id) pop ;
+- (id) dequeue ;
 - (void) setObject:(id)obj atIndex:(int)idx ;
 -(void) addObjectIfNotContains:(id)obj ;
 

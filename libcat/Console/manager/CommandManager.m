@@ -40,7 +40,7 @@
 #define TOOLBAR_ITEMS_SECTION_INDEX -1
 
 
-
+NSArray* array_prefix_index(NSArray* array) ;
 
 NSArray* array_prefix_index(NSArray* array) {
 	NSMutableArray* ary = [NSMutableArray array];
@@ -303,8 +303,8 @@ NSString* surrounded_array_prefix_index(NSArray* array) {
 
 -(NSString*) command_new_objects:(id)currentObject arg:(id)arg {
 	NSMutableArray* ary = [NSMutableArray array];
-	[ary addObject:SWF(@"NEW_OBJECTS: %@", NEWOBJECTMAN.newObjects)];
-	[ary addObject:SWF(@"%@: %@", NEW_ONE_NAME, NEWOBJECTMAN.newOne)];
+	[ary addObject:SWF(@"NEW_OBJECTS: %@", NEWOBJECTMAN.neoObjects)];
+	[ary addObject:SWF(@"%@: %@", NEW_ONE_NAME, NEWOBJECTMAN.neoOne)];
 	return [ary join:LF];
 }
 

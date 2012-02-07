@@ -19,6 +19,8 @@ CGFloat CGPointsDistance(CGPoint from, CGPoint to) ;
 CGPoint CGPointWithScale(CGPoint point, CGFloat scale) ;
 CGPoint CGPointDivideByScale(CGPoint point, CGFloat scale) ;
 CGPoint CGPointDivideByScaleWithFloorDown(CGPoint point, CGFloat scale) ;
+CGPoint CGPointDivideByScales(CGPoint point, CGFloat scaleX, CGFloat scaleY) ;
+CGPoint CGPointDivideByScalesWithFloorDown(CGPoint point, CGFloat scaleX, CGFloat scaleY) ;	
 #define CGPointMinusOne		CGPointMake(-1, -1)
 #define CGPointIsMinusOne(point)	CGPointEqualToPoint(point, CGPointMinusOne)
 

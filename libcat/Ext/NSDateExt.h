@@ -29,7 +29,8 @@ typedef enum {
 	WEEKDAY_SATURDAY = 7
 } kWeekdayIndex ;
 
-NSString* hourName_minute_second_SPACE(NSTimeInterval ti) ;
+NSString* timeInterval_to_hourName_minute_second_SPACE(NSTimeInterval ti) ;
+
 NSString* monthName_standalone(int month) ;
 NSString* monthName_short_standalone(int month) ;
 NSString* monthName_day_SPACE(int month, int day) ;
@@ -63,6 +64,7 @@ NSString* int_to_secondName(int second) ;
 -(NSDate*) oneYearAgo ;
 -(NSDate*) oneYearAfter ;
 -(NSDate*) oneDayBefore ;
+-(NSDate*) nDaysBefore:(int)nDays ;
 -(NSDate*) nDaysAfter:(int)nDays ;
 -(int) countDownOfTheDay:(NSDate*)comingDate ;
 
@@ -81,7 +83,9 @@ NSString* int_to_secondName(int second) ;
 -(NSString*) year_month_day_MINUS_hour_minute_second_MINUS ;
 -(NSString*) year_month_day_MINUS_AMPM_hour_minute_COLON ;
 -(NSString*) year_monthName_SPACE ;
+-(NSString*) year_shortMonthName_SPACE ;
 -(NSString*) year_monthName_day_SPACE ;
+-(NSString*) year_monthName_day_weekday_SPACE ;
 -(NSString*) month_day_DOT ;
 -(NSString*) monthName ;
 -(NSString*) monthName_day_SPACE ;
@@ -122,6 +126,7 @@ NSString* int_to_secondName(int second) ;
 @interface NSDate (Weekday)
 -(NSString*) weekdayName ;
 +(NSArray*) weekdayNames ;
++(NSArray*) weekdayNames:(NSArray*)weekdayNames forCalendar:(NSCalendar*)calendar ;
 -(NSString*) shortWeekdayName ;
 +(NSArray*) shortWeekdayNames ;
 -(NSString*) shortWeekdayHanjaName ;

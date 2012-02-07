@@ -20,6 +20,7 @@
 +(NSArray*) daysFromYear:(int)year ;
 -(int) weekdayIndexForCalendar:(NSCalendar*)calendar ;
 +(int) sundayIndexForCalendar:(NSCalendar*)calendar ;
++(int) saturdayIndexForCalendar:(NSCalendar*)calendar ;
 -(NSDate*) to_date ;
 -(NSString*) gmtString ;
 @end

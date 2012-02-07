@@ -67,9 +67,9 @@ NSString* int_to_hourName(int hour) {
 
 NSString* int_to_minuteName(int minute) {
 	if (IS_LANG_KOREAN) {
-		return SWF(@"%02d분", minute);
+		return SWF(@"%d분", minute);
 	} else {
-		return SWF(@"%02d", minute);
+		return SWF(@"%d", minute);
 	}		
 }
 
@@ -77,7 +77,7 @@ NSString* int_to_secondName(int second) {
 	if (IS_LANG_KOREAN) {
 		return SWF(@"%d초", second);
 	} else {
-		return SWF(@"%02d", second);
+		return SWF(@"%d", second);
 	}	
 }
 
@@ -200,7 +200,7 @@ NSString* monthLongName_day_SPACE(int month, int day) {
 }
 
 +(NSDate*) dateFrom:(int)year month:(int)month day:(int)day hour:(int)hour minute:(int)minute second:(int)second {
-	NSDateComponents* comps = [[NSCalendar currentCalendar] components:UNIT_FLAGS_YMDHMS fromDate:self];
+	NSDateComponents* comps = [[NSCalendar currentCalendar] components:UNIT_FLAGS_YMDHMS fromDate:(NSDate*)self];
 	comps.year = year;
 	comps.month = month;
 	comps.day = day;
@@ -224,6 +224,14 @@ NSString* monthLongName_day_SPACE(int month, int day) {
 
 -(NSDate*) oneDayBefore {
 	return [self internal_dateByAddingTimeInterval: -ONE_DAY_SECONDS];
+}
+
+-(NSDate*) nDaysBefore:(int)nDays {
+	NSDateComponents* comps = [[NSDateComponents alloc] init];
+	comps.day = -nDays;
+	NSDate* date = [[NSCalendar currentCalendar] dateByAddingComponents:comps toDate:self options:0];
+	[comps release];
+	return date;
 }
 
 -(NSDate*) nDaysAfter:(int)nDays {
@@ -294,6 +302,14 @@ NSString* monthLongName_day_SPACE(int month, int day) {
 
 -(NSString*) year_monthName_SPACE {
 	if (IS_LOCALE_KOREAN) {
+		return [self formatWith:@"yyyy년 LLLL"];
+	} else {
+		return [self formatWith:@"LLLL yyyy"];
+	}	
+}
+
+-(NSString*) year_shortMonthName_SPACE {
+	if (IS_LOCALE_KOREAN) {
 		return [self formatWith:@"yyyy년 LLL"];
 	} else {
 		return [self formatWith:@"LLL yyyy"];
@@ -306,6 +322,14 @@ NSString* monthLongName_day_SPACE(int month, int day) {
 	} else {
 		return [self formatWith:@"LLL d, yyyy"];
 	}	
+}
+
+-(NSString*) year_monthName_day_weekday_SPACE {
+	if (IS_LOCALE_KOREAN) {
+		return [self formatWith:@"yyyy년 M월 d일 E요일"];
+	} else {		
+		return [self formatWith:@"LLL d, yyyy EEEE"];
+	}
 }
 
 -(NSString*) amPM_hourName_minute_SPACE {
@@ -364,7 +388,7 @@ NSString* monthLongName_day_SPACE(int month, int day) {
 	if (IS_LOCALE_KOREAN) {
 		return [self formatWith:@"LLL d일"];
 	} else {
-		return [self formatWith:@"d/LLL"];
+		return [self formatWith:@"LLL d"];
 	}
 }
 
@@ -372,7 +396,7 @@ NSString* monthLongName_day_SPACE(int month, int day) {
 	if (IS_LOCALE_KOREAN) {
 		return [self formatWith:@"LLLL d일"];
 	} else {
-		return [self formatWith:@"d / LLLL"];
+		return [self formatWith:@"LLLL d"];
 	}
 }
 
@@ -402,10 +426,6 @@ NSString* monthLongName_day_SPACE(int month, int day) {
 
 -(NSString*) year_month_day_MINUS_AMPM_hour_minute_COLON {
 	return [self formatWith:@"yyyy-MM-dd a hh:mm"];
-}
-
--(NSString*) AMPM_hour_minute_COLON {
-	return [self formatWith:@"a h:mm"];
 }
 
 -(NSString*) year_month_day_MINUS_hour_minute_second_COLON {
@@ -531,8 +551,9 @@ NSString* monthLongName_day_SPACE(int month, int day) {
 }
 
 -(int) numberOfWeeksInMonth {
-	CGFloat firstWeekdayInMonth = [self firstWeekdayInMonth] - FIRST_WEEKDAY_OF_CALENDAR;
-	return ceil((firstWeekdayInMonth + [self numberOfDaysInMonth]) / WEEKDAY_COUNT);
+	int firstWeekdayInMonth = [self firstWeekdayInMonth] - FIRST_WEEKDAY_OF_CALENDAR;
+	int weeks = ceil((firstWeekdayInMonth + [self numberOfDaysInMonth]) / (WEEKDAY_COUNT + 0.0));
+	return weeks;
 }
 
 -(NSArray*) monthTable {	
@@ -587,6 +608,15 @@ NSString* monthLongName_day_SPACE(int month, int day) {
 
 +(NSArray*) weekdayNames {
 	return [NSDate weekdayNamesBy:@selector(weekdaySymbols)];
+}
+
++(NSArray*) weekdayNames:(NSArray*)weekdayNames forCalendar:(NSCalendar*)calendar {
+	int firstWeekday = [calendar firstWeekday];
+	if (WEEKDAY_MONDAY == firstWeekday) {
+		return [weekdayNames rshift:1];
+	} else {
+		return weekdayNames;
+	}
 }
 
 -(NSString*) shortWeekdayName {

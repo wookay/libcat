@@ -44,6 +44,14 @@ CGPoint CGPointDivideByScaleWithFloorDown(CGPoint point, CGFloat scale) {
 	return CGPointMake(floor(point.x / scale), floor(point.y / scale));
 }
 
+CGPoint CGPointDivideByScales(CGPoint point, CGFloat scaleX, CGFloat scaleY) {
+	return CGPointMake(point.x / scaleX, point.y / scaleY);
+}
+
+CGPoint CGPointDivideByScalesWithFloorDown(CGPoint point, CGFloat scaleX, CGFloat scaleY) {
+	return CGPointMake(floor(point.x / scaleX), floor(point.y / scaleY));
+}
+
 #pragma mark CGRect
 BOOL CGRectHasPoint(CGRect rect, CGPoint point) {
 	return true == CGRectContainsPoint(rect, point);

@@ -38,7 +38,7 @@ typedef enum
 }
 
 @property (nonatomic, readonly, retain) NSError *lastError;
-@property (readonly, assign) HTTPServerState state;
+@property (nonatomic, assign) HTTPServerState state;
 
 + (HTTPServer *)sharedServer;
 

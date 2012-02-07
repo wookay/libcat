@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 
 
-
 @interface NSData (Ext)
 -(char) onebyte_to_char ;
 - (int) onebyte_to_int ;

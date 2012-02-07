@@ -43,19 +43,19 @@ int enum_rshift(int greatest, int current) {
 -(NSNumber*) round_up {
 	double value = round([self doubleValue]);
 	return [NSNumber numberWithDouble:value];
-//	assert_equal(LONGNUM(3), [LONGNUM(3.14) round_up]);
+//	assert_equal(LONGNUM(1), [LONGNUM(1.33) round_up]);
 //	assert_equal(LONGNUM(2), [LONGNUM(1.66) round_up]);
 }
 -(NSNumber*) ceiling {
 	double value = ceil([self doubleValue]);
 	return [NSNumber numberWithDouble:value];
-//	assert_equal(LONGNUM(4), [LONGNUM(3.14) ceiling]);
+//	assert_equal(LONGNUM(2), [LONGNUM(1.33) ceiling]);
 //	assert_equal(LONGNUM(2), [LONGNUM(1.66) ceiling]);
 }
 -(NSNumber*) floor_down {
 	double value = floor([self doubleValue]);
 	return [NSNumber numberWithDouble:value];
-//	assert_equal(LONGNUM(3), [LONGNUM(3.14) floor_down]);
+//	assert_equal(LONGNUM(1), [LONGNUM(1.33) floor_down]);
 //	assert_equal(LONGNUM(1), [LONGNUM(1.66) floor_down]);
 }
 

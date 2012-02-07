@@ -15,6 +15,7 @@
 #import "Logger.h"
 #import "Numero.h"
 #import "GeometryExt.h"
+#import "objc/runtime.h"
 
 #if USE_PRIVATE_API
 @interface UIApplication (Recoder)

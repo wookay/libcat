@@ -13,12 +13,12 @@
 #define NEW_ONE_NAME		@"$0"
 
 @interface NewObjectManager : NSObject {
-	NSMutableDictionary* newObjects;
-	id newOne;
+	NSMutableDictionary* neoObjects;
+	id neoOne;
 	id oldOne;
 }
-@property (nonatomic, retain) NSMutableDictionary* newObjects;
-@property (nonatomic, retain) id newOne;
+@property (nonatomic, retain) NSMutableDictionary* neoObjects;
+@property (nonatomic, retain) id neoOne;
 @property (nonatomic, assign) id oldOne;
 
 + (NewObjectManager*) sharedManager ;
