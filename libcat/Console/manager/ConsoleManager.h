@@ -45,6 +45,7 @@ typedef enum { kGetterReturnTypeInspect, kGetterReturnTypeObject } GetterReturnT
 +(void) run ;
 +(void) run:(int)port ;
 +(void) stop ;
++(void) hide ;
 +(void) hide_console_button ;
 -(void) start_servers ;
 -(void) start_servers:(int)port ;
@@ -53,6 +54,7 @@ typedef enum { kGetterReturnTypeInspect, kGetterReturnTypeObject } GetterReturnT
 -(void) make_console_buttons ;
 -(void) hide_console_button ;
 -(void) toggle_logs_button ;
++(void) setConsoleButtonAtTopRight ;
 //-(void) update_record_button ;
 
 @end

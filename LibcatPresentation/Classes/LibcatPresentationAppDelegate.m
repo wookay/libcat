@@ -8,36 +8,30 @@
 
 #import "LibcatPresentationAppDelegate.h"
 #import "RootViewController.h"
-#import "ConsoleManager.h"
 #import "Logger.h"
 
-@implementation LibcatPresentationAppDelegate
+#import "ConsoleManager.h"
 
+@implementation LibcatPresentationAppDelegate
 @synthesize window;
 @synthesize navigationController;
-
 
 #pragma mark -
 #pragma mark Application lifecycle
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
-    
-    // Override point for customization after application launch.
-	
-    // Add the navigation controller's view to the window and display.
     [window setRootViewController:navigationController];
     [self.window makeKeyAndVisible];
-
-   
     
 #if TARGET_IPHONE_SIMULATOR
 	[ConsoleManager run];
-//	[ConsoleManager hide_console_button];
+    [ConsoleManager setConsoleButtonAtTopRight];
+    //	[ConsoleManager hide];
 #endif
-    
     
     return YES;
 }
+
 
 
 - (void)applicationWillResignActive:(UIApplication *)application {

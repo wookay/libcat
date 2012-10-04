@@ -13,6 +13,7 @@
 #import "NSArrayExt.h"
 #import "Settings.h"
 #import "GotoView.h"
+#import "NSTextExt.h"
 
 @implementation PresentationViewController
 @synthesize tableView;
@@ -112,20 +113,38 @@
 }
 
 - (UIView*) tableView:(UITableView *)tableView_ viewForHeaderInSection:(NSInteger)section {
+    NSString* titleForHeader = [self.tableView.dataSource tableView:tableView_ titleForHeaderInSection:section];
 	CGRect rect = SLIDE_TITLE_RECT;
 	UILabel* label = [[[UILabel alloc] initWithFrame:rect] autorelease];
-	label.font = [UIFont fontWithName:@"ArialRoundedMTBold" size:40];
+	label.font = [UIFont fontWithName:@"ArialRoundedMTBold" size:30];
 	label.textAlignment = NSTextAlignmentCenter;
 	label.backgroundColor = [UIColor clearColor];
 	label.textColor = COLOR_RGBA_FF(0x06, 0x10, 0x2b, 1);
 	label.shadowColor = COLOR_RGBA_FF(0x95, 0x95, 0x95, 1);
-	label.text = [self.tableView.dataSource tableView:tableView_ titleForHeaderInSection:section];
+	label.text = titleForHeader;
+    self.title = titleForHeader;
 	return label;
 }
 
+-(IBAction) touchedFullScreenImage:(id)sender {
+    [sender removeTarget:self action:@selector(touchedFullScreenImage:) forControlEvents:UIControlEventTouchUpInside];
+    [sender removeFromSuperview];
+}
+
 - (void)tableView:(UITableView *)tableView_ didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    id item = [[[[SlideDataSource sharedInstance].slides objectAtIndex:pageControl.currentPage] objectAtSecond] objectAtIndex:indexPath.row];
+	if ([item isKindOfClass:[UIImage class]]) {
+        UIImage* image = item;
+         UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
+        button.frame = self.view.frame;
+        [button addTarget:self action:@selector(touchedFullScreenImage:) forControlEvents:UIControlEventTouchUpInside];
+        [button setImage:image forState:UIControlStateNormal];
+        [button setBackgroundColor:[UIColor blackColor]];
+        [self.view addSubview:button];
+    }
 	[tableView_ deselectRowAtIndexPath:indexPath animated:true];
 }
+
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
 }
 

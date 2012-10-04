@@ -13,6 +13,7 @@
 #import "Logger.h"
 #import "Settings.h"
 #import "NSDateExt.h"
+#import "NSTextExt.h"
 
 void SLIDE_PAGE(NSString* slideTitle, NSArray* slideItems) {
 	[[SlideDataSource sharedInstance] add_slide_page:slideTitle items:slideItems];
@@ -30,16 +31,19 @@ void SLIDE_PAGE(NSString* slideTitle, NSArray* slideItems) {
 						   NSLocalizedString(@"Bluff Coding", nil),
 						   nil]);
 	SLIDE_PAGE(NSLocalizedString(@"Languages", nil), [NSArray arrayWithObjects:[UIImage imageNamed:@"graphs_languages.png"], nil]);
-	SLIDE_PAGE(NSLocalizedString(@"Features", nil), [NSArray arrayWithObjects:@"Ext", @"Block", @"Unit Test, Logger", @"Console", nil]);
-	SLIDE_PAGE(@"Ext", [NSArray arrayWithObjects:@"Objective-C Library", @"Foundation Extensions & Macros", nil]);
-	SLIDE_PAGE(@"Ext", [NSArray arrayWithObjects:@"NSStringExt", @"NSArrayExt", @"NSDictionaryExt", @"...", nil]);
-	SLIDE_PAGE(@"Block", [NSArray arrayWithObjects:@"Block Extensions", @" for array, dictionary, number", @"UIBlock Extensions", nil]);
+	SLIDE_PAGE(NSLocalizedString(@"Features", nil), [NSArray arrayWithObjects:@"Ext", @"Unit Test, Logger", @"Console", nil]);
+	SLIDE_PAGE(@"Ext", [NSArray arrayWithObjects:@"Objective-C Library", @"Foundation Extensions using Categories & Macros", nil]);
+	SLIDE_PAGE(@"Ext (2)", [NSArray arrayWithObjects:@"NSStringExt", @"NSArrayExt", @"NSDictionaryExt", @"Block Extensions", @"...", nil]);
 	SLIDE_PAGE(@"Unit Test", [NSArray arrayWithObjects:NSLocalizedString(@"Writing Unit Test Codes", nil), NSLocalizedString(@"Make Reusable Code", nil), nil]);
-	SLIDE_PAGE(@"Unit Test ( Example )", [NSArray arrayWithObjects:[UIImage imageNamed:@"unittest_example.png"], nil]);
-	SLIDE_PAGE(@"Unit Test ( Run )", [NSArray arrayWithObjects:[UIImage imageNamed:@"unittest_run.png"], nil]);
-	SLIDE_PAGE(@"Unit Test ( Report )", [NSArray arrayWithObjects:[UIImage imageNamed:@"unittest_report.png"], nil]);
-	SLIDE_PAGE(@"Logger", [NSArray arrayWithObjects:@"log_info(@\"message\")", @"  RootViewController.m #032   message", @"log_info(@\"idx %d\", idx)", @"  RootViewController.m #033   idx 1    ", nil]);
+	SLIDE_PAGE(@"Unit Test - Example", [NSArray arrayWithObjects:[UIImage imageNamed:@"unittest_example.png"], nil]);
+	SLIDE_PAGE(@"Unit Test - Run", [NSArray arrayWithObjects:[UIImage imageNamed:@"unittest_run.png"], nil]);
+	SLIDE_PAGE(@"Unit Test - Report", [NSArray arrayWithObjects:[UIImage imageNamed:@"unittest_report.png"], nil]);
+	SLIDE_PAGE(@"Logger", [NSArray arrayWithObjects:@"log_info(@\"message\");", @"  RootViewController.m #032   message", @"log_info(@\"idx %d\", idx);", @"  RootViewController.m #033   idx 1    ", nil]);
+    
+    // Console
 	SLIDE_PAGE(@"Console", [NSArray arrayWithObjects:@"Command shell debugging environment", NSLocalizedString(@"Scripting", nil), NSLocalizedString(@"Automation", nil), nil]);
+    SLIDE_PAGE(@"Start Console Server", [NSArray arrayWithObjects:@"[ConsoleManager run];", [UIImage imageNamed:@"consolemanager_run.png"], nil]);
+    SLIDE_PAGE(@"Terminal to connect", [NSArray arrayWithObjects:@"~/libcat/script$ ./console.rb", [UIImage imageNamed:@"script_console.png"], nil]);
 	SLIDE_PAGE(@"ls", [NSArray arrayWithObjects:
 						@"ls TARGET           : list target object (l)      ",
 						@"  > ls              : list current object         ",
@@ -80,7 +84,7 @@ void SLIDE_PAGE(NSString* slideTitle, NSArray* slideItems) {
 	SLIDE_PAGE(@"flick", [NSArray arrayWithObjects:
 					  @"flick TARGET        : flick target UI (f)  ",
 					  nil]);
-	SLIDE_PAGE(@"open", [NSArray arrayWithObjects:@"open Safari UI", nil]);
+	SLIDE_PAGE(@"open", [NSArray arrayWithObjects:@"open Safari UI", [UIImage imageNamed:@"open_safari.png"], nil]);
 	SLIDE_PAGE(@"hit", [NSArray arrayWithObjects:@"hitTest UI on/off", nil]);
 	SLIDE_PAGE(@"events", [NSArray arrayWithObjects:NSLocalizedString(@"Record, Play the touch events", nil), @"USE_PRIVATE_API=1", nil]);
 	SLIDE_PAGE(@"events", [NSArray arrayWithObjects:
@@ -113,6 +117,22 @@ void SLIDE_PAGE(NSString* slideTitle, NSArray* slideItems) {
 										@"  > UITableViewDelegate",
 										SPACE,
 										nil]);
+    SLIDE_PAGE(@"libcat for your project", [NSArray arrayWithObjects:
+                                              @"Add libcat to your project",
+                                    nil]);
+    SLIDE_PAGE(@"libcat for your project (2)", [NSArray arrayWithObjects:
+                                            @"inside YourAppDelegate.m",
+                                            @"  #import \"ConsoleManager.h\"",
+                                            @"  [ConsoleManager run];",
+                                            @"",
+                                            nil]);
+    SLIDE_PAGE(@"libcat for your project (3)", [NSArray arrayWithObjects:
+                                                @"Add QuartzCore.framework, CFNetwork.framework",
+                                                nil]);
+    SLIDE_PAGE(@"Run your App", [NSArray arrayWithObjects:
+                                            @"Run your App",
+                                            @"Run script/console.rb on terminal",
+                                                nil]);
 	SLIDE_PAGE(NSLocalizedString(@"Feedback", nil), [NSArray arrayWithObjects:NSLocalizedString(@"Subscribe to google groups", nil), @"http://groups.google.com/group/interactivelibcat", nil]);
 	SLIDE_PAGE(NSLocalizedString(@"Questions?", nil), [NSArray arrayWithObjects:@"", nil]);
 	SLIDE_PAGE(@"FIN", [NSArray arrayWithObjects:SPACE, PAIR(NSLocalizedString(@"Thanks", nil), Enum(NSTextAlignmentCenter)), nil]);
@@ -160,7 +180,6 @@ void SLIDE_PAGE(NSString* slideTitle, NSArray* slideItems) {
     
 	cell.imageView.image = nil;
 	cell.textLabel.textAlignment = NSTextAlignmentLeft;
-//    UITextAlignmentLeft
 	cell.textLabel.text = nil;
 	
 	// Configure the cell.
@@ -178,7 +197,7 @@ void SLIDE_PAGE(NSString* slideTitle, NSArray* slideItems) {
 		cell.textLabel.adjustsFontSizeToFitWidth = true;
 		cell.textLabel.text = itemText;
 		cell.textLabel.numberOfLines = [itemText split:LF].count;
-		cell.textLabel.font = [UIFont fontWithName:@"SeoulHangangB" size:36];
+		cell.textLabel.font = [UIFont fontWithName:@"SeoulHangangB" size:26];
 		cell.textLabel.textColor = COLOR_RGBA_FF(0x06, 0x10, 0x2b, 1);
 	}
     return cell;
@@ -223,22 +242,6 @@ void SLIDE_PAGE(NSString* slideTitle, NSArray* slideItems) {
  return YES;
  }
  */
-
-
-#pragma mark -
-#pragma mark Table view delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-	/*
-	 <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-	 [self.navigationController pushViewController:detailViewController animated:YES];
-	 [detailViewController release];
-	 */
-}
-
 
 + (SlideDataSource*) sharedInstance {
 	static SlideDataSource*	manager = nil;

@@ -55,6 +55,10 @@
 	[[self sharedManager] stop];
 }
 
++(void) hide {
+	[[self sharedManager] hide_console_button];
+}
+
 +(void) hide_console_button {
 	[[self sharedManager] hide_console_button];
 }
@@ -663,6 +667,18 @@
 
 -(IBAction) touchedConsoleButton:(id)sender {
 	[PROPERTYMAN showConsoleController];
+}
+
++(void) setConsoleButtonAtTopRight {
+	UIWindow* window = [UIApplication sharedApplication].keyWindow;
+    for (UIView* subview in window.subviews) {
+        if ([subview isKindOfClass:[ConsoleButton class]]) {
+            CGRect windowFrame = window.frame;
+            CGRect consoleRect = CGRectOffset(CGRectTopRight(windowFrame, 70, 10), 2, 2);
+            subview.frame = consoleRect;
+            break;
+        }
+    }
 }
 
 -(void) make_console_buttons {

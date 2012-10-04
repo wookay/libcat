@@ -16,6 +16,9 @@
 		28C286E10D94DF7D0034E888 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C286E00D94DF7D0034E888 /* RootViewController.m */; };
 		28F335F11007B36200424DE2 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28F335F01007B36200424DE2 /* RootViewController.xib */; };
 		2BC8457D161D771F0037468D /* Default-Landscape-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BC8457C161D771F0037468D /* Default-Landscape-568h@2x.png */; };
+		2BEC18B7161DCD4D0033F466 /* script_console.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BEC18B6161DCD4D0033F466 /* script_console.png */; };
+		2BEC18B9161DCEE70033F466 /* consolemanager_run.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BEC18B8161DCEE70033F466 /* consolemanager_run.png */; };
+		2BEC18BB161DD6FC0033F466 /* open_safari.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BEC18BA161DD6FC0033F466 /* open_safari.png */; };
 		DA7A2356132A0D020040CAF2 /* Async.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7A22E4132A0D020040CAF2 /* Async.m */; };
 		DA7A2357132A0D020040CAF2 /* NSArrayBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7A22E6132A0D020040CAF2 /* NSArrayBlock.m */; };
 		DA7A2358132A0D020040CAF2 /* NSDictionaryBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7A22E8132A0D020040CAF2 /* NSDictionaryBlock.m */; };
@@ -100,6 +103,10 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2BC8457C161D771F0037468D /* Default-Landscape-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape-568h@2x.png"; sourceTree = "<group>"; };
 		2BC8457E161D77540037468D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		2BE08069161DCAA500E32AFA /* NSTextExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSTextExt.h; sourceTree = "<group>"; };
+		2BEC18B6161DCD4D0033F466 /* script_console.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = script_console.png; sourceTree = "<group>"; };
+		2BEC18B8161DCEE70033F466 /* consolemanager_run.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = consolemanager_run.png; sourceTree = "<group>"; };
+		2BEC18BA161DD6FC0033F466 /* open_safari.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = open_safari.png; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* LibcatPresentation-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "LibcatPresentation-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		DA7A22E3132A0D020040CAF2 /* Async.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Async.h; sourceTree = "<group>"; };
 		DA7A22E4132A0D020040CAF2 /* Async.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Async.m; sourceTree = "<group>"; };
@@ -293,9 +300,9 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				DA7D3BFE132862F80020E9D6 /* slide_images */,
 				DADCD7C4133066410082B437 /* Images */,
 				DA93B0DA132F6B070016810D /* Languages */,
-				DA7D3BFE132862F80020E9D6 /* slide_images */,
 				DA93AFFA132F61DC0016810D /* SeoulHangangB.ttf */,
 				28F335F01007B36200424DE2 /* RootViewController.xib */,
 				28AD735F0D9D9599002E5188 /* MainWindow.xib */,
@@ -479,6 +486,7 @@
 				DA7A233E132A0D020040CAF2 /* NSTimerExt.h */,
 				DA7A233F132A0D020040CAF2 /* NSTimerExt.m */,
 				DA7A2340132A0D020040CAF2 /* Numero.h */,
+				2BE08069161DCAA500E32AFA /* NSTextExt.h */,
 			);
 			path = Ext;
 			sourceTree = "<group>";
@@ -519,10 +527,13 @@
 		DA7D3BFE132862F80020E9D6 /* slide_images */ = {
 			isa = PBXGroup;
 			children = (
+				2BEC18B8161DCEE70033F466 /* consolemanager_run.png */,
+				2BEC18B6161DCD4D0033F466 /* script_console.png */,
 				DA7D3C9013286A8B0020E9D6 /* unittest_report.png */,
 				DA7D3C6E132869CB0020E9D6 /* unittest_run.png */,
 				DA7D3C4F132868A40020E9D6 /* unittest_example.png */,
 				DA7D3BFF132862FE0020E9D6 /* graphs_languages.png */,
+				2BEC18BA161DD6FC0033F466 /* open_safari.png */,
 			);
 			path = slide_images;
 			sourceTree = "<group>";
@@ -596,7 +607,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0450;
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "LibcatPresentation" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -641,6 +652,9 @@
 				DADCD7C8133066490082B437 /* Icon.png in Resources */,
 				DADCD810133069AB0082B437 /* Default-Landscape.png in Resources */,
 				2BC8457D161D771F0037468D /* Default-Landscape-568h@2x.png in Resources */,
+				2BEC18B7161DCD4D0033F466 /* script_console.png in Resources */,
+				2BEC18B9161DCEE70033F466 /* consolemanager_run.png in Resources */,
+				2BEC18BB161DD6FC0033F466 /* open_safari.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -770,6 +784,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -782,6 +797,7 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 			};

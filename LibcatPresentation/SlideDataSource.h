@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface SlideDataSource : NSObject <UITableViewDelegate, UITableViewDataSource> {
+@interface SlideDataSource : NSObject <UITableViewDataSource> {
 	NSMutableArray* slides;
 	int currentSlideIndex;
 }
