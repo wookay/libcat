@@ -15,10 +15,8 @@ How to use it on your project
 1. Add libcat to your project
 2. Add following code to YourAppDelegate.m
 
-	// import ConsoleManager.h
 	#import "ConsoleManager.h"
-
- 	// run console server
+	
 	[ConsoleManager run];
 
 
