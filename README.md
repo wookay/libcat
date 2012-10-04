@@ -15,8 +15,10 @@ How to use it on your project
 1. Add libcat to your project
 2. Add following code to YourAppDelegate.m
 
+    <code>
 	#import "ConsoleManager.h"
 	[ConsoleManager run];
+    </code>
 
 3. Add QuartzCore.framework, CFNetwork.framework
 4. Launch your App
