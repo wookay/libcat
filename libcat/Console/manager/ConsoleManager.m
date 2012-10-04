@@ -29,6 +29,7 @@
 #if USE_PRIVATE_API
 #import "UIEventExt.h"
 #endif
+#import "NSTextExt.h"
 
 
 #define DEFAULT_ENV_COLUMNS 100
@@ -630,11 +631,11 @@
 		} else {
 			topViewController = rootVC;
 		}
-		if ([topViewController respondsToSelector:@selector(modalViewController)]) {
-			return topViewController.modalViewController ? topViewController.modalViewController : topViewController;
-		} else {
+//		if ([topViewController respondsToSelector:@selector(modalViewController)]) {
+//			return topViewController.modalViewController ? topViewController.modalViewController : topViewController;
+//		} else {
 			return topViewController;
-		}
+//		}
 	}
 }
 
@@ -791,7 +792,7 @@
 	self = [super initWithFrame:frame];
 	if (self) {
 		self.titleLabel.font = [UIFont fontWithName:@"Courier-Bold" size:frame.size.height/1.3];
-		self.titleLabel.textAlignment = UITextAlignmentCenter;
+		self.titleLabel.textAlignment = NSTextAlignmentCenter;
 		self.titleLabel.baselineAdjustment = UIBaselineAdjustmentAlignCenters;
 		self.titleLabel.adjustsFontSizeToFitWidth = true;
 		self.layer.cornerRadius = 4.1;

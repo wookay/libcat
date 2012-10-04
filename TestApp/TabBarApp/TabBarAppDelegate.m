@@ -9,7 +9,7 @@
 #import "TabBarAppDelegate.h"
 #import "ConsoleManager.h"
 #import "Logger.h"
-
+#import "UnitTest.h"
 
 @implementation TabBarAppDelegate
 
@@ -27,9 +27,20 @@
 	return false;
 }
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
-    [window addSubview:tabBarController.view];
-	return [super application:application didFinishLaunchingWithOptions:launchOptions];
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    BOOL didFinishLaunchingWithOptions = [super application:application didFinishLaunchingWithOptions:launchOptions];
+    
+    //#if TARGET_IPHONE_SIMULATOR
+    [UnitTest run];
+    //#endif
+    
+    [window setRootViewController:tabBarController];
+    
+    //#if TARGET_IPHONE_SIMULATOR
+    [ConsoleManager run];
+    //#endif
+    
+    return didFinishLaunchingWithOptions;
 }
 
 

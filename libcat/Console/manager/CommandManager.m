@@ -509,11 +509,11 @@ NSString* surrounded_array_prefix_index(NSArray* array) {
 	[ary addObjectsFromArray:[targetStrings allKeys]];
 	[ary addObjectsFromArray:[currentObject methodNames]];
 	[ary addObjectsFromArray:[currentObject classHierarchy]];
-	if (currentObject == [currentObject class]) {
-		[ary addObjectsFromArray:[NSObject methodNamesForClass:currentObject->isa]];
-		[ary addObjectsFromArray:[NSObject ivarNamesForClass:currentObject->isa]];
+	if (currentObject == [currentObject class]) {        
+		[ary addObjectsFromArray:[NSObject methodNamesForClass:object_getClass(currentObject)]];
+		[ary addObjectsFromArray:[NSObject ivarNamesForClass:object_getClass(currentObject)]];
 	} else {
-		[ary addObjectsFromArray:[NSObject ivarNamesForClass:[currentObject class]]];		
+		[ary addObjectsFromArray:[NSObject ivarNamesForClass:object_getClass(currentObject)]];
 	}
 	for(NSString* method in [UIColor classMethodNames]) {
 		if ([method hasSuffix:@"Color"]) {

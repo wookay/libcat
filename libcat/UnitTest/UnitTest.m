@@ -13,6 +13,7 @@
 #import "objc/message.h"
 #import "NSDateExt.h"
 #import "NSArrayExt.h"
+#import "NSTextExt.h"
 
 #define UNITTEST_TARGET_CLASS_FILTERING_SELECTOR @selector(hasPrefix:)
 
@@ -41,7 +42,7 @@
 	UIWindow* window = [UIApplication sharedApplication].keyWindow;
 	UILabel* label = [[UILabel alloc] initWithFrame:window.frame];
 	label.text = SWF(@"%d tests, %d assertions, %d failures, %d errors\n", UNITTESTMAN.tests, UNITTESTMAN.assertions, UNITTESTMAN.failures, UNITTESTMAN.errors);
-	label.textAlignment = UITextAlignmentCenter;
+	label.textAlignment = NSTextAlignmentCenter;
 	label.adjustsFontSizeToFitWidth = true;
 	if (UNITTESTMAN.failures > 0) {
 		label.backgroundColor = [UIColor redColor];

@@ -16,13 +16,14 @@
     [[UIScreen mainScreen] respondsToSelector:@selector(displayLinkWithTarget:selector:)] && \
     [UIScreen mainScreen].scale == 2.0 \
 )
+#define IS_IPHONE5 (568 == SCREEN_HEIGHT)
 
 #define SYSTEM_VERSION [[[UIDevice currentDevice] systemVersion] floatValue]
 
 // screen frame
-#define SCREEN_WIDTH (IS_IPAD ? 768 : 320)
-#define SCREEN_HEIGHT (IS_IPAD ? 1024 : 480)
-#define SCREEN_FRAME CGRectMake(0,0,SCREEN_WIDTH,SCREEN_HEIGHT)
+#define SCREEN_FRAME [UIScreen mainScreen].bounds
+#define SCREEN_WIDTH (SCREEN_FRAME.size.width)
+#define SCREEN_HEIGHT (SCREEN_FRAME.size.height)
 #define HALF_SCREEN_WIDTH (SCREEN_WIDTH/2)
 #define HALF_SCREEN_HEIGHT (SCREEN_HEIGHT/2)
 

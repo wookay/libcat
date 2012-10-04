@@ -59,21 +59,17 @@ static NSMutableArray *registeredHandlers = nil;
 //
 + (void)registerHandler:(Class)handlerClass
 {
+    
 	if (registeredHandlers == nil)
 	{
 		registeredHandlers = [[NSMutableArray alloc] init];
 	}
 	
-	NSUInteger i;
-	NSUInteger count = [registeredHandlers count];
-	for (i = 0; i < count; i++)
-	{
-		if ([handlerClass priority] >= [[registeredHandlers objectAtIndex:i] priority])
-		{
-			break;
-		}
-	}
-	[registeredHandlers insertObject:handlerClass atIndex:i];
+    if ([HTTPResponseHandler priority] < [handlerClass priority]) {
+        [registeredHandlers insertObject:handlerClass atIndex:0];
+    } else {
+        [registeredHandlers addObject:handlerClass];
+    }
 }
 
 //
@@ -120,6 +116,9 @@ static NSMutableArray *registeredHandlers = nil;
 	url:(NSURL *)requestURL
 	headerFields:(NSDictionary *)requestHeaderFields
 {
+    
+    //log_info(@"registeredHandlers %@", registeredHandlers);
+    
 	for (Class handlerClass in registeredHandlers)
 	{
 		if ([handlerClass canHandleRequest:aRequest

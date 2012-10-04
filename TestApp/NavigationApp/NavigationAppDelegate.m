@@ -9,6 +9,7 @@
 #import "NavigationAppDelegate.h"
 #import "ConsoleManager.h"
 #import "Logger.h"
+#import "UnitTest.h"
 
 @implementation NavigationAppDelegate
 
@@ -30,9 +31,20 @@
 	return false;
 }
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
-    [window addSubview:navigationController.view];
-	return [super application:application didFinishLaunchingWithOptions:launchOptions];
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    BOOL didFinishLaunchingWithOptions = [super application:application didFinishLaunchingWithOptions:launchOptions];
+
+    //#if TARGET_IPHONE_SIMULATOR
+    [UnitTest run];
+    //#endif
+
+    [window setRootViewController:navigationController];
+
+    //#if TARGET_IPHONE_SIMULATOR
+    [ConsoleManager run];
+    //#endif
+
+    return didFinishLaunchingWithOptions;
 }
 
 - (void)dealloc {	

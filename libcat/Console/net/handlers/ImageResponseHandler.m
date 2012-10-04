@@ -30,6 +30,10 @@
 
 @implementation ImageResponseHandler
 
++ (NSUInteger)priority
+{
+	return 1;
+}
 
 +(void) load {
 	[HTTPResponseHandler registerHandler:self];
@@ -159,7 +163,7 @@
 	CFHTTPMessageSetHeaderFieldValue(
 									 response,
 									 (CFStringRef)@"Content-Length",
-									 (CFStringRef)[NSString stringWithFormat:@"%ld", [fileData length]]);
+									 (CFStringRef)[NSString stringWithFormat:@"%d", [fileData length]]);
 	CFDataRef headerData = CFHTTPMessageCopySerializedMessage(response);
 	
 	@try

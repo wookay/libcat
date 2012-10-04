@@ -27,8 +27,6 @@
 #import "HTTPResponseHandler.h"
 #import "Logger.h"
 
-
-
 NSString * const HTTPServerNotificationStateChanged = @"ServerNotificationStateChanged";
 
 //

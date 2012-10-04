@@ -79,6 +79,10 @@ static NSString *replaceAll(NSString *s, NSDictionary *replacements) {
 
 @implementation WebResponseHandler
 
++ (NSUInteger)priority
+{
+	return 1;
+}
 
 +(void) load {
 	[HTTPResponseHandler registerHandler:self];
@@ -247,7 +251,7 @@ static NSString *replaceAll(NSString *s, NSDictionary *replacements) {
 	CFHTTPMessageSetHeaderFieldValue(
 									 response,
 									 (CFStringRef)@"Content-Length",
-									 (CFStringRef)[NSString stringWithFormat:@"%ld", [fileData length]]);
+									 (CFStringRef)[NSString stringWithFormat:@"%d", [fileData length]]);
 	CFDataRef headerData = CFHTTPMessageCopySerializedMessage(response);
 	
 	@try

@@ -43,19 +43,19 @@
     self = [super init];
     if (nil != self) {
 #if USE_PRIVATE_API
-        _timestamp = timestamp_;
-        _phase = phase_;
-        _tapCount = tapCount_;
-        _window = view_.window;
-        _view = view_;
-		_gestureView = view_;
-        _gestureRecognizers = [NSMutableArray array];
-        _locationInWindow = point;
-        _previousLocationInWindow = point;
-        _touchFlags._firstTouchForView = 1;
-        _touchFlags._isTap = 1;
-        _touchFlags._isDelayed = 0;
-        _touchFlags._sentTouchesEnded = 0;
+//        _timestamp = timestamp_;
+//        _phase = phase_;
+//        _tapCount = tapCount_;
+//        _window = view_.window;
+//        _view = view_;
+//		_gestureView = view_;
+//        _gestureRecognizers = [NSMutableArray array];
+//        _locationInWindow = point;
+//        _previousLocationInWindow = point;
+//        _touchFlags._firstTouchForView = 1;
+//        _touchFlags._isTap = 1;
+//        _touchFlags._isDelayed = 0;
+//        _touchFlags._sentTouchesEnded = 0;
 #endif
     }
     return self;
@@ -65,53 +65,53 @@
     self = [super init];
     if (nil != self) {
 #if USE_PRIVATE_API
-        _timestamp = [touch timestamp];
-        _phase = [touch phase];
-		_savedPhase = [touch savedPhase];
-        _tapCount = [touch tapCount];
-        _window = view_.window;
-        _view = view_;
-		_gestureView = view_;
-        _gestureRecognizers = [NSMutableArray arrayWithArray:[touch gestureRecognizers]];
-        _locationInWindow = [touch locationInView:view_.window];
-        _previousLocationInWindow = [touch previousLocationInView:view_.window];
-		_pathIndex = touch.pathIndex;
-		_pathIdentity = touch.pathIdentity;
-		_pathMajorRadius = touch.pathMajorRadius;
-        _touchFlags._firstTouchForView = touch.firstTouchForView;
-        _touchFlags._isTap = touch.isTap;
-        _touchFlags._isDelayed = touch.isDelayed;
-        _touchFlags._sentTouchesEnded = touch.sentTouchesEnded;
+//        _timestamp = [touch timestamp];
+//        _phase = [touch phase];
+//		_savedPhase = [touch savedPhase];
+//        _tapCount = [touch tapCount];
+//        _window = view_.window;
+//        _view = view_;
+//		_gestureView = view_;
+//        _gestureRecognizers = [NSMutableArray arrayWithArray:[touch gestureRecognizers]];
+//        _locationInWindow = [touch locationInView:view_.window];
+//        _previousLocationInWindow = [touch previousLocationInView:view_.window];
+//		_pathIndex = touch.pathIndex;
+//		_pathIdentity = touch.pathIdentity;
+//		_pathMajorRadius = touch.pathMajorRadius;
+//        _touchFlags._firstTouchForView = touch.firstTouchForView;
+//        _touchFlags._isTap = touch.isTap;
+//        _touchFlags._isDelayed = touch.isDelayed;
+//        _touchFlags._sentTouchesEnded = touch.sentTouchesEnded;
 #endif
     }
     return self;
 }
 
 #if USE_PRIVATE_API
--(UITouchPhase) savedPhase {
-	return _savedPhase;
-}
--(unsigned int) firstTouchForView {
-	return _touchFlags._firstTouchForView;
-}
--(unsigned int) isTap {
-	return _touchFlags._isTap;
-}
--(unsigned int) isDelayed {
-	return _touchFlags._isDelayed;
-}
--(unsigned int) sentTouchesEnded {
-	return _touchFlags._sentTouchesEnded;
-}
--(UInt8) pathIndex {
-	return _pathIndex;
-}
--(UInt8) pathIdentity {
-	return _pathIdentity;
-}
--(float) pathMajorRadius {
-	return _pathMajorRadius;
-}
+//-(UITouchPhase) savedPhase {
+//	return _savedPhase;
+//}
+//-(unsigned int) firstTouchForView {
+//	return _touchFlags._firstTouchForView;
+//}
+//-(unsigned int) isTap {
+//	return _touchFlags._isTap;
+//}
+//-(unsigned int) isDelayed {
+//	return _touchFlags._isDelayed;
+//}
+//-(unsigned int) sentTouchesEnded {
+//	return _touchFlags._sentTouchesEnded;
+//}
+//-(UInt8) pathIndex {
+//	return _pathIndex;
+//}
+//-(UInt8) pathIdentity {
+//	return _pathIdentity;
+//}
+//-(float) pathMajorRadius {
+//	return _pathMajorRadius;
+//}
 #endif
 
 

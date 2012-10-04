@@ -75,7 +75,7 @@
 }
 
 -(void) test_superclass {
-	assert_equal(_array3([NSMutableString class], [NSString class], [NSObject class]), [@"" superclasses]);
+	assert_equal(_array4(NSClassFromString(@"__NSCFString"), [NSMutableString class], [NSString class], [NSObject class]), [@"" superclasses]);
 	assert_equal(_array1([NSObject class]), [NSString superclasses]);
 	assert_equal(_array0(), [NSObject superclasses]);
 }

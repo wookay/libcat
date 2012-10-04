@@ -10,6 +10,7 @@
 #import "OpenGLViewController.h"
 #import "ConsoleManager.h"
 #import "Logger.h"
+#import "UnitTest.h"
 
 @implementation OpenGLAppDelegate
 
@@ -29,8 +30,20 @@
 
 -(BOOL) application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 	self.viewController.view.backgroundColor = [UIColor colorWithRed:0.470588235294118f green:0.364705882352941f blue:0.862745098039216f alpha:1];
-    [self.window addSubview:self.viewController.view];
-	return [super application:application didFinishLaunchingWithOptions:launchOptions];
+    
+    BOOL didFinishLaunchingWithOptions = [super application:application didFinishLaunchingWithOptions:launchOptions];
+    
+    //#if TARGET_IPHONE_SIMULATOR
+    [UnitTest run];
+    //#endif
+    
+    [window setRootViewController:viewController];
+    
+    //#if TARGET_IPHONE_SIMULATOR
+    [ConsoleManager run];
+    //#endif
+    
+    return didFinishLaunchingWithOptions;
 }
 
 -(void) applicationWillResignActive:(UIApplication *)application {

@@ -35,7 +35,7 @@ int enum_rshift(int greatest, int current) {
 @implementation NSNumber (MathFunctions)
 
 -(NSString*) chr {
-	return [NSString stringWithFormat:@"%C", [self charValue]];
+	return [NSString stringWithFormat:@"%c", [self charValue]];
 }
 -(NSNumber*) next {
 	return [NSNumber numberWithInt:[self intValue] + 1];

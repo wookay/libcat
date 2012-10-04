@@ -25,12 +25,14 @@
 
     // Add the tab bar controller's view to the window and display.
     [window makeKeyAndVisible];
-	
-//#if TARGET_IPHONE_SIMULATOR
-	[UnitTest run];
-	[ConsoleManager run];
-//#endif
-	
+    
+    
+    
+//    #if TARGET_IPHONE_SIMULATOR
+//        [UnitTest run];
+//        [ConsoleManager run];
+//    #endif
+    
     return YES;
 }
 

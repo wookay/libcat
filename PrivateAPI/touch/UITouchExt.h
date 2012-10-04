@@ -17,14 +17,14 @@
 -(id) initWithPoint:(CGPoint)point view:(UIView*)view_ timestamp:(NSTimeInterval)timestamp_ phase:(UITouchPhase)phase_ tapCount:(NSUInteger)tapCount_ ;
 
 #if USE_PRIVATE_API
--(UITouchPhase) savedPhase ;
--(unsigned int) firstTouchForView ;
--(unsigned int) isTap ;
--(unsigned int) isDelayed ;
--(unsigned int) sentTouchesEnded ;
--(UInt8) pathIndex ;
--(UInt8) pathIdentity ;
--(float) pathMajorRadius ;
+//-(UITouchPhase) savedPhase ;
+//-(unsigned int) firstTouchForView ;
+//-(unsigned int) isTap ;
+//-(unsigned int) isDelayed ;
+//-(unsigned int) sentTouchesEnded ;
+//-(UInt8) pathIndex ;
+//-(UInt8) pathIdentity ;
+//-(float) pathMajorRadius ;
 #endif
 
 @end

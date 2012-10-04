@@ -25,11 +25,17 @@
     // Override point for customization after application launch.
 	
     // Add the navigation controller's view to the window and display.
-    [self.window addSubview:navigationController.view];
+    [window setRootViewController:navigationController];
     [self.window makeKeyAndVisible];
 
+   
+    
+#if TARGET_IPHONE_SIMULATOR
 	[ConsoleManager run];
-	[ConsoleManager hide_console_button];
+//	[ConsoleManager hide_console_button];
+#endif
+    
+    
     return YES;
 }
 

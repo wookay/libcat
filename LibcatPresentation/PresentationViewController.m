@@ -39,7 +39,7 @@
 	[SlideDataSource sharedInstance].currentSlideIndex = page;	
 	NSIndexSet* indexSet = [NSIndexSet indexSetWithIndex:0];
 	[tableView reloadSections:indexSet withRowAnimation:animation];	
-	log_info(@"c %d", page);
+	//log_info(@"c %d", page);
 }
 
 -(IBAction) touchedPageControl:(id)sender {
@@ -76,7 +76,7 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
 	// Return YES for supported orientations.
-	return (interfaceOrientation == UIInterfaceOrientationLandscapeRight);
+	return NO;//(interfaceOrientation == UIInterfaceOrientationLandscapeRight);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -115,7 +115,7 @@
 	CGRect rect = SLIDE_TITLE_RECT;
 	UILabel* label = [[[UILabel alloc] initWithFrame:rect] autorelease];
 	label.font = [UIFont fontWithName:@"ArialRoundedMTBold" size:40];
-	label.textAlignment = UITextAlignmentCenter;
+	label.textAlignment = NSTextAlignmentCenter;
 	label.backgroundColor = [UIColor clearColor];
 	label.textColor = COLOR_RGBA_FF(0x06, 0x10, 0x2b, 1);
 	label.shadowColor = COLOR_RGBA_FF(0x95, 0x95, 0x95, 1);

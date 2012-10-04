@@ -15,6 +15,7 @@
 		28AD73600D9D9599002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD735F0D9D9599002E5188 /* MainWindow.xib */; };
 		28C286E10D94DF7D0034E888 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C286E00D94DF7D0034E888 /* RootViewController.m */; };
 		28F335F11007B36200424DE2 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28F335F01007B36200424DE2 /* RootViewController.xib */; };
+		2BC8457D161D771F0037468D /* Default-Landscape-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BC8457C161D771F0037468D /* Default-Landscape-568h@2x.png */; };
 		DA7A2356132A0D020040CAF2 /* Async.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7A22E4132A0D020040CAF2 /* Async.m */; };
 		DA7A2357132A0D020040CAF2 /* NSArrayBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7A22E6132A0D020040CAF2 /* NSArrayBlock.m */; };
 		DA7A2358132A0D020040CAF2 /* NSDictionaryBlock.m in Sources */ = {isa = PBXBuildFile; fileRef = DA7A22E8132A0D020040CAF2 /* NSDictionaryBlock.m */; };
@@ -73,7 +74,6 @@
 		DA7D3C50132868A40020E9D6 /* unittest_example.png in Resources */ = {isa = PBXBuildFile; fileRef = DA7D3C4F132868A40020E9D6 /* unittest_example.png */; };
 		DA7D3C6F132869CB0020E9D6 /* unittest_run.png in Resources */ = {isa = PBXBuildFile; fileRef = DA7D3C6E132869CB0020E9D6 /* unittest_run.png */; };
 		DA7D3C9113286A8B0020E9D6 /* unittest_report.png in Resources */ = {isa = PBXBuildFile; fileRef = DA7D3C9013286A8B0020E9D6 /* unittest_report.png */; };
-		DA7F9D531328C55A00D44A1F /* README in Resources */ = {isa = PBXBuildFile; fileRef = DA7F9D521328C55A00D44A1F /* README */; };
 		DA82D33013276C44002CC33B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA82D32E13276C44002CC33B /* QuartzCore.framework */; };
 		DA82D33113276C44002CC33B /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA82D32F13276C44002CC33B /* CFNetwork.framework */; };
 		DA82D33A13276C52002CC33B /* PresentationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DA82D33813276C52002CC33B /* PresentationViewController.m */; };
@@ -98,6 +98,8 @@
 		28C286E00D94DF7D0034E888 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		28F335F01007B36200424DE2 /* RootViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		2BC8457C161D771F0037468D /* Default-Landscape-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape-568h@2x.png"; sourceTree = "<group>"; };
+		2BC8457E161D77540037468D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* LibcatPresentation-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "LibcatPresentation-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		DA7A22E3132A0D020040CAF2 /* Async.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Async.h; sourceTree = "<group>"; };
 		DA7A22E4132A0D020040CAF2 /* Async.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Async.m; sourceTree = "<group>"; };
@@ -212,7 +214,6 @@
 		DA7D3C4F132868A40020E9D6 /* unittest_example.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unittest_example.png; sourceTree = "<group>"; };
 		DA7D3C6E132869CB0020E9D6 /* unittest_run.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unittest_run.png; sourceTree = "<group>"; };
 		DA7D3C9013286A8B0020E9D6 /* unittest_report.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unittest_report.png; sourceTree = "<group>"; };
-		DA7F9D521328C55A00D44A1F /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
 		DA82D32E13276C44002CC33B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		DA82D32F13276C44002CC33B /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		DA82D33713276C52002CC33B /* PresentationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PresentationViewController.h; sourceTree = "<group>"; };
@@ -268,7 +269,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				DA7F9D521328C55A00D44A1F /* README */,
+				2BC8457E161D77540037468D /* README.md */,
 				DA7A22E1132A0D020040CAF2 /* libcat */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				DA82D33413276C45002CC33B /* presentation */,
@@ -562,6 +563,7 @@
 		DADCD7C4133066410082B437 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				2BC8457C161D771F0037468D /* Default-Landscape-568h@2x.png */,
 				DADCD80F133069AB0082B437 /* Default-Landscape.png */,
 				DADCD7C6133066490082B437 /* Icon.png */,
 			);
@@ -630,7 +632,6 @@
 				DA7D3C50132868A40020E9D6 /* unittest_example.png in Resources */,
 				DA7D3C6F132869CB0020E9D6 /* unittest_run.png in Resources */,
 				DA7D3C9113286A8B0020E9D6 /* unittest_report.png in Resources */,
-				DA7F9D531328C55A00D44A1F /* README in Resources */,
 				DA7A2363132A0D020040CAF2 /* ConsoleViewController.xib in Resources */,
 				DA7A2365132A0D020040CAF2 /* EditPropertyViewController.xib in Resources */,
 				DA7A2369132A0D020040CAF2 /* PropertyRootViewController.xib in Resources */,
@@ -639,6 +640,7 @@
 				DA93B0E4132F6B070016810D /* Localizable.strings in Resources */,
 				DADCD7C8133066490082B437 /* Icon.png in Resources */,
 				DADCD810133069AB0082B437 /* Default-Landscape.png in Resources */,
+				2BC8457D161D771F0037468D /* Default-Landscape-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

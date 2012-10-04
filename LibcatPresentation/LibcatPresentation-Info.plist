@@ -26,13 +26,17 @@
 	<true/>
 	<key>NSMainNibFile</key>
 	<string>MainWindow</string>
-	<key>UIStatusBarHidden</key>
-	<true/>
-	<key>UILaunchImageFile</key>
-	<string>Default-Landscape.png</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>SeoulHangangB.ttf</string>
+	</array>
+	<key>UILaunchImageFile</key>
+	<string>Default-Landscape.png</string>
+	<key>UIStatusBarHidden</key>
+	<true/>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 </dict>
 </plist>

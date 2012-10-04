@@ -19,6 +19,11 @@
 
 @implementation ConsoleResponseHandler
 
++ (NSUInteger)priority
+{
+	return 1;
+}
+
 +(void) load {
 	[HTTPResponseHandler registerHandler:self];
 }
@@ -67,7 +72,7 @@
 	CFHTTPMessageCreateResponse(kCFAllocatorDefault, 200, NULL, kCFHTTPVersion1_1);
 	CFHTTPMessageSetHeaderFieldValue(response, (CFStringRef)@"Content-Type", (CFStringRef)@"text/plain");
 	CFHTTPMessageSetHeaderFieldValue(response, (CFStringRef)@"Connection", (CFStringRef)@"close");
-	CFHTTPMessageSetHeaderFieldValue(response, (CFStringRef)@"Content-Length", (CFStringRef)[NSString stringWithFormat:@"%ld", [fileData length]]);
+	CFHTTPMessageSetHeaderFieldValue(response, (CFStringRef)@"Content-Length", (CFStringRef)[NSString stringWithFormat:@"%d", [fileData length]]);
 	CFDataRef headerData = CFHTTPMessageCopySerializedMessage(response);
 	
 	@try

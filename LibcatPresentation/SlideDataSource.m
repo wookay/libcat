@@ -23,7 +23,7 @@ void SLIDE_PAGE(NSString* slideTitle, NSArray* slideItems) {
 @synthesize currentSlideIndex;
 
 -(void) loadSlideData {
-	SLIDE_PAGE(@"libcat", [NSArray arrayWithObjects:SPACE, SPACE, PAIR([[NSDate date] year_monthName_day_SPACE], Enum(UITextAlignmentRight)), PAIR(@"ㄴㅇㄱ ", Enum(UITextAlignmentRight)), nil]);	
+	SLIDE_PAGE(@"libcat", [NSArray arrayWithObjects:SPACE, SPACE, PAIR([[NSDate date] year_monthName_day_SPACE], Enum(NSTextAlignmentRight)), PAIR(@"ㄴㅇㄱ ", Enum(NSTextAlignmentRight)), nil]);
 	SLIDE_PAGE(@"libcat", [NSArray arrayWithObjects:@"https://github.com/wookay/libcat",
 						   NSLocalizedString(@"Open Source Project", nil),
 						   NSLocalizedString(@"Interactive iPhone application development", nil),
@@ -115,7 +115,7 @@ void SLIDE_PAGE(NSString* slideTitle, NSArray* slideItems) {
 										nil]);
 	SLIDE_PAGE(NSLocalizedString(@"Feedback", nil), [NSArray arrayWithObjects:NSLocalizedString(@"Subscribe to google groups", nil), @"http://groups.google.com/group/interactivelibcat", nil]);
 	SLIDE_PAGE(NSLocalizedString(@"Questions?", nil), [NSArray arrayWithObjects:@"", nil]);
-	SLIDE_PAGE(@"FIN", [NSArray arrayWithObjects:SPACE, PAIR(NSLocalizedString(@"Thanks", nil), Enum(UITextAlignmentCenter)), nil]);
+	SLIDE_PAGE(@"FIN", [NSArray arrayWithObjects:SPACE, PAIR(NSLocalizedString(@"Thanks", nil), Enum(NSTextAlignmentCenter)), nil]);
 
 }
 
@@ -159,7 +159,8 @@ void SLIDE_PAGE(NSString* slideTitle, NSArray* slideItems) {
     }
     
 	cell.imageView.image = nil;
-	cell.textLabel.textAlignment = UITextAlignmentLeft;
+	cell.textLabel.textAlignment = NSTextAlignmentLeft;
+//    UITextAlignmentLeft
 	cell.textLabel.text = nil;
 	
 	// Configure the cell.
