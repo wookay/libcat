@@ -4,4 +4,5 @@
 
 require './console'
 c = Console.new
-puts c.input 'ls'
+c.input 'ls'
+c.input 'view.backgroundColor = greenColor'
