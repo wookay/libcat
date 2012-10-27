@@ -1,9 +1,0 @@
-//
-// Prefix header for all source files of the 'MacApp' target in the 'MacApp' project
-//
-
-#ifdef __OBJC__
-    #import <Cocoa/Cocoa.h>
-#endif
-
-#import "UIKitHelper.h"

@@ -13,6 +13,9 @@
 		2BC84568161D711F0037468D /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BC8455C161D6B120037468D /* Default-568h@2x.png */; };
 		2BC8456A161D71320037468D /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BC84569161D71320037468D /* Default-568h@2x.png */; };
 		2BC8456C161D71B90037468D /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BC8456B161D71B90037468D /* Default-568h@2x.png */; };
+		2BD14D0A162C75BC00E5A169 /* CommandManagerTouchExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD14D09162C75BC00E5A169 /* CommandManagerTouchExt.m */; };
+		2BD14D0B162C75BC00E5A169 /* CommandManagerTouchExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD14D09162C75BC00E5A169 /* CommandManagerTouchExt.m */; };
+		2BD14D0C162C75BC00E5A169 /* CommandManagerTouchExt.m in Sources */ = {isa = PBXBuildFile; fileRef = 2BD14D09162C75BC00E5A169 /* CommandManagerTouchExt.m */; };
 		DA210A7C126207A400FBBE35 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = DA210A7A126207A400FBBE35 /* Default.png */; };
 		DA210A7D126207A400FBBE35 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = DA210A7B126207A400FBBE35 /* Icon.png */; };
 		DA210AD312620AC100FBBE35 /* calculator.png in Resources */ = {isa = PBXBuildFile; fileRef = DA210AD112620AC100FBBE35 /* calculator.png */; };
@@ -30,17 +33,14 @@
 		DA89675B12F4ED4C00ADCEC5 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = DA89675A12F4ED4C00ADCEC5 /* Icon-72.png */; };
 		DA89675D12F4ED5A00ADCEC5 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = DA89675C12F4ED5A00ADCEC5 /* Icon-72.png */; };
 		DA89675F12F4ED6200ADCEC5 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = DA89675E12F4ED6200ADCEC5 /* Icon-72.png */; };
-		DAA9667912ACD25A00CB4664 /* CommandManagerTouchExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA9664012ACD25A00CB4664 /* CommandManagerTouchExt.m */; };
 		DAA9667B12ACD25A00CB4664 /* UIEventExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA9664512ACD25A00CB4664 /* UIEventExt.m */; };
 		DAA9667C12ACD25A00CB4664 /* UITouchExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA9664712ACD25A00CB4664 /* UITouchExt.m */; };
 		DAA9667D12ACD25A00CB4664 /* UIViewOpenGLExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA9664912ACD25A00CB4664 /* UIViewOpenGLExt.m */; };
 		DAA9667E12ACD25A00CB4664 /* UIViewTouchExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA9664B12ACD25A00CB4664 /* UIViewTouchExt.m */; };
-		DAA966AC12ACD25A00CB4664 /* CommandManagerTouchExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA9664012ACD25A00CB4664 /* CommandManagerTouchExt.m */; };
 		DAA966AE12ACD25A00CB4664 /* UIEventExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA9664512ACD25A00CB4664 /* UIEventExt.m */; };
 		DAA966AF12ACD25A00CB4664 /* UITouchExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA9664712ACD25A00CB4664 /* UITouchExt.m */; };
 		DAA966B012ACD25A00CB4664 /* UIViewOpenGLExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA9664912ACD25A00CB4664 /* UIViewOpenGLExt.m */; };
 		DAA966B112ACD25A00CB4664 /* UIViewTouchExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA9664B12ACD25A00CB4664 /* UIViewTouchExt.m */; };
-		DAA966DF12ACD25A00CB4664 /* CommandManagerTouchExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA9664012ACD25A00CB4664 /* CommandManagerTouchExt.m */; };
 		DAA966E112ACD25A00CB4664 /* UIEventExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA9664512ACD25A00CB4664 /* UIEventExt.m */; };
 		DAA966E212ACD25A00CB4664 /* UITouchExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA9664712ACD25A00CB4664 /* UITouchExt.m */; };
 		DAA966E312ACD25A00CB4664 /* UIViewOpenGLExt.m in Sources */ = {isa = PBXBuildFile; fileRef = DAA9664912ACD25A00CB4664 /* UIViewOpenGLExt.m */; };
@@ -61,7 +61,6 @@
 		DAC5BA2712A99E5500953A23 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAA63F621261AC140010F870 /* Localizable.strings */; };
 		DAC5BA2B12A99E5500953A23 /* calculator.png in Resources */ = {isa = PBXBuildFile; fileRef = DA210AD112620AC100FBBE35 /* calculator.png */; };
 		DAC5BA2C12A99E5500953A23 /* trend.png in Resources */ = {isa = PBXBuildFile; fileRef = DA210AD212620AC100FBBE35 /* trend.png */; };
-		DAC5BA3212A99E5500953A23 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = DAE9D2AC12A81EE500EA3F21 /* README.md */; };
 		DAC5BA3412A99E5500953A23 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
 		DAC5BA3612A99E5500953A23 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28C286E00D94DF7D0034E888 /* RootViewController.m */; };
 		DAC5BA3712A99E5500953A23 /* UIControlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DADD7EE31260AE2C0040E482 /* UIControlViewController.m */; };
@@ -286,8 +285,6 @@
 		DACCAEB213483E5A0095EA8C /* Inspect.m in Sources */ = {isa = PBXBuildFile; fileRef = DACCAE0D13483E5A0095EA8C /* Inspect.m */; };
 		DACCAEB313483E5A0095EA8C /* Logger.m in Sources */ = {isa = PBXBuildFile; fileRef = DACCAE0F13483E5A0095EA8C /* Logger.m */; };
 		DACCAEB413483E5A0095EA8C /* UnitTest.m in Sources */ = {isa = PBXBuildFile; fileRef = DACCAE1113483E5A0095EA8C /* UnitTest.m */; };
-		DAE9D2AD12A81EE500EA3F21 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = DAE9D2AC12A81EE500EA3F21 /* README.md */; };
-		DAE9D2AE12A81EE500EA3F21 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = DAE9D2AC12A81EE500EA3F21 /* README.md */; };
 		DAE9E26B1295E63F00F72551 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28F335F01007B36200424DE2 /* RootViewController.xib */; };
 		DAE9E26D1295E63F00F72551 /* UIControlViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DADD7EE41260AE2C0040E482 /* UIControlViewController.xib */; };
 		DAE9E26E1295E63F00F72551 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = DAA63F621261AC140010F870 /* Localizable.strings */; };
@@ -330,11 +327,14 @@
 		28C286E00D94DF7D0034E888 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		28F335F01007B36200424DE2 /* RootViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = RootViewController.xib; path = ../RootViewController.xib; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		2B0E601A162C75D4007E912D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		2B6D200914E1D1FD0016D124 /* libcat_statusbar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "libcat_statusbar@2x.png"; sourceTree = "<group>"; };
 		2BC8455C161D6B120037468D /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../../Default-568h@2x.png"; sourceTree = "<group>"; };
 		2BC84569161D71320037468D /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		2BC8456B161D71B90037468D /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		2BC84591161D79BA0037468D /* NSTextExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSTextExt.h; sourceTree = "<group>"; };
+		2BD14D08162C75BC00E5A169 /* CommandManagerTouchExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommandManagerTouchExt.h; sourceTree = "<group>"; };
+		2BD14D09162C75BC00E5A169 /* CommandManagerTouchExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommandManagerTouchExt.m; sourceTree = "<group>"; };
 		DA210A7A126207A400FBBE35 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		DA210A7B126207A400FBBE35 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		DA210AD112620AC100FBBE35 /* calculator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = calculator.png; sourceTree = "<group>"; };
@@ -349,8 +349,6 @@
 		DAA63F631261AC140010F870 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DAA63F651261AC140010F870 /* Korean */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Korean; path = Korean.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DAA63F671261AC140010F870 /* Spanish */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Spanish; path = Spanish.lproj/Localizable.strings; sourceTree = "<group>"; };
-		DAA9663F12ACD25A00CB4664 /* CommandManagerTouchExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommandManagerTouchExt.h; sourceTree = "<group>"; };
-		DAA9664012ACD25A00CB4664 /* CommandManagerTouchExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommandManagerTouchExt.m; sourceTree = "<group>"; };
 		DAA9664412ACD25A00CB4664 /* UIEventExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIEventExt.h; sourceTree = "<group>"; };
 		DAA9664512ACD25A00CB4664 /* UIEventExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIEventExt.m; sourceTree = "<group>"; };
 		DAA9664612ACD25A00CB4664 /* UITouchExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITouchExt.h; sourceTree = "<group>"; };
@@ -528,7 +526,6 @@
 		DADD7EE21260AE2C0040E482 /* UIControlViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIControlViewController.h; sourceTree = "<group>"; };
 		DADD7EE31260AE2C0040E482 /* UIControlViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIControlViewController.m; sourceTree = "<group>"; };
 		DADD7EE41260AE2C0040E482 /* UIControlViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UIControlViewController.xib; sourceTree = "<group>"; };
-		DAE9D2AC12A81EE500EA3F21 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README.md; path = ../README.md; sourceTree = SOURCE_ROOT; };
 		DAE9E2C01295E63F00F72551 /* NavigationApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NavigationApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAEDA12312C014F100360459 /* TestLocale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestLocale.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -603,7 +600,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				DAE9D2AC12A81EE500EA3F21 /* README.md */,
+				2B0E601A162C75D4007E912D /* README.md */,
 				DACCAD9B13483E5A0095EA8C /* libcat */,
 				DAA9663D12ACD25A00CB4664 /* PrivateAPI */,
 				DACAB00312629054006DA76D /* TestCases */,
@@ -646,6 +643,15 @@
 				2892E40F0DC94CBA00A64D0F /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2BD14D07162C75BC00E5A169 /* manager */ = {
+			isa = PBXGroup;
+			children = (
+				2BD14D08162C75BC00E5A169 /* CommandManagerTouchExt.h */,
+				2BD14D09162C75BC00E5A169 /* CommandManagerTouchExt.m */,
+			);
+			path = manager;
 			sourceTree = "<group>";
 		};
 		DA054F5B125DDD2600660097 /* console */ = {
@@ -707,21 +713,12 @@
 		DAA9663D12ACD25A00CB4664 /* PrivateAPI */ = {
 			isa = PBXGroup;
 			children = (
-				DAA9663E12ACD25A00CB4664 /* manager */,
+				2BD14D07162C75BC00E5A169 /* manager */,
 				DAA9664112ACD25A00CB4664 /* touch */,
 			);
 			name = PrivateAPI;
 			path = ../PrivateAPI;
 			sourceTree = SOURCE_ROOT;
-		};
-		DAA9663E12ACD25A00CB4664 /* manager */ = {
-			isa = PBXGroup;
-			children = (
-				DAA9663F12ACD25A00CB4664 /* CommandManagerTouchExt.h */,
-				DAA9664012ACD25A00CB4664 /* CommandManagerTouchExt.m */,
-			);
-			path = manager;
-			sourceTree = "<group>";
 		};
 		DAA9664112ACD25A00CB4664 /* touch */ = {
 			isa = PBXGroup;
@@ -1221,7 +1218,6 @@
 				DA210AD312620AC100FBBE35 /* calculator.png in Resources */,
 				DA210AD412620AC100FBBE35 /* trend.png in Resources */,
 				DAC3D08F1266A23500CA00D1 /* InfoPlist.strings in Resources */,
-				DAE9D2AE12A81EE500EA3F21 /* README.md in Resources */,
 				DAC5BA9112A99F2300953A23 /* TabBarMainWindow-iPad.xib in Resources */,
 				DAC5BA9212A99F2300953A23 /* TabBarMainWindow.xib in Resources */,
 				DA89675D12F4ED5A00ADCEC5 /* Icon-72.png in Resources */,
@@ -1247,7 +1243,6 @@
 				DAC5BA2712A99E5500953A23 /* Localizable.strings in Resources */,
 				DAC5BA2B12A99E5500953A23 /* calculator.png in Resources */,
 				DAC5BA2C12A99E5500953A23 /* trend.png in Resources */,
-				DAC5BA3212A99E5500953A23 /* README.md in Resources */,
 				DAC5BB7212A9A33F00953A23 /* OpenGLMainWindow.xib in Resources */,
 				DAC5BB8512A9A3A500953A23 /* OpenGLViewController.xib in Resources */,
 				DAC5BBD012A9A65000953A23 /* OpenGLMainWindow-iPad.xib in Resources */,
@@ -1275,7 +1270,6 @@
 				DAE9E26E1295E63F00F72551 /* Localizable.strings in Resources */,
 				DAE9E2721295E63F00F72551 /* calculator.png in Resources */,
 				DAE9E2731295E63F00F72551 /* trend.png in Resources */,
-				DAE9D2AD12A81EE500EA3F21 /* README.md in Resources */,
 				DAC5BA9E12A99FCF00953A23 /* NavigationMainWindow.xib in Resources */,
 				DAC5BBF112A9A70A00953A23 /* NavigationMainWindow-iPad.xib in Resources */,
 				DAC0C29912A9AA5300F669EC /* InfoPlist.strings in Resources */,
@@ -1321,7 +1315,6 @@
 				DAAAE1FF126442E00059A264 /* TestView.m in Sources */,
 				DAAAE206126442ED0059A264 /* TestButton.m in Sources */,
 				DAC5BA9012A99F2300953A23 /* TabBarAppDelegate.m in Sources */,
-				DAA966DF12ACD25A00CB4664 /* CommandManagerTouchExt.m in Sources */,
 				DAA966E112ACD25A00CB4664 /* UIEventExt.m in Sources */,
 				DAA966E212ACD25A00CB4664 /* UITouchExt.m in Sources */,
 				DAA966E312ACD25A00CB4664 /* UIViewOpenGLExt.m in Sources */,
@@ -1377,6 +1370,7 @@
 				DACCAEB213483E5A0095EA8C /* Inspect.m in Sources */,
 				DACCAEB313483E5A0095EA8C /* Logger.m in Sources */,
 				DACCAEB413483E5A0095EA8C /* UnitTest.m in Sources */,
+				2BD14D0B162C75BC00E5A169 /* CommandManagerTouchExt.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1407,7 +1401,6 @@
 				DAC5BB6F12A9A33F00953A23 /* EAGLView.m in Sources */,
 				DAC5BB7012A9A33F00953A23 /* OpenGLAppDelegate.m in Sources */,
 				DAC5BB7112A9A33F00953A23 /* OpenGLViewController.m in Sources */,
-				DAA966AC12ACD25A00CB4664 /* CommandManagerTouchExt.m in Sources */,
 				DAA966AE12ACD25A00CB4664 /* UIEventExt.m in Sources */,
 				DAA966AF12ACD25A00CB4664 /* UITouchExt.m in Sources */,
 				DAA966B012ACD25A00CB4664 /* UIViewOpenGLExt.m in Sources */,
@@ -1463,6 +1456,7 @@
 				DACCAE4613483E5A0095EA8C /* Inspect.m in Sources */,
 				DACCAE4713483E5A0095EA8C /* Logger.m in Sources */,
 				DACCAE4813483E5A0095EA8C /* UnitTest.m in Sources */,
+				2BD14D0C162C75BC00E5A169 /* CommandManagerTouchExt.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1491,7 +1485,6 @@
 				DAE9E28D1295E63F00F72551 /* TestView.m in Sources */,
 				DAE9E28E1295E63F00F72551 /* TestButton.m in Sources */,
 				DAC5BA9F12A99FCF00953A23 /* NavigationAppDelegate.m in Sources */,
-				DAA9667912ACD25A00CB4664 /* CommandManagerTouchExt.m in Sources */,
 				DAA9667B12ACD25A00CB4664 /* UIEventExt.m in Sources */,
 				DAA9667C12ACD25A00CB4664 /* UITouchExt.m in Sources */,
 				DAA9667D12ACD25A00CB4664 /* UIViewOpenGLExt.m in Sources */,
@@ -1547,6 +1540,7 @@
 				DACCAE7C13483E5A0095EA8C /* Inspect.m in Sources */,
 				DACCAE7D13483E5A0095EA8C /* Logger.m in Sources */,
 				DACCAE7E13483E5A0095EA8C /* UnitTest.m in Sources */,
+				2BD14D0A162C75BC00E5A169 /* CommandManagerTouchExt.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
