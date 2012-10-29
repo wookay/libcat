@@ -16,7 +16,7 @@ FileUtils.mkdir_p EVENTS_PATH
 SPACE = ' '
 COLON = ':'
 PROMPT = '> '
-CONSOLE_VERSION = 0.3
+CONSOLE_VERSION = 0.5
 ABOUT = <<EOF
 libcat Console #{CONSOLE_VERSION}
 Copyright (c) 2010, 2011 WooKyoung Noh
@@ -40,7 +40,6 @@ cd TARGET           : change target object
   > cd ~~           : to UIApplication
   > cd 0            : at index as listed          
   > cd 1 0          : at section and row
-  > cd -1 0         : at index on toolbar
   > cd Title        : labeled as Title   
   > cd view         : to property        
   > cd UIButton     : to class           
@@ -49,16 +48,14 @@ pwd                 : view & controller hierarchy
 properties TARGET   : list properties (p)         
   > text            : property getter             
   > text = hello    : property setter             
-manipulate TARGET   : manipulate properties UI
-open                : open Safari UI
+flick TARGET        : flick target UI (f)  
 touch TARGET        : touch target UI (t)  
 back                : popViewController UI (b)
+drag TARGET         : drag target UI (d)
 rm TARGET           : removeFromSuperview UI      
-flick TARGET        : flick target UI (f)  
 png TARGET          : capture target as image UI
-fill_rect RECT      : fill rect UI
-add_ui UILabel      : add UI
-drag                : drag UI on/off (d)
+
+open                : open Safari UI (o)
 EOF
   help_pages.push <<EOF
 help     : help (h)
@@ -68,22 +65,6 @@ clear    : clear the screen
 history  : input commands history
 sleep N  : sleep N seconds
 
-events                   : list touch events (e)
-  > events record        : record on/off (er)
-  > events play          : play events (ep)
-  > events cut N         : cut N events (ex)
-  > events clear         : clear events (ec)
-  > events replay NAME   : replay events (ee)
-  > events save NAME     : save events (es)
-  > events load NAME     : load events (el)
-
-enum ENUMTYPE            : enum type info
-  > enum UITextAlignmentLeft
-  > enum UITextAlignment
-
-map ARGS
-  > view.subviews.map text frame.size
-
 class introspection
   > classInfo TARGET (c)
   > methods TARGET (m)
@@ -92,6 +73,19 @@ class introspection
   > protocols TARGET
   > UIApplication
   > UITableViewDelegate
+enum ENUMTYPE            : enum type info
+  > enum UIInterfaceOrientationPortrait
+  > enum UIInterfaceOrientation
+map ARGS
+  > view.subviews.map text frame.size
+events (USE_PRIVATE_API) : list touch events (e) 
+  > events record        : record on/off (er)
+  > events play          : play events (ep)
+  > events cut N         : cut N events (ex)
+  > events clear         : clear events (ec)
+  > events replay NAME   : replay events (ee)
+  > events save NAME     : save events (es)
+  > events load NAME     : load events (el)
 EOF
   if $COLUMNS >= DEFAULT_ENV_COLUMNS
     first_page_lines = help_pages.first.split(LF)
@@ -101,7 +95,13 @@ EOF
       lines = page.split LF
       0.upto lines.count do |line_no|
         line = lines[line_no]
-        result_lines[line_no].concat line if line
+        if line
+          if result_lines[line_no]
+            result_lines[line_no].concat line
+          else
+            result_lines[line_no] = ''.ljust(max_width+2).concat line
+          end
+        end
       end
     end
     puts result_lines.join(LF)
@@ -160,6 +160,7 @@ class Console
     'd' => 'drag',
 	'm' => 'methods',
 	'M' => 'classMethods',
+    'o' => 'open',
 	'p' => 'properties',
     'b' => 'back',
     'f' => 'flick',

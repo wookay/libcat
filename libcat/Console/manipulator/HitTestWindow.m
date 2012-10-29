@@ -38,13 +38,27 @@
     UITouch* touch = [touches anyObject];
     CGPoint location = [touch locationInView:self];
     CGPoint previousLocation = [touch previousLocationInView:self];
+    CGFloat dx, dy;
+    switch (UIApplication.sharedApplication.statusBarOrientation) {
+        case UIInterfaceOrientationPortrait:
+        case UIInterfaceOrientationPortraitUpsideDown:
+            dx = location.x - previousLocation.x;
+            dy = location.y - previousLocation.y;
+            break;
+            break;
+        case UIInterfaceOrientationLandscapeLeft:
+        case UIInterfaceOrientationLandscapeRight:
+            dy = -location.x + previousLocation.x;
+            dx = location.y - previousLocation.y;
+            break;
+    }
     if (nil == targetView) {
         CGRect rect = selectedView.frame;
-        rect.origin = CGPointOffset(rect.origin, location.x - previousLocation.x, location.y - previousLocation.y);
+        rect.origin = CGPointOffset(rect.origin, dx, dy);
         selectedView.frame = rect;
     } else {
         CGRect rect = targetView.frame;
-        rect.origin = CGPointOffset(rect.origin, location.x - previousLocation.x, location.y - previousLocation.y);
+        rect.origin = CGPointOffset(rect.origin, dx, dy);
         targetView.frame = rect;
     }
 }

@@ -15,7 +15,7 @@ HISTORY_PATH = "#{COLSOLE_PATH}history"
 FileUtils.mkdir_p COLSOLE_PATH
 LF = "\n"
 
-COMMANDS = %w{open help quit about clear history sleep} + %w{back cd commands echo enum events flash hit log ls manipulate new_objects openURL prompt properties pwd rm touch COLUMNS show_console hide_console fill_rect add_ui}
+COMMANDS = %w{open help quit about clear history sleep} + %w{back cd commands echo enum events flash hit log ls manipulate new_objects openURL prompt properties pwd rm touch COLUMNS protocols show_console hide_console fill_rect add_ui}
 
 def force_encoding_utf8 str
   if str.respond_to? :force_encoding

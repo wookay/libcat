@@ -10,8 +10,9 @@
 #import "ViewController.h"
 
 
-// import
+// 1. Import
 #import "ConsoleManager.h"
+
 
 @implementation AppDelegate
 
@@ -35,9 +36,11 @@
     [self.window makeKeyAndVisible];
     
     
-    // run
+    // 2. Run
+#if TARGET_IPHONE_SIMULATOR
     [ConsoleManager run];
-    
+#endif
+
     
     return YES;
 }

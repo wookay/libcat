@@ -59,7 +59,6 @@ void SLIDE_PAGE(NSString* slideTitle, NSArray* slideItems) {
 					   @"  > cd ~~           : to UIApplication",
 					   @"  > cd 0            : at index as listed          ",
 					   @"  > cd 1 0          : at section and row",
-					   @"  > cd -1 0         : at index on toolbar",
 					   @"  > cd Title        : labeled as Title   ",
 					   @"  > cd view         : to property        ",
 					   @"  > cd UIButton     : to class           ",
@@ -90,9 +89,10 @@ void SLIDE_PAGE(NSString* slideTitle, NSArray* slideItems) {
 	SLIDE_PAGE(@"map", [NSArray arrayWithObjects:
 						@"map ARGS",
 						@"  > view.subviews.map text frame.size",
+                        @"  > view.subviews.map frame subviews.count",
 						nil]);
     
-	SLIDE_PAGE(@"open", [NSArray arrayWithObjects:@"open Safari UI", [UIImage imageNamed:@"open_safari.png"], nil]);
+	SLIDE_PAGE(@"open", [NSArray arrayWithObjects:@"open Safari UI (o)", [UIImage imageNamed:@"open_safari.png"], nil]);
     
     SLIDE_PAGE(@"flick", [NSArray arrayWithObjects:
                           @"flick TARGET        : flick target UI (f)",
@@ -100,20 +100,20 @@ void SLIDE_PAGE(NSString* slideTitle, NSArray* slideItems) {
     SLIDE_PAGE(@"touch", [NSArray arrayWithObjects:
                           @"touch TARGET        : touch target UI (t)  ",
                           nil]);
+    SLIDE_PAGE(@"drag", [NSArray arrayWithObjects:@"drag on/off (d)", @"drag TARGET", nil]);
 	SLIDE_PAGE(@"back", [NSArray arrayWithObjects:
                          @"back                : popViewController UI (b)",
                          nil]);
 	SLIDE_PAGE(@"rm", [NSArray arrayWithObjects:
 					   @"rm TARGET           : removeFromSuperview UI",
 					   nil]);
-	SLIDE_PAGE(@"drag", [NSArray arrayWithObjects:@"drag UI on/off (d)", nil]);
 
     SLIDE_PAGE(@"automation script", [NSArray arrayWithObjects:
-                                        @"console/test_script.rb",
 										@"require './console'",
 										@"c = Console.new",
 										@"c.input 'ls'",
 										@"c.input 'view.backgroundColor = greenColor'",
+                                        @"console/test_script.rb",
                                            nil]);
     
     SLIDE_PAGE(@"events", [NSArray arrayWithObjects:NSLocalizedString(@"Record, Play the touch events", nil), @"USE_PRIVATE_API=1", nil]);
@@ -131,7 +131,7 @@ void SLIDE_PAGE(NSString* slideTitle, NSArray* slideItems) {
     
     SLIDE_PAGE(@"libcat for your project", [NSArray arrayWithObjects:
                                               @"Add libcat to your project",
-                                            @"SimpleApp",
+                                            @"* SimpleApp",
                                     nil]);
     SLIDE_PAGE(@"libcat for your project (2)", [NSArray arrayWithObjects:
                                             @"inside YourAppDelegate.m",
