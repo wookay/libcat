@@ -58,7 +58,7 @@ flick TARGET        : flick target UI (f)
 png TARGET          : capture target as image UI
 fill_rect RECT      : fill rect UI
 add_ui UILabel      : add UI
-hit                 : hitTest UI on/off
+drag                : drag UI on/off (d)
 EOF
   help_pages.push <<EOF
 help     : help (h)
@@ -157,6 +157,7 @@ class Console
     'ec' => 'events clear',
     'es' => 'events save',
     'el' => 'events load',
+    'd' => 'drag',
 	'm' => 'methods',
 	'M' => 'classMethods',
 	'p' => 'properties',

@@ -75,7 +75,6 @@
 		DA7D3AC7132856CC0020E9D6 /* PresentationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA7D3AC5132856CC0020E9D6 /* PresentationViewController.xib */; };
 		DA7D3C00132862FE0020E9D6 /* graphs_languages.png in Resources */ = {isa = PBXBuildFile; fileRef = DA7D3BFF132862FE0020E9D6 /* graphs_languages.png */; };
 		DA7D3C50132868A40020E9D6 /* unittest_example.png in Resources */ = {isa = PBXBuildFile; fileRef = DA7D3C4F132868A40020E9D6 /* unittest_example.png */; };
-		DA7D3C6F132869CB0020E9D6 /* unittest_run.png in Resources */ = {isa = PBXBuildFile; fileRef = DA7D3C6E132869CB0020E9D6 /* unittest_run.png */; };
 		DA7D3C9113286A8B0020E9D6 /* unittest_report.png in Resources */ = {isa = PBXBuildFile; fileRef = DA7D3C9013286A8B0020E9D6 /* unittest_report.png */; };
 		DA82D33013276C44002CC33B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA82D32E13276C44002CC33B /* QuartzCore.framework */; };
 		DA82D33113276C44002CC33B /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA82D32F13276C44002CC33B /* CFNetwork.framework */; };
@@ -219,7 +218,6 @@
 		DA7D3B7813285CCC0020E9D6 /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
 		DA7D3BFF132862FE0020E9D6 /* graphs_languages.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = graphs_languages.png; sourceTree = "<group>"; };
 		DA7D3C4F132868A40020E9D6 /* unittest_example.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unittest_example.png; sourceTree = "<group>"; };
-		DA7D3C6E132869CB0020E9D6 /* unittest_run.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unittest_run.png; sourceTree = "<group>"; };
 		DA7D3C9013286A8B0020E9D6 /* unittest_report.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = unittest_report.png; sourceTree = "<group>"; };
 		DA82D32E13276C44002CC33B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		DA82D32F13276C44002CC33B /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -530,7 +528,6 @@
 				2BEC18B8161DCEE70033F466 /* consolemanager_run.png */,
 				2BEC18B6161DCD4D0033F466 /* script_console.png */,
 				DA7D3C9013286A8B0020E9D6 /* unittest_report.png */,
-				DA7D3C6E132869CB0020E9D6 /* unittest_run.png */,
 				DA7D3C4F132868A40020E9D6 /* unittest_example.png */,
 				DA7D3BFF132862FE0020E9D6 /* graphs_languages.png */,
 				2BEC18BA161DD6FC0033F466 /* open_safari.png */,
@@ -641,7 +638,6 @@
 				DA7D3AC7132856CC0020E9D6 /* PresentationViewController.xib in Resources */,
 				DA7D3C00132862FE0020E9D6 /* graphs_languages.png in Resources */,
 				DA7D3C50132868A40020E9D6 /* unittest_example.png in Resources */,
-				DA7D3C6F132869CB0020E9D6 /* unittest_run.png in Resources */,
 				DA7D3C9113286A8B0020E9D6 /* unittest_report.png in Resources */,
 				DA7A2363132A0D020040CAF2 /* ConsoleViewController.xib in Resources */,
 				DA7A2365132A0D020040CAF2 /* EditPropertyViewController.xib in Resources */,

@@ -11,26 +11,27 @@
 
 
 typedef enum {
-	kHitTestModeNone,
-	kHitTestModeHitTestView,
-	kHitTestModeHitTestOnce,
-} kHitTestMode;
+	kDragModeOff,
+    kDragModeOn,
+    kDragModeHitTestOnce,
+} kDragMode;
 
-@protocol HitTestDelegate;
+//@protocol HitTestDelegate;
 
 @interface HitTestWindow : UIWindow {
-	kHitTestMode hitTestMode;
+	kDragMode dragMode;
 	UIWindow* realWindow;
-	id<HitTestDelegate> hitTestDelegate;
+    UIView* selectedView;
+    UIView* targetView;
+//	id<HitTestDelegate> hitTestDelegate;
 }
-@property (nonatomic) kHitTestMode hitTestMode;
+@property (nonatomic) kDragMode dragMode;
 @property (nonatomic, retain)	UIWindow* realWindow;
-@property (nonatomic, assign) 	id<HitTestDelegate> hitTestDelegate;
+@property (nonatomic, assign)	UIView* selectedView;
+@property (nonatomic, assign)	UIView* targetView;
+//@property (nonatomic, assign) 	id<HitTestDelegate> hitTestDelegate;
 
 +(HitTestWindow*) sharedWindow ;
--(void) makeHitTestOff ;
--(NSString*) enterHitTestMode:(kHitTestMode)hitTestArg ;
--(void) hitTestOnce ;
--(NSString*) hitTestView ;
+-(NSString*) dragView:(id)targetView ;
 
 @end

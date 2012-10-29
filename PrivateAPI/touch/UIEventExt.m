@@ -110,16 +110,6 @@
 	NSMutableArray* ary = [NSMutableArray array];
 	int idx = 0;
 	for (NSDictionary* eventDict in userEvents) {
-//		NSData* data = [eventDict objectForKey:@"Data"];
-//		switch (data.length) {
-//			case 60:
-//				break;
-//			case 84:
-//				break;
-//			default:
-//				break;
-//		}
-
 		NSDictionary* location = [eventDict objectForKey:@"Location"];
 		[ary addObject:SWF(@"%d\t%@\t{%@, %@}\t%@",
 						   idx,

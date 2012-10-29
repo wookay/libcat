@@ -515,7 +515,7 @@
 						const char* argTypeOne = [sig getArgumentTypeAtIndex:ARGUMENT_INDEX_ONE];
 						const char* argTypeTwo = [sig getArgumentTypeAtIndex:ARGUMENT_INDEX_TWO];
 						if (_C_ID == *argTypeOne && _C_UINT == *argTypeTwo) {
-							[target performSelector:selector withObject:objOne withObject:(id)[objTwo intValue]];	
+							[target performSelector:selector withObject:objOne withObject:(id)[objTwo intValue]];
 							[ary addObject:SWF(@"[%@ %@ %@]", oldTargetStr, method, arg)];	
 						} else {
 							found  = false;
@@ -552,7 +552,12 @@
 				NSArray* pair = [COMMANDMAN findTargetObject:target arg:newArg];
 				id obj = [pair objectAtSecond];
 				if (nil == obj) {
-					return [NSException exceptionWithName:@"Command Not Found" reason:nil userInfo:nil];
+                    NSString* isMethodStr = SWF(@"is%@", [method capitalizedString]);
+                    if ([target respondsToSelector:NSSelectorFromString(isMethodStr)]) {
+                        return [self getterChainObject:target command:isMethodStr arg:arg returnType:getterReturnType];
+                    } else {
+                        return [NSException exceptionWithName:@"Command Not Found" reason:nil userInfo:nil];
+                    }
 				} else {
 					[ary addObject:SWF(@"%@", obj)];
 					target = obj;
@@ -635,11 +640,7 @@
 		} else {
 			topViewController = rootVC;
 		}
-//		if ([topViewController respondsToSelector:@selector(modalViewController)]) {
-//			return topViewController.modalViewController ? topViewController.modalViewController : topViewController;
-//		} else {
-			return topViewController;
-//		}
+        return topViewController;
 	}
 }
 
@@ -701,33 +702,7 @@
 	[logsButton setTitle:NSLocalizedString(@"Logs", nil) forState:UIControlStateNormal];	
 	[window addSubview:logsButton];
 	[logsButton release];		
-	
-//#if USE_PRIVATE_API
-//	CGRect recordRect = CGRectMake(logsRect.origin.x - 45 - BUTTON_MARGIN, consoleRect.origin.y, 45, consoleRect.size.height);
-//	UIButton* recordButton = [[ConsoleButton alloc] initWithFrame:recordRect];
-//	BOOL settingConsoleRecordButton = [[NSUserDefaults standardUserDefaults] boolForKey:SETTING_CONSOLE_RECORD_BUTTON];
-//	recordButton.hidden = settingConsoleRecordButton;
-//	recordButton.tag = kTagRecordButton;
-//	[recordButton addTarget:self action:@selector(touchedToggleRecordButton:) forControlEvents:UIControlEventTouchUpInside];
-//	[window addSubview:recordButton];
-//	[self update_record_button];
-//	[recordButton release];		
-//#endif
 }
-
-//-(void) update_record_button {
-//#if USE_PRIVATE_API
-//	UIWindow* window = [UIApplication sharedApplication].keyWindow;
-//	UIButton* recordButton = (UIButton*)[window viewWithTag:kTagRecordButton];
-//	if (EVENTRECORDER.recorded) {
-//		[recordButton setTitle:NSLocalizedString(@"Stop", nil) forState:UIControlStateNormal];	
-//		[recordButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//	} else {
-//		[recordButton setTitle:NSLocalizedString(@"Record", nil) forState:UIControlStateNormal];	
-//		[recordButton setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-//	}
-//#endif
-//}
 
 -(void) toggle_logs_button {
 	UIWindow* window = [UIApplication sharedApplication].keyWindow;

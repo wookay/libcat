@@ -32,27 +32,26 @@
 #import "PropertyManipulator.h"
 #import <QuartzCore/QuartzCore.h>
 
-#if USE_COCOA
-	#import "NSWindowExtMac.h"
-	#import "NSViewExtMac.h"
-#endif
-
 #define TOOLBAR_ITEMS_SECTION_INDEX -1
 
 
-NSArray* array_prefix_index(NSArray* array) ;
+NSArray* array_prefix_index(int sector, NSArray* array) ;
 
-NSArray* array_prefix_index(NSArray* array) {
+NSArray* array_prefix_index(int sector, NSArray* array) {
 	NSMutableArray* ary = [NSMutableArray array];
 	for (int idx = 0; idx < array.count; idx++) {
 		id obj = [array objectAtIndex:idx];
-		[ary addObject:SWF(@"  [%d] %@", idx, [obj inspect])];
+        if (0 == sector) {
+            [ary addObject:SWF(@"  [%d] %@", idx, [obj inspect])];
+        } else {
+            [ary addObject:SWF(@"  [%d %d] %@", sector, idx, [obj inspect])];
+        }
 	}
 	return ary;
 }
 
-NSString* surrounded_array_prefix_index(NSArray* array) {
-	NSArray* ary = array_prefix_index(array);
+NSString* surrounded_array_prefix_index(int sector, NSArray* array) {
+    NSArray* ary = array_prefix_index(sector, array);
 	if (ary.count > 0) {
 		return SWF(@"\n%@", [ary join:LF]);
 	} else {
@@ -63,11 +62,10 @@ NSString* surrounded_array_prefix_index(NSArray* array) {
 @implementation CommandManager
 @synthesize commandsMap;
 
-#pragma mark HitTestDelegate
-
--(void) touchedHitTestView:(UIView*)view {
-	log_info(@"hitTest %@", view);
-}
+//#pragma mark HitTestDelegate
+//-(void) touchedHitTestView:(UIView*)view {
+//	log_info(@"hitTest %@", view);
+//}
 
 -(id) commandNotFound {
 	return NSLocalizedString(@"Command Not Found", nil);
@@ -76,7 +74,7 @@ NSString* surrounded_array_prefix_index(NSArray* array) {
 -(NSDictionary*) load_system_commands {
 	return [NSDictionary dictionaryWithKeysAndObjects:
 			@"pwd", @"command_pwd:arg:",
-			@"hit", @"command_hit:arg:",
+            @"drag", @"command_drag:arg:",
 			@"events", @"command_events:arg:",
 			@"cd", @"command_cd:arg:",
 			@"ls", @"command_ls:arg:",
@@ -104,7 +102,7 @@ NSString* surrounded_array_prefix_index(NSArray* array) {
 			@"classMethods", @"command_classMethods:arg:",
 			@"methods", @"command_methods:arg:",
 			@"ivars", @"command_ivars:arg:",
-			@"protocols", @"command_protocols:arg:",			
+			@"protocols", @"command_protocols:arg:",
 			nil];
 }
 
@@ -226,9 +224,16 @@ NSString* surrounded_array_prefix_index(NSArray* array) {
 	}
 }
 
--(NSString*) command_hit:(id)currentObject arg:(id)arg {
+-(NSString*) command_drag:(id)currentObject arg:(id)arg {
 	HitTestWindow* hitTestWindow = [HitTestWindow sharedWindow];
-	return [hitTestWindow hitTestView];
+    UIView* targetView = nil;
+    NSArray* pair = [self findTargetObject:currentObject arg:arg];
+	id targetObject = [pair objectAtSecond];
+	if (nil == targetObject) {
+    } else if ([targetObject isKindOfClass:[UIView class]]) {
+        targetView = targetObject;
+    }
+	return [hitTestWindow dragView:targetView];
 }
 
 -(id) command_png:(id)currentObject arg:(id)arg {
@@ -549,7 +554,8 @@ NSString* surrounded_array_prefix_index(NSArray* array) {
 				}
 				break;
 			case LS_VIEWCONTROLLERS:
-				[ary addObject:SWF(@"VIEWCONTROLLERS: %@", surrounded_array_prefix_index(obj))];
+				[ary addObject:SWF(@"VIEWCONTROLLERS: %@",
+                                   surrounded_array_prefix_index(0, obj))];
 				break;
 			case LS_TABLEVIEW:
 				[ary addObject:SWF(@"TABLEVIEW: %@", [obj inspect])];
@@ -564,7 +570,7 @@ NSString* surrounded_array_prefix_index(NSArray* array) {
 						} else {
 							[ary addObject:SWF(@"== %@ %d : %@ ==", NSLocalizedString(@"Section", nil), idx, sectionTitle)];
 						}
-						[ary addObject:[array_prefix_index(sectionAry) join:LF]];
+						[ary addObject:[array_prefix_index(idx, sectionAry) join:LF]];
 					}];				
 				}
 				break;
@@ -578,7 +584,7 @@ NSString* surrounded_array_prefix_index(NSArray* array) {
 				}
 				break;				
 			case LS_VIEW_SUBVIEWS:
-				[ary addObject:SWF(@"VIEW.SUBVIEWS: %@", surrounded_array_prefix_index(obj))];
+				[ary addObject:SWF(@"VIEW.SUBVIEWS: %@", surrounded_array_prefix_index(0, obj))];
 				break;
 			case LS_TABBAR:
 				[ary addObject:SWF(@"TABBAR: %@", [obj inspect])];				
@@ -590,14 +596,14 @@ NSString* surrounded_array_prefix_index(NSArray* array) {
 				[ary addObject:SWF(@"NAVIGATIONCONTROLLER_TOOLBAR: %@", [obj inspect])];				
 				break;								
 			case LS_NAVIGATIONCONTROLLER_TOOLBAR_ITEMS:
-				[ary addObject:SWF(@"NAVIGATIONCONTROLLER_TOOLBAR_ITEMS:\n%d%@", TOOLBAR_ITEMS_SECTION_INDEX, surrounded_array_prefix_index(obj))];				
+				[ary addObject:SWF(@"NAVIGATIONCONTROLLER_TOOLBAR_ITEMS:%@", surrounded_array_prefix_index(TOOLBAR_ITEMS_SECTION_INDEX, obj))];
 				break;												
 			case LS_TOOLBAR:
 				[ary addObject:SWF(@"TOOLBAR: %@", [obj inspect])];				
 				break;								
 			case LS_TOOLBAR_ITEMS:
-				[ary addObject:SWF(@"TOOLBAR_ITEMS: %d %@", TOOLBAR_ITEMS_SECTION_INDEX, surrounded_array_prefix_index(obj))];				
-				break;																
+				[ary addObject:SWF(@"TOOLBAR_ITEMS: %@", surrounded_array_prefix_index(TOOLBAR_ITEMS_SECTION_INDEX, obj))];
+				break;
 			case LS_CLASS_METHODS:
 				[ary addObject:SWF(@"CLASS_METHODS:\n%@", [obj inspect])];				
 				break;	
@@ -605,13 +611,13 @@ NSString* surrounded_array_prefix_index(NSArray* array) {
 				[ary addObject:SWF(@"LAYER: %@", [obj inspect])];
 				break;												
 			case LS_LAYER_SUBLAYERS:
-				[ary addObject:SWF(@"LAYER.SUBLAYERS: %@", surrounded_array_prefix_index(obj))];
+				[ary addObject:SWF(@"LAYER.SUBLAYERS: %@", surrounded_array_prefix_index(0, obj))];
 				break;		
 			case LS_WINDOWS:
-				[ary addObject:SWF(@"WINDOWS: %@", surrounded_array_prefix_index(obj))];
+				[ary addObject:SWF(@"WINDOWS: %@", surrounded_array_prefix_index(0, obj))];
 				break;						
 			case LS_ARRAY:
-				[ary addObject:[array_prefix_index(obj) join:LF]];
+				[ary addObject:[array_prefix_index(0, obj) join:LF]];
 				break;										
 			default:
 				break;
@@ -762,11 +768,6 @@ NSString* surrounded_array_prefix_index(NSArray* array) {
 		[ret addObject:PAIR(Enum(LS_WINDOWS), application.windows)];
 	} else if ([currentObject isKindOfClass:[NSArray class]]) {
 		[ret addObject:PAIR(Enum(LS_ARRAY), currentObject)];
-#if USE_COCOA
-	} else if ([currentObject isKindOfClass:[NSWindow class]]) {
-		NSWindow* window = currentObject;
-		[ret addObject:PAIR(Enum(LS_VIEW_SUBVIEWS), [window.contentView subviews])];	
-#endif
 	} else if (currentObject == [currentObject class]) {
 		[ret addObject:PAIR(Enum(LS_CLASS_METHODS), [DisquotatedObject disquotatedObjectWithObject:currentObject descript:[currentObject classMethods]])];
 	}
@@ -953,29 +954,11 @@ NSString* surrounded_array_prefix_index(NSArray* array) {
 					changeObject = [array objectAtIndex:row];
 					found = true;
 				}
-#if USE_COCOA
-			} else if ([currentObject isKindOfClass:[NSWindow class]]) {
-				return [self findTargetObject:[currentObject contentView] arg:arg];
-			} else if ([currentObject isKindOfClass:[NSView class]]) {
-				UIView* view = currentObject;
-				if (row < view.subviews.count) {
-					UIView* subview = [view.subviews objectAtIndex:row];				
-					changeObject = subview;
-					found = true;
-					
-					if ([subview isKindOfClass:[NSControl class]]) {
-						ActionBlock block = ^id {				
-							[(NSControl*)subview performClick:subview];
-							return SWF(@"[%@ performClick: %@]", [subview className], @"sender");
-						};
-						actionBlock = Block_copy(block);
-					}
-				}
-#endif
 			}
 		} // TOOLBAR_ITEMS_SECTION_INDEX != section
-		if (! found) {
-			return PAIR(NSLocalizedString(@"Not Found", nil), nil); 
+		if (found) {
+        } else {
+			return PAIR(NSLocalizedString(@"Not Found", nil), nil);
 		}
 	} else if ([arg isNotEmpty]) {
 		SEL selector = NSSelectorFromString(arg);
@@ -1033,7 +1016,7 @@ NSString* surrounded_array_prefix_index(NSArray* array) {
 		}
 	}
 	if (nil == changeObject) {
-		return TRIO(NSLocalizedString(@"Not Found", nil), [NilClass nilClass], [NilClass nilClass]); 
+		return TRIO(NSLocalizedString(@"Not Found", nil), [NilClass nilClass], [NilClass nilClass]);
 	} else {
 		return TRIO(SWF(@"cd %@", [changeObject class]), changeObject, actionBlock);
 	}	

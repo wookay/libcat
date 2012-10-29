@@ -152,7 +152,7 @@ static NSString *replaceAll(NSString *s, NSDictionary *replacements) {
 				}
 				break;
 			case LS_VIEWCONTROLLERS:
-				[ary addObject:SWF(@"VIEWCONTROLLERS: %@", [surrounded_array_prefix_index(obj) htmlEscapedString])];
+				[ary addObject:SWF(@"VIEWCONTROLLERS: %@", [surrounded_array_prefix_index(0, obj) htmlEscapedString])];
 				break;
 			case LS_TABLEVIEW:
 				[ary addObject:SWF(@"TABLEVIEW: %@", [[obj inspect] htmlEscapedString])];

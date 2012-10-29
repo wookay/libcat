@@ -21,95 +21,103 @@
 #import "PropertyManipulator.h"
 
 @implementation HitTestWindow
-@synthesize hitTestMode;
+@synthesize dragMode;
 @synthesize realWindow;
-@synthesize hitTestDelegate;
+@synthesize selectedView;
+@synthesize targetView;
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    if (nil == targetView) {
+        [selectedView flick];
+    } else {
+        [targetView flick];
+    }
+}
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+    UITouch* touch = [touches anyObject];
+    CGPoint location = [touch locationInView:self];
+    CGPoint previousLocation = [touch previousLocationInView:self];
+    if (nil == targetView) {
+        CGRect rect = selectedView.frame;
+        rect.origin = CGPointOffset(rect.origin, location.x - previousLocation.x, location.y - previousLocation.y);
+        selectedView.frame = rect;
+    } else {
+        CGRect rect = targetView.frame;
+        rect.origin = CGPointOffset(rect.origin, location.x - previousLocation.x, location.y - previousLocation.y);
+        targetView.frame = rect;
+    }
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    if (nil == targetView) {
+        [selectedView flick];
+    } else {
+        [targetView flick];
+    }
+}
+
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
+}
+
+-(NSString*) dragView:(id)targetView_ {
+    if (kDragModeOff == dragMode) {
+        dragMode = kDragModeOn;
+        realWindow = [UIApplication sharedApplication].keyWindow;
+        selectedView = nil;
+        targetView = targetView_;
+        [self makeKeyAndVisible];
+        if (nil == targetView) {
+            [self flick];
+        } else {
+            [targetView flick];
+        }
+        return @"drag on";
+    } else {
+        if (nil == targetView_) {
+            dragMode = kDragModeOff;
+            [realWindow makeKeyAndVisible];
+            realWindow = nil;
+            selectedView = nil;
+            targetView = nil;
+            return @"drag off";
+        } else {
+            targetView = targetView_;
+            [targetView flick];
+        }
+    }
+    return SWF(@"drag %@", targetView);
+}
+
+-(void) hitTestOnce {
+    dragMode = kDragModeHitTestOnce;
+    realWindow = [UIApplication sharedApplication].keyWindow;
+    selectedView = nil;
+    targetView = nil;
+    [self makeKeyAndVisible];
+}
 
 - (UIView*) hitTest:(CGPoint)point withEvent:(UIEvent *)event {
 	if ([realWindow isEqual:self]) {
 		return self;
-	} else {		
-		UIView* view = [realWindow hitTest:point withEvent:event];
-		switch (hitTestMode) {
-			case kHitTestModeHitTestOnce: {
-					[view flick];
-					if (nil != hitTestDelegate) {
-						[hitTestDelegate touchedHitTestView:view];
-						[PROPERTYMAN manipulate:view];
-					}					
-					CONSOLEMAN.currentTargetObject = view;
-					[self makeHitTestOff];
-					return self;
-				}
-				break;
-				
-			case kHitTestModeHitTestView: {
-					if ([view isEqual:CONSOLEMAN.currentTargetObject]) {
-					} else {
-						if (nil != hitTestDelegate) {
-							[hitTestDelegate touchedHitTestView:view];
-						}					
-						CONSOLEMAN.currentTargetObject = view;	
-					}
-					[view flick];
-					return self;
-				}
-				break;
-				
-			case kHitTestModeNone:
-			default:
-				break;
-		}
-		return view;
 	}
-}
-
--(void) makeHitTestOff {
-	hitTestMode = kHitTestModeNone;
-	if (nil != self.realWindow) {
-		[self.realWindow makeKeyAndVisible];
-	}	
-}
-
--(NSString*) hitTestView {
-	return [self enterHitTestMode:kHitTestModeHitTestView];
-}
-
--(void) hitTestOnce {
-	[self enterHitTestMode:kHitTestModeHitTestOnce];
-}
-
--(NSString*) enterHitTestMode:(kHitTestMode)hitTestArg {	
-	if (kHitTestModeHitTestView == hitTestArg && kHitTestModeHitTestView == hitTestMode) {
-		[self makeHitTestOff];
-		return NSLocalizedString(@"hitTest off", nil);		
-	} else {
-		hitTestMode = hitTestArg;
-		if (kHitTestModeNone == hitTestMode) {
-			if (nil != self.realWindow) {
-				[self.realWindow makeKeyAndVisible];
-			}			
-		} else {
-			UIWindow* keyWindow = [UIApplication sharedApplication].keyWindow;
-			if ([self isEqual:keyWindow]) {
-			} else {
-				self.realWindow = keyWindow;
-				self.hitTestDelegate = COMMANDMAN;
-			}
-			[self makeKeyAndVisible];
-			if (kHitTestModeHitTestView == hitTestArg) {
-				[self flick];			
-			}
-		}
-		switch (hitTestMode) {
-			case kHitTestModeHitTestView:
-				return NSLocalizedString(@"hitTest on", nil);
-				break;
-			default:
-				break;
-		}
-		return NSLocalizedString(@"None", nil);
-	}
+	UIView* view = [realWindow hitTest:point withEvent:event];
+    if (nil == view) {
+    } else {
+        if (kDragModeHitTestOnce == dragMode) {
+            CONSOLEMAN.currentTargetObject = view;
+            [view flick];
+            dragMode = kDragModeOff;
+            [realWindow makeKeyAndVisible];
+            realWindow = nil;
+            selectedView = nil;
+            targetView = nil;
+            [PROPERTYMAN manipulate:view];
+            return self;
+        }
+        selectedView = view;
+    }
+    return self;
 }
 
 +(HitTestWindow*) sharedWindow {
@@ -123,17 +131,20 @@
 - (id) init {
 	self = [super init];
 	if (self) {
+        self.userInteractionEnabled = true;
 		self.frame = SCREEN_FRAME;
-		self.hitTestMode = kHitTestModeNone;
+		self.dragMode = kDragModeOff;
 		self.realWindow = nil;
-		self.hitTestDelegate = nil;
+        self.selectedView = nil;
+        self.targetView = nil;
 	}
 	return self;
 }
 
 - (void) dealloc {
-	hitTestDelegate = nil;
-	realWindow = nil;
+    selectedView = nil;
+    targetView = nil;
+    realWindow = nil;
 	[super dealloc];
 }
 

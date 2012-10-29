@@ -89,7 +89,7 @@
 	CGRect screenRect = [[UIScreen mainScreen] bounds];    
 //	UIGraphicsBeginImageContext(screenRect.size);
     UIGraphicsBeginImageContextWithOptions(window.bounds.size, window.opaque, 0.0);
-    log_info(@"windowboundssize %@", SFSize(window.bounds.size));
+//    log_info(@"windowboundssize %@", SFSize(window.bounds.size));
 	CGContextRef ctx = UIGraphicsGetCurrentContext(); 
 	[[UIColor blackColor] set]; 
 	CGContextFillRect(ctx, screenRect);

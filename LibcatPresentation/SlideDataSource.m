@@ -36,14 +36,14 @@ void SLIDE_PAGE(NSString* slideTitle, NSArray* slideItems) {
 	SLIDE_PAGE(@"Ext (2)", [NSArray arrayWithObjects:@"NSStringExt", @"NSArrayExt", @"NSDictionaryExt", @"Block Extensions", @"...", nil]);
 	SLIDE_PAGE(@"Unit Test", [NSArray arrayWithObjects:NSLocalizedString(@"Writing Unit Test Codes", nil), NSLocalizedString(@"Make Reusable Code", nil), nil]);
 	SLIDE_PAGE(@"Unit Test - Example", [NSArray arrayWithObjects:[UIImage imageNamed:@"unittest_example.png"], nil]);
-	SLIDE_PAGE(@"Unit Test - Run", [NSArray arrayWithObjects:[UIImage imageNamed:@"unittest_run.png"], nil]);
+	SLIDE_PAGE(@"Unit Test - Run", [NSArray arrayWithObjects:@"[UnitTest run];", nil]);
 	SLIDE_PAGE(@"Unit Test - Report", [NSArray arrayWithObjects:[UIImage imageNamed:@"unittest_report.png"], nil]);
 	SLIDE_PAGE(@"Logger", [NSArray arrayWithObjects:@"log_info(@\"message\");", @"  RootViewController.m #032   message", @"log_info(@\"idx %d\", idx);", @"  RootViewController.m #033   idx 1    ", nil]);
     
     // Console
 	SLIDE_PAGE(@"Console", [NSArray arrayWithObjects:@"Command shell debugging environment", NSLocalizedString(@"Scripting", nil), NSLocalizedString(@"Automation", nil), nil]);
     SLIDE_PAGE(@"Start Console Server", [NSArray arrayWithObjects:@"[ConsoleManager run];", [UIImage imageNamed:@"consolemanager_run.png"], nil]);
-    SLIDE_PAGE(@"Terminal to connect", [NSArray arrayWithObjects:@"~/libcat/script$ ./console.rb", [UIImage imageNamed:@"script_console.png"], nil]);
+    SLIDE_PAGE(@"Terminal shell", [NSArray arrayWithObjects:@"~/libcat/script$ ./console.rb", [UIImage imageNamed:@"script_console.png"], nil]);
 	SLIDE_PAGE(@"ls", [NSArray arrayWithObjects:
 						@"ls TARGET           : list target object (l)      ",
 						@"  > ls              : list current object         ",
@@ -72,21 +72,51 @@ void SLIDE_PAGE(NSString* slideTitle, NSArray* slideItems) {
 					  @"  > text            : property getter             ",
 					  @"  > text = hello    : property setter             ",
 					  nil]);
-	SLIDE_PAGE(@"touch", [NSArray arrayWithObjects:
-					  @"touch TARGET        : touch target UI (t)  ",
-					  nil]);
-	SLIDE_PAGE(@"back", [NSArray arrayWithObjects:
-					  @"back                : popViewController UI (b)",
-					  nil]);
-	SLIDE_PAGE(@"rm", [NSArray arrayWithObjects:
-					   @"rm TARGET           : removeFromSuperview UI      ",
-					   nil]);
-	SLIDE_PAGE(@"flick", [NSArray arrayWithObjects:
-					  @"flick TARGET        : flick target UI (f)  ",
-					  nil]);
+    SLIDE_PAGE(@"class introspection", [NSArray arrayWithObjects:
+										@"  > classInfo TARGET (c)",
+										@"  > methods TARGET (m)",
+										@"  > classMethods TARGET (M)",
+										@"  > ivars TARGET (i)",
+										@"  > protocols TARGET",
+										@"  > UIApplication",
+										@"  > UITableViewDelegate",
+										SPACE,
+										nil]);
+    SLIDE_PAGE(@"object chaining", [NSArray arrayWithObjects:
+                                    @"  > view.subviews.count",
+                                    @"  > 0.layer.delegate",
+                                    @"  > UIApplication.sharedApplication",
+                                    nil]);
+	SLIDE_PAGE(@"map", [NSArray arrayWithObjects:
+						@"map ARGS",
+						@"  > view.subviews.map text frame.size",
+						nil]);
+    
 	SLIDE_PAGE(@"open", [NSArray arrayWithObjects:@"open Safari UI", [UIImage imageNamed:@"open_safari.png"], nil]);
-	SLIDE_PAGE(@"hit", [NSArray arrayWithObjects:@"hitTest UI on/off", nil]);
-	SLIDE_PAGE(@"events", [NSArray arrayWithObjects:NSLocalizedString(@"Record, Play the touch events", nil), @"USE_PRIVATE_API=1", nil]);
+    
+    SLIDE_PAGE(@"flick", [NSArray arrayWithObjects:
+                          @"flick TARGET        : flick target UI (f)",
+                          nil]);
+    SLIDE_PAGE(@"touch", [NSArray arrayWithObjects:
+                          @"touch TARGET        : touch target UI (t)  ",
+                          nil]);
+	SLIDE_PAGE(@"back", [NSArray arrayWithObjects:
+                         @"back                : popViewController UI (b)",
+                         nil]);
+	SLIDE_PAGE(@"rm", [NSArray arrayWithObjects:
+					   @"rm TARGET           : removeFromSuperview UI",
+					   nil]);
+	SLIDE_PAGE(@"drag", [NSArray arrayWithObjects:@"drag UI on/off (d)", nil]);
+
+    SLIDE_PAGE(@"automation script", [NSArray arrayWithObjects:
+                                        @"console/test_script.rb",
+										@"require './console'",
+										@"c = Console.new",
+										@"c.input 'ls'",
+										@"c.input 'view.backgroundColor = greenColor'",
+                                           nil]);
+    
+    SLIDE_PAGE(@"events", [NSArray arrayWithObjects:NSLocalizedString(@"Record, Play the touch events", nil), @"USE_PRIVATE_API=1", nil]);
 	SLIDE_PAGE(@"events", [NSArray arrayWithObjects:
 						   @"events                   : list touch events (e)",
 						   @"  > events record        : record on/off (er)",
@@ -98,27 +128,10 @@ void SLIDE_PAGE(NSString* slideTitle, NSArray* slideItems) {
 						   @"  > events load NAME     : load events (el)",
 						   SPACE,
 						   nil]);
-	SLIDE_PAGE(@"object chaining", [NSArray arrayWithObjects:
-						@"  > view.subviews.count",
-						@"  > 0.layer.delegate",
-						@"  > UIApplication.sharedApplication",
-						nil]);
-	SLIDE_PAGE(@"map", [NSArray arrayWithObjects:
-						@"map ARGS",
-						@"  > view.subviews.map text frame.size",
-						nil]);
-	SLIDE_PAGE(@"class introspection", [NSArray arrayWithObjects:
-										@"  > classInfo TARGET (c)",
-										@"  > methods TARGET (m)",
-										@"  > classMethods TARGET (M)",
-										@"  > ivars TARGET (i)",
-										@"  > protocols TARGET",
-										@"  > UIApplication",
-										@"  > UITableViewDelegate",
-										SPACE,
-										nil]);
+    
     SLIDE_PAGE(@"libcat for your project", [NSArray arrayWithObjects:
                                               @"Add libcat to your project",
+                                            @"SimpleApp",
                                     nil]);
     SLIDE_PAGE(@"libcat for your project (2)", [NSArray arrayWithObjects:
                                             @"inside YourAppDelegate.m",
