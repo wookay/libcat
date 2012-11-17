@@ -11,29 +11,30 @@
 #import "NSStringExt.h"
 #import "NSMutableArrayExt.h"
 #import "Logger.h"
+#import <UIKit/UIKit.h>
 
 NSArray* PAIR(id uno, id dos) {
-	NSMutableArray* ary = [NSMutableArray array];
-	[ary addObject:(nil == uno) ? [NilClass nilClass] : uno];
-	[ary addObject:(nil == dos) ? [NilClass nilClass] : dos];
-	return ary;
+    return [NSArray arrayWithObjects:
+            (nil == uno) ? [NilClass nilClass] : uno,
+            (nil == dos) ? [NilClass nilClass] : dos,
+            nil];
 }
 
 NSArray* TRIO(id uno, id dos, id tres) {
-	NSMutableArray* ary = [NSMutableArray array];
-	[ary addObject:(nil == uno) ? [NilClass nilClass] : uno];
-	[ary addObject:(nil == dos) ? [NilClass nilClass] : dos];
-	[ary addObject:(nil == tres) ? [NilClass nilClass] : tres];
-	return ary;	
+    return [NSArray arrayWithObjects:
+        (nil == uno) ? [NilClass nilClass] : uno,
+        (nil == dos) ? [NilClass nilClass] : dos,
+        (nil == tres) ? [NilClass nilClass] : tres,
+            nil];
 }
 
 NSArray* CUAD(id uno, id dos, id tres, id cuatro) {
-	NSMutableArray* ary = [NSMutableArray array];
-	[ary addObject:(nil == uno) ? [NilClass nilClass] : uno];
-	[ary addObject:(nil == dos) ? [NilClass nilClass] : dos];
-	[ary addObject:(nil == tres) ? [NilClass nilClass] : tres];
-	[ary addObject:(nil == cuatro) ? [NilClass nilClass] : cuatro];
-	return ary;	
+    return [NSArray arrayWithObjects:
+            (nil == uno) ? [NilClass nilClass] : uno,
+            (nil == dos) ? [NilClass nilClass] : dos,
+            (nil == tres) ? [NilClass nilClass] : tres,
+            (nil == cuatro) ? [NilClass nilClass] : cuatro,
+            nil];
 }
 
 NSInteger sortByFirstObjectComparator(NSArray* uno, NSArray* dos, void* context) ;

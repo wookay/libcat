@@ -6,6 +6,8 @@
 //  Copyright 2010 factorcat. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
+
 typedef void (^ButtonBlock)(id sender) ;
 
 

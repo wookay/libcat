@@ -7,7 +7,7 @@
 //
 
 #import "NSIndexPathExt.h"
-
+#import <UIKit/UIKit.h>
 
 @implementation NSIndexPath (Ext)
 

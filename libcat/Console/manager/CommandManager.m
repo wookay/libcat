@@ -59,6 +59,47 @@ NSString* surrounded_array_prefix_index(int sector, NSArray* array) {
 	}
 }
 
+NSArray* sectionsFromTableView(UITableView* tableView) {
+    NSMutableArray* sections = [NSMutableArray array];
+    NSMutableArray* sectionHeaders = [NSMutableArray array];
+    NSMutableArray* sectionFooters = [NSMutableArray array];
+    for (int section = 0; section < [tableView numberOfSections]; section++) {
+        NSMutableArray* ary = [NSMutableArray array];
+        for (int row = 0; row < [tableView numberOfRowsInSection:section]; row++) {
+            NSIndexPath* indexPath = [NSIndexPath indexPathWithSection:section Row:row];
+            UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
+            if (nil != cell) {
+                [ary addObject:cell];
+            }
+        }
+        [sections addObject:ary];
+#ifdef __IPHONE_6_0
+        UITableViewHeaderFooterView* headerView = [tableView headerViewForSection:section];
+        if (nil == headerView) {
+            [sectionHeaders addObject:[NilClass nilClass]];
+        } else {
+            [sectionHeaders addObject:headerView];
+        }
+        UITableViewHeaderFooterView* footerView = [tableView footerViewForSection:section];
+        if (nil == footerView) {
+            [sectionFooters addObject:[NilClass nilClass]];
+        } else {
+            [sectionFooters addObject:footerView];
+        }
+#else
+        if (nil != tableView.dataSource) {
+            NSString* headerTitle = [tableView.dataSource tableView:tableView titleForHeaderInSection:section];
+            if (nil == headerTitle) {
+                [sectionHeaders addObject:[NilClass nilClass]];
+            } else {
+                [sectionHeaders addObject:headerTitle];
+            }
+        }
+#endif
+    }
+    return CUAD(Enum(LS_SECTIONS), sections, sectionHeaders, sectionFooters);
+}
+
 @implementation CommandManager
 @synthesize commandsMap;
 
@@ -561,17 +602,36 @@ NSString* surrounded_array_prefix_index(int sector, NSArray* array) {
 				[ary addObject:SWF(@"TABLEVIEW: %@", [obj inspect])];
 				break;
 			case LS_SECTIONS: {
-					NSArray* sectionTitles = [pair objectAtThird];
+					NSArray* sectionHeaders = [pair objectAtThird];
+#ifdef __IPHONE_6_0
+                    NSArray* sectionFooters = [pair objectAtFourth];
+#endif
 					[ary addObject:@"SECTIONS:"];
 					[(NSArray*)obj each_with_index:^(id sectionAry, int idx) {
-						NSString* sectionTitle = [sectionTitles objectAtIndex:idx];
-						if (IS_NIL(sectionTitle)) {
+#ifdef __IPHONE_6_0
+						UITableViewHeaderFooterView* headerView = [sectionHeaders objectAtIndex:idx];
+						if (IS_NIL(headerView)) {
 							[ary addObject:SWF(@"== %@ %d ==", NSLocalizedString(@"Section", nil), idx)];
 						} else {
-							[ary addObject:SWF(@"== %@ %d : %@ ==", NSLocalizedString(@"Section", nil), idx, sectionTitle)];
+							[ary addObject:SWF(@"== %@ %d : %@ <%p> ==", NSLocalizedString(@"Section", nil), idx, headerView.textLabel.text, headerView)];
 						}
+#else
+						NSString* headerTitle = [sectionHeaders objectAtIndex:idx];
+						if (IS_NIL(headerTitle)) {
+							[ary addObject:SWF(@"== %@ %d ==", NSLocalizedString(@"Section", nil), idx)];
+						} else {
+							[ary addObject:SWF(@"== %@ %d : %@ ==", NSLocalizedString(@"Section", nil), idx, headerTitle)];
+						}                        
+#endif
 						[ary addObject:[array_prefix_index(idx, sectionAry) join:LF]];
-					}];				
+#ifdef __IPHONE_6_0
+                        UITableViewHeaderFooterView* footerView = [sectionFooters objectAtIndex:idx];
+						if (IS_NIL(footerView)) {
+						} else {
+							[ary addObject:SWF(@"  %@ <%p>", footerView.textLabel.text, footerView)];
+						}
+#endif
+					}];
 				}
 				break;
 			case LS_VIEW:
@@ -661,6 +721,7 @@ NSString* surrounded_array_prefix_index(int sector, NSArray* array) {
 	return [ary join:LF];
 }
 
+
 -(NSArray*) array_ls:(id)currentObject arg:(id)arg {
 	NSMutableArray* ret = [NSMutableArray array];
 	[ret addObject:PAIR(Enum(LS_OBJECT), currentObject)];
@@ -687,27 +748,10 @@ NSString* surrounded_array_prefix_index(int sector, NSArray* array) {
 			[ret addObject: PAIR(Enum(LS_NAVIGATIONITEM), controller.navigationItem) ];
 		}
 		if ([controller.view isKindOfClass:[UITableView class]]) {
-			UITableView* tableView = (UITableView*)controller.view;
-			NSMutableArray* sections = [NSMutableArray array];
-			NSMutableArray* sectionTitles = [NSMutableArray array];
-			for (int section = 0; section < [tableView numberOfSections]; section++) {
-				NSMutableArray* ary = [NSMutableArray array];
-				for (int row = 0; row < [tableView numberOfRowsInSection:section]; row++) {
-					NSIndexPath* indexPath = [NSIndexPath indexPathWithSection:section Row:row];
-					UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
-					if (nil != cell) {
-						[ary addObject:cell];
-					}
-				}
-				[sections addObject:ary];
-				if ([tableView.dataSource respondsToSelector:@selector(tableView: titleForHeaderInSection:)]) {
-					[sectionTitles addObject:[tableView.dataSource tableView:tableView titleForHeaderInSection:section]];
-				} else {
-					[sectionTitles addObject:[NilClass nilClass]];
-				}
-			}
+            UITableView* tableView = (UITableView*)controller.view;
+            NSArray* cuad = sectionsFromTableView(tableView);
 			[ret addObject:PAIR(Enum(LS_TABLEVIEW), tableView)];
-			[ret addObject:TRIO(Enum(LS_SECTIONS), sections, sectionTitles)];
+			[ret addObject:cuad];
 		} else {
 			if (recursive) {
 				[controller.view traverseSubviews:traverseBlock reverse:true];
@@ -722,30 +766,8 @@ NSString* surrounded_array_prefix_index(int sector, NSArray* array) {
 		}
 	} else if ([currentObject isKindOfClass:[UITableView class]]) {
 		UITableView* tableView = currentObject;
-		NSMutableArray* sections = [NSMutableArray array];
-		NSMutableArray* sectionTitles = [NSMutableArray array];
-		for (int section = 0; section < [tableView numberOfSections]; section++) {
-			NSMutableArray* ary = [NSMutableArray array];
-			for (int row = 0; row < [tableView numberOfRowsInSection:section]; row++) {
-				NSIndexPath* indexPath = [NSIndexPath indexPathWithSection:section Row:row];
-				UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
-				if (nil != cell) {
-					[ary addObject:cell];
-				}
-			}
-			[sections addObject:ary];
-			if ([tableView.dataSource respondsToSelector:@selector(tableView: titleForHeaderInSection:)]) {
-				id title = [tableView.dataSource tableView:tableView titleForHeaderInSection:section];
-				if (nil == title) {
-					[sectionTitles addObject:[NilClass nilClass]];
-				} else {
-					[sectionTitles addObject:title];
-				}
-			} else {
-				[sectionTitles addObject:[NilClass nilClass]];
-			}
-		}
-		[ret addObject:TRIO(Enum(LS_SECTIONS), sections, sectionTitles)];
+        NSArray* cuad = sectionsFromTableView(tableView);
+        [ret addObject:cuad];
 	} else if ([currentObject isKindOfClass:[UIView class]]) {
 		UIView* view = currentObject;
 		if (recursive) {
@@ -1063,6 +1085,19 @@ NSString* surrounded_array_prefix_index(int sector, NSArray* array) {
 		if ([controller.view isKindOfClass:[UITableView class]]) {
 			UITableView* tableView = (UITableView*)controller.view;
 			for (int section = 0; section < [tableView numberOfSections]; section++) {
+#ifdef __IPHONE_6_0
+                UITableViewHeaderFooterView* headerView = [tableView headerViewForSection:section];
+                if (nil != headerView) {
+					NSString* textLabelText = headerView.textLabel.text;
+					if (nil != textLabelText) {
+						[targetStrings setObject:headerView forKey:textLabelText];
+						ActionBlock block = ^id {
+							return nil;
+						};
+						[targetBlocks setObject:Block_copy(block) forKey:textLabelText];
+					}
+                }
+#endif
 				for (int row = 0; row < [tableView numberOfRowsInSection:section]; row++) {
 					NSIndexPath* indexPath = [NSIndexPath indexPathWithSection:section Row:row];
 					UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];

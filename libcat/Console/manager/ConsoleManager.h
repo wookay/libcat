@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 #define CONSOLEMAN	[ConsoleManager sharedManager]
 #define SETTING_CONSOLE_SHOW_LOGS_BUTTON @"Console Show Logs Button"

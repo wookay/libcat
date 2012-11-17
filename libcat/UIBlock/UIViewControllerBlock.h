@@ -6,6 +6,7 @@
 //  Copyright 2010 factorcat. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
 typedef void (^TraverseViewControllerBlock)(int depth, UIViewController* viewController) ;
 
 @interface UIViewController (Block)

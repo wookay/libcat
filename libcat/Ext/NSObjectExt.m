@@ -365,14 +365,11 @@ NSString* TypeEncodingDescription(char* code) {
 		SEL sel = NSSelectorFromString(propertyName);
 		BOOL failed = false;
 		id obj = [self getPropertyValue:sel failed:&failed];
-		if (failed) {
-		} else {
-			const char* attr = property_getAttributes(property);
-			const char *aTypeDescription = (const char*)&attr[1];
-			NSString* attributesString = SWF(@"%s", aTypeDescription);
-			NSArray* attributes = [attributesString split:COMMA];
-			[ary addObject:TRIO(propertyName, obj, attributes)];								
-		}
+        const char* attr = property_getAttributes(property);
+        const char *aTypeDescription = (const char*)&attr[1];
+        NSString* attributesString = SWF(@"%s", aTypeDescription);
+        NSArray* attributes = [attributesString split:COMMA];
+        [ary addObject:TRIO(propertyName, obj, attributes)];
 	}
 	free(properties);
 	return [ary sortByFirstObject];	

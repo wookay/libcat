@@ -18,6 +18,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "NSArrayBlock.h"
 #import "Inspect.h"
+#import "NSObjectExt.h"
 #import "NSBundleExt.h"
 
 @interface NSString (HTMLExtensions)
@@ -158,16 +159,46 @@ static NSString *replaceAll(NSString *s, NSDictionary *replacements) {
 				[ary addObject:SWF(@"TABLEVIEW: %@", [[obj inspect] htmlEscapedString])];
 				break;
 			case LS_SECTIONS: {
-					[ary addObject:SWF(@"SECTIONS: ")];
-					int section = 0;
-					for (NSArray* sectionArray in (NSArray*)obj) {
-						int row = 0;
-						for (id cell in sectionArray) {
+                    NSArray* sectionHeaders = [pair objectAtThird];
+#ifdef __IPHONE_6_0
+                    NSArray* sectionFooters = [pair objectAtFourth];
+#endif
+                    [ary addObject:@"SECTIONS :"];
+                    [(NSArray*)obj each_with_index:^(id sectionAry, int section) {
+#ifdef __IPHONE_6_0
+                        UITableViewHeaderFooterView* headerView = [sectionHeaders objectAtIndex:section];
+                        if (IS_NIL(headerView)) {
+                            [ary addObject:[SWF(@"== %@ %d ==", NSLocalizedString(@"Section", nil), section) htmlEscapedString]];
+                        } else {
+                            [ary addObject:
+                                 SWF(@"%@<br /><img src='/image/%p.png' />",
+                                     [SWF(@"== %@ %d : %@ %@==", NSLocalizedString(@"Section", nil), section, headerView.textLabel.text, [headerView inspect]) htmlEscapedString],
+                                     headerView)];
+                        }
+#else
+                        NSString* headerTitle = [sectionHeaders objectAtIndex:section];
+						if (IS_NIL(headerTitle)) {
+							[ary addObject:SWF(@"== %@ %d ==", NSLocalizedString(@"Section", nil), section)];
+						} else {
+							[ary addObject:SWF(@"== %@ %d : %@ ==", NSLocalizedString(@"Section", nil), section, headerTitle)];
+						}                        
+#endif
+                        int row = 0;
+						for (id cell in sectionAry) {
 							[ary addObject:SWF(@"[%d %d] %@<br /><img src='/image/%p.png' /><hr />", section, row, [[cell inspect] htmlEscapedString], cell)];
 							row += 1;
 						}
-						section += 1;
-					}
+#ifdef __IPHONE_6_0
+                        UITableViewHeaderFooterView* footerView = [sectionFooters objectAtIndex:section];
+						if (IS_NIL(footerView)) {
+						} else {
+							[ary addObject:
+                                 SWF(@"%@<br /><img src='/image/%p.png' />",
+                                     [SWF(@"  %@", footerView) htmlEscapedString],
+                                      footerView)];
+						}
+#endif
+                    }];
 				}
 				break;
 			case LS_VIEW:
@@ -233,7 +264,7 @@ static NSString *replaceAll(NSString *s, NSDictionary *replacements) {
 				break;
 		}
 	}
-	[ary addObject:@"<img src='/image/capture.png' border='20'>"];
+	[ary addObject:@"<br /><img src='/image/capture.png' border='20' />"];
 
 	NSString* body = SWF(@"<pre>%@</pre>", [ary join:LF]);
 	NSString* head = SWF(@"<meta http-equiv='content-type' content='text/html; charset=UTF-8' /><title>%@</title>", title);

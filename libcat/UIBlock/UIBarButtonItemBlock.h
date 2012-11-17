@@ -6,6 +6,7 @@
 //  Copyright 2010 factorcat. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
 #define FLEXIBLE_SPACE_ITEM		[[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil] autorelease]
 
 typedef void (^BarButtonItemBlock)() ;

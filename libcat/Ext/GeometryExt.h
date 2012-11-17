@@ -8,7 +8,7 @@
 
 
 #define _not		!
-
+#import <UIKit/UIKit.h>
 
 #pragma mark CGPoint
 BOOL CGPointIsZero(CGPoint point) ;
