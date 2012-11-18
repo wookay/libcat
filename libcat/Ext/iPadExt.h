@@ -6,10 +6,7 @@
 //  Copyright 2010 factorcat. All rights reserved.
 //
 
-#if USE_COCOA
-#else
-	#import <UIKit/UIDevice.h>
-#endif
+#import <UIKit/UIDevice.h>
 
 #define IS_IPAD ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
 #define IS_RETINA ( \

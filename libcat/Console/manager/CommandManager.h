@@ -15,12 +15,6 @@ typedef id (^ActionBlock)() ;
 NSString* surrounded_array_prefix_index(int sector, NSArray* array) ;
 enum { LS_OBJECT, LS_VIEWCONTROLLERS, LS_TABLEVIEW, LS_SECTIONS, LS_VIEW, LS_INDENTED_VIEW, LS_VIEW_SUBVIEWS, LS_TABBAR, LS_NAVIGATIONITEM, LS_NAVIGATIONCONTROLLER_TOOLBAR, LS_NAVIGATIONCONTROLLER_TOOLBAR_ITEMS, LS_TOOLBAR, LS_TOOLBAR_ITEMS, LS_CLASS_METHODS,  LS_LAYER, LS_LAYER_SUBLAYERS, LS_INDENTED_LAYER, LS_WINDOWS, LS_ARRAY, };
 
-
-//@protocol HitTestDelegate
-//-(void) touchedHitTestView:(UIView*)view ;
-//@end
-
-
 @interface CommandManager : NSObject {
 	NSMutableDictionary* commandsMap;
 }

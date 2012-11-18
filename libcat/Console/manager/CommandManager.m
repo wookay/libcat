@@ -59,32 +59,54 @@ NSString* surrounded_array_prefix_index(int sector, NSArray* array) {
 	}
 }
 
-NSArray* sectionsFromTableView(UITableView* tableView) {
+NSArray* sectionsFromTableView(UITableView* tableView, BOOL recursive) {
     NSMutableArray* sections = [NSMutableArray array];
     NSMutableArray* sectionHeaders = [NSMutableArray array];
     NSMutableArray* sectionFooters = [NSMutableArray array];
     for (int section = 0; section < [tableView numberOfSections]; section++) {
-        NSMutableArray* ary = [NSMutableArray array];
+        NSMutableArray* sectionArray = [NSMutableArray array];
         for (int row = 0; row < [tableView numberOfRowsInSection:section]; row++) {
             NSIndexPath* indexPath = [NSIndexPath indexPathWithSection:section Row:row];
             UITableViewCell* cell = [tableView cellForRowAtIndexPath:indexPath];
             if (nil != cell) {
-                [ary addObject:cell];
+                if (recursive) {
+                    [cell traverseSubviews:^(int depth, UIView* subview) {
+                        [sectionArray addObject:TRIO(Enum(LS_INDENTED_VIEW), subview, FIXNUM(depth))];
+                    } reverse:true];
+                } else {
+                    [sectionArray addObject:TRIO(Enum(LS_INDENTED_VIEW), cell, FIXNUM(0))];
+                }
             }
         }
-        [sections addObject:ary];
+        [sections addObject:sectionArray];
 #ifdef __IPHONE_6_0
         UITableViewHeaderFooterView* headerView = [tableView headerViewForSection:section];
         if (nil == headerView) {
             [sectionHeaders addObject:[NilClass nilClass]];
         } else {
-            [sectionHeaders addObject:headerView];
+            NSMutableArray* sectionHeaderArray = [NSMutableArray array];
+            if (recursive) {
+                [headerView traverseSubviews:^(int depth, UIView* subview) {
+                    [sectionHeaderArray addObject:TRIO(Enum(LS_INDENTED_VIEW), subview, FIXNUM(depth))];
+                } reverse:true];
+            } else {
+                [sectionHeaderArray addObject:TRIO(Enum(LS_INDENTED_VIEW), headerView, FIXNUM(0))];
+            }
+            [sectionHeaders addObject:sectionHeaderArray];
         }
         UITableViewHeaderFooterView* footerView = [tableView footerViewForSection:section];
         if (nil == footerView) {
             [sectionFooters addObject:[NilClass nilClass]];
         } else {
-            [sectionFooters addObject:footerView];
+            NSMutableArray* sectionFooterArray = [NSMutableArray array];
+            if (recursive) {
+                [footerView traverseSubviews:^(int depth, UIView* subview) {
+                    [sectionFooterArray addObject:TRIO(Enum(LS_INDENTED_VIEW), subview, FIXNUM(depth))];
+                } reverse:true];
+            } else {
+                [sectionFooterArray addObject:TRIO(Enum(LS_INDENTED_VIEW), footerView, FIXNUM(0))];
+            }
+            [sectionFooters addObject:sectionFooterArray];
         }
 #else
         if (nil != tableView.dataSource) {
@@ -100,13 +122,9 @@ NSArray* sectionsFromTableView(UITableView* tableView) {
     return CUAD(Enum(LS_SECTIONS), sections, sectionHeaders, sectionFooters);
 }
 
+
 @implementation CommandManager
 @synthesize commandsMap;
-
-//#pragma mark HitTestDelegate
-//-(void) touchedHitTestView:(UIView*)view {
-//	log_info(@"hitTest %@", view);
-//}
 
 -(id) commandNotFound {
 	return NSLocalizedString(@"Command Not Found", nil);
@@ -414,10 +432,6 @@ NSArray* sectionsFromTableView(UITableView* tableView) {
 		} afterDone:^ {
 			barButtonItem.style = style;
 		}];
-#if USE_COCOA
-	} else if ([changeObject isKindOfClass:[NSView class]]) {
-		[changeObject flick];
-#endif
 	}
 	return EMPTY_STRING;
 }
@@ -607,28 +621,58 @@ NSArray* sectionsFromTableView(UITableView* tableView) {
                     NSArray* sectionFooters = [pair objectAtFourth];
 #endif
 					[ary addObject:@"SECTIONS:"];
-					[(NSArray*)obj each_with_index:^(id sectionAry, int idx) {
+					[(NSArray*)obj each_with_index:^(id sectionArray, int sectionIndex) {
 #ifdef __IPHONE_6_0
-						UITableViewHeaderFooterView* headerView = [sectionHeaders objectAtIndex:idx];
-						if (IS_NIL(headerView)) {
-							[ary addObject:SWF(@"== %@ %d ==", NSLocalizedString(@"Section", nil), idx)];
+						NSArray* sectionHeaderArray = [sectionHeaders objectAtIndex:sectionIndex];
+						if (IS_NIL(sectionHeaderArray)) {
+							[ary addObject:SWF(@"== %@ %d ==", NSLocalizedString(@"Section", nil), sectionIndex)];
 						} else {
-							[ary addObject:SWF(@"== %@ %d : %@ <%p> ==", NSLocalizedString(@"Section", nil), idx, headerView.textLabel.text, headerView)];
+                            for (NSArray* trio in sectionHeaderArray) {
+                                id item = [trio objectAtSecond];
+                                int depth = [[trio objectAtThird] intValue];
+                                if (depth > 0) {
+                                    [ary addObject:SWF(@"      %@%@", [TAB repeat:depth], [item inspect])];
+                                } else {
+                                    [ary addObject:SWF(@"== %@ %d : %@ ==", NSLocalizedString(@"Section", nil), sectionIndex, item)];
+                                }
+                            }
 						}
 #else
-						NSString* headerTitle = [sectionHeaders objectAtIndex:idx];
+						NSString* headerTitle = [sectionHeaders objectAtIndex:sectionIndex];
 						if (IS_NIL(headerTitle)) {
-							[ary addObject:SWF(@"== %@ %d ==", NSLocalizedString(@"Section", nil), idx)];
+							[ary addObject:SWF(@"== %@ %d ==", NSLocalizedString(@"Section", nil), sectionIndex)];
 						} else {
-							[ary addObject:SWF(@"== %@ %d : %@ ==", NSLocalizedString(@"Section", nil), idx, headerTitle)];
+							[ary addObject:SWF(@"== %@ %d : %@ ==", NSLocalizedString(@"Section", nil), sectionIndex, headerTitle)];
 						}                        
 #endif
-						[ary addObject:[array_prefix_index(idx, sectionAry) join:LF]];
+                        int row = 0;
+                        for (NSArray* trio in sectionArray) {
+                            id item = [trio objectAtSecond];
+                            int depth = [[trio objectAtThird] intValue];
+                            if (depth > 0) {
+                                [ary addObject:SWF(@"      %@%@", [TAB repeat:depth], [item inspect])];
+                            } else {
+                                if (0 == sectionIndex) {
+                                    [ary addObject:SWF(@"  [%d] %@", row, [item inspect])];
+                                } else {
+                                    [ary addObject:SWF(@"  [%d %d] %@", sectionIndex, row, [item inspect])];
+                                }
+                                row += 1;
+                            }
+                        }
 #ifdef __IPHONE_6_0
-                        UITableViewHeaderFooterView* footerView = [sectionFooters objectAtIndex:idx];
-						if (IS_NIL(footerView)) {
+                        NSArray* sectionFooterArray = [sectionFooters objectAtIndex:sectionIndex];
+						if (IS_NIL(sectionFooterArray)) {
 						} else {
-							[ary addObject:SWF(@"  %@ <%p>", footerView.textLabel.text, footerView)];
+                            for (NSArray* trio in sectionFooterArray) {
+                                id item = [trio objectAtSecond];
+                                int depth = [[trio objectAtThird] intValue];
+                                if (depth > 0) {
+                                    [ary addObject:SWF(@"      %@%@", [TAB repeat:depth], [item inspect])];
+                                } else {
+                                    [ary addObject:SWF(@"  []    %@", item)];
+                                }
+                            }
 						}
 #endif
 					}];
@@ -722,6 +766,7 @@ NSArray* sectionsFromTableView(UITableView* tableView) {
 }
 
 
+
 -(NSArray*) array_ls:(id)currentObject arg:(id)arg {
 	NSMutableArray* ret = [NSMutableArray array];
 	[ret addObject:PAIR(Enum(LS_OBJECT), currentObject)];
@@ -730,6 +775,7 @@ NSArray* sectionsFromTableView(UITableView* tableView) {
 	TraverseViewBlock traverseBlock = ^(int depth, UIView* subview) {
 		[ret addObject:TRIO(Enum(LS_INDENTED_VIEW), subview, FIXNUM(depth))];
 	};
+    
 	
 	if ([currentObject isKindOfClass:[UITabBarController class]]) {
 		UITabBarController* tabBarController = currentObject;
@@ -749,8 +795,8 @@ NSArray* sectionsFromTableView(UITableView* tableView) {
 		}
 		if ([controller.view isKindOfClass:[UITableView class]]) {
             UITableView* tableView = (UITableView*)controller.view;
-            NSArray* cuad = sectionsFromTableView(tableView);
 			[ret addObject:PAIR(Enum(LS_TABLEVIEW), tableView)];
+            NSArray* cuad = sectionsFromTableView(tableView, recursive);
 			[ret addObject:cuad];
 		} else {
 			if (recursive) {
@@ -766,7 +812,7 @@ NSArray* sectionsFromTableView(UITableView* tableView) {
 		}
 	} else if ([currentObject isKindOfClass:[UITableView class]]) {
 		UITableView* tableView = currentObject;
-        NSArray* cuad = sectionsFromTableView(tableView);
+        NSArray* cuad = sectionsFromTableView(tableView, recursive);
         [ret addObject:cuad];
 	} else if ([currentObject isKindOfClass:[UIView class]]) {
 		UIView* view = currentObject;

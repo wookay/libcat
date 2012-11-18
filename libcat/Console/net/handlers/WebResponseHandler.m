@@ -29,6 +29,16 @@
 - (NSString *)htmlUnescapedString;
 
 @end
+
+
+
+NSString* imageTagForUIView(UIView* obj) {
+    return SWF(@"%@<br /><img src='/image/%p.png' />",
+        [[obj inspect] htmlEscapedString],
+        obj);
+}
+
+
 @implementation NSString (HTMLExtensions)
 
 static NSDictionary *htmlEscapes = nil;
@@ -163,40 +173,62 @@ static NSString *replaceAll(NSString *s, NSDictionary *replacements) {
 #ifdef __IPHONE_6_0
                     NSArray* sectionFooters = [pair objectAtFourth];
 #endif
-                    [ary addObject:@"SECTIONS :"];
-                    [(NSArray*)obj each_with_index:^(id sectionAry, int section) {
+                    [ary addObject:@"SECTIONS:"];
+                    [(NSArray*)obj each_with_index:^(id sectionArray, int sectionIndex) {
 #ifdef __IPHONE_6_0
-                        UITableViewHeaderFooterView* headerView = [sectionHeaders objectAtIndex:section];
-                        if (IS_NIL(headerView)) {
-                            [ary addObject:[SWF(@"== %@ %d ==", NSLocalizedString(@"Section", nil), section) htmlEscapedString]];
+                        NSArray* sectionHeaderArray = [sectionHeaders objectAtIndex:sectionIndex];
+                        if (IS_NIL(sectionHeaderArray)) {
+                            [ary addObject:SWF(@"<h3>== %@ %d ==</h3>", NSLocalizedString(@"Section", nil), sectionIndex)];
                         } else {
-                            [ary addObject:
-                                 SWF(@"%@<br /><img src='/image/%p.png' />",
-                                     [SWF(@"== %@ %d : %@ %@==", NSLocalizedString(@"Section", nil), section, headerView.textLabel.text, [headerView inspect]) htmlEscapedString],
-                                     headerView)];
+                            for (NSArray* trio in sectionHeaderArray) {
+                                id item = [trio objectAtSecond];
+                                int depth = [[trio objectAtThird] intValue];
+                                if (depth > 0) {
+                                    [ary addObject:SWF(@"      %@%@", [TAB repeat:depth], imageTagForUIView(item))];
+                                } else {
+                                    [ary addObject:SWF(@"<h3>== %@ %d : %@ ==</h3>", NSLocalizedString(@"Section", nil), sectionIndex, imageTagForUIView(item))];
+                                }
+                            }
                         }
 #else
-                        NSString* headerTitle = [sectionHeaders objectAtIndex:section];
-						if (IS_NIL(headerTitle)) {
-							[ary addObject:SWF(@"== %@ %d ==", NSLocalizedString(@"Section", nil), section)];
-						} else {
-							[ary addObject:SWF(@"== %@ %d : %@ ==", NSLocalizedString(@"Section", nil), section, headerTitle)];
-						}                        
+                        NSString* headerTitle = [sectionHeaders objectAtIndex:sectionIndex];
+                        if (IS_NIL(headerTitle)) {
+                            [ary addObject:SWF(@"<h3>== %@ %d ==</h3>", NSLocalizedString(@"Section", nil), sectionIndex)];
+                        } else {
+                            [ary addObject:SWF(@"<h3>== %@ %d : %@ ==</h3>", NSLocalizedString(@"Section", nil), sectionIndex, headerTitle)];
+                        }
 #endif
                         int row = 0;
-						for (id cell in sectionAry) {
-							[ary addObject:SWF(@"[%d %d] %@<br /><img src='/image/%p.png' /><hr />", section, row, [[cell inspect] htmlEscapedString], cell)];
-							row += 1;
-						}
+                        for (NSArray* trio in sectionArray) {
+                            id item = [trio objectAtSecond];
+                            int depth = [[trio objectAtThird] intValue];
+                            if (depth > 0) {
+                                [ary addObject:SWF(@"      %@%@", [TAB repeat:depth], imageTagForUIView(item))];
+                            } else {
+                                [ary addObject:@"<hr />"];
+                                if (0 == sectionIndex) {
+                                    [ary addObject:SWF(@"  [%d] %@", row, imageTagForUIView(item))];
+                                } else {
+                                    [ary addObject:SWF(@"  [%d %d] %@", sectionIndex, row, imageTagForUIView(item))];
+                                }
+                                row += 1;
+                            }
+                        }
 #ifdef __IPHONE_6_0
-                        UITableViewHeaderFooterView* footerView = [sectionFooters objectAtIndex:section];
-						if (IS_NIL(footerView)) {
-						} else {
-							[ary addObject:
-                                 SWF(@"%@<br /><img src='/image/%p.png' />",
-                                     [SWF(@"  %@", footerView) htmlEscapedString],
-                                      footerView)];
-						}
+                        NSArray* sectionFooterArray = [sectionFooters objectAtIndex:sectionIndex];
+                        if (IS_NIL(sectionFooterArray)) {
+                        } else {
+                            for (NSArray* trio in sectionFooterArray) {
+                                id item = [trio objectAtSecond];
+                                int depth = [[trio objectAtThird] intValue];
+                                if (depth > 0) {
+                                    [ary addObject:SWF(@"      %@%@", [TAB repeat:depth], imageTagForUIView(item))];
+                                } else {
+                                    [ary addObject:@"<hr />"];
+                                    [ary addObject:SWF(@"  []    %@", imageTagForUIView(item))];
+                                }
+                            }
+                        }
 #endif
                     }];
 				}

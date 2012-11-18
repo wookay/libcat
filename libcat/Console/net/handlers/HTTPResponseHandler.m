@@ -241,16 +241,7 @@ static NSMutableArray *registeredHandlers = nil;
 //
 // [server closeHandler:self] should be invoked when done sending data.
 //
-- (void)startResponse
-{
-//	NSString* path = [[url path] slice:1 backward:-1];
-	//NSArray* ary = [[NSFileManager defaultManager] fileExistsAtPath:path  at];
-//	log_info(@"e %@", ary);
-//	log_info(@".%@ ", [[NSFileManager defaultManager] currentDirectoryPath]);
-	
-//	- (NSArray *)subpathsOfDirectoryAtPath:(NSString *)path error:(NSError **)error;
-
-	
+- (void)startResponse {
 	CFHTTPMessageRef response =
 		CFHTTPMessageCreateResponse(
 			kCFAllocatorDefault, 501, NULL, kCFHTTPVersion1_1);

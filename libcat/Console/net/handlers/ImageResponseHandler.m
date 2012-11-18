@@ -18,12 +18,6 @@
 #import <QuartzCore/QuartzCore.h>
 #import "iPadExt.h"
 
-#if USE_COCOA
-	#import "NSWindowExtMac.h"
-	#import "NSViewExtMac.h"
-	#import "UIKitHelper.h"
-#endif
-
 #if USE_OPENGL
 	#import "UIViewOpenGLExt.h"
 #endif
@@ -61,13 +55,6 @@
 		} else {
 			size_t address = [addressStr to_size_t];
 			id obj = (id)address;
-			
-#if USE_COCOA
-			if ([SWF(@"%x", obj) isEqualToString:@"ffffffff"]) {
-				return nil;
-			}
-#endif
-			
 			return [self obj_to_image:obj];
 		}
 	}
@@ -75,7 +62,7 @@
 }
 
 -(UIImage*) capture_image {
-	UIWindow* window = [UIApplication sharedApplication].keyWindow;// [CONSOLEMAN navigationController].topViewController.view;
+	UIWindow* window = [UIApplication sharedApplication].keyWindow;
 	if ([window respondsToSelector:@selector(hasOpenGLView)]) {
 		if ([window performSelector:@selector(hasOpenGLView)]) {
 			if ([window respondsToSelector:@selector(opengl_to_image)]) {
@@ -83,13 +70,8 @@
 			}
 		}
 	}
-#if USE_COCOA
-	return (UIImage*)[window.contentView to_image];
-#else
 	CGRect screenRect = [[UIScreen mainScreen] bounds];    
-//	UIGraphicsBeginImageContext(screenRect.size);
     UIGraphicsBeginImageContextWithOptions(window.bounds.size, window.opaque, 0.0);
-//    log_info(@"windowboundssize %@", SFSize(window.bounds.size));
 	CGContextRef ctx = UIGraphicsGetCurrentContext(); 
 	[[UIColor blackColor] set]; 
 	CGContextFillRect(ctx, screenRect);
@@ -109,7 +91,6 @@
 	UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
 	UIGraphicsEndImageContext();
 	return newImage; 	
-#endif
 }
 
 -(UIImage*) obj_to_image:(id)obj {
@@ -123,7 +104,6 @@
 				}
 			}
 		}
-//		UIGraphicsBeginImageContext(view.frame.size);
         UIGraphicsBeginImageContextWithOptions(view.frame.size, view.opaque, 0.0);
 		[view.layer renderInContext: UIGraphicsGetCurrentContext()];
 		image = UIGraphicsGetImageFromCurrentImageContext();
@@ -136,10 +116,6 @@
 		[layer renderInContext: UIGraphicsGetCurrentContext()];
 		image = UIGraphicsGetImageFromCurrentImageContext();
 		UIGraphicsEndImageContext();						
-#if USE_COCOA
-	} else if ([obj isKindOfClass:[NSView class]]) {
-		image = (UIImage*)[obj to_image];
-#endif
 	}
 	return image;
 }

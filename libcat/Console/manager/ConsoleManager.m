@@ -652,15 +652,6 @@
 		return [delegate performSelector:@selector(tabBarController)];	
 	} else if ([delegate respondsToSelector:@selector(viewController)]) {
 		return [delegate performSelector:@selector(viewController)];	
-#if USE_COCOA
-	} else if ([delegate conformsToProtocol:@protocol(NSApplicationDelegate)]) {
-		NSWindow* window = [delegate performSelector:@selector(window)];
-		if (nil == window) {
-			return nil;
-		} else {
-			return window.windowController ? window.windowController : window;
-		}
-#endif
 	} else {
 		return nil;
 	}
