@@ -16,10 +16,10 @@ FileUtils.mkdir_p EVENTS_PATH
 SPACE = ' '
 COLON = ':'
 PROMPT = '> '
-CONSOLE_VERSION = 0.5
+CONSOLE_VERSION = 1.0
 ABOUT = <<EOF
 libcat Console #{CONSOLE_VERSION}
-Copyright (c) 2010, 2011 WooKyoung Noh
+Copyright (c) 2010, 2011, 2012 WooKyoung Noh
 EOF
 
 DEFAULT_ENV_COLUMNS = 100
@@ -110,14 +110,11 @@ EOF
   end
 end
 
-def resolve_server_url
-  console_server_address = ARGV.size>0 ? ARGV.first : 'localhost'
+def resolve_server_url console_server_address
   console_server_port = open("#{DIR}/../libcat/Console/manager/ConsoleManager.m").read.lines.select { |line| line =~ /#define CONSOLE_SERVER_PORT/ }.first.split(SPACE).last.to_i # 8080
   server_url = (console_server_address.include? COLON) ? "http://#{console_server_address}" : "http://#{console_server_address}:#{console_server_port}"
 end
 
-SERVER_URL = resolve_server_url
-CONSOLE_SERVER_URL = "#{SERVER_URL}/console"
 
 class Console
   def comment_out line
@@ -183,9 +180,9 @@ class Console
   def console_request command, arg
     if arg
       query = "arg=#{arg}"
-      req_path = "#{CONSOLE_SERVER_URL}/#{command}?#{query}"
+      req_path = "#{@CONSOLE_SERVER_URL}/#{command}?#{query}"
     else
-      req_path = "#{CONSOLE_SERVER_URL}/#{command}"
+      req_path = "#{@CONSOLE_SERVER_URL}/#{command}"
     end
     begin
       response = Net::HTTP.get_response(URI.parse(URI.escape(req_path)))
@@ -214,7 +211,9 @@ class Console
     end
   end
 
-  def initialize
+  def initialize url='localhost'
+    @SERVER_URL = resolve_server_url url
+    @CONSOLE_SERVER_URL = "#{@SERVER_URL}/console"
     @shell = Shell.new :prompt => PROMPT, :print => true
     @proc_block = proc do |env, text|
       case text
@@ -237,7 +236,7 @@ class Console
 	    when 'about'
            puts ABOUT
         when 'open'
-           `open #{SERVER_URL}`
+           `open #{@SERVER_URL}`
         when 'sleep'
           sleep arg.to_f
         when 'events'
@@ -267,7 +266,7 @@ class Console
       end
       @shell.options[:prompt] = prompt
     rescue # Timeout::Error
-      puts "Cannot connect to console server #{SERVER_URL}"
+      puts "Cannot connect to console server #{@SERVER_URL}"
       puts "Please run TestApp"
       prompt = PROMPT
       exit
@@ -322,7 +321,7 @@ if __FILE__ == $0
 console.rb [IP] [IP:PORT]
 EOF
   else
-    console = Console.new
+    console = Console.new(ARGV.size>0 ? ARGV.first : 'localhost')
     console.run
   end
 end

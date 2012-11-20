@@ -33,9 +33,13 @@
 
 
 NSString* imageTagForUIView(UIView* obj) {
-    return SWF(@"%@<br /><img src='/image/%p.png' />",
-        [[obj inspect] htmlEscapedString],
-        obj);
+    if ([obj isKindOfClass:[NSString class]]) {
+        return [[obj inspect] htmlEscapedString];
+    } else {
+        return SWF(@"%@<br /><img src='/image/%p.png' />",
+            [[obj inspect] htmlEscapedString],
+            obj);
+    }
 }
 
 
@@ -170,12 +174,9 @@ static NSString *replaceAll(NSString *s, NSDictionary *replacements) {
 				break;
 			case LS_SECTIONS: {
                     NSArray* sectionHeaders = [pair objectAtThird];
-#ifdef __IPHONE_6_0
                     NSArray* sectionFooters = [pair objectAtFourth];
-#endif
                     [ary addObject:@"SECTIONS:"];
                     [(NSArray*)obj each_with_index:^(id sectionArray, int sectionIndex) {
-#ifdef __IPHONE_6_0
                         NSArray* sectionHeaderArray = [sectionHeaders objectAtIndex:sectionIndex];
                         if (IS_NIL(sectionHeaderArray)) {
                             [ary addObject:SWF(@"<h3>== %@ %d ==</h3>", NSLocalizedString(@"Section", nil), sectionIndex)];
@@ -190,14 +191,6 @@ static NSString *replaceAll(NSString *s, NSDictionary *replacements) {
                                 }
                             }
                         }
-#else
-                        NSString* headerTitle = [sectionHeaders objectAtIndex:sectionIndex];
-                        if (IS_NIL(headerTitle)) {
-                            [ary addObject:SWF(@"<h3>== %@ %d ==</h3>", NSLocalizedString(@"Section", nil), sectionIndex)];
-                        } else {
-                            [ary addObject:SWF(@"<h3>== %@ %d : %@ ==</h3>", NSLocalizedString(@"Section", nil), sectionIndex, headerTitle)];
-                        }
-#endif
                         int row = 0;
                         for (NSArray* trio in sectionArray) {
                             id item = [trio objectAtSecond];
@@ -214,7 +207,6 @@ static NSString *replaceAll(NSString *s, NSDictionary *replacements) {
                                 row += 1;
                             }
                         }
-#ifdef __IPHONE_6_0
                         NSArray* sectionFooterArray = [sectionFooters objectAtIndex:sectionIndex];
                         if (IS_NIL(sectionFooterArray)) {
                         } else {
@@ -229,7 +221,6 @@ static NSString *replaceAll(NSString *s, NSDictionary *replacements) {
                                 }
                             }
                         }
-#endif
                     }];
 				}
 				break;

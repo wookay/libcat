@@ -1632,6 +1632,7 @@
 				GCC_PREFIX_HEADER = TestApp_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "USE_PRIVATE_API=1";
 				INFOPLIST_FILE = "TabBarApp-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = TabBarApp;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1648,6 +1649,7 @@
 				GCC_PREFIX_HEADER = TestApp_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "USE_PRIVATE_API=1";
 				INFOPLIST_FILE = "TabBarApp-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = TabBarApp;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1670,6 +1672,7 @@
 					"USE_OPENGL=1",
 				);
 				INFOPLIST_FILE = "OpenGLApp-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = OpenGLApp;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1689,6 +1692,7 @@
 					"USE_OPENGL=1",
 				);
 				INFOPLIST_FILE = "OpenGLApp-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = OpenGLApp;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1701,6 +1705,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1709,6 +1715,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "USE_PRIVATE_API=1";
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				INFOPLIST_FILE = "NavigationApp-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = NavigationApp;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1720,12 +1727,15 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = TestApp_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "USE_PRIVATE_API=1";
 				GCC_WARN_FOUR_CHARACTER_CONSTANTS = NO;
 				INFOPLIST_FILE = "NavigationApp-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = NavigationApp;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
