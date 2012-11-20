@@ -755,6 +755,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = LibcatPresentation_Prefix.pch;
 				INFOPLIST_FILE = "LibcatPresentation-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = LibcatPresentation;
 			};
 			name = Debug;
@@ -767,6 +768,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = LibcatPresentation_Prefix.pch;
 				INFOPLIST_FILE = "LibcatPresentation-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PRODUCT_NAME = LibcatPresentation;
 				VALIDATE_PRODUCT = YES;
 			};
