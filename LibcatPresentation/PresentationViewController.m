@@ -14,10 +14,12 @@
 #import "Settings.h"
 #import "GotoView.h"
 #import "NSTextExt.h"
+#import "iPadExt.h"
 
 @implementation PresentationViewController
 @synthesize tableView;
 @synthesize pageControl;
+@synthesize goButton;
 
 -(IBAction) touchedGotoButton:(id)sender {
 	[GotoView showGotoAlertView:NSLocalizedString(@"Page", nil) currentPage:pageControl.currentPage numberOfPages:pageControl.numberOfPages delegate:self];
@@ -28,6 +30,35 @@
 		pageControl.currentPage = page;
 		[self changeSlidePage:page];
 	}
+}
+
+-(void) setPage:(NSString*)num {
+    int pageNum = [num intValue];
+    if ([SlideDataSource sharedInstance].slides.count > pageNum) {
+        [self changedSlidePage:pageNum];
+    } else {
+        [self changedSlidePage:[SlideDataSource sharedInstance].slides.count - 1];
+    }
+}
+
+-(void) firstPage {
+    [self changedSlidePage:0];
+}
+
+-(void) lastPage {
+    [self changedSlidePage:[SlideDataSource sharedInstance].slides.count - 1];
+}
+
+-(void) nextPage {
+    if ([SlideDataSource sharedInstance].slides.count > [SlideDataSource sharedInstance].currentSlideIndex + 1) {
+        [self changedSlidePage:[SlideDataSource sharedInstance].currentSlideIndex + 1];
+    }
+}
+
+-(void) prevPage {
+    if (0 < [SlideDataSource sharedInstance].currentSlideIndex) {
+        [self changedSlidePage:[SlideDataSource sharedInstance].currentSlideIndex - 1];
+    }
 }
 
 -(void) changeSlidePage:(int)page {
@@ -72,6 +103,11 @@
 	pageControl.numberOfPages = cnt;
 	pageControl.backgroundColor = COLOR_RGBA_FF(0x31, 0xa1, 0x31, 1);
 	pageControl.layer.cornerRadius = 5;
+    
+    if (IS_IPAD) {
+        goButton.frame = CGRectMake(27,725,29,31);
+        pageControl.frame = CGRectMake(241,721,658,36);
+    }
     [super viewDidLoad];
 }
 
@@ -151,6 +187,7 @@
 - (void)dealloc {
 	[tableView release];
 	[pageControl release];
+    [goButton release];
     [super dealloc];
 }
 

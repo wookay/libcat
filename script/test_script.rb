@@ -14,3 +14,7 @@ view.frame
 view.subviews
 view.subviews.map frame text
 EOF
+
+if c.input('view.hidden') == "0"
+  puts "blah blah"
+end
