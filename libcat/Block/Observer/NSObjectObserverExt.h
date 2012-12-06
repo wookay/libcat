@@ -15,17 +15,8 @@
 
 @interface NSObject (ObserverExt)
 
--(void) addObserver:(Observer*)observer forKeyPath:(NSString *)keyPath withObjectChangedBlock:(ObjectChangedBlock)block ;
--(void) addObserver:(Observer*)observer forKeyPath:(NSString *)keyPath withSetChangedBlock:(SetChangedBlock)block ;
--(void) addObserver:(Observer*)observer forKeyPath:(NSString *)keyPath withArrayChangedBlock:(ArrayChangedBlock)block ;
--(void) addObserver:(Observer*)observer forKeyPath:(NSString *)keyPath withDictionarySetBlock:(DictionaryChangedBlock)block ;
+-(void) addObserver:(Observer*)observer forKeyPath:(NSString *)keyPath changed:(ObjectChangedBlock)block ;
 
 @end
 
-
-@interface NSObject (NSKeyValueCodingExt)
-
--(id) mutableDictionaryValueForKeyPath:(NSString*)keyPath ;
-
-@end
 

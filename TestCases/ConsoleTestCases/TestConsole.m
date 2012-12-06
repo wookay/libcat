@@ -12,11 +12,39 @@
 #import "NSObjectExt.h"
 #import <objc/message.h>
 
+
+@interface TestLabel : NSObject {
+    NSString* text;
+}
+@property (nonatomic, retain) NSString* text;
+@end
+
+@implementation TestLabel
+@synthesize text;
+-(void) dealloc {
+    [text release];
+    [super dealloc];
+}
+@end
+
+
 @interface TestConsole : NSObject 
 @end
 
 
 @implementation TestConsole
+
+-(void) test_consoleManager {
+    TestLabel* label = [[TestLabel alloc] init];
+    NSString* result = [CONSOLEMAN setterChain:@"text" arg:@"= b" target:label];
+    assert_equal(@"b", label.text);
+    assert_equal(@"text = b", result);
+
+    result = [CONSOLEMAN setterChain:@"not_a_method" arg:@"= b" target:label];
+    assert_equal(@"setNot_a_method: Command Not Found", result);
+
+    [label release];
+}
 
 -(void) test_openURL {
 	NSURL* scheme = [NSURL URLWithString:@"libcat.TabBarApp:password"];

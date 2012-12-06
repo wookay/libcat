@@ -17,8 +17,10 @@ enum { LS_OBJECT, LS_VIEWCONTROLLERS, LS_TABLEVIEW, LS_SECTIONS, LS_VIEW, LS_IND
 
 @interface CommandManager : NSObject {
 	NSMutableDictionary* commandsMap;
+    NSMutableDictionary* config;
 }
 @property (nonatomic, retain) NSMutableDictionary* commandsMap;
+@property (nonatomic, retain) NSMutableDictionary* config;
 
 -(NSDictionary*) load_system_commands ;
 -(NSArray*) findTargetObject:(id)currentObject arg:(id)arg ;

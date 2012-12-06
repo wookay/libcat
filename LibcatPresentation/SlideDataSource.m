@@ -108,6 +108,12 @@ void SLIDE_PAGE(NSString* slideTitle, NSArray* slideItems) {
 					   @"rm TARGET           : removeFromSuperview UI",
 					   nil]);
 
+    SLIDE_PAGE(@"watch", [NSArray arrayWithObjects:@"watch KEYPATH (w)",
+                          @"  > w title",
+                          @"  > w view.frame",
+                          @"  > w",
+                          nil]);
+
     SLIDE_PAGE(@"automation script", [NSArray arrayWithObjects:
 										@"require './console'",
 										@"c = Console.new",

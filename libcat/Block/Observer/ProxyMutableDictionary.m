@@ -10,6 +10,7 @@
 #import "ObserverManager.h"
 #import "Logger.h"
 #import "NSDictionaryExt.h"
+#import "NSNumberExt.h"
 
 @implementation ProxyMutableDictionary
 @synthesize proxyKeyPath;
@@ -54,25 +55,33 @@
 	BOOL hasKey = [proxyDict hasKey:aKey];
 	id oldObj = [proxyDict objectForKey:aKey];
 	[proxyDict setObject:anObject forKey:aKey];
-	DictionaryChangedBlock changedBlock = [OBSERVERMAN.observeBlock objectForKey:proxyKeyPath];
+	ObjectChangedBlock changedBlock = [OBSERVERMAN.observeBlock objectForKey:proxyKeyPath];
 	if (nil != changedBlock) {
 		if (hasKey) {
 			if ([oldObj isEqual:anObject]) {
 			} else {
-				changedBlock(NSKeyValueChangeReplacement, anObject, oldObj, aKey);				
+                    changedBlock(proxyKeyPath, self, [NSDictionary dictionaryWithKeysAndObjects:
+                                                      @"kind", Enum(NSKeyValueChangeReplacement),
+                                                      nil]);
 			}
 		} else {
-			changedBlock(NSKeyValueChangeInsertion, anObject, nil, aKey);			
+            changedBlock(proxyKeyPath, self, [NSDictionary dictionaryWithKeysAndObjects:
+                                              @"kind", Enum(NSKeyValueChangeInsertion),
+                                              nil]);
+
 		}
 	}
 }
 
 -(void) removeObjectForKey:(id)aKey {
 	id oldObj = [proxyDict objectForKey:aKey];
-	[proxyDict removeObjectForKey:aKey];	
-	DictionaryChangedBlock changedBlock = [OBSERVERMAN.observeBlock objectForKey:proxyKeyPath];
+	[proxyDict removeObjectForKey:aKey];
+	ObjectChangedBlock changedBlock = [OBSERVERMAN.observeBlock objectForKey:proxyKeyPath];
 	if (nil != changedBlock) {
-		changedBlock(NSKeyValueChangeRemoval, nil, oldObj, aKey);
+        oldObj = nil;
+        changedBlock(proxyKeyPath, self, [NSDictionary dictionaryWithKeysAndObjects:
+                                          @"kind", Enum(NSKeyValueChangeRemoval),
+                                          nil]);
 	}
 }
 

@@ -10,10 +10,7 @@
 
 NSString* keyValueChangeToString(NSKeyValueChange kind) ;
 
-typedef void (^ObjectChangedBlock)(NSKeyValueChange kind, id obj, id oldObj) ;
-typedef void (^SetChangedBlock)(NSKeyValueChange kind, id obj, id oldObj) ;
-typedef void (^ArrayChangedBlock)(NSKeyValueChange kind, id obj, id oldObj, int idx) ;
-typedef void (^DictionaryChangedBlock)(NSKeyValueChange kind, id obj, id oldObj, id key) ;
+typedef void (^ObjectChangedBlock)(NSString* keyPath, id object, NSDictionary* change);
 
 @interface Observer : NSObject
 

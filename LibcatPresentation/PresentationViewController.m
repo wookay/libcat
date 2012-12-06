@@ -32,6 +32,7 @@
 	}
 }
 
+// page = 10
 -(void) setPage:(NSString*)num {
     int pageNum = [num intValue];
     if ([SlideDataSource sharedInstance].slides.count > pageNum) {

@@ -35,8 +35,8 @@ typedef enum { kGetterReturnTypeInspect, kGetterReturnTypeObject } GetterReturnT
 
 -(NSArray*) mapTargetObject:(id)targetObject arg:(id)arg ;
 -(id) get_argObject:(NSString*)arg ;
--(NSString*) getterChain:(id)command arg:(id)arg ;
--(NSString*) setterChain:(id)command arg:(id)arg ;
+-(NSString*) getterChain:(id)command arg:(id)arg target:(id)target ;
+-(NSString*) setterChain:(id)command arg:(id)arg target:(id)target ;
 -(id) currentTargetObjectOrTopViewController ;
 -(id) getterChainObject:(id)target command:(id)command arg:(id)arg returnType:(GetterReturnType)getterReturnType ;
 

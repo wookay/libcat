@@ -14,6 +14,14 @@
 
 #define OBSERVERMAN	[ObserverManager sharedManager]
 
+
+@interface NSObject (NSKeyValueCodingExt)
+-(id) mutableDictionaryValueForKeyPath:(NSString*)keyPath ;
+@end
+
+
+
+
 @interface ObserverManager : Observer {
 	NSMutableDictionary* observeBlock;
 }

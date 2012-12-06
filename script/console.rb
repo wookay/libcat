@@ -48,13 +48,13 @@ pwd                 : view & controller hierarchy
 properties TARGET   : list properties (p)         
   > text            : property getter             
   > text = hello    : property setter             
+watch KEYPATH       : watch property keypath (w)
 flick TARGET        : flick target UI (f)  
 touch TARGET        : touch target UI (t)  
 back                : popViewController UI (b)
 drag TARGET         : drag target UI (d)
 rm TARGET           : removeFromSuperview UI      
 png TARGET          : capture target as image UI
-
 open                : open Safari UI (o)
 EOF
   help_pages.push <<EOF
@@ -163,6 +163,7 @@ class Console
     'f' => 'flick',
     'c' => 'classInfo',
     'i' => 'ivars',
+	'w' => 'watch',
     '$' => 'new_objects',
     }
     full_command = aliases[command_str]

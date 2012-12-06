@@ -31,6 +31,8 @@
 #import "UIViewBlock.h"
 #import "PropertyManipulator.h"
 #import <QuartzCore/QuartzCore.h>
+#import "ObserverManager.h"
+#import "NSDateExt.h"
 
 #define TOOLBAR_ITEMS_SECTION_INDEX -1
 
@@ -136,6 +138,7 @@ NSArray* sectionsFromTableView(UITableView* tableView, BOOL recursive) {
 
 @implementation CommandManager
 @synthesize commandsMap;
+@synthesize config;
 
 -(id) commandNotFound {
 	return NSLocalizedString(@"Command Not Found", nil);
@@ -173,6 +176,8 @@ NSArray* sectionsFromTableView(UITableView* tableView, BOOL recursive) {
 			@"methods", @"command_methods:arg:",
 			@"ivars", @"command_ivars:arg:",
 			@"protocols", @"command_protocols:arg:",
+            @"watch", @"command_watch:arg:",
+            @"instrumentObjcMessageSends", @"command_instrumentObjcMessageSends:arg:",
 			nil];
 }
 
@@ -240,6 +245,82 @@ NSArray* sectionsFromTableView(UITableView* tableView, BOOL recursive) {
 		[view flick];
 		return SWF(@"%@ %@", NSLocalizedString(@"fill_rect", nil), SFRect(rect));
 	}
+}
+
+extern void instrumentObjcMessageSends(BOOL);
+#define kInstrumentObjcMessageSends @"instrumentObjcMessageSends"
+-(NSString*) command_instrumentObjcMessageSends:(id)currentObject arg:(id)arg {
+    BOOL instrumented = false;
+    NSNumber* value = [config valueForKey:kInstrumentObjcMessageSends];
+    if (nil == value) {
+        instrumented = true;
+    } else {
+        instrumented = ! [value boolValue];
+    }
+    [config setValue:[NSNumber numberWithBool:instrumented] forKey:kInstrumentObjcMessageSends];
+    instrumentObjcMessageSends(instrumented);
+    if (instrumented) {
+        return SWF(@"instrumentObjcMessageSends YES\ntail -f /tmp/msgSends-%d", getpid());
+    } else {
+        return SWF(@"instrumentObjcMessageSends NO");
+    }
+}
+
+-(NSString*) command_watch:(id)currentObject arg:(id)arg {
+    NSMutableDictionary* watch = [config valueForKey:@"watch"];
+    if (nil == watch) {
+        [config setValue:[NSMutableDictionary dictionary] forKey:@"watch"];
+    }
+    watch = [config valueForKey:@"watch"];
+    
+    if (nil == arg) {
+    } else {
+        id target = nil;
+        NSString* path = nil;
+        if ([arg hasText:DOT]) {
+            NSArray* pair = [arg split:DOT];
+            NSString* targetArg = [[pair slice:0 backward:-2] join:DOT];
+            NSArray* targetPair = [self findTargetObject:currentObject arg:targetArg];
+            target = [targetPair objectAtSecond];
+            path = [pair objectAtLast];
+        } else {
+            target = currentObject;
+            path = arg;
+        }
+        if ([target respondsToSelector:NSSelectorFromString(path)]) {
+            NSString* watchKey = SWF(@"%p.%@", target, path);
+            if ([watch hasKey:watchKey]) {
+                [target removeObserver:OBSERVERMAN forKeyPath:path];
+                [watch removeObjectForKey:watchKey];
+                return SWF(@"watch off %@", watchKey);
+            } else {
+                [target addObserver:OBSERVERMAN forKeyPath:path changed:^(NSString* keyPath, id object, NSDictionary* change) {
+                    print_log_info(@"%@ %@ %p.%@\n%@%@ => %@\n", [[NSDate date] gmtString], [object className], object, keyPath,
+                                   [SPACE repeat:4], [change valueForKey:@"old"],  [change valueForKey:@"new"]);
+                }];
+                [watch setObject:[target className] forKey:watchKey];
+                return SWF(@"watch on %@", watchKey);
+            }
+        } else {
+            return SWF(@"watch failed %@", arg);
+        }
+    }
+    if ([watch allKeys].count > 0) {
+        NSMutableArray* ary = [NSMutableArray array];
+        int maxLengthOfClassName = 0;
+        for (NSString* key in [watch allKeys]) {
+            NSString* className = [watch objectForKey:key];
+            maxLengthOfClassName = MAX(maxLengthOfClassName, [className length]);
+        }
+        for (NSString* key in [watch allKeys]) {
+            id value = [CONSOLEMAN getterChainObject:nil command:key arg:EMPTY_STRING returnType:kGetterReturnTypeInspect];
+            NSString* className = [watch objectForKey:key];
+            [ary addObject:SWF(@"  %@ %@\t%@", [className ljust:maxLengthOfClassName],  key, value)];
+        }
+        return SWF(@"watch (\n%@\n)", [ary join:LF]);
+    } else {
+        return @"watch (\n)";
+    }
 }
 
 -(NSString*) command_openURL:(id)currentObject arg:(id)arg {
@@ -840,7 +921,24 @@ NSArray* sectionsFromTableView(UITableView* tableView, BOOL recursive) {
 	return ret;
 }
 
--(NSArray*) findTargetObject:(id)currentObject arg:(id)arg {
+-(NSArray*) findTargetObject:(id)target arg:(id)arg {
+    id subtarget = target;
+    id subarg = arg;
+    if ([arg hasText:DOT]) {
+        if ([DOT isEqualToString:arg] || [DOT_DOT isEqualToString:arg]) {
+        } else {
+            NSArray* chains = [arg split:DOT];
+            for (NSString* item in [chains slice:0 backward:-2]) {
+                NSArray* trio = [self findTargetObjectRecur:subtarget arg:item];
+                subtarget = [trio objectAtSecond];
+            }
+            subarg = [chains lastObject];
+        }
+    }
+    return [self findTargetObjectRecur:subtarget arg:subarg];
+}
+
+-(NSArray*) findTargetObjectRecur:(id)currentObject arg:(id)arg {
 	id changeObject = nil;
 	id actionBlock = nil;
 	if ([SLASH isEqualToString:arg]) {
@@ -893,7 +991,6 @@ NSArray* sectionsFromTableView(UITableView* tableView, BOOL recursive) {
 	} else if ([arg hasPrefix:MEMORY_ADDRESS_PREFIX]) {
 		size_t address = [arg to_size_t];
 		id obj = (id)address;
-		
 		changeObject = obj;
 		actionBlock = [self get_targetObjectActionBlock:obj];
 	} else if ([arg isIntegerNumberWithSpace]) {
@@ -1189,12 +1286,14 @@ NSArray* sectionsFromTableView(UITableView* tableView, BOOL recursive) {
 	self = [super init];
 	if (self) {
 		self.commandsMap = [NSMutableDictionary dictionaryWithDictionary:[self load_system_commands]];
+        self.config = [NSMutableDictionary dictionary];
 	}
 	return self;
 }
 
 - (void)dealloc {
 	[commandsMap release];
+    [config release];
 	[super dealloc];
 }
 

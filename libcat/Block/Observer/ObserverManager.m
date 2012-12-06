@@ -8,6 +8,32 @@
 
 #import "ObserverManager.h"
 
+
+
+
+
+@implementation NSObject (NSKeyValueCodingExt)
+
+-(id) mutableDictionaryValueForKeyPath:(NSString*)keyPath {
+	id obj = [self valueForKeyPath:keyPath];
+	if ([obj isKindOfClass:[ProxyMutableDictionary class]]) {
+		return obj;
+	} else {
+		ProxyMutableDictionary* dict = [[[ProxyMutableDictionary alloc] init] autorelease];
+		dict.proxyKeyPath = keyPath;
+		if ([obj isKindOfClass:[NSDictionary class]]) {
+			dict.proxyDict = [NSMutableDictionary dictionaryWithDictionary:obj];
+		}
+		[self setValue:dict forKeyPath:keyPath];
+		return dict;
+	}
+}
+
+@end
+
+
+
+
 @implementation ObserverManager
 @synthesize observeBlock;
 

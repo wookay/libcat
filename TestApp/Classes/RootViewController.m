@@ -23,7 +23,7 @@ enum { kSectionSampleControllers, kSectionUnitTest, kSectionMax };
 
 @implementation RootViewController
 
-- (void)viewDidLoad {	
+- (void)viewDidLoad {
     [super viewDidLoad];	
 	
 	self.title = NSLocalizedString(@"libcat", nil);

@@ -121,15 +121,30 @@
 	}
 	NSString* selectorStr = [COMMANDMAN.commandsMap objectForKey:command];
 	if (nil == selectorStr) {
-		if ([[arg strip] hasPrefix:EQUAL]) {
-			return [self setterChain:command arg:arg];
-		} else {
-			id obj = [self getterChain:command arg:arg];
-			if ([obj isKindOfClass:[NSException class]]) {
-				return SWF(@"%@", obj);
-			} else {
-				return obj;
-			}
+        if ([arg hasText:EQUAL]) {
+            NSArray* pair = [arg split:EQUAL];
+            NSString* prevArg = [pair objectAtFirst];
+            NSArray* prevPair = [prevArg split:DOT];
+            if (0 == prevPair.count) {
+                NSArray* nextPair = [command split:DOT];
+                if (1 == nextPair.count) {
+                    return [self setterChain:command arg:arg target:currentTargetObject];
+                } else {
+                    NSArray* trio = [COMMANDMAN findTargetObject:currentTargetObject arg:[[nextPair slice:0 backward:-2] join:DOT]];
+                    id target = [trio objectAtSecond];
+                    return [self setterChain:[[nextPair lastObject] strip] arg:SWF(@"=%@", [pair objectAtLast]) target:target];
+                }
+            } else {
+                id target = [self getterChainObject:currentTargetObject command:SWF(@"%@ %@", command, [[prevPair slice:0 backward:-2] join:DOT]) arg:EMPTY_STRING returnType:kGetterReturnTypeObject];
+                return [self setterChain:[[prevPair lastObject] strip] arg:SWF(@"=%@", [pair objectAtLast]) target:target];
+            }
+        } else {
+            id obj = [self getterChain:command arg:arg target:currentTargetObject];
+            if ([obj isKindOfClass:[NSException class]]) {
+                return SWF(@"%@", obj);
+            } else {
+                return obj;
+            }
 		}
 	} else {
 		SEL selector = NSSelectorFromString(selectorStr);
@@ -170,15 +185,14 @@
 	}
 }
 
--(NSString*) setterChain:(id)command arg:(id)arg {
+-(NSString*) setterChain:(id)command arg:(id)arg target:(id)target {
 	NSMutableArray* ary = [NSMutableArray array];
-	id target = currentTargetObject;
 	NSString* lastMethod = nil;
 	NSArray* commands = [command split:DOT];
 	if (commands.count > 1) {
 		lastMethod = [commands objectAtLast];
 		target = [self getterChainObject:target command:[[commands slice:0 backward:-2] join:DOT] arg:EMPTY_STRING returnType:kGetterReturnTypeObject];
-	} else if (commands.count == 1) {
+	} else if (1 == commands.count) {
 		lastMethod = [commands objectAtFirst];
 	} else {
 		return [COMMANDMAN commandNotFound];
@@ -195,7 +209,7 @@
 			getterCommand = [arg slice:0 :commandRange.location];
 			getterArg = [arg slice:commandRange.location backward:-1];
 		}
-		id obj = [self getterChainObject:currentTargetObject command:getterCommand arg:getterArg returnType:kGetterReturnTypeObject];
+		id obj = [self getterChainObject:target command:getterCommand arg:getterArg returnType:kGetterReturnTypeObject];
 		[NEWOBJECTMAN setNewObject:obj forKey:lastMethod];
 		[ary addObject:SWF(@"%@ = %@", lastMethod, obj)];							
 	} else {
@@ -302,8 +316,8 @@
 	return ary;
 }
 
--(NSString*) getterChain:(id)command arg:(id)arg {
-	return [self getterChainObject:self.currentTargetObject command:command arg:arg returnType:kGetterReturnTypeInspect];
+-(NSString*) getterChain:(id)command arg:(id)arg target:(id)target {
+	return [self getterChainObject:target command:command arg:arg returnType:kGetterReturnTypeInspect];
 }
 
 -(id) getterChainObject:(id)target command:(id)command arg:(id)arg returnType:(GetterReturnType)getterReturnType {
