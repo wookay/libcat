@@ -121,9 +121,18 @@
 	}
 	NSString* selectorStr = [COMMANDMAN.commandsMap objectForKey:command];
 	if (nil == selectorStr) {
+        if ([command hasText:EQUAL]) {
+            NSArray* pair = [command split:EQUAL];
+            command = [pair objectAtFirst];
+            if (IS_NIL(arg)) {
+                arg = SWF(@"= %@", [pair objectAtSecond]);
+            } else {
+                arg = SWF(@"= %@ %@", [pair objectAtSecond], arg);
+            }
+        }
         if ([arg hasText:EQUAL]) {
             NSArray* pair = [arg split:EQUAL];
-            NSString* prevArg = [pair objectAtFirst];
+            NSString* prevArg = [[pair objectAtFirst] strip];
             NSArray* prevPair = [prevArg split:DOT];
             if (0 == prevPair.count) {
                 NSArray* nextPair = [command split:DOT];
@@ -139,6 +148,14 @@
                 return [self setterChain:[[prevPair lastObject] strip] arg:SWF(@"=%@", [pair objectAtLast]) target:target];
             }
         } else {
+            if ([arg hasText:DOT]) {
+                NSArray* pair = [arg split:DOT];
+                NSString* num = [pair objectAtFirst];
+                if ([num isIntegerNumber]) {
+                    command = SWF(@"%@ %@", command, arg);
+                    arg = nil;
+                }
+            }
             id obj = [self getterChain:command arg:arg target:currentTargetObject];
             if ([obj isKindOfClass:[NSException class]]) {
                 return SWF(@"%@", obj);
@@ -189,7 +206,7 @@
 	NSMutableArray* ary = [NSMutableArray array];
 	NSString* lastMethod = nil;
 	NSArray* commands = [command split:DOT];
-	if (commands.count > 1) {
+    if (commands.count > 1) {
 		lastMethod = [commands objectAtLast];
 		target = [self getterChainObject:target command:[[commands slice:0 backward:-2] join:DOT] arg:EMPTY_STRING returnType:kGetterReturnTypeObject];
 	} else if (1 == commands.count) {
