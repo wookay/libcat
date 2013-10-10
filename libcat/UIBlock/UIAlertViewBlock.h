@@ -27,6 +27,6 @@ enum { kAlertCancelOK_CANCEL, kAlertCancelOK_OK };
 @interface ProcForAlertView : NSObject <UIAlertViewDelegate> {
 	AlertBlock callBlock;
 }
-@property (nonatomic, retain)	AlertBlock callBlock;
+@property (nonatomic, copy)	AlertBlock callBlock;
 +(ProcForAlertView*) procWithBlock:(AlertBlock)block ;
 @end

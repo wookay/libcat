@@ -675,6 +675,7 @@
 	}
 }
 
+#pragma GCC diagnostic ignored "-Wundeclared-selector"
 -(UIViewController*) get_rootViewController {
 	id delegate = [UIApplication sharedApplication].delegate;
 	if ([delegate respondsToSelector:@selector(navigationController)]) {
@@ -683,9 +684,12 @@
 		return [delegate performSelector:@selector(tabBarController)];	
 	} else if ([delegate respondsToSelector:@selector(viewController)]) {
 		return [delegate performSelector:@selector(viewController)];	
+	} else if ([delegate respondsToSelector:@selector(window)]) {
+        UIWindow* window = [delegate performSelector:@selector(window)];
+		return window.rootViewController;
 	} else {
-		return nil;
-	}
+        return nil;
+    }
 }
 
 -(IBAction) touchedConsoleButton:(id)sender {
@@ -693,11 +697,11 @@
 }
 
 +(void) setConsoleButtonAtTopRight {
-	UIWindow* window = [UIApplication sharedApplication].keyWindow;
-    for (UIView* subview in window.subviews) {
+	UIWindow* window = [[UIApplication sharedApplication].windows objectAtIndex:0];
+    for (UIView* subview in window.rootViewController.view.subviews) {
         if ([subview isKindOfClass:[ConsoleButton class]]) {
             CGRect windowFrame = window.frame;
-            CGRect consoleRect = CGRectOffset(CGRectTopRight(windowFrame, 70, 10), 2, 2);
+            CGRect consoleRect = CGRectOffset(CGRectTopRight(windowFrame, 70, 10), 160, 2);
             subview.frame = consoleRect;
             break;
         }
@@ -705,14 +709,13 @@
 }
 
 -(void) make_console_buttons {
-	UIWindow* window = [UIApplication sharedApplication].keyWindow;
+	UIWindow* window = [[UIApplication sharedApplication].windows objectAtIndex:0];
 	CGRect windowFrame = window.frame;
-
-	CGRect consoleRect = CGRectOffset(CGRectTopRight(windowFrame, 70, 19), -50, 21);
+    CGRect consoleRect = CGRectOffset(CGRectTopRight(windowFrame, 70, 19), -50, 21);
 	UIButton* consoleButton = [[ConsoleButton alloc] initWithFrame:consoleRect];
 	[consoleButton addTarget:self action:@selector(touchedConsoleButton:) forControlEvents:UIControlEventTouchUpInside];
 	[consoleButton setTitle:NSLocalizedString(@"Console", nil) forState:UIControlStateNormal];
-	[window addSubview:consoleButton];
+    [window.rootViewController.view addSubview:consoleButton];
 	[consoleButton release];
 
 #define BUTTON_MARGIN 20

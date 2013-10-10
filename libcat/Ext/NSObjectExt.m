@@ -134,12 +134,12 @@ NSString* TypeEncodingDescription(char* code) {
 }
 
 -(NSArray*) classMethodNames {
-	Class targetClass = [self class]->isa;
+	Class targetClass = object_getClass([self class]);
 	return [NSObject methodNamesForClass:targetClass];
 }
 
 -(NSArray*) classMethods {
-	Class targetClass = [self class]->isa;
+	Class targetClass = object_getClass([self class]);
 	return [NSObject methodsForClass:targetClass];
 }
 
@@ -248,7 +248,7 @@ NSString* TypeEncodingDescription(char* code) {
 	NSString* protocolPart = protocols.count > 0 ? SWF(@" <%@>", [protocols join:COMMA_SPACE]) : EMPTY_STRING;
 	NSString* ivarsPart = ivars.count > 0 ? SWF(@" {\n%@\n}", [ivars join:LF]) : EMPTY_STRING;
 	[ary addObject:SWF(@"@interface %@%@%@%@", className, superclassPart, protocolPart, ivarsPart)];
-	unsigned int classMethodsCount = [self countMethodsForClass:targetClass->isa];
+	unsigned int classMethodsCount = [self countMethodsForClass:object_getClass(targetClass)];
 	unsigned int instanceMethodsCount = [self countMethodsForClass:targetClass];
 	if (classMethodsCount > 0) {
 		[ary addObject:SWF(@"+ %d classMethods ...", classMethodsCount)];

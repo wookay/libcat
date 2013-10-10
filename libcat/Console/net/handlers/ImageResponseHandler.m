@@ -61,6 +61,7 @@
 	return nil;
 }
 
+#pragma GCC diagnostic ignored "-Wundeclared-selector"
 -(UIImage*) capture_image {
 	UIWindow* window = [UIApplication sharedApplication].keyWindow;
 	if ([window respondsToSelector:@selector(hasOpenGLView)]) {
@@ -79,14 +80,21 @@
 		[window.layer renderInContext:ctx];		
 	}
 	if (! CGRectIsEmpty([UIApplication sharedApplication].statusBarFrame)) {
-		CALayer* statusbarLayer = [CALayer layer];
-		statusbarLayer.frame = [UIApplication sharedApplication].statusBarFrame;		
-        if (IS_IPAD) {
-            statusbarLayer.contents = (id) [[UIImage imageNamed:@"libcat_statusbar~ipad.png"] CGImage];            
+        CALayer* statusbarLayer = [CALayer layer];
+        statusbarLayer.frame = [UIApplication sharedApplication].statusBarFrame;
+        Class statusBarWindow = NSClassFromString(@"UIStatusBarWindow");
+        if (NULL == statusBarWindow) {
+//            if (IS_IPAD) {
+//                statusbarLayer.contents = (id) [[UIImage imageNamed:@"libcat_statusbar~ipad.png"] CGImage];            
+//            } else {
+//                statusbarLayer.contents = (id) [[UIImage imageNamed:(IS_RETINA ? @"libcat_statusbar@2x.png" : @"libcat_statusbar.png")] CGImage];
+//            }
         } else {
-            statusbarLayer.contents = (id) [[UIImage imageNamed:(IS_RETINA ? @"libcat_statusbar@2x.png" : @"libcat_statusbar.png")] CGImage];
+            UIWindow* statusBarWindow = [UIApplication.sharedApplication performSelector:@selector(statusBarWindow)];
+            UIView* view = [statusBarWindow.subviews objectAtIndex:0];
+            statusbarLayer.contents = (id) [[self obj_to_image:view] CGImage];
         }
-		[statusbarLayer renderInContext:ctx];
+        [statusbarLayer renderInContext:ctx];
 	}
 	UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
 	UIGraphicsEndImageContext();

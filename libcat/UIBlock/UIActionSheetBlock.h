@@ -32,9 +32,9 @@ typedef void (^ActionSheetBlock)() ;
 	NSMutableArray* otherBlocks;
 	ActionSheetBlock doneBlock;
 }
-@property (nonatomic, retain)	ActionSheetBlock cancelBlock;
-@property (nonatomic, retain)	ActionSheetBlock destructiveBlock;
+@property (nonatomic, copy)	ActionSheetBlock cancelBlock;
+@property (nonatomic, copy)	ActionSheetBlock destructiveBlock;
 @property (nonatomic, retain)	NSMutableArray* otherBlocks;
-@property (nonatomic, retain)	ActionSheetBlock doneBlock;
+@property (nonatomic, copy)	ActionSheetBlock doneBlock;
 +(ProcForActionSheet*) procWithCancelBlock:(ActionSheetBlock)cancelBlock_ destructiveBlock:(ActionSheetBlock)destructiveBlock_ otherBlocks:(NSArray*)otherBlocks_ doneBlock:(ActionSheetBlock)doneBlock_ ;
 @end

@@ -23,7 +23,7 @@ typedef void (^ButtonBlock)(id sender) ;
 @interface ProcForButton : NSObject {
 	ButtonBlock callBlock;
 }
-@property (nonatomic, retain)	ButtonBlock callBlock;
+@property (nonatomic, copy)	ButtonBlock callBlock;
 -(void) call:(id)sender ;
 +(ProcForButton*) procWithBlock:(ButtonBlock)block ;
 @end

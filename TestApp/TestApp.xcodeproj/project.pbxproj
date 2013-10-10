@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2B6D200A14E1D1FD0016D124 /* libcat_statusbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B6D200914E1D1FD0016D124 /* libcat_statusbar@2x.png */; };
-		2B6D200B14E1D1FD0016D124 /* libcat_statusbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B6D200914E1D1FD0016D124 /* libcat_statusbar@2x.png */; };
-		2B6D200C14E1D1FD0016D124 /* libcat_statusbar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2B6D200914E1D1FD0016D124 /* libcat_statusbar@2x.png */; };
 		2BC84568161D711F0037468D /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BC8455C161D6B120037468D /* Default-568h@2x.png */; };
 		2BC8456A161D71320037468D /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BC84569161D71320037468D /* Default-568h@2x.png */; };
 		2BC8456C161D71B90037468D /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2BC8456B161D71B90037468D /* Default-568h@2x.png */; };
@@ -147,8 +144,6 @@
 		DACCAE2813483E5A0095EA8C /* ConsoleResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DACCADCB13483E5A0095EA8C /* ConsoleResponseHandler.m */; };
 		DACCAE2913483E5A0095EA8C /* HTTPResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DACCADCD13483E5A0095EA8C /* HTTPResponseHandler.m */; };
 		DACCAE2A13483E5A0095EA8C /* ImageResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DACCADCF13483E5A0095EA8C /* ImageResponseHandler.m */; };
-		DACCAE2B13483E5A0095EA8C /* libcat_statusbar.png in Resources */ = {isa = PBXBuildFile; fileRef = DACCADD113483E5A0095EA8C /* libcat_statusbar.png */; };
-		DACCAE2C13483E5A0095EA8C /* libcat_statusbar~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = DACCADD213483E5A0095EA8C /* libcat_statusbar~ipad.png */; };
 		DACCAE2D13483E5A0095EA8C /* WebResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DACCADD413483E5A0095EA8C /* WebResponseHandler.m */; };
 		DACCAE2E13483E5A0095EA8C /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = DACCADD713483E5A0095EA8C /* AsyncSocket.m */; };
 		DACCAE2F13483E5A0095EA8C /* HTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = DACCADD913483E5A0095EA8C /* HTTPServer.m */; };
@@ -201,8 +196,6 @@
 		DACCAE5E13483E5A0095EA8C /* ConsoleResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DACCADCB13483E5A0095EA8C /* ConsoleResponseHandler.m */; };
 		DACCAE5F13483E5A0095EA8C /* HTTPResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DACCADCD13483E5A0095EA8C /* HTTPResponseHandler.m */; };
 		DACCAE6013483E5A0095EA8C /* ImageResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DACCADCF13483E5A0095EA8C /* ImageResponseHandler.m */; };
-		DACCAE6113483E5A0095EA8C /* libcat_statusbar.png in Resources */ = {isa = PBXBuildFile; fileRef = DACCADD113483E5A0095EA8C /* libcat_statusbar.png */; };
-		DACCAE6213483E5A0095EA8C /* libcat_statusbar~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = DACCADD213483E5A0095EA8C /* libcat_statusbar~ipad.png */; };
 		DACCAE6313483E5A0095EA8C /* WebResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DACCADD413483E5A0095EA8C /* WebResponseHandler.m */; };
 		DACCAE6413483E5A0095EA8C /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = DACCADD713483E5A0095EA8C /* AsyncSocket.m */; };
 		DACCAE6513483E5A0095EA8C /* HTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = DACCADD913483E5A0095EA8C /* HTTPServer.m */; };
@@ -255,8 +248,6 @@
 		DACCAE9413483E5A0095EA8C /* ConsoleResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DACCADCB13483E5A0095EA8C /* ConsoleResponseHandler.m */; };
 		DACCAE9513483E5A0095EA8C /* HTTPResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DACCADCD13483E5A0095EA8C /* HTTPResponseHandler.m */; };
 		DACCAE9613483E5A0095EA8C /* ImageResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DACCADCF13483E5A0095EA8C /* ImageResponseHandler.m */; };
-		DACCAE9713483E5A0095EA8C /* libcat_statusbar.png in Resources */ = {isa = PBXBuildFile; fileRef = DACCADD113483E5A0095EA8C /* libcat_statusbar.png */; };
-		DACCAE9813483E5A0095EA8C /* libcat_statusbar~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = DACCADD213483E5A0095EA8C /* libcat_statusbar~ipad.png */; };
 		DACCAE9913483E5A0095EA8C /* WebResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DACCADD413483E5A0095EA8C /* WebResponseHandler.m */; };
 		DACCAE9A13483E5A0095EA8C /* AsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = DACCADD713483E5A0095EA8C /* AsyncSocket.m */; };
 		DACCAE9B13483E5A0095EA8C /* HTTPServer.m in Sources */ = {isa = PBXBuildFile; fileRef = DACCADD913483E5A0095EA8C /* HTTPServer.m */; };
@@ -328,7 +319,6 @@
 		28F335F01007B36200424DE2 /* RootViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = RootViewController.xib; path = ../RootViewController.xib; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2B0E601A162C75D4007E912D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; name = README.md; path = ../README.md; sourceTree = "<group>"; };
-		2B6D200914E1D1FD0016D124 /* libcat_statusbar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "libcat_statusbar@2x.png"; sourceTree = "<group>"; };
 		2BC8455C161D6B120037468D /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "../../Default-568h@2x.png"; sourceTree = "<group>"; };
 		2BC84569161D71320037468D /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		2BC8456B161D71B90037468D /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -345,7 +335,6 @@
 		DA89675A12F4ED4C00ADCEC5 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
 		DA89675C12F4ED5A00ADCEC5 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
 		DA89675E12F4ED6200ADCEC5 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
-		DA89678012F4EEAA00ADCEC5 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 		DAA63F631261AC140010F870 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DAA63F651261AC140010F870 /* Korean */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Korean; path = Korean.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DAA63F671261AC140010F870 /* Spanish */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Spanish; path = Spanish.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -461,8 +450,6 @@
 		DACCADCD13483E5A0095EA8C /* HTTPResponseHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPResponseHandler.m; sourceTree = "<group>"; };
 		DACCADCE13483E5A0095EA8C /* ImageResponseHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageResponseHandler.h; sourceTree = "<group>"; };
 		DACCADCF13483E5A0095EA8C /* ImageResponseHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageResponseHandler.m; sourceTree = "<group>"; };
-		DACCADD113483E5A0095EA8C /* libcat_statusbar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = libcat_statusbar.png; sourceTree = "<group>"; };
-		DACCADD213483E5A0095EA8C /* libcat_statusbar~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "libcat_statusbar~ipad.png"; sourceTree = "<group>"; };
 		DACCADD313483E5A0095EA8C /* WebResponseHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebResponseHandler.h; sourceTree = "<group>"; };
 		DACCADD413483E5A0095EA8C /* WebResponseHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebResponseHandler.m; sourceTree = "<group>"; };
 		DACCADD613483E5A0095EA8C /* AsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsyncSocket.h; sourceTree = "<group>"; };
@@ -836,7 +823,6 @@
 				DAC5BAEF12A9A25700953A23 /* NavigationApp-Info.plist */,
 				DAC5BAEB12A9A24700953A23 /* TabBarApp-Info.plist */,
 				DAC5BAED12A9A25100953A23 /* OpenGLApp-Info.plist */,
-				DA89678012F4EEAA00ADCEC5 /* Entitlements.plist */,
 			);
 			name = Info.plist;
 			sourceTree = "<group>";
@@ -1015,21 +1001,10 @@
 				DACCADCD13483E5A0095EA8C /* HTTPResponseHandler.m */,
 				DACCADCE13483E5A0095EA8C /* ImageResponseHandler.h */,
 				DACCADCF13483E5A0095EA8C /* ImageResponseHandler.m */,
-				DACCADD013483E5A0095EA8C /* images */,
 				DACCADD313483E5A0095EA8C /* WebResponseHandler.h */,
 				DACCADD413483E5A0095EA8C /* WebResponseHandler.m */,
 			);
 			path = handlers;
-			sourceTree = "<group>";
-		};
-		DACCADD013483E5A0095EA8C /* images */ = {
-			isa = PBXGroup;
-			children = (
-				DACCADD113483E5A0095EA8C /* libcat_statusbar.png */,
-				2B6D200914E1D1FD0016D124 /* libcat_statusbar@2x.png */,
-				DACCADD213483E5A0095EA8C /* libcat_statusbar~ipad.png */,
-			);
-			path = images;
 			sourceTree = "<group>";
 		};
 		DACCADD513483E5A0095EA8C /* servers */ = {
@@ -1179,7 +1154,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0450;
+				LastUpgradeCheck = 0500;
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "TestApp" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1225,9 +1200,6 @@
 				DACCAE8C13483E5A0095EA8C /* ConsoleViewController.xib in Resources */,
 				DACCAE8E13483E5A0095EA8C /* EditPropertyViewController.xib in Resources */,
 				DACCAE9213483E5A0095EA8C /* PropertyRootViewController.xib in Resources */,
-				DACCAE9713483E5A0095EA8C /* libcat_statusbar.png in Resources */,
-				DACCAE9813483E5A0095EA8C /* libcat_statusbar~ipad.png in Resources */,
-				2B6D200B14E1D1FD0016D124 /* libcat_statusbar@2x.png in Resources */,
 				2BC84568161D711F0037468D /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1254,9 +1226,6 @@
 				DACCAE2013483E5A0095EA8C /* ConsoleViewController.xib in Resources */,
 				DACCAE2213483E5A0095EA8C /* EditPropertyViewController.xib in Resources */,
 				DACCAE2613483E5A0095EA8C /* PropertyRootViewController.xib in Resources */,
-				DACCAE2B13483E5A0095EA8C /* libcat_statusbar.png in Resources */,
-				DACCAE2C13483E5A0095EA8C /* libcat_statusbar~ipad.png in Resources */,
-				2B6D200C14E1D1FD0016D124 /* libcat_statusbar@2x.png in Resources */,
 				2BC8456C161D71B90037468D /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1280,9 +1249,6 @@
 				DACCAE5613483E5A0095EA8C /* ConsoleViewController.xib in Resources */,
 				DACCAE5813483E5A0095EA8C /* EditPropertyViewController.xib in Resources */,
 				DACCAE5C13483E5A0095EA8C /* PropertyRootViewController.xib in Resources */,
-				DACCAE6113483E5A0095EA8C /* libcat_statusbar.png in Resources */,
-				DACCAE6213483E5A0095EA8C /* libcat_statusbar~ipad.png in Resources */,
-				2B6D200A14E1D1FD0016D124 /* libcat_statusbar@2x.png in Resources */,
 				2BC8456A161D71320037468D /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1593,11 +1559,11 @@
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1605,7 +1571,6 @@
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -1624,7 +1589,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1643,7 +1607,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = TestApp_Prefix.pch;
@@ -1661,7 +1624,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1683,7 +1645,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = TestApp_Prefix.pch;
@@ -1704,7 +1665,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
@@ -1726,7 +1686,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CODE_SIGN_ENTITLEMENTS = Entitlements.plist;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = YES;

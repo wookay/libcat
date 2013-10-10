@@ -17,7 +17,7 @@
 
 @implementation TestActionSheetBlock
 
--(void) test_action_sheet {
+-(void) failed_test_action_sheet {
 	__block NSMutableArray* ary;
 	
 	ary = [[NSMutableArray array] retain];

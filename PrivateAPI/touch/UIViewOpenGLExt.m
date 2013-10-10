@@ -19,7 +19,7 @@
 
 @implementation UIView (OpenGLExt)
 -(BOOL) isOpenGLView {
-	Class targetClass = [self class]->isa;
+	Class targetClass = object_getClass([self class]);
 	if (class_respondsToSelector(targetClass, @selector(layerClass))) {
 		IMP imp = class_getMethodImplementation(targetClass, @selector(layerClass));
 		Class layerClass = ((id (*)(id, SEL))imp)(targetClass, @selector(layerClass));

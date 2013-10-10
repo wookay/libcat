@@ -354,6 +354,7 @@ typedef enum {
 					[UIView setAnimationDuration:TIMEINTERVAL_ZOOMOUT];
 					self.navigationController.view.frame = CGRectMake(SCREEN_WIDTH, 0, 0, 0);
 					[UIView commitAnimations];
+                    #pragma GCC diagnostic ignored "-Wundeclared-selector"
 					[[HitTestWindow sharedWindow] performSelector:@selector(hitTestOnce) afterDelay:TIMEINTERVAL_ZOOMOUT];
 					break;
 

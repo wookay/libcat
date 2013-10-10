@@ -22,7 +22,7 @@ UIBarButtonItem* barbutton_flexible_space(CGFloat width) ;
 @interface ProcForBarButtonItem : NSObject {
 	BarButtonItemBlock callBlock;
 }
-@property (nonatomic, retain) BarButtonItemBlock callBlock;
+@property (nonatomic, copy) BarButtonItemBlock callBlock;
 -(void) call ;
 +(ProcForBarButtonItem*) procWithBlock:(BarButtonItemBlock)block ;
 @end
